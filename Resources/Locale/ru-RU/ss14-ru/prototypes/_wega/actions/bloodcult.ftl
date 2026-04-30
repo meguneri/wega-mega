@@ -38,7 +38,7 @@ ent-ActionBloodCultSpear = [color=red]Кровавое копье[/color]
 ent-RecallBloodCultSpear = [color=red]Вернуть копье[/color]
     .desc = Способность позволяющая призвать кровавое копье.
 ent-ActionBloodCultBoltBarrage = [color=red]Кровавое шквал болтов[/color]
-    .desc = Способность позволяющая стрелять стрелять болтами. Способность стоит 200 крови!
+    .desc = Способность позволяющая стрелять болтами. Способность стоит 200 крови!
 
 # Construct
 ent-TeleportConstructSpell = Бестелестность
