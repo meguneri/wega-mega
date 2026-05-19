@@ -180,7 +180,7 @@
   - type: ModularSuitPreassembled
     modules:
     - HealthAnalyzerSuitModule
-    - VisorMedicalSuitModule
+    #- VisorMedicalSuitModule
     - QuickCarrySuitModule
     - StorageSuitModule
     - FlashlightSuitModuleLavender
@@ -199,7 +199,7 @@
     modules:
     - HealthAnalyzerSuitModule
     - DefibrillatorSuitModule
-    - VisorMedicalSuitModule
+    #- VisorMedicalSuitModule
     - QuickCarrySuitModule
     - StorageSuitModule
     - AdvancedFlashlightSuitModulePink

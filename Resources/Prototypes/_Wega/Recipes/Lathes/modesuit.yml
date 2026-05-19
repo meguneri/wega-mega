@@ -174,10 +174,10 @@
   id: VisorDiagnosticSuitModule
   result: VisorDiagnosticSuitModule
 
-- type: latheRecipe
-  parent: BaseModesuitModule
-  id: VisorMedicalSuitModule
-  result: VisorMedicalSuitModule
+#- type: latheRecipe
+#  parent: BaseModesuitModule
+#  id: VisorMedicalSuitModule
+#  result: VisorMedicalSuitModule
 
 - type: latheRecipe
   parent: BaseModesuitModule
