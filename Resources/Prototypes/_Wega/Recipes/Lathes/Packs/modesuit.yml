@@ -27,7 +27,7 @@
   - TetherSuitModule
   - BikeHornSuitModule
   - VisorDiagnosticSuitModule
-  #- VisorMedicalSuitModule
+  - VisorMedicalSuitModule
   - WeldingSuitModule
   - VisorMesonSuitModule
   - RadiationShieldSuitModule

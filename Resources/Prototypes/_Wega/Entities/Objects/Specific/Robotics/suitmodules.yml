@@ -272,22 +272,22 @@
     tags:
     - VisorSuitModule
 
-#- type: entity
-#  parent: BaseVisorSuitModule
-#  id: VisorMedicalSuitModule
-#  name: medical visor suit module
-#  description: "A heads-up display installed into the visor of the suit. This cross-references suit sensor data with a modern biological scanning suite, allowing the user to visualize the current health of organic lifeforms, as well as access data such as patient files in a convenient readout. They say these also let you see behind you."
-#  components:
-#  - type: Sprite
-#    state: medhud_visor
-#  - type: ModularSuitModuleEffect
-#    activeComponents:
-#    - type: ShowHealthBars
-#    - type: ShowHealthIcons
-#  - type: ModularSuitModule
-#    verbIcon:
-#      sprite: *modules-rsi
-#      state: medhud_visor
+- type: entity
+  parent: BaseVisorSuitModule
+  id: VisorMedicalSuitModule
+  name: medical visor suit module
+  description: "A heads-up display installed into the visor of the suit. This cross-references suit sensor data with a modern biological scanning suite, allowing the user to visualize the current health of organic lifeforms, as well as access data such as patient files in a convenient readout. They say these also let you see behind you."
+  components:
+  - type: Sprite
+    state: medhud_visor
+  - type: ModularSuitModuleEffect
+    activeComponents:
+    - type: ShowHealthBars
+    - type: ShowHealthIcons
+  - type: ModularSuitModule
+    verbIcon:
+      sprite: *modules-rsi
+      state: medhud_visor
 
 - type: entity
   parent: BaseVisorSuitModule
