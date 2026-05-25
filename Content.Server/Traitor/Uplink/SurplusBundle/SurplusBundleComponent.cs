@@ -1,3 +1,6 @@
+using Content.Shared.Store;
+using Robust.Shared.Prototypes;
+
 namespace Content.Server.Traitor.Uplink.SurplusBundle;
 
 /// <summary>
@@ -17,5 +20,5 @@ public sealed partial class SurplusBundleComponent : Component
     ///     Items with any category that hits its limit are excluded from further picks.
     /// </summary>
     [DataField]
-    public Dictionary<string, int> CategoryLimits = new();
+    public Dictionary<ProtoId<StoreCategoryPrototype>, int> CategoryLimits = new();
 }
