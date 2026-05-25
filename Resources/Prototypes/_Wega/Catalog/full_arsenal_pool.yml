@@ -2965,3 +2965,294 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+# ── SPELLBOOKS ───────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalSpellbookOffensive
+  name: full-arsenal-spellbookoffensive-name
+  description: full-arsenal-spellbookoffensive-desc
+  productEntity: SpellbookOffensive
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookDefensive
+  name: full-arsenal-spellbookdefensive-name
+  description: full-arsenal-spellbookdefensive-desc
+  productEntity: SpellbookDefensive
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookUtility
+  name: full-arsenal-spellbookutility-name
+  description: full-arsenal-spellbookutility-desc
+  productEntity: SpellbookUtility
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookEquipment
+  name: full-arsenal-spellbookequipment-name
+  description: full-arsenal-spellbookequipment-desc
+  productEntity: SpellbookEquipment
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookBlink
+  name: full-arsenal-spellbookblink-name
+  description: full-arsenal-spellbookblink-desc
+  productEntity: SpellbookBlink
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookFireball
+  name: full-arsenal-spellbookfireball-name
+  description: full-arsenal-spellbookfireball-desc
+  productEntity: SpellbookFireball
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookFireballUpgrade
+  name: full-arsenal-spellbookfireballupgrade-name
+  description: full-arsenal-spellbookfireballupgrade-desc
+  productEntity: SpellbookFireballUpgrade
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookForceWall
+  name: full-arsenal-spellbookforcewall-name
+  description: full-arsenal-spellbookforcewall-desc
+  productEntity: SpellbookForceWall
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookKnock
+  name: full-arsenal-spellbookknock-name
+  description: full-arsenal-spellbookknock-desc
+  productEntity: SpellbookKnock
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookCharge
+  name: full-arsenal-spellbookcharge-name
+  description: full-arsenal-spellbookcharge-desc
+  productEntity: SpellbookCharge
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookRepulse
+  name: full-arsenal-spellbookrepulse-name
+  description: full-arsenal-spellbookrepulse-desc
+  productEntity: SpellbookRepulse
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookRodForm
+  name: full-arsenal-spellbookrodform-name
+  description: full-arsenal-spellbookrodform-desc
+  productEntity: SpellbookRodForm
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookSmite
+  name: full-arsenal-spellbooksmite-name
+  description: full-arsenal-spellbooksmite-desc
+  productEntity: SpellbookSmite
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookSmoke
+  name: full-arsenal-spellbooksmoke-name
+  description: full-arsenal-spellbooksmoke-desc
+  productEntity: SpellbookSmoke
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookSlip
+  name: full-arsenal-spellbookslip-name
+  description: full-arsenal-spellbookslip-desc
+  productEntity: SpellbookSlip
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookJaunt
+  name: full-arsenal-spellbookjaunt-name
+  description: full-arsenal-spellbookjaunt-desc
+  productEntity: SpellbookJaunt
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookJauntUpgrade
+  name: full-arsenal-spellbookjauntupgrade-name
+  description: full-arsenal-spellbookjauntupgrade-desc
+  productEntity: SpellbookJauntUpgrade
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookMindSwap
+  name: full-arsenal-spellbookmindswap-name
+  description: full-arsenal-spellbookmindswap-desc
+  productEntity: SpellbookMindSwap
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookStaffAnimation
+  name: full-arsenal-spellbookstaffanimation-name
+  description: full-arsenal-spellbookstaffanimation-desc
+  productEntity: SpellbookStaffAnimation
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookHammerMjollnir
+  name: full-arsenal-spellbookhammermjollnir-name
+  description: full-arsenal-spellbookhammermjollnir-desc
+  productEntity: SpellbookHammerMjollnir
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookHammerSingularity
+  name: full-arsenal-spellbookhammersingularity-name
+  description: full-arsenal-spellbookhammersingularity-desc
+  productEntity: SpellbookHammerSingularity
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookPolymorphSpider
+  name: full-arsenal-spellbookpolymorphspider-name
+  description: full-arsenal-spellbookpolymorphspider-desc
+  productEntity: SpellbookPolymorphSpider
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookItemRecallSwap
+  name: full-arsenal-spellbookitemrecallswap-name
+  description: full-arsenal-spellbookitemrecallswap-desc
+  productEntity: SpellbookItemRecallSwap
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookVoidApplause
+  name: full-arsenal-spellbookvoidapplause-name
+  description: full-arsenal-spellbookvoidapplause-desc
+  productEntity: SpellbookVoidApplause
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookWandDoor
+  name: full-arsenal-spellbookwanddoor-name
+  description: full-arsenal-spellbookwanddoor-desc
+  productEntity: SpellbookWandDoor
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookWandLocker
+  name: full-arsenal-spellbookwandlocker-name
+  description: full-arsenal-spellbookwandlocker-desc
+  productEntity: SpellbookWandLocker
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookWandPolymorphCarp
+  name: full-arsenal-spellbookwandpolymorphcarp-name
+  description: full-arsenal-spellbookwandpolymorphcarp-desc
+  productEntity: SpellbookWandPolymorphCarp
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookCluwne
+  name: full-arsenal-spellbookcluwne-name
+  description: full-arsenal-spellbookcluwne-desc
+  productEntity: SpellbookCluwne
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRandomSpellbook
+  name: full-arsenal-randomspellbook-name
+  description: full-arsenal-randomspellbook-desc
+  productEntity: RandomSpellbook
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
