@@ -423,3 +423,18 @@
     whitelist:
       tags:
       - NukeOpsUplink
+
+- type: listing
+  id: UplinkFullArsenalBundle
+  name: uplink-full-arsenal-bundle-name
+  description: uplink-full-arsenal-bundle-desc
+  productEntity: CrateSyndicateFullArsenal
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

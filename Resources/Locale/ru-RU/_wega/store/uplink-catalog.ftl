@@ -50,3 +50,286 @@ uplink-energy-shield-module-bundle-name = набор модулей энерге
 uplink-energy-shield-module-bundle-desc = Комплект из пяти модулей энергетического щита в удобной сумке. Позволяет оснастить всю команду личной защитой.
 uplink-xc67-agent-name = xC-67
 uplink-xc67-agent-desc = Невероятная штурмовая винтовка xC-67, которая позволит бадаться со станцией на равной.
+
+uplink-full-arsenal-bundle-name = Ящик полного арсенала
+uplink-full-arsenal-bundle-desc = Содержит случайное снаряжение суммарной стоимостью ровно 40 телекристаллов из пула более 100 предметов: холодное оружие, пистолеты, дробовики, штурмовые винтовки, броня, скафандры, аптечки, наборы оружия, боеприпасы, импланты, гаджеты и многое другое. Повезёт — получишь полный стартовый оперативный набор. Не повезёт — бейсбольную биту и ящик пистолетных патронов.
+
+store-preset-name-full-arsenal = Полный арсенал
+
+# Weapon bundles — briefcases
+full-arsenal-briefcase-sniper-name = Снайперский кейс
+full-arsenal-briefcase-sniper-desc = Кейс с тяжёлой снайперской винтовкой Синдиката и несколькими магазинами.
+full-arsenal-briefcase-hushpup-name = Кейс дробовика Hushpup
+full-arsenal-briefcase-hushpup-desc = Кейс со складным бесшумным дробовиком Hushpup и патронами.
+full-arsenal-briefcase-c20r-name = Кейс C-20r
+full-arsenal-briefcase-c20r-desc = Кейс с пистолетом-пулемётом C-20r и запасными магазинами.
+full-arsenal-briefcase-bulldog-name = Кейс Bulldog
+full-arsenal-briefcase-bulldog-desc = Кейс с дробовиком Bulldog и барабанными магазинами.
+full-arsenal-briefcase-chinalake-name = Кейс гранатомёта China Lake
+full-arsenal-briefcase-chinalake-desc = Кейс с гранатомётом China Lake и различными гранатами.
+full-arsenal-briefcase-xc67-name = Кейс xC-67
+full-arsenal-briefcase-xc67-desc = Кейс с боевой винтовкой xC-67 и расширенными магазинами.
+
+# Weapon bundles — duffel bags
+full-arsenal-duffel-smg-name = Вещмешок C-20r
+full-arsenal-duffel-smg-desc = Вещмешок с пистолетом-пулемётом C-20r и запасом магазинов.
+full-arsenal-duffel-shotgun-name = Вещмешок Bulldog
+full-arsenal-duffel-shotgun-desc = Вещмешок с дробовиком Bulldog и запасом патронов.
+full-arsenal-duffel-rifle-name = Вещмешок Estoc DMR
+full-arsenal-duffel-rifle-desc = Вещмешок с самозарядной винтовкой Estoc и несколькими магазинами.
+full-arsenal-duffel-lmg-name = Вещмешок L6 SAW
+full-arsenal-duffel-lmg-desc = Тяжёлый вещмешок с пулемётом L6 SAW и ящиками с патронами.
+full-arsenal-duffel-gl-name = Вещмешок с гранатомётом
+full-arsenal-duffel-gl-desc = Вещмешок с гранатомётом China Lake и набором гранат.
+full-arsenal-duffel-revolver-name = Вещмешок Python
+full-arsenal-duffel-revolver-desc = Вещмешок с мощным AP-револьвером Python и скоростными перезарядчиками.
+full-arsenal-duffel-carbine-name = Вещмешок M-90gl
+full-arsenal-duffel-carbine-desc = Вещмешок с тактической винтовкой M-90 с подствольным гранатомётом, магазинами и гранатами.
+full-arsenal-duffel-hushpup-name = Вещмешок Hushpup
+full-arsenal-duffel-hushpup-desc = Вещмешок со складным бесшумным дробовиком Hushpup и ящиком патронов.
+full-arsenal-duffel-hristov-name = Вещмешок Христов
+full-arsenal-duffel-hristov-desc = Вещмешок с продвинутой снайперской винтовкой Христов и четырьмя магазинами.
+full-arsenal-duffel-xc67-name = Вещмешок xC-67
+full-arsenal-duffel-xc67-desc = Вещмешок с боевой винтовкой xC-67 и расширенными магазинами.
+full-arsenal-duffel-ammo-name = Вещмешок с боеприпасами
+full-arsenal-duffel-ammo-desc = Вещмешок с ассортиментом магазинов и патронов для различного оружия.
+full-arsenal-duffel-medical-name = Медицинский вещмешок
+full-arsenal-duffel-medical-desc = Набор медицинских расходников для поддержания боеспособности отряда.
+full-arsenal-duffel-starter-name = Стартовый оперативный набор
+full-arsenal-duffel-starter-desc = Полный набор снаряжения для оперативника Синдиката: C-20r, клинок, взрывчатка, аптечка и многое другое.
+
+# Ammo boxes
+full-arsenal-ammo-box-pistol-name = Ящик пистолетных патронов
+full-arsenal-ammo-box-pistol-desc = Ящик стандартных пистолетных патронов.
+full-arsenal-ammo-box-lightrifle-name = Ящик патронов лёгкой винтовки
+full-arsenal-ammo-box-lightrifle-desc = Ящик патронов для лёгких винтовок.
+full-arsenal-ammo-box-rifle-name = Ящик винтовочных патронов
+full-arsenal-ammo-box-rifle-desc = Ящик стандартных винтовочных патронов.
+full-arsenal-ammo-box-magnum-name = Ящик патронов магнум
+full-arsenal-ammo-box-magnum-desc = Ящик мощных патронов магнум для Python.
+full-arsenal-ammo-box-caseless-name = Ящик безгильзовых патронов
+full-arsenal-ammo-box-caseless-desc = Ящик безгильзовых пистолетных патронов для Cobra.
+full-arsenal-ammo-box-antimateriel-name = Ящик антиматериальных патронов
+full-arsenal-ammo-box-antimateriel-desc = Ящик снайперских антиматериальных патронов для Христова.
+
+# Implants
+full-arsenal-implant-storage-name = Имплант хранилища
+full-arsenal-implant-storage-desc = Внутренняя полость для хранения предметов прямо в теле.
+full-arsenal-implant-freedom-name = Имплант свободы
+full-arsenal-implant-freedom-desc = Позволяет вырваться из наручников по команде.
+full-arsenal-implant-scram-name = SCRAM-имплант
+full-arsenal-implant-scram-desc = Телепортирует носителя в случайное место при активации. Опасно!
+full-arsenal-implant-dna-name = Имплант смешения ДНК
+full-arsenal-implant-dna-desc = Случайным образом изменяет ДНК и внешность носителя.
+full-arsenal-implant-emp-name = ЭМИ-имплант
+full-arsenal-implant-emp-desc = Испускает мощный электромагнитный импульс вокруг носителя.
+full-arsenal-implant-radio-name = Радио-имплант
+full-arsenal-implant-radio-desc = Скрытая рация, вживлённая прямо в тело. Синдикат всегда на связи.
+full-arsenal-implant-uplink-name = Имплант аплинка
+full-arsenal-implant-uplink-desc = Скрытый доступ к аплинку Синдиката без физического устройства.
+full-arsenal-implant-mindshield-name = Имплант поддельного ментального щита
+full-arsenal-implant-mindshield-desc = Имитирует наличие официального ментального щита при сканировании.
+full-arsenal-implant-voice-name = Имплант голосовой маски
+full-arsenal-implant-voice-desc = Изменяет голос носителя на любой другой по желанию.
+full-arsenal-implant-microbomb-name = Имплант микробомбы
+full-arsenal-implant-microbomb-desc = Небольшой заряд. Взрывается по команде или при гибели носителя.
+full-arsenal-implant-acidifier-name = Имплант ацидификатора смерти
+full-arsenal-implant-acidifier-desc = При гибели растворяет тело носителя кислотой, уничтожая улики.
+
+# Gadgets & tools
+full-arsenal-emag-name = Эмаг
+full-arsenal-emag-desc = Электромагнитная карточка для взлома дверей и терминалов.
+full-arsenal-chameleon-projector-name = Хамелеон-проектор
+full-arsenal-chameleon-projector-desc = Позволяет принять облик любого предмета на полу.
+full-arsenal-agent-id-name = Агентское удостоверение
+full-arsenal-agent-id-desc = Удостоверение личности с настраиваемыми именем и доступами.
+full-arsenal-syndie-id-name = Удостоверение Синдиката
+full-arsenal-syndie-id-desc = Стандартное удостоверение агента Синдиката.
+full-arsenal-radio-jammer-name = Глушитель радиосвязи
+full-arsenal-radio-jammer-desc = Блокирует все радиосигналы в зоне действия.
+full-arsenal-stealth-box-name = Стелс-ящик
+full-arsenal-stealth-box-desc = Прочный ящик с камуфляжем. Прячется незамеченным на виду.
+full-arsenal-jaws-name = Щипцы жизни Синдиката
+full-arsenal-jaws-desc = Усиленный гидравлический инструмент для взлома стен и полов.
+full-arsenal-encryption-keys-name = Шифровальные ключи Синдиката
+full-arsenal-encryption-keys-desc = Коробка из двух ключей шифрования для доступа к секретным каналам связи.
+
+# Exosuit modules
+full-arsenal-module-noslip-name = Модуль защиты от скольжения
+full-arsenal-module-noslip-desc = Обеспечивает идеальное сцепление с любой поверхностью. Без расхода энергии.
+full-arsenal-module-plate-name = Модуль компрессии бронепластин
+full-arsenal-module-plate-desc = Сжимает бронепластины, позволяя носить дополнительную защиту незаметно.
+full-arsenal-module-shield-name = Модуль энергетического щита
+full-arsenal-module-shield-desc = Блокирует входящий урон за счёт энергии скафандра.
+full-arsenal-module-shield-bundle-name = Набор модулей энергетического щита
+full-arsenal-module-shield-bundle-desc = Пять модулей энергетического щита в одном вещмешке. Хватит на всю команду.
+
+# Trinkets & fun
+full-arsenal-soap-name = Мыло Синдиката
+full-arsenal-soap-desc = Скользкое мыло с логотипом Синдиката. Идеально для диверсий.
+full-arsenal-cluster-soap-name = Кластерное мыло
+full-arsenal-cluster-soap-desc = При скольжении рассыпает ещё больше мыла. Полный хаос.
+full-arsenal-cigarettes-name = Сигареты Синдиката
+full-arsenal-cigarettes-desc = Пачка фирменных сигарет. Расслабляет между операциями.
+full-arsenal-syndie-player-name = Плеер Синдиката
+full-arsenal-syndie-player-desc = Портативный музыкальный плеер. Разбавит рутинную резню любимой музыкой.
+full-arsenal-syndie-pouch-name = Усиленный подсумок Синдиката
+full-arsenal-syndie-pouch-desc = Вместительный подсумок с усиленной защитой от взрывов.
+full-arsenal-dice-of-fate-name = Кость судьбы
+full-arsenal-dice-of-fate-desc = Таинственный артефакт, способный кардинально изменить судьбу бросившего. Огромный риск!
+
+# Medical supplies (loose stacks)
+full-arsenal-brutepack-name = Набор для ушибов (10 шт.)
+full-arsenal-brutepack-desc = Десять наборов для лечения травм тупыми предметами и порезов.
+full-arsenal-ointment-name = Мазь (10 шт.)
+full-arsenal-ointment-desc = Десять тюбиков мази для лечения ожогов и обморожений.
+full-arsenal-medicated-suture-name = Медикаментозные швы (10 шт.)
+full-arsenal-medicated-suture-desc = Десять пропитанных лекарством швов для заживления ран.
+full-arsenal-regenerative-mesh-name = Регенерирующая сетка (10 шт.)
+full-arsenal-regenerative-mesh-desc = Десять полотен продвинутой регенерирующей сетки для лечения серьёзных ожогов.
+
+# Backpacks
+full-arsenal-backpack-syndicate-name = Рюкзак Синдиката
+full-arsenal-backpack-syndicate-desc = Фирменный чёрный рюкзак с черепом Синдиката.
+full-arsenal-backpack-duffel-syndicate-name = Вещмешок Синдиката (пустой)
+full-arsenal-backpack-duffel-syndicate-desc = Пустой вещмешок Синдиката для переноски большего количества снаряжения.
+full-arsenal-backpack-security-name = Рюкзак охраны
+full-arsenal-backpack-security-desc = Стандартный рюкзак службы безопасности.
+full-arsenal-backpack-merc-name = Рюкзак наёмника
+full-arsenal-backpack-merc-desc = Тактический рюкзак в военном стиле.
+
+# EVA bundle
+full-arsenal-eva-bundle-name = ЕКД вещмешок Синдиката
+full-arsenal-eva-bundle-desc = Вещмешок с костюмом ЕКД Синдиката для работы в открытом космосе.
+
+# Uniforms
+full-arsenal-uniform-operative-name = Комбинезон оперативника
+full-arsenal-uniform-operative-desc = Форменный комбинезон ядерного оперативника Синдиката.
+full-arsenal-uniform-black-name = Чёрный комбинезон
+full-arsenal-uniform-black-desc = Простой чёрный комбинезон. Ничего лишнего.
+full-arsenal-uniform-deathsquad-name = Комбинезон Отряда Смерти
+full-arsenal-uniform-deathsquad-desc = Форменный комбинезон элитного Отряда Смерти ЦентКом.
+full-arsenal-uniform-blueshield-name = Комбинезон Синего щита
+full-arsenal-uniform-blueshield-desc = Форменный комбинезон офицера Синего щита.
+
+# Magboots
+full-arsenal-magboots-standard-name = Магнитные ботинки
+full-arsenal-magboots-standard-desc = Стандартные магнитные ботинки для передвижения в условиях невесомости.
+full-arsenal-magboots-syndie-name = Кроваво-красные магнитные ботинки
+full-arsenal-magboots-syndie-desc = Фирменные магнитные ботинки Синдиката в кроваво-красном цвете.
+full-arsenal-magboots-combat-name = Боевые магнитные ботинки
+full-arsenal-magboots-combat-desc = Усиленные магнитные ботинки с повышенными защитными свойствами.
+full-arsenal-magboots-adv-syndie-name = Улучшенные кроваво-красные магнитные ботинки
+full-arsenal-magboots-adv-syndie-desc = Новейшая версия легендарных кроваво-красных магнитных ботинок. Незаменимы для опытного агента.
+full-arsenal-magboots-adv-name = Улучшенные магнитные ботинки
+full-arsenal-magboots-adv-desc = Продвинутые магнитные ботинки капитана. Лучшая устойчивость на любой поверхности.
+full-arsenal-magboots-blinding-name = Молниеносные магнитные ботинки
+full-arsenal-magboots-blinding-desc = Экспериментальные ботинки с магнитным ускорителем. Невероятно быстрые.
+
+# New melee
+full-arsenal-stunprod-name = Электрошоковая дубинка
+full-arsenal-stunprod-desc = Длинная дубинка с мощным электрическим разрядом.
+full-arsenal-sledgehammer-name = Кувалда
+full-arsenal-sledgehammer-desc = Тяжёлая кувалда. Не самое изящное оружие, но очень эффективное.
+full-arsenal-mjollnir-name = Мьёльнир
+full-arsenal-mjollnir-desc = Легендарный молот. Говорят, им можно призывать молнии.
+full-arsenal-singularity-hammer-name = Молот сингулярности
+full-arsenal-singularity-hammer-desc = Молот, несущий сдавливающую силу сингулярности. Crunch.
+full-arsenal-eldritch-blade-name = Потусторонний клинок
+full-arsenal-eldritch-blade-desc = Кровавый клинок культистов, вызванный из другого измерения.
+full-arsenal-unholy-halberd-name = Нечестивая алебарда
+full-arsenal-unholy-halberd-desc = Длинная алебарда из арсенала культа. Наносит серьёзный урон.
+full-arsenal-arm-blade-name = Лезвие руки
+full-arsenal-arm-blade-desc = Острейшее лезвие, крепящееся к руке. Оружие чейнджлинга.
+full-arsenal-energy-sword-double-name = Двойной энергетический меч
+full-arsenal-energy-sword-double-desc = Редкий двусторонний энергетический меч. Смертоносен в умелых руках.
+full-arsenal-energy-cutlass-name = Энергетическая сабля
+full-arsenal-energy-cutlass-desc = Пиратская энергетическая сабля. Режет всё.
+full-arsenal-energy-dagger-loud-name = Энергетический кинжал (видимый)
+full-arsenal-energy-dagger-loud-desc = Энергетический кинжал, который не скрывает своего присутствия.
+full-arsenal-throwing-knife-name = Метательный нож
+full-arsenal-throwing-knife-desc = Острый нож, предназначенный для метания на расстояние.
+full-arsenal-cane-blade-name = Клинок-трость
+full-arsenal-cane-blade-desc = Изящная трость, скрывающая острый клинок внутри.
+full-arsenal-survival-knife-name = Нож выживальщика
+full-arsenal-survival-knife-desc = Надёжный универсальный нож для работы в полевых условиях.
+full-arsenal-kukri-knife-name = Кукри
+full-arsenal-kukri-knife-desc = Серповидный нож с утяжелённым концом. Отлично рубит.
+full-arsenal-butch-cleaver-name = Мясницкий тесак
+full-arsenal-butch-cleaver-desc = Тяжёлый тесак мясника. Весомый аргумент в споре.
+full-arsenal-combat-crowbar-name = Боевой гвоздодёр
+full-arsenal-combat-crowbar-desc = Усиленный гвоздодёр из арсенала Синдиката.
+
+# New ranged
+full-arsenal-pistol-desert-eagle-name = Desert Eagle
+full-arsenal-pistol-desert-eagle-desc = Мощный полуавтоматический пистолет. Большой и тяжёлый.
+full-arsenal-pistol-echis-name = Пистолет Echis
+full-arsenal-pistol-echis-desc = Компактный пистолет с высокой скоростью стрельбы.
+full-arsenal-revolver-deckard-name = Deckard
+full-arsenal-revolver-deckard-desc = Надёжный детективный пистолет под патрон магнум.
+full-arsenal-revolver-inspector-name = Инспектор
+full-arsenal-revolver-inspector-desc = Компактный карманный револьвер. Легко спрятать.
+full-arsenal-revolver-pirate-name = Пиратский пистолет
+full-arsenal-revolver-pirate-desc = Старинный пиратский пистолет. Громкий, но эффективный.
+full-arsenal-smg-atreides-name = Atreides
+full-arsenal-smg-atreides-desc = Полноразмерный пистолет-пулемёт с высоким темпом огня.
+full-arsenal-shotgun-sawn-name = Обрез
+full-arsenal-shotgun-sawn-desc = Обрезанное ружьё. Компактно, но очень мощно в упор.
+full-arsenal-shotgun-blunderbuss-name = Мушкетон
+full-arsenal-shotgun-blunderbuss-desc = Раритетный мушкетон. Разрывает врагов на куски.
+full-arsenal-shotgun-improvised-name = Самодельное ружьё
+full-arsenal-shotgun-improvised-desc = Кустарное ружьё. Работает... обычно.
+full-arsenal-rifle-m90gl-name = M-90gl (одиночно)
+full-arsenal-rifle-m90gl-desc = Тактическая боевая винтовка с подствольным гранатомётом.
+full-arsenal-rifle-lecter-xl8-name = Lecter XL8
+full-arsenal-rifle-lecter-xl8-desc = Улучшенная версия Lecter с расширенным магазином.
+full-arsenal-rifle-xc67-bare-name = xC-67 (одиночно)
+full-arsenal-rifle-xc67-bare-desc = Прототип штурмовой винтовки xC-67. Без комплекта.
+full-arsenal-sniper-musket-name = Мушкет
+full-arsenal-sniper-musket-desc = Старинный дульнозарядный мушкет. Медленный, но мощный.
+full-arsenal-launcher-hydra-name = Hydra (нелетальный)
+full-arsenal-launcher-hydra-desc = Многозарядный гранатомёт с нелетальными снарядами.
+full-arsenal-launcher-hydra-lethal-name = Hydra (летальный)
+full-arsenal-launcher-hydra-lethal-desc = Многозарядный гранатомёт с летальными снарядами. Опасен.
+full-arsenal-launcher-rocket-name = Ракетница
+full-arsenal-launcher-rocket-desc = Переносной ракетный комплекс. Уничтожает всё в зоне взрыва.
+full-arsenal-pka-name = Протокинетический ускоритель
+full-arsenal-pka-desc = Переносное горное оборудование, переделанное в оружие. Стреляет камнями.
+
+# New armor
+full-arsenal-armor-basic-slim-name = Тонкий базовый бронежилет
+full-arsenal-armor-basic-slim-desc = Облегчённый бронежилет. Не мешает движениям.
+full-arsenal-armor-captain-carapace-name = Карапас капитана
+full-arsenal-armor-captain-carapace-desc = Фирменный золотой карапас капитана с высокой защитой.
+full-arsenal-armor-centcomm-carapace-name = Карапас ЦентКом
+full-arsenal-armor-centcomm-carapace-desc = Элитный карапас сил ЦентКом. Почти неуязвим.
+full-arsenal-vest-detective-name = Детективский жилет
+full-arsenal-vest-detective-desc = Неприметный жилет детектива с базовой защитой.
+full-arsenal-armor-templar-name = Броня тамплиера
+full-arsenal-armor-templar-desc = Усиленная броня рыцарей-тамплиеров. Надёжная защита.
+full-arsenal-armor-blueshield-name = Броня Синего щита
+full-arsenal-armor-blueshield-desc = Броня офицера Синего щита с хорошей защитой VIP.
+full-arsenal-armor-explorer-name = Исследовательский костюм
+full-arsenal-armor-explorer-desc = Защитный костюм для рейдов на сальвейдж и работы вне станции.
+full-arsenal-armor-explorer-khaki-name = Исследовательский костюм (хаки)
+full-arsenal-armor-explorer-khaki-desc = Защитный костюм в цвете хаки. Та же защита, другой стиль.
+full-arsenal-armor-explorer-medical-name = Медицинский исследовательский костюм
+full-arsenal-armor-explorer-medical-desc = Вариант исследовательского костюма с медицинскими надбавками.
+full-arsenal-armor-sherif-carapace-name = Карапас шерифа
+full-arsenal-armor-sherif-carapace-desc = Карапас шерифа с характерным значком. Серьёзная защита.
+full-arsenal-armor-captain-carapace-white-name = Белый карапас капитана
+full-arsenal-armor-captain-carapace-white-desc = Белая парадная версия капитанского карапаса.
+
+# New hardsuits
+full-arsenal-hardsuit-spatio-name = Скафандр космонавта
+full-arsenal-hardsuit-spatio-desc = Базовый скафандр для работы в открытом космосе.
+full-arsenal-hardsuit-salvage-name = Скафандр сальвейджа
+full-arsenal-hardsuit-salvage-desc = Прочный скафандр горщиков с защитой от ударов.
+full-arsenal-hardsuit-goliath-name = Скафандр Голиафа
+full-arsenal-hardsuit-goliath-desc = Тяжёлый скафандр из шкуры Голиафа. Почти непробиваем.
+full-arsenal-hardsuit-void-name = Скафандр Пустоты
+full-arsenal-hardsuit-void-desc = Специализированный скафандр для выживания в Пустоте.
+full-arsenal-hardsuit-void-advanced-name = Улучшенный скафандр Пустоты
+full-arsenal-hardsuit-void-advanced-desc = Продвинутая версия скафандра Пустоты с повышенными характеристиками.
+full-arsenal-hardsuit-blueshield-name = Скафандр Синего щита
+full-arsenal-hardsuit-blueshield-desc = Тактический скафандр офицера Синего щита.

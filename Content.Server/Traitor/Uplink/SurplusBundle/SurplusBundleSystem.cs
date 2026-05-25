@@ -77,6 +77,7 @@ public sealed class SurplusBundleSystem : EntitySystem
             var randomItem = listings[randomIndex];
             ret.Add(randomItem);
             totalCost += randomItem.Cost.Values.Sum();
+            listings.RemoveAt(randomIndex); // each listing spawns at most once per crate
         }
 
         return ret;

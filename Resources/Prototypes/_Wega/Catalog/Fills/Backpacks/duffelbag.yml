@@ -79,6 +79,20 @@
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledRevolverStandard
+  name: Python bundle
+  description: "A Magnum Python revolver bundled with two speed loaders."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRevolverPython
+        - id: SpeedLoaderMagnum
+          amount: 2
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelEnergyShieldModuleBundle
   name: energy shield module bundle
   description: Contains five energy shield modules. Allows equipping an entire team with personal protective forcefields.

@@ -18,3 +18,5 @@ store-category-void-medical = Медикаменты
 store-category-void-weapon = Оружие
 store-category-void-shuttle = Шаттл
 store-category-void-special = Специальное
+
+store-category-full-arsenal = Арсенал
