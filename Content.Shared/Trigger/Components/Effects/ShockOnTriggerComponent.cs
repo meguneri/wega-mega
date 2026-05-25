@@ -31,4 +31,10 @@ public sealed partial class ShockOnTriggerComponent : BaseXOnTriggerComponent
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan Duration = TimeSpan.FromSeconds(2);
+
+    /// <summary>
+    /// Custom popup message shown to the shocked player instead of the default electrocution message.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public LocId? PlayerPopup;
 }

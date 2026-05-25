@@ -21,7 +21,7 @@ public sealed class ShockOnTriggerSystem : XOnTriggerSystem<ShockOnTriggerCompon
             target = container.Owner;
         }
 
-        _electrocution.TryDoElectrocution(target, null, ent.Comp.Damage, ent.Comp.Duration, true, ignoreInsulation: true);
+        _electrocution.TryDoElectrocution(target, null, ent.Comp.Damage, ent.Comp.Duration, true, ignoreInsulation: true, customPlayerPopup: ent.Comp.PlayerPopup);
         args.Handled = true;
     }
 }

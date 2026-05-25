@@ -63,7 +63,7 @@ namespace Content.Shared.Electrocution
         /// <returns>Whether the entity <see cref="uid"/> was stunned by the shock.</returns>
         public virtual bool TryDoElectrocution(
             EntityUid uid, EntityUid? sourceUid, int shockDamage, TimeSpan time, bool refresh, float siemensCoefficient = 1f,
-            StatusEffectsComponent? statusEffects = null, bool ignoreInsulation = false)
+            StatusEffectsComponent? statusEffects = null, bool ignoreInsulation = false, LocId? customPlayerPopup = null)
         {
             // only done serverside
             return false;

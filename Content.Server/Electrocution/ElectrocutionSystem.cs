@@ -291,10 +291,10 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
     /// <inheritdoc/>
     public override bool TryDoElectrocution(
         EntityUid uid, EntityUid? sourceUid, int shockDamage, TimeSpan time, bool refresh, float siemensCoefficient = 1f,
-        StatusEffectsComponent? statusEffects = null, bool ignoreInsulation = false)
+        StatusEffectsComponent? statusEffects = null, bool ignoreInsulation = false, LocId? customPlayerPopup = null)
     {
         if (!DoCommonElectrocutionAttempt(uid, sourceUid, ref siemensCoefficient, ignoreInsulation)
-            || !DoCommonElectrocution(uid, sourceUid, shockDamage, time, refresh, siemensCoefficient, statusEffects))
+            || !DoCommonElectrocution(uid, sourceUid, shockDamage, time, refresh, siemensCoefficient, statusEffects, customPlayerPopup))
             return false;
 
         RaiseLocalEvent(uid, new ElectrocutedEvent(uid, sourceUid, siemensCoefficient), true);
@@ -369,7 +369,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
 
     private bool DoCommonElectrocution(EntityUid uid, EntityUid? sourceUid,
         int? shockDamage, TimeSpan time, bool refresh, float siemensCoefficient = 1f,
-        StatusEffectsComponent? statusEffects = null)
+        StatusEffectsComponent? statusEffects = null, LocId? customPlayerPopup = null)
     {
         if (siemensCoefficient <= 0)
             return false;
@@ -415,7 +415,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
         _stuttering.DoStutter(uid, time * StutteringTimeMultiplier, refresh);
         _jittering.DoJitter(uid, time * JitterTimeMultiplier, refresh, JitterAmplitude, JitterFrequency, true, statusEffects);
 
-        _popup.PopupEntity(Loc.GetString("electrocuted-component-mob-shocked-popup-player"), uid, uid);
+        _popup.PopupEntity(Loc.GetString(customPlayerPopup ?? "electrocuted-component-mob-shocked-popup-player"), uid, uid);
 
         var filter = Filter.PvsExcept(uid, entityManager: EntityManager);
 
