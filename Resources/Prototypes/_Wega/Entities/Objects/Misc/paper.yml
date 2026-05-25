@@ -126,6 +126,7 @@
         Blunt: 0
     angle: 10
   - type: Flash
+  - type: RevolutionaryConverter
   - type: Tag
     tags:
     - Book
