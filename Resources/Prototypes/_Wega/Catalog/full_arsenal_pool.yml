@@ -1003,39 +1003,6 @@
 
 # uplink price: 3 TC
 - type: listing
-  id: FullArsenalChameleonProjector
-  name: full-arsenal-chameleon-projector-name
-  description: full-arsenal-chameleon-projector-desc
-  productEntity: ChameleonProjector
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
-# uplink price: 3 TC
-- type: listing
-  id: FullArsenalAgentIDCard
-  name: full-arsenal-agent-id-name
-  description: full-arsenal-agent-id-desc
-  productEntity: AgentIDCard
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
-# uplink price: 1 TC
-- type: listing
-  id: FullArsenalSyndicateIDCard
-  name: full-arsenal-syndie-id-name
-  description: full-arsenal-syndie-id-desc
-  productEntity: SyndicateIDCard
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-# uplink price: 3 TC
-- type: listing
   id: FullArsenalRadioJammer
   name: full-arsenal-radio-jammer-name
   description: full-arsenal-radio-jammer-desc
@@ -1067,60 +1034,65 @@
   categories:
   - FullArsenal
 
-# uplink price: 2 TC (box of 2 encryption keys)
-- type: listing
-  id: FullArsenalEncryptionKeys
-  name: full-arsenal-encryption-keys-name
-  description: full-arsenal-encryption-keys-desc
-  productEntity: BoxEncryptionKeySyndie
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
+# ── MOD СКАФАНДРЫ (предсобранные, модули внутри) ──────────────────────────────
 
-# ── EXOSUIT MODULES ───────────────────────────────────────────────────────────
-
-# wega uplink price: 1 TC
 - type: listing
-  id: FullArsenalModuleNoSlip
-  name: full-arsenal-module-noslip-name
-  description: full-arsenal-module-noslip-desc
-  productEntity: NoSlipSuitModule
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-# wega uplink price: 2 TC
-- type: listing
-  id: FullArsenalModulePlateCompression
-  name: full-arsenal-module-plate-name
-  description: full-arsenal-module-plate-desc
-  productEntity: PlateCompressionSuitModule
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-# wega uplink NukeOps price: 8 TC
-- type: listing
-  id: FullArsenalModuleEnergyShield
-  name: full-arsenal-module-shield-name
-  description: full-arsenal-module-shield-desc
-  productEntity: EnergyShieldSuitModule
+  id: FullArsenalModSuitEngineering
+  name: full-arsenal-modsuit-engineering-name
+  description: full-arsenal-modsuit-engineering-desc
+  productEntity: ClothingModularControllerEngineeringPreassembled
   cost:
     Telecrystal: 8
   categories:
   - FullArsenal
 
-# wega uplink NukeOps price: 32 TC (5 shield modules in a bag)
 - type: listing
-  id: FullArsenalModuleEnergyShieldBundle
-  name: full-arsenal-module-shield-bundle-name
-  description: full-arsenal-module-shield-bundle-desc
-  productEntity: ClothingBackpackDuffelEnergyShieldModuleBundle
+  id: FullArsenalModSuitSecurity
+  name: full-arsenal-modsuit-security-name
+  description: full-arsenal-modsuit-security-desc
+  productEntity: ClothingModularControllerSecurityPreassembled
   cost:
-    Telecrystal: 32
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalModSuitMedical
+  name: full-arsenal-modsuit-medical-name
+  description: full-arsenal-modsuit-medical-desc
+  productEntity: ClothingModularControllerMedicalPreassembled
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalModSuitSyndicate
+  name: full-arsenal-modsuit-syndicate-name
+  description: full-arsenal-modsuit-syndicate-desc
+  productEntity: ClothingModularControllerSyndicatePreassembled
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalModSuitElite
+  name: full-arsenal-modsuit-elite-name
+  description: full-arsenal-modsuit-elite-desc
+  productEntity: ClothingModularControllerElitePreassembled
+  cost:
+    Telecrystal: 15
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalModSuitApocryphal
+  name: full-arsenal-modsuit-apocryphal-name
+  description: full-arsenal-modsuit-apocryphal-desc
+  productEntity: ClothingModularControllerApocryphalPreassembled
+  cost:
+    Telecrystal: 18
   categories:
   - FullArsenal
 
@@ -1228,6 +1200,389 @@
   productEntity: RegenerativeMesh
   cost:
     Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGauze
+  name: full-arsenal-gauze-name
+  description: full-arsenal-gauze-desc
+  productEntity: Gauze
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBloodpack
+  name: full-arsenal-bloodpack-name
+  description: full-arsenal-bloodpack-desc
+  productEntity: Bloodpack
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDefibrillatorCompact
+  name: full-arsenal-defib-compact-name
+  description: full-arsenal-defib-compact-desc
+  productEntity: DefibrillatorCompact
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDefibrillatorSyndicate
+  name: full-arsenal-defib-syndicate-name
+  description: full-arsenal-defib-syndicate-desc
+  productEntity: DefibrillatorSyndicate
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+# Medkits (filled)
+- type: listing
+  id: FullArsenalMedkitBrute
+  name: full-arsenal-medkit-brute-name
+  description: full-arsenal-medkit-brute-desc
+  productEntity: MedkitBruteFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMedkitBurn
+  name: full-arsenal-medkit-burn-name
+  description: full-arsenal-medkit-burn-desc
+  productEntity: MedkitBurnFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMedkitToxin
+  name: full-arsenal-medkit-toxin-name
+  description: full-arsenal-medkit-toxin-desc
+  productEntity: MedkitToxinFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMedkitOxygen
+  name: full-arsenal-medkit-oxygen-name
+  description: full-arsenal-medkit-oxygen-desc
+  productEntity: MedkitOxygenFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMedkitRadiation
+  name: full-arsenal-medkit-radiation-name
+  description: full-arsenal-medkit-radiation-desc
+  productEntity: MedkitRadiationFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMedkitAdvanced
+  name: full-arsenal-medkit-advanced-name
+  description: full-arsenal-medkit-advanced-desc
+  productEntity: MedkitAdvancedFilled
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMedkitCombat
+  name: full-arsenal-medkit-combat-name
+  description: full-arsenal-medkit-combat-desc
+  productEntity: MedkitCombatFilled
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+# Medipen / autoinjectors
+- type: listing
+  id: FullArsenalEmergencyMedipen
+  name: full-arsenal-medipen-emergency-name
+  description: full-arsenal-medipen-emergency-desc
+  productEntity: EmergencyMedipen
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalAntiPoisonMedipen
+  name: full-arsenal-medipen-antipoison-name
+  description: full-arsenal-medipen-antipoison-desc
+  productEntity: AntiPoisonMedipen
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpaceMedipen
+  name: full-arsenal-medipen-space-name
+  description: full-arsenal-medipen-space-desc
+  productEntity: SpaceMedipen
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalCombatMedipen
+  name: full-arsenal-medipen-combat-name
+  description: full-arsenal-medipen-combat-desc
+  productEntity: CombatMedipen
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalMedipen
+  name: full-arsenal-medipen-survival-name
+  description: full-arsenal-medipen-survival-desc
+  productEntity: SurvivalMedipen
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBruteAutoInjector
+  name: full-arsenal-autoinjector-brute-name
+  description: full-arsenal-autoinjector-brute-desc
+  productEntity: BruteAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBurnAutoInjector
+  name: full-arsenal-autoinjector-burn-name
+  description: full-arsenal-autoinjector-burn-desc
+  productEntity: BurnAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRadAutoInjector
+  name: full-arsenal-autoinjector-rad-name
+  description: full-arsenal-autoinjector-rad-desc
+  productEntity: RadAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalAirlossAutoInjector
+  name: full-arsenal-autoinjector-airloss-name
+  description: full-arsenal-autoinjector-airloss-desc
+  productEntity: AirlossAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPunctAutoInjector
+  name: full-arsenal-autoinjector-punct-name
+  description: full-arsenal-autoinjector-punct-desc
+  productEntity: PunctAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPyraAutoInjector
+  name: full-arsenal-autoinjector-pyra-name
+  description: full-arsenal-autoinjector-pyra-desc
+  productEntity: PyraAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBoxAutoInjectorAll
+  name: full-arsenal-box-autoinjector-all-name
+  description: full-arsenal-box-autoinjector-all-desc
+  productEntity: BoxAutoInjectorAll
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+# Химические бутылки с лечебными реагентами
+- type: listing
+  id: FullArsenalBottleBicaridine
+  name: full-arsenal-bottle-bicaridine-name
+  description: full-arsenal-bottle-bicaridine-desc
+  productEntity: ChemistryBottleBicaridine
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleDermaline
+  name: full-arsenal-bottle-dermaline-name
+  description: full-arsenal-bottle-dermaline-desc
+  productEntity: ChemistryBottleDermaline
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleOmnizine
+  name: full-arsenal-bottle-omnizine-name
+  description: full-arsenal-bottle-omnizine-desc
+  productEntity: ChemistryBottleOmnizine
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleTricordrazine
+  name: full-arsenal-bottle-tricordrazine-name
+  description: full-arsenal-bottle-tricordrazine-desc
+  productEntity: ChemistryBottleTricordrazine
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleKelotane
+  name: full-arsenal-bottle-kelotane-name
+  description: full-arsenal-bottle-kelotane-desc
+  productEntity: ChemistryBottleKelotane
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleDylovene
+  name: full-arsenal-bottle-dylovene-name
+  description: full-arsenal-bottle-dylovene-desc
+  productEntity: ChemistryBottleDylovene
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleDexalinPlus
+  name: full-arsenal-bottle-dexalinplus-name
+  description: full-arsenal-bottle-dexalinplus-desc
+  productEntity: ChemistryBottleDexalinPlus
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleInaprovaline
+  name: full-arsenal-bottle-inaprovaline-name
+  description: full-arsenal-bottle-inaprovaline-desc
+  productEntity: ChemistryBottleInaprovaline
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleEpinephrine
+  name: full-arsenal-bottle-epinephrine-name
+  description: full-arsenal-bottle-epinephrine-desc
+  productEntity: ChemistryBottleEpinephrine
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleTranexamicAcid
+  name: full-arsenal-bottle-tranexamic-name
+  description: full-arsenal-bottle-tranexamic-desc
+  productEntity: ChemistryBottleTranexamicAcid
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleSigynate
+  name: full-arsenal-bottle-sigynate-name
+  description: full-arsenal-bottle-sigynate-desc
+  productEntity: ChemistryBottleSigynate
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleArithrazine
+  name: full-arsenal-bottle-arithrazine-name
+  description: full-arsenal-bottle-arithrazine-desc
+  productEntity: ChemistryBottleArithrazine
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleCryoxadone
+  name: full-arsenal-bottle-cryoxadone-name
+  description: full-arsenal-bottle-cryoxadone-desc
+  productEntity: ChemistryBottleCryoxadone
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottlePhalanximine
+  name: full-arsenal-bottle-phalanximine-name
+  description: full-arsenal-bottle-phalanximine-desc
+  productEntity: ChemistryBottlePhalanximine
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleHyronalin
+  name: full-arsenal-bottle-hyronalin-name
+  description: full-arsenal-bottle-hyronalin-desc
+  productEntity: ChemistryBottleHyronalin
+  cost:
+    Telecrystal: 1
   categories:
   - FullArsenal
 
