@@ -3046,3 +3046,119 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+
+# ── SECURITY / DISABLERS ──────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalTaser
+  name: full-arsenal-taser-name
+  description: full-arsenal-taser-desc
+  productEntity: WeaponTaser
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDisabler
+  name: full-arsenal-disabler-name
+  description: full-arsenal-disabler-desc
+  productEntity: WeaponDisabler
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDisablerSMG
+  name: full-arsenal-disabler-smg-name
+  description: full-arsenal-disabler-smg-desc
+  productEntity: WeaponDisablerSMG
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalEnergyMagnum
+  name: full-arsenal-energy-magnum-name
+  description: full-arsenal-energy-magnum-desc
+  productEntity: WeaponEnergyMagnum
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalEnergyShotgun
+  name: full-arsenal-energy-shotgun-name
+  description: full-arsenal-energy-shotgun-desc
+  productEntity: WeaponEnergyShotgun
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+# ── ENERGY GUNS ───────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalPulsePistol
+  name: full-arsenal-pulse-pistol-name
+  description: full-arsenal-pulse-pistol-desc
+  productEntity: WeaponPulsePistol
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPulseCarbine
+  name: full-arsenal-pulse-carbine-name
+  description: full-arsenal-pulse-carbine-desc
+  productEntity: WeaponPulseCarbine
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPulseRifle
+  name: full-arsenal-pulse-rifle-name
+  description: full-arsenal-pulse-rifle-desc
+  productEntity: WeaponPulseRifle
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalLaserCannon
+  name: full-arsenal-laser-cannon-name
+  description: full-arsenal-laser-cannon-desc
+  productEntity: WeaponLaserCannon
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalTeslaGun
+  name: full-arsenal-tesla-gun-name
+  description: full-arsenal-tesla-gun-desc
+  productEntity: WeaponTeslaGun
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+# ── HEAVY WEAPONS ─────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalMinigun
+  name: full-arsenal-minigun-name
+  description: full-arsenal-minigun-desc
+  productEntity: WeaponMinigun
+  cost:
+    Telecrystal: 9
+  categories:
+  - FullArsenal

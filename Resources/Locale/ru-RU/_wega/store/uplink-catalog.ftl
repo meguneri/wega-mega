@@ -558,3 +558,31 @@ full-arsenal-spellbookspawn-name = Книга призыва
 full-arsenal-spellbookspawn-desc = Призывает магического карпа. Зачем? Потому что можно.
 full-arsenal-wizardsgrimoire-name = Гримуар волшебника
 full-arsenal-wizardsgrimoire-desc = Полная книга заклинаний волшебника. Содержит весь арсенал магических умений.
+
+# Security / Disablers
+full-arsenal-taser-name = Тазер
+full-arsenal-taser-desc = Маломощный нелетальный пистолет с ограниченным запасом заряда. Надёжно обездвиживает цель.
+full-arsenal-disabler-name = Дизейблер
+full-arsenal-disabler-desc = Стандартное нелетальное оружие службы безопасности. Обездвиживает цель несколькими выстрелами.
+full-arsenal-disabler-smg-name = Дизейблер-ПП
+full-arsenal-disabler-smg-desc = Продвинутая версия дизейблера с высокой скорострельностью. Позволяет быстро нейтрализовать несколько целей.
+full-arsenal-energy-magnum-name = Энергетический магнум
+full-arsenal-energy-magnum-desc = Мощный энергетический пистолет на вооружении начальника службы безопасности. Бьёт как летально, так и оглушающим режимом.
+full-arsenal-energy-shotgun-name = Энергетический дробовик
+full-arsenal-energy-shotgun-desc = Прототип дробовика на энергетических зарядах. Широкий конус поражения делает его страшным в ближнем бою.
+
+# Energy guns
+full-arsenal-pulse-pistol-name = Импульсный пистолет
+full-arsenal-pulse-pistol-desc = Компактный пистолет NT на импульсной батарее. Перезаряжается от сети.
+full-arsenal-pulse-carbine-name = Импульсный карабин
+full-arsenal-pulse-carbine-desc = Импульсный карабин NT среднего класса. Точный и надёжный в бою на средних дистанциях.
+full-arsenal-pulse-rifle-name = Импульсная винтовка
+full-arsenal-pulse-rifle-desc = Тяжёлая штурмовая винтовка NT на импульсных зарядах. Мощный урон и высокая ёмкость батареи.
+full-arsenal-laser-cannon-name = Лазерная пушка
+full-arsenal-laser-cannon-desc = Тяжёлое лазерное орудие с огромным разовым уроном. Медленная перезарядка, но каждый выстрел сносит половину здоровья.
+full-arsenal-tesla-gun-name = Тесла-пистолет
+full-arsenal-tesla-gun-desc = Экспериментальное оружие, выпускающее цепные молнии. Особенно эффективно против скоплений целей.
+
+# Heavy weapons
+full-arsenal-minigun-name = Миниган
+full-arsenal-minigun-desc = Шестиствольный миниган с огромной скорострельностью. Требует времени на раскрутку, но в деле не оставляет шансов.
