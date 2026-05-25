@@ -41,6 +41,21 @@
       Telecrystal: 0
 
 - type: entity
+  id: StorePresetFullArsenal
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-full-arsenal
+    categories:
+    - FullArsenal
+    currencyWhitelist:
+    - Telecrystal
+    balance:
+      Telecrystal: 0
+    expectedFaction:
+    - Syndicate
+
+- type: entity
   id: StorePresetRevolution
   abstract: true
   components:

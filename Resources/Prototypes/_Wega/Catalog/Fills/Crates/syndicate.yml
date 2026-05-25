@@ -1,0 +1,8 @@
+- type: entity
+  parent: [ CrateSyndicate, StorePresetFullArsenal, BaseSyndicateContraband ]
+  id: CrateSyndicateFullArsenal
+  name: uplink-full-arsenal-bundle-name
+  description: uplink-full-arsenal-bundle-desc
+  components:
+  - type: SurplusBundle
+    totalPrice: 40
