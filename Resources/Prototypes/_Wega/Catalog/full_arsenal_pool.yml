@@ -503,6 +503,286 @@
   categories:
   - FullArsenal
 
+- type: listing
+  id: FullArsenalHardsuitEVA
+  name: full-arsenal-hardsuit-eva-name
+  description: full-arsenal-hardsuit-eva-desc
+  productEntity: ClothingOuterHardsuitEVA
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitAncientEVA
+  name: full-arsenal-hardsuit-ancient-eva-name
+  description: full-arsenal-hardsuit-ancient-eva-desc
+  productEntity: ClothingOuterHardsuitAncientEVA
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitEngineeringWhite
+  name: full-arsenal-hardsuit-engineering-white-name
+  description: full-arsenal-hardsuit-engineering-white-desc
+  productEntity: ClothingOuterHardsuitEngineeringWhite
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitMedical
+  name: full-arsenal-hardsuit-medical-name
+  description: full-arsenal-hardsuit-medical-desc
+  productEntity: ClothingOuterHardsuitMedical
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitSecurity
+  name: full-arsenal-hardsuit-security-name
+  description: full-arsenal-hardsuit-security-desc
+  productEntity: ClothingOuterHardsuitSecurity
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitSecurityRed
+  name: full-arsenal-hardsuit-security-red-name
+  description: full-arsenal-hardsuit-security-red-desc
+  productEntity: ClothingOuterHardsuitSecurityRed
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitSecurityPilot
+  name: full-arsenal-hardsuit-security-pilot-name
+  description: full-arsenal-hardsuit-security-pilot-desc
+  productEntity: ClothingOuterHardsuitSecurityPilot
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitWarden
+  name: full-arsenal-hardsuit-warden-name
+  description: full-arsenal-hardsuit-warden-desc
+  productEntity: ClothingOuterHardsuitWarden
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitBrigmedic
+  name: full-arsenal-hardsuit-brigmedic-name
+  description: full-arsenal-hardsuit-brigmedic-desc
+  productEntity: ClothingOuterHardsuitBrigmedic
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitCap
+  name: full-arsenal-hardsuit-cap-name
+  description: full-arsenal-hardsuit-cap-desc
+  productEntity: ClothingOuterHardsuitCap
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitRd
+  name: full-arsenal-hardsuit-rd-name
+  description: full-arsenal-hardsuit-rd-desc
+  productEntity: ClothingOuterHardsuitRd
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitMaxim
+  name: full-arsenal-hardsuit-maxim-name
+  description: full-arsenal-hardsuit-maxim-desc
+  productEntity: ClothingOuterHardsuitMaxim
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitWizard
+  name: full-arsenal-hardsuit-wizard-name
+  description: full-arsenal-hardsuit-wizard-desc
+  productEntity: ClothingOuterHardsuitWizard
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitPirateCap
+  name: full-arsenal-hardsuit-pirate-cap-name
+  description: full-arsenal-hardsuit-pirate-cap-desc
+  productEntity: ClothingOuterHardsuitPirateCap
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitSyndieCommander
+  name: full-arsenal-hardsuit-syndie-commander-name
+  description: full-arsenal-hardsuit-syndie-commander-desc
+  productEntity: ClothingOuterHardsuitSyndieCommander
+  cost:
+    Telecrystal: 15
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitSyndieMedic
+  name: full-arsenal-hardsuit-syndie-medic-name
+  description: full-arsenal-hardsuit-syndie-medic-desc
+  productEntity: ClothingOuterHardsuitSyndieMedic
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitVoidParamed
+  name: full-arsenal-hardsuit-void-paramed-name
+  description: full-arsenal-hardsuit-void-paramed-desc
+  productEntity: ClothingOuterHardsuitVoidParamed
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitCBURN
+  name: full-arsenal-hardsuit-cburn-name
+  description: full-arsenal-hardsuit-cburn-desc
+  productEntity: ClothingOuterHardsuitCBURN
+  cost:
+    Telecrystal: 15
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitCBURNLeader
+  name: full-arsenal-hardsuit-cburn-leader-name
+  description: full-arsenal-hardsuit-cburn-leader-desc
+  productEntity: ClothingOuterHardsuitCBURNLeader
+  cost:
+    Telecrystal: 18
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitERTLeader
+  name: full-arsenal-hardsuit-ert-leader-name
+  description: full-arsenal-hardsuit-ert-leader-desc
+  productEntity: ClothingOuterHardsuitERTLeader
+  cost:
+    Telecrystal: 15
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitERTSecurity
+  name: full-arsenal-hardsuit-ert-security-name
+  description: full-arsenal-hardsuit-ert-security-desc
+  productEntity: ClothingOuterHardsuitERTSecurity
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitERTEngineer
+  name: full-arsenal-hardsuit-ert-engineer-name
+  description: full-arsenal-hardsuit-ert-engineer-desc
+  productEntity: ClothingOuterHardsuitERTEngineer
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitERTMedical
+  name: full-arsenal-hardsuit-ert-medical-name
+  description: full-arsenal-hardsuit-ert-medical-desc
+  productEntity: ClothingOuterHardsuitERTMedical
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitERTChaplain
+  name: full-arsenal-hardsuit-ert-chaplain-name
+  description: full-arsenal-hardsuit-ert-chaplain-desc
+  productEntity: ClothingOuterHardsuitERTChaplain
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitERTJanitor
+  name: full-arsenal-hardsuit-ert-janitor-name
+  description: full-arsenal-hardsuit-ert-janitor-desc
+  productEntity: ClothingOuterHardsuitERTJanitor
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitClown
+  name: full-arsenal-hardsuit-clown-name
+  description: full-arsenal-hardsuit-clown-desc
+  productEntity: ClothingOuterHardsuitClown
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitMime
+  name: full-arsenal-hardsuit-mime-name
+  description: full-arsenal-hardsuit-mime-desc
+  productEntity: ClothingOuterHardsuitMime
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHardsuitSanta
+  name: full-arsenal-hardsuit-santa-name
+  description: full-arsenal-hardsuit-santa-desc
+  productEntity: ClothingOuterHardsuitSanta
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
 # ── MEDICAL ───────────────────────────────────────────────────────────────────
 
 - type: listing
