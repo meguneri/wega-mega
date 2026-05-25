@@ -2,9 +2,7 @@ using System.Linq;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Store;
 using Content.Shared.Store.Components;
-using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
 namespace Content.Server.Traitor.Uplink.SurplusBundle;
@@ -44,7 +42,7 @@ public sealed class SurplusBundleSystem : EntitySystem
     private List<ListingData> GetRandomContent(Entity<SurplusBundleComponent, StoreComponent> ent)
     {
         var ret = new List<ListingData>();
-        var categoryCounts = new Dictionary<ProtoId<StoreCategoryPrototype>, int>();
+        var categoryCounts = new Dictionary<string, int>();
 
         var listings = _store.GetAvailableListings(ent, null, ent.Comp2.Categories)
             .OrderBy(p => p.Cost.Values.Sum())
@@ -72,7 +70,7 @@ public sealed class SurplusBundleSystem : EntitySystem
             totalCost += pick.Cost.Values.Sum();
 
             foreach (var cat in pick.Categories)
-                categoryCounts[cat] = categoryCounts.GetValueOrDefault(cat) + 1;
+                categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
 
             listings.Remove(pick);
         }
@@ -82,12 +80,12 @@ public sealed class SurplusBundleSystem : EntitySystem
 
     private static bool ExceedsCategoryLimit(
         ListingData listing,
-        Dictionary<ProtoId<StoreCategoryPrototype>, int> limits,
-        Dictionary<ProtoId<StoreCategoryPrototype>, int> counts)
+        Dictionary<string, int> limits,
+        Dictionary<string, int> counts)
     {
         foreach (var cat in listing.Categories)
         {
-            if (limits.TryGetValue(cat, out var limit) && counts.GetValueOrDefault(cat) >= limit)
+            if (limits.TryGetValue(cat.Id, out var limit) && counts.GetValueOrDefault(cat.Id) >= limit)
                 return true;
         }
         return false;

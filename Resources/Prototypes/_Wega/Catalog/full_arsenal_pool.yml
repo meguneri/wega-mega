@@ -1323,17 +1323,6 @@
 
 # ── GADGETS & TOOLS ───────────────────────────────────────────────────────────
 
-# uplink price: 4 TC
-- type: listing
-  id: FullArsenalEmag
-  name: full-arsenal-emag-name
-  description: full-arsenal-emag-desc
-  productEntity: Emag
-  cost:
-    Telecrystal: 4
-  categories:
-  - FullArsenal
-
 # uplink price: 3 TC
 - type: listing
   id: FullArsenalRadioJammer

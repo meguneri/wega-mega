@@ -137,8 +137,6 @@ full-arsenal-implant-acidifier-name = Имплант ацидификатора 
 full-arsenal-implant-acidifier-desc = При гибели растворяет тело носителя кислотой, уничтожая улики.
 
 # Gadgets & tools
-full-arsenal-emag-name = Эмаг
-full-arsenal-emag-desc = Электромагнитная карточка для взлома дверей и терминалов.
 full-arsenal-radio-jammer-name = Глушитель радиосвязи
 full-arsenal-radio-jammer-desc = Блокирует все радиосигналы в зоне действия.
 full-arsenal-stealth-box-name = Стелс-ящик
