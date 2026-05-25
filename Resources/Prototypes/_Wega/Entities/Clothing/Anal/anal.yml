@@ -85,3 +85,26 @@
     sprite: _Wega/Clothing/Anal/yellow.rsi
   - type: Clothing
     sprite: _Wega/Clothing/Anal/yellow.rsi
+
+- type: entity
+  parent: ClothingAnalBase
+  id: ClothingAnalVibrator
+  name: vaginal vibrator
+  description: A remote-controlled vibrator that buzzes on signal.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Anal/pink.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Anal/pink.rsi
+  - type: ShockOnTrigger
+    targetContainer: true
+    damage: 1
+    duration: 1
+    playerPopup: shock-on-trigger-vibrator-popup
+  - type: SpawnOnTrigger
+    proto: EffectHearts
+    useMapCoords: true
+  - type: TriggerOnSignal
+  - type: DeviceLinkSink
+    ports:
+      - Trigger
