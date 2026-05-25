@@ -11,4 +11,11 @@ public sealed partial class SurplusBundleComponent : Component
     /// </summary>
     [DataField]
     public int TotalPrice = 20;
+
+    /// <summary>
+    ///     Maximum number of items allowed per store category.
+    ///     Items with any category that hits its limit are excluded from further picks.
+    /// </summary>
+    [DataField]
+    public Dictionary<string, int> CategoryLimits = new();
 }

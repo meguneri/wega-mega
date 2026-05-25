@@ -6,3 +6,5 @@
   components:
   - type: SurplusBundle
     totalPrice: 40
+    categoryLimits:
+      FullArsenalArmor: 2

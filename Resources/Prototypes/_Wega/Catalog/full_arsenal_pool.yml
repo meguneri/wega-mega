@@ -357,6 +357,7 @@
     Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorRiot
@@ -367,6 +368,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorReflective
@@ -377,6 +379,7 @@
     Telecrystal: 4
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorBulletproof
@@ -387,6 +390,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorCult
@@ -397,6 +401,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorHeavy
@@ -407,6 +412,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorWarden
@@ -417,6 +423,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # uplink raid bundle: 8 TC with extras; armor alone ≈ 6
 - type: listing
@@ -428,6 +435,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # uplink price: 2 TC
 - type: listing
@@ -439,6 +447,7 @@
     Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitEngineering
@@ -449,6 +458,7 @@
     Telecrystal: 4
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitAtmos
@@ -459,6 +469,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # uplink bundle: 7 TC with duffel+extras; suit alone ≈ 5
 - type: listing
@@ -470,6 +481,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # uplink bundle: 12 TC; suit alone ≈ 10
 - type: listing
@@ -481,6 +493,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # uplink bundle (NukeOps): 12 TC with crate+extras; suit alone ≈ 10
 - type: listing
@@ -492,6 +505,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitDeathsquad
@@ -502,6 +516,7 @@
     Telecrystal: 20
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitEVA
@@ -512,6 +527,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitAncientEVA
@@ -522,6 +538,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitEngineeringWhite
@@ -532,6 +549,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitMedical
@@ -542,6 +560,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSecurity
@@ -552,6 +571,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSecurityRed
@@ -562,6 +582,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSecurityPilot
@@ -572,6 +593,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitWarden
@@ -582,6 +604,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitBrigmedic
@@ -592,6 +615,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitCap
@@ -602,6 +626,7 @@
     Telecrystal: 12
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitRd
@@ -612,6 +637,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitMaxim
@@ -622,6 +648,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitWizard
@@ -632,6 +659,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitPirateCap
@@ -642,6 +670,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSyndieCommander
@@ -652,6 +681,7 @@
     Telecrystal: 15
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSyndieMedic
@@ -662,6 +692,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitVoidParamed
@@ -672,6 +703,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitCBURN
@@ -682,6 +714,7 @@
     Telecrystal: 15
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitCBURNLeader
@@ -692,6 +725,7 @@
     Telecrystal: 18
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitERTLeader
@@ -702,6 +736,7 @@
     Telecrystal: 15
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitERTSecurity
@@ -712,6 +747,7 @@
     Telecrystal: 12
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitERTEngineer
@@ -722,6 +758,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitERTMedical
@@ -732,6 +769,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitERTChaplain
@@ -742,6 +780,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitERTJanitor
@@ -752,6 +791,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitClown
@@ -762,6 +802,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitMime
@@ -772,6 +813,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSanta
@@ -782,6 +824,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # ── MEDICAL ───────────────────────────────────────────────────────────────────
 
@@ -1335,6 +1378,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalModSuitSecurity
@@ -1345,6 +1389,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalModSuitMedical
@@ -1355,6 +1400,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalModSuitSyndicate
@@ -1365,6 +1411,7 @@
     Telecrystal: 12
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalModSuitElite
@@ -1375,6 +1422,7 @@
     Telecrystal: 15
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalModSuitApocryphal
@@ -1385,6 +1433,7 @@
     Telecrystal: 18
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # ── TRINKETS & FUN ────────────────────────────────────────────────────────────
 
@@ -2381,6 +2430,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorCaptainCarapace
@@ -2391,6 +2441,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorCentcommCarapace
@@ -2401,6 +2452,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalVestDetective
@@ -2411,6 +2463,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorTemplar
@@ -2421,6 +2474,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorBlueShield
@@ -2431,6 +2485,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorExplorerSuit
@@ -2441,6 +2496,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorExplorerSuitKhaki
@@ -2451,6 +2507,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorExplorerSuitMedical
@@ -2461,6 +2518,7 @@
     Telecrystal: 7
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorSherifCarapace
@@ -2471,6 +2529,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorCaptainCarapaceWhite
@@ -2481,6 +2540,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # ── NEW HARDSUITS ─────────────────────────────────────────────────────────────
 
@@ -2493,6 +2553,7 @@
     Telecrystal: 7
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitSalvage
@@ -2503,6 +2564,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitGoliath
@@ -2513,6 +2575,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitVoid
@@ -2523,6 +2586,7 @@
     Telecrystal: 10
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitVoidAdvanced
@@ -2533,6 +2597,7 @@
     Telecrystal: 12
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalHardsuitBlueShield
@@ -2541,5 +2606,362 @@
   productEntity: ClothingOuterHardsuitBlueShield
   cost:
     Telecrystal: 10
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+# ── GRENADES ─────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalGrenadeFlashbang
+  name: full-arsenal-grenade-flashbang-name
+  description: full-arsenal-grenade-flashbang-desc
+  productEntity: GrenadeFlashBang
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeEMP
+  name: full-arsenal-grenade-emp-name
+  description: full-arsenal-grenade-emp-desc
+  productEntity: EmpGrenade
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeTearGas
+  name: full-arsenal-grenade-teargas-name
+  description: full-arsenal-grenade-teargas-desc
+  productEntity: TearGasGrenade
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeStinger
+  name: full-arsenal-grenade-stinger-name
+  description: full-arsenal-grenade-stinger-desc
+  productEntity: GrenadeStinger
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeEx
+  name: full-arsenal-grenade-ex-name
+  description: full-arsenal-grenade-ex-desc
+  productEntity: ExGrenade
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeShrapnel
+  name: full-arsenal-grenade-shrapnel-name
+  description: full-arsenal-grenade-shrapnel-desc
+  productEntity: GrenadeShrapnel
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeIncendiary
+  name: full-arsenal-grenade-incendiary-name
+  description: full-arsenal-grenade-incendiary-desc
+  productEntity: GrenadeIncendiary
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeCluster
+  name: full-arsenal-grenade-cluster-name
+  description: full-arsenal-grenade-cluster-desc
+  productEntity: ClusterGrenade
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSyndieMiniBomb
+  name: full-arsenal-syndie-minibomb-name
+  description: full-arsenal-syndie-minibomb-desc
+  productEntity: SyndieMiniBomb
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSyndieTrickyBomb
+  name: full-arsenal-syndie-tricky-bomb-name
+  description: full-arsenal-syndie-tricky-bomb-desc
+  productEntity: SyndieTrickyBomb
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrenadeHolyHand
+  name: full-arsenal-grenade-holyhand-name
+  description: full-arsenal-grenade-holyhand-desc
+  productEntity: HolyHandGrenade
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+# ── COMBAT GLOVES AND KNUCKLEDUSTERS ─────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalGlovesCombat
+  name: full-arsenal-gloves-combat-name
+  description: full-arsenal-gloves-combat-desc
+  productEntity: ClothingHandsGlovesCombat
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesMercCombat
+  name: full-arsenal-gloves-merc-combat-name
+  description: full-arsenal-gloves-merc-combat-desc
+  productEntity: ClothingHandsMercGlovesCombat
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesMercFingerless
+  name: full-arsenal-gloves-merc-fingerless-name
+  description: full-arsenal-gloves-merc-fingerless-desc
+  productEntity: ClothingHandsGlovesMercFingerless
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesBlueShieldCombat
+  name: full-arsenal-gloves-blueshield-combat-name
+  description: full-arsenal-gloves-blueshield-combat-desc
+  productEntity: ClothingHandsGlovesCombatBlueShield
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesNorthStar
+  name: full-arsenal-gloves-northstar-name
+  description: full-arsenal-gloves-northstar-desc
+  productEntity: ClothingHandsGlovesNorthStar
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesKravMaga
+  name: full-arsenal-gloves-kravmaga-name
+  description: full-arsenal-gloves-kravmaga-desc
+  productEntity: ClothingHandsGlovesKravMaga
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesConcussive
+  name: full-arsenal-gloves-concussive-name
+  description: full-arsenal-gloves-concussive-desc
+  productEntity: ClothingHandsGlovesConcussiveGauntlets
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesPowerglove
+  name: full-arsenal-gloves-powerglove-name
+  description: full-arsenal-gloves-powerglove-desc
+  productEntity: ClothingHandsGlovesPowerglove
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesSpaceNinja
+  name: full-arsenal-gloves-spaceninja-name
+  description: full-arsenal-gloves-spaceninja-desc
+  productEntity: ClothingHandsGlovesSpaceNinja
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesBoxingRiggedRed
+  name: full-arsenal-gloves-boxing-rigged-red-name
+  description: full-arsenal-gloves-boxing-rigged-red-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedRed
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesBoxingRiggedBlue
+  name: full-arsenal-gloves-boxing-rigged-blue-name
+  description: full-arsenal-gloves-boxing-rigged-blue-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedBlue
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesBoxingRiggedGreen
+  name: full-arsenal-gloves-boxing-rigged-green-name
+  description: full-arsenal-gloves-boxing-rigged-green-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedGreen
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesBoxingRiggedYellow
+  name: full-arsenal-gloves-boxing-rigged-yellow-name
+  description: full-arsenal-gloves-boxing-rigged-yellow-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedYellow
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalKnuckleDusters
+  name: full-arsenal-knuckle-dusters-name
+  description: full-arsenal-knuckle-dusters-desc
+  productEntity: ClothingHandsKnuckleDusters
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalKnuckleDustersBrass
+  name: full-arsenal-knuckle-dusters-brass-name
+  description: full-arsenal-knuckle-dusters-brass-desc
+  productEntity: ClothingHandsKnuckleDustersBrass
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalKnuckleDustersQM
+  name: full-arsenal-knuckle-dusters-qm-name
+  description: full-arsenal-knuckle-dusters-qm-desc
+  productEntity: ClothingHandsKnuckleDustersQM
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalKnuckleDustersStun
+  name: full-arsenal-knuckle-dusters-stun-name
+  description: full-arsenal-knuckle-dusters-stun-desc
+  productEntity: ClothingHandsKnuckleDustersStun
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalKnuckleDustersSyndicate
+  name: full-arsenal-knuckle-dusters-syndicate-name
+  description: full-arsenal-knuckle-dusters-syndicate-desc
+  productEntity: ClothingHandsKnuckleDustersSyndicate
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalKnuckleBoneCrushers
+  name: full-arsenal-knuckle-bone-crushers-name
+  description: full-arsenal-knuckle-bone-crushers-desc
+  productEntity: ClothingHandsKnuckleBoneCrushers
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+# ── RESTRAINTS ────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalHandcuffs
+  name: full-arsenal-handcuffs-name
+  description: full-arsenal-handcuffs-desc
+  productEntity: Handcuffs
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBoxHandcuffs
+  name: full-arsenal-box-handcuffs-name
+  description: full-arsenal-box-handcuffs-desc
+  productEntity: BoxHandcuff
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalZipties
+  name: full-arsenal-zipties-name
+  description: full-arsenal-zipties-desc
+  productEntity: Zipties
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBoxZipties
+  name: full-arsenal-box-zipties-name
+  description: full-arsenal-box-zipties-desc
+  productEntity: BoxZiptie
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalCablecuffs
+  name: full-arsenal-cablecuffs-name
+  description: full-arsenal-cablecuffs-desc
+  productEntity: Cablecuffs
+  cost:
+    Telecrystal: 1
   categories:
   - FullArsenal

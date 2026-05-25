@@ -97,6 +97,11 @@
   name: store-category-full-arsenal
   priority: 0
 
+- type: storeCategory
+  id: FullArsenalArmor
+  name: store-category-full-arsenal-armor
+  priority: 1
+
  #revolution
 - type: storeCategory
   id: RevolutionSupport

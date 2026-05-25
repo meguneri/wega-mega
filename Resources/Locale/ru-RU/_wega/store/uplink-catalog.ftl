@@ -462,3 +462,81 @@ full-arsenal-hardsuit-santa-name = Скафандр Санты
 full-arsenal-hardsuit-santa-desc = Праздничный скафандр Санта-Клауса. Но кому тут дарить подарки?
 full-arsenal-hardsuit-blueshield-name = Скафандр Синего щита
 full-arsenal-hardsuit-blueshield-desc = Тактический скафандр офицера Синего щита.
+
+# Grenades
+full-arsenal-grenade-flashbang-name = Светошумовая граната
+full-arsenal-grenade-flashbang-desc = Оглушает и слепит всех в зоне взрыва.
+full-arsenal-grenade-emp-name = ЭМИ-граната
+full-arsenal-grenade-emp-desc = Выводит из строя электронику и роботов в радиусе взрыва.
+full-arsenal-grenade-teargas-name = Слезоточивый газ
+full-arsenal-grenade-teargas-desc = Выпускает облако газа, раздражающего глаза и дыхательные пути.
+full-arsenal-grenade-stinger-name = Граната-жалюзи
+full-arsenal-grenade-stinger-desc = Выпускает рой нелетальных снарядов для подавления противника.
+full-arsenal-grenade-ex-name = Осколочная граната
+full-arsenal-grenade-ex-desc = Стандартная боевая граната с осколочным поражением.
+full-arsenal-grenade-shrapnel-name = Шрапнельная граната
+full-arsenal-grenade-shrapnel-desc = Разбрасывает металлические осколки в широком радиусе.
+full-arsenal-grenade-incendiary-name = Зажигательная граната
+full-arsenal-grenade-incendiary-desc = Создаёт зону огня при взрыве. Хороша против скоплений.
+full-arsenal-grenade-cluster-name = Кассетная граната
+full-arsenal-grenade-cluster-desc = Разрывается на несколько суббоеприпасов. Большая зона поражения.
+full-arsenal-syndie-minibomb-name = Минибомба Синдиката
+full-arsenal-syndie-minibomb-desc = Компактная мощная бомба. Помещается в карман.
+full-arsenal-syndie-tricky-bomb-name = Хитрая бомба Синдиката
+full-arsenal-syndie-tricky-bomb-desc = Бомба с нестандартным механизмом срабатывания. Сюрприз!
+full-arsenal-grenade-holyhand-name = Священная граната
+full-arsenal-grenade-holyhand-desc = ...и насчитав до трёх — не до двух и не до четырёх — метни её.
+
+# Combat gloves
+full-arsenal-gloves-combat-name = Боевые перчатки
+full-arsenal-gloves-combat-desc = Усиленные перчатки для рукопашного боя.
+full-arsenal-gloves-merc-combat-name = Боевые перчатки наёмника
+full-arsenal-gloves-merc-combat-desc = Тактические перчатки бойца-наёмника.
+full-arsenal-gloves-merc-fingerless-name = Перчатки наёмника без пальцев
+full-arsenal-gloves-merc-fingerless-desc = Открытые тактические перчатки для удобства с оружием.
+full-arsenal-gloves-blueshield-combat-name = Боевые перчатки Синего щита
+full-arsenal-gloves-blueshield-combat-desc = Усиленные боевые перчатки офицера Синего щита.
+full-arsenal-gloves-northstar-name = Перчатки Полярной звезды
+full-arsenal-gloves-northstar-desc = Экзотические боевые перчатки с повышенным уроном. Редкость.
+full-arsenal-gloves-kravmaga-name = Перчатки Крав-мага
+full-arsenal-gloves-kravmaga-desc = Перчатки для бойцов Крав-мага. Позволяют использовать боевые приёмы.
+full-arsenal-gloves-concussive-name = Контузионные перчатки
+full-arsenal-gloves-concussive-desc = Тяжёлые перчатки с ударным усилением. Оглушают противника.
+full-arsenal-gloves-powerglove-name = Силовая перчатка
+full-arsenal-gloves-powerglove-desc = Механизированная перчатка с усиленным захватом и ударом.
+full-arsenal-gloves-spaceninja-name = Перчатки космического ниндзя
+full-arsenal-gloves-spaceninja-desc = Специальные перчатки ниндзя с уникальными боевыми свойствами.
+full-arsenal-gloves-boxing-rigged-red-name = Накачанные боксёрские перчатки (красные)
+full-arsenal-gloves-boxing-rigged-red-desc = Боксёрские перчатки с усиленным ударом. Красный вариант.
+full-arsenal-gloves-boxing-rigged-blue-name = Накачанные боксёрские перчатки (синие)
+full-arsenal-gloves-boxing-rigged-blue-desc = Боксёрские перчатки с усиленным ударом. Синий вариант.
+full-arsenal-gloves-boxing-rigged-green-name = Накачанные боксёрские перчатки (зелёные)
+full-arsenal-gloves-boxing-rigged-green-desc = Боксёрские перчатки с усиленным ударом. Зелёный вариант.
+full-arsenal-gloves-boxing-rigged-yellow-name = Накачанные боксёрские перчатки (жёлтые)
+full-arsenal-gloves-boxing-rigged-yellow-desc = Боксёрские перчатки с усиленным ударом. Жёлтый вариант.
+
+# Knuckledusters
+full-arsenal-knuckle-dusters-name = Кастет
+full-arsenal-knuckle-dusters-desc = Простой кастет. Усиливает удар кулаком.
+full-arsenal-knuckle-dusters-brass-name = Латунный кастет
+full-arsenal-knuckle-dusters-brass-desc = Классический латунный кастет. Тяжёлый и надёжный.
+full-arsenal-knuckle-dusters-qm-name = Кастет квартирмейстера
+full-arsenal-knuckle-dusters-qm-desc = Фирменный кастет завхоза. Не задавайте лишних вопросов.
+full-arsenal-knuckle-dusters-stun-name = Электрошоковый кастет
+full-arsenal-knuckle-dusters-stun-desc = Кастет с электрошоком. Оглушает противника при ударе.
+full-arsenal-knuckle-dusters-syndicate-name = Кастет Синдиката
+full-arsenal-knuckle-dusters-syndicate-desc = Боевой кастет с логотипом Синдиката. Повышенный урон.
+full-arsenal-knuckle-bone-crushers-name = Дробители костей
+full-arsenal-knuckle-bone-crushers-desc = Тяжёлые кастеты, способные сломать кости с одного удара.
+
+# Restraints
+full-arsenal-handcuffs-name = Наручники
+full-arsenal-handcuffs-desc = Стандартные металлические наручники.
+full-arsenal-box-handcuffs-name = Коробка наручников
+full-arsenal-box-handcuffs-desc = Коробка с несколькими парами наручников.
+full-arsenal-zipties-name = Стяжки
+full-arsenal-zipties-desc = Пластиковые стяжки. Дёшево, сердито, надёжно.
+full-arsenal-box-zipties-name = Коробка стяжек
+full-arsenal-box-zipties-desc = Коробка с несколькими пластиковыми стяжками.
+full-arsenal-cablecuffs-name = Кабельные стяжки
+full-arsenal-cablecuffs-desc = Самодельные стяжки из кабеля. Прочные, но режутся ножом.

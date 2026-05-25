@@ -40,10 +40,10 @@ public sealed class SurplusBundleSystem : EntitySystem
         }
     }
 
-    // wow, is this leetcode reference?
     private List<ListingData> GetRandomContent(Entity<SurplusBundleComponent, StoreComponent> ent)
     {
         var ret = new List<ListingData>();
+        var categoryCounts = new Dictionary<string, int>();
 
         var listings = _store.GetAvailableListings(ent, null, ent.Comp2.Categories)
             .OrderBy(p => p.Cost.Values.Sum())
@@ -53,33 +53,42 @@ public sealed class SurplusBundleSystem : EntitySystem
             return ret;
 
         var totalCost = FixedPoint2.Zero;
-        var index = 0;
         while (totalCost < ent.Comp1.TotalPrice)
         {
-            // All data is sorted in price descending order
-            // Find new item with the lowest acceptable price
-            // All expansive items will be before index, all acceptable after
             var remainingBudget = ent.Comp1.TotalPrice - totalCost;
-            while (listings[index].Cost.Values.Sum() > remainingBudget)
-            {
-                index++;
-                if (index >= listings.Count)
-                {
-                    // Looks like no cheap items left
-                    // It shouldn't be case for ss14 content
-                    // Because there are 1 TC items
-                    return ret;
-                }
-            }
 
-            // Select random listing and add into crate
-            var randomIndex = _random.Next(index, listings.Count);
-            var randomItem = listings[randomIndex];
-            ret.Add(randomItem);
-            totalCost += randomItem.Cost.Values.Sum();
-            listings.RemoveAt(randomIndex); // each listing spawns at most once per crate
+            // Eligible: within budget and not over any category limit
+            var eligible = listings
+                .Where(l => l.Cost.Values.Sum() <= remainingBudget &&
+                            !ExceedsCategoryLimit(l, ent.Comp1.CategoryLimits, categoryCounts))
+                .ToList();
+
+            if (eligible.Count == 0)
+                break;
+
+            var pick = eligible[_random.Next(0, eligible.Count)];
+            ret.Add(pick);
+            totalCost += pick.Cost.Values.Sum();
+
+            foreach (var cat in pick.Categories)
+                categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
+
+            listings.Remove(pick);
         }
 
         return ret;
+    }
+
+    private static bool ExceedsCategoryLimit(
+        ListingData listing,
+        Dictionary<string, int> limits,
+        Dictionary<string, int> counts)
+    {
+        foreach (var cat in listing.Categories)
+        {
+            if (limits.TryGetValue(cat.Id, out var limit) && counts.GetValueOrDefault(cat.Id) >= limit)
+                return true;
+        }
+        return false;
     }
 }
