@@ -493,6 +493,16 @@
   categories:
   - FullArsenal
 
+- type: listing
+  id: FullArsenalHardsuitDeathsquad
+  name: full-arsenal-hardsuit-deathsquad-name
+  description: full-arsenal-hardsuit-deathsquad-desc
+  productEntity: ClothingOuterHardsuitDeathsquad
+  cost:
+    Telecrystal: 20
+  categories:
+  - FullArsenal
+
 # ── MEDICAL ───────────────────────────────────────────────────────────────────
 
 - type: listing

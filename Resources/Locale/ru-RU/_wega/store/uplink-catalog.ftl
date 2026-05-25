@@ -402,5 +402,7 @@ full-arsenal-hardsuit-void-name = Скафандр Пустоты
 full-arsenal-hardsuit-void-desc = Специализированный скафандр для выживания в Пустоте.
 full-arsenal-hardsuit-void-advanced-name = Улучшенный скафандр Пустоты
 full-arsenal-hardsuit-void-advanced-desc = Продвинутая версия скафандра Пустоты с повышенными характеристиками.
+full-arsenal-hardsuit-deathsquad-name = Скафандр эскадрона смерти
+full-arsenal-hardsuit-deathsquad-desc = Легендарный скафандр сил ЦентКом. Появление владельца не предвещает ничего хорошего.
 full-arsenal-hardsuit-blueshield-name = Скафандр Синего щита
 full-arsenal-hardsuit-blueshield-desc = Тактический скафандр офицера Синего щита.
