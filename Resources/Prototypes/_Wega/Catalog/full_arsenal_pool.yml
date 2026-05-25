@@ -2954,3 +2954,95 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+
+# ── SPELLBOOKS (physical) ────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalSpellbookFireball
+  name: full-arsenal-spellbookfireball-name
+  description: full-arsenal-spellbookfireball-desc
+  productEntity: FireballSpellbook
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookBlink
+  name: full-arsenal-spellbookblink-name
+  description: full-arsenal-spellbookblink-desc
+  productEntity: BlinkBook
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookSmite
+  name: full-arsenal-spellbooksmite-name
+  description: full-arsenal-spellbooksmite-desc
+  productEntity: SmiteBook
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookKnock
+  name: full-arsenal-spellbookknock-name
+  description: full-arsenal-spellbookknock-desc
+  productEntity: KnockSpellbook
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookForceWall
+  name: full-arsenal-spellbookforcewall-name
+  description: full-arsenal-spellbookforcewall-desc
+  productEntity: ForceWallSpellbook
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookRunes
+  name: full-arsenal-spellbookrunes-name
+  description: full-arsenal-spellbookrunes-desc
+  productEntity: ScrollRunes
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookFireSelf
+  name: full-arsenal-spellbookfireself-name
+  description: full-arsenal-spellbookfireself-desc
+  productEntity: FireSelfSpellbook
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpellbookSpawn
+  name: full-arsenal-spellbookspawn-name
+  description: full-arsenal-spellbookspawn-desc
+  productEntity: SpawnSpellbook
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalWizardsGrimoire
+  name: full-arsenal-wizardsgrimoire-name
+  description: full-arsenal-wizardsgrimoire-desc
+  productEntity: WizardsGrimoireNoRefund
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal

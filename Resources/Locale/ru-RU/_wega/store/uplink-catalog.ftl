@@ -538,3 +538,23 @@ full-arsenal-box-zipties-name = Коробка стяжек
 full-arsenal-box-zipties-desc = Коробка с несколькими пластиковыми стяжками.
 full-arsenal-cablecuffs-name = Кабельные стяжки
 full-arsenal-cablecuffs-desc = Самодельные стяжки из кабеля. Прочные, но режутся ножом.
+
+# Spellbooks (physical entities)
+full-arsenal-spellbookfireball-name = Книга огненного шара
+full-arsenal-spellbookfireball-desc = Даёт заклинание огненного шара. Классика.
+full-arsenal-spellbookblink-name = Книга рывка
+full-arsenal-spellbookblink-desc = Даёт заклинание мгновенного телепорта на небольшое расстояние.
+full-arsenal-spellbooksmite-name = Книга кары
+full-arsenal-spellbooksmite-desc = Даёт заклинание мощного удара небесной энергией.
+full-arsenal-spellbookknock-name = Книга открытия
+full-arsenal-spellbookknock-desc = Даёт заклинание магического взлома дверей и шлюзов.
+full-arsenal-spellbookforcewall-name = Книга силовой стены
+full-arsenal-spellbookforcewall-desc = Даёт заклинание создания непроходимого энергетического барьера.
+full-arsenal-spellbookrunes-name = Свиток рун
+full-arsenal-spellbookrunes-desc = Даёт руны вспышки, взрыва, огня и оглушения.
+full-arsenal-spellbookfireself-name = Книга самовозгорания
+full-arsenal-spellbookfireself-desc = Даёт заклинание поджига самого себя. Да, именно так.
+full-arsenal-spellbookspawn-name = Книга призыва
+full-arsenal-spellbookspawn-desc = Призывает магического карпа. Зачем? Потому что можно.
+full-arsenal-wizardsgrimoire-name = Гримуар волшебника
+full-arsenal-wizardsgrimoire-desc = Полная книга заклинаний волшебника. Содержит весь арсенал магических умений.
