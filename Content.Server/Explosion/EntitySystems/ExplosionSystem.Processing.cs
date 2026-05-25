@@ -8,6 +8,7 @@ using Content.Shared.Explosion;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
+using Content.Shared.Tiles;
 using Content.Shared.Projectiles;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
@@ -522,6 +523,9 @@ public sealed partial class ExplosionSystem
         ref (TileHistoryChunk? Chunk, Vector2i Indices)? chunk)
     {
         if (_tileDefinitionManager[tileRef.Tile.TypeId] is not ContentTileDefinition tileDef || tileDef.Indestructible)
+            return;
+
+        if (HasComp<ProtectedGridComponent>(tileRef.GridUid))
             return;
 
         if (!CanCreateVacuum)
