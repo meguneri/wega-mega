@@ -20,3 +20,7 @@ store-category-void-shuttle = Шаттл
 store-category-void-special = Специальное
 
 store-category-full-arsenal = Арсенал
+store-category-full-arsenal-armor = Броня
+store-category-full-arsenal-head = Шлемы/Противогазы
+store-category-full-arsenal-grenade = Гранаты
+store-category-full-arsenal-ammo = Патроны

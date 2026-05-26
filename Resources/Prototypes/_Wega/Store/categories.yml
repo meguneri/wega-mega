@@ -102,6 +102,21 @@
   name: store-category-full-arsenal-armor
   priority: 1
 
+- type: storeCategory
+  id: FullArsenalHead
+  name: store-category-full-arsenal-head
+  priority: 2
+
+- type: storeCategory
+  id: FullArsenalGrenade
+  name: store-category-full-arsenal-grenade
+  priority: 3
+
+- type: storeCategory
+  id: FullArsenalAmmo
+  name: store-category-full-arsenal-ammo
+  priority: 4
+
  #revolution
 - type: storeCategory
   id: RevolutionSupport

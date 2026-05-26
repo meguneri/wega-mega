@@ -148,7 +148,7 @@
   description: full-arsenal-pistol-n1984-desc
   productEntity: WeaponPistolN1984
   cost:
-    Telecrystal: 3
+    Telecrystal: 8
   categories:
   - FullArsenal
 
@@ -255,7 +255,7 @@
   description: full-arsenal-shotgun-bulldog-desc
   productEntity: WeaponShotgunBulldog
   cost:
-    Telecrystal: 7
+    Telecrystal: 9
   categories:
   - FullArsenal
 
@@ -266,7 +266,7 @@
   description: full-arsenal-shotgun-hushpup-desc
   productEntity: WeaponShotgunHushpup
   cost:
-    Telecrystal: 6
+    Telecrystal: 5
   categories:
   - FullArsenal
 
@@ -288,7 +288,7 @@
   description: full-arsenal-rifle-ak-desc
   productEntity: WeaponRifleAk
   cost:
-    Telecrystal: 3
+    Telecrystal: 6
   categories:
   - FullArsenal
 
@@ -922,6 +922,99 @@
   categories:
   - FullArsenal
 
+- type: listing
+  id: FullArsenalStunbatonBlueshield
+  name: full-arsenal-stunbaton-blueshield-name
+  description: full-arsenal-stunbaton-blueshield-desc
+  productEntity: StunbatonBlueshield
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalTelescopicbaton
+  name: full-arsenal-telescopic-baton-name
+  description: full-arsenal-telescopic-baton-desc
+  productEntity: Telescopicbaton
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalTruncheon
+  name: full-arsenal-truncheon-name
+  description: full-arsenal-truncheon-desc
+  productEntity: Truncheon
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+# ── SHIELDS ───────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalRiotShield
+  name: full-arsenal-riot-shield-name
+  description: full-arsenal-riot-shield-desc
+  productEntity: RiotShield
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRiotLaserShield
+  name: full-arsenal-riot-laser-shield-name
+  description: full-arsenal-riot-laser-shield-desc
+  productEntity: RiotLaserShield
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRiotBulletShield
+  name: full-arsenal-riot-bullet-shield-name
+  description: full-arsenal-riot-bullet-shield-desc
+  productEntity: RiotBulletShield
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMirrorShield
+  name: full-arsenal-mirror-shield-name
+  description: full-arsenal-mirror-shield-desc
+  productEntity: MirrorShield
+  cost:
+    Telecrystal: 9
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalTelescopicShield
+  name: full-arsenal-telescopic-shield-name
+  description: full-arsenal-telescopic-shield-desc
+  productEntity: TelescopicShield
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+# uplink price: 8 TC
+- type: listing
+  id: FullArsenalEnergyShield
+  name: full-arsenal-energy-shield-name
+  description: full-arsenal-energy-shield-desc
+  productEntity: EnergyShield
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
 # ── WEAPON BUNDLES (BRIEFCASES) ───────────────────────────────────────────────
 
 # uplink price: 6 TC
@@ -935,39 +1028,6 @@
   categories:
   - FullArsenal
 
-# uplink price: 10 TC
-- type: listing
-  id: FullArsenalBriefcaseHushpup
-  name: full-arsenal-briefcase-hushpup-name
-  description: full-arsenal-briefcase-hushpup-desc
-  productEntity: BriefcaseWeaponHushpupFilled
-  cost:
-    Telecrystal: 10
-  categories:
-  - FullArsenal
-
-# uplink price: 14 TC
-- type: listing
-  id: FullArsenalBriefcaseC20r
-  name: full-arsenal-briefcase-c20r-name
-  description: full-arsenal-briefcase-c20r-desc
-  productEntity: BriefcaseWeaponC20Filled
-  cost:
-    Telecrystal: 14
-  categories:
-  - FullArsenal
-
-# uplink price: 13 TC
-- type: listing
-  id: FullArsenalBriefcaseBulldog
-  name: full-arsenal-briefcase-bulldog-name
-  description: full-arsenal-briefcase-bulldog-desc
-  productEntity: BriefcaseWeaponBulldogFilled
-  cost:
-    Telecrystal: 13
-  categories:
-  - FullArsenal
-
 # uplink price: 20 TC
 - type: listing
   id: FullArsenalBriefcaseChinaLake
@@ -975,18 +1035,7 @@
   description: full-arsenal-briefcase-chinalake-desc
   productEntity: BriefcaseWeaponChinaLakeFilled
   cost:
-    Telecrystal: 20
-  categories:
-  - FullArsenal
-
-# wega uplink price: 15 TC
-- type: listing
-  id: FullArsenalBriefcaseXC67
-  name: full-arsenal-briefcase-xc67-name
-  description: full-arsenal-briefcase-xc67-desc
-  productEntity: BriefcaseWeaponXc67Filled
-  cost:
-    Telecrystal: 15
+    Telecrystal: 14
   categories:
   - FullArsenal
 
@@ -1135,6 +1184,72 @@
   categories:
   - FullArsenal
 
+# uplink price: 8 TC
+- type: listing
+  id: FullArsenalDuffelC4Bundle
+  name: uplink-c4-bundle-name
+  description: uplink-c4-bundle-desc
+  productEntity: ClothingBackpackDuffelSyndicateC4tBundle
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+# uplink price: 7 TC
+- type: listing
+  id: FullArsenalDuffelHardsuitBundle
+  name: uplink-hardsuit-syndie-name
+  description: uplink-hardsuit-syndie-desc
+  productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+# uplink price: 12 TC
+- type: listing
+  id: FullArsenalDuffelEliteHardsuitBundle
+  name: uplink-hardsuit-syndieelite-name
+  description: uplink-hardsuit-syndieelite-desc
+  productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+# uplink price: 1 TC
+- type: listing
+  id: FullArsenalDuffelPyjamaBundle
+  name: uplink-costume-pyjama-name
+  description: uplink-costume-pyjama-desc
+  productEntity: ClothingBackpackDuffelSyndicatePyjamaBundle
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+# uplink price: 1 TC
+- type: listing
+  id: FullArsenalDuffelCostumeClown
+  name: uplink-costume-clown-name
+  description: uplink-costume-clown-desc
+  productEntity: ClothingBackpackDuffelSyndicateCostumeClown
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+# uplink price: 1 TC
+- type: listing
+  id: FullArsenalDuffelCarpSuit
+  name: uplink-carp-suit-bundle-name
+  description: uplink-carp-suit-bundle-desc
+  productEntity: ClothingBackpackDuffelSyndicateCarpSuit
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
 # ── AMMO BOXES ────────────────────────────────────────────────────────────────
 
 # uplink price: 1 TC each
@@ -1147,6 +1262,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalAmmo
 
 - type: listing
   id: FullArsenalAmmoBoxLightRifle
@@ -1157,6 +1273,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalAmmo
 
 - type: listing
   id: FullArsenalAmmoBoxRifle
@@ -1167,6 +1284,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalAmmo
 
 - type: listing
   id: FullArsenalAmmoBoxMagnum
@@ -1177,6 +1295,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalAmmo
 
 - type: listing
   id: FullArsenalAmmoBoxCaselessRifle
@@ -1187,6 +1306,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalAmmo
 
 - type: listing
   id: FullArsenalAmmoBoxAntiMateriel
@@ -1197,6 +1317,181 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalAmmo
+
+# ── SPECIAL AMMO ──────────────────────────────────────────────────────────────
+
+# Pistol special
+- type: listing
+  id: FullArsenalAmmoMagPistolIncendiary
+  name: full-arsenal-ammo-mag-pistol-incendiary-name
+  description: full-arsenal-ammo-mag-pistol-incendiary-desc
+  productEntity: MagazinePistolIncendiary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoMagPistolUranium
+  name: full-arsenal-ammo-mag-pistol-uranium-name
+  description: full-arsenal-ammo-mag-pistol-uranium-desc
+  productEntity: MagazinePistolUranium
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+# SMG special
+- type: listing
+  id: FullArsenalAmmoMagSmgIncendiary
+  name: full-arsenal-ammo-mag-smg-incendiary-name
+  description: full-arsenal-ammo-mag-smg-incendiary-desc
+  productEntity: MagazinePistolSubMachineGunIncendiary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoMagSmgUranium
+  name: full-arsenal-ammo-mag-smg-uranium-name
+  description: full-arsenal-ammo-mag-smg-uranium-desc
+  productEntity: MagazinePistolSubMachineGunUranium
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+# Rifle special
+- type: listing
+  id: FullArsenalAmmoMagRifleIncendiary
+  name: full-arsenal-ammo-mag-rifle-incendiary-name
+  description: full-arsenal-ammo-mag-rifle-incendiary-desc
+  productEntity: MagazineRifleIncendiary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoMagRifleUranium
+  name: full-arsenal-ammo-mag-rifle-uranium-name
+  description: full-arsenal-ammo-mag-rifle-uranium-desc
+  productEntity: MagazineRifleUranium
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+# Light rifle special
+- type: listing
+  id: FullArsenalAmmoMagLightRifleIncendiary
+  name: full-arsenal-ammo-mag-lightrifle-incendiary-name
+  description: full-arsenal-ammo-mag-lightrifle-incendiary-desc
+  productEntity: MagazineLightRifleIncendiary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoMagLightRifleUranium
+  name: full-arsenal-ammo-mag-lightrifle-uranium-name
+  description: full-arsenal-ammo-mag-lightrifle-uranium-desc
+  productEntity: MagazineLightRifleUranium
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+# Magnum special (revolvers / Python)
+- type: listing
+  id: FullArsenalAmmoSpeedloaderMagnumAP
+  name: full-arsenal-ammo-speedloader-magnum-ap-name
+  description: full-arsenal-ammo-speedloader-magnum-ap-desc
+  productEntity: SpeedLoaderMagnumAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoSpeedloaderMagnumIncendiary
+  name: full-arsenal-ammo-speedloader-magnum-incendiary-name
+  description: full-arsenal-ammo-speedloader-magnum-incendiary-desc
+  productEntity: SpeedLoaderMagnumIncendiary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoSpeedloaderMagnumUranium
+  name: full-arsenal-ammo-speedloader-magnum-uranium-name
+  description: full-arsenal-ammo-speedloader-magnum-uranium-desc
+  productEntity: SpeedLoaderMagnumUranium
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+# Eagle AP mag (standalone)
+- type: listing
+  id: FullArsenalAmmoMagEagleAP
+  name: full-arsenal-ammo-mag-eagle-ap-name
+  description: full-arsenal-ammo-mag-eagle-ap-desc
+  productEntity: MagazineEagleAP
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+# Shotgun special
+- type: listing
+  id: FullArsenalAmmoShotgunSlug
+  name: full-arsenal-ammo-shotgun-slug-name
+  description: full-arsenal-ammo-shotgun-slug-desc
+  productEntity: MagazineShotgunSlug
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoShotgunBeanbag
+  name: full-arsenal-ammo-shotgun-beanbag-name
+  description: full-arsenal-ammo-shotgun-beanbag-desc
+  productEntity: MagazineShotgunBeanbag
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoShotgunIncendiary
+  name: full-arsenal-ammo-shotgun-incendiary-name
+  description: full-arsenal-ammo-shotgun-incendiary-desc
+  productEntity: MagazineShotgunIncendiary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
 
 # ── IMPLANTS ──────────────────────────────────────────────────────────────────
 
@@ -1233,17 +1528,6 @@
   categories:
   - FullArsenal
 
-# uplink price: 3 TC
-- type: listing
-  id: FullArsenalImplantDnaScrambler
-  name: full-arsenal-implant-dna-name
-  description: full-arsenal-implant-dna-desc
-  productEntity: DnaScramblerImplanter
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
 # uplink price: 2 TC
 - type: listing
   id: FullArsenalImplantEmp
@@ -1257,82 +1541,16 @@
 
 # uplink price: 2 TC
 - type: listing
-  id: FullArsenalImplantRadio
-  name: full-arsenal-implant-radio-name
-  description: full-arsenal-implant-radio-desc
-  productEntity: RadioImplanter
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-# uplink price: 1 TC
-- type: listing
-  id: FullArsenalImplantUplink
-  name: full-arsenal-implant-uplink-name
-  description: full-arsenal-implant-uplink-desc
-  productEntity: UplinkImplanter
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-# uplink price: 3 TC
-- type: listing
-  id: FullArsenalImplantFakeMindshield
-  name: full-arsenal-implant-mindshield-name
-  description: full-arsenal-implant-mindshield-desc
-  productEntity: FakeMindShieldImplanter
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
-# uplink price: 2 TC
-- type: listing
-  id: FullArsenalImplantVoiceMask
-  name: full-arsenal-implant-voice-name
-  description: full-arsenal-implant-voice-desc
-  productEntity: VoiceMaskImplanter
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-# uplink price: 2 TC
-- type: listing
   id: FullArsenalImplantMicroBomb
   name: full-arsenal-implant-microbomb-name
   description: full-arsenal-implant-microbomb-desc
   productEntity: MicroBombImplanter
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-# uplink NukeOps price: 4 TC
-- type: listing
-  id: FullArsenalImplantDeathAcidifier
-  name: full-arsenal-implant-acidifier-name
-  description: full-arsenal-implant-acidifier-desc
-  productEntity: DeathAcidifierImplanter
   cost:
     Telecrystal: 4
   categories:
   - FullArsenal
 
 # ── GADGETS & TOOLS ───────────────────────────────────────────────────────────
-
-# uplink price: 3 TC
-- type: listing
-  id: FullArsenalRadioJammer
-  name: full-arsenal-radio-jammer-name
-  description: full-arsenal-radio-jammer-desc
-  productEntity: RadioJammer
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
 
 # uplink price: 5 TC
 - type: listing
@@ -1353,6 +1571,109 @@
   productEntity: SyndicateJawsOfLife
   cost:
     Telecrystal: 2
+  categories:
+  - FullArsenal
+
+# uplink price: 6 TC
+- type: listing
+  id: FullArsenalHypopen
+  name: full-arsenal-hypopen-name
+  description: full-arsenal-hypopen-desc
+  productEntity: HypopenBox
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+# uplink price: 1 TC
+- type: listing
+  id: FullArsenalExplodingPen
+  name: full-arsenal-exploding-pen-name
+  description: full-arsenal-exploding-pen-desc
+  productEntity: PenExplodingBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+# uplink price: 1 TC
+- type: listing
+  id: FullArsenalHypoDart
+  name: full-arsenal-hypodart-name
+  description: full-arsenal-hypodart-desc
+  productEntity: HypoDartBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSyndiHypo
+  name: full-arsenal-syndi-hypo-name
+  description: full-arsenal-syndi-hypo-desc
+  productEntity: SyndiHypo
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalStimpack
+  name: full-arsenal-stimpack-name
+  description: full-arsenal-stimpack-desc
+  productEntity: Stimpack
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalWehMedipen
+  name: full-arsenal-weh-medipen-name
+  description: full-arsenal-weh-medipen-desc
+  productEntity: WehMedipen
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalStimpackMini
+  name: full-arsenal-stimpack-mini-name
+  description: full-arsenal-stimpack-mini-desc
+  productEntity: StimpackMini
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalJetInjector
+  name: full-arsenal-jet-injector-name
+  description: full-arsenal-jet-injector-desc
+  productEntity: JetInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalAdvancedJetInjector
+  name: full-arsenal-advanced-jet-injector-name
+  description: full-arsenal-advanced-jet-injector-desc
+  productEntity: AdvancedJetInjector
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalChemicalMedipen
+  name: full-arsenal-chemical-medipen-name
+  description: full-arsenal-chemical-medipen-desc
+  productEntity: ChemicalMedipen
+  cost:
+    Telecrystal: 1
   categories:
   - FullArsenal
 
@@ -1446,16 +1767,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalCigarettes
-  name: full-arsenal-cigarettes-name
-  description: full-arsenal-cigarettes-desc
-  productEntity: CigPackSyndicate
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
 # wega uplink — music player
 - type: listing
   id: FullArsenalSyndiePlayer
@@ -1475,6 +1786,78 @@
   productEntity: PouchSyndie
   cost:
     Telecrystal: 1
+  categories:
+  - FullArsenal
+
+# uplink price: 26 TC
+- type: listing
+  id: FullArsenalCatEars
+  name: full-arsenal-cat-ears-name
+  description: full-arsenal-cat-ears-desc
+  productEntity: ClothingHeadHatCatEars
+  cost:
+    Telecrystal: 26
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDogEars
+  name: full-arsenal-dog-ears-name
+  description: full-arsenal-dog-ears-desc
+  productEntity: ClothingHeadHatDogEars
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBunnyEars
+  name: full-arsenal-bunny-ears-name
+  description: full-arsenal-bunny-ears-desc
+  productEntity: ClothingHeadHatBunny
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBalloonSyn
+  name: full-arsenal-balloon-syn-name
+  description: full-arsenal-balloon-syn-desc
+  productEntity: BalloonSyn
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalElegantMaidDress
+  name: full-arsenal-elegant-maid-dress-name
+  description: full-arsenal-elegant-maid-dress-desc
+  productEntity: ClothingUniformJumpskirtElegantMaid
+  cost:
+    Telecrystal: 30
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSyndicateSegway
+  name: full-arsenal-syndicate-segway-name
+  description: full-arsenal-syndicate-segway-desc
+  productEntity: CrateFunSyndicateSegway
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+# uplink price: 2 TC
+- type: listing
+  id: FullArsenalToolboxSyndicate
+  name: full-arsenal-toolbox-syndicate-name
+  description: full-arsenal-toolbox-syndicate-desc
+  productEntity: ToolboxSyndicateFilled
+  cost:
+    Telecrystal: 2
   categories:
   - FullArsenal
 
@@ -1552,22 +1935,22 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalDefibrillatorCompact
-  name: full-arsenal-defib-compact-name
-  description: full-arsenal-defib-compact-desc
-  productEntity: DefibrillatorCompact
-  cost:
-    Telecrystal: 4
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalDefibrillatorSyndicate
   name: full-arsenal-defib-syndicate-name
   description: full-arsenal-defib-syndicate-desc
   productEntity: DefibrillatorSyndicate
   cost:
-    Telecrystal: 6
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSmokerKit
+  name: full-arsenal-smoker-kit-name
+  description: full-arsenal-smoker-kit-desc
+  productEntity: InterdyneSmokerKit
+  cost:
+    Telecrystal: 2
   categories:
   - FullArsenal
 
@@ -1660,16 +2043,6 @@
   productEntity: AntiPoisonMedipen
   cost:
     Telecrystal: 2
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalSpaceMedipen
-  name: full-arsenal-medipen-space-name
-  description: full-arsenal-medipen-space-desc
-  productEntity: SpaceMedipen
-  cost:
-    Telecrystal: 3
   categories:
   - FullArsenal
 
@@ -2249,6 +2622,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalPistolDesertEagleAP
+  name: full-arsenal-pistol-desert-eagle-ap-name
+  description: full-arsenal-pistol-desert-eagle-ap-desc
+  productEntity: WeaponPistolDesertEagleAP
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalPistolEchis
   name: full-arsenal-pistol-echis-name
   description: full-arsenal-pistol-echis-desc
@@ -2610,6 +2993,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeEMP
@@ -2620,6 +3004,7 @@
     Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeTearGas
@@ -2630,6 +3015,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeStinger
@@ -2640,6 +3026,7 @@
     Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeEx
@@ -2650,6 +3037,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeShrapnel
@@ -2660,6 +3048,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeIncendiary
@@ -2670,6 +3059,7 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeCluster
@@ -2680,6 +3070,7 @@
     Telecrystal: 4
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalSyndieMiniBomb
@@ -2690,6 +3081,7 @@
     Telecrystal: 4
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalSyndieTrickyBomb
@@ -2700,6 +3092,7 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+  - FullArsenalGrenade
 
 - type: listing
   id: FullArsenalGrenadeHolyHand
@@ -2710,6 +3103,29 @@
     Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalGrenade
+
+- type: listing
+  id: FullArsenalGrenadeBaton
+  name: full-arsenal-grenade-baton-name
+  description: full-arsenal-grenade-baton-desc
+  productEntity: GrenadeBaton
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalGrenade
+
+- type: listing
+  id: FullArsenalGrenadeCleanade
+  name: full-arsenal-grenade-cleanade-name
+  description: full-arsenal-grenade-cleanade-desc
+  productEntity: GrenadeCleanade
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalGrenade
 
 # ── COMBAT GLOVES AND KNUCKLEDUSTERS ─────────────────────────────────────────
 
@@ -3055,7 +3471,7 @@
   description: full-arsenal-taser-desc
   productEntity: WeaponTaser
   cost:
-    Telecrystal: 2
+    Telecrystal: 4
   categories:
   - FullArsenal
 
@@ -3159,6 +3575,799 @@
   description: full-arsenal-minigun-desc
   productEntity: WeaponMinigun
   cost:
-    Telecrystal: 9
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+# ── SNIPER MK2 ────────────────────────────────────────────────────────────────
+
+# wega advanced variant; duffel version costs 18 TC with ammo; gun alone ≈ 12
+- type: listing
+  id: FullArsenalSniperHristovAdvanced
+  name: full-arsenal-sniper-hristov-advanced-name
+  description: full-arsenal-sniper-hristov-advanced-desc
+  productEntity: WeaponSniperHristovAdvanced
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+# ── HELMETS ───────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalHelmetBasic
+  name: full-arsenal-helmet-basic-name
+  description: full-arsenal-helmet-basic-desc
+  productEntity: ClothingHeadHelmetBasic
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetRiot
+  name: full-arsenal-helmet-riot-name
+  description: full-arsenal-helmet-riot-desc
+  productEntity: ClothingHeadHelmetRiot
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetFlash
+  name: full-arsenal-helmet-flash-name
+  description: full-arsenal-helmet-flash-desc
+  productEntity: ClothingHeadHelmetFlash
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetMerc
+  name: full-arsenal-helmet-merc-name
+  description: full-arsenal-helmet-merc-desc
+  productEntity: ClothingHeadHelmetMerc
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetBone
+  name: full-arsenal-helmet-bone-name
+  description: full-arsenal-helmet-bone-desc
+  productEntity: ClothingHeadHelmetBone
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetERTJanitor
+  name: full-arsenal-helmet-ert-janitor-name
+  description: full-arsenal-helmet-ert-janitor-desc
+  productEntity: ClothingHeadHelmetERTJanitor
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetCult
+  name: full-arsenal-helmet-cult-name
+  description: full-arsenal-helmet-cult-desc
+  productEntity: ClothingHeadHelmetCult
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetSyndicate
+  name: full-arsenal-helmet-syndicate-name
+  description: full-arsenal-helmet-syndicate-desc
+  productEntity: ClothingHeadHelmetSyndicate
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetSwat
+  name: full-arsenal-helmet-swat-name
+  description: full-arsenal-helmet-swat-desc
+  productEntity: ClothingHeadHelmetSwat
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetSwatSyndicate
+  name: full-arsenal-helmet-swat-syndicate-name
+  description: full-arsenal-helmet-swat-syndicate-desc
+  productEntity: ClothingHeadHelmetSwatSyndicate
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetRaid
+  name: full-arsenal-helmet-raid-name
+  description: full-arsenal-helmet-raid-desc
+  productEntity: ClothingHeadHelmetRaid
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetPodWars
+  name: full-arsenal-helmet-podwars-name
+  description: full-arsenal-helmet-podwars-desc
+  productEntity: ClothingHeadHelmetPodWars
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetSecurityMedic
+  name: full-arsenal-helmet-security-medic-name
+  description: full-arsenal-helmet-security-medic-desc
+  productEntity: ClothingHeadHelmetSecurityMedic
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetThunderdome
+  name: full-arsenal-helmet-thunderdome-name
+  description: full-arsenal-helmet-thunderdome-desc
+  productEntity: ClothingHeadHelmetThunderdome
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetVoidParamed
+  name: full-arsenal-helmet-void-paramed-name
+  description: full-arsenal-helmet-void-paramed-desc
+  productEntity: ClothingHeadHelmetVoidParamed
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetTemplar
+  name: full-arsenal-helmet-templar-name
+  description: full-arsenal-helmet-templar-desc
+  productEntity: ClothingHeadHelmetTemplar
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetSpaceNinja
+  name: full-arsenal-helmet-space-ninja-name
+  description: full-arsenal-helmet-space-ninja-desc
+  productEntity: ClothingHeadHelmetSpaceNinja
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetERTEngineer
+  name: full-arsenal-helmet-ert-engineer-name
+  description: full-arsenal-helmet-ert-engineer-desc
+  productEntity: ClothingHeadHelmetERTEngineer
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetERTMedic
+  name: full-arsenal-helmet-ert-medic-name
+  description: full-arsenal-helmet-ert-medic-desc
+  productEntity: ClothingHeadHelmetERTMedic
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetERTSecurity
+  name: full-arsenal-helmet-ert-security-name
+  description: full-arsenal-helmet-ert-security-desc
+  productEntity: ClothingHeadHelmetERTSecurity
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetAncient
+  name: full-arsenal-helmet-ancient-name
+  description: full-arsenal-helmet-ancient-desc
+  productEntity: ClothingHeadHelmetAncient
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetERTLeader
+  name: full-arsenal-helmet-ert-leader-name
+  description: full-arsenal-helmet-ert-leader-desc
+  productEntity: ClothingHeadHelmetERTLeader
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetCBURN
+  name: full-arsenal-helmet-cburn-name
+  description: full-arsenal-helmet-cburn-desc
+  productEntity: ClothingHeadHelmetCBURN
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetCBURNLeader
+  name: full-arsenal-helmet-cburn-leader-name
+  description: full-arsenal-helmet-cburn-leader-desc
+  productEntity: ClothingHeadHelmetCBURNLeader
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+# ── GAS MASKS ─────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalMaskGas
+  name: full-arsenal-mask-gas-name
+  description: full-arsenal-mask-gas-desc
+  productEntity: ClothingMaskGas
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasAtmos
+  name: full-arsenal-mask-gas-atmos-name
+  description: full-arsenal-mask-gas-atmos-desc
+  productEntity: ClothingMaskGasAtmos
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasSecurity
+  name: full-arsenal-mask-gas-security-name
+  description: full-arsenal-mask-gas-security-desc
+  productEntity: ClothingMaskGasSecurity
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasMerc
+  name: full-arsenal-mask-gas-merc-name
+  description: full-arsenal-mask-gas-merc-desc
+  productEntity: ClothingMaskGasMerc
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasSwat
+  name: full-arsenal-mask-gas-swat-name
+  description: full-arsenal-mask-gas-swat-desc
+  productEntity: ClothingMaskGasSwat
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasSyndicate
+  name: full-arsenal-mask-gas-syndicate-name
+  description: full-arsenal-mask-gas-syndicate-desc
+  productEntity: ClothingMaskGasSyndicate
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasERT
+  name: full-arsenal-mask-gas-ert-name
+  description: full-arsenal-mask-gas-ert-desc
+  productEntity: ClothingMaskGasERT
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalMaskGasDeathSquad
+  name: full-arsenal-mask-gas-deathsquad-name
+  description: full-arsenal-mask-gas-deathsquad-desc
+  productEntity: ClothingMaskGasDeathSquad
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+# ── FUN HATS ──────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalHatWatermelon
+  name: full-arsenal-hat-watermelon-name
+  description: full-arsenal-hat-watermelon-desc
+  productEntity: ClothingHeadHatWatermelon
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+# ── ADDITIONAL ENERGY / LASER ─────────────────────────────────────────────────
+
+# standard HoS sidearm
+- type: listing
+  id: FullArsenalLaserGun
+  name: full-arsenal-laser-gun-name
+  description: full-arsenal-laser-gun-desc
+  productEntity: WeaponLaserGun
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+# crafted at security autolathe
+- type: listing
+  id: FullArsenalAdvancedLaser
+  name: full-arsenal-advanced-laser-name
+  description: full-arsenal-advanced-laser-desc
+  productEntity: WeaponAdvancedLaser
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalAntiqueLaser
+  name: full-arsenal-antique-laser-name
+  description: full-arsenal-antique-laser-desc
+  productEntity: WeaponAntiqueLaser
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMakeshiftLaser
+  name: full-arsenal-makeshift-laser-name
+  description: full-arsenal-makeshift-laser-desc
+  productEntity: WeaponMakeshiftLaser
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBlueLaserPistol
+  name: full-arsenal-blue-laser-pistol-name
+  description: full-arsenal-blue-laser-pistol-desc
+  productEntity: WeaponBlueLaserPistol
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+# wega custom laser sniper; crafted at security lathe
+- type: listing
+  id: FullArsenalLaserSvalinn
+  name: full-arsenal-laser-svalinn-name
+  description: full-arsenal-laser-svalinn-desc
+  productEntity: WeaponLaserSvalinn
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+# shoots through walls
+- type: listing
+  id: FullArsenalXrayCannon
+  name: full-arsenal-xray-cannon-name
+  description: full-arsenal-xray-cannon-desc
+  productEntity: WeaponXrayCannon
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+# launches entities as projectiles
+- type: listing
+  id: FullArsenalForceGun
+  name: full-arsenal-force-gun-name
+  description: full-arsenal-force-gun-desc
+  productEntity: WeaponForceGun
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalIonCarbine
+  name: full-arsenal-ion-carbine-name
+  description: full-arsenal-ion-carbine-desc
+  productEntity: WeaponIonCarabine
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalEnergyPulsar
+  name: full-arsenal-energy-pulsar-name
+  description: full-arsenal-energy-pulsar-desc
+  productEntity: WeaponEnergyPulsar
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+# uplink price: 5 TC, limited stock
+- type: listing
+  id: FullArsenalEnergyCrossbow
+  name: full-arsenal-energy-crossbow-name
+  description: full-arsenal-energy-crossbow-desc
+  productEntity: WeaponEnergyCrossbow
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+# wega Dominator — HoS-grade tri-mode laser pistol
+- type: listing
+  id: FullArsenalDominator
+  name: full-arsenal-dominator-name
+  description: full-arsenal-dominator-desc
+  productEntity: WeaponDominator
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+# uplink price: 5 TC (super taser)
+- type: listing
+  id: FullArsenalTaserSuper
+  name: full-arsenal-taser-super-name
+  description: full-arsenal-taser-super-desc
+  productEntity: WeaponTaserSuper
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+# ── ADDITIONAL FIREARMS ───────────────────────────────────────────────────────
+
+# wega military SMG; available via security voucher
+- type: listing
+  id: FullArsenalSMGBerkut
+  name: full-arsenal-smg-berkut-name
+  description: full-arsenal-smg-berkut-desc
+  productEntity: WeaponSubmachinegunBerkut
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+# compact LMG variant
+- type: listing
+  id: FullArsenalLMGL6C
+  name: full-arsenal-lmg-l6c-name
+  description: full-arsenal-lmg-l6c-desc
+  productEntity: WeaponLightMachineGunL6C
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalC20rROW
+  name: full-arsenal-c20r-row-name
+  description: full-arsenal-c20r-row-desc
+  productEntity: WeaponSubMachineGunC20rROW
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalC20rROWAdvanced
+  name: full-arsenal-c20r-row-advanced-name
+  description: full-arsenal-c20r-row-advanced-desc
+  productEntity: WeaponSubMachineGunC20rROWAdvensed
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+# AP variant of Python
+- type: listing
+  id: FullArsenalRevolverPythonAP
+  name: full-arsenal-revolver-python-ap-name
+  description: full-arsenal-revolver-python-ap-desc
+  productEntity: WeaponRevolverPythonAP
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+# AP variant of Mateba — deathsquad grade
+- type: listing
+  id: FullArsenalRevolverMatebaAP
+  name: full-arsenal-revolver-mateba-ap-name
+  description: full-arsenal-revolver-mateba-ap-desc
+  productEntity: WeaponRevolverMatebaAP
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPistolCHIMP
+  name: full-arsenal-pistol-chimp-name
+  description: full-arsenal-pistol-chimp-desc
+  productEntity: WeaponPistolCHIMP
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPistolFlintlock
+  name: full-arsenal-pistol-flintlock-name
+  description: full-arsenal-pistol-flintlock-desc
+  productEntity: WeaponPistolFlintlock
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalFlareGun
+  name: full-arsenal-flare-gun-name
+  description: full-arsenal-flare-gun-desc
+  productEntity: WeaponFlareGun
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalFlareGunSecurity
+  name: full-arsenal-flare-gun-security-name
+  description: full-arsenal-flare-gun-security-desc
+  productEntity: WeaponFlareGunSecurity
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalShotgunDoubleRubber
+  name: full-arsenal-shotgun-double-rubber-name
+  description: full-arsenal-shotgun-double-rubber-desc
+  productEntity: WeaponShotgunDoubleBarreledRubber
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalShotgunEnforcerRubber
+  name: full-arsenal-shotgun-enforcer-rubber-name
+  description: full-arsenal-shotgun-enforcer-rubber-desc
+  productEntity: WeaponShotgunEnforcerRubber
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalShotgunHandmade
+  name: full-arsenal-shotgun-handmade-name
+  description: full-arsenal-shotgun-handmade-desc
+  productEntity: WeaponShotgunHandmade
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+# china lake clone; same price as the original
+- type: listing
+  id: FullArsenalORG430
+  name: full-arsenal-org430-name
+  description: full-arsenal-org430-desc
+  productEntity: WeaponORG430
+  cost:
+    Telecrystal: 18
+  categories:
+  - FullArsenal
+
+# ── ADDITIONAL MELEE ──────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalHighFrequencyBlade
+  name: full-arsenal-hf-blade-name
+  description: full-arsenal-hf-blade-desc
+  productEntity: WeaponHighFrequencyBlade
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalChainsword
+  name: full-arsenal-chainsword-name
+  description: full-arsenal-chainsword-desc
+  productEntity: WeaponChainsword
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalCursedKatana
+  name: full-arsenal-cursed-katana-name
+  description: full-arsenal-cursed-katana-desc
+  productEntity: WeaponCursedKatana
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHanzoSteel
+  name: full-arsenal-hanzo-steel-name
+  description: full-arsenal-hanzo-steel-desc
+  productEntity: WeaponHanzoSteel
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalNullRod
+  name: full-arsenal-null-rod-name
+  description: full-arsenal-null-rod-desc
+  productEntity: WeaponNullRod
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalForceSword
+  name: full-arsenal-force-sword-name
+  description: full-arsenal-force-sword-desc
+  productEntity: WeaponForceSword
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalCrusher
+  name: full-arsenal-crusher-name
+  description: full-arsenal-crusher-desc
+  productEntity: WeaponCrusher
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDeathBlade
+  name: full-arsenal-death-blade-name
+  description: full-arsenal-death-blade-desc
+  productEntity: WeaponDeathBlade
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDeathDagger
+  name: full-arsenal-death-dagger-name
+  description: full-arsenal-death-dagger-desc
+  productEntity: WeaponDeathDagger
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+# ── DESTABILIZERS / SPECIAL ───────────────────────────────────────────────────
+
+# changes target's temperature — non-lethal harassment
+- type: listing
+  id: FullArsenalTemperatureGun
+  name: full-arsenal-temperature-gun-name
+  description: full-arsenal-temperature-gun-desc
+  productEntity: WeaponTemperatureGun
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalParticleDecelerator
+  name: full-arsenal-particle-decelerator-name
+  description: full-arsenal-particle-decelerator-desc
+  productEntity: WeaponParticleDecelerator
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGrapplingGun
+  name: full-arsenal-grappling-gun-name
+  description: full-arsenal-grappling-gun-desc
+  productEntity: WeaponGrapplingGun
+  cost:
+    Telecrystal: 3
   categories:
   - FullArsenal

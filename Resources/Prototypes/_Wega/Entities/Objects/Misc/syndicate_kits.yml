@@ -1,0 +1,17 @@
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: InterdyneSmokerKit
+  name: Interdyne smoker kit
+  description: A wrapped Interdyne package containing their signature herbal cigarettes and a matching Flippo lighter. The complete smoking experience.
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    state: closed
+  - type: SpawnItemsOnUse
+    items:
+    - id: CigPackSyndicate
+    - id: InterdyneFlippo
+    sound:
+      path: /Audio/Effects/unwrap.ogg

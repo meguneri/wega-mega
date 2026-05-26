@@ -8,3 +8,6 @@
     totalPrice: 40
     categoryLimits:
       FullArsenalArmor: 2
+      FullArsenalHead: 1
+      FullArsenalGrenade: 3
+      FullArsenalAmmo: 4
