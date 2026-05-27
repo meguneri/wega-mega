@@ -138,7 +138,8 @@ public partial class MobStateSystem
             }
             case MobState.Dead:
             {
-                EnsureComp<CollisionWakeComponent>(target);
+                if (!TerminatingOrDeleted(target))
+                    EnsureComp<CollisionWakeComponent>(target);
                 Down(target);
                 _appearance.SetData(target, MobStateVisuals.State, MobState.Dead);
                 break;

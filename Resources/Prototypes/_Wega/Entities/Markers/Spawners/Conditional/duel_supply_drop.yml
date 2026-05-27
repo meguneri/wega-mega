@@ -1,0 +1,58 @@
+# Спавнер дуэльного ящика снаряжения.
+# Размещается на карте в центре арены.
+# Каждые 60 секунд спавнит CrateDuelSupplyDrop с рандомным лутом.
+# Сам ящик исчезает через 59 секунд — за 1 секунду до следующего спавна.
+#
+# Спавнер ВЫКЛЮЧЕН по умолчанию (enabled: false).
+# Кнопка DuelSupplyDropButton автоматически связывается через AutoLink (канал DuelDrop).
+# Нажатие кнопки переключает спавнер:
+#   ВЫКЛ → ВКЛ  (первый ящик через 60 сек после нажатия)
+#   ВКЛ → ВЫКЛ  (останавливает аирдропы)
+
+- type: entity
+  name: Duel Supply Drop Spawner
+  id: DuelSupplyDropSpawner
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+      - state: timed
+  - type: TimedSpawner
+    prototypes:
+      - CrateDuelSupplyDrop
+    chance: 1.0
+    intervalSeconds: 60
+    minimumEntitiesSpawned: 1
+    maximumEntitiesSpawned: 1
+    randomSpawnRadius: 3.0
+    enabled: false
+  - type: SpawnerSignalControl
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - Toggle
+  - type: AutoLinkReceiver
+    channel: DuelDrop
+
+# Кнопка для управления спавнером дуэльного ящика.
+# Размещается на стене арены, AutoLink автоматически связывает с DuelSupplyDropSpawner
+# через канал DuelDrop — ручная настройка в редакторе не нужна.
+# Нажатие кнопки переключает спавнер (ВКЛ/ВЫКЛ).
+- type: entity
+  name: duel supply drop button
+  id: DuelSupplyDropButton
+  parent: SignalButton
+  suffix: Duel Arena
+  description: Запускает или останавливает периодический сброс ящиков снаряжения в центр арены.
+  components:
+  - type: DeviceLinkSource
+    ports:
+      - Pressed
+    range: 200  # арена может быть большой — нужен запас
+  - type: AutoLinkTransmitter
+    channel: DuelDrop

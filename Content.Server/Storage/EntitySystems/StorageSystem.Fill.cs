@@ -98,17 +98,24 @@ public sealed partial class StorageSystem
         var spawnItems = EntitySpawnCollection.GetSpawns(component.Contents, Random);
         foreach (var item in spawnItems)
         {
-            // No, you are not allowed to fill a container with entity spawners.
-            DebugTools.Assert(!_prototype.Index<EntityPrototype>(item)
-                .HasComponent(typeof(RandomSpawnerComponent)));
-            var ent = Spawn(item, coordinates);
+            try
+            {
+                // No, you are not allowed to fill a container with entity spawners.
+                DebugTools.Assert(!_prototype.Index<EntityPrototype>(item)
+                    .HasComponent(typeof(RandomSpawnerComponent)));
+                var ent = Spawn(item, coordinates);
 
-            // handle depending on storage component, again this should be unified after ECS
-            if (entityStorageComp != null && EntityStorage.Insert(ent, uid, entityStorageComp))
-                continue;
+                // handle depending on storage component, again this should be unified after ECS
+                if (entityStorageComp != null && EntityStorage.Insert(ent, uid, entityStorageComp))
+                    continue;
 
-            Log.Error($"Tried to StorageFill {item} inside {ToPrettyString(uid)} but can't.");
-            Del(ent);
+                Log.Error($"Tried to StorageFill {item} inside {ToPrettyString(uid)} but can't.");
+                Del(ent);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"StorageFill: exception while spawning '{item}' into {ToPrettyString(uid)}: {e.Message}");
+            }
         }
     }
 }

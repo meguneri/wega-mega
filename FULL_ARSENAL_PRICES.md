@@ -18,6 +18,13 @@
 |---|---|---|
 | Бейсбольная бита | `BaseBallBat` | 1 TC |
 | Копьё | `Spear` | 1 TC |
+| Костяное копьё | `SpearBone` | 1 TC |
+| Усиленное копьё | `SpearReinforced` | 2 TC |
+| Плазменное копьё | `SpearPlasma` | 3 TC |
+| Урановое копьё | `SpearUranium` | 3 TC |
+| Копьё из зуба акулы-мальки | `SpearSharkMinnow` | 3 TC |
+| Глефа-дробилка | `WeaponCrusherGlaive` | 5 TC |
+| Магмитовая глефа-дробилка | `WeaponMagmiteCrusherGlaive` | 6 TC |
 | Мачете | `Machete` | 1 TC |
 | Пожарный топор | `FireAxe` | 1 TC |
 | Боевой нож | `CombatKnife` | 1 TC |
@@ -154,7 +161,7 @@
 | Пулезащитный щит | `RiotBulletShield` | 4 TC |
 | Телескопический щит | `TelescopicShield` | 5 TC |
 | Зеркальный щит | `MirrorShield` | 9 TC |
-| Энергетический щит | `EnergyShield` | 12 TC |
+| Энергетический щит | `EnergyShield` | 8 TC |
 
 ---
 
@@ -222,7 +229,7 @@
 | МОД Медицинский | `ClothingModularControllerMedicalPreassembled` | 10 TC |
 | МОД Синдикат | `ClothingModularControllerSyndicatePreassembled` | 12 TC |
 | МОД Элита | `ClothingModularControllerElitePreassembled` | 15 TC |
-| МОД Апокрифический | `ClothingModularControllerApocryphalPreassembled` | 18 TC |
+| МОД Апокрифический | `ClothingModularControllerApocryphalPreassembled` | 25 TC |
 
 ---
 
@@ -238,8 +245,11 @@
 | Регенеративная сетка | `RegenerativeMesh` | 2 TC |
 | Аптечка (ушибы) | `MedkitBruteFilled` | 2 TC |
 | Аптечка (ожоги) | `MedkitBurnFilled` | 2 TC |
-| Боевая аптечка | `MedkitCombatFilled` | 2 TC |
-| Продвинутая аптечка | `MedkitAdvancedFilled` | 3 TC |
+| Аптечка (яды) | `MedkitToxinFilled` | 2 TC |
+| Аптечка (кислород) | `MedkitOxygenFilled` | 2 TC |
+| Аптечка (радиация) | `MedkitRadiationFilled` | 2 TC |
+| Боевая аптечка | `MedkitCombatFilled` | 5 TC |
+| Продвинутая аптечка | `MedkitAdvancedFilled` | 5 TC |
 | Синдикатский дефибриллятор | `DefibrillatorSyndicate` | 12 TC |
 
 ---
@@ -281,7 +291,6 @@
 | Микроинъектор гиперзина | `StimpackMini` | 1 TC |
 | Джет-инъектор | `JetInjector` | 1 TC |
 | Улучшенный джет-инъектор | `AdvancedJetInjector` | 2 TC |
-| Химический медпен (пустой) | `ChemicalMedipen` | 1 TC |
 | Вех-автошприц | `WehMedipen` | 1 TC |
 
 ---
@@ -296,6 +305,7 @@
 | Магнум патроны | `MagazineBoxMagnum` |
 | Безгильзовые патроны | `MagazineBoxCaselessRifle` |
 | Противоматериальные патроны | `MagazineBoxAntiMateriel` |
+| Дробовые патроны (стандарт) | `MagazineBoxShotgun` |
 
 ---
 
@@ -408,7 +418,6 @@
 |---|---|---|
 | Арбузная шляпа | `ClothingHeadHatWatermelon` | 1 TC |
 | Синдикатское мыло | `SoapSyndie` | 1 TC |
-| Кластерное мыло | `SlipocalypseClusterSoap` | 1 TC |
 | Набор курильщика Интердайн | `InterdyneSmokerKit` | 2 TC |
 | Синдикатский плеер | `SyndiePlayerInstrument` | 1 TC |
 | Синдикатский кошелёк | `PouchSyndie` | 1 TC |

@@ -69,6 +69,7 @@
     slots:
       gun_chamber:
         name: Chamber
+        startingItem: ShellShotgunBeanbag
         priority: 1
         whitelist:
           tags:

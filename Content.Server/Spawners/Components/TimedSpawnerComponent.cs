@@ -51,6 +51,27 @@ public sealed partial class TimedSpawnerComponent : Component, ISerializationHoo
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextFire = TimeSpan.Zero;
 
+    /// <summary>
+    /// Whether this spawner is currently active. When false, no entities will be spawned.
+    /// Can be toggled via signals (SpawnerSignalControl component).
+    /// </summary>
+    [DataField]
+    public bool Enabled = true;
+
+    /// <summary>
+    /// If greater than zero, spawned entities are placed at a random position within this
+    /// radius (in tiles) of <see cref="SpawnNearEntity"/> (when set) or of the spawner itself.
+    /// </summary>
+    [DataField]
+    public float RandomSpawnRadius = 0f;
+
+    /// <summary>
+    /// Runtime-only reference: the entity whose position is used as the center for
+    /// random-radius spawning. Set by <c>SpawnerSignalControlSystem</c> when a signal
+    /// arrives from a linked button/switch. Not serialized.
+    /// </summary>
+    public EntityUid? SpawnNearEntity;
+
     void ISerializationHooks.AfterDeserialization()
     {
         if (MinimumEntitiesSpawned > MaximumEntitiesSpawned)

@@ -1,0 +1,397 @@
+# ── ДУЭЛЬНЫЙ ЯЩИК СНАРЯЖЕНИЯ (Supply Drop) ───────────────────────────────────
+# Спавнится в центре арены каждые 60 секунд, исчезает через 59 секунд.
+# При спавне: колокол слышен всем на станции, ящик светится оранжевым.
+#
+# Лут рандомный — 5 независимых слотов (orGroup):
+#   Medicine    — всегда один предмет из полного пула медицины
+#   ChemBottle  — всегда одна бутылочка с лечебным/полезным реагентом
+#   Ammo        — всегда один тип боеприпасов
+#   Utility     — зарядник / дымовуха / флэш / стимпак или ничего (~20%)
+#   Melee       — холодное оружие или ничего (~14%)
+#
+# Все предметы в группе — вес prob: 1 (равная вероятность).
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CrateDuelSupplyDrop
+  name: supply drop
+  description: Ящик экстренного снаряжения, сброшенный в центр арены. Содержимое неизвестно.
+  components:
+  - type: StorageFill
+    contents:
+
+      # ── Медицина ───────────────────────────────────────────────────────────
+      # Медипены
+      - id: EmergencyMedipen
+        orGroup: Medicine
+        prob: 1
+      - id: SurvivalMedipen
+        orGroup: Medicine
+        prob: 1
+      - id: CombatMedipen
+        orGroup: Medicine
+        prob: 1
+      - id: AntiPoisonMedipen
+        orGroup: Medicine
+        prob: 1
+      - id: SpaceMedipen
+        orGroup: Medicine
+        prob: 1
+      - id: WehMedipen
+        orGroup: Medicine
+        prob: 1
+      # Аптечки (заполненные)
+      - id: MedkitFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitCombatFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitBruteFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitBurnFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitAdvancedFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitOxygenFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitRadiationFilled
+        orGroup: Medicine
+        prob: 1
+      - id: MedkitToxinFilled
+        orGroup: Medicine
+        prob: 1
+      # Перевязочные материалы и расходники
+      - id: Brutepack
+        orGroup: Medicine
+        prob: 1
+      - id: Ointment
+        orGroup: Medicine
+        prob: 1
+      - id: AloeCream
+        orGroup: Medicine
+        prob: 1
+      - id: Gauze
+        orGroup: Medicine
+        prob: 1
+      - id: MedicatedSuture
+        orGroup: Medicine
+        prob: 1
+      - id: RegenerativeMesh
+        orGroup: Medicine
+        prob: 1
+      - id: Bloodpack
+        orGroup: Medicine
+        prob: 1
+      # Шприцы
+      - id: SyringeAmbuzol
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeBicaridine
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeDermaline
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeEphedrine
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeEthylredoxrazine
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeHyronalin
+        orGroup: Medicine
+        prob: 1
+      - id: SyringePhalanximine
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeRomerol
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeSaline
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeSpaceacillin
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeStimulants
+        orGroup: Medicine
+        prob: 1
+      - id: SyringeTranexamicAcid
+        orGroup: Medicine
+        prob: 1
+      # Контейнеры с таблетками
+      - id: PillCanisterAmbuzol
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterArithrazine
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterBicaridine
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterBruzin
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterCopper
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterDermaline
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterDylomet
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterExMedipen
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterFresium
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterHyronalin
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterIron
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterKelotane
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterLacerinol
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterLeporazine
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterMutadon
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterOmnizine
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterPhalanximine
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterPotassiumIodide
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterPuncturase
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterPyrazine
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterSaline
+        orGroup: Medicine
+        prob: 1
+      - id: PillCanisterTricordrazine
+        orGroup: Medicine
+        prob: 1
+
+      # ── Бутылочки с реагентами (только лечебные / полезные) ───────────────
+      # Лечение травм
+      - id: ChemistryBottleBicaridine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleBruizine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleLacerinol
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleUltravasculine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleDoxarubixadone
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleCryoxadone
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleOmnizine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleTricordrazine
+        orGroup: ChemBottle
+        prob: 1
+      # Лечение ожогов
+      - id: ChemistryBottleDermaline
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleKelotane
+        orGroup: ChemBottle
+        prob: 1
+      # Кислород / кровь
+      - id: ChemistryBottleSaline
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleEpinephrine
+        orGroup: ChemBottle
+        prob: 1
+      # Детоксикация / антияды
+      - id: ChemistryBottleEthylredoxrazine
+        orGroup: ChemBottle
+        prob: 1
+      # Температура / внутренние органы
+      - id: ChemistryBottleLeporazine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottlePyrazine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottlePuncturase
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottlePhalanximine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleSiderlac
+        orGroup: ChemBottle
+        prob: 1
+      # Стимуляторы / ускорители
+      - id: ChemistryBottleEphedrine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleEthyloxyephedrine
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleSynaptizine
+        orGroup: ChemBottle
+        prob: 1
+      # Прочие полезные
+      - id: ChemistryBottleTranexamicAcid
+        orGroup: ChemBottle
+        prob: 1
+      - id: ChemistryBottleBarozine
+        orGroup: ChemBottle
+        prob: 1
+
+      # ── Боеприпасы (всегда один тип) ───────────────────────────────────────
+      # Пистолетные
+      - id: MagazineBoxPistol
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxPistolIncendiary
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxPistolUranium
+        orGroup: Ammo
+        prob: 1
+      # Магнум
+      - id: MagazineBoxMagnum
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxMagnumAP
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxMagnumIncendiary
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxMagnumUranium
+        orGroup: Ammo
+        prob: 1
+      # Винтовочные
+      - id: MagazineBoxRifle
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxRifleBig
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxRifleIncendiary
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxRifleUranium
+        orGroup: Ammo
+        prob: 1
+      # Лёгкая винтовка
+      - id: MagazineBoxLightRifle
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxLightRifleBig
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxLightRifleIncendiary
+        orGroup: Ammo
+        prob: 1
+      - id: MagazineBoxLightRifleUranium
+        orGroup: Ammo
+        prob: 1
+      # Безгильзовая винтовка
+      - id: MagazineBoxCaselessRifle
+        orGroup: Ammo
+        prob: 1
+      # Противоматериальный
+      - id: MagazineBoxAntiMateriel
+        orGroup: Ammo
+        prob: 1
+      # Дробовик
+      - id: BoxLethalshot
+        orGroup: Ammo
+        prob: 1
+      - id: BoxShotgunSlug
+        orGroup: Ammo
+        prob: 1
+      - id: BoxShotgunIncendiary
+        orGroup: Ammo
+        prob: 1
+      - id: BoxShotgunUranium
+        orGroup: Ammo
+        prob: 1
+
+      # ── Утилита (или ничего — ~17%) ─────────────────────────────────────────
+      - id: SmokeGrenade
+        orGroup: Utility
+        prob: 1
+      - id: Flash
+        orGroup: Utility
+        prob: 1
+      - id: Stimpack
+        orGroup: Utility
+        prob: 1
+      - id: StimpackMini
+        orGroup: Utility
+        prob: 1
+      - id: PortableRecharger
+        orGroup: Utility
+        prob: 1
+      - orGroup: Utility   # ничего не спавнится (~17%)
+        prob: 1
+
+      # ── Холодное оружие (или ничего — ~14%) ────────────────────────────────
+      - id: CombatKnife
+        orGroup: Melee
+        prob: 1
+      - id: ThrowingKnife
+        orGroup: Melee
+        prob: 1
+      - id: Machete
+        orGroup: Melee
+        prob: 1
+      - id: Spear
+        orGroup: Melee
+        prob: 1
+      - id: SurvivalKnife
+        orGroup: Melee
+        prob: 1
+      - id: EnergyDagger
+        orGroup: Melee
+        prob: 1
+      - orGroup: Melee     # ничего не спавнится (~14%)
+        prob: 1
+
+  - type: PointLight
+    radius: 4.0
+    energy: 3.0
+    color: "#ff8800"
+  - type: EmitGlobalSoundOnSpawn
+    sound:
+      path: /Audio/Weapons/boxingbell.ogg
+    params:
+      volume: 0
+  - type: TimedDespawn
+    lifetime: 59
+  - type: EjectStorageOnDespawn

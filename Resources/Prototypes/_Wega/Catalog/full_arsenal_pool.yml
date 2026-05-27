@@ -28,6 +28,76 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalSpearBone
+  name: full-arsenal-spear-bone-name
+  description: full-arsenal-spear-bone-desc
+  productEntity: SpearBone
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpearReinforced
+  name: full-arsenal-spear-reinforced-name
+  description: full-arsenal-spear-reinforced-desc
+  productEntity: SpearReinforced
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpearPlasma
+  name: full-arsenal-spear-plasma-name
+  description: full-arsenal-spear-plasma-desc
+  productEntity: SpearPlasma
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpearUranium
+  name: full-arsenal-spear-uranium-name
+  description: full-arsenal-spear-uranium-desc
+  productEntity: SpearUranium
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSpearSharkMinnow
+  name: full-arsenal-spear-sharkminnow-name
+  description: full-arsenal-spear-sharkminnow-desc
+  productEntity: SpearSharkMinnow
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalCrusherGlaive
+  name: full-arsenal-crusher-glaive-name
+  description: full-arsenal-crusher-glaive-desc
+  productEntity: WeaponCrusherGlaive
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMagmiteCrusherGlaive
+  name: full-arsenal-magmite-crusher-glaive-name
+  description: full-arsenal-magmite-crusher-glaive-desc
+  productEntity: WeaponMagmiteCrusherGlaive
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalMachete
   name: full-arsenal-machete-name
   description: full-arsenal-machete-desc
@@ -826,60 +896,7 @@
   - FullArsenal
   - FullArsenalArmor
 
-# ── MEDICAL ───────────────────────────────────────────────────────────────────
-
-- type: listing
-  id: FullArsenalMedkitBrute
-  name: full-arsenal-medkit-brute-name
-  description: full-arsenal-medkit-brute-desc
-  productEntity: MedkitBruteFilled
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalMedkitBurn
-  name: full-arsenal-medkit-burn-name
-  description: full-arsenal-medkit-burn-desc
-  productEntity: MedkitBurnFilled
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-# uplink price: 2 TC
-- type: listing
-  id: FullArsenalMedkitCombat
-  name: full-arsenal-medkit-combat-name
-  description: full-arsenal-medkit-combat-desc
-  productEntity: MedkitCombatFilled
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalMedkitAdvanced
-  name: full-arsenal-medkit-advanced-name
-  description: full-arsenal-medkit-advanced-desc
-  productEntity: MedkitAdvancedFilled
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
 # ── UTILITY ───────────────────────────────────────────────────────────────────
-
-- type: listing
-  id: FullArsenalHandcuffs
-  name: full-arsenal-handcuffs-name
-  description: full-arsenal-handcuffs-desc
-  productEntity: Handcuffs
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
 
 - type: listing
   id: FullArsenalFlashlight
@@ -1011,7 +1028,7 @@
   description: full-arsenal-energy-shield-desc
   productEntity: EnergyShield
   cost:
-    Telecrystal: 12
+    Telecrystal: 8
   categories:
   - FullArsenal
 
@@ -1313,6 +1330,17 @@
   name: full-arsenal-ammo-box-antimateriel-name
   description: full-arsenal-ammo-box-antimateriel-desc
   productEntity: MagazineBoxAntiMateriel
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoBoxShotgun
+  name: full-arsenal-ammo-box-shotgun-name
+  description: full-arsenal-ammo-box-shotgun-desc
+  productEntity: MagazineBoxShotgun
   cost:
     Telecrystal: 1
   categories:
@@ -1667,16 +1695,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalChemicalMedipen
-  name: full-arsenal-chemical-medipen-name
-  description: full-arsenal-chemical-medipen-desc
-  productEntity: ChemicalMedipen
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
 # ── MOD СКАФАНДРЫ (предсобранные, модули внутри) ──────────────────────────────
 
 - type: listing
@@ -1740,7 +1758,7 @@
   description: full-arsenal-modsuit-apocryphal-desc
   productEntity: ClothingModularControllerApocryphalPreassembled
   cost:
-    Telecrystal: 18
+    Telecrystal: 25
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -1752,16 +1770,6 @@
   name: full-arsenal-soap-name
   description: full-arsenal-soap-desc
   productEntity: SoapSyndie
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalClusterSoap
-  name: full-arsenal-cluster-soap-name
-  description: full-arsenal-cluster-soap-desc
-  productEntity: SlipocalypseClusterSoap
   cost:
     Telecrystal: 1
   categories:
@@ -2237,15 +2245,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalBottleSigynate
-  name: full-arsenal-bottle-sigynate-name
-  description: full-arsenal-bottle-sigynate-desc
-  productEntity: ChemistryBottleSigynate
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
 
 - type: listing
   id: FullArsenalBottleArithrazine
@@ -2705,7 +2704,7 @@
   id: FullArsenalShotgunImprovised
   name: full-arsenal-shotgun-improvised-name
   description: full-arsenal-shotgun-improvised-desc
-  productEntity: WeaponShotgunImprovised
+  productEntity: WeaponShotgunImprovisedLoaded
   cost:
     Telecrystal: 1
   categories:
