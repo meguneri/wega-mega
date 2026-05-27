@@ -106,9 +106,6 @@
       - id: SyringeHyronalin
         orGroup: Medicine
         prob: 1
-      - id: SyringePhalanximine
-        orGroup: Medicine
-        prob: 1
       - id: SyringeRomerol
         orGroup: Medicine
         prob: 1
@@ -171,9 +168,6 @@
         orGroup: Medicine
         prob: 1
       - id: PillCanisterOmnizine
-        orGroup: Medicine
-        prob: 1
-      - id: PillCanisterPhalanximine
         orGroup: Medicine
         prob: 1
       - id: PillCanisterPotassiumIodide
@@ -244,9 +238,6 @@
         orGroup: ChemBottle
         prob: 1
       - id: ChemistryBottlePuncturase
-        orGroup: ChemBottle
-        prob: 1
-      - id: ChemistryBottlePhalanximine
         orGroup: ChemBottle
         prob: 1
       - id: ChemistryBottleSiderlac
@@ -348,7 +339,7 @@
         prob: 1
       - id: Flash
         orGroup: Utility
-        prob: 1
+        prob: 0.2
       - id: Stimpack
         orGroup: Utility
         prob: 1

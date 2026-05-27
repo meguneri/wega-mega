@@ -38,3 +38,13 @@
   - type: GunRequiresWield
   - type: StaticPrice
     price: 10000
+
+- type: entity
+  parent: WeaponImprovisedPneumaticCannon
+  id: WeaponImprovisedPneumaticCannonFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      gas_tank:
+      - OxygenTankFilled

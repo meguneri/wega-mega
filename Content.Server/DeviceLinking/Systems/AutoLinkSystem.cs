@@ -12,10 +12,10 @@ public sealed class AutoLinkSystem : EntitySystem
     /// <inheritdoc/>
     public override void Initialize()
     {
-        SubscribeLocalEvent<AutoLinkTransmitterComponent, MapInitEvent>(OnAutoLinkMapInit);
+        SubscribeLocalEvent<AutoLinkTransmitterComponent, MapInitEvent>(OnTransmitterMapInit);
     }
 
-    private void OnAutoLinkMapInit(EntityUid uid, AutoLinkTransmitterComponent component, MapInitEvent args)
+    private void OnTransmitterMapInit(EntityUid uid, AutoLinkTransmitterComponent component, MapInitEvent args)
     {
         var xform = Transform(uid);
 
@@ -23,14 +23,12 @@ public sealed class AutoLinkSystem : EntitySystem
         while (query.MoveNext(out var receiverUid, out var receiver))
         {
             if (receiver.AutoLinkChannel != component.AutoLinkChannel)
-                continue; // Not ours.
-
-            var rxXform = Transform(receiverUid);
-
-            if (rxXform.GridUid != xform.GridUid)
                 continue;
 
-            _deviceLinkSystem.LinkDefaults(null, uid, receiverUid);
+            if (Transform(receiverUid).GridUid != xform.GridUid)
+                continue;
+
+            _deviceLinkSystem.LinkDefaults(null, uid, receiverUid, skipRangeCheck: true);
         }
     }
 }

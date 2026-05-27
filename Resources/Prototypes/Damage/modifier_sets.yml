@@ -329,9 +329,5 @@
   coefficients:
     Holy: 2
 
-# Vulps get more heat damage because fur
 - type: damageModifierSet
   id: Vulpkanin
-  coefficients:
-    Heat: 1.15 # Corvax-Wega-Edit-Corvux 1.3
-    Cold: 0.65 #0.85 Corvax-CorvaxVulp_Port

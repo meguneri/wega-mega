@@ -479,7 +479,7 @@
   description: full-arsenal-armor-heavy-desc
   productEntity: ClothingOuterArmorHeavy
   cost:
-    Telecrystal: 6
+    Telecrystal: 10
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -572,7 +572,7 @@
   description: full-arsenal-hardsuit-juggernaut-desc
   productEntity: ClothingOuterHardsuitJuggernaut
   cost:
-    Telecrystal: 10
+    Telecrystal: 12
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -583,7 +583,7 @@
   description: full-arsenal-hardsuit-deathsquad-desc
   productEntity: ClothingOuterHardsuitDeathsquad
   cost:
-    Telecrystal: 20
+    Telecrystal: 35
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -1656,16 +1656,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalWehMedipen
-  name: full-arsenal-weh-medipen-name
-  description: full-arsenal-weh-medipen-desc
-  productEntity: WehMedipen
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalStimpackMini
   name: full-arsenal-stimpack-mini-name
   description: full-arsenal-stimpack-mini-desc
@@ -1758,7 +1748,7 @@
   description: full-arsenal-modsuit-apocryphal-desc
   productEntity: ClothingModularControllerApocryphalPreassembled
   cost:
-    Telecrystal: 25
+    Telecrystal: 35
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -2267,16 +2257,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalBottlePhalanximine
-  name: full-arsenal-bottle-phalanximine-name
-  description: full-arsenal-bottle-phalanximine-desc
-  productEntity: ChemistryBottlePhalanximine
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalBottleHyronalin
   name: full-arsenal-bottle-hyronalin-name
   description: full-arsenal-bottle-hyronalin-desc
@@ -2562,9 +2542,19 @@
   id: FullArsenalCaneBlade
   name: full-arsenal-cane-blade-name
   description: full-arsenal-cane-blade-desc
-  productEntity: CaneBlade
+  productEntity: CaneSheathFilled
   cost:
     Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPneumaticCannonKit
+  name: full-arsenal-pneumatic-cannon-kit-name
+  description: full-arsenal-pneumatic-cannon-kit-desc
+  productEntity: WeaponImprovisedPneumaticCannonFilled
+  cost:
+    Telecrystal: 2
   categories:
   - FullArsenal
 
@@ -3458,7 +3448,7 @@
   description: full-arsenal-wizardsgrimoire-desc
   productEntity: WizardsGrimoireNoRefund
   cost:
-    Telecrystal: 10
+    Telecrystal: 30
   categories:
   - FullArsenal
 

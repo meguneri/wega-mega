@@ -237,7 +237,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         foreach (var source in sources)
         {
             if (source.DefaultLinks == null)
-                return new List<(string, string)>();
+                continue;
 
             foreach (var defaultLink in source.DefaultLinks)
             {
@@ -261,7 +261,8 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         EntityUid sourceUid,
         EntityUid sinkUid,
         DeviceLinkSourceComponent? sourceComponent = null,
-        DeviceLinkSinkComponent? sinkComponent = null)
+        DeviceLinkSinkComponent? sinkComponent = null,
+        bool skipRangeCheck = false)
     {
         if (!Resolve(sourceUid, ref sourceComponent) || !Resolve(sinkUid, ref sinkComponent))
             return;
@@ -273,7 +274,7 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
 
         var sourcePorts = GetSourcePorts(sourceUid, sourceComponent);
         var defaults = GetDefaults(sourcePorts);
-        SaveLinks(userId, sourceUid, sinkUid, defaults, sourceComponent, sinkComponent);
+        SaveLinks(userId, sourceUid, sinkUid, defaults, sourceComponent, sinkComponent, skipRangeCheck);
 
         if (userId != null)
             _popupSystem.PopupCursor(Loc.GetString("signal-linking-verb-success", ("machine", sourceUid)), userId.Value);
@@ -296,12 +297,13 @@ public abstract class SharedDeviceLinkSystem : EntitySystem
         EntityUid sinkUid,
         List<(string source, string sink)> links,
         DeviceLinkSourceComponent? sourceComponent = null,
-        DeviceLinkSinkComponent? sinkComponent = null)
+        DeviceLinkSinkComponent? sinkComponent = null,
+        bool skipRangeCheck = false)
     {
         if (!Resolve(sourceUid, ref sourceComponent) || !Resolve(sinkUid, ref sinkComponent))
             return;
 
-        if (!InRange(sourceUid, sinkUid, sourceComponent.Range))
+        if (!skipRangeCheck && !InRange(sourceUid, sinkUid, sourceComponent.Range))
         {
             if (userId != null)
                 _popupSystem.PopupCursor(Loc.GetString("signal-linker-component-out-of-range"), userId.Value);

@@ -44,10 +44,6 @@ public sealed class SpawnerSignalControlSystem : EntitySystem
         if (!TryComp<TimedSpawnerComponent>(uid, out var timedSpawner))
             return;
 
-        // Remember the source entity so spawns happen near it (e.g. the button on the wall).
-        if (args.Trigger is { } triggerUid && Exists(triggerUid))
-            timedSpawner.SpawnNearEntity = triggerUid;
-
         // Toggle: disable if enabled, enable if disabled.
         _spawner.SetEnabled(uid, timedSpawner, !timedSpawner.Enabled);
 
