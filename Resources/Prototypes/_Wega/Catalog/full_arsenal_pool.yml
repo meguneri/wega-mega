@@ -650,7 +650,7 @@
   description: full-arsenal-coat-hos-trench-desc
   productEntity: ClothingOuterCoatHoSTrench
   cost:
-    Telecrystal: 8
+    Telecrystal: 4
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -661,7 +661,7 @@
   description: full-arsenal-winter-hos-desc
   productEntity: ClothingOuterWinterHoS
   cost:
-    Telecrystal: 8
+    Telecrystal: 4
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -683,7 +683,7 @@
   description: full-arsenal-coat-captain-desc
   productEntity: ClothingOuterCoatCaptain
   cost:
-    Telecrystal: 10
+    Telecrystal: 4
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -694,7 +694,7 @@
   description: full-arsenal-coat-hop-desc
   productEntity: ClothingOuterCoatHOP
   cost:
-    Telecrystal: 4
+    Telecrystal: 2
   categories:
   - FullArsenal
   - FullArsenalArmor

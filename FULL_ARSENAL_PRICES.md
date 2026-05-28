@@ -204,11 +204,11 @@
 | Тренч детектива (стандартный) | `ClothingOuterCoatDetectiveLoadout` | 3 TC |
 | Тренч детектива (нуар) | `ClothingOuterCoatDetectiveLoadoutGrey` | 3 TC |
 | Тренч детектива (тёмный) | `ClothingOuterCoatDetectiveDark` | 3 TC |
-| Тренч ГСБ | `ClothingOuterCoatHoSTrench` | 8 TC |
-| Зимняя куртка ГСБ | `ClothingOuterWinterHoS` | 8 TC |
+| Тренч ГСБ | `ClothingOuterCoatHoSTrench` | 4 TC |
+| Зимняя куртка ГСБ | `ClothingOuterWinterHoS` | 4 TC |
 | Бронированное пальто ГСБ | `ClothingOuterCoatHoSGreatcoat` | 5 TC |
-| Торжественная куртка капитана | `ClothingOuterCoatCaptain` | 10 TC |
-| Куртка главы персонала | `ClothingOuterCoatHOP` | 4 TC |
+| Торжественная куртка капитана | `ClothingOuterCoatCaptain` | 4 TC |
+| Куртка главы персонала | `ClothingOuterCoatHOP` | 2 TC |
 | Бронированное пальто синдиката | `ClothingOuterCoatSyndieCapArmored` | 4 TC |
 | Зимнее бронепальто синдиката | `ClothingOuterWinterSyndieCapArmored` | 4 TC |
 | Зимнее пальто Синий Щит | `ClothingOuterWinterBlueShield` | 4 TC |
