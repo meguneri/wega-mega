@@ -1,0 +1,25 @@
+# DuelArenaTracker — невидимая сущность, размещается в центре арены.
+# Слушает DuelFight (барьеры открылись → сканирует игроков вокруг и регистрирует дуэлянтов).
+# Слушает DuelReset (дуэль сброшена → очищает список).
+# Когда один из дуэлянтов падает в крит — объявляет победителя на весь сервер.
+
+- type: entity
+  id: DuelArenaTracker
+  parent: MarkerBase
+  name: Duel Arena Tracker
+  suffix: Duel Arena
+  description: Невидимый трекер дуэли. Объявляет победителя, когда один из дуэлянтов теряет сознание.
+  components:
+  - type: Sprite
+    layers:
+      - state: blue
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Toggle
+  - type: AutoLinkReceiver
+    channels:
+      - DuelFight
+      - DuelReset
+  - type: DuelArena
+    scanRange: 12

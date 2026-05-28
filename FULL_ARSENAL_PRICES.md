@@ -83,8 +83,6 @@
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
 | ПП C-20r | `WeaponSubMachineGunC20r` | 10 TC |
-| ПП C-20r ROW | `WeaponSubMachineGunC20rROW` | 14 TC |
-| ПП C-20r ROW Advanced | `WeaponSubMachineGunC20rROWAdvensed` | 16 TC |
 
 ---
 
@@ -198,6 +196,7 @@
 | Тяжёлая броня | `ClothingOuterArmorHeavy` | 18 TC |
 | Тяжёлая броня (зелёная) | `ClothingOuterArmorHeavyGreen` | 18 TC |
 | Тяжёлая броня (красная) | `ClothingOuterArmorHeavyRed` | 18 TC |
+| Хитиновый панцирь | `ClothingOuterArmorChangeling` | 4 TC |
 | Костяная броня | `ClothingOuterArmorBone` | 12 TC |
 | Броня Pod Wars | `ClothingOuterArmorPodWars` | 8 TC |
 | Жилет детектива | `ClothingOuterVestDetective` | 2 TC |
@@ -235,7 +234,7 @@
 | EVA | `ClothingOuterHardsuitEVA` | 3 TC |
 | Инженерный | `ClothingOuterHardsuitEngineering` | 4 TC |
 | Санта | `ClothingOuterHardsuitSanta` | 5 TC |
-| Синдикат (базовый) | `ClothingOuterHardsuitSyndie` | 5 TC |
+| Синдикат (базовый) | `ClothingOuterHardsuitSyndie` | 7 TC |
 | ERT Уборщик | `ClothingOuterHardsuitERTJanitor` | 5 TC |
 | Инженерный (белый) | `ClothingOuterHardsuitEngineeringWhite` | 6 TC |
 | Атмосферный | `ClothingOuterHardsuitAtmos` | 6 TC |
@@ -247,8 +246,10 @@
 | Бригмедик | `ClothingOuterHardsuitBrigmedic` | 8 TC |
 | Пустотный парамедик | `ClothingOuterHardsuitVoidParamed` | 8 TC |
 | Древний EVA | `ClothingOuterHardsuitAncientEVA` | 8 TC |
-| Синдикат Медик | `ClothingOuterHardsuitSyndieMedic` | 10 TC |
-| Синдикат Элита | `ClothingOuterHardsuitSyndieElite` | 10 TC |
+| Синдикат Медик | `ClothingOuterHardsuitSyndieMedic` | 7 TC |
+| Преобразователь кровавого-красного скафандра | `HardsuitOperSelector` | 7 TC |
+| Преобразователь медицинского кровавого-красного скафандра | `HardsuitOperMedSelector` | 7 TC |
+| Синдикат Элита | `ClothingOuterHardsuitSyndieElite` | 12 TC |
 | Джаггернаут | `ClothingOuterHardsuitJuggernaut` | 10 TC |
 | Пилот охраны | `ClothingOuterHardsuitSecurityPilot` | 10 TC |
 | НД | `ClothingOuterHardsuitRd` | 10 TC |
@@ -296,6 +297,7 @@
 | Боевая аптечка | `MedkitCombatFilled` | 5 TC |
 | Продвинутая аптечка | `MedkitAdvancedFilled` | 5 TC |
 | Синдикатский дефибриллятор | `DefibrillatorSyndicate` | 12 TC |
+| Кремовый банановый пирог | `FoodPieBananaCream` | 5 TC |
 
 ---
 
@@ -429,9 +431,11 @@
 | Вещмешок пулемёт LMG | `ClothingBackpackDuffelSyndicateFilledLMG` | 30 TC |
 | Вещмешок стартовый набор | `ClothingBackpackDuffelSyndicateFilledStarterKit` | 40 TC |
 | Вещмешок C-4 | `ClothingBackpackDuffelSyndicateC4tBundle` | 8 TC |
-| Вещмешок скафандр Синдиката | `ClothingBackpackDuffelSyndicateHardsuitBundle` | 7 TC |
-| Вещмешок элитный скафандр | `ClothingBackpackDuffelSyndicateEliteHardsuitBundle` | 12 TC |
-| Вещмешок пижамы | `ClothingBackpackDuffelSyndicatePyjamaBundle` | 1 TC |
+| Вещмешок скафандр Синдиката | `ClothingBackpackDuffelSyndicateHardsuitBundle` | 8 TC |
+| Вещмешок элитный скафандр | `ClothingBackpackDuffelSyndicateEliteHardsuitBundle` | 13 TC |
+| Армейская РПС | `ClothingBeltMilitaryWebbing` | 2 TC |
+| РПС шахтёра | `ClothingBeltSalvageWebbing` | 2 TC |
+| РПС охраны | `ClothingBeltSecurityWebbing` | 2 TC |
 | Вещмешок костюм клоуна | `ClothingBackpackDuffelSyndicateCostumeClown` | 1 TC |
 | Вещмешок костюм карпа | `ClothingBackpackDuffelSyndicateCarpSuit` | 1 TC |
 
@@ -465,8 +469,6 @@
 | Шлем ERT Охраны | `ClothingHeadHelmetERTSecurity` | 4 TC |
 | Древний шлем | `ClothingHeadHelmetAncient` | 5 TC |
 | Шлем ERT Лидера | `ClothingHeadHelmetERTLeader` | 5 TC |
-| Шлем CBURN | `ClothingHeadHelmetCBURN` | 6 TC |
-| Шлем CBURN Лидера | `ClothingHeadHelmetCBURNLeader` | 8 TC |
 
 ---
 

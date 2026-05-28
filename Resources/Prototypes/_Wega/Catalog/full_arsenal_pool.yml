@@ -568,6 +568,17 @@
   - FullArsenalArmor
 
 - type: listing
+  id: FullArsenalArmorChangeling
+  name: full-arsenal-armor-changeling-name
+  description: full-arsenal-armor-changeling-desc
+  productEntity: ClothingOuterArmorChangeling
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
   id: FullArsenalArmorBone
   name: full-arsenal-armor-bone-name
   description: full-arsenal-armor-bone-desc
@@ -585,17 +596,6 @@
   productEntity: ClothingOuterArmorPodWars
   cost:
     Telecrystal: 8
-  categories:
-  - FullArsenal
-  - FullArsenalArmor
-
-- type: listing
-  id: FullArsenalVestDetective
-  name: full-arsenal-vest-detective-name
-  description: full-arsenal-vest-detective-desc
-  productEntity: ClothingOuterVestDetective
-  cost:
-    Telecrystal: 2
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -917,7 +917,7 @@
   description: full-arsenal-hardsuit-syndie-desc
   productEntity: ClothingOuterHardsuitSyndie
   cost:
-    Telecrystal: 5
+    Telecrystal: 7
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -929,7 +929,7 @@
   description: full-arsenal-hardsuit-syndie-elite-desc
   productEntity: ClothingOuterHardsuitSyndieElite
   cost:
-    Telecrystal: 10
+    Telecrystal: 12
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -1117,7 +1117,7 @@
   description: full-arsenal-hardsuit-syndie-commander-desc
   productEntity: ClothingOuterHardsuitSyndieCommander
   cost:
-    Telecrystal: 15
+    Telecrystal: 16
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -1128,7 +1128,29 @@
   description: full-arsenal-hardsuit-syndie-medic-desc
   productEntity: ClothingOuterHardsuitSyndieMedic
   cost:
-    Telecrystal: 10
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
+  id: FullArsenalHardsuitOperSelector
+  name: full-arsenal-hardsuit-oper-selector-name
+  description: full-arsenal-hardsuit-oper-selector-desc
+  productEntity: HardsuitOperSelector
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
+  id: FullArsenalHardsuitOperMedSelector
+  name: full-arsenal-hardsuit-oper-med-selector-name
+  description: full-arsenal-hardsuit-oper-med-selector-desc
+  productEntity: HardsuitOperMedSelector
+  cost:
+    Telecrystal: 7
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -1694,36 +1716,55 @@
   categories:
   - FullArsenal
 
-# uplink price: 7 TC
+# uplink price: 8 TC
 - type: listing
   id: FullArsenalDuffelHardsuitBundle
   name: uplink-hardsuit-syndie-name
   description: uplink-hardsuit-syndie-desc
   productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
   cost:
-    Telecrystal: 7
+    Telecrystal: 8
   categories:
   - FullArsenal
 
-# uplink price: 12 TC
+# uplink price: 13 TC
 - type: listing
   id: FullArsenalDuffelEliteHardsuitBundle
   name: uplink-hardsuit-syndieelite-name
   description: uplink-hardsuit-syndieelite-desc
   productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
   cost:
-    Telecrystal: 12
+    Telecrystal: 13
   categories:
   - FullArsenal
 
-# uplink price: 1 TC
 - type: listing
-  id: FullArsenalDuffelPyjamaBundle
-  name: uplink-costume-pyjama-name
-  description: uplink-costume-pyjama-desc
-  productEntity: ClothingBackpackDuffelSyndicatePyjamaBundle
+  id: FullArsenalBeltMilitaryWebbing
+  name: full-arsenal-belt-military-webbing-name
+  description: full-arsenal-belt-military-webbing-desc
+  productEntity: ClothingBeltMilitaryWebbing
   cost:
-    Telecrystal: 1
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBeltSalvageWebbing
+  name: full-arsenal-belt-salvage-webbing-name
+  description: full-arsenal-belt-salvage-webbing-desc
+  productEntity: ClothingBeltSalvageWebbing
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBeltSecurityWebbing
+  name: full-arsenal-belt-security-webbing-name
+  description: full-arsenal-belt-security-webbing-desc
+  productEntity: ClothingBeltSecurityWebbing
+  cost:
+    Telecrystal: 2
   categories:
   - FullArsenal
 
@@ -2118,16 +2159,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalSyndiHypo
-  name: full-arsenal-syndi-hypo-name
-  description: full-arsenal-syndi-hypo-desc
-  productEntity: SyndiHypo
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalStimpack
   name: full-arsenal-stimpack-name
   description: full-arsenal-stimpack-desc
@@ -2248,7 +2279,18 @@
   description: full-arsenal-modsuit-syndicate-desc
   productEntity: ClothingModularControllerSyndicatePreassembled
   cost:
-    Telecrystal: 12
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
+  id: FullArsenalModSuitMining
+  name: full-arsenal-modsuit-mining-name
+  description: full-arsenal-modsuit-mining-desc
+  productEntity: ClothingModularControllerMiningPreassembled
+  cost:
+    Telecrystal: 4
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -2259,7 +2301,7 @@
   description: full-arsenal-modsuit-elite-desc
   productEntity: ClothingModularControllerElitePreassembled
   cost:
-    Telecrystal: 15
+    Telecrystal: 12
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -2748,16 +2790,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalBottleDexalinPlus
-  name: full-arsenal-bottle-dexalinplus-name
-  description: full-arsenal-bottle-dexalinplus-desc
-  productEntity: ChemistryBottleDexalinPlus
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalBottleInaprovaline
   name: full-arsenal-bottle-inaprovaline-name
   description: full-arsenal-bottle-inaprovaline-desc
@@ -2798,15 +2830,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalBottleCryoxadone
-  name: full-arsenal-bottle-cryoxadone-name
-  description: full-arsenal-bottle-cryoxadone-desc
-  productEntity: ChemistryBottleCryoxadone
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
 
 - type: listing
   id: FullArsenalBottleHyronalin
@@ -2815,6 +2838,16 @@
   productEntity: ChemistryBottleHyronalin
   cost:
     Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPieBananaCream
+  name: full-arsenal-pie-banana-cream-name
+  description: full-arsenal-pie-banana-cream-desc
+  productEntity: FoodPieBananaCream
+  cost:
+    Telecrystal: 5
   categories:
   - FullArsenal
 
@@ -4431,27 +4464,6 @@
   - FullArsenal
   - FullArsenalHead
 
-- type: listing
-  id: FullArsenalHelmetCBURN
-  name: full-arsenal-helmet-cburn-name
-  description: full-arsenal-helmet-cburn-desc
-  productEntity: ClothingHeadHelmetCBURN
-  cost:
-    Telecrystal: 6
-  categories:
-  - FullArsenal
-  - FullArsenalHead
-
-- type: listing
-  id: FullArsenalHelmetCBURNLeader
-  name: full-arsenal-helmet-cburn-leader-name
-  description: full-arsenal-helmet-cburn-leader-desc
-  productEntity: ClothingHeadHelmetCBURNLeader
-  cost:
-    Telecrystal: 8
-  categories:
-  - FullArsenal
-  - FullArsenalHead
 
 # ── GAS MASKS ─────────────────────────────────────────────────────────────────
 
@@ -4719,25 +4731,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalC20rROW
-  name: full-arsenal-c20r-row-name
-  description: full-arsenal-c20r-row-desc
-  productEntity: WeaponSubMachineGunC20rROW
-  cost:
-    Telecrystal: 14
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalC20rROWAdvanced
-  name: full-arsenal-c20r-row-advanced-name
-  description: full-arsenal-c20r-row-advanced-desc
-  productEntity: WeaponSubMachineGunC20rROWAdvensed
-  cost:
-    Telecrystal: 16
-  categories:
-  - FullArsenal
 
 # AP variant of Python
 - type: listing
