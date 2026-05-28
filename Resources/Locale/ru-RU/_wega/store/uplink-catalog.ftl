@@ -468,6 +468,10 @@ full-arsenal-pka-name = Протокинетический ускоритель
 full-arsenal-pka-desc = Переносное горное оборудование, переделанное в оружие. Стреляет камнями.
 
 # New armor
+full-arsenal-helmet-scrap-name = Мусорный шлем
+full-arsenal-helmet-scrap-desc = Самодельный шлем из ведра и стальных пластин. Защита символическая, но зато смотрится устрашающе.
+full-arsenal-armor-scrap-name = Мусорная броня
+full-arsenal-armor-scrap-desc = Самодельный доспех из стальных пластин и проводов. Режет скорость напополам, но держит удар не хуже некоторых промышленных образцов.
 full-arsenal-armor-basic-slim-name = Тонкий базовый бронежилет
 full-arsenal-armor-basic-slim-desc = Облегчённый бронежилет. Не мешает движениям.
 full-arsenal-armor-captain-carapace-name = Карапас капитана

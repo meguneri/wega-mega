@@ -356,9 +356,6 @@
       - id: CombatKnife
         orGroup: Melee
         prob: 1
-      - id: ThrowingKnife
-        orGroup: Melee
-        prob: 1
       - id: Machete
         orGroup: Melee
         prob: 1

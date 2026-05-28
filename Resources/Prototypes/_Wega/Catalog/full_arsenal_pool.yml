@@ -441,6 +441,17 @@
   - FullArsenalArmor
 
 - type: listing
+  id: FullArsenalArmorScrap
+  name: full-arsenal-armor-scrap-name
+  description: full-arsenal-armor-scrap-desc
+  productEntity: ClothingOuterArmorScrap
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
   id: FullArsenalArmorReflective
   name: full-arsenal-armor-reflective-name
   description: full-arsenal-armor-reflective-desc
@@ -479,7 +490,7 @@
   description: full-arsenal-armor-heavy-desc
   productEntity: ClothingOuterArmorHeavy
   cost:
-    Telecrystal: 10
+    Telecrystal: 18
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -3512,7 +3523,7 @@
   description: full-arsenal-pulse-pistol-desc
   productEntity: WeaponPulsePistol
   cost:
-    Telecrystal: 4
+    Telecrystal: 20
   categories:
   - FullArsenal
 
@@ -3522,7 +3533,7 @@
   description: full-arsenal-pulse-carbine-desc
   productEntity: WeaponPulseCarbine
   cost:
-    Telecrystal: 6
+    Telecrystal: 20
   categories:
   - FullArsenal
 
@@ -3532,7 +3543,7 @@
   description: full-arsenal-pulse-rifle-desc
   productEntity: WeaponPulseRifle
   cost:
-    Telecrystal: 7
+    Telecrystal: 35
   categories:
   - FullArsenal
 
@@ -3588,6 +3599,17 @@
   name: full-arsenal-helmet-basic-name
   description: full-arsenal-helmet-basic-desc
   productEntity: ClothingHeadHelmetBasic
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalHead
+
+- type: listing
+  id: FullArsenalHelmetScrap
+  name: full-arsenal-helmet-scrap-name
+  description: full-arsenal-helmet-scrap-desc
+  productEntity: ClothingHeadHelmetScrap
   cost:
     Telecrystal: 1
   categories:
