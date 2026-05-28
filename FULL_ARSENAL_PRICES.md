@@ -34,7 +34,7 @@
 | Сабля капитана | `CaptainSabre` | 3 TC |
 | Проклятая катана | `WeaponCursedKatana` | 4 TC |
 | Клеймор | `Claymore` | 4 TC |
-| Нулевой жезл | `WeaponNullRod` | 4 TC |
+| Нулевой жезл | `WeaponNullRod` | 2 TC |
 | Силовой меч | `WeaponForceSword` | 5 TC |
 | Дробилка | `WeaponCrusher` | 5 TC |
 | Кинжал смерти | `WeaponDeathDagger` | 5 TC |
@@ -43,6 +43,8 @@
 | Клинок смерти | `WeaponDeathBlade` | 7 TC |
 | Высокочастотный клинок | `WeaponHighFrequencyBlade` | 7 TC |
 | Энергетический меч | `EnergySword` | 8 TC |
+| Двойной энергетический меч | `EnergySwordDouble` | 16 TC |
+| Рапира Синдиката (набор) | `BeltSheathSyndieFilledBox` | 8 TC |
 
 ---
 
@@ -69,6 +71,7 @@
 | Desert Eagle | `WeaponPistolDesertEagle` | 4 TC |
 | Desert Eagle AP | `WeaponPistolDesertEagleAP` | 6 TC |
 | Dominator (три режима) | `WeaponDominator` | 8 TC |
+| Импульсный пистолет | `WeaponPulsePistol` | 20 TC |
 
 ---
 
@@ -79,9 +82,9 @@
 | ПП Дрозд | `WeaponSubMachineGunDrozd` | 4 TC |
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
-| ПП C-20r | `WeaponSubMachineGunC20r` | 7 TC |
-| ПП C-20r ROW | `WeaponSubMachineGunC20rROW` | 8 TC |
-| ПП C-20r ROW Advanced | `WeaponSubMachineGunC20rROWAdvensed` | 10 TC |
+| ПП C-20r | `WeaponSubMachineGunC20r` | 10 TC |
+| ПП C-20r ROW | `WeaponSubMachineGunC20rROW` | 14 TC |
+| ПП C-20r ROW Advanced | `WeaponSubMachineGunC20rROWAdvensed` | 16 TC |
 
 ---
 
@@ -109,6 +112,7 @@
 | Сигнальный пистолет | `WeaponFlareGun` | 2 TC |
 | Сигнальный пистолет (охрана) | `WeaponFlareGunSecurity` | 3 TC |
 | Лазерный карабин | `WeaponLaserCarbine` | 3 TC |
+| Сойка | `WeaponRifleJay` | 10 TC |
 | Винтовка AK | `WeaponRifleAk` | 6 TC |
 | Ионный карабин | `WeaponIonCarabine` | 5 TC |
 | Винтовка Lecter | `WeaponRifleLecter` | 5 TC |
@@ -118,6 +122,8 @@
 | Пулемёт L6C (компакт) | `WeaponLightMachineGunL6C` | 10 TC |
 | Снайперка Hristov МК2 | `WeaponSniperHristovAdvanced` | 12 TC |
 | Пулемёт L6 | `WeaponLightMachineGunL6` | 12 TC |
+| Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
+| Импульсная винтовка | `WeaponPulseRifle` | 35 TC |
 
 ---
 
@@ -156,29 +162,68 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
-| Щит рейдовый | `RiotShield` | 2 TC |
-| Щит лазерный | `RiotLaserShield` | 4 TC |
+| Противоударный щит | `RiotShield` | 2 TC |
+| Противолазерный щит | `RiotLaserShield` | 4 TC |
 | Пулезащитный щит | `RiotBulletShield` | 4 TC |
 | Телескопический щит | `TelescopicShield` | 5 TC |
-| Зеркальный щит | `MirrorShield` | 9 TC |
+| Тактический жилет Web (щит) | `ClothingOuterVestWeb` | 6 TC |
 | Энергетический щит | `EnergyShield` | 8 TC |
+| Элитный тактический жилет | `ClothingOuterVestWebElite` | 8 TC |
+| Зеркальный щит | `MirrorShield` | 9 TC |
+| Щит Синего щита | `BlueSheildSheild` | 9 TC |
+| Деревянный баклер | `WoodenBuckler` | 1 TC |
+| Картонный щит | `CardShield` | 1 TC |
+| Самодельный щит | `MakeshiftShield` | 1 TC |
+| Паутинный щит | `WebShield` | 1 TC |
+| Часовой щит | `ClockworkShield` | 3 TC |
+| Сломанный энергощит | `BrokenEnergyShield` | 1 TC |
+| Сломанный щит СЩ | `BrokenBlueSheildSheild` | 1 TC |
 
 ---
 
 ## Броня (лимит 2 шт. за открытие)
 
-### Обычная броня
+### Обычная броня и одежда с бронёй
 
 | Предмет | Entity | Цена |
 |---|---|---|
 | Базовая броня | `ClothingOuterArmorBasic` | 2 TC |
+| Мусорная броня | `ClothingOuterArmorScrap` | 4 TC |
 | Противоударная броня | `ClothingOuterArmorRiot` | 3 TC |
 | Отражающая броня | `ClothingOuterArmorReflective` | 4 TC |
 | Пулестойкая броня | `ClothingOuterArmorBulletproof` | 5 TC |
 | Культистская броня | `ClothingOuterArmorCult` | 5 TC |
-| Тяжёлая броня | `ClothingOuterArmorHeavy` | 6 TC |
 | Броня смотрителя | `ClothingOuterArmorWarden` | 6 TC |
 | Рейдовая броня | `ClothingOuterArmorRaid` | 6 TC |
+| Тяжёлая броня | `ClothingOuterArmorHeavy` | 18 TC |
+| Тяжёлая броня (зелёная) | `ClothingOuterArmorHeavyGreen` | 18 TC |
+| Тяжёлая броня (красная) | `ClothingOuterArmorHeavyRed` | 18 TC |
+| Костяная броня | `ClothingOuterArmorBone` | 12 TC |
+| Броня Pod Wars | `ClothingOuterArmorPodWars` | 8 TC |
+| Жилет детектива | `ClothingOuterVestDetective` | 2 TC |
+| Тренч детектива | `ClothingOuterCoatDetective` | 3 TC |
+| Тренч детектива (стандартный) | `ClothingOuterCoatDetectiveLoadout` | 3 TC |
+| Тренч детектива (нуар) | `ClothingOuterCoatDetectiveLoadoutGrey` | 3 TC |
+| Тренч детектива (тёмный) | `ClothingOuterCoatDetectiveDark` | 3 TC |
+| Тренч ГСБ | `ClothingOuterCoatHoSTrench` | 8 TC |
+| Зимняя куртка ГСБ | `ClothingOuterWinterHoS` | 8 TC |
+| Бронированное пальто ГСБ | `ClothingOuterCoatHoSGreatcoat` | 5 TC |
+| Торжественная куртка капитана | `ClothingOuterCoatCaptain` | 10 TC |
+| Куртка главы персонала | `ClothingOuterCoatHOP` | 4 TC |
+| Бронированное пальто синдиката | `ClothingOuterCoatSyndieCapArmored` | 4 TC |
+| Зимнее бронепальто синдиката | `ClothingOuterWinterSyndieCapArmored` | 4 TC |
+| Зимнее пальто Синий Щит | `ClothingOuterWinterBlueShield` | 4 TC |
+| Зимнее бронепальто Синий Щит | `ClothingOuterWinterBlueShieldAlt` | 4 TC |
+| Куртка смотрителя | `ClothingOuterCoatWarden` | 6 TC |
+| Куртка смотрителя (тёмно-синяя) | `ClothingOuterCoatWardenAlt` | 6 TC |
+| Зимняя бронекуртка пилота | `ClothingOuterWinterPilot` | 3 TC |
+| Шинель службы безопасности | `ClothingOuterCoatSecurityOvercoat` | 3 TC |
+| Тактический жилет | `ClothingOuterVestWeb` | 6 TC |
+| Элитный тактический жилет | `ClothingOuterVestWebElite` | 8 TC |
+| Тактический жилет наёмника | `ClothingOuterVestWebMerc` | 3 TC |
+| Тренч | `ClothingOuterCoatTrench` | 1 TC |
+| Доги | `ClothingOuterDogi` | 2 TC |
+| Бронированный медицинский халат | `ClothingOuterCoatAMG` | 2 TC |
 
 ### Скафандры
 
@@ -258,6 +303,7 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
+| Нескользящие ботинки | `ClothingShoesChameleonNoSlips` | 2 TC |
 | Наручники | `Handcuffs` | 1 TC |
 | Фонарик | `FlashlightSeclite` | 1 TC |
 | Дымовая граната | `SmokeGrenade` | 1 TC |
@@ -286,12 +332,14 @@
 | Гипоручка (коробка) | `HypopenBox` | 6 TC |
 | Взрывающаяся ручка (коробка) | `PenExplodingBox` | 1 TC |
 | Гипо-дарт (коробка) | `HypoDartBox` | 1 TC |
-| Горлекс-гипоспрей | `SyndiHypo` | 3 TC |
+| Гипоспрей | `Hypospray` | 2 TC |
+| Горлекс-гипоспрей | `SyndiHypo` | 2 TC |
+| Гипоручка | `Hypopen` | 2 TC |
+| Ручка Киберсан | `CyberPen` | 1 TC |
 | Стимпак (гиперзин, полный) | `Stimpack` | 4 TC |
 | Микроинъектор гиперзина | `StimpackMini` | 1 TC |
-| Джет-инъектор | `JetInjector` | 1 TC |
-| Улучшенный джет-инъектор | `AdvancedJetInjector` | 2 TC |
 | Вех-автошприц | `WehMedipen` | 1 TC |
+| Настоящий молочный коктейль (30 ед.) | `DrinkTrueMilkshakeFilled` | 5 TC |
 
 ---
 
@@ -337,6 +385,8 @@
 |---|---|---|
 | Снайперский набор | `BriefcaseSyndieSniperBundleFilled` | 6 TC |
 | Чемодан China Lake | `BriefcaseWeaponChinaLakeFilled` | 14 TC |
+| Чемодан-автомат (C-20K) | `WeaponSubMachineGunBriefcase` | 10 TC |
+| Набор лоббиста | `BriefcaseSyndieLobbyingBundleFilled` | 2 TC |
 
 ---
 
@@ -370,7 +420,9 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
+| Бронированная рабочая каска | `ClothingHeadHatHardhatArmored` | 2 TC |
 | Базовый шлем | `ClothingHeadHelmetBasic` | 1 TC |
+| Мусорный шлем | `ClothingHeadHelmetScrap` | 1 TC |
 | Противоударный шлем | `ClothingHeadHelmetRiot` | 2 TC |
 | Флэш-шлем | `ClothingHeadHelmetFlash` | 2 TC |
 | Шлем наёмника | `ClothingHeadHelmetMerc` | 2 TC |
@@ -428,4 +480,23 @@
 | Собачьи ушки | `ClothingHeadHatDogEars` | 10 TC |
 | Кошачьи ушки | `ClothingHeadHatCatEars` | 26 TC |
 | Элегантное платье горничной | `ClothingUniformJumpskirtElegantMaid` | 30 TC |
-| Кубик судьбы | `DiceOfFate` | 20 TC |
+| Кубик судьбы | `DiceOfFate` | 10 TC |
+| Пистолет-пугач | `RevolverCapGun` | 10 TC |
+| Пистолет-пугач (фальшивый) | `RevolverCapGunFake` | 10 TC |
+| Игрушечный световой меч | `ToySword` | 8 TC |
+
+---
+
+## Книги заклинаний
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Призыв существ | `SpawnSpellbook` | 10 TC |
+| Нокаут (Knock) | `KnockSpellbook` | 10 TC |
+| Самовозгорание | `FireSelfSpellbook` | 10 TC |
+| Мигание (Blink) | `BlinkBook` | 10 TC |
+| Стена силы | `ForceWallSpellbook` | 10 TC |
+| Руны | `ScrollRunes` | 10 TC |
+| Огненный шар | `FireballSpellbook` | 10 TC |
+| Удар молнии (Smite) | `SmiteBook` | 10 TC |
+| Гримуар волшебника | `WizardsGrimoireNoRefund` | 30 TC |

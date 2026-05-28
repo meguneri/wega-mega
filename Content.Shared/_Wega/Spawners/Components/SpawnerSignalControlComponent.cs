@@ -30,7 +30,7 @@ public sealed partial class SpawnerSignalControlComponent : Component
     /// Message broadcast when the spawner is turned ON.
     /// </summary>
     [DataField]
-    public string EnabledMessage = "Сброс снаряжения активирован. Ящики будут появляться в центре арены каждые 60 секунд.";
+    public string EnabledMessage = "Сброс снаряжения активирован. Ящики будут появляться в центре арены каждые 45 секунд.";
 
     /// <summary>
     /// Message broadcast when the spawner is turned OFF.

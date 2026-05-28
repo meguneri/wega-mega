@@ -1,0 +1,120 @@
+# ── ДУЭЛЬНЫЙ СТАРТОВЫЙ БАРЬЕР ────────────────────────────────────────────────
+#
+# Схема сигналов (всё через AutoLink — ручная настройка в редакторе не нужна):
+#
+#   DuelStartButton ──[DuelStart]──► DuelStartTimer ──[DuelFight]──► DuelStartBarrier
+#                                                             └──[DuelFight]──► DuelStartSoundEmitter
+#
+#   DuelResetButton ──[DuelReset]──► DuelStartBarrier (Close)
+#
+# Порядок событий:
+#   1. Нажатие DuelStartButton → Pressed → Trigger (дефолт) → запускает таймер
+#   2. Таймер отсчитывает 5 секунд (отображается на экране)
+#   3. По истечении → Timer → Open (дефолт) → барьеры открываются
+#                          → Trigger (дефолт) → DuelStartSoundEmitter воспроизводит колокол
+#   4. После дуэли: нажатие DuelResetButton → Pressed → Toggle (дефолт) → барьеры закрываются
+#
+# Размещение на карте:
+#   - DuelStartBarrier: по одному на каждой стороне арены (несколько тайлов в ряд)
+#   - DuelStartTimer: на стене рядом с кнопкой
+#   - DuelStartButton: на стене арены (видное место)
+#   - DuelResetButton: на стене арены (рядом со стартовой кнопкой или отдельно)
+#   - DuelStartSoundEmitter: один в любом месте арены (невидимый)
+
+# ── Барьер ───────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: DuelStartBarrier
+  parent: BlastDoor
+  name: duel barrier
+  suffix: Duel Arena
+  description: Бронированный барьер, разделяющий дуэлянтов до начала поединка.
+  components:
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Close
+      - Toggle
+  - type: AutoLinkReceiver
+    channels:
+      - DuelFight
+      - DuelReset
+
+# ── Таймер ───────────────────────────────────────────────────────────────────
+
+- type: entity
+  id: DuelStartTimer
+  parent: ScreenTimer
+  name: duel start timer
+  suffix: Duel Arena
+  description: Таймер обратного отсчёта перед началом дуэли.
+  components:
+  - type: SignalTimer
+    delay: 5
+    canEditLabel: false
+  - type: DeviceLinkSink
+    ports:
+      - Trigger
+  - type: AutoLinkReceiver
+    channel: DuelStart
+  - type: DeviceLinkSource
+    ports:
+      - Start
+      - Timer
+  - type: AutoLinkTransmitter
+    channel: DuelFight
+
+# ── Кнопка старта ────────────────────────────────────────────────────────────
+
+- type: entity
+  id: DuelStartButton
+  parent: SignalButton
+  name: duel start button
+  suffix: Duel Arena
+  description: Запускает обратный отсчёт и открывает барьеры арены.
+  components:
+  - type: DeviceLinkSource
+    ports:
+      - Pressed
+    range: 200
+  - type: AutoLinkTransmitter
+    channel: DuelStart
+
+# ── Звуковой эмиттер ─────────────────────────────────────────────────────────
+
+- type: entity
+  id: DuelStartSoundEmitter
+  parent: MarkerBase
+  name: Duel Sound Emitter
+  suffix: Duel Arena
+  description: Невидимая сущность. Воспроизводит колокол на весь сервер при старте дуэли.
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+  - type: DeviceLinkSink
+    ports:
+      - Trigger
+  - type: AutoLinkReceiver
+    channel: DuelFight
+  - type: EmitGlobalSoundOnSignal
+    sound:
+      path: /Audio/Effects/church_bell3.ogg
+    params:
+      volume: 0
+
+# ── Кнопка сброса ────────────────────────────────────────────────────────────
+
+- type: entity
+  id: DuelResetButton
+  parent: SignalButton
+  name: duel reset button
+  suffix: Duel Arena
+  description: Закрывает барьеры арены после окончания дуэли. Готовит арену к следующему поединку.
+  components:
+  - type: DeviceLinkSource
+    ports:
+      - Pressed
+    range: 200
+  - type: AutoLinkTransmitter
+    channel: DuelReset

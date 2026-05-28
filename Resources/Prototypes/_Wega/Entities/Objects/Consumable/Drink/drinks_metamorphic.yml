@@ -1,0 +1,13 @@
+- type: entity
+  parent: DrinkMilkshake
+  id: DrinkTrueMilkshakeFilled
+  name: true milkshake
+  description: A thick, creamy milkshake. Looks suspiciously perfect.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: TrueMilkshake
+          Quantity: 30
