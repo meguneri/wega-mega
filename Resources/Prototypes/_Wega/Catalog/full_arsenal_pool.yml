@@ -3624,6 +3624,28 @@
   - FullArsenalGrenade
 
 - type: listing
+  id: FullArsenalGrenadeClusterBang
+  name: full-arsenal-grenade-cluster-bang-name
+  description: full-arsenal-grenade-cluster-bang-desc
+  productEntity: ClusterBang
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalGrenade
+
+- type: listing
+  id: FullArsenalGrenadeClusterBangFull
+  name: full-arsenal-grenade-cluster-bang-full-name
+  description: full-arsenal-grenade-cluster-bang-full-desc
+  productEntity: ClusterBangFull
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalGrenade
+
+- type: listing
   id: FullArsenalSyndieMiniBomb
   name: full-arsenal-syndie-minibomb-name
   description: full-arsenal-syndie-minibomb-desc

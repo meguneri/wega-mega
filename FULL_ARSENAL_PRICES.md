@@ -311,6 +311,27 @@
 
 ---
 
+## Гранаты (лимит 3 за открытие)
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Светошумовая | `GrenadeFlashBang` | 1 TC |
+| Слезоточивый газ | `TearGasGrenade` | 1 TC |
+| ЭМИ | `EmpGrenade` | 2 TC |
+| Дубинка-граната | `GrenadeBaton` | 2 TC |
+| Клинада | `GrenadeCleanade` | 1 TC |
+| Осколочная | `ExGrenade` | 3 TC |
+| Шрапнельная | `GrenadeShrapnel` | 3 TC |
+| Зажигательная | `GrenadeIncendiary` | 3 TC |
+| Кассетная светошумовая | `ClusterBang` | 3 TC |
+| Святая ручная граната | `HolyHandGrenade` | 3 TC |
+| Кассетная | `ClusterGrenade` | 4 TC |
+| Кассетная светошумовая (полная) | `ClusterBangFull` | 4 TC |
+| Мини-бомба синдиката | `SyndieMiniBomb` | 4 TC |
+| Хитрая бомба синдиката | `SyndieTrickyBomb` | 5 TC |
+
+---
+
 ## Импланты
 
 | Предмет | Entity | Цена |
