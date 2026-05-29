@@ -589,16 +589,6 @@
   - FullArsenal
   - FullArsenalArmor
 
-- type: listing
-  id: FullArsenalVestDetective
-  name: full-arsenal-vest-detective-name
-  description: full-arsenal-vest-detective-desc
-  productEntity: ClothingOuterVestDetective
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalCoatDetective
@@ -2118,16 +2108,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalSyndiHypo
-  name: full-arsenal-syndi-hypo-name
-  description: full-arsenal-syndi-hypo-desc
-  productEntity: SyndiHypo
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalStimpack
   name: full-arsenal-stimpack-name
   description: full-arsenal-stimpack-desc
@@ -2162,16 +2142,6 @@
   name: full-arsenal-hypospray-name
   description: full-arsenal-hypospray-desc
   productEntity: Hypospray
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalSyndiHypo
-  name: full-arsenal-syndi-hypo-name
-  description: full-arsenal-syndi-hypo-desc
-  productEntity: SyndiHypo
   cost:
     Telecrystal: 2
   categories:
@@ -3373,17 +3343,6 @@
   productEntity: ClothingOuterArmorCentcommCarapace
   cost:
     Telecrystal: 6
-  categories:
-  - FullArsenal
-  - FullArsenalArmor
-
-- type: listing
-  id: FullArsenalVestDetective
-  name: full-arsenal-vest-detective-name
-  description: full-arsenal-vest-detective-desc
-  productEntity: ClothingOuterVestDetective
-  cost:
-    Telecrystal: 3
   categories:
   - FullArsenal
   - FullArsenalArmor
