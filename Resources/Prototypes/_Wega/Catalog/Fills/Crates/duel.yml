@@ -4,7 +4,7 @@
 #
 # Лут рандомный — 5 независимых слотов (orGroup):
 #   Medicine    — всегда один предмет из полного пула медицины
-#   Ammo        — всегда один тип боеприпасов
+#   Ammo        — два независимых случайных типа боеприпасов
 #   Utility     — зарядник / дымовуха / флэш / стимпак или ничего (~17%)
 #   Melee       — холодное оружие или ничего (~14%)
 #
@@ -101,7 +101,7 @@
         orGroup: Medicine
         prob: 1
 
-      # ── Боеприпасы (всегда один тип) ───────────────────────────────────────
+      # ── Боеприпасы (два независимых случайных типа) ────────────────────────
       # Пистолетные
       - id: MagazineBoxPistol
         orGroup: Ammo
@@ -171,6 +171,71 @@
         prob: 1
       - id: BoxShotgunUranium
         orGroup: Ammo
+        prob: 1
+
+      # Второй независимый слот патронов
+      - id: MagazineBoxPistol
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxPistolIncendiary
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxPistolUranium
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxMagnum
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxMagnumAP
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxMagnumIncendiary
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxMagnumUranium
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxRifle
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxRifleBig
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxRifleIncendiary
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxRifleUranium
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxLightRifle
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxLightRifleBig
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxLightRifleIncendiary
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxLightRifleUranium
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxCaselessRifle
+        orGroup: Ammo2
+        prob: 1
+      - id: MagazineBoxAntiMateriel
+        orGroup: Ammo2
+        prob: 1
+      - id: BoxLethalshot
+        orGroup: Ammo2
+        prob: 1
+      - id: BoxShotgunSlug
+        orGroup: Ammo2
+        prob: 1
+      - id: BoxShotgunIncendiary
+        orGroup: Ammo2
+        prob: 1
+      - id: BoxShotgunUranium
+        orGroup: Ammo2
         prob: 1
 
       # ── Утилита (или ничего — ~17%) ─────────────────────────────────────────

@@ -1,0 +1,36 @@
+# Счётчик убийств дуэльной арены.
+#
+# Схема сигналов (AutoLink — ручная настройка не нужна):
+#
+#   DuelStartTimer ──[DuelFight]──► DuelKillTracker  (активация, обнуление счёта)
+#   DuelResetButton ──[DuelReset]──► DuelKillTracker (сброс счёта, деактивация)
+#
+# Размещение на карте:
+#   - один экземпляр в любом месте арены (невидимый, как DuelStartSoundEmitter)
+#   - range: 20 — подбери под размер твоей арены
+
+- type: entity
+  name: Duel Kill Tracker
+  id: DuelKillTracker
+  parent: MarkerBase
+  description: Невидимая сущность. Считает убийства внутри арены и объявляет счёт в чат.
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+  - type: DuelKillTracker
+    range: 100
+    sender: "Арена"
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Toggle
+  - type: AutoLinkReceiver
+    channels:
+      - DuelFight
+      - DuelReset
