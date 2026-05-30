@@ -65,7 +65,7 @@ public sealed partial class SurgerySystem
 
             if (categoryId.Contains("Leg"))
             {
-                if (!HasComp<BodyComponent>(ent))
+                if (!HasComp<BodyComponent>(ent) || Terminating(ent))
                     return;
                 _stun.TryKnockdown(ent.Owner, TimeSpan.FromSeconds(2f), true, false);
             }
