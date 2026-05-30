@@ -11,3 +11,19 @@
       FullArsenalHead: 1
       FullArsenalGrenade: 3
       FullArsenalAmmo: 4
+
+- type: entity
+  parent: [ CrateSyndicate, StorePresetMeleeArsenal, BaseSyndicateContraband ]
+  id: CrateSyndicateMeleeArsenal
+  name: uplink-melee-arsenal-bundle-name
+  description: uplink-melee-arsenal-bundle-desc
+  components:
+  - type: SurplusBundle
+    totalPrice: 40
+    categoryLimits:
+      MeleeArsenalArmor: 2
+      MeleeArsenalHead: 1
+      MeleeArsenalGrenade: 3
+    # Гарантируем минимум одно оружие ближнего боя в каждом ящике.
+    guaranteedCategories:
+      - MeleeArsenalWeapon

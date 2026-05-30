@@ -3,3 +3,9 @@
   name: signal-port-name-surgery-table-sender
   description: signal-port-description-surgery-table-sender
   defaultLinks: [ SurgeryTableReceiver ]
+
+- type: sourcePort
+  id: DuelEnded
+  name: signal-port-name-duel-ended
+  description: signal-port-description-duel-ended
+  defaultLinks: [ Close ]

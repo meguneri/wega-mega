@@ -438,3 +438,18 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkMeleeArsenalBundle
+  name: uplink-melee-arsenal-bundle-name
+  description: uplink-melee-arsenal-bundle-desc
+  productEntity: CrateSyndicateMeleeArsenal
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle

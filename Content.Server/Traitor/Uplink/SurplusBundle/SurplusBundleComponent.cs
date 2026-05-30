@@ -18,4 +18,12 @@ public sealed partial class SurplusBundleComponent : Component
     /// </summary>
     [DataField]
     public Dictionary<string, int> CategoryLimits = new();
+
+    /// <summary>
+    ///     Categories from which at least one item is guaranteed to be picked before the
+    ///     regular random fill, as long as the budget allows. Used, for example, to ensure
+    ///     a melee arena crate always contains at least one melee weapon.
+    /// </summary>
+    [DataField]
+    public List<string> GuaranteedCategories = new();
 }

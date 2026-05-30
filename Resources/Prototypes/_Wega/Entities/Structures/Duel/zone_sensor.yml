@@ -1,0 +1,33 @@
+- type: entity
+  parent: MarkerBase
+  id: DuelZoneSensor
+  name: zone player sensor
+  description: Sends a High signal while at least one living player is within the detection radius. Connect two sensors via LogicGateAnd to automatically close duel airlocks when both duelists are in position.
+  suffix: Duel, Zone Sensor
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Corvax/Markers/environment.rsi
+      state: base-blue
+      shader: unshaded
+    - sprite: Corvax/Markers/environment.rsi
+      shader: unshaded
+      state: portal
+  - type: ZonePlayerSensor
+    range: 1.5
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+    - Output
+    lastSignals:
+      Output: false
+  - type: DeviceLinkSink
+    ports:
+    - Reset
+  - type: AutoLinkReceiver
+    channel: DuelReset

@@ -158,6 +158,26 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalFireAxeFlaming
+  name: full-arsenal-fire-axe-flaming-name
+  description: full-arsenal-fire-axe-flaming-desc
+  productEntity: FireAxeFlaming
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBaguette
+  name: full-arsenal-baguette-name
+  description: full-arsenal-baguette-desc
+  productEntity: WeaponBaguette
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalCombatKnife
   name: full-arsenal-combat-knife-name
   description: full-arsenal-combat-knife-desc
@@ -302,6 +322,16 @@
   productEntity: WeaponSubMachineGunDrozd
   cost:
     Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSMGDonksoft
+  name: full-arsenal-smg-donksoft-name
+  description: full-arsenal-smg-donksoft-desc
+  productEntity: WeaponSubMachineGunDonksoft
+  cost:
+    Telecrystal: 1
   categories:
   - FullArsenal
 
@@ -2090,17 +2120,6 @@
   categories:
   - FullArsenal
 
-# uplink price: 2 TC
-- type: listing
-  id: FullArsenalImplantMicroBomb
-  name: full-arsenal-implant-microbomb-name
-  description: full-arsenal-implant-microbomb-desc
-  productEntity: MicroBombImplanter
-  cost:
-    Telecrystal: 4
-  categories:
-  - FullArsenal
-
 # ── GADGETS & TOOLS ───────────────────────────────────────────────────────────
 
 # uplink price: 5 TC
@@ -3657,17 +3676,6 @@
   - FullArsenalGrenade
 
 - type: listing
-  id: FullArsenalGrenadeClusterBang
-  name: full-arsenal-grenade-cluster-bang-name
-  description: full-arsenal-grenade-cluster-bang-desc
-  productEntity: ClusterBang
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-  - FullArsenalGrenade
-
-- type: listing
   id: FullArsenalGrenadeClusterBangFull
   name: full-arsenal-grenade-cluster-bang-full-name
   description: full-arsenal-grenade-cluster-bang-full-desc
@@ -4696,17 +4704,6 @@
   categories:
   - FullArsenal
 
-# uplink price: 5 TC (super taser)
-- type: listing
-  id: FullArsenalTaserSuper
-  name: full-arsenal-taser-super-name
-  description: full-arsenal-taser-super-desc
-  productEntity: WeaponTaserSuper
-  cost:
-    Telecrystal: 10
-  categories:
-  - FullArsenal
-
 # ── ADDITIONAL FIREARMS ───────────────────────────────────────────────────────
 
 # wega military SMG; available via security voucher
@@ -4719,18 +4716,6 @@
     Telecrystal: 6
   categories:
   - FullArsenal
-
-# compact LMG variant
-- type: listing
-  id: FullArsenalLMGL6C
-  name: full-arsenal-lmg-l6c-name
-  description: full-arsenal-lmg-l6c-desc
-  productEntity: WeaponLightMachineGunL6C
-  cost:
-    Telecrystal: 10
-  categories:
-  - FullArsenal
-
 
 # AP variant of Python
 - type: listing
@@ -4914,16 +4899,6 @@
   productEntity: WeaponDeathBlade
   cost:
     Telecrystal: 7
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalDeathDagger
-  name: full-arsenal-death-dagger-name
-  description: full-arsenal-death-dagger-desc
-  productEntity: WeaponDeathDagger
-  cost:
-    Telecrystal: 5
   categories:
   - FullArsenal
 

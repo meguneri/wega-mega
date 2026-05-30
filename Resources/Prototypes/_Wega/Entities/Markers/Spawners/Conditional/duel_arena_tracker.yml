@@ -13,13 +13,27 @@
   - type: Sprite
     layers:
       - state: blue
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
   - type: DeviceLinkSink
     ports:
       - Open
       - Toggle
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+      - DuelEnded
+    lastSignals:
+      DuelEnded: false
   - type: AutoLinkReceiver
     channels:
       - DuelFight
       - DuelReset
+  - type: AutoLinkTransmitter
+    channel: DuelReset
   - type: DuelArena
-    scanRange: 12
+    # Радиус в тайлах — должен покрывать всю арену. Ставь трекер в центр.
+    scanRange: 200

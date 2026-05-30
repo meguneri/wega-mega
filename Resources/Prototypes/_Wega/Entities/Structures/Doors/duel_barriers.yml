@@ -30,6 +30,8 @@
   suffix: Duel Arena
   description: Бронированный барьер, разделяющий дуэлянтов до начала поединка.
   components:
+  - type: Door
+    state: Closed
   - type: DeviceLinkSink
     ports:
       - Open

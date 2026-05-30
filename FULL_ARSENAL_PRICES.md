@@ -27,6 +27,8 @@
 | Магмитовая глефа-дробилка | `WeaponMagmiteCrusherGlaive` | 6 TC |
 | Мачете | `Machete` | 1 TC |
 | Пожарный топор | `FireAxe` | 1 TC |
+| Пылающий пожарный топор | `FireAxeFlaming` | 4 TC |
+| Багет | `WeaponBaguette` | 2 TC |
 | Боевой нож | `CombatKnife` | 1 TC |
 | Катласс | `Cutlass` | 2 TC |
 | Энергетический кинжал | `EnergyDagger` | 2 TC |
@@ -37,7 +39,6 @@
 | Нулевой жезл | `WeaponNullRod` | 2 TC |
 | Силовой меч | `WeaponForceSword` | 5 TC |
 | Дробилка | `WeaponCrusher` | 5 TC |
-| Кинжал смерти | `WeaponDeathDagger` | 5 TC |
 | Цепной меч | `WeaponChainsword` | 6 TC |
 | Сталь Хандзо | `WeaponHanzoSteel` | 6 TC |
 | Клинок смерти | `WeaponDeathBlade` | 7 TC |
@@ -63,6 +64,7 @@
 | Пистолет CHIMP | `WeaponPistolCHIMP` | 4 TC |
 | Пульсар | `WeaponEnergyPulsar` | 4 TC |
 | Револьвер Python | `WeaponRevolverPython` | 4 TC |
+| Инспектор | `WeaponRevolverInspector` | 3 TC |
 | Револьвер Mateba | `WeaponRevolverMateba` | 4 TC |
 | Улучшенный лазер | `WeaponAdvancedLaser` | 5 TC |
 | Энергетический арбалет | `WeaponEnergyCrossbow` | 5 TC |
@@ -80,6 +82,7 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | ПП Дрозд | `WeaponSubMachineGunDrozd` | 4 TC |
+| ПП Donksoft | `WeaponSubMachineGunDonksoft` | 1 TC |
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
 | ПП C-20r | `WeaponSubMachineGunC20r` | 10 TC |
@@ -341,7 +344,6 @@
 | Имплант свободы | `FreedomImplanter` | 2 TC |
 | Имплант SCRAM | `ScramImplanter` | 2 TC |
 | ЭМИ-имплант | `EmpImplanter` | 2 TC |
-| Микробомба | `MicroBombImplanter` | 4 TC |
 | Хранилище (имплант) | `StorageImplanter` | 6 TC |
 
 ---

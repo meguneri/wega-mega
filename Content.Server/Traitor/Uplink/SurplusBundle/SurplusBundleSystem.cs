@@ -53,6 +53,31 @@ public sealed class SurplusBundleSystem : EntitySystem
             return ret;
 
         var totalCost = FixedPoint2.Zero;
+
+        // Guaranteed picks: ensure at least one item from each guaranteed category (budget permitting).
+        foreach (var category in ent.Comp1.GuaranteedCategories)
+        {
+            var remainingBudget = ent.Comp1.TotalPrice - totalCost;
+
+            var eligible = listings
+                .Where(l => l.Categories.Any(c => c.Id == category) &&
+                            l.Cost.Values.Sum() <= remainingBudget &&
+                            !ExceedsCategoryLimit(l, ent.Comp1.CategoryLimits, categoryCounts))
+                .ToList();
+
+            if (eligible.Count == 0)
+                continue;
+
+            var guaranteed = eligible[_random.Next(0, eligible.Count)];
+            ret.Add(guaranteed);
+            totalCost += guaranteed.Cost.Values.Sum();
+
+            foreach (var cat in guaranteed.Categories)
+                categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
+
+            listings.Remove(guaranteed);
+        }
+
         while (totalCost < ent.Comp1.TotalPrice)
         {
             var remainingBudget = ent.Comp1.TotalPrice - totalCost;

@@ -117,6 +117,33 @@
   name: store-category-full-arsenal-ammo
   priority: 4
 
+#melee arsenal crate pool
+- type: storeCategory
+  id: MeleeArsenal
+  name: store-category-full-arsenal
+  priority: 0
+
+- type: storeCategory
+  id: MeleeArsenalArmor
+  name: store-category-full-arsenal-armor
+  priority: 1
+
+- type: storeCategory
+  id: MeleeArsenalHead
+  name: store-category-full-arsenal-head
+  priority: 2
+
+- type: storeCategory
+  id: MeleeArsenalGrenade
+  name: store-category-full-arsenal-grenade
+  priority: 3
+
+# Оружие ближнего боя — используется для гарантированной выдачи минимум одного клинка в MeleeArsenal.
+- type: storeCategory
+  id: MeleeArsenalWeapon
+  name: store-category-full-arsenal
+  priority: 0
+
  #revolution
 - type: storeCategory
   id: RevolutionSupport
