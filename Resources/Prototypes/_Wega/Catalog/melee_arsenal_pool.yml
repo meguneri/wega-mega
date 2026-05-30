@@ -1,7 +1,7 @@
 # Melee Arsenal pool — same as Full Arsenal but with all ranged weapons removed.
 # Only melee weapons, armor, utility, shields, grenades, and support items.
 
-MELEE
+# ── MELEE ────────────────────────────────
 
 - type: listing
   id: MeleeArsenalSaw
@@ -267,7 +267,7 @@ MELEE
   - MeleeArsenal
   - MeleeArsenalWeapon
 
-ARMOR
+# ── ARMOR ────────────────────────────────
 
 - type: listing
   id: MeleeArsenalArmorBasic
@@ -1083,7 +1083,7 @@ ARMOR
   - MeleeArsenal
   - MeleeArsenalArmor
 
-UTILITY
+# ── UTILITY ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalFlashlight
@@ -1116,7 +1116,7 @@ UTILITY
   - MeleeArsenal
 
 
-SHIELDS
+# ── SHIELDS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalRiotShield
@@ -1258,7 +1258,7 @@ SHIELDS
   categories:
   - MeleeArsenal
 
-WEAPON BUNDLES (меле и поддержка)
+# ── WEAPON BUNDLES (меле и поддержка) ──────────────────
 
 - type: listing
   id: MeleeArsenalRapierSyndie
@@ -1370,7 +1370,7 @@ WEAPON BUNDLES (меле и поддержка)
   categories:
   - MeleeArsenal
 
-IMPLANTS
+# ── IMPLANTS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalImplantStorage
@@ -1412,7 +1412,7 @@ IMPLANTS
   categories:
   - MeleeArsenal
 
-GADGETS & TOOLS
+# ── GADGETS & TOOLS ─────────────────────────────
 
 - type: listing
   id: MeleeArsenalStealthBox
@@ -1535,7 +1535,7 @@ GADGETS & TOOLS
   categories:
   - MeleeArsenal
 
-MOD СКАФАНДРЫ
+# ── MOD СКАФАНДРЫ ──────────────────────────
 
 - type: listing
   id: MeleeArsenalModSuitEngineering
@@ -1614,7 +1614,7 @@ MOD СКАФАНДРЫ
   - MeleeArsenal
   - MeleeArsenalArmor
 
-TRINKETS & FUN
+# ── TRINKETS & FUN ─────────────────────────────
 
 - type: listing
   id: MeleeArsenalSoapSyndie
@@ -1756,7 +1756,7 @@ TRINKETS & FUN
   categories:
   - MeleeArsenal
 
-MEDICAL SUPPLIES
+# ── MEDICAL SUPPLIES ────────────────────────────
 
 - type: listing
   id: MeleeArsenalBrutepack
@@ -2138,7 +2138,7 @@ MEDICAL SUPPLIES
   categories:
   - MeleeArsenal
 
-BACKPACKS
+# ── BACKPACKS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalBackpackSyndicate
@@ -2190,7 +2190,7 @@ BACKPACKS
   categories:
   - MeleeArsenal
 
-UNIFORMS
+# ── UNIFORMS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalUniformOperative
@@ -2232,7 +2232,7 @@ UNIFORMS
   categories:
   - MeleeArsenal
 
-MAGBOOTS
+# ── MAGBOOTS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalNoSlipShoes
@@ -2304,7 +2304,7 @@ MAGBOOTS
   categories:
   - MeleeArsenal
 
-NEW MELEE WEAPONS
+# ── NEW MELEE WEAPONS ────────────────────────────
 
 - type: listing
   id: MeleeArsenalSledgehammer
@@ -2471,7 +2471,7 @@ NEW MELEE WEAPONS
   - MeleeArsenal
   - MeleeArsenalWeapon
 
-NEW ARMOR
+# ── NEW ARMOR ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalArmorBasicSlim
@@ -2594,7 +2594,7 @@ NEW ARMOR
   - MeleeArsenal
   - MeleeArsenalArmor
 
-NEW HARDSUITS
+# ── NEW HARDSUITS ─────────────────────────────
 
 - type: listing
   id: MeleeArsenalHardsuitSpatio
@@ -2662,7 +2662,7 @@ NEW HARDSUITS
   - MeleeArsenal
   - MeleeArsenalArmor
 
-GRENADES
+# ── GRENADES ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalGrenadeFlashbang
@@ -2818,7 +2818,7 @@ GRENADES
   - MeleeArsenal
   - MeleeArsenalGrenade
 
-COMBAT GLOVES AND KNUCKLEDUSTERS
+# ── COMBAT GLOVES AND KNUCKLEDUSTERS ───────────────────────
 
 - type: listing
   id: MeleeArsenalGlovesCombat
@@ -3000,7 +3000,7 @@ COMBAT GLOVES AND KNUCKLEDUSTERS
   categories:
   - MeleeArsenal
 
-SPELLBOOKS (physical)
+# ── SPELLBOOKS (physical) ───────────────────────────
 
 - type: listing
   id: MeleeArsenalSpellbookBlink
@@ -3062,7 +3062,7 @@ SPELLBOOKS (physical)
   categories:
   - MeleeArsenal
 
-HELMETS
+# ── HELMETS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalHardhatArmored
@@ -3328,7 +3328,7 @@ HELMETS
   - MeleeArsenal
   - MeleeArsenalHead
 
-GAS MASKS
+# ── GAS MASKS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalMaskGas
@@ -3418,7 +3418,7 @@ GAS MASKS
   - MeleeArsenal
   - MeleeArsenalHead
 
-FUN HATS
+# ── FUN HATS ───────────────────────────────
 
 - type: listing
   id: MeleeArsenalHatWatermelon
@@ -3430,7 +3430,7 @@ FUN HATS
   categories:
   - MeleeArsenal
 
-ADDITIONAL MELEE
+# ── ADDITIONAL MELEE ────────────────────────────
 
 - type: listing
   id: MeleeArsenalHighFrequencyBlade
