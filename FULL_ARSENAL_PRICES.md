@@ -4,9 +4,17 @@
 
 Лимиты категорий за одно открытие:
 - Броня (`FullArsenalArmor`): **макс. 2**
-- Шлемы/противогазы (`FullArsenalHead`): **макс. 1**
+- Шлемы/противогазы (`FullArsenalHead`): **макс. 2**
 - Гранаты (`FullArsenalGrenade`): **макс. 3**
 - Патроны (`FullArsenalAmmo`): **макс. 4**
+- Пустые сумки/рюкзаки/вещмешки (`FullArsenalBag`): **макс. 1** (готовые комплекты-вещмешки с оружием/скафандрами сюда не входят)
+
+Броня и шлемы зафиксированы (2 / 2) во всех четырёх ящиках — с размером ящика они не растут.
+Увеличенные варианты (тот же пул, отдельные текстуры) масштабируют только гранаты/патроны:
+- `CrateSyndicateFullArsenalPlus` (аплинк **60 TC**) — бюджет до 60 TC; броня 2 / шлемы 2 / гранаты 5 / патроны 6.
+- `CrateSyndicateFullArsenalMega` (аплинк **120 TC**) — бюджет до 120 TC; броня 2 / шлемы 2 / гранаты 9 / патроны 12.
+
+⚠️ В любой ящик влезает **не более 30 предметов** (`EntityStorage.Capacity`). Генерация набора (`SurplusBundle.MaxItems = 30`) останавливается на 30 предметах, даже если бюджет не израсходован — поэтому большие ящики не всегда тратят весь лимит ТК, но и не сыплют лишнее на пол.
 
 Цены калиброваны по аплинку: предметы из аплинка = цена аплинка; предметы из бандлей ≈ цена бандля минус ~2 TC за упаковку.
 
@@ -33,10 +41,11 @@
 | Катласс | `Cutlass` | 2 TC |
 | Энергетический кинжал | `EnergyDagger` | 2 TC |
 | Катана | `Katana` | 3 TC |
-| Сабля капитана | `CaptainSabre` | 3 TC |
+| Энергокатана ниндзя | `EnergyKatana` | 9 TC |
+| Сабля капитана (с ножнами) | `ClothingBeltSheathFilled` | 3 TC |
 | Проклятая катана | `WeaponCursedKatana` | 4 TC |
 | Клеймор | `Claymore` | 4 TC |
-| Нулевой жезл | `WeaponNullRod` | 2 TC |
+| Нулевой жезл (с ножнами) | `ClothingBeltSheathChaplinFilled` | 2 TC |
 | Силовой меч | `WeaponForceSword` | 5 TC |
 | Дробилка | `WeaponCrusher` | 5 TC |
 | Цепной меч | `WeaponChainsword` | 6 TC |
@@ -45,7 +54,7 @@
 | Высокочастотный клинок | `WeaponHighFrequencyBlade` | 7 TC |
 | Энергетический меч | `EnergySword` | 8 TC |
 | Двойной энергетический меч | `EnergySwordDouble` | 16 TC |
-| Рапира Синдиката (набор) | `BeltSheathSyndieFilledBox` | 8 TC |
+| Рапира Синдиката (с ножнами) | `ClothingBeltSheathSyndicateFilled` | 8 TC |
 
 ---
 
@@ -124,7 +133,8 @@
 | Снайперка Hristov МК2 | `WeaponSniperHristovAdvanced` | 12 TC |
 | Пулемёт L6 | `WeaponLightMachineGunL6` | 12 TC |
 | Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
-| Импульсная винтовка | `WeaponPulseRifle` | 35 TC |
+| Импульсный дробовик | `WeaponPulseShotgun` | 35 TC |
+| Импульсная снайперская винтовка | `WeaponPulseSniper` | 35 TC |
 
 ---
 
@@ -226,17 +236,14 @@
 | Тренч | `ClothingOuterCoatTrench` | 1 TC |
 | Доги | `ClothingOuterDogi` | 2 TC |
 | Бронированный медицинский халат | `ClothingOuterCoatAMG` | 2 TC |
+| Одеяние флаггелянта (не под лимитом брони) | `ClothingOuterFlagellantRobe` | 2 TC |
 
 ### Скафандры
 
 | Предмет | Entity | Цена |
 |---|---|---|
-| Карп | `ClothingOuterHardsuitCarp` | 2 TC |
-| Клоун | `ClothingOuterHardsuitClown` | 3 TC |
-| Мим | `ClothingOuterHardsuitMime` | 3 TC |
 | EVA | `ClothingOuterHardsuitEVA` | 3 TC |
 | Инженерный | `ClothingOuterHardsuitEngineering` | 4 TC |
-| Санта | `ClothingOuterHardsuitSanta` | 5 TC |
 | Синдикат (базовый) | `ClothingOuterHardsuitSyndie` | 7 TC |
 | ERT Уборщик | `ClothingOuterHardsuitERTJanitor` | 5 TC |
 | Инженерный (белый) | `ClothingOuterHardsuitEngineeringWhite` | 6 TC |
@@ -273,12 +280,28 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
+| МОД Стандартный | `ClothingModularControllerStandardPreassembled` | 3 TC |
+| МОД Гражданский | `ClothingModularControllerCivilianPreassembled` | 3 TC |
+| МОД Космохонк | `ClothingModularControllerCosmohonkPreassembled` | 3 TC |
+| МОД Погрузочный | `ClothingModularControllerLoaderPreassembled` | 4 TC |
+| МОД Прототип | `ClothingModularControllerPrototypePreassembled` | 4 TC |
+| МОД Шахтёрский | `ClothingModularControllerMiningPreassembled` | 4 TC |
+| МОД Атмосферный | `ClothingModularControllerAtmosphericPreassembled` | 6 TC |
+| МОД Астероидный | `ClothingModularControllerAsteroidPreassembled` | 6 TC |
+| МОД Научный | `ClothingModularControllerResearchPreassembled` | 6 TC |
+| МОД Синдикат | `ClothingModularControllerSyndicatePreassembled` | 7 TC |
 | МОД Инженерный | `ClothingModularControllerEngineeringPreassembled` | 8 TC |
+| МОД Продвинутый | `ClothingModularControllerAdvancedPreassembled` | 8 TC |
+| МОД Магнатский | `ClothingModularControllerMagnatePreassembled` | 8 TC |
 | МОД Охрана | `ClothingModularControllerSecurityPreassembled` | 10 TC |
 | МОД Медицинский | `ClothingModularControllerMedicalPreassembled` | 10 TC |
-| МОД Синдикат | `ClothingModularControllerSyndicatePreassembled` | 12 TC |
-| МОД Элита | `ClothingModularControllerElitePreassembled` | 15 TC |
-| МОД Апокрифический | `ClothingModularControllerApocryphalPreassembled` | 25 TC |
+| МОД Спасательный | `ClothingModularControllerRescuePreassembled` | 11 TC |
+| МОД Элита | `ClothingModularControllerElitePreassembled` | 12 TC |
+| МОД Страж | `ClothingModularControllerSafeguardPreassembled` | 12 TC |
+| МОД Ответный (ОБР) | `ClothingModularControllerResponsoryPreassembled` | 12 TC |
+| МОД Инквизиторский | `ClothingModularControllerInquisitoryPreassembled` | 12 TC |
+| МОД Корпоративный | `ClothingModularControllerCorporatePreassembled` | 14 TC |
+| МОД Апокрифический | `ClothingModularControllerApocryphalPreassembled` | 35 TC |
 
 ---
 
@@ -313,6 +336,8 @@
 | Фонарик | `FlashlightSeclite` | 1 TC |
 | Дымовая граната | `SmokeGrenade` | 1 TC |
 | Флэш | `Flash` | 1 TC |
+| Омега-мыло | `SoapOmega` | 2 TC |
+| Одноразовая баллистическая турель | `ToolboxElectricalTurretFilled` | 4 TC |
 
 ---
 
@@ -410,7 +435,6 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Снайперский набор | `BriefcaseSyndieSniperBundleFilled` | 6 TC |
-| Чемодан China Lake | `BriefcaseWeaponChinaLakeFilled` | 14 TC |
 | Чемодан-автомат (C-20K) | `WeaponSubMachineGunBriefcase` | 10 TC |
 | Набор лоббиста | `BriefcaseSyndieLobbyingBundleFilled` | 2 TC |
 
@@ -440,7 +464,25 @@
 | РПС шахтёра | `ClothingBeltSalvageWebbing` | 2 TC |
 | РПС охраны | `ClothingBeltSecurityWebbing` | 2 TC |
 | Вещмешок костюм клоуна | `ClothingBackpackDuffelSyndicateCostumeClown` | 1 TC |
-| Вещмешок костюм карпа | `ClothingBackpackDuffelSyndicateCarpSuit` | 1 TC |
+
+---
+
+## Пустые сумки и рюкзаки (лимит 1 за открытие — `FullArsenalBag`, все по 1 TC)
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Рюкзак Синдиката | `ClothingBackpackSyndicate` | 1 TC |
+| Вещмешок Синдиката | `ClothingBackpackDuffelSyndicate` | 1 TC |
+| Рюкзак охраны | `ClothingBackpackSecurity` | 1 TC |
+| Рюкзак наёмника | `ClothingBackpackMerc` | 1 TC |
+| Рюкзак | `ClothingBackpack` | 1 TC |
+| Кожаная сумка | `ClothingBackpackSatchelLeather` | 1 TC |
+| Сумка | `ClothingBackpackSatchel` | 1 TC |
+| Вещмешок | `ClothingBackpackDuffel` | 1 TC |
+
+Не считаются «сумкой» (отдельный слот, под лимит не идут):
+- Кожаная поясная сумка | `ClothingBeltStorageWaistbag` | 1 TC — слот пояса.
+- Скороходы (с заряженной малой батареей) | `ClothingShoesBootsSpeedFilled` | 4 TC — **только в FullArsenal-ящиках**, не в мелейном. Батарею можно вынуть, на ходу разряжается.
 
 ---
 
@@ -507,6 +549,7 @@
 | Кошачьи ушки | `ClothingHeadHatCatEars` | 26 TC |
 | Элегантное платье горничной | `ClothingUniformJumpskirtElegantMaid` | 30 TC |
 | Кубик судьбы | `DiceOfFate` | 10 TC |
+| Кость войны (боевой d20) | `DiceOfWar` | 10 TC |
 | Пистолет-пугач | `RevolverCapGun` | 10 TC |
 | Пистолет-пугач (фальшивый) | `RevolverCapGunFake` | 10 TC |
 | Игрушечный световой меч | `ToySword` | 8 TC |
@@ -524,5 +567,4 @@
 | Стена силы | `ForceWallSpellbook` | 10 TC |
 | Руны | `ScrollRunes` | 10 TC |
 | Огненный шар | `FireballSpellbook` | 10 TC |
-| Удар молнии (Smite) | `SmiteBook` | 10 TC |
 | Гримуар волшебника | `WizardsGrimoireNoRefund` | 30 TC |

@@ -9,6 +9,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
@@ -75,13 +76,32 @@ public sealed class DiceOfFateSystem : EntitySystem
     private static readonly EntProtoId Toolbox = "ToolboxThief";
     private static readonly EntProtoId Cash = "SpaceCash10000";
 
+    // ── Arena table ──────────────────────────────────────────────────────────
+    private static readonly ProtoId<DamageModifierSetPrototype> ArenaArmorMod = "DiceOfFateMod"; // 0.5x damage taken
+    private static readonly EntProtoId CombatMedkit = "MedkitCombatFilled";
+    private static readonly EntProtoId Stim = "Stimpack";
+    private static readonly EntProtoId MiniStim = "StimpackMini";
+    private static readonly EntProtoId ArmorVest = "ClothingOuterArmorBasic";
+    private static readonly EntProtoId Shield = "EnergyShield";
+    private static readonly EntProtoId StrongWeapon = "EnergySword";
+    private static readonly EntProtoId[] ArenaWeapons =
+    {
+        "WeaponPistolViper",
+        "Cutlass",
+        "Machete",
+        "WeaponRevolverInspector",
+        "EnergyDagger",
+    };
+
+    private const float ArenaBuffSeconds = 30f;
+
     private void OnUseInHand(Entity<DiceOfFateComponent> entity, ref UseInHandEvent args)
     {
         if (!TryComp<DiceComponent>(entity, out var dice) || entity.Comp.Used)
             return;
 
         entity.Comp.Used = true;
-        RollFate(args.User, dice.CurrentValue);
+        RollFate(args.User, dice.CurrentValue, entity.Comp.Arena);
         Timer.Spawn(TimeSpan.FromSeconds(1), () => { QueueDel(entity); }); // So that you can see the number
     }
 
@@ -92,13 +112,22 @@ public sealed class DiceOfFateSystem : EntitySystem
             return;
 
         entity.Comp.Used = true;
-        RollFate(args.User.Value, dice.CurrentValue);
+        RollFate(args.User.Value, dice.CurrentValue, entity.Comp.Arena);
         Timer.Spawn(TimeSpan.FromSeconds(1), () => { QueueDel(entity); }); // So that you can see the number
     }
 
-    public void RollFate(EntityUid user, int value)
+    public void RollFate(EntityUid user, int value, bool arena = false)
     {
-        var success = value switch
+        var success = arena
+            ? RollArena(user, value)
+            : RollClassic(user, value);
+
+        _admin.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(user):user} rolls dice of fate (arena: {arena}): outcome '{success}', number {value}.");
+    }
+
+    private bool RollClassic(EntityUid user, int value)
+    {
+        return value switch
         {
             1 => CompleteAnnihilation(user),
             2 => InstantDeath(user),
@@ -122,8 +151,6 @@ public sealed class DiceOfFateSystem : EntitySystem
             20 => BecomeWizard(user),
             _ => NothingHappens(user)
         };
-
-        _admin.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(user):user} rools fade is '{success}', got nimber {value}.");
     }
 
     private bool CompleteAnnihilation(EntityUid user)
@@ -330,5 +357,161 @@ public sealed class DiceOfFateSystem : EntitySystem
 
         _antag.ForceMakeAntag<WizardRoleComponent>(actor.PlayerSession, DefaultWizardRule);
         return true;
+    }
+
+    // ── Arena table ──────────────────────────────────────────────────────────
+    // Боевой набор под дуэль: только полезные и нейтральные исходы — баффы, оружие,
+    // лечение. Негативных эффектов нет. 1 — скромно, 20 — джекпот.
+    private bool RollArena(EntityUid user, int value)
+    {
+        return value switch
+        {
+            1 => NothingHappens(user),             // ничего
+            2 => ArenaMiniStim(user),              // микроинъектор гиперзина в руки
+            3 => ArenaCombatMedkit(user),          // боевая аптечка в руки
+            4 => ArenaCombatStim(user),            // боевой стим в руки
+            5 => ArenaSpawnArmor(user),            // броня в руки
+            6 => ArenaSpawnShield(user),           // энергощит в руки
+            7 => ArenaRandomWeapon(user),          // случайное оружие в руки
+            8 => ArenaAdrenaline(user),            // бафф скорости на время
+            9 => ArenaTemporaryArmor(user),        // ×0.5 урона по себе на время
+            10 => ArenaCombatStim(user),           // боевой стим в руки
+            11 => ArenaRandomWeapon(user),         // случайное оружие в руки
+            12 => ArenaCombatMedkit(user),         // боевая аптечка в руки
+            13 => ArenaAdrenaline(user),           // бафф скорости на время
+            14 => ArenaStrongWeapon(user),         // мощное оружие в руки
+            15 => ArenaTemporaryArmor(user),       // ×0.5 урона по себе на время
+            16 => ArenaBerserk(user),              // скорость + броня на время
+            17 => ArenaStrongWeapon(user),         // мощное оружие в руки
+            18 => PermanentDamageReduction(user),  // постоянная ×0.5 броня
+            19 => ArenaWarJackpot(user),           // мощное оружие + броня на время
+            20 => ArenaMegaJackpot(user),          // постоянная броня + мощное оружие
+            _ => NothingHappens(user)
+        };
+    }
+
+    private bool ArenaSpawnArmor(EntityUid user)
+    {
+        var armor = Spawn(ArmorVest, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, armor);
+        return true;
+    }
+
+    private bool ArenaSpawnShield(EntityUid user)
+    {
+        var shield = Spawn(Shield, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, shield);
+        return true;
+    }
+
+    private bool ArenaMegaJackpot(EntityUid user)
+    {
+        PermanentDamageReduction(user);
+        var weapon = Spawn(StrongWeapon, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, weapon);
+        return true;
+    }
+
+    private bool ArenaMiniStim(EntityUid user)
+    {
+        var stim = Spawn(MiniStim, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, stim);
+        return true;
+    }
+
+    private bool ArenaCombatMedkit(EntityUid user)
+    {
+        var kit = Spawn(CombatMedkit, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, kit);
+        return true;
+    }
+
+    private bool ArenaAdrenaline(EntityUid user)
+    {
+        TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
+        return true;
+    }
+
+    private bool ArenaRandomWeapon(EntityUid user)
+    {
+        var weapon = Spawn(_random.Pick(ArenaWeapons), Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, weapon);
+        return true;
+    }
+
+    private bool ArenaTemporaryArmor(EntityUid user)
+    {
+        TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
+        return true;
+    }
+
+    private bool ArenaCombatStim(EntityUid user)
+    {
+        var stim = Spawn(Stim, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, stim);
+        return true;
+    }
+
+    private bool ArenaStrongWeapon(EntityUid user)
+    {
+        var weapon = Spawn(StrongWeapon, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, weapon);
+        return true;
+    }
+
+    private bool ArenaBerserk(EntityUid user)
+    {
+        TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
+        TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
+        return true;
+    }
+
+    private bool ArenaWarJackpot(EntityUid user)
+    {
+        TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
+        var weapon = Spawn(StrongWeapon, Transform(user).Coordinates);
+        _hands.TryForcePickupAnyHand(user, weapon);
+        return true;
+    }
+
+    /// <summary>
+    /// Временно умножает базовую скорость и возвращает исходную через <paramref name="seconds"/> секунд.
+    /// </summary>
+    private void TempSpeedMultiplier(EntityUid user, float multiplier, float seconds)
+    {
+        if (!TryComp<MovementSpeedModifierComponent>(user, out var move))
+            return;
+
+        var walk = move.BaseWalkSpeed;
+        var sprint = move.BaseSprintSpeed;
+        var accel = move.Acceleration;
+
+        _speed.ChangeBaseSpeed(user, walk * multiplier, sprint * multiplier, accel, move);
+
+        Timer.Spawn(TimeSpan.FromSeconds(seconds), () =>
+        {
+            if (Deleted(user) || !TryComp<MovementSpeedModifierComponent>(user, out var current))
+                return;
+            _speed.ChangeBaseSpeed(user, walk, sprint, accel, current);
+        });
+    }
+
+    /// <summary>
+    /// Временно ставит набор модификаторов урона и возвращает исходный через <paramref name="seconds"/> секунд.
+    /// </summary>
+    private void TempDamageMod(EntityUid user, ProtoId<DamageModifierSetPrototype> mod, float seconds)
+    {
+        if (!TryComp<DamageableComponent>(user, out var damageable))
+            return;
+
+        var original = damageable.DamageModifierSetId;
+        _damage.SetDamageModifierSetId(user, mod);
+
+        Timer.Spawn(TimeSpan.FromSeconds(seconds), () =>
+        {
+            if (Deleted(user))
+                return;
+            _damage.SetDamageModifierSetId(user, original);
+        });
     }
 }

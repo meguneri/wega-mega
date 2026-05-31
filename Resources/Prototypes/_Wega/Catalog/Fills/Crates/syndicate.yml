@@ -6,11 +6,62 @@
   components:
   - type: SurplusBundle
     totalPrice: 40
+    weightByCost: true
+    markIssuedItems: true
     categoryLimits:
       FullArsenalArmor: 2
-      FullArsenalHead: 1
+      FullArsenalHead: 2
       FullArsenalGrenade: 3
       FullArsenalAmmo: 4
+      FullArsenalBag: 1
+
+# Большой ящик полного арсенала — тот же пул, бюджет 120 ТК.
+# Броня/шлемы зафиксированы (2/2) как в обычном ящике; масштабируются только гранаты/патроны (×3).
+- type: entity
+  parent: [ CrateSyndicate, StorePresetFullArsenal, BaseSyndicateContraband ]
+  id: CrateSyndicateFullArsenalMega
+  name: uplink-full-arsenal-mega-bundle-name
+  description: uplink-full-arsenal-mega-bundle-desc
+  components:
+  # Отдельная текстура, чтобы отличать от обычного ящика арсенала.
+  - type: Icon
+    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+  - type: SurplusBundle
+    totalPrice: 120
+    weightByCost: true
+    markIssuedItems: true
+    categoryLimits:
+      FullArsenalArmor: 2
+      FullArsenalHead: 2
+      FullArsenalGrenade: 9
+      FullArsenalAmmo: 12
+      FullArsenalBag: 1
+
+# Расширенный ящик полного арсенала — тот же пул, бюджет 60 ТК.
+# Броня/шлемы зафиксированы (2/2) как в обычном ящике; масштабируются только гранаты/патроны (×1.5).
+- type: entity
+  parent: [ CrateSyndicate, StorePresetFullArsenal, BaseSyndicateContraband ]
+  id: CrateSyndicateFullArsenalPlus
+  name: uplink-full-arsenal-plus-bundle-name
+  description: uplink-full-arsenal-plus-bundle-desc
+  components:
+  # Отдельная текстура (ящик с оружием), чтобы отличать от других ящиков арсенала.
+  - type: Icon
+    sprite: Structures/Storage/Crates/weapon.rsi
+  - type: Sprite
+    sprite: Structures/Storage/Crates/weapon.rsi
+  - type: SurplusBundle
+    totalPrice: 60
+    weightByCost: true
+    markIssuedItems: true
+    categoryLimits:
+      FullArsenalArmor: 2
+      FullArsenalHead: 2
+      FullArsenalGrenade: 5
+      FullArsenalAmmo: 6
+      FullArsenalBag: 1
 
 - type: entity
   parent: [ CrateSyndicate, StorePresetMeleeArsenal, BaseSyndicateContraband ]
@@ -20,10 +71,13 @@
   components:
   - type: SurplusBundle
     totalPrice: 40
+    weightByCost: true
+    markIssuedItems: true
     categoryLimits:
       MeleeArsenalArmor: 2
-      MeleeArsenalHead: 1
+      MeleeArsenalHead: 2
       MeleeArsenalGrenade: 3
+      MeleeArsenalBag: 1
     # Гарантируем минимум одно оружие ближнего боя в каждом ящике.
     guaranteedCategories:
       - MeleeArsenalWeapon

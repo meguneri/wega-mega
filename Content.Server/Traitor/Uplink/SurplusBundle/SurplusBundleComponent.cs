@@ -13,6 +13,14 @@ public sealed partial class SurplusBundleComponent : Component
     public int TotalPrice = 20;
 
     /// <summary>
+    ///     Hard cap on the number of items generated, regardless of remaining budget.
+    ///     Keeps the bundle from overflowing the crate's storage capacity (default 30):
+    ///     extra items would otherwise fail to insert and spill onto the floor.
+    /// </summary>
+    [DataField]
+    public int MaxItems = 30;
+
+    /// <summary>
     ///     Maximum number of items allowed per store category (keyed by category ID string).
     ///     Items with any category that hits its limit are excluded from further picks.
     /// </summary>
@@ -26,4 +34,30 @@ public sealed partial class SurplusBundleComponent : Component
     /// </summary>
     [DataField]
     public List<string> GuaranteedCategories = new();
+
+    /// <summary>
+    ///     If true, item picks are weighted by cost (probability ∝ price^<see cref="CostWeightExponent"/>)
+    ///     instead of uniform. This biases the bundle toward more expensive gear, so each opening yields a
+    ///     capable loadout rather than a pile of cheap filler — used by the duel arena crates.
+    ///     Vanilla surplus crates leave this false (uniform selection).
+    /// </summary>
+    [DataField]
+    public bool WeightByCost;
+
+    /// <summary>
+    ///     Exponent applied to item price when <see cref="WeightByCost"/> is set: weight = price^exponent.
+    ///     1.0 = linear (price-proportional, strongly favours the priciest items); 0.5 = square root
+    ///     (gentle bias, keeps top-tier items a rare jackpot); 0 = uniform. Lower it for rarer big-ticket drops.
+    /// </summary>
+    [DataField]
+    public double CostWeightExponent = 0.5;
+
+    /// <summary>
+    ///     If true, every item generated into this bundle is tagged with
+    ///     <c>ArenaIssuedItemComponent</c>. Used by the duel arena crates so the arena cleanup
+    ///     deletes only crate-issued gear, leaving players' own items and map props untouched.
+    ///     Leave false for vanilla surplus crates.
+    /// </summary>
+    [DataField]
+    public bool MarkIssuedItems;
 }

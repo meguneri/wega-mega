@@ -80,7 +80,7 @@ public sealed class HideLayerClothingSystem : EntitySystem
         {
             // Only update this layer if we are currently equipped to the relevant slot.
             if (validSlots.HasFlag(inSlot))
-                _hideableHumanoidLayers.SetLayerOcclusion(user, layer, hideLayers, inSlot);
+                _hideableHumanoidLayers.SetLayerOcclusion(user, layer, hideLayers && !KeepVisible(layer), inSlot);
         }
 
         // Fallback for obsolete field: assume we want to hide **all** layers, as long as we are equipped to any
@@ -91,10 +91,14 @@ public sealed class HideLayerClothingSystem : EntitySystem
         {
             foreach (var layer in slots)
             {
-                _hideableHumanoidLayers.SetLayerOcclusion(user, layer, hideLayers, inSlot);
+                _hideableHumanoidLayers.SetLayerOcclusion(user, layer, hideLayers && !KeepVisible(layer), inSlot);
             }
         }
     }
+
+    // Wega-Edit: волосы не должны скрываться головными уборами/шлемами — слой остаётся видимым всегда.
+    private static bool KeepVisible(HumanoidVisualLayers layer)
+        => layer == HumanoidVisualLayers.Hair;
 
     private bool IsEnabled(Entity<HideLayerClothingComponent, ClothingComponent> clothing)
     {

@@ -235,10 +235,31 @@
   - MeleeArsenalWeapon
 
 - type: listing
+  id: MeleeArsenalEnergyKatana
+  name: full-arsenal-energy-katana-name
+  description: full-arsenal-energy-katana-desc
+  productEntity: EnergyKatana
+  cost:
+    Telecrystal: 9
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSoapOmega
+  name: full-arsenal-soap-omega-name
+  description: full-arsenal-soap-omega-desc
+  productEntity: SoapOmega
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
   id: MeleeArsenalCaptainSabre
   name: full-arsenal-captain-sabre-name
   description: full-arsenal-captain-sabre-desc
-  productEntity: CaptainSabre
+  productEntity: ClothingBeltSheathFilled
   cost:
     Telecrystal: 3
   categories:
@@ -677,17 +698,6 @@
   - MeleeArsenalArmor
 
 - type: listing
-  id: MeleeArsenalHardsuitCarp
-  name: full-arsenal-hardsuit-carp-name
-  description: full-arsenal-hardsuit-carp-desc
-  productEntity: ClothingOuterHardsuitCarp
-  cost:
-    Telecrystal: 2
-  categories:
-  - MeleeArsenal
-  - MeleeArsenalArmor
-
-- type: listing
   id: MeleeArsenalHardsuitEngineering
   name: full-arsenal-hardsuit-engineering-name
   description: full-arsenal-hardsuit-engineering-desc
@@ -1050,39 +1060,6 @@
   - MeleeArsenal
   - MeleeArsenalArmor
 
-- type: listing
-  id: MeleeArsenalHardsuitClown
-  name: full-arsenal-hardsuit-clown-name
-  description: full-arsenal-hardsuit-clown-desc
-  productEntity: ClothingOuterHardsuitClown
-  cost:
-    Telecrystal: 3
-  categories:
-  - MeleeArsenal
-  - MeleeArsenalArmor
-
-- type: listing
-  id: MeleeArsenalHardsuitMime
-  name: full-arsenal-hardsuit-mime-name
-  description: full-arsenal-hardsuit-mime-desc
-  productEntity: ClothingOuterHardsuitMime
-  cost:
-    Telecrystal: 3
-  categories:
-  - MeleeArsenal
-  - MeleeArsenalArmor
-
-- type: listing
-  id: MeleeArsenalHardsuitSanta
-  name: full-arsenal-hardsuit-santa-name
-  description: full-arsenal-hardsuit-santa-desc
-  productEntity: ClothingOuterHardsuitSanta
-  cost:
-    Telecrystal: 5
-  categories:
-  - MeleeArsenal
-  - MeleeArsenalArmor
-
 # ── UTILITY ───────────────────────────────
 
 - type: listing
@@ -1264,7 +1241,7 @@
   id: MeleeArsenalRapierSyndie
   name: full-arsenal-rapier-syndie-name
   description: full-arsenal-rapier-syndie-desc
-  productEntity: BeltSheathSyndieFilledBox
+  productEntity: ClothingBeltSheathSyndicateFilled
   cost:
     Telecrystal: 8
   categories:
@@ -1360,16 +1337,6 @@
   categories:
   - MeleeArsenal
 
-- type: listing
-  id: MeleeArsenalDuffelCarpSuit
-  name: uplink-carp-suit-bundle-name
-  description: uplink-carp-suit-bundle-desc
-  productEntity: ClothingBackpackDuffelSyndicateCarpSuit
-  cost:
-    Telecrystal: 1
-  categories:
-  - MeleeArsenal
-
 # ── IMPLANTS ───────────────────────────────
 
 - type: listing
@@ -1454,26 +1421,6 @@
   categories:
   - MeleeArsenal
 
-
-- type: listing
-  id: MeleeArsenalStimpack
-  name: full-arsenal-stimpack-name
-  description: full-arsenal-stimpack-desc
-  productEntity: Stimpack
-  cost:
-    Telecrystal: 4
-  categories:
-  - MeleeArsenal
-
-- type: listing
-  id: MeleeArsenalStimpackMini
-  name: full-arsenal-stimpack-mini-name
-  description: full-arsenal-stimpack-mini-desc
-  productEntity: StimpackMini
-  cost:
-    Telecrystal: 1
-  categories:
-  - MeleeArsenal
 
 - type: listing
   id: MeleeArsenalPortableRecharger
@@ -2146,9 +2093,10 @@
   description: full-arsenal-backpack-syndicate-desc
   productEntity: ClothingBackpackSyndicate
   cost:
-    Telecrystal: 3
+    Telecrystal: 1
   categories:
   - MeleeArsenal
+  - MeleeArsenalBag
 
 - type: listing
   id: MeleeArsenalBackpackDuffelSyndicate
@@ -2156,9 +2104,10 @@
   description: full-arsenal-backpack-duffel-syndicate-desc
   productEntity: ClothingBackpackDuffelSyndicate
   cost:
-    Telecrystal: 3
+    Telecrystal: 1
   categories:
   - MeleeArsenal
+  - MeleeArsenalBag
 
 - type: listing
   id: MeleeArsenalBackpackSecurity
@@ -2166,9 +2115,10 @@
   description: full-arsenal-backpack-security-desc
   productEntity: ClothingBackpackSecurity
   cost:
-    Telecrystal: 2
+    Telecrystal: 1
   categories:
   - MeleeArsenal
+  - MeleeArsenalBag
 
 - type: listing
   id: MeleeArsenalBackpackMerc
@@ -2176,7 +2126,64 @@
   description: full-arsenal-backpack-merc-desc
   productEntity: ClothingBackpackMerc
   cost:
-    Telecrystal: 3
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+# Дополнительные пустые сумки/рюкзаки (категория MeleeArsenalBag, лимит 1 на ящик).
+- type: listing
+  id: MeleeArsenalBackpackPlain
+  name: full-arsenal-backpack-plain-name
+  description: full-arsenal-backpack-plain-desc
+  productEntity: ClothingBackpack
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalSatchel
+  name: full-arsenal-satchel-name
+  description: full-arsenal-satchel-desc
+  productEntity: ClothingBackpackSatchelLeather
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalDuffelPlain
+  name: full-arsenal-duffel-plain-name
+  description: full-arsenal-duffel-plain-desc
+  productEntity: ClothingBackpackDuffel
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalSatchelGray
+  name: full-arsenal-satchel-gray-name
+  description: full-arsenal-satchel-gray-desc
+  productEntity: ClothingBackpackSatchel
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+# Кожаная поясная сумка — пояс (не для инструментов). Слот пояса, под лимит сумок не идёт.
+- type: listing
+  id: MeleeArsenalLeatherWaistbag
+  name: full-arsenal-leather-waistbag-name
+  description: full-arsenal-leather-waistbag-desc
+  productEntity: ClothingBeltStorageWaistbag
+  cost:
+    Telecrystal: 1
   categories:
   - MeleeArsenal
 
@@ -2187,48 +2194,6 @@
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
   cost:
     Telecrystal: 3
-  categories:
-  - MeleeArsenal
-
-# ── UNIFORMS ───────────────────────────────
-
-- type: listing
-  id: MeleeArsenalUniformOperative
-  name: full-arsenal-uniform-operative-name
-  description: full-arsenal-uniform-operative-desc
-  productEntity: ClothingUniformJumpsuitOperative
-  cost:
-    Telecrystal: 3
-  categories:
-  - MeleeArsenal
-
-- type: listing
-  id: MeleeArsenalUniformBlack
-  name: full-arsenal-uniform-black-name
-  description: full-arsenal-uniform-black-desc
-  productEntity: ClothingUniformJumpsuitColorBlack
-  cost:
-    Telecrystal: 2
-  categories:
-  - MeleeArsenal
-
-- type: listing
-  id: MeleeArsenalUniformDeathSquad
-  name: full-arsenal-uniform-deathsquad-name
-  description: full-arsenal-uniform-deathsquad-desc
-  productEntity: ClothingUniformJumpsuitDeathSquad
-  cost:
-    Telecrystal: 3
-  categories:
-  - MeleeArsenal
-
-- type: listing
-  id: MeleeArsenalUniformBlueShield
-  name: full-arsenal-uniform-blueshield-name
-  description: full-arsenal-uniform-blueshield-desc
-  productEntity: ClothingUniformJumpsuitBlueShield
-  cost:
-    Telecrystal: 2
   categories:
   - MeleeArsenal
 
@@ -3480,7 +3445,7 @@
   id: MeleeArsenalNullRod
   name: full-arsenal-null-rod-name
   description: full-arsenal-null-rod-desc
-  productEntity: WeaponNullRod
+  productEntity: ClothingBeltSheathChaplinFilled
   cost:
     Telecrystal: 2
   categories:

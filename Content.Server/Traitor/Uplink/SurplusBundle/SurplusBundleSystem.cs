@@ -1,9 +1,12 @@
+using System;
 using System.Linq;
+using Content.Server._Wega.Duel.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
+using Robust.Shared.Containers;
 using Robust.Shared.Random;
 
 namespace Content.Server.Traitor.Uplink.SurplusBundle;
@@ -13,6 +16,7 @@ public sealed class SurplusBundleSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly StoreSystem _store = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
 
     public override void Initialize()
     {
@@ -36,7 +40,29 @@ public sealed class SurplusBundleSystem : EntitySystem
         foreach (var item in content)
         {
             var dode = Spawn(item.ProductEntity, cords);
+
+            // Tag arena-issued gear so the duel cleanup only removes what the crate gave out.
+            // Tagging recurses into containers so bundled contents are covered too — including the
+            // implant preloaded inside an implanter, which keeps the mark after it's injected and
+            // lets the cleanup wipe implants the duelists gave themselves.
+            if (ent.Comp1.MarkIssuedItems)
+                MarkIssuedRecursive(dode);
+
             _entityStorage.Insert(dode, ent);
+        }
+    }
+
+    /// <summary>
+    ///     Tags an entity and everything nested in its containers with <see cref="ArenaIssuedItemComponent"/>.
+    /// </summary>
+    private void MarkIssuedRecursive(EntityUid uid)
+    {
+        EnsureComp<ArenaIssuedItemComponent>(uid);
+
+        foreach (var container in _container.GetAllContainers(uid))
+        {
+            foreach (var contained in container.ContainedEntities)
+                MarkIssuedRecursive(contained);
         }
     }
 
@@ -57,6 +83,9 @@ public sealed class SurplusBundleSystem : EntitySystem
         // Guaranteed picks: ensure at least one item from each guaranteed category (budget permitting).
         foreach (var category in ent.Comp1.GuaranteedCategories)
         {
+            if (ret.Count >= ent.Comp1.MaxItems)
+                break;
+
             var remainingBudget = ent.Comp1.TotalPrice - totalCost;
 
             var eligible = listings
@@ -68,7 +97,7 @@ public sealed class SurplusBundleSystem : EntitySystem
             if (eligible.Count == 0)
                 continue;
 
-            var guaranteed = eligible[_random.Next(0, eligible.Count)];
+            var guaranteed = PickItem(eligible, ent.Comp1);
             ret.Add(guaranteed);
             totalCost += guaranteed.Cost.Values.Sum();
 
@@ -78,7 +107,7 @@ public sealed class SurplusBundleSystem : EntitySystem
             listings.Remove(guaranteed);
         }
 
-        while (totalCost < ent.Comp1.TotalPrice)
+        while (totalCost < ent.Comp1.TotalPrice && ret.Count < ent.Comp1.MaxItems)
         {
             var remainingBudget = ent.Comp1.TotalPrice - totalCost;
 
@@ -91,7 +120,7 @@ public sealed class SurplusBundleSystem : EntitySystem
             if (eligible.Count == 0)
                 break;
 
-            var pick = eligible[_random.Next(0, eligible.Count)];
+            var pick = PickItem(eligible, ent.Comp1);
             ret.Add(pick);
             totalCost += pick.Cost.Values.Sum();
 
@@ -102,6 +131,39 @@ public sealed class SurplusBundleSystem : EntitySystem
         }
 
         return ret;
+    }
+
+    /// <summary>
+    ///     Picks one listing from the eligible set. Uniform by default; if the bundle has
+    ///     <see cref="SurplusBundleComponent.WeightByCost"/> set, probability is weighted by
+    ///     price^<see cref="SurplusBundleComponent.CostWeightExponent"/> so pricier gear is more likely
+    ///     (gently, by default), while top-tier items stay a rare jackpot.
+    /// </summary>
+    private ListingDataWithCostModifiers PickItem(List<ListingDataWithCostModifiers> eligible, SurplusBundleComponent comp)
+    {
+        if (!comp.WeightByCost)
+            return eligible[_random.Next(0, eligible.Count)];
+
+        var exponent = comp.CostWeightExponent;
+
+        var total = 0.0;
+        foreach (var listing in eligible)
+            total += Weight(listing, exponent);
+
+        var roll = _random.NextDouble() * total;
+        foreach (var listing in eligible)
+        {
+            roll -= Weight(listing, exponent);
+            if (roll <= 0.0)
+                return listing;
+        }
+
+        return eligible[^1];
+    }
+
+    private static double Weight(ListingDataWithCostModifiers listing, double exponent)
+    {
+        return Math.Pow(Math.Max(1.0, listing.Cost.Values.Sum().Double()), exponent);
     }
 
     private static bool ExceedsCategoryLimit(
