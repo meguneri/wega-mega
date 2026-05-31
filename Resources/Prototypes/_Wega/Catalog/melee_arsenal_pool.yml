@@ -1664,10 +1664,10 @@
   - MeleeArsenal
 
 - type: listing
-  id: MeleeArsenalDiceOfFate
-  name: full-arsenal-dice-of-fate-name
-  description: full-arsenal-dice-of-fate-desc
-  productEntity: DiceOfFate
+  id: MeleeArsenalDiceOfWar
+  name: full-arsenal-dice-of-war-name
+  description: full-arsenal-dice-of-war-desc
+  productEntity: DiceOfWar
   cost:
     Telecrystal: 10
   categories:
