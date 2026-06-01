@@ -5,7 +5,7 @@ namespace Content.Shared.Genetics.Systems;
 
 public sealed class DnaClientSystem : EntitySystem
 {
-    [Dependency] private readonly DnaServerSystem _dnaServer = default!;
+    [Dependency] private DnaServerSystem _dnaServer = default!;
 
     public override void Initialize()
     {

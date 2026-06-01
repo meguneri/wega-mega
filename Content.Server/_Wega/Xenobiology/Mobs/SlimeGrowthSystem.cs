@@ -10,7 +10,7 @@ namespace Content.Server.Xenobiology;
 
 public sealed class SlimeGrowthSystem : SharedSlimeGrowthSystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly EntProtoId DefaultSlime = "MobXenoSlimeGray";
 

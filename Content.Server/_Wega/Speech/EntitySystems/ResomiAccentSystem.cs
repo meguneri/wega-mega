@@ -7,7 +7,7 @@ namespace Content.Server._Wega.Speech.EntitySystems;
 
 public sealed class ResomiAccentSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     private static readonly Regex RegexSh = new("ш+", RegexOptions.Compiled);
     private static readonly Regex RegexShUpper = new("Ш+", RegexOptions.Compiled);

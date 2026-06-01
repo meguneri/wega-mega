@@ -5,7 +5,7 @@ namespace Content.Server.Modular.Suit;
 
 public sealed class EnergyShieldModuleHandler : ModuleActionHandler
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {

@@ -7,7 +7,7 @@ namespace Content.Server.Genetics.System;
 
 public sealed class TelekinesisGenSystem : EntitySystem
 {
-    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private HandsSystem _hands = default!;
 
     public override void Initialize()
     {

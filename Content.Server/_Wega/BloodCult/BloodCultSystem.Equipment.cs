@@ -12,7 +12,7 @@ namespace Content.Server.Blood.Cult;
 
 public sealed partial class BloodCultSystem
 {
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
+    [Dependency] private ThrowingSystem _throwing = default!;
 
     private void InitializeEquipment()
     {
@@ -26,7 +26,7 @@ public sealed partial class BloodCultSystem
 
         if (HasComp<BloodCultistComponent>(args.EquipTarget) && ent.Comp.Cult == CultType.Blood)
             return;
-        
+
         if (HasComp<VeilCultistComponent>(args.EquipTarget) && ent.Comp.Cult == CultType.Veil)
             return;
 
@@ -44,7 +44,7 @@ public sealed partial class BloodCultSystem
 
         if (HasComp<BloodCultistComponent>(args.User) && ent.Comp.Cult == CultType.Blood)
             return;
-        
+
         if (HasComp<VeilCultistComponent>(args.User) && ent.Comp.Cult == CultType.Veil)
             return;
 
@@ -72,7 +72,7 @@ public sealed partial class BloodCultSystem
             var target = hitList[i];
             if (HasComp<BloodCultistComponent>(target) && comp.Cult == CultType.Blood)
                 hitList.RemoveAt(i);
-            
+
             if (HasComp<VeilCultistComponent>(target) && comp.Cult == CultType.Veil)
                 hitList.RemoveAt(i);
         }

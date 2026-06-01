@@ -9,7 +9,7 @@ namespace Content.Client._Wega.Surgery.Ui;
 [UsedImplicitly]
 public sealed class SurgeryBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     [ViewVariables]
     private SurgeryWindow? _window;

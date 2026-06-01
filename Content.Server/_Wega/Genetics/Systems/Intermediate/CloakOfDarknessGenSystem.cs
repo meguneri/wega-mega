@@ -7,8 +7,8 @@ namespace Content.Server.Genetics.System;
 
 public sealed class CloakOfDarknessGenSystem : EntitySystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
-    [Dependency] private readonly SharedStealthSystem _stealth = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
 
     public override void Initialize()
     {

@@ -9,7 +9,7 @@ namespace Content.Server.Genetics.System;
 
 public sealed class RegenerationGenSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private DamageableSystem _damage = default!;
 
     private static readonly ProtoId<DamageTypePrototype> BluntDamage = "Blunt";
     private static readonly ProtoId<DamageTypePrototype> HeatDamage = "Heat";

@@ -6,8 +6,8 @@ namespace Content.Shared.Disease;
 
 public abstract class SharedDiseaseSystem : EntitySystem
 {
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ISerializationManager _serializationManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private ISerializationManager _serializationManager = default!;
 
     public Queue<EntityUid> AddQueue = new();
 

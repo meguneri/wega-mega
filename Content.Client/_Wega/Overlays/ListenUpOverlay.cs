@@ -14,8 +14,8 @@ namespace Content.Client._Wega.Overlays;
 
 public sealed class ListenUpOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
-    [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private IEntityManager _entity = default!;
+    [Dependency] private IPlayerManager _players = default!;
 
     private readonly EntityLookupSystem _entityLookup;
     private readonly TransformSystem _transformSystem;

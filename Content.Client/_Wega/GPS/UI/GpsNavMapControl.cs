@@ -14,8 +14,8 @@ namespace Content.Client._Wega.GPS.UI;
 
 public sealed class GpsNavMapControl : Control
 {
-    [Dependency] private readonly IResourceCache _resourceCache = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IResourceCache _resourceCache = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private EntityUid? _mapUid;
     private List<GpsDeviceInfo> _gpsDevices = new();

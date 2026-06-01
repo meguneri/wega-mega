@@ -7,7 +7,7 @@ namespace Content.Server.Veil.Cult;
 
 public sealed partial class TeleportionEnchantSystem : SharedTeleportationEnchantSystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

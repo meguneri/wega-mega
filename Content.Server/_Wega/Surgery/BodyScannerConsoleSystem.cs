@@ -15,10 +15,10 @@ namespace Content.Server.Medical.Surgery
 {
     public sealed class BodyScannerConsoleSystem : EntitySystem
     {
-        [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IGameTiming _timing = default!;
-        [Dependency] private readonly SharedDeviceLinkSystem _deviceLink = default!;
+        [Dependency] private UserInterfaceSystem _uiSystem = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private SharedDeviceLinkSystem _deviceLink = default!;
 
         public override void Initialize()
         {

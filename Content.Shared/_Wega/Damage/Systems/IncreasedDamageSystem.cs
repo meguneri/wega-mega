@@ -5,8 +5,8 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed class IncreasedDamageSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

@@ -16,12 +16,12 @@ namespace Content.Client.Achievements;
 
 public sealed class AchievementsSystem : SharedAchievementsSystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IUserInterfaceManager _ui = default!;
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IUserInterfaceManager _ui = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public IReadOnlyList<AchievementsEnum> UnlockedAchievements => _unlockedAchievements;
     private List<AchievementsEnum> _unlockedAchievements = new();

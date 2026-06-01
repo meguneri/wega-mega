@@ -11,9 +11,9 @@ namespace Content.Server.Mining;
 
 public sealed class MiningServerSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAmbientSoundSystem _ambient = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
+    [Dependency] private SharedAmbientSoundSystem _ambient = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private AtmosphereSystem _atmosphereSystem = default!;
 
     public override void Initialize()
     {

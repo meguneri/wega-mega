@@ -7,8 +7,8 @@ namespace Content.Shared.Genetics.Systems;
 // TODO: ref this
 public sealed class DizzySystem : EntitySystem
 {
-    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private StatusEffectsSystem _statusEffectsSystem = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     [ValidatePrototypeId<StatusEffectPrototype>]
     public const string DizzyKey = "Dizzy";

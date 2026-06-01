@@ -6,7 +6,7 @@ namespace Content.Server.Resomi.Abilities;
 
 public sealed class ListenUpSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

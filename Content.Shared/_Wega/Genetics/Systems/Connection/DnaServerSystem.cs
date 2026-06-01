@@ -6,7 +6,7 @@ namespace Content.Shared.Genetics.Systems;
 
 public sealed class DnaServerSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Initialize()
     {

@@ -11,15 +11,15 @@ namespace Content.Shared.Xenobiology.Systems.Machines;
 
 public sealed class CellSequencerSystem : EntitySystem
 {
-    [Dependency] private readonly CellClientSystem _cellClient = default!;
-    [Dependency] private readonly CellServerSystem _cellServer = default!;
+    [Dependency] private CellClientSystem _cellClient = default!;
+    [Dependency] private CellServerSystem _cellServer = default!;
 
-    [Dependency] private readonly SharedMaterialStorageSystem _materialStorage = default!;
+    [Dependency] private SharedMaterialStorageSystem _materialStorage = default!;
 
-    [Dependency] private readonly SharedCellSystem _cell = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedUserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedCellSystem _cell = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedUserInterfaceSystem _userInterface = default!;
 
     public override void Initialize()
     {

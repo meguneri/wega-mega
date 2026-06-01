@@ -22,18 +22,18 @@ namespace Content.Server.Veil.Cult;
 
 public sealed partial class VeilCultSystem
 {
-    [Dependency] private readonly BloodstreamSystem _blood = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
-    [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly EmpSystem _emp = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-    [Dependency] private readonly FlashSystem _flash = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
-    [Dependency] private readonly SharedStackSystem _stack = default!;
-    [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly VisibilitySystem _visibility = default!;
-    [Dependency] private readonly SharedStationAiSystem _stationAi = default!;
+    [Dependency] private BloodstreamSystem _blood = default!;
+    [Dependency] private ChatSystem _chat = default!;
+    [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private EmpSystem _emp = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
+    [Dependency] private FlashSystem _flash = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private VisibilitySystem _visibility = default!;
+    [Dependency] private SharedStationAiSystem _stationAi = default!;
 
     private static readonly SoundPathSpecifier CultSpell = new SoundPathSpecifier("/Audio/_Wega/Effects/cult_spell.ogg");
     private static readonly int EnergyPerOne = 100; // TODO: МБ сделать значение в компоненте рула, а не хардкодом | Не, похуй, но я бы вывел в константу :P

@@ -10,7 +10,7 @@ namespace Content.Shared.Sharpening.Systems;
 
 public abstract class SharedSharpeningSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

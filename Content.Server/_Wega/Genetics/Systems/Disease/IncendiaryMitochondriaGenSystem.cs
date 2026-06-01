@@ -7,8 +7,8 @@ namespace Content.Server.Genetics.System;
 
 public sealed class IncendiaryMitochondriaSystem : EntitySystem
 {
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private IRobustRandom _random = default!;
 
     public override void Update(float frameTime)
     {

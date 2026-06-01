@@ -14,7 +14,7 @@ namespace Content.Client.Visuals;
 /// </summary>
 public sealed class VisualStateSystem : VisualizerSystem<VisualStateComponent>
 {
-    [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     public override void Initialize()
     {

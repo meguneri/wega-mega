@@ -10,7 +10,7 @@ namespace Content.Server.Genetics.System;
 
 public sealed class EnsureMarkingSystem : EntitySystem
 {
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     public static readonly ProtoId<MarkingPrototype> DefaultHorns = "LizardHornsDemonic";
 

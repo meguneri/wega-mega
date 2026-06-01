@@ -9,7 +9,7 @@ namespace Content.Server.Lavaland.Artefacts.Systems;
 
 public sealed class SoulStorageSystem : EntitySystem
 {
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
 
     public override void Initialize()
     {

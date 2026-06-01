@@ -7,8 +7,8 @@ namespace Content.Shared.Genetics.Systems
 {
     public sealed class StructuralEnzymesIndexerSystem : EntitySystem
     {
-        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private List<EnzymesPrototypeInfo> _enzymesPrototypes = new List<EnzymesPrototypeInfo>();
         private bool _isInitialized = false;

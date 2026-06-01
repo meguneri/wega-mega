@@ -8,8 +8,8 @@ namespace Content.Shared.Clothing;
 
 public sealed class ForceLoadoutSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly OutfitSystem _outfitSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private OutfitSystem _outfitSystem = default!;
 
     public override void Initialize()
     {

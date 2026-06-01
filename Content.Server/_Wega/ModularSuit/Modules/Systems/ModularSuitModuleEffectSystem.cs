@@ -8,8 +8,8 @@ namespace Content.Server.Modular.Suit;
 
 public sealed class ModularSuitSuitEffectSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {

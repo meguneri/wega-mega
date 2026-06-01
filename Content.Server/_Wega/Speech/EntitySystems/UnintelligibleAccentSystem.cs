@@ -9,7 +9,7 @@ namespace Content.Server.Speech.EntitySystems
 {
     public sealed class UnintelligibleAccentSystem : EntitySystem
     {
-        [Dependency] private readonly IRobustRandom _random = default!;
+        [Dependency] private IRobustRandom _random = default!;
 
         private static readonly Regex WordSplitRegex = new Regex(@"(\W+)", RegexOptions.Compiled);
         public override void Initialize()

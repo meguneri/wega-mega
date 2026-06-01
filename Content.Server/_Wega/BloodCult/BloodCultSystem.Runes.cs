@@ -45,13 +45,13 @@ namespace Content.Server.Blood.Cult;
 
 public sealed partial class BloodCultSystem
 {
-    [Dependency] private readonly FlammableSystem _flammable = default!;
-    [Dependency] private readonly GibbingSystem _gibbing = default!;
-    [Dependency] private readonly IConsoleHost _consoleHost = default!;
-    [Dependency] private readonly IMapManager _mapMan = default!;
-    [Dependency] private readonly NavMapSystem _navMap = default!;
-    [Dependency] private readonly RejuvenateSystem _rejuvenate = default!;
-    [Dependency] private readonly SharedGhostSystem _ghost = default!;
+    [Dependency] private FlammableSystem _flammable = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private IConsoleHost _consoleHost = default!;
+    [Dependency] private IMapManager _mapMan = default!;
+    [Dependency] private NavMapSystem _navMap = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private SharedGhostSystem _ghost = default!;
 
     private static readonly EntProtoId BloodCultObserver = "MobObserverIfrit";
 

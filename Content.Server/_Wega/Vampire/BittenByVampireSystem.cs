@@ -10,7 +10,7 @@ namespace Content.Server.Vampire;
 /// </summary>
 public sealed class BittenByVampireSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

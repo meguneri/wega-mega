@@ -8,7 +8,7 @@ namespace Content.Server.Implants;
 
 public sealed class InternalStorageSystem : SharedInternalStorageSystem
 {
-    [Dependency] private readonly LegionSystem _legion = default!;
+    [Dependency] private LegionSystem _legion = default!;
 
     public override void Initialize()
     {

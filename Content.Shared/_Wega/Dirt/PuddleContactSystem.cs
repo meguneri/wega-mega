@@ -5,8 +5,8 @@ namespace Content.Shared.DirtVisuals;
 
 public sealed class PuddleContactSystem : EntitySystem
 {
-    [Dependency] private readonly SharedDirtSystem _dirt = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedDirtSystem _dirt = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
 
     public override void Initialize()
     {

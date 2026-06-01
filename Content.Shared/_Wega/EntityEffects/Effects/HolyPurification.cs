@@ -13,8 +13,8 @@ namespace Content.Shared.EntityEffects.Effects;
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
 public sealed partial class HolyPurificationEntityEffectSystem : EntityEffectSystem<HumanoidProfileComponent, HolyPurification>
 {
-    [Dependency] private readonly SharedBloodCultSystem _bloodCult = default!;
-    [Dependency] private readonly SharedVeilCultSystem _veilCult = default!;
+    [Dependency] private SharedBloodCultSystem _bloodCult = default!;
+    [Dependency] private SharedVeilCultSystem _veilCult = default!;
 
     protected override void Effect(Entity<HumanoidProfileComponent> entity, ref EntityEffectEvent<HolyPurification> args)
     {

@@ -9,10 +9,10 @@ namespace Content.Server.Damage.Systems;
 
 public sealed class DamageOnActionSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
-    [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private HungerSystem _hunger = default!;
+    [Dependency] private PopupSystem _popup = default!;
 
     public override void Initialize()
     {

@@ -12,7 +12,7 @@ namespace Content.Client._Wega.ModularSuit.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class ModularSuitWindow : BaseWindow
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     private Dictionary<NetEntity, ModuleControl> _moduleControls = new();
     private Dictionary<SuitPartType, PartControl> _partControls = new();

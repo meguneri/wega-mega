@@ -7,7 +7,7 @@ namespace Content.Server.Modular.Suit;
 
 public sealed class ModularSuitSpringlockModuleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {

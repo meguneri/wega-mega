@@ -7,7 +7,7 @@ namespace Content.Shared.Weapons.Hitscan.Systems;
 
 public sealed class HitscanEMPSystem : EntitySystem
 {
-    [Dependency] private readonly SharedEmpSystem _emp = default!;
+    [Dependency] private SharedEmpSystem _emp = default!;
 
     public override void Initialize()
     {

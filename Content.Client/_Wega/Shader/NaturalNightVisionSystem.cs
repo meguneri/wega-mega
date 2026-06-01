@@ -9,10 +9,10 @@ namespace Content.Client.Shaders.Systems;
 
 public sealed class NaturalNightVisionSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IOverlayManager _overlayManager = default!;
-    [Dependency] private readonly ILightManager _lightManager = default!;
-    [Dependency] private readonly SharedActionsSystem _action = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IOverlayManager _overlayManager = default!;
+    [Dependency] private ILightManager _lightManager = default!;
+    [Dependency] private SharedActionsSystem _action = default!;
 
     private NaturalNightVisionOverlay _overlay = default!;
 

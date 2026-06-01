@@ -12,8 +12,8 @@ namespace Content.Server.Wega.Ghost.Respawn;
 
 public sealed class GhostRespawnSystem : EntitySystem
 {
-    [Dependency] private readonly IPlayerManager _player = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IPlayerManager _player = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private readonly Dictionary<ICommonSession, TimeSpan> _respawnResetTimes = [];
 

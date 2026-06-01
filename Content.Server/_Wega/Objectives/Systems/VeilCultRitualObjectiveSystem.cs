@@ -8,7 +8,7 @@ namespace Content.Server.Objectives.Systems;
 
 public sealed class VeilCultRitualObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly VeilCultRuleSystem _veilCult = default!;
+    [Dependency] private VeilCultRuleSystem _veilCult = default!;
 
     public override void Initialize()
     {

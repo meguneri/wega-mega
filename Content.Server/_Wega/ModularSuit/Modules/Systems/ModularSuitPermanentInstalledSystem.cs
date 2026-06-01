@@ -4,7 +4,7 @@ namespace Content.Server.Modular.Suit;
 
 public sealed class ModularSuitPermanentInstalledSystem : EntitySystem
 {
-    [Dependency] private readonly SharedModularSuitSystem _modularSuit = default!;
+    [Dependency] private SharedModularSuitSystem _modularSuit = default!;
 
     public override void Initialize()
     {

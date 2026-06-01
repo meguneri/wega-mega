@@ -9,8 +9,8 @@ namespace Content.Server.Genetics.System;
 
 public sealed class SpeedUpGenSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
 
     public override void Initialize()
     {

@@ -10,9 +10,9 @@ namespace Content.Shared.Resomi.Abilities;
 public abstract class SharedAgillitySkillSystem : EntitySystem
 {
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly ClimbSystem _climb = default!;
-    [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private ClimbSystem _climb = default!;
+    [Dependency] private SharedStaminaSystem _stamina = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     protected const int BaseCollisionGroup = (int)(CollisionGroup.MobMask);
 

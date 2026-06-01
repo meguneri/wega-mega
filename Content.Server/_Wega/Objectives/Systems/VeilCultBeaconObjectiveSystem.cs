@@ -6,8 +6,8 @@ namespace Content.Server.Objectives.Systems;
 
 public sealed class VeilCultBeaconObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
+    [Dependency] private EntityLookupSystem _entityLookup = default!;
 
     public override void Initialize()
     {

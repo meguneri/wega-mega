@@ -5,7 +5,7 @@ namespace Content.Server.Objectives.Systems;
 
 public sealed class BloodCultTargetObjectiveSystem : EntitySystem
 {
-    [Dependency] private readonly TargetObjectiveSystem _target = default!;
+    [Dependency] private TargetObjectiveSystem _target = default!;
 
     public override void Initialize()
     {

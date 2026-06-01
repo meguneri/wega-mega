@@ -7,7 +7,7 @@ namespace Content.Server.Interaction;
 
 public sealed class DeleteOnDropSystem : EntitySystem
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     public override void Initialize()
     {

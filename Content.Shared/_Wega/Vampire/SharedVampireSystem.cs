@@ -12,8 +12,8 @@ namespace Content.Shared.Vampire;
 
 public abstract class SharedVampireSystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedVisualBodySystem _visualBody = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedVisualBodySystem _visualBody = default!;
 
     #region Blood Management
 

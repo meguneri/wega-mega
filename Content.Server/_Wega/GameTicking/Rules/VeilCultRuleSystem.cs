@@ -37,26 +37,26 @@ namespace Content.Server.GameTicking.Rules
 {
     public sealed class VeilCultRuleSystem : GameRuleSystem<VeilCultRuleComponent>
     {
-        [Dependency] private readonly SharedAchievementsSystem _achievement = default!;
-        [Dependency] private readonly ActionsSystem _action = default!;
-        [Dependency] private readonly AntagSelectionSystem _antag = default!;
-        [Dependency] private readonly ISharedPlayerManager _player = default!;
-        [Dependency] private readonly IPlayerManager _playerManager = default!;
-        [Dependency] private readonly IAdminLogManager _adminLogManager = default!;
-        [Dependency] private readonly MindSystem _mind = default!;
-        [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
-        [Dependency] private readonly RoleSystem _role = default!;
-        [Dependency] private readonly RoundEndSystem _roundEndSystem = default!;
-        [Dependency] private readonly IRobustRandom _random = default!;
-        [Dependency] private readonly SharedAudioSystem _audio = default!;
-        [Dependency] private readonly SharedPopupSystem _popup = default!;
-        [Dependency] private readonly ObjectivesSystem _objectives = default!;
-        [Dependency] private readonly TargetObjectiveSystem _target = default!;
-        [Dependency] private readonly MetaDataSystem _meta = default!;
-        [Dependency] private readonly SharedStationSystem _stationSystem = default!;
-        [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
-        [Dependency] private readonly ServerGlobalSoundSystem _sound = default!;
-        [Dependency] private readonly ChatSystem _chat = default!;
+        [Dependency] private SharedAchievementsSystem _achievement = default!;
+        [Dependency] private ActionsSystem _action = default!;
+        [Dependency] private AntagSelectionSystem _antag = default!;
+        [Dependency] private ISharedPlayerManager _player = default!;
+        [Dependency] private IPlayerManager _playerManager = default!;
+        [Dependency] private IAdminLogManager _adminLogManager = default!;
+        [Dependency] private MindSystem _mind = default!;
+        [Dependency] private NpcFactionSystem _npcFaction = default!;
+        [Dependency] private RoleSystem _role = default!;
+        [Dependency] private RoundEndSystem _roundEndSystem = default!;
+        [Dependency] private IRobustRandom _random = default!;
+        [Dependency] private SharedAudioSystem _audio = default!;
+        [Dependency] private SharedPopupSystem _popup = default!;
+        [Dependency] private ObjectivesSystem _objectives = default!;
+        [Dependency] private TargetObjectiveSystem _target = default!;
+        [Dependency] private MetaDataSystem _meta = default!;
+        [Dependency] private SharedStationSystem _stationSystem = default!;
+        [Dependency] private EntityLookupSystem _entityLookup = default!;
+        [Dependency] private ServerGlobalSoundSystem _sound = default!;
+        [Dependency] private ChatSystem _chat = default!;
 
         public readonly ProtoId<NpcFactionPrototype> VeilCultNpcFaction = "VeilCult";
 

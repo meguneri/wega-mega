@@ -10,10 +10,10 @@ namespace Content.Client.Shaders.Systems;
 
 public sealed class NightVisionOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entityManager = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private IPlayerManager _playerManager = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
 
     private static readonly ProtoId<ShaderPrototype> NightVision = "NightVision";
     public override OverlaySpace Space => OverlaySpace.WorldSpace;

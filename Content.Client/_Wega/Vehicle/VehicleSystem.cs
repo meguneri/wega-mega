@@ -6,7 +6,7 @@ namespace Content.Client.Vehicle;
 
 public sealed class VehicleSystem : SharedVehicleSystem
 {
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     public override void Initialize()
     {

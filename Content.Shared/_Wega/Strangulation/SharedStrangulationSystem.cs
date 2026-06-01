@@ -5,7 +5,7 @@ namespace Content.Shared.Strangulation
 {
     public abstract class SharedStrangulationSystem : EntitySystem
     {
-        [Dependency] private readonly ActionBlockerSystem _actionBlockerSystem = default!;
+        [Dependency] private ActionBlockerSystem _actionBlockerSystem = default!;
 
         public override void Initialize()
         {

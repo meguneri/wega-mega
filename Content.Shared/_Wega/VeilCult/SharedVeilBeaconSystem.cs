@@ -6,7 +6,7 @@ namespace Content.Shared.Veil.Cult;
 
 public sealed class VeilBeaconSystem : EntitySystem
 {
-    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {

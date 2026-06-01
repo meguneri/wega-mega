@@ -6,8 +6,8 @@ namespace Content.Server.Traits.Assorted;
 
 public sealed class UncontrollableCoughSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly DiseaseSystem _diseaseSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private DiseaseSystem _diseaseSystem = default!;
 
     public override void Initialize()
     {

@@ -8,8 +8,8 @@ namespace Content.Client._Wega.Genetics.Ui;
 
 public sealed class MindCommunicationUIController : UIController
 {
-    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
-    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private IUserInterfaceManager _uiManager = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
 
     private MindCommunicationPanel? _panel;
     private bool _panelDisposed = false;

@@ -10,8 +10,8 @@ namespace Content.Client._Wega.Voucher;
 [UsedImplicitly]
 public sealed class VoucherBoundUserInterface : BoundUserInterface
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
-    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     [ViewVariables]
     private VoucherKitWindow? _window;

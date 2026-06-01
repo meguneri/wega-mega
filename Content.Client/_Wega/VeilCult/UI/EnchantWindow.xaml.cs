@@ -11,7 +11,7 @@ namespace Content.Client._Wega.VeilCult.UI;
 [GenerateTypedNameReferences]
 public sealed partial class EnchantWindow : RadialMenu
 {
-    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private IPrototypeManager _prototype = default!;
 
     public event Action<EntProtoId>? OnEnchantSelected;
     private List<EntProtoId> _enchants = new();

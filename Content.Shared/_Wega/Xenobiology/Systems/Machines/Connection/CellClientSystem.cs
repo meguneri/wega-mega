@@ -5,7 +5,7 @@ namespace Content.Shared.Xenobiology.Systems.Machines.Connection;
 
 public sealed class CellClientSystem : EntitySystem
 {
-    [Dependency] private readonly CellServerSystem _cellServer = default!;
+    [Dependency] private CellServerSystem _cellServer = default!;
 
     public override void Initialize()
     {

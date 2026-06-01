@@ -7,8 +7,8 @@ namespace Content.Server.Modular.Suit;
 
 public sealed class AffectedModuleCarrySystem : EntitySystem
 {
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
 
     public override void Initialize()
     {

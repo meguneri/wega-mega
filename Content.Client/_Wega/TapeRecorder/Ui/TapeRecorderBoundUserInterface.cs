@@ -6,7 +6,7 @@ namespace Content.Client.TapeRecorder.Ui;
 
 public sealed class TapeRecorderBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private readonly IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _entMan = default!;
 
     [ViewVariables]
     private TapeRecorderWindow? _window;

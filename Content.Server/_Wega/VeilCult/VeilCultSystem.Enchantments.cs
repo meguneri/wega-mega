@@ -46,13 +46,13 @@ namespace Content.Server.Veil.Cult;
 
 public sealed partial class VeilCultSystem
 {
-    [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
-    [Dependency] private readonly SharedDoorSystem _door = default!;
-    [Dependency] private readonly SurgerySystem _surgery = default!;
-    [Dependency] private readonly TileSystem _tile = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly ITileDefinitionManager _tileDefinitionManager = default!;
+    [Dependency] private MovementSpeedModifierSystem _speed = default!;
+    [Dependency] private TagSystem _tag = default!;
+    [Dependency] private SharedDoorSystem _door = default!;
+    [Dependency] private SurgerySystem _surgery = default!;
+    [Dependency] private TileSystem _tile = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private ITileDefinitionManager _tileDefinitionManager = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
