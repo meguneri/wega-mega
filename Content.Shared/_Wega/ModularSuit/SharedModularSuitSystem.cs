@@ -33,6 +33,20 @@ public abstract partial class SharedModularSuitSystem : EntitySystem
     public const string ModuleContainer = "suit_module";
     public const string HiddenClothingContainer = "suit_hidden";
 
+    /// <summary>
+    /// Возвращает части МОД-скафандра, которые в данный момент развёрнуты (надеты в слоты
+    /// брони игрока), а значит не лежат в контейнерах контроллера. Нужно внешним системам
+    /// (напр. очистке дуэльной арены), чтобы удалить их вместе с контроллером — иначе
+    /// надетые шлем/нагрудник/перчатки/ботинки останутся на игроке после удаления МОД.
+    /// </summary>
+    public List<EntityUid> GetEquippedParts(EntityUid controller)
+    {
+        var result = new List<EntityUid>();
+        if (TryComp<ModularSuitEquippedComponent>(controller, out var equipped))
+            result.AddRange(equipped.EquippedParts.Values);
+        return result;
+    }
+
     public override void Initialize()
     {
         SubscribeLocalEvent<ModularSuitComponent, MapInitEvent>(OnMapInit);

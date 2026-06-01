@@ -107,20 +107,29 @@ public sealed class DuelArenaSystem : EntitySystem
     private void ArmDuel(EntityUid uid, DuelArenaComponent comp)
     {
         if (comp.IsActive)
+        {
+            _chatManager.DispatchServerAnnouncement("Дуэль уже идёт — старт проигнорирован.", Color.Gray);
             return;
+        }
 
         var duelists = GetAliveInRange(uid, comp);
-        if (duelists.Count == 0)
+        if (duelists.Count < 2)
+        {
+            _chatManager.DispatchServerAnnouncement(
+                duelists.Count == 0
+                    ? "Дуэль не началась: в зоне нет бойцов."
+                    : "Дуэль не началась: нужно минимум 2 бойца.",
+                Color.Gray);
             return;
+        }
 
         comp.Duelists.Clear();
         foreach (var d in duelists)
             comp.Duelists.Add(d);
         comp.IsActive = true;
 
-        // Бой начался: отменяем запланированное закрытие шлюзов и сбрасываем сигнал в LOW.
-        // Шлюзы открываются по сигналу старта (DuelFight), а сброс латча гарантирует, что
-        // следующее закрытие будет «свежим» фронтом.
+        // Отменяем grace-период предыдущей дуэли — иначе Update отправит сигнал закрытия
+        // шлюзов уже во время нового боя.
         comp.GateCloseAt = null;
         _signalSystem.SendSignal(uid, comp.ResetPort, false);
 
@@ -200,39 +209,47 @@ public sealed class DuelArenaSystem : EntitySystem
 
             var loser = uid;
             var loserName = MetaData(loser).EntityName;
-            var winner = arena.Duelists.FirstOrDefault(d => d != loser);
+
+            // Ищем победителя — живого дуэлянта. Если он тоже в крите/мёртв — ничья.
+            var winner = arena.Duelists
+                .Where(d => d != loser && _mobState.IsAlive(d))
+                .Cast<EntityUid?>()
+                .FirstOrDefault();
 
             string msg;
-            if (winner != default)
+            if (winner != null)
             {
-                var winnerName = MetaData(winner).EntityName;
+                var winnerName = MetaData(winner.Value).EntityName;
 
                 // Счёт ведём по игроку (NetUserId), а не по телу: иначе после клона/респавна
                 // боец получает новый EntityUid и счёт каждый раунд начинается заново.
-                var winnerUser = GetUser(winner);
-                var loserUser = GetUser(loser);
+                var winnerUser = GetUser(winner.Value);
+                var loserUser  = GetUser(loser);
 
                 if (winnerUser != null)
                     arena.Scores[winnerUser.Value] = arena.Scores.GetValueOrDefault(winnerUser.Value) + 1;
 
                 var winnerScore = winnerUser != null ? arena.Scores.GetValueOrDefault(winnerUser.Value) : 0;
-                var loserScore = loserUser != null ? arena.Scores.GetValueOrDefault(loserUser.Value) : 0;
+                var loserScore  = loserUser  != null ? arena.Scores.GetValueOrDefault(loserUser.Value)  : 0;
 
-                msg = $"Дуэль завершена! {loserName} потерял сознание. Победитель: {winnerName}! " +
-                      $"Счёт: {winnerName} {winnerScore} — {loserScore} {loserName}";
+                msg = $"Дуэль завершена! Победитель: {winnerName}! {loserName} потерял сознание. " +
+                      $"Счёт: {winnerName} {winnerScore} — {loserScore} {loserName}. Снаряжение убрано.";
             }
             else
             {
-                msg = $"Дуэль завершена! {loserName} потерял сознание.";
+                // Оба упали — ничья.
+                var otherName = arena.Duelists
+                    .Where(d => d != loser)
+                    .Select(d => MetaData(d).EntityName)
+                    .FirstOrDefault() ?? "?";
+                msg = $"Ничья! {loserName} и {otherName} потеряли сознание одновременно. Снаряжение убрано.";
             }
 
-            _chatManager.DispatchServerAnnouncement(msg, Color.Gold);
             arena.Duelists.Clear();
 
-            // По концу боя сразу убираем снаряжение с бойцов и предметы с пола арены
-            // (базовую одежду — комбинезон/бельё/чулки — не трогаем).
+            // Убираем снаряжение и объявляем результат одним сообщением.
             _cleanup.CleanupArea(arenaUid, arena.CleanupRange);
-            _chatManager.DispatchServerAnnouncement("Арена очищена: снаряжение дуэлянтов и предметы убраны.", Color.Gold);
+            _chatManager.DispatchServerAnnouncement(msg, Color.Gold);
 
             // Сигнал закрытия шлюзов шлём не сразу, а через ReturnGrace секунд: дуэлянты
             // возвращаются в базы по открытым шлюзам, и только потом те закрываются (см. Update).

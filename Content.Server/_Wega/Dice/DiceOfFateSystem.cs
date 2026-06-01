@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Server._Wega.Duel.Components;
+using Content.Server._Wega.Duel.Systems;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Body.Systems;
@@ -15,6 +17,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.Dice;
 using Content.Shared.Disease;
+using Content.Shared.Effects;
 using Content.Shared.Explosion;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.Components;
@@ -29,6 +32,8 @@ using Content.Shared.Popups;
 using Content.Shared.Roles.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -40,8 +45,13 @@ public sealed class DiceOfFateSystem : EntitySystem
 {
     [Dependency] private readonly SharedAccessSystem _access = default!;
     [Dependency] private readonly IAdminLogManager _admin = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly DuelArenaCleanupSystem _cleanup = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly SharedDiceSystem _dice = default!;
     [Dependency] private readonly SharedDiseaseSystem _disease = default!;
     [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly GibbingSystem _gibbing = default!;
@@ -59,8 +69,65 @@ public sealed class DiceOfFateSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DiceOfFateComponent, UseInHandEvent>(OnUseInHand, after: [typeof(SharedDiceSystem)]);
-        SubscribeLocalEvent<DiceOfFateComponent, LandEvent>(OnLand, after: [typeof(SharedDiceSystem)]);
+        // Единственная подписка на каждое событие — перехватываем ДО SharedDiceSystem.
+        // Внутри сами катим кубик и блокируем SharedDiceSystem через args.Handled.
+        // Это обходит ограничение движка: нельзя иметь две подписки на один (comp, event).
+        SubscribeLocalEvent<DiceOfFateComponent, UseInHandEvent>(OnUseInHand, before: [typeof(SharedDiceSystem)]);
+        SubscribeLocalEvent<DiceOfFateComponent, LandEvent>(OnLand, before: [typeof(SharedDiceSystem)]);
+    }
+
+    private void OnUseInHand(Entity<DiceOfFateComponent> entity, ref UseInHandEvent args)
+    {
+        if (entity.Comp.Used || args.Handled)
+            return;
+        if (!TryComp<DiceComponent>(entity, out var dice))
+            return;
+
+        entity.Comp.Used = true;
+        args.Handled = true;
+
+        var roll = _random.Next(1, dice.Sides + 1);
+        _dice.SetCurrentValue((entity.Owner, dice), roll);
+
+        ApplyRollResult(entity.Owner, entity.Comp, dice, args.User);
+        Timer.Spawn(TimeSpan.FromSeconds(1), () => { QueueDel(entity); });
+    }
+
+    private void OnLand(Entity<DiceOfFateComponent> entity, ref LandEvent args)
+    {
+        if (entity.Comp.Used || args.User == null)
+            return;
+        if (!TryComp<DiceComponent>(entity, out var dice))
+            return;
+
+        entity.Comp.Used = true;
+
+        var roll = _random.Next(1, dice.Sides + 1);
+        _dice.SetCurrentValue((entity.Owner, dice), roll);
+
+        ApplyRollResult(entity.Owner, entity.Comp, dice, args.User.Value);
+        Timer.Spawn(TimeSpan.FromSeconds(1), () => { QueueDel(entity); });
+    }
+
+    private void ApplyRollResult(EntityUid diceUid, DiceOfFateComponent comp, DiceComponent dice, EntityUid user)
+    {
+        var text = Loc.GetString("dice-component-on-roll-land", ("die", diceUid), ("currentSide", dice.CurrentValue));
+
+        if (comp.Arena)
+        {
+            // Арена: только бросивший видит результат, в админ-лог не пишем.
+            _popup.PopupEntity(text, diceUid, user);
+            RollArena(user, dice.CurrentValue);
+        }
+        else
+        {
+            // Обычный кубик: публичный попап + звук для всех в зоне видимости + админ-лог.
+            _popup.PopupPredicted(text, diceUid, user);
+            _audio.PlayPredicted(dice.Sound, diceUid, user);
+            var success = RollClassic(user, dice.CurrentValue);
+            _admin.Add(LogType.Action, LogImpact.Extreme,
+                $"{ToPrettyString(user):user} rolls dice of fate: outcome '{success}', number {dice.CurrentValue}.");
+        }
     }
 
     private static readonly ProtoId<DamageModifierSetPrototype> DamageMod = "DiceOfFateMod";
@@ -81,48 +148,47 @@ public sealed class DiceOfFateSystem : EntitySystem
     private static readonly EntProtoId CombatMedkit = "MedkitCombatFilled";
     private static readonly EntProtoId Stim = "Stimpack";
     private static readonly EntProtoId MiniStim = "StimpackMini";
-    private static readonly EntProtoId ArmorVest = "ClothingOuterArmorBasic";
     private static readonly EntProtoId Shield = "EnergyShield";
     private static readonly EntProtoId StrongWeapon = "EnergySword";
+    private static readonly EntProtoId StrongWeaponKatana = "EnergyKatana";
+    private static readonly EntProtoId StrongWeaponBat = "HomerunBat";
+
+    // Случайные оружия — нижний ярус (грани 7, 11, 19).
     private static readonly EntProtoId[] ArenaWeapons =
     {
-        "WeaponPistolViper",
-        "Cutlass",
-        "Machete",
-        "WeaponRevolverInspector",
-        "EnergyDagger",
+        "WeaponPistolViper",       // пистолет
+        "WeaponPistolMk58",        // стандартный пистолет
+        "WeaponPistolCobra",       // пистолет с остановкой
+        "WeaponPistolN1984",       // табельный пистолет
+        "WeaponRevolverInspector", // револьвер инспектора
+        "Cutlass",                 // абордажная сабля
+        "Machete",                 // мачете
+        "CombatKnife",             // боевой нож
+        "FireAxe",                 // пожарный топор
+        "EnergyDagger",            // энергокинжал
+        "BaseBallBat",             // бейсбольная бита
+        "WeaponShotgunDoubleBarreled", // двустволка
+    };
+
+    // Случайная броня (грань 5).
+    private static readonly EntProtoId[] ArenaArmors =
+    {
+        "ClothingOuterArmorBasic",       // лёгкий бронежилет
+        "ClothingOuterArmorRiot",        // антирадиационный
+        "ClothingOuterArmorBulletproof", // пуленепробиваемый
+        "ClothingOuterArmorReflective",  // отражающий (vs энергооружие)
+        "ClothingOuterVestWeb",          // тактический жилет
+        "ClothingOuterArmorHeavy",       // тяжёлая броня (замедляет)
+        "ClothingOuterArmorScrap",       // металлолом
     };
 
     private const float ArenaBuffSeconds = 30f;
+    private const float ArenaRushSeconds = 10f;
 
-    private void OnUseInHand(Entity<DiceOfFateComponent> entity, ref UseInHandEvent args)
+    public void RollFate(EntityUid user, int value)
     {
-        if (!TryComp<DiceComponent>(entity, out var dice) || entity.Comp.Used)
-            return;
-
-        entity.Comp.Used = true;
-        RollFate(args.User, dice.CurrentValue, entity.Comp.Arena);
-        Timer.Spawn(TimeSpan.FromSeconds(1), () => { QueueDel(entity); }); // So that you can see the number
-    }
-
-    private void OnLand(Entity<DiceOfFateComponent> entity, ref LandEvent args)
-    {
-        if (args.User == null || !TryComp<DiceComponent>(entity, out var dice)
-            || entity.Comp.Used)
-            return;
-
-        entity.Comp.Used = true;
-        RollFate(args.User.Value, dice.CurrentValue, entity.Comp.Arena);
-        Timer.Spawn(TimeSpan.FromSeconds(1), () => { QueueDel(entity); }); // So that you can see the number
-    }
-
-    public void RollFate(EntityUid user, int value, bool arena = false)
-    {
-        var success = arena
-            ? RollArena(user, value)
-            : RollClassic(user, value);
-
-        _admin.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(user):user} rolls dice of fate (arena: {arena}): outcome '{success}', number {value}.");
+        var success = RollClassic(user, value);
+        _admin.Add(LogType.Action, LogImpact.Extreme, $"{ToPrettyString(user):user} rolls dice of fate: outcome '{success}', number {value}.");
     }
 
     private bool RollClassic(EntityUid user, int value)
@@ -360,40 +426,39 @@ public sealed class DiceOfFateSystem : EntitySystem
     }
 
     // ── Arena table ──────────────────────────────────────────────────────────
-    // Боевой набор под дуэль: только полезные и нейтральные исходы — баффы, оружие,
-    // лечение. Негативных эффектов нет. 1 — скромно, 20 — джекпот.
+    // Боевой набор под дуэль: только полезные и нейтральные исходы. 1 — скромно, 20 — джекпот.
+    // Каждая грань уникальна, ценность нарастает.
     private bool RollArena(EntityUid user, int value)
     {
         return value switch
         {
-            1 => NothingHappens(user),             // ничего
-            2 => ArenaMiniStim(user),              // микроинъектор гиперзина в руки
-            3 => ArenaCombatMedkit(user),          // боевая аптечка в руки
-            4 => ArenaCombatStim(user),            // боевой стим в руки
-            5 => ArenaSpawnArmor(user),            // броня в руки
-            6 => ArenaSpawnShield(user),           // энергощит в руки
-            7 => ArenaRandomWeapon(user),          // случайное оружие в руки
-            8 => ArenaAdrenaline(user),            // бафф скорости на время
-            9 => ArenaTemporaryArmor(user),        // ×0.5 урона по себе на время
-            10 => ArenaCombatStim(user),           // боевой стим в руки
-            11 => ArenaRandomWeapon(user),         // случайное оружие в руки
-            12 => ArenaCombatMedkit(user),         // боевая аптечка в руки
-            13 => ArenaAdrenaline(user),           // бафф скорости на время
-            14 => ArenaStrongWeapon(user),         // мощное оружие в руки
-            15 => ArenaTemporaryArmor(user),       // ×0.5 урона по себе на время
-            16 => ArenaBerserk(user),              // скорость + броня на время
-            17 => ArenaStrongWeapon(user),         // мощное оружие в руки
-            18 => PermanentDamageReduction(user),  // постоянная ×0.5 броня
-            19 => ArenaWarJackpot(user),           // мощное оружие + броня на время
-            20 => ArenaMegaJackpot(user),          // постоянная броня + мощное оружие
-            _ => NothingHappens(user)
+            1  => NothingHappens(user),             // ничего
+            2  => ArenaMiniStim(user),              // микростим в руки
+            3  => ArenaCombatMedkit(user),          // боевая аптечка в руки
+            4  => ArenaCombatStim(user),            // боевой стим в руки
+            5  => ArenaSpawnArmor(user),            // броня в руки
+            6  => ArenaSpawnShield(user),           // энергощит в руки
+            7  => ArenaRandomWeapon(user),          // случайное оружие в руки
+            8  => ArenaRush(user),                  // рывок: ×1.8 скорость на 10 сек
+            9  => ArenaAdrenaline(user),            // ×1.3 скорость на 30 сек
+            10 => ArenaTemporaryArmor(user),        // ×0.5 урона на 30 сек
+            11 => ArenaWeaponAndMiniStim(user),     // случайное оружие + микростим
+            12 => ArenaMedkitAndStim(user),         // аптечка + стим
+            13 => ArenaBerserk(user),               // скорость + броня на 30 сек
+            14 => ArenaStrongWeapon(user),          // энергокатана с дэшем
+            15 => ArenaRegen(user),                 // регенерация: +30 хп за 30 сек
+            16 => ArenaStrongWeaponAndShield(user), // мощное оружие + энергощит
+            17 => ArenaWarJackpot(user),            // бита с нокбеком + броня на 30 сек
+            18 => ArenaBerserkAndMedkit(user),      // скорость + броня + аптечка
+            19 => ArenaRegenAndWeapon(user),        // регенерация + случайное оружие
+            20 => ArenaMegaJackpot(user),           // скорость + броня + мощное оружие
+            _  => NothingHappens(user)
         };
     }
 
     private bool ArenaSpawnArmor(EntityUid user)
     {
-        var armor = Spawn(ArmorVest, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, armor);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(_random.Pick(ArenaArmors), user));
         return true;
     }
 
@@ -406,72 +471,244 @@ public sealed class DiceOfFateSystem : EntitySystem
 
     private bool ArenaMegaJackpot(EntityUid user)
     {
-        PermanentDamageReduction(user);
-        var weapon = Spawn(StrongWeapon, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, weapon);
+        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, LabelBerserk, EffectWave);
+        TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
+        TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(StrongWeapon, user));
         return true;
     }
 
     private bool ArenaMiniStim(EntityUid user)
     {
-        var stim = Spawn(MiniStim, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, stim);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(MiniStim, user));
         return true;
     }
 
     private bool ArenaCombatMedkit(EntityUid user)
     {
-        var kit = Spawn(CombatMedkit, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, kit);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(CombatMedkit, user));
         return true;
     }
 
     private bool ArenaAdrenaline(EntityUid user)
     {
+        ApplyTempGlow(user, GlowSpeed, ArenaBuffSeconds, LabelSpeed, EffectWave);
         TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
         return true;
     }
 
     private bool ArenaRandomWeapon(EntityUid user)
     {
-        var weapon = Spawn(_random.Pick(ArenaWeapons), Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, weapon);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(_random.Pick(ArenaWeapons), user));
         return true;
     }
 
     private bool ArenaTemporaryArmor(EntityUid user)
     {
+        ApplyTempGlow(user, GlowArmor, ArenaBuffSeconds, LabelArmor, EffectSparks);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         return true;
     }
 
     private bool ArenaCombatStim(EntityUid user)
     {
-        var stim = Spawn(Stim, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, stim);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(Stim, user));
         return true;
     }
 
+    // Грань 14: энергокатана с дэшем.
     private bool ArenaStrongWeapon(EntityUid user)
     {
-        var weapon = Spawn(StrongWeapon, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, weapon);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(StrongWeaponKatana, user));
         return true;
     }
 
     private bool ArenaBerserk(EntityUid user)
     {
+        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, LabelBerserk, EffectWave);
         TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         return true;
     }
 
+    // Грань 17: бита с нокбеком + временная броня — неожиданный вариант.
     private bool ArenaWarJackpot(EntityUid user)
     {
+        ApplyTempGlow(user, GlowArmor, ArenaBuffSeconds, LabelArmor, EffectSparks);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
-        var weapon = Spawn(StrongWeapon, Transform(user).Coordinates);
-        _hands.TryForcePickupAnyHand(user, weapon);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(StrongWeaponBat, user));
         return true;
+    }
+
+    // ── Новые уникальные исходы ──────────────────────────────────────────────
+
+    // Грань 8: короткий но мощный рывок — ×1.8 скорость на 10 сек.
+    private bool ArenaRush(EntityUid user)
+    {
+        ApplyTempGlow(user, GlowRush, ArenaRushSeconds, LabelRush, EffectWave);
+        TempSpeedMultiplier(user, 1.8f, ArenaRushSeconds);
+        return true;
+    }
+
+    // Грань 11: случайное оружие + микростим.
+    private bool ArenaWeaponAndMiniStim(EntityUid user)
+    {
+        _hands.TryForcePickupAnyHand(user, SpawnArena(_random.Pick(ArenaWeapons), user));
+        _hands.TryForcePickupAnyHand(user, SpawnArena(MiniStim, user));
+        return true;
+    }
+
+    // Грань 12: боевая аптечка + стим.
+    private bool ArenaMedkitAndStim(EntityUid user)
+    {
+        _hands.TryForcePickupAnyHand(user, SpawnArena(CombatMedkit, user));
+        _hands.TryForcePickupAnyHand(user, SpawnArena(Stim, user));
+        return true;
+    }
+
+    // Грань 15: периодическая регенерация — лечит постепенно за 30 сек.
+    private bool ArenaRegen(EntityUid user)
+    {
+        ApplyTempGlow(user, GlowRegen, ArenaBuffSeconds, LabelRegen, EffectRegen);
+        const int ticks = 10;
+        const float interval = ArenaBuffSeconds / ticks; // 3 сек на тик
+        var heal = new DamageSpecifier { DamageDict =
+        {
+            { "Blunt",  -8 },
+            { "Slash",  -8 },
+            { "Pierce", -4 },
+            { "Burn",   -8 },
+            { "Shock",  -2 },
+        }};
+        for (var i = 1; i <= ticks; i++)
+        {
+            var delay = i;
+            Timer.Spawn(TimeSpan.FromSeconds(interval * delay), () =>
+            {
+                if (!Deleted(user))
+                    _damage.TryChangeDamage(user, heal, ignoreResistances: true);
+            });
+        }
+        return true;
+    }
+
+    // Грань 16: мощное оружие + энергощит.
+    private bool ArenaStrongWeaponAndShield(EntityUid user)
+    {
+        _hands.TryForcePickupAnyHand(user, SpawnArena(StrongWeapon, user));
+        _hands.TryForcePickupAnyHand(user, SpawnArena(Shield, user));
+        return true;
+    }
+
+    // Грань 18: берсерк (скорость + броня) + боевая аптечка.
+    private bool ArenaBerserkAndMedkit(EntityUid user)
+    {
+        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, LabelBerserk, EffectWave);
+        TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
+        TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(CombatMedkit, user));
+        return true;
+    }
+
+    // Грань 19: регенерация + случайное оружие.
+    private bool ArenaRegenAndWeapon(EntityUid user)
+    {
+        ArenaRegen(user);
+        _hands.TryForcePickupAnyHand(user, SpawnArena(_random.Pick(ArenaWeapons), user));
+        return true;
+    }
+
+    // ── Спавн арена-предметов ────────────────────────────────────────────────
+
+    /// <summary>
+    /// Спавнит предмет и сразу тегирует его <see cref="ArenaIssuedItemComponent"/>,
+    /// чтобы очистка арены удалила его по окончании дуэли.
+    /// </summary>
+    // Спавнит предмет и рекурсивно тегирует его и всё вложенное ArenaIssuedItemComponent.
+    private EntityUid SpawnArena(EntProtoId proto, EntityUid user)
+    {
+        var uid = Spawn(proto, Transform(user).Coordinates);
+        _cleanup.MarkIssuedRecursive(uid);
+        return uid;
+    }
+
+    // ── Визуальные эффекты баффов ────────────────────────────────────────────
+
+    // Счётчик активных свечений: если > 0, PointLight держится на персонаже.
+    private readonly Dictionary<EntityUid, int> _activeGlows = new();
+
+    private static readonly Color GlowRush    = Color.FromHex("#FFD700"); // золотой   — рывок
+    private static readonly Color GlowSpeed   = Color.FromHex("#00CFFF"); // голубой   — адреналин
+    private static readonly Color GlowArmor   = Color.FromHex("#3A6FFF"); // синий     — броня
+    private static readonly Color GlowBerserk = Color.FromHex("#AA44FF"); // фиолетовый — берсерк
+    private static readonly Color GlowRegen   = Color.FromHex("#44FF88"); // зелёный   — регенерация
+
+    // Названия баффов для попапа над головой.
+    private const string LabelRush    = "⚡ РЫВОК";
+    private const string LabelSpeed   = ">> АДРЕНАЛИН";
+    private const string LabelArmor   = "## БРОНЯ";
+    private const string LabelBerserk = "!! БЕРСЕРК";
+    private const string LabelRegen   = "+ РЕГЕНЕРАЦИЯ";
+
+    /// <summary>
+    /// Тройная пульсирующая вспышка + крупный попап над игроком (виден всем)
+    /// + постоянное свечение на время баффа.
+    /// </summary>
+    // Готовые анимации эффектов под разные типы баффа.
+    private static readonly EntProtoId EffectWave = "EffectGravityPulse"; // волна — скорость/берсерк
+    private static readonly EntProtoId EffectSparks = "EffectSparks";     // искры — броня
+    private static readonly EntProtoId EffectRegen = "EffectDiceRegen";   // голограмма — регенерация
+
+    private void ApplyTempGlow(EntityUid user, Color color, float seconds, string label, EntProtoId effect)
+    {
+        // Крупный попап — все вокруг видят название баффа.
+        _popup.PopupEntity(label, user, PopupType.LargeCaution);
+
+        // Анимация эффекта поверх игрока в момент срабатывания.
+        Spawn(effect, Transform(user).Coordinates);
+
+        // Тройная пульсирующая вспышка: 0 мс — 120 мс — 240 мс.
+        for (var i = 0; i < 3; i++)
+        {
+            var delay = i * 120;
+            Timer.Spawn(delay, () =>
+            {
+                if (!Deleted(user))
+                    _colorFlash.RaiseEffect(color, [user], Filter.Pvs(user, entityManager: EntityManager));
+            });
+        }
+
+        // Постоянное свечение на время баффа.
+        _activeGlows.TryGetValue(user, out var count);
+        _activeGlows[user] = count + 1;
+
+        EnsureComp<PointLightComponent>(user, out var light);
+        _pointLight.SetColor(user, color, light);
+        _pointLight.SetEnergy(user, 2.5f, light);
+        _pointLight.SetRadius(user, 3f, light);
+        _pointLight.SetEnabled(user, true, light);
+
+        Timer.Spawn(TimeSpan.FromSeconds(seconds), () =>
+        {
+            if (Deleted(user))
+            {
+                _activeGlows.Remove(user);
+                return;
+            }
+
+            if (!_activeGlows.TryGetValue(user, out var c))
+                return;
+
+            if (c <= 1)
+            {
+                _activeGlows.Remove(user);
+                RemCompDeferred<PointLightComponent>(user);
+            }
+            else
+            {
+                _activeGlows[user] = c - 1;
+            }
+        });
     }
 
     /// <summary>

@@ -282,6 +282,42 @@
     graph: BloodCultWeapons
     node: death
 
+# Арена-вариант для дуэлей: копия death blade БЕЗ BloodCultWeapon и культовой
+# постройки, поэтому им могут пользоваться обычные дуэлянты (не культисты).
+# Нельзя наследовать от WeaponDeathBlade: компонент BloodCultWeapon не убрать
+# через наследование, поэтому это самостоятельный прототип.
+- type: entity
+  id: WeaponDeathBladeArena
+  parent: BaseItem
+  name: death blade
+  description: A scythe-like weapon, very sharp...
+  suffix: Arena
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Melee/death_blade.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+  - type: Item
+    storedRotation: -45
+    size: Normal
+    shape:
+    - 0,0,1,0
+    - 0,2,0,1
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Piercing: 30
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: DisarmMalus
+
 - type: entity
   id: WeaponHellBlade
   parent: BaseItem

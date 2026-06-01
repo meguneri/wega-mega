@@ -1,0 +1,18 @@
+# Эффект регенерации кубика судьбы (арена) — лечащая голограмма medi_holo.
+# Остальные баффы используют готовые EffectGravityPulse и EffectSparks.
+- type: entity
+  id: EffectDiceRegen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 0.8
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    sprite: /Textures/Effects/medi_holo.rsi
+    state: medi_holo
+  - type: EffectVisuals
+  - type: Tag
+    tags:
+    - HideContextMenu
+  - type: AnimationPlayer

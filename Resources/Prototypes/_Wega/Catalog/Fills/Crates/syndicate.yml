@@ -1,8 +1,8 @@
 - type: entity
   parent: [ CrateSyndicate, StorePresetFullArsenal, BaseSyndicateContraband ]
   id: CrateSyndicateFullArsenal
-  name: uplink-full-arsenal-bundle-name
-  description: uplink-full-arsenal-bundle-desc
+  name: Ящик хаоса (40 ТК)
+  description: Случайное снаряжение на 40 ТК. Более 200 предметов в пуле — оружие, броня, скафандры, гранаты, импланты и многое другое. Повезёт — скафандр командира и LMG. Не повезёт — бита и кошачьи ушки.
   components:
   - type: Icon
     sprite: _Wega/Structures/Storage/Crates/full_arsenal.rsi
@@ -24,8 +24,8 @@
 - type: entity
   parent: [ CrateSyndicate, StorePresetFullArsenal, BaseSyndicateContraband ]
   id: CrateSyndicateFullArsenalMega
-  name: uplink-full-arsenal-mega-bundle-name
-  description: uplink-full-arsenal-mega-bundle-desc
+  name: Мега ящик хаоса (120 ТК)
+  description: Случайное снаряжение на 120 ТК. Тот же пул из 200+ предметов, увеличенные лимиты. Не более 30 предметов в ящике.
   components:
   - type: Icon
     sprite: _Wega/Structures/Storage/Crates/full_arsenal_mega.rsi
@@ -47,8 +47,8 @@
 - type: entity
   parent: [ CrateSyndicate, StorePresetFullArsenal, BaseSyndicateContraband ]
   id: CrateSyndicateFullArsenalPlus
-  name: uplink-full-arsenal-plus-bundle-name
-  description: uplink-full-arsenal-plus-bundle-desc
+  name: Продвинутый ящик хаоса (60 ТК)
+  description: Случайное снаряжение на 60 ТК. Тот же пул из 200+ предметов, увеличенные лимиты.
   components:
   - type: Icon
     sprite: _Wega/Structures/Storage/Crates/full_arsenal_plus.rsi
@@ -68,8 +68,8 @@
 - type: entity
   parent: [ CrateSyndicate, StorePresetMeleeArsenal, BaseSyndicateContraband ]
   id: CrateSyndicateMeleeArsenal
-  name: uplink-melee-arsenal-bundle-name
-  description: uplink-melee-arsenal-bundle-desc
+  name: Ящик хаоса ближнего боя (40 ТК)
+  description: Случайное снаряжение на 40 ТК. Только холодное оружие и поддержка — мечи, кинжалы, щиты, броня, гранаты. Никакого огнестрела. Гарантировано минимум одно оружие ближнего боя.
   components:
   - type: Icon
     sprite: _Wega/Structures/Storage/Crates/melee_arsenal.rsi

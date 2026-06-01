@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Content.Server._Wega.Duel.Components;
+using Content.Server._Wega.Duel.Systems;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Store.Systems;
 using Content.Shared.FixedPoint;
@@ -17,6 +18,7 @@ public sealed class SurplusBundleSystem : EntitySystem
     [Dependency] private readonly EntityStorageSystem _entityStorage = default!;
     [Dependency] private readonly StoreSystem _store = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly DuelArenaCleanupSystem _cleanup = default!;
 
     public override void Initialize()
     {
@@ -38,46 +40,20 @@ public sealed class SurplusBundleSystem : EntitySystem
         var cords = Transform(ent).Coordinates;
         var content = GetRandomContent(ent);
 
-        // Only tag items when a duel is actually running. Crates placed on the map at load time
-        // must not be tagged — otherwise cleanup after a later duel would delete their contents.
-        var shouldTag = ent.Comp1.MarkIssuedItems && IsDuelActive();
+        // Tag arena-issued gear so the duel cleanup only removes what the crate gave out.
+        // MarkIssuedItems is set exclusively on the dedicated duel arena crates, which are
+        // bought from the uplink BEFORE the duelists arm the fight — so we tag on fill rather
+        // than gating on an active duel (the crate is filled while the duel isn't running yet).
+        var shouldTag = ent.Comp1.MarkIssuedItems;
 
         foreach (var item in content)
         {
             var dode = Spawn(item.ProductEntity, cords);
 
             if (shouldTag)
-                MarkIssuedRecursive(dode);
+                _cleanup.MarkIssuedRecursive(dode);
 
             _entityStorage.Insert(dode, ent);
-        }
-    }
-
-    private bool IsDuelActive()
-    {
-        var query = EntityQueryEnumerator<DuelArenaComponent>();
-        while (query.MoveNext(out _, out var arena))
-        {
-            if (arena.IsActive)
-                return true;
-        }
-        return false;
-    }
-
-    /// <summary>
-    ///     Tags an entity and everything nested in its containers with <see cref="ArenaIssuedItemComponent"/>.
-    /// </summary>
-    private void MarkIssuedRecursive(EntityUid uid)
-    {
-        EnsureComp<ArenaIssuedItemComponent>(uid);
-
-        if (!TryComp<ContainerManagerComponent>(uid, out var manager))
-            return;
-
-        foreach (var container in _container.GetAllContainers(uid, manager))
-        {
-            foreach (var contained in container.ContainedEntities)
-                MarkIssuedRecursive(contained);
         }
     }
 

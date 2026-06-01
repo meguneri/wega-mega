@@ -288,3 +288,6 @@
   - type: TimedDespawn
     lifetime: 44
   - type: EjectStorageOnDespawn
+  # Помечает ящик и весь лут как выданное аренное снаряжение —
+  # очистка арены уберёт их после окончания раунда.
+  - type: ArenaSupplyDrop

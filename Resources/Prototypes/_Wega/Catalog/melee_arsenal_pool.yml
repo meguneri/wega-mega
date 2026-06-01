@@ -3478,7 +3478,7 @@
   id: MeleeArsenalDeathBlade
   name: full-arsenal-death-blade-name
   description: full-arsenal-death-blade-desc
-  productEntity: WeaponDeathBlade
+  productEntity: WeaponDeathBladeArena
   cost:
     Telecrystal: 7
   categories:
