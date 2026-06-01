@@ -14,6 +14,13 @@ public sealed partial class DuelArenaComponent : Component
     public float ScanRange = 200f;
 
     /// <summary>
+    /// Радиус (в тайлах) очистки снаряжения по окончании боя.
+    /// Должен покрывать арену, но не дальние части станции.
+    /// </summary>
+    [DataField]
+    public float CleanupRange = 200f;
+
+    /// <summary>
     /// Как часто (в секундах) трекер сканирует зону на наличие дуэлянтов.
     /// </summary>
     [DataField]

@@ -231,7 +231,7 @@ public sealed class DuelArenaSystem : EntitySystem
 
             // По концу боя сразу убираем снаряжение с бойцов и предметы с пола арены
             // (базовую одежду — комбинезон/бельё/чулки — не трогаем).
-            _cleanup.CleanupArea(arenaUid, arena.ScanRange);
+            _cleanup.CleanupArea(arenaUid, arena.CleanupRange);
             _chatManager.DispatchServerAnnouncement("Арена очищена: снаряжение дуэлянтов и предметы убраны.", Color.Gold);
 
             // Сигнал закрытия шлюзов шлём не сразу, а через ReturnGrace секунд: дуэлянты

@@ -4,6 +4,7 @@ using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Implants.Components;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
@@ -11,14 +12,12 @@ using Robust.Shared.Map;
 namespace Content.Server._Wega.Duel.Systems;
 
 /// <summary>
-/// Очистка дуэльной арены: удаляет только предметы, выданные ящиком-арсеналом
-/// (помеченные <see cref="ArenaIssuedItemComponent"/>), где бы они ни лежали — на полу,
-/// в руках, надетые на бойцах, внутри рюкзаков/ящиков или вколотые в дуэлянтов импланты.
-/// Вещи игроков и предметы карты НЕ трогаются. Дополнительно убираются лужи (кровь, химия
-/// и т.п.) — следы боя.
-///
-/// Вызывается автоматически по концу боя (<see cref="DuelArenaSystem"/>) и вручную кнопкой
-/// через <see cref="DuelArenaCleanupComponent"/>.
+/// Очистка дуэльной арены. Удаляет:
+/// — предметы из ящика-арсенала (<see cref="ArenaIssuedItemComponent"/>),
+/// — потраченные гильзы (<see cref="CartridgeAmmoComponent"/> с Spent=true),
+/// — лужи крови/химии.
+/// Замаппленные вещи карты не трогаются: они загружаются до старта дуэли
+/// и поэтому не получают тег ArenaIssuedItem.
 /// </summary>
 public sealed class DuelArenaCleanupSystem : EntitySystem
 {
@@ -31,6 +30,10 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<DuelArenaCleanupComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<DuelArenaCleanupComponent, SignalReceivedEvent>(OnSignalReceived);
+
+        // Тегаем гильзы и прочие картриджи, заспавненные во время активной дуэли,
+        // чтобы клинап их убрал независимо от того, из чьего оружия они вылетели.
+        SubscribeLocalEvent<CartridgeAmmoComponent, ComponentStartup>(OnCartridgeStartup);
     }
 
     private void OnInit(EntityUid uid, DuelArenaCleanupComponent comp, ComponentInit args)
@@ -38,15 +41,17 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         _link.EnsureSinkPorts(uid, comp.TriggerPort);
     }
 
+    private void OnCartridgeStartup(EntityUid uid, CartridgeAmmoComponent comp, ComponentStartup args)
+    {
+        if (IsDuelActive())
+            EnsureComp<ArenaIssuedItemComponent>(uid);
+    }
+
     private void OnSignalReceived(EntityUid uid, DuelArenaCleanupComponent comp, ref SignalReceivedEvent args)
     {
         if (args.Port != comp.TriggerPort)
             return;
 
-        // Защита от «очистки на старте»: если рядом есть арена с идущим боём (IsActive),
-        // игнорируем сигнал. Спасает от случайной проводки старт-устройств на порт Trigger,
-        // а заодно не даёт ручной кнопке зачистить арену посреди дуэли. В конце боя очистка
-        // идёт напрямую из DuelArenaSystem (там IsActive уже сброшен), так что её не блокирует.
         if (IsDuelActiveNearby(uid, comp.Range))
             return;
 
@@ -54,9 +59,17 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         _chat.DispatchServerAnnouncement("Арена очищена: выданное снаряжение убрано.", Color.Gold);
     }
 
-    /// <summary>
-    /// Есть ли в радиусе от контроллера дуэльная арена с идущим боём.
-    /// </summary>
+    private bool IsDuelActive()
+    {
+        var query = EntityQueryEnumerator<DuelArenaComponent>();
+        while (query.MoveNext(out _, out var arena))
+        {
+            if (arena.IsActive)
+                return true;
+        }
+        return false;
+    }
+
     private bool IsDuelActiveNearby(EntityUid originEntity, float range)
     {
         var origin = Transform(originEntity).MapPosition;
@@ -68,32 +81,25 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
             if (InRange(arenaUid, origin, range))
                 return true;
         }
-
         return false;
     }
 
-    /// <summary>
-    /// Удаляет в радиусе только предметы, выданные ящиком-арсеналом (помеченные
-    /// <see cref="ArenaIssuedItemComponent"/>), и лужи. Удаление предмета-контейнера
-    /// (рюкзака/ящика) забирает с собой и его содержимое. Вколотые дуэлянтами импланты
-    /// сперва принудительно извлекаются, чтобы снять дарованные ими действия/компоненты.
-    /// Центр и радиус задаёт вызывающая сторона.
-    /// </summary>
     public void CleanupArea(EntityUid originEntity, float range)
     {
         var origin = Transform(originEntity).MapPosition;
 
-        // 1. Только выданное снаряжение — на полу, в руках, надетое, в контейнерах или вколотое.
+        // 1. Снаряжение из ящика + гильзы (все помечены ArenaIssuedItemComponent).
         var issuedQuery = EntityQueryEnumerator<ArenaIssuedItemComponent>();
         while (issuedQuery.MoveNext(out var itemUid, out _))
         {
             if (!InRange(itemUid, origin, range))
                 continue;
 
-            // Вколотый имплант: ПРИНУДИТЕЛЬНО вынимаем из импланта-контейнера дуэлянта (force обходит
-            // запрет на извлечение перманентных). Это поднимает EntGotRemovedFromContainerMessage, и
-            // SharedSubdermalImplantSystem снимает дарованные действия/компоненты. Без этого простой
-            // QueueDel удалил бы только сущность импланта, а действие (напр. «побег») осталось бы рабочим.
+            if (Transform(itemUid).Anchored)
+                continue;
+
+            // Вколотый имплант: принудительно вынимаем, чтобы SharedSubdermalImplantSystem
+            // корректно снял дарованные действия/компоненты.
             if (_container.TryGetContainingContainer((itemUid, null), out var container)
                 && container.ID == ImplanterComponent.ImplantSlotId)
             {
@@ -103,7 +109,7 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
             QueueDel(itemUid);
         }
 
-        // 2. Лужи на полу (кровь, химия и т.п.) — следы боя.
+        // 2. Лужи на полу (кровь, химия и т.п.).
         var puddleQuery = EntityQueryEnumerator<PuddleComponent>();
         while (puddleQuery.MoveNext(out var puddleUid, out _))
         {

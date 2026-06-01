@@ -37,19 +37,31 @@ public sealed class SurplusBundleSystem : EntitySystem
     {
         var cords = Transform(ent).Coordinates;
         var content = GetRandomContent(ent);
+
+        // Only tag items when a duel is actually running. Crates placed on the map at load time
+        // must not be tagged — otherwise cleanup after a later duel would delete their contents.
+        var shouldTag = ent.Comp1.MarkIssuedItems && IsDuelActive();
+
         foreach (var item in content)
         {
             var dode = Spawn(item.ProductEntity, cords);
 
-            // Tag arena-issued gear so the duel cleanup only removes what the crate gave out.
-            // Tagging recurses into containers so bundled contents are covered too — including the
-            // implant preloaded inside an implanter, which keeps the mark after it's injected and
-            // lets the cleanup wipe implants the duelists gave themselves.
-            if (ent.Comp1.MarkIssuedItems)
+            if (shouldTag)
                 MarkIssuedRecursive(dode);
 
             _entityStorage.Insert(dode, ent);
         }
+    }
+
+    private bool IsDuelActive()
+    {
+        var query = EntityQueryEnumerator<DuelArenaComponent>();
+        while (query.MoveNext(out _, out var arena))
+        {
+            if (arena.IsActive)
+                return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -59,7 +71,10 @@ public sealed class SurplusBundleSystem : EntitySystem
     {
         EnsureComp<ArenaIssuedItemComponent>(uid);
 
-        foreach (var container in _container.GetAllContainers(uid))
+        if (!TryComp<ContainerManagerComponent>(uid, out var manager))
+            return;
+
+        foreach (var container in _container.GetAllContainers(uid, manager))
         {
             foreach (var contained in container.ContainedEntities)
                 MarkIssuedRecursive(contained);

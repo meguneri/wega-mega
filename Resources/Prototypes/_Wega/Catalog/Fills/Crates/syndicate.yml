@@ -4,6 +4,10 @@
   name: uplink-full-arsenal-bundle-name
   description: uplink-full-arsenal-bundle-desc
   components:
+  - type: Icon
+    sprite: _Wega/Structures/Storage/Crates/full_arsenal.rsi
+  - type: Sprite
+    sprite: _Wega/Structures/Storage/Crates/full_arsenal.rsi
   - type: SurplusBundle
     totalPrice: 40
     weightByCost: true
@@ -23,11 +27,10 @@
   name: uplink-full-arsenal-mega-bundle-name
   description: uplink-full-arsenal-mega-bundle-desc
   components:
-  # Отдельная текстура, чтобы отличать от обычного ящика арсенала.
   - type: Icon
-    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+    sprite: _Wega/Structures/Storage/Crates/full_arsenal_mega.rsi
   - type: Sprite
-    sprite: Structures/Storage/Crates/syndicate_secure.rsi
+    sprite: _Wega/Structures/Storage/Crates/full_arsenal_mega.rsi
   - type: SurplusBundle
     totalPrice: 120
     weightByCost: true
@@ -47,11 +50,10 @@
   name: uplink-full-arsenal-plus-bundle-name
   description: uplink-full-arsenal-plus-bundle-desc
   components:
-  # Отдельная текстура (ящик с оружием), чтобы отличать от других ящиков арсенала.
   - type: Icon
-    sprite: Structures/Storage/Crates/weapon.rsi
+    sprite: _Wega/Structures/Storage/Crates/full_arsenal_plus.rsi
   - type: Sprite
-    sprite: Structures/Storage/Crates/weapon.rsi
+    sprite: _Wega/Structures/Storage/Crates/full_arsenal_plus.rsi
   - type: SurplusBundle
     totalPrice: 60
     weightByCost: true
@@ -69,6 +71,10 @@
   name: uplink-melee-arsenal-bundle-name
   description: uplink-melee-arsenal-bundle-desc
   components:
+  - type: Icon
+    sprite: _Wega/Structures/Storage/Crates/melee_arsenal.rsi
+  - type: Sprite
+    sprite: _Wega/Structures/Storage/Crates/melee_arsenal.rsi
   - type: SurplusBundle
     totalPrice: 40
     weightByCost: true

@@ -3111,7 +3111,7 @@
   description: full-arsenal-speed-boots-desc
   productEntity: ClothingShoesBootsSpeedFilled
   cost:
-    Telecrystal: 4
+    Telecrystal: 14
   categories:
   - FullArsenal
 
