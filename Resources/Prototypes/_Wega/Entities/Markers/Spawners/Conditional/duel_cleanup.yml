@@ -1,0 +1,42 @@
+# Очистка дуэльной арены.
+# DuelCleanupButton ──[DuelCleanup]──► DuelCleanupController (порт Trigger)
+# Кнопка снимает и удаляет всё снаряжение с бойцов в радиусе и убирает предметы с пола арены.
+# Связь автоматическая через AutoLink (канал DuelCleanup) — ручная настройка не нужна.
+
+- type: entity
+  id: DuelCleanupController
+  parent: MarkerBase
+  name: Duel Cleanup Controller
+  suffix: Duel Arena
+  description: Невидимый контроллер. По сигналу очищает арену от снаряжения и предметов.
+  components:
+  - type: Sprite
+    layers:
+      - state: red
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - Trigger
+  - type: AutoLinkReceiver
+    channel: DuelCleanup
+  - type: DuelArenaCleanup
+    # Радиус в тайлах — ставь по размеру арены (удаляет предметы!). Контроллер — в центр.
+    range: 200
+
+- type: entity
+  id: DuelCleanupButton
+  parent: SignalButton
+  name: duel cleanup button
+  suffix: Duel Arena
+  description: Удаляет всё снаряжение дуэлянтов и убирает предметы с арены. Жми после раунда.
+  components:
+  - type: DeviceLinkSource
+    ports:
+      - Pressed
+    range: 200
+  - type: AutoLinkTransmitter
+    channel: DuelCleanup

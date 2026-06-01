@@ -8,6 +8,18 @@
   - type: DiceOfFate
 
 - type: entity
+  parent: d20Dice
+  id: DiceOfWar
+  name: war die
+  description: A blood-red twenty-sided die, humming with the promise of a fight. Fortune favours the bold.
+  suffix: Dice Of War, DO NOT MAP
+  components:
+  - type: Sprite
+    color: "#e03030"
+  - type: DiceOfFate
+    arena: true
+
+- type: entity
   parent: BaseStorageItem
   id: CardTarotBoxEmpty
   name: tarot card box

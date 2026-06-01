@@ -1,0 +1,3486 @@
+# Melee Arsenal pool — same as Full Arsenal but with all ranged weapons removed.
+# Only melee weapons, armor, utility, shields, grenades, and support items.
+
+# ── MELEE ────────────────────────────────
+
+- type: listing
+  id: MeleeArsenalSaw
+  name: full-arsenal-saw-name
+  description: full-arsenal-saw-desc
+  productEntity: Saw
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSawAdvanced
+  name: full-arsenal-saw-advanced-name
+  description: full-arsenal-saw-advanced-desc
+  productEntity: SawAdvanced
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalChainsaw
+  name: full-arsenal-chainsaw-name
+  description: full-arsenal-chainsaw-desc
+  productEntity: Chainsaw
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalChainsawGreen
+  name: full-arsenal-chainsaw-green-name
+  description: full-arsenal-chainsaw-green-desc
+  productEntity: ChainsawGreen
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalBaseballBat
+  name: full-arsenal-baseball-bat-name
+  description: full-arsenal-baseball-bat-desc
+  productEntity: BaseBallBat
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSpear
+  name: full-arsenal-spear-name
+  description: full-arsenal-spear-desc
+  productEntity: Spear
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSpearBone
+  name: full-arsenal-spear-bone-name
+  description: full-arsenal-spear-bone-desc
+  productEntity: SpearBone
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSpearReinforced
+  name: full-arsenal-spear-reinforced-name
+  description: full-arsenal-spear-reinforced-desc
+  productEntity: SpearReinforced
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSpearPlasma
+  name: full-arsenal-spear-plasma-name
+  description: full-arsenal-spear-plasma-desc
+  productEntity: SpearPlasma
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSpearUranium
+  name: full-arsenal-spear-uranium-name
+  description: full-arsenal-spear-uranium-desc
+  productEntity: SpearUranium
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSpearSharkMinnow
+  name: full-arsenal-spear-sharkminnow-name
+  description: full-arsenal-spear-sharkminnow-desc
+  productEntity: SpearSharkMinnow
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCrusherGlaive
+  name: full-arsenal-crusher-glaive-name
+  description: full-arsenal-crusher-glaive-desc
+  productEntity: WeaponCrusherGlaive
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalMagmiteCrusherGlaive
+  name: full-arsenal-magmite-crusher-glaive-name
+  description: full-arsenal-magmite-crusher-glaive-desc
+  productEntity: WeaponMagmiteCrusherGlaive
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalMachete
+  name: full-arsenal-machete-name
+  description: full-arsenal-machete-desc
+  productEntity: Machete
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalFireAxe
+  name: full-arsenal-fire-axe-name
+  description: full-arsenal-fire-axe-desc
+  productEntity: FireAxe
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalFireAxeFlaming
+  name: full-arsenal-fire-axe-flaming-name
+  description: full-arsenal-fire-axe-flaming-desc
+  productEntity: FireAxeFlaming
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalBaguette
+  name: full-arsenal-baguette-name
+  description: full-arsenal-baguette-desc
+  productEntity: WeaponBaguette
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCombatKnife
+  name: full-arsenal-combat-knife-name
+  description: full-arsenal-combat-knife-desc
+  productEntity: CombatKnife
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCutlass
+  name: full-arsenal-cutlass-name
+  description: full-arsenal-cutlass-desc
+  productEntity: Cutlass
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEnergyDagger
+  name: full-arsenal-energy-dagger-name
+  description: full-arsenal-energy-dagger-desc
+  productEntity: EnergyDagger
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalKatana
+  name: full-arsenal-katana-name
+  description: full-arsenal-katana-desc
+  productEntity: Katana
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEnergyKatana
+  name: full-arsenal-energy-katana-name
+  description: full-arsenal-energy-katana-desc
+  productEntity: EnergyKatana
+  cost:
+    Telecrystal: 9
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSoapOmega
+  name: full-arsenal-soap-omega-name
+  description: full-arsenal-soap-omega-desc
+  productEntity: SoapOmega
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCaptainSabre
+  name: full-arsenal-captain-sabre-name
+  description: full-arsenal-captain-sabre-desc
+  productEntity: ClothingBeltSheathFilled
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClaymore
+  name: full-arsenal-claymore-name
+  description: full-arsenal-claymore-desc
+  productEntity: Claymore
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEnergySword
+  name: full-arsenal-energy-sword-name
+  description: full-arsenal-energy-sword-desc
+  productEntity: EnergySword
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+# ── ARMOR ────────────────────────────────
+
+- type: listing
+  id: MeleeArsenalArmorBasic
+  name: full-arsenal-armor-basic-name
+  description: full-arsenal-armor-basic-desc
+  productEntity: ClothingOuterArmorBasic
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorRiot
+  name: full-arsenal-armor-riot-name
+  description: full-arsenal-armor-riot-desc
+  productEntity: ClothingOuterArmorRiot
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorScrap
+  name: full-arsenal-armor-scrap-name
+  description: full-arsenal-armor-scrap-desc
+  productEntity: ClothingOuterArmorScrap
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorReflective
+  name: full-arsenal-armor-reflective-name
+  description: full-arsenal-armor-reflective-desc
+  productEntity: ClothingOuterArmorReflective
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorBulletproof
+  name: full-arsenal-armor-bulletproof-name
+  description: full-arsenal-armor-bulletproof-desc
+  productEntity: ClothingOuterArmorBulletproof
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorCult
+  name: full-arsenal-armor-cult-name
+  description: full-arsenal-armor-cult-desc
+  productEntity: ClothingOuterArmorCult
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorHeavy
+  name: full-arsenal-armor-heavy-name
+  description: full-arsenal-armor-heavy-desc
+  productEntity: ClothingOuterArmorHeavy
+  cost:
+    Telecrystal: 18
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorHeavyGreen
+  name: full-arsenal-armor-heavy-green-name
+  description: full-arsenal-armor-heavy-green-desc
+  productEntity: ClothingOuterArmorHeavyGreen
+  cost:
+    Telecrystal: 18
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorHeavyRed
+  name: full-arsenal-armor-heavy-red-name
+  description: full-arsenal-armor-heavy-red-desc
+  productEntity: ClothingOuterArmorHeavyRed
+  cost:
+    Telecrystal: 18
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorChangeling
+  name: full-arsenal-armor-changeling-name
+  description: full-arsenal-armor-changeling-desc
+  productEntity: ClothingOuterArmorChangeling
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorBone
+  name: full-arsenal-armor-bone-name
+  description: full-arsenal-armor-bone-desc
+  productEntity: ClothingOuterArmorBone
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorPodWars
+  name: full-arsenal-armor-pod-wars-name
+  description: full-arsenal-armor-pod-wars-desc
+  productEntity: ClothingOuterArmorPodWars
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatDetective
+  name: full-arsenal-coat-detective-name
+  description: full-arsenal-coat-detective-desc
+  productEntity: ClothingOuterCoatDetective
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatDetectiveLoadout
+  name: full-arsenal-coat-detective-loadout-name
+  description: full-arsenal-coat-detective-loadout-desc
+  productEntity: ClothingOuterCoatDetectiveLoadout
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatDetectiveGrey
+  name: full-arsenal-coat-detective-grey-name
+  description: full-arsenal-coat-detective-grey-desc
+  productEntity: ClothingOuterCoatDetectiveLoadoutGrey
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatDetectiveDark
+  name: full-arsenal-coat-detective-dark-name
+  description: full-arsenal-coat-detective-dark-desc
+  productEntity: ClothingOuterCoatDetectiveDark
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatHoSTrench
+  name: full-arsenal-coat-hos-trench-name
+  description: full-arsenal-coat-hos-trench-desc
+  productEntity: ClothingOuterCoatHoSTrench
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalWinterHoS
+  name: full-arsenal-winter-hos-name
+  description: full-arsenal-winter-hos-desc
+  productEntity: ClothingOuterWinterHoS
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatHoSGreatcoat
+  name: full-arsenal-coat-hos-greatcoat-name
+  description: full-arsenal-coat-hos-greatcoat-desc
+  productEntity: ClothingOuterCoatHoSGreatcoat
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatCaptain
+  name: full-arsenal-coat-captain-name
+  description: full-arsenal-coat-captain-desc
+  productEntity: ClothingOuterCoatCaptain
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatHoP
+  name: full-arsenal-coat-hop-name
+  description: full-arsenal-coat-hop-desc
+  productEntity: ClothingOuterCoatHOP
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatWarden
+  name: full-arsenal-coat-warden-name
+  description: full-arsenal-coat-warden-desc
+  productEntity: ClothingOuterCoatWarden
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatWardenAlt
+  name: full-arsenal-coat-warden-alt-name
+  description: full-arsenal-coat-warden-alt-desc
+  productEntity: ClothingOuterCoatWardenAlt
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalWinterPilot
+  name: full-arsenal-winter-pilot-name
+  description: full-arsenal-winter-pilot-desc
+  productEntity: ClothingOuterWinterPilot
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatSecurityOvercoat
+  name: full-arsenal-coat-security-overcoat-name
+  description: full-arsenal-coat-security-overcoat-desc
+  productEntity: ClothingOuterCoatSecurityOvercoat
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatTrench
+  name: full-arsenal-coat-trench-name
+  description: full-arsenal-coat-trench-desc
+  productEntity: ClothingOuterCoatTrench
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatSyndieCapArmored
+  name: full-arsenal-coat-syndie-cap-armored-name
+  description: full-arsenal-coat-syndie-cap-armored-desc
+  productEntity: ClothingOuterCoatSyndieCapArmored
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalWinterSyndieCapArmored
+  name: full-arsenal-winter-syndie-cap-armored-name
+  description: full-arsenal-winter-syndie-cap-armored-desc
+  productEntity: ClothingOuterWinterSyndieCapArmored
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalWinterBlueShield
+  name: full-arsenal-winter-blue-shield-name
+  description: full-arsenal-winter-blue-shield-desc
+  productEntity: ClothingOuterWinterBlueShield
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalWinterBlueShieldAlt
+  name: full-arsenal-winter-blue-shield-alt-name
+  description: full-arsenal-winter-blue-shield-alt-desc
+  productEntity: ClothingOuterWinterBlueShieldAlt
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalVestWeb
+  name: full-arsenal-vest-web-name
+  description: full-arsenal-vest-web-desc
+  productEntity: ClothingOuterVestWeb
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalVestWebElite
+  name: full-arsenal-vest-web-elite-name
+  description: full-arsenal-vest-web-elite-desc
+  productEntity: ClothingOuterVestWebElite
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalVestWebMerc
+  name: full-arsenal-vest-web-merc-name
+  description: full-arsenal-vest-web-merc-desc
+  productEntity: ClothingOuterVestWebMerc
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalDogi
+  name: full-arsenal-dogi-name
+  description: full-arsenal-dogi-desc
+  productEntity: ClothingOuterDogi
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalCoatAMG
+  name: full-arsenal-coat-amg-name
+  description: full-arsenal-coat-amg-desc
+  productEntity: ClothingOuterCoatAMG
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorWarden
+  name: full-arsenal-armor-warden-name
+  description: full-arsenal-armor-warden-desc
+  productEntity: ClothingOuterArmorWarden
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorRaid
+  name: full-arsenal-armor-raid-name
+  description: full-arsenal-armor-raid-desc
+  productEntity: ClothingOuterArmorRaid
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitEngineering
+  name: full-arsenal-hardsuit-engineering-name
+  description: full-arsenal-hardsuit-engineering-desc
+  productEntity: ClothingOuterHardsuitEngineering
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitAtmos
+  name: full-arsenal-hardsuit-atmos-name
+  description: full-arsenal-hardsuit-atmos-desc
+  productEntity: ClothingOuterHardsuitAtmos
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSyndie
+  name: full-arsenal-hardsuit-syndie-name
+  description: full-arsenal-hardsuit-syndie-desc
+  productEntity: ClothingOuterHardsuitSyndie
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSyndieElite
+  name: full-arsenal-hardsuit-syndie-elite-name
+  description: full-arsenal-hardsuit-syndie-elite-desc
+  productEntity: ClothingOuterHardsuitSyndieElite
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitJuggernaut
+  name: full-arsenal-hardsuit-juggernaut-name
+  description: full-arsenal-hardsuit-juggernaut-desc
+  productEntity: ClothingOuterHardsuitJuggernaut
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitDeathsquad
+  name: full-arsenal-hardsuit-deathsquad-name
+  description: full-arsenal-hardsuit-deathsquad-desc
+  productEntity: ClothingOuterHardsuitDeathsquad
+  cost:
+    Telecrystal: 35
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitEVA
+  name: full-arsenal-hardsuit-eva-name
+  description: full-arsenal-hardsuit-eva-desc
+  productEntity: ClothingOuterHardsuitEVA
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitAncientEVA
+  name: full-arsenal-hardsuit-ancient-eva-name
+  description: full-arsenal-hardsuit-ancient-eva-desc
+  productEntity: ClothingOuterHardsuitAncientEVA
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitEngineeringWhite
+  name: full-arsenal-hardsuit-engineering-white-name
+  description: full-arsenal-hardsuit-engineering-white-desc
+  productEntity: ClothingOuterHardsuitEngineeringWhite
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitMedical
+  name: full-arsenal-hardsuit-medical-name
+  description: full-arsenal-hardsuit-medical-desc
+  productEntity: ClothingOuterHardsuitMedical
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSecurity
+  name: full-arsenal-hardsuit-security-name
+  description: full-arsenal-hardsuit-security-desc
+  productEntity: ClothingOuterHardsuitSecurity
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSecurityRed
+  name: full-arsenal-hardsuit-security-red-name
+  description: full-arsenal-hardsuit-security-red-desc
+  productEntity: ClothingOuterHardsuitSecurityRed
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSecurityPilot
+  name: full-arsenal-hardsuit-security-pilot-name
+  description: full-arsenal-hardsuit-security-pilot-desc
+  productEntity: ClothingOuterHardsuitSecurityPilot
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitWarden
+  name: full-arsenal-hardsuit-warden-name
+  description: full-arsenal-hardsuit-warden-desc
+  productEntity: ClothingOuterHardsuitWarden
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitBrigmedic
+  name: full-arsenal-hardsuit-brigmedic-name
+  description: full-arsenal-hardsuit-brigmedic-desc
+  productEntity: ClothingOuterHardsuitBrigmedic
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitCap
+  name: full-arsenal-hardsuit-cap-name
+  description: full-arsenal-hardsuit-cap-desc
+  productEntity: ClothingOuterHardsuitCap
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitRd
+  name: full-arsenal-hardsuit-rd-name
+  description: full-arsenal-hardsuit-rd-desc
+  productEntity: ClothingOuterHardsuitRd
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitMaxim
+  name: full-arsenal-hardsuit-maxim-name
+  description: full-arsenal-hardsuit-maxim-desc
+  productEntity: ClothingOuterHardsuitMaxim
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitWizard
+  name: full-arsenal-hardsuit-wizard-name
+  description: full-arsenal-hardsuit-wizard-desc
+  productEntity: ClothingOuterHardsuitWizard
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitPirateCap
+  name: full-arsenal-hardsuit-pirate-cap-name
+  description: full-arsenal-hardsuit-pirate-cap-desc
+  productEntity: ClothingOuterHardsuitPirateCap
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSyndieCommander
+  name: full-arsenal-hardsuit-syndie-commander-name
+  description: full-arsenal-hardsuit-syndie-commander-desc
+  productEntity: ClothingOuterHardsuitSyndieCommander
+  cost:
+    Telecrystal: 16
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSyndieMedic
+  name: full-arsenal-hardsuit-syndie-medic-name
+  description: full-arsenal-hardsuit-syndie-medic-desc
+  productEntity: ClothingOuterHardsuitSyndieMedic
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitOperSelector
+  name: full-arsenal-hardsuit-oper-selector-name
+  description: full-arsenal-hardsuit-oper-selector-desc
+  productEntity: HardsuitOperSelector
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitOperMedSelector
+  name: full-arsenal-hardsuit-oper-med-selector-name
+  description: full-arsenal-hardsuit-oper-med-selector-desc
+  productEntity: HardsuitOperMedSelector
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitVoidParamed
+  name: full-arsenal-hardsuit-void-paramed-name
+  description: full-arsenal-hardsuit-void-paramed-desc
+  productEntity: ClothingOuterHardsuitVoidParamed
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitCBURN
+  name: full-arsenal-hardsuit-cburn-name
+  description: full-arsenal-hardsuit-cburn-desc
+  productEntity: ClothingOuterHardsuitCBURN
+  cost:
+    Telecrystal: 15
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitCBURNLeader
+  name: full-arsenal-hardsuit-cburn-leader-name
+  description: full-arsenal-hardsuit-cburn-leader-desc
+  productEntity: ClothingOuterHardsuitCBURNLeader
+  cost:
+    Telecrystal: 18
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitERTLeader
+  name: full-arsenal-hardsuit-ert-leader-name
+  description: full-arsenal-hardsuit-ert-leader-desc
+  productEntity: ClothingOuterHardsuitERTLeader
+  cost:
+    Telecrystal: 15
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitERTSecurity
+  name: full-arsenal-hardsuit-ert-security-name
+  description: full-arsenal-hardsuit-ert-security-desc
+  productEntity: ClothingOuterHardsuitERTSecurity
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitERTEngineer
+  name: full-arsenal-hardsuit-ert-engineer-name
+  description: full-arsenal-hardsuit-ert-engineer-desc
+  productEntity: ClothingOuterHardsuitERTEngineer
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitERTMedical
+  name: full-arsenal-hardsuit-ert-medical-name
+  description: full-arsenal-hardsuit-ert-medical-desc
+  productEntity: ClothingOuterHardsuitERTMedical
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitERTChaplain
+  name: full-arsenal-hardsuit-ert-chaplain-name
+  description: full-arsenal-hardsuit-ert-chaplain-desc
+  productEntity: ClothingOuterHardsuitERTChaplain
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitERTJanitor
+  name: full-arsenal-hardsuit-ert-janitor-name
+  description: full-arsenal-hardsuit-ert-janitor-desc
+  productEntity: ClothingOuterHardsuitERTJanitor
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+# ── UTILITY ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalFlashlight
+  name: full-arsenal-flashlight-name
+  description: full-arsenal-flashlight-desc
+  productEntity: FlashlightSeclite
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSmokeGrenade
+  name: full-arsenal-smoke-grenade-name
+  description: full-arsenal-smoke-grenade-desc
+  productEntity: SmokeGrenade
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalFlash
+  name: full-arsenal-flash-name
+  description: full-arsenal-flash-desc
+  productEntity: Flash
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+
+# ── SHIELDS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalRiotShield
+  name: full-arsenal-riot-shield-name
+  description: full-arsenal-riot-shield-desc
+  productEntity: RiotShield
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalRiotLaserShield
+  name: full-arsenal-riot-laser-shield-name
+  description: full-arsenal-riot-laser-shield-desc
+  productEntity: RiotLaserShield
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalRiotBulletShield
+  name: full-arsenal-riot-bullet-shield-name
+  description: full-arsenal-riot-bullet-shield-desc
+  productEntity: RiotBulletShield
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMirrorShield
+  name: full-arsenal-mirror-shield-name
+  description: full-arsenal-mirror-shield-desc
+  productEntity: MirrorShield
+  cost:
+    Telecrystal: 9
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalTelescopicShield
+  name: full-arsenal-telescopic-shield-name
+  description: full-arsenal-telescopic-shield-desc
+  productEntity: TelescopicShield
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalEnergyShield
+  name: full-arsenal-energy-shield-name
+  description: full-arsenal-energy-shield-desc
+  productEntity: EnergyShield
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalWoodenBuckler
+  name: full-arsenal-wooden-buckler-name
+  description: full-arsenal-wooden-buckler-desc
+  productEntity: WoodenBuckler
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCardShield
+  name: full-arsenal-card-shield-name
+  description: full-arsenal-card-shield-desc
+  productEntity: CardShield
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMakeshiftShield
+  name: full-arsenal-makeshift-shield-name
+  description: full-arsenal-makeshift-shield-desc
+  productEntity: MakeshiftShield
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalWebShield
+  name: full-arsenal-web-shield-name
+  description: full-arsenal-web-shield-desc
+  productEntity: WebShield
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalClockworkShield
+  name: full-arsenal-clockwork-shield-name
+  description: full-arsenal-clockwork-shield-desc
+  productEntity: ClockworkShield
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBlueSheildSheild
+  name: full-arsenal-blueshield-shield-name
+  description: full-arsenal-blueshield-shield-desc
+  productEntity: BlueSheildSheild
+  cost:
+    Telecrystal: 9
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBrokenEnergyShield
+  name: full-arsenal-broken-energy-shield-name
+  description: full-arsenal-broken-energy-shield-desc
+  productEntity: BrokenEnergyShield
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBrokenBlueSheildSheild
+  name: full-arsenal-broken-blueshield-shield-name
+  description: full-arsenal-broken-blueshield-shield-desc
+  productEntity: BrokenBlueSheildSheild
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+# ── WEAPON BUNDLES (меле и поддержка) ──────────────────
+
+- type: listing
+  id: MeleeArsenalRapierSyndie
+  name: full-arsenal-rapier-syndie-name
+  description: full-arsenal-rapier-syndie-desc
+  productEntity: ClothingBeltSheathSyndicateFilled
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalLobbyingBundle
+  name: full-arsenal-lobbying-bundle-name
+  description: full-arsenal-lobbying-bundle-desc
+  productEntity: BriefcaseSyndieLobbyingBundleFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDuffelMedical
+  name: full-arsenal-duffel-medical-name
+  description: full-arsenal-duffel-medical-desc
+  productEntity: ClothingBackpackDuffelSyndicateMedicalBundleFilled
+  cost:
+    Telecrystal: 24
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDuffelC4Bundle
+  name: uplink-c4-bundle-name
+  description: uplink-c4-bundle-desc
+  productEntity: ClothingBackpackDuffelSyndicateC4tBundle
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDuffelHardsuitBundle
+  name: uplink-hardsuit-syndie-name
+  description: uplink-hardsuit-syndie-desc
+  productEntity: ClothingBackpackDuffelSyndicateHardsuitBundle
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDuffelEliteHardsuitBundle
+  name: uplink-hardsuit-syndieelite-name
+  description: uplink-hardsuit-syndieelite-desc
+  productEntity: ClothingBackpackDuffelSyndicateEliteHardsuitBundle
+  cost:
+    Telecrystal: 13
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBeltMilitaryWebbing
+  name: full-arsenal-belt-military-webbing-name
+  description: full-arsenal-belt-military-webbing-desc
+  productEntity: ClothingBeltMilitaryWebbing
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBeltSalvageWebbing
+  name: full-arsenal-belt-salvage-webbing-name
+  description: full-arsenal-belt-salvage-webbing-desc
+  productEntity: ClothingBeltSalvageWebbing
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBeltSecurityWebbing
+  name: full-arsenal-belt-security-webbing-name
+  description: full-arsenal-belt-security-webbing-desc
+  productEntity: ClothingBeltSecurityWebbing
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDuffelCostumeClown
+  name: uplink-costume-clown-name
+  description: uplink-costume-clown-desc
+  productEntity: ClothingBackpackDuffelSyndicateCostumeClown
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+# ── IMPLANTS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalImplantStorage
+  name: full-arsenal-implant-storage-name
+  description: full-arsenal-implant-storage-desc
+  productEntity: StorageImplanter
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalImplantFreedom
+  name: full-arsenal-implant-freedom-name
+  description: full-arsenal-implant-freedom-desc
+  productEntity: FreedomImplanter
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalImplantScram
+  name: full-arsenal-implant-scram-name
+  description: full-arsenal-implant-scram-desc
+  productEntity: ScramImplanter
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalImplantEmp
+  name: full-arsenal-implant-emp-name
+  description: full-arsenal-implant-emp-desc
+  productEntity: EmpImplanter
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+# ── GADGETS & TOOLS ─────────────────────────────
+
+- type: listing
+  id: MeleeArsenalStealthBox
+  name: full-arsenal-stealth-box-name
+  description: full-arsenal-stealth-box-desc
+  productEntity: StealthBox
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalJawsOfLife
+  name: full-arsenal-jaws-name
+  description: full-arsenal-jaws-desc
+  productEntity: SyndicateJawsOfLife
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalHypopen
+  name: full-arsenal-hypopen-name
+  description: full-arsenal-hypopen-desc
+  productEntity: HypopenBox
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalExplodingPen
+  name: full-arsenal-exploding-pen-name
+  description: full-arsenal-exploding-pen-desc
+  productEntity: PenExplodingBox
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+
+- type: listing
+  id: MeleeArsenalPortableRecharger
+  name: full-arsenal-portable-recharger-name
+  description: full-arsenal-portable-recharger-desc
+  productEntity: PortableRecharger
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalHypospray
+  name: full-arsenal-hypospray-name
+  description: full-arsenal-hypospray-desc
+  productEntity: Hypospray
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSyndiHypo
+  name: full-arsenal-syndi-hypo-name
+  description: full-arsenal-syndi-hypo-desc
+  productEntity: SyndiHypo
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalHypopenSingle
+  name: full-arsenal-hypopen-single-name
+  description: full-arsenal-hypopen-single-desc
+  productEntity: Hypopen
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCyberPen
+  name: full-arsenal-cyber-pen-name
+  description: full-arsenal-cyber-pen-desc
+  productEntity: CyberPen
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalTrueMilkshake
+  name: full-arsenal-true-milkshake-name
+  description: full-arsenal-true-milkshake-desc
+  productEntity: DrinkTrueMilkshakeFilled
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+# ── MOD СКАФАНДРЫ ──────────────────────────
+
+- type: listing
+  id: MeleeArsenalModSuitEngineering
+  name: full-arsenal-modsuit-engineering-name
+  description: full-arsenal-modsuit-engineering-desc
+  productEntity: ClothingModularControllerEngineeringPreassembled
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitSecurity
+  name: full-arsenal-modsuit-security-name
+  description: full-arsenal-modsuit-security-desc
+  productEntity: ClothingModularControllerSecurityPreassembled
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitMedical
+  name: full-arsenal-modsuit-medical-name
+  description: full-arsenal-modsuit-medical-desc
+  productEntity: ClothingModularControllerMedicalPreassembled
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitSyndicate
+  name: full-arsenal-modsuit-syndicate-name
+  description: full-arsenal-modsuit-syndicate-desc
+  productEntity: ClothingModularControllerSyndicatePreassembled
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitMining
+  name: full-arsenal-modsuit-mining-name
+  description: full-arsenal-modsuit-mining-desc
+  productEntity: ClothingModularControllerMiningPreassembled
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitElite
+  name: full-arsenal-modsuit-elite-name
+  description: full-arsenal-modsuit-elite-desc
+  productEntity: ClothingModularControllerElitePreassembled
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitApocryphal
+  name: full-arsenal-modsuit-apocryphal-name
+  description: full-arsenal-modsuit-apocryphal-desc
+  productEntity: ClothingModularControllerApocryphalPreassembled
+  cost:
+    Telecrystal: 35
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+# ── TRINKETS & FUN ─────────────────────────────
+
+- type: listing
+  id: MeleeArsenalSoapSyndie
+  name: full-arsenal-soap-name
+  description: full-arsenal-soap-desc
+  productEntity: SoapSyndie
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSyndiePlayer
+  name: full-arsenal-syndie-player-name
+  description: full-arsenal-syndie-player-desc
+  productEntity: SyndiePlayerInstrument
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSyndiePouch
+  name: full-arsenal-syndie-pouch-name
+  description: full-arsenal-syndie-pouch-desc
+  productEntity: PouchSyndie
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCatEars
+  name: full-arsenal-cat-ears-name
+  description: full-arsenal-cat-ears-desc
+  productEntity: ClothingHeadHatCatEars
+  cost:
+    Telecrystal: 26
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDogEars
+  name: full-arsenal-dog-ears-name
+  description: full-arsenal-dog-ears-desc
+  productEntity: ClothingHeadHatDogEars
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBunnyEars
+  name: full-arsenal-bunny-ears-name
+  description: full-arsenal-bunny-ears-desc
+  productEntity: ClothingHeadHatBunny
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBalloonSyn
+  name: full-arsenal-balloon-syn-name
+  description: full-arsenal-balloon-syn-desc
+  productEntity: BalloonSyn
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalElegantMaidDress
+  name: full-arsenal-elegant-maid-dress-name
+  description: full-arsenal-elegant-maid-dress-desc
+  productEntity: ClothingUniformJumpskirtElegantMaid
+  cost:
+    Telecrystal: 30
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSyndicateSegway
+  name: full-arsenal-syndicate-segway-name
+  description: full-arsenal-syndicate-segway-desc
+  productEntity: CrateFunSyndicateSegway
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalToolboxSyndicate
+  name: full-arsenal-toolbox-syndicate-name
+  description: full-arsenal-toolbox-syndicate-desc
+  productEntity: ToolboxSyndicateFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDiceOfWar
+  name: full-arsenal-dice-of-war-name
+  description: full-arsenal-dice-of-war-desc
+  productEntity: DiceOfWar
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCapGun
+  name: full-arsenal-cap-gun-name
+  description: full-arsenal-cap-gun-desc
+  productEntity: RevolverCapGun
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCapGunFake
+  name: full-arsenal-cap-gun-fake-name
+  description: full-arsenal-cap-gun-fake-desc
+  productEntity: RevolverCapGunFake
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalToySword
+  name: full-arsenal-toy-sword-name
+  description: full-arsenal-toy-sword-desc
+  productEntity: ToySword
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+# ── MEDICAL SUPPLIES ────────────────────────────
+
+- type: listing
+  id: MeleeArsenalBrutepack
+  name: full-arsenal-brutepack-name
+  description: full-arsenal-brutepack-desc
+  productEntity: Brutepack
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalOintment
+  name: full-arsenal-ointment-name
+  description: full-arsenal-ointment-desc
+  productEntity: Ointment
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedicatedSuture
+  name: full-arsenal-medicated-suture-name
+  description: full-arsenal-medicated-suture-desc
+  productEntity: MedicatedSuture
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalRegenerativeMesh
+  name: full-arsenal-regenerative-mesh-name
+  description: full-arsenal-regenerative-mesh-desc
+  productEntity: RegenerativeMesh
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGauze
+  name: full-arsenal-gauze-name
+  description: full-arsenal-gauze-desc
+  productEntity: Gauze
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBloodpack
+  name: full-arsenal-bloodpack-name
+  description: full-arsenal-bloodpack-desc
+  productEntity: Bloodpack
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalDefibrillatorSyndicate
+  name: full-arsenal-defib-syndicate-name
+  description: full-arsenal-defib-syndicate-desc
+  productEntity: DefibrillatorSyndicate
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSmokerKit
+  name: full-arsenal-smoker-kit-name
+  description: full-arsenal-smoker-kit-desc
+  productEntity: InterdyneSmokerKit
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitBrute
+  name: full-arsenal-medkit-brute-name
+  description: full-arsenal-medkit-brute-desc
+  productEntity: MedkitBruteFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitBurn
+  name: full-arsenal-medkit-burn-name
+  description: full-arsenal-medkit-burn-desc
+  productEntity: MedkitBurnFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitToxin
+  name: full-arsenal-medkit-toxin-name
+  description: full-arsenal-medkit-toxin-desc
+  productEntity: MedkitToxinFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitOxygen
+  name: full-arsenal-medkit-oxygen-name
+  description: full-arsenal-medkit-oxygen-desc
+  productEntity: MedkitOxygenFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitRadiation
+  name: full-arsenal-medkit-radiation-name
+  description: full-arsenal-medkit-radiation-desc
+  productEntity: MedkitRadiationFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitAdvanced
+  name: full-arsenal-medkit-advanced-name
+  description: full-arsenal-medkit-advanced-desc
+  productEntity: MedkitAdvancedFilled
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMedkitCombat
+  name: full-arsenal-medkit-combat-name
+  description: full-arsenal-medkit-combat-desc
+  productEntity: MedkitCombatFilled
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalEmergencyMedipen
+  name: full-arsenal-medipen-emergency-name
+  description: full-arsenal-medipen-emergency-desc
+  productEntity: EmergencyMedipen
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalAntiPoisonMedipen
+  name: full-arsenal-medipen-antipoison-name
+  description: full-arsenal-medipen-antipoison-desc
+  productEntity: AntiPoisonMedipen
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCombatMedipen
+  name: full-arsenal-medipen-combat-name
+  description: full-arsenal-medipen-combat-desc
+  productEntity: CombatMedipen
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSurvivalMedipen
+  name: full-arsenal-medipen-survival-name
+  description: full-arsenal-medipen-survival-desc
+  productEntity: SurvivalMedipen
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBruteAutoInjector
+  name: full-arsenal-autoinjector-brute-name
+  description: full-arsenal-autoinjector-brute-desc
+  productEntity: BruteAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBurnAutoInjector
+  name: full-arsenal-autoinjector-burn-name
+  description: full-arsenal-autoinjector-burn-desc
+  productEntity: BurnAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalRadAutoInjector
+  name: full-arsenal-autoinjector-rad-name
+  description: full-arsenal-autoinjector-rad-desc
+  productEntity: RadAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalAirlossAutoInjector
+  name: full-arsenal-autoinjector-airloss-name
+  description: full-arsenal-autoinjector-airloss-desc
+  productEntity: AirlossAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalPunctAutoInjector
+  name: full-arsenal-autoinjector-punct-name
+  description: full-arsenal-autoinjector-punct-desc
+  productEntity: PunctAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalPyraAutoInjector
+  name: full-arsenal-autoinjector-pyra-name
+  description: full-arsenal-autoinjector-pyra-desc
+  productEntity: PyraAutoInjector
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBoxAutoInjectorAll
+  name: full-arsenal-box-autoinjector-all-name
+  description: full-arsenal-box-autoinjector-all-desc
+  productEntity: BoxAutoInjectorAll
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleBicaridine
+  name: full-arsenal-bottle-bicaridine-name
+  description: full-arsenal-bottle-bicaridine-desc
+  productEntity: ChemistryBottleBicaridine
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleDermaline
+  name: full-arsenal-bottle-dermaline-name
+  description: full-arsenal-bottle-dermaline-desc
+  productEntity: ChemistryBottleDermaline
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleOmnizine
+  name: full-arsenal-bottle-omnizine-name
+  description: full-arsenal-bottle-omnizine-desc
+  productEntity: ChemistryBottleOmnizine
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleTricordrazine
+  name: full-arsenal-bottle-tricordrazine-name
+  description: full-arsenal-bottle-tricordrazine-desc
+  productEntity: ChemistryBottleTricordrazine
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleKelotane
+  name: full-arsenal-bottle-kelotane-name
+  description: full-arsenal-bottle-kelotane-desc
+  productEntity: ChemistryBottleKelotane
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleDylovene
+  name: full-arsenal-bottle-dylovene-name
+  description: full-arsenal-bottle-dylovene-desc
+  productEntity: ChemistryBottleDylovene
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleInaprovaline
+  name: full-arsenal-bottle-inaprovaline-name
+  description: full-arsenal-bottle-inaprovaline-desc
+  productEntity: ChemistryBottleInaprovaline
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleEpinephrine
+  name: full-arsenal-bottle-epinephrine-name
+  description: full-arsenal-bottle-epinephrine-desc
+  productEntity: ChemistryBottleEpinephrine
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleTranexamicAcid
+  name: full-arsenal-bottle-tranexamic-name
+  description: full-arsenal-bottle-tranexamic-desc
+  productEntity: ChemistryBottleTranexamicAcid
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleArithrazine
+  name: full-arsenal-bottle-arithrazine-name
+  description: full-arsenal-bottle-arithrazine-desc
+  productEntity: ChemistryBottleArithrazine
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalBottleHyronalin
+  name: full-arsenal-bottle-hyronalin-name
+  description: full-arsenal-bottle-hyronalin-desc
+  productEntity: ChemistryBottleHyronalin
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalPieBananaCream
+  name: full-arsenal-pie-banana-cream-name
+  description: full-arsenal-pie-banana-cream-desc
+  productEntity: FoodPieBananaCream
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+# ── BACKPACKS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalBackpackSyndicate
+  name: full-arsenal-backpack-syndicate-name
+  description: full-arsenal-backpack-syndicate-desc
+  productEntity: ClothingBackpackSyndicate
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalBackpackDuffelSyndicate
+  name: full-arsenal-backpack-duffel-syndicate-name
+  description: full-arsenal-backpack-duffel-syndicate-desc
+  productEntity: ClothingBackpackDuffelSyndicate
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalBackpackSecurity
+  name: full-arsenal-backpack-security-name
+  description: full-arsenal-backpack-security-desc
+  productEntity: ClothingBackpackSecurity
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalBackpackMerc
+  name: full-arsenal-backpack-merc-name
+  description: full-arsenal-backpack-merc-desc
+  productEntity: ClothingBackpackMerc
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+# Дополнительные пустые сумки/рюкзаки (категория MeleeArsenalBag, лимит 1 на ящик).
+- type: listing
+  id: MeleeArsenalBackpackPlain
+  name: full-arsenal-backpack-plain-name
+  description: full-arsenal-backpack-plain-desc
+  productEntity: ClothingBackpack
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalSatchel
+  name: full-arsenal-satchel-name
+  description: full-arsenal-satchel-desc
+  productEntity: ClothingBackpackSatchelLeather
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalDuffelPlain
+  name: full-arsenal-duffel-plain-name
+  description: full-arsenal-duffel-plain-desc
+  productEntity: ClothingBackpackDuffel
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+- type: listing
+  id: MeleeArsenalSatchelGray
+  name: full-arsenal-satchel-gray-name
+  description: full-arsenal-satchel-gray-desc
+  productEntity: ClothingBackpackSatchel
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalBag
+
+# Кожаная поясная сумка — пояс (не для инструментов). Слот пояса, под лимит сумок не идёт.
+- type: listing
+  id: MeleeArsenalLeatherWaistbag
+  name: full-arsenal-leather-waistbag-name
+  description: full-arsenal-leather-waistbag-desc
+  productEntity: ClothingBeltStorageWaistbag
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalEVABundle
+  name: full-arsenal-eva-bundle-name
+  description: full-arsenal-eva-bundle-desc
+  productEntity: ClothingBackpackDuffelSyndicateEVABundle
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+# ── MAGBOOTS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalNoSlipShoes
+  name: full-arsenal-no-slip-shoes-name
+  description: full-arsenal-no-slip-shoes-desc
+  productEntity: ClothingShoesChameleonNoSlips
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMagbootsStandard
+  name: full-arsenal-magboots-standard-name
+  description: full-arsenal-magboots-standard-desc
+  productEntity: ClothingShoesBootsMag
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMagbootsSyndie
+  name: full-arsenal-magboots-syndie-name
+  description: full-arsenal-magboots-syndie-desc
+  productEntity: ClothingShoesBootsMagSyndie
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMagbootsCombat
+  name: full-arsenal-magboots-combat-name
+  description: full-arsenal-magboots-combat-desc
+  productEntity: ClothingShoesBootsMagCombat
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMagbootsAdvSynd
+  name: full-arsenal-magboots-adv-syndie-name
+  description: full-arsenal-magboots-adv-syndie-desc
+  productEntity: ClothingShoesBootsMagAdvSynd
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMagbootsAdv
+  name: full-arsenal-magboots-adv-name
+  description: full-arsenal-magboots-adv-desc
+  productEntity: ClothingShoesBootsMagAdv
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalMagbootsBlinding
+  name: full-arsenal-magboots-blinding-name
+  description: full-arsenal-magboots-blinding-desc
+  productEntity: ClothingShoesBootsMagBlinding
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+# ── NEW MELEE WEAPONS ────────────────────────────
+
+- type: listing
+  id: MeleeArsenalSledgehammer
+  name: full-arsenal-sledgehammer-name
+  description: full-arsenal-sledgehammer-desc
+  productEntity: Sledgehammer
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalMjollnir
+  name: full-arsenal-mjollnir-name
+  description: full-arsenal-mjollnir-desc
+  productEntity: Mjollnir
+  cost:
+    Telecrystal: 15
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSingularityHammer
+  name: full-arsenal-singularity-hammer-name
+  description: full-arsenal-singularity-hammer-desc
+  productEntity: SingularityHammer
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEldritchBlade
+  name: full-arsenal-eldritch-blade-name
+  description: full-arsenal-eldritch-blade-desc
+  productEntity: EldritchBlade
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalUnholyHalberd
+  name: full-arsenal-unholy-halberd-name
+  description: full-arsenal-unholy-halberd-desc
+  productEntity: UnholyHalberd
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalArmBlade
+  name: full-arsenal-arm-blade-name
+  description: full-arsenal-arm-blade-desc
+  productEntity: ArmBlade
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEnergySwordDouble
+  name: full-arsenal-energy-sword-double-name
+  description: full-arsenal-energy-sword-double-desc
+  productEntity: EnergySwordDouble
+  cost:
+    Telecrystal: 16
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEnergyCutlass
+  name: full-arsenal-energy-cutlass-name
+  description: full-arsenal-energy-cutlass-desc
+  productEntity: EnergyCutlass
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalEnergyDaggerLoud
+  name: full-arsenal-energy-dagger-loud-name
+  description: full-arsenal-energy-dagger-loud-desc
+  productEntity: EnergyDaggerLoud
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalThrowingKnife
+  name: full-arsenal-throwing-knife-name
+  description: full-arsenal-throwing-knife-desc
+  productEntity: ThrowingKnife
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCaneBlade
+  name: full-arsenal-cane-blade-name
+  description: full-arsenal-cane-blade-desc
+  productEntity: CaneSheathFilled
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalSurvivalKnife
+  name: full-arsenal-survival-knife-name
+  description: full-arsenal-survival-knife-desc
+  productEntity: SurvivalKnife
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalKukriKnife
+  name: full-arsenal-kukri-knife-name
+  description: full-arsenal-kukri-knife-desc
+  productEntity: KukriKnife
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalButchCleaver
+  name: full-arsenal-butch-cleaver-name
+  description: full-arsenal-butch-cleaver-desc
+  productEntity: ButchCleaver
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCombatCrowbar
+  name: full-arsenal-combat-crowbar-name
+  description: full-arsenal-combat-crowbar-desc
+  productEntity: CombatCrowbar
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+# ── NEW ARMOR ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalArmorBasicSlim
+  name: full-arsenal-armor-basic-slim-name
+  description: full-arsenal-armor-basic-slim-desc
+  productEntity: ClothingOuterArmorBasicSlim
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorCaptainCarapace
+  name: full-arsenal-armor-captain-carapace-name
+  description: full-arsenal-armor-captain-carapace-desc
+  productEntity: ClothingOuterArmorCaptainCarapace
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorCentcommCarapace
+  name: full-arsenal-armor-centcomm-carapace-name
+  description: full-arsenal-armor-centcomm-carapace-desc
+  productEntity: ClothingOuterArmorCentcommCarapace
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalVestDetective
+  name: full-arsenal-vest-detective-name
+  description: full-arsenal-vest-detective-desc
+  productEntity: ClothingOuterVestDetective
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorTemplar
+  name: full-arsenal-armor-templar-name
+  description: full-arsenal-armor-templar-desc
+  productEntity: ClothingOuterArmorTemplar
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorBlueShield
+  name: full-arsenal-armor-blueshield-name
+  description: full-arsenal-armor-blueshield-desc
+  productEntity: ClothingOuterArmorBlueShield
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorExplorerSuit
+  name: full-arsenal-armor-explorer-name
+  description: full-arsenal-armor-explorer-desc
+  productEntity: ClothingOuterArmorExplorerSuit
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorExplorerSuitKhaki
+  name: full-arsenal-armor-explorer-khaki-name
+  description: full-arsenal-armor-explorer-khaki-desc
+  productEntity: ClothingOuterArmorExplorerSuitKhaki
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorExplorerSuitMedical
+  name: full-arsenal-armor-explorer-medical-name
+  description: full-arsenal-armor-explorer-medical-desc
+  productEntity: ClothingOuterArmorExplorerSuitMedical
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorSherifCarapace
+  name: full-arsenal-armor-sherif-carapace-name
+  description: full-arsenal-armor-sherif-carapace-desc
+  productEntity: ClothingOuterArmorSherifCarapace
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorCaptainCarapaceWhite
+  name: full-arsenal-armor-captain-carapace-white-name
+  description: full-arsenal-armor-captain-carapace-white-desc
+  productEntity: ClothingOuterArmorCaptainCarapaceWhite
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+# ── NEW HARDSUITS ─────────────────────────────
+
+- type: listing
+  id: MeleeArsenalHardsuitSpatio
+  name: full-arsenal-hardsuit-spatio-name
+  description: full-arsenal-hardsuit-spatio-desc
+  productEntity: ClothingOuterHardsuitSpatio
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitSalvage
+  name: full-arsenal-hardsuit-salvage-name
+  description: full-arsenal-hardsuit-salvage-desc
+  productEntity: ClothingOuterHardsuitSalvage
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitGoliath
+  name: full-arsenal-hardsuit-goliath-name
+  description: full-arsenal-hardsuit-goliath-desc
+  productEntity: ClothingOuterHardsuitGoliath
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitVoid
+  name: full-arsenal-hardsuit-void-name
+  description: full-arsenal-hardsuit-void-desc
+  productEntity: ClothingOuterHardsuitVoid
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitVoidAdvanced
+  name: full-arsenal-hardsuit-void-advanced-name
+  description: full-arsenal-hardsuit-void-advanced-desc
+  productEntity: ClothingOuterHardsuitVoidAdvanced
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalHardsuitBlueShield
+  name: full-arsenal-hardsuit-blueshield-name
+  description: full-arsenal-hardsuit-blueshield-desc
+  productEntity: ClothingOuterHardsuitBlueShield
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+# ── GRENADES ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalGrenadeFlashbang
+  name: full-arsenal-grenade-flashbang-name
+  description: full-arsenal-grenade-flashbang-desc
+  productEntity: GrenadeFlashBang
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeEMP
+  name: full-arsenal-grenade-emp-name
+  description: full-arsenal-grenade-emp-desc
+  productEntity: EmpGrenade
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeTearGas
+  name: full-arsenal-grenade-teargas-name
+  description: full-arsenal-grenade-teargas-desc
+  productEntity: TearGasGrenade
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeStinger
+  name: full-arsenal-grenade-stinger-name
+  description: full-arsenal-grenade-stinger-desc
+  productEntity: GrenadeStinger
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeEx
+  name: full-arsenal-grenade-ex-name
+  description: full-arsenal-grenade-ex-desc
+  productEntity: ExGrenade
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeShrapnel
+  name: full-arsenal-grenade-shrapnel-name
+  description: full-arsenal-grenade-shrapnel-desc
+  productEntity: GrenadeShrapnel
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeIncendiary
+  name: full-arsenal-grenade-incendiary-name
+  description: full-arsenal-grenade-incendiary-desc
+  productEntity: GrenadeIncendiary
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeCluster
+  name: full-arsenal-grenade-cluster-name
+  description: full-arsenal-grenade-cluster-desc
+  productEntity: ClusterGrenade
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeClusterBangFull
+  name: full-arsenal-grenade-cluster-bang-full-name
+  description: full-arsenal-grenade-cluster-bang-full-desc
+  productEntity: ClusterBangFull
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalSyndieMiniBomb
+  name: full-arsenal-syndie-minibomb-name
+  description: full-arsenal-syndie-minibomb-desc
+  productEntity: SyndieMiniBomb
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalSyndieTrickyBomb
+  name: full-arsenal-syndie-tricky-bomb-name
+  description: full-arsenal-syndie-tricky-bomb-desc
+  productEntity: SyndieTrickyBomb
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeHolyHand
+  name: full-arsenal-grenade-holyhand-name
+  description: full-arsenal-grenade-holyhand-desc
+  productEntity: HolyHandGrenade
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeBaton
+  name: full-arsenal-grenade-baton-name
+  description: full-arsenal-grenade-baton-desc
+  productEntity: GrenadeBaton
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+- type: listing
+  id: MeleeArsenalGrenadeCleanade
+  name: full-arsenal-grenade-cleanade-name
+  description: full-arsenal-grenade-cleanade-desc
+  productEntity: GrenadeCleanade
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalGrenade
+
+# ── COMBAT GLOVES AND KNUCKLEDUSTERS ───────────────────────
+
+- type: listing
+  id: MeleeArsenalGlovesCombat
+  name: full-arsenal-gloves-combat-name
+  description: full-arsenal-gloves-combat-desc
+  productEntity: ClothingHandsGlovesCombat
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesMercCombat
+  name: full-arsenal-gloves-merc-combat-name
+  description: full-arsenal-gloves-merc-combat-desc
+  productEntity: ClothingHandsMercGlovesCombat
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesMercFingerless
+  name: full-arsenal-gloves-merc-fingerless-name
+  description: full-arsenal-gloves-merc-fingerless-desc
+  productEntity: ClothingHandsGlovesMercFingerless
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesBlueShieldCombat
+  name: full-arsenal-gloves-blueshield-combat-name
+  description: full-arsenal-gloves-blueshield-combat-desc
+  productEntity: ClothingHandsGlovesCombatBlueShield
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesNorthStar
+  name: full-arsenal-gloves-northstar-name
+  description: full-arsenal-gloves-northstar-desc
+  productEntity: ClothingHandsGlovesNorthStar
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesKravMaga
+  name: full-arsenal-gloves-kravmaga-name
+  description: full-arsenal-gloves-kravmaga-desc
+  productEntity: ClothingHandsGlovesKravMaga
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesConcussive
+  name: full-arsenal-gloves-concussive-name
+  description: full-arsenal-gloves-concussive-desc
+  productEntity: ClothingHandsGlovesConcussiveGauntlets
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesPowerglove
+  name: full-arsenal-gloves-powerglove-name
+  description: full-arsenal-gloves-powerglove-desc
+  productEntity: ClothingHandsGlovesPowerglove
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesSpaceNinja
+  name: full-arsenal-gloves-spaceninja-name
+  description: full-arsenal-gloves-spaceninja-desc
+  productEntity: ClothingHandsGlovesSpaceNinja
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesBoxingRiggedRed
+  name: full-arsenal-gloves-boxing-rigged-red-name
+  description: full-arsenal-gloves-boxing-rigged-red-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedRed
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesBoxingRiggedBlue
+  name: full-arsenal-gloves-boxing-rigged-blue-name
+  description: full-arsenal-gloves-boxing-rigged-blue-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedBlue
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesBoxingRiggedGreen
+  name: full-arsenal-gloves-boxing-rigged-green-name
+  description: full-arsenal-gloves-boxing-rigged-green-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedGreen
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesBoxingRiggedYellow
+  name: full-arsenal-gloves-boxing-rigged-yellow-name
+  description: full-arsenal-gloves-boxing-rigged-yellow-desc
+  productEntity: ClothingHandsGlovesBoxingRiggedYellow
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalKnuckleDusters
+  name: full-arsenal-knuckle-dusters-name
+  description: full-arsenal-knuckle-dusters-desc
+  productEntity: ClothingHandsKnuckleDusters
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalKnuckleDustersBrass
+  name: full-arsenal-knuckle-dusters-brass-name
+  description: full-arsenal-knuckle-dusters-brass-desc
+  productEntity: ClothingHandsKnuckleDustersBrass
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalKnuckleDustersQM
+  name: full-arsenal-knuckle-dusters-qm-name
+  description: full-arsenal-knuckle-dusters-qm-desc
+  productEntity: ClothingHandsKnuckleDustersQM
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalKnuckleDustersSyndicate
+  name: full-arsenal-knuckle-dusters-syndicate-name
+  description: full-arsenal-knuckle-dusters-syndicate-desc
+  productEntity: ClothingHandsKnuckleDustersSyndicate
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalKnuckleBoneCrushers
+  name: full-arsenal-knuckle-bone-crushers-name
+  description: full-arsenal-knuckle-bone-crushers-desc
+  productEntity: ClothingHandsKnuckleBoneCrushers
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+# ── SPELLBOOKS (physical) ───────────────────────────
+
+- type: listing
+  id: MeleeArsenalSpellbookBlink
+  name: full-arsenal-spellbookblink-name
+  description: full-arsenal-spellbookblink-desc
+  productEntity: BlinkBook
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSpellbookKnock
+  name: full-arsenal-spellbookknock-name
+  description: full-arsenal-spellbookknock-desc
+  productEntity: KnockSpellbook
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSpellbookForceWall
+  name: full-arsenal-spellbookforcewall-name
+  description: full-arsenal-spellbookforcewall-desc
+  productEntity: ForceWallSpellbook
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSpellbookRunes
+  name: full-arsenal-spellbookrunes-name
+  description: full-arsenal-spellbookrunes-desc
+  productEntity: ScrollRunes
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSpellbookFireSelf
+  name: full-arsenal-spellbookfireself-name
+  description: full-arsenal-spellbookfireself-desc
+  productEntity: FireSelfSpellbook
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalSpellbookSpawn
+  name: full-arsenal-spellbookspawn-name
+  description: full-arsenal-spellbookspawn-desc
+  productEntity: SpawnSpellbook
+  cost:
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+
+# ── HELMETS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalHardhatArmored
+  name: full-arsenal-hardhat-armored-name
+  description: full-arsenal-hardhat-armored-desc
+  productEntity: ClothingHeadHatHardhatArmored
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetBasic
+  name: full-arsenal-helmet-basic-name
+  description: full-arsenal-helmet-basic-desc
+  productEntity: ClothingHeadHelmetBasic
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetScrap
+  name: full-arsenal-helmet-scrap-name
+  description: full-arsenal-helmet-scrap-desc
+  productEntity: ClothingHeadHelmetScrap
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetRiot
+  name: full-arsenal-helmet-riot-name
+  description: full-arsenal-helmet-riot-desc
+  productEntity: ClothingHeadHelmetRiot
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetFlash
+  name: full-arsenal-helmet-flash-name
+  description: full-arsenal-helmet-flash-desc
+  productEntity: ClothingHeadHelmetFlash
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetMerc
+  name: full-arsenal-helmet-merc-name
+  description: full-arsenal-helmet-merc-desc
+  productEntity: ClothingHeadHelmetMerc
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetBone
+  name: full-arsenal-helmet-bone-name
+  description: full-arsenal-helmet-bone-desc
+  productEntity: ClothingHeadHelmetBone
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetERTJanitor
+  name: full-arsenal-helmet-ert-janitor-name
+  description: full-arsenal-helmet-ert-janitor-desc
+  productEntity: ClothingHeadHelmetERTJanitor
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetCult
+  name: full-arsenal-helmet-cult-name
+  description: full-arsenal-helmet-cult-desc
+  productEntity: ClothingHeadHelmetCult
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetSyndicate
+  name: full-arsenal-helmet-syndicate-name
+  description: full-arsenal-helmet-syndicate-desc
+  productEntity: ClothingHeadHelmetSyndicate
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetSwat
+  name: full-arsenal-helmet-swat-name
+  description: full-arsenal-helmet-swat-desc
+  productEntity: ClothingHeadHelmetSwat
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetSwatSyndicate
+  name: full-arsenal-helmet-swat-syndicate-name
+  description: full-arsenal-helmet-swat-syndicate-desc
+  productEntity: ClothingHeadHelmetSwatSyndicate
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetRaid
+  name: full-arsenal-helmet-raid-name
+  description: full-arsenal-helmet-raid-desc
+  productEntity: ClothingHeadHelmetRaid
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetPodWars
+  name: full-arsenal-helmet-podwars-name
+  description: full-arsenal-helmet-podwars-desc
+  productEntity: ClothingHeadHelmetPodWars
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetSecurityMedic
+  name: full-arsenal-helmet-security-medic-name
+  description: full-arsenal-helmet-security-medic-desc
+  productEntity: ClothingHeadHelmetSecurityMedic
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetThunderdome
+  name: full-arsenal-helmet-thunderdome-name
+  description: full-arsenal-helmet-thunderdome-desc
+  productEntity: ClothingHeadHelmetThunderdome
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetVoidParamed
+  name: full-arsenal-helmet-void-paramed-name
+  description: full-arsenal-helmet-void-paramed-desc
+  productEntity: ClothingHeadHelmetVoidParamed
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetTemplar
+  name: full-arsenal-helmet-templar-name
+  description: full-arsenal-helmet-templar-desc
+  productEntity: ClothingHeadHelmetTemplar
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetSpaceNinja
+  name: full-arsenal-helmet-space-ninja-name
+  description: full-arsenal-helmet-space-ninja-desc
+  productEntity: ClothingHeadHelmetSpaceNinja
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetERTEngineer
+  name: full-arsenal-helmet-ert-engineer-name
+  description: full-arsenal-helmet-ert-engineer-desc
+  productEntity: ClothingHeadHelmetERTEngineer
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetERTMedic
+  name: full-arsenal-helmet-ert-medic-name
+  description: full-arsenal-helmet-ert-medic-desc
+  productEntity: ClothingHeadHelmetERTMedic
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetERTSecurity
+  name: full-arsenal-helmet-ert-security-name
+  description: full-arsenal-helmet-ert-security-desc
+  productEntity: ClothingHeadHelmetERTSecurity
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetAncient
+  name: full-arsenal-helmet-ancient-name
+  description: full-arsenal-helmet-ancient-desc
+  productEntity: ClothingHeadHelmetAncient
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetERTLeader
+  name: full-arsenal-helmet-ert-leader-name
+  description: full-arsenal-helmet-ert-leader-desc
+  productEntity: ClothingHeadHelmetERTLeader
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+# ── GAS MASKS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalMaskGas
+  name: full-arsenal-mask-gas-name
+  description: full-arsenal-mask-gas-desc
+  productEntity: ClothingMaskGas
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasAtmos
+  name: full-arsenal-mask-gas-atmos-name
+  description: full-arsenal-mask-gas-atmos-desc
+  productEntity: ClothingMaskGasAtmos
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasSecurity
+  name: full-arsenal-mask-gas-security-name
+  description: full-arsenal-mask-gas-security-desc
+  productEntity: ClothingMaskGasSecurity
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasMerc
+  name: full-arsenal-mask-gas-merc-name
+  description: full-arsenal-mask-gas-merc-desc
+  productEntity: ClothingMaskGasMerc
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasSwat
+  name: full-arsenal-mask-gas-swat-name
+  description: full-arsenal-mask-gas-swat-desc
+  productEntity: ClothingMaskGasSwat
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasSyndicate
+  name: full-arsenal-mask-gas-syndicate-name
+  description: full-arsenal-mask-gas-syndicate-desc
+  productEntity: ClothingMaskGasSyndicate
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasERT
+  name: full-arsenal-mask-gas-ert-name
+  description: full-arsenal-mask-gas-ert-desc
+  productEntity: ClothingMaskGasERT
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalMaskGasDeathSquad
+  name: full-arsenal-mask-gas-deathsquad-name
+  description: full-arsenal-mask-gas-deathsquad-desc
+  productEntity: ClothingMaskGasDeathSquad
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+# ── FUN HATS ───────────────────────────────
+
+- type: listing
+  id: MeleeArsenalHatWatermelon
+  name: full-arsenal-hat-watermelon-name
+  description: full-arsenal-hat-watermelon-desc
+  productEntity: ClothingHeadHatWatermelon
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+# ── ADDITIONAL MELEE ────────────────────────────
+
+- type: listing
+  id: MeleeArsenalHighFrequencyBlade
+  name: full-arsenal-hf-blade-name
+  description: full-arsenal-hf-blade-desc
+  productEntity: WeaponHighFrequencyBlade
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalChainsword
+  name: full-arsenal-chainsword-name
+  description: full-arsenal-chainsword-desc
+  productEntity: WeaponChainsword
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCursedKatana
+  name: full-arsenal-cursed-katana-name
+  description: full-arsenal-cursed-katana-desc
+  productEntity: WeaponCursedKatana
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalHanzoSteel
+  name: full-arsenal-hanzo-steel-name
+  description: full-arsenal-hanzo-steel-desc
+  productEntity: WeaponHanzoSteel
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalNullRod
+  name: full-arsenal-null-rod-name
+  description: full-arsenal-null-rod-desc
+  productEntity: ClothingBeltSheathChaplinFilled
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalForceSword
+  name: full-arsenal-force-sword-name
+  description: full-arsenal-force-sword-desc
+  productEntity: WeaponForceSword
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalCrusher
+  name: full-arsenal-crusher-name
+  description: full-arsenal-crusher-desc
+  productEntity: WeaponCrusher
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalDeathBlade
+  name: full-arsenal-death-blade-name
+  description: full-arsenal-death-blade-desc
+  productEntity: WeaponDeathBlade
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon

@@ -438,3 +438,74 @@
     blacklist:
       components:
       - SurplusBundle
+
+- type: listing
+  id: UplinkFullArsenalMegaBundle
+  name: uplink-full-arsenal-mega-bundle-name
+  description: uplink-full-arsenal-mega-bundle-desc
+  productEntity: CrateSyndicateFullArsenalMega
+  cost:
+    Telecrystal: 120
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: UplinkFullArsenalPlusBundle
+  name: uplink-full-arsenal-plus-bundle-name
+  description: uplink-full-arsenal-plus-bundle-desc
+  productEntity: CrateSyndicateFullArsenalPlus
+  cost:
+    Telecrystal: 60
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: UplinkMeleeArsenalBundle
+  name: uplink-melee-arsenal-bundle-name
+  description: uplink-melee-arsenal-bundle-desc
+  productEntity: CrateSyndicateMeleeArsenal
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkDisruption
+  conditions:
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+
+- type: listing
+  id: UplinkLoyaltyImplant
+  name: uplink-loyalty-implant-name
+  description: uplink-loyalty-implant-desc
+  icon: { sprite: Objects/Specific/Medical/syndi_implanter.rsi, state: implanter1 }
+  productEntity: LoyaltyImplanter
+  categories:
+  - UplinkImplants
+  discountDownTo:
+    Telecrystal: 3
+  cost:
+    Telecrystal: 5
+
+- type: listing
+  id: UplinkHomerunBat
+  name: uplink-homerun-bat-name
+  description: uplink-homerun-bat-desc
+  productEntity: HomerunBat
+  discountCategory: veryRareDiscounts
+  discountDownTo:
+    Telecrystal: 2
+  cost:
+    Telecrystal: 4
+  categories:
+    - UplinkWeaponry

@@ -1,0 +1,41 @@
+# DuelArenaTracker — невидимая сущность, размещается в центре арены.
+# Слушает DuelFight (старт боя → сканирует игроков вокруг и регистрирует дуэлянтов).
+# Слушает DuelReset (дуэль сброшена вручную → очищает список).
+# Когда один из дуэлянтов падает в крит — объявляет победителя на весь сервер и спустя
+# ReturnGrace секунд (по умолчанию 20) шлёт DuelEnded → шлюзы баз закрываются.
+# Подключение: DuelEnded (канал DuelReset) → порт Close шлюзов баз. Открываются шлюзы по DuelFight.
+
+- type: entity
+  id: DuelArenaTracker
+  parent: MarkerBase
+  name: Duel Arena Tracker
+  suffix: Duel Arena
+  description: Невидимый трекер дуэли. Объявляет победителя, когда один из дуэлянтов теряет сознание.
+  components:
+  - type: Sprite
+    layers:
+      - state: blue
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Toggle
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+      - DuelEnded
+    lastSignals:
+      DuelEnded: false
+  - type: AutoLinkReceiver
+    channels:
+      - DuelFight
+      - DuelReset
+  - type: AutoLinkTransmitter
+    channel: DuelReset
+  - type: DuelArena
+    # Радиус в тайлах — должен покрывать всю арену. Ставь трекер в центр.
+    scanRange: 200

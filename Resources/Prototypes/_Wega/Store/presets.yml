@@ -56,6 +56,21 @@
     - Syndicate
 
 - type: entity
+  id: StorePresetMeleeArsenal
+  abstract: true
+  components:
+  - type: Store
+    name: store-preset-name-full-arsenal
+    categories:
+    - MeleeArsenal
+    currencyWhitelist:
+    - Telecrystal
+    balance:
+      Telecrystal: 0
+    expectedFaction:
+    - Syndicate
+
+- type: entity
   id: StorePresetRevolution
   abstract: true
   components:

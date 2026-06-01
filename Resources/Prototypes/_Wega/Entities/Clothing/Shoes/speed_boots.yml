@@ -1,0 +1,11 @@
+# Скороходы с заряженной малой батареей внутри — для дуэльных ящиков арсенала.
+- type: entity
+  parent: ClothingShoesBootsSpeed
+  id: ClothingShoesBootsSpeedFilled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmall

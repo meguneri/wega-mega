@@ -117,6 +117,45 @@
   name: store-category-full-arsenal-ammo
   priority: 4
 
+# Пустые сумки/рюкзаки/вещмешки — лимит 1 на ящик (готовые комплекты-вещмешки сюда не входят).
+- type: storeCategory
+  id: FullArsenalBag
+  name: store-category-full-arsenal
+  priority: 5
+
+#melee arsenal crate pool
+- type: storeCategory
+  id: MeleeArsenal
+  name: store-category-full-arsenal
+  priority: 0
+
+- type: storeCategory
+  id: MeleeArsenalArmor
+  name: store-category-full-arsenal-armor
+  priority: 1
+
+- type: storeCategory
+  id: MeleeArsenalHead
+  name: store-category-full-arsenal-head
+  priority: 2
+
+- type: storeCategory
+  id: MeleeArsenalGrenade
+  name: store-category-full-arsenal-grenade
+  priority: 3
+
+# Оружие ближнего боя — используется для гарантированной выдачи минимум одного клинка в MeleeArsenal.
+- type: storeCategory
+  id: MeleeArsenalWeapon
+  name: store-category-full-arsenal
+  priority: 0
+
+# Пустые сумки/рюкзаки/вещмешки — лимит 1 на ящик (готовые комплекты-вещмешки сюда не входят).
+- type: storeCategory
+  id: MeleeArsenalBag
+  name: store-category-full-arsenal
+  priority: 5
+
  #revolution
 - type: storeCategory
   id: RevolutionSupport
