@@ -14,10 +14,10 @@ namespace Content.Server._Wega.Spawners.EntitySystems;
 /// inside MapInitEvent. This avoids raising network events during entity
 /// initialization (which can cause crashes or client desync).
 /// </summary>
-public sealed class EmitGlobalSoundOnSpawnSystem : EntitySystem
+public sealed partial class EmitGlobalSoundOnSpawnSystem : EntitySystem
 {
-    [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     // Pending sounds to play on the next Update() tick.
     private readonly Queue<(EntityUid Uid, ResolvedSoundSpecifier Sound, AudioParams Params)> _pending = new();
