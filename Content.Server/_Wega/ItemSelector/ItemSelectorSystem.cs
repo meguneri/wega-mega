@@ -6,6 +6,8 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Content.Server.Administration.Logs;
 using Content.Shared.Database;
+using Content.Server._Wega.Duel.Components;
+using Content.Server._Wega.Duel.Systems;
 
 namespace Content.Server.Item.Selector;
 
@@ -15,6 +17,7 @@ public sealed partial class ItemSelectorSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly DuelArenaCleanupSystem _arenaCleanup = default!;
 
     public override void Initialize()
     {
@@ -59,6 +62,13 @@ public sealed partial class ItemSelectorSystem : EntitySystem
     private void OnSelection(EntityUid uid, ItemSelectorComponent comp, ItemSelectorSelectionMessage args)
     {
         var ent = Spawn(args.SelectedId, Transform(uid).Coordinates);
+
+        // Если сам селектор был выдан дуэльной ареной (помечен ArenaIssuedItemComponent),
+        // переносим тег на заспавненный предмет (и его содержимое), иначе очистка арены не
+        // уберёт выбранный скафандр/гипоручку — они спавнятся свежими и без тега.
+        if (HasComp<ArenaIssuedItemComponent>(uid))
+            _arenaCleanup.MarkIssuedRecursive(ent);
+
         _hands.TryForcePickupAnyHand(GetEntity(args.User), ent);
 
         _admin.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(GetEntity(args.User)):user} selects a {ToPrettyString(ent):entity} instead of {ToPrettyString(uid):entity}");

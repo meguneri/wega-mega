@@ -67,15 +67,33 @@ public sealed class DuelArenaSystem : EntitySystem
     }
 
     /// <summary>
-    /// Снимает дуэль с боевого взвода, если в зоне не осталось ни одного из запомненных дуэлянтов
-    /// (например, оба покинули арену живыми, и финала по крит/смерти не будет).
+    /// Периодическая проверка исхода боя. Подстраховывает событие крит/смерти: если его не
+    /// поймали вовремя и в живых остался ≤1 дуэлянт — объявляем итог здесь. Если оба ещё живы,
+    /// но никого из них нет в зоне — дуэль заброшена, тихо снимаем взвод (без победителя).
     /// </summary>
     private void Scan(EntityUid uid, DuelArenaComponent comp)
     {
-        var alive = GetAliveInRange(uid, comp);
-        if (!comp.Duelists.Any(d => alive.Contains(d)))
+        var aliveDuelists = comp.Duelists.Where(IsAliveDuelist).ToList();
+        if (aliveDuelists.Count <= 1)
+        {
+            ConcludeDuel(uid, comp);
+            return;
+        }
+
+        var aliveInRange = GetAliveInRange(uid, comp);
+        if (!comp.Duelists.Any(d => aliveInRange.Contains(d)))
             ResetDuel(comp);
     }
+
+    /// <summary>
+    /// «Ещё в бою» ли дуэлянт. Боец считается стоящим, пока он не в крите и не мёртв —
+    /// предкрит (PreCritical) НЕ завершает дуэль. Безопасно к удалённым сущностям.
+    /// </summary>
+    private bool IsAliveDuelist(EntityUid d)
+        => Exists(d) && HasComp<MobStateComponent>(d) && !_mobState.IsIncapacitated(d);
+
+    private string SafeName(EntityUid uid)
+        => Exists(uid) ? MetaData(uid).EntityName : "?";
 
     /// <summary>
     /// Собирает живых мобов в радиусе арены.
@@ -106,11 +124,10 @@ public sealed class DuelArenaSystem : EntitySystem
     /// </summary>
     private void ArmDuel(EntityUid uid, DuelArenaComponent comp)
     {
+        // Сигнал старта может прийти повторно (двойное нажатие/повтор сигнала). Если дуэль уже
+        // идёт — молча игнорируем, чтобы не дублировать объявление «Дуэль началась».
         if (comp.IsActive)
-        {
-            _chatManager.DispatchServerAnnouncement("Дуэль уже идёт — старт проигнорирован.", Color.Gray);
             return;
-        }
 
         var duelists = GetAliveInRange(uid, comp);
         if (duelists.Count < 2)
@@ -205,56 +222,66 @@ public sealed class DuelArenaSystem : EntitySystem
             if (!arena.IsActive || !arena.Duelists.Contains(uid))
                 continue;
 
-            arena.IsActive = false;
-
-            var loser = uid;
-            var loserName = MetaData(loser).EntityName;
-
-            // Ищем победителя — живого дуэлянта. Если он тоже в крите/мёртв — ничья.
-            var winner = arena.Duelists
-                .Where(d => d != loser && _mobState.IsAlive(d))
-                .Cast<EntityUid?>()
-                .FirstOrDefault();
-
-            string msg;
-            if (winner != null)
-            {
-                var winnerName = MetaData(winner.Value).EntityName;
-
-                // Счёт ведём по игроку (NetUserId), а не по телу: иначе после клона/респавна
-                // боец получает новый EntityUid и счёт каждый раунд начинается заново.
-                var winnerUser = GetUser(winner.Value);
-                var loserUser  = GetUser(loser);
-
-                if (winnerUser != null)
-                    arena.Scores[winnerUser.Value] = arena.Scores.GetValueOrDefault(winnerUser.Value) + 1;
-
-                var winnerScore = winnerUser != null ? arena.Scores.GetValueOrDefault(winnerUser.Value) : 0;
-                var loserScore  = loserUser  != null ? arena.Scores.GetValueOrDefault(loserUser.Value)  : 0;
-
-                msg = $"Дуэль завершена! Победитель: {winnerName}! {loserName} потерял сознание. " +
-                      $"Счёт: {winnerName} {winnerScore} — {loserScore} {loserName}. Снаряжение убрано.";
-            }
-            else
-            {
-                // Оба упали — ничья.
-                var otherName = arena.Duelists
-                    .Where(d => d != loser)
-                    .Select(d => MetaData(d).EntityName)
-                    .FirstOrDefault() ?? "?";
-                msg = $"Ничья! {loserName} и {otherName} потеряли сознание одновременно. Снаряжение убрано.";
-            }
-
-            arena.Duelists.Clear();
-
-            // Убираем снаряжение и объявляем результат одним сообщением.
-            _cleanup.CleanupArea(arenaUid, arena.CleanupRange);
-            _chatManager.DispatchServerAnnouncement(msg, Color.Gold);
-
-            // Сигнал закрытия шлюзов шлём не сразу, а через ReturnGrace секунд: дуэлянты
-            // возвращаются в базы по открытым шлюзам, и только потом те закрываются (см. Update).
-            arena.GateCloseAt = _timing.CurTime + TimeSpan.FromSeconds(arena.ReturnGrace);
+            ConcludeDuel(arenaUid, arena);
             break;
         }
+    }
+
+    /// <summary>
+    /// Подводит итог дуэли, если в живых остался ≤1 дуэлянт: объявляет победителя (или ничью),
+    /// начисляет счёт, убирает выданное снаряжение и запускает grace-период закрытия шлюзов.
+    /// Если живых ещё ≥2 — ничего не делает (бой продолжается). Идемпотентна за счёт IsActive.
+    /// </summary>
+    private bool ConcludeDuel(EntityUid arenaUid, DuelArenaComponent arena)
+    {
+        if (!arena.IsActive)
+            return false;
+
+        var aliveDuelists = arena.Duelists.Where(IsAliveDuelist).ToList();
+        if (aliveDuelists.Count > 1)
+            return false; // бой ещё идёт
+
+        arena.IsActive = false;
+
+        EntityUid? winner = aliveDuelists.Count == 1 ? aliveDuelists[0] : null;
+
+        string msg;
+        if (winner != null)
+        {
+            var winnerName = SafeName(winner.Value);
+            var loser = arena.Duelists.FirstOrDefault(d => d != winner.Value);
+            var loserName = SafeName(loser);
+
+            // Счёт ведём по игроку (NetUserId), а не по телу: иначе после клона/респавна
+            // боец получает новый EntityUid и счёт каждый раунд начинается заново.
+            var winnerUser = GetUser(winner.Value);
+            var loserUser  = loser.Valid ? GetUser(loser) : null;
+
+            if (winnerUser != null)
+                arena.Scores[winnerUser.Value] = arena.Scores.GetValueOrDefault(winnerUser.Value) + 1;
+
+            var winnerScore = winnerUser != null ? arena.Scores.GetValueOrDefault(winnerUser.Value) : 0;
+            var loserScore  = loserUser  != null ? arena.Scores.GetValueOrDefault(loserUser.Value)  : 0;
+
+            msg = $"Дуэль завершена! Победитель: {winnerName}! {loserName} потерял сознание. " +
+                  $"Счёт: {winnerName} {winnerScore} — {loserScore} {loserName}. Снаряжение убрано.";
+        }
+        else
+        {
+            // Никого живого — ничья.
+            var names = string.Join(" и ", arena.Duelists.Select(SafeName));
+            msg = $"Ничья! {names} потеряли сознание. Снаряжение убрано.";
+        }
+
+        arena.Duelists.Clear();
+
+        // Убираем снаряжение и объявляем результат одним сообщением.
+        _cleanup.CleanupArea(arenaUid, arena.CleanupRange);
+        _chatManager.DispatchServerAnnouncement(msg, Color.Gold);
+
+        // Сигнал закрытия шлюзов шлём не сразу, а через ReturnGrace секунд: дуэлянты
+        // возвращаются в базы по открытым шлюзам, и только потом те закрываются (см. Update).
+        arena.GateCloseAt = _timing.CurTime + TimeSpan.FromSeconds(arena.ReturnGrace);
+        return true;
     }
 }

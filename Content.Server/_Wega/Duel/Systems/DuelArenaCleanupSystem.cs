@@ -1,19 +1,27 @@
 using Content.Server._Wega.Duel.Components;
+using Content.Server.Botany.Components;
 using Content.Server.Chat.Managers;
+using Content.Server.Spawners.Components;
+using Content.Server.Spawners.EntitySystems;
+using Content.Server.Traitor.Uplink.SurplusBundle;
+using Content.Shared._Wega.Spawners.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Modular.Suit;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Modular.Suit;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Implants.Components;
-using Content.Shared.Modular.Suit;
+using Content.Shared.Inventory;
+using Content.Shared.Slippery;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._Wega.Duel.Systems;
 
@@ -31,6 +39,10 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ModularSuitSystem _modSuit = default!;
+    [Dependency] private readonly SpawnerSystem _spawner = default!;
+
+    /// <summary>Прототип дуэльного ящика-аирдропа — спавнер, кидающий именно его, гасим в конце боя.</summary>
+    private static readonly EntProtoId DuelSupplyDropProto = "CrateDuelSupplyDrop";
 
     public override void Initialize()
     {
@@ -42,16 +54,17 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         // чтобы клинап их убрал независимо от того, из чьего оружия они вылетели.
         SubscribeLocalEvent<CartridgeAmmoComponent, ComponentStartup>(OnCartridgeStartup);
 
-        // МОД-скафандры: модули спавнятся в MapInitEvent уже ПОСЛЕ того, как MarkIssuedRecursive
-        // отработал на самом скафандре. Подписываемся после ModularSuitSystem, чтобы модули
-        // уже были вставлены в контейнер, и тегируем их если скафандр помечен.
-        SubscribeLocalEvent<ModularSuitPreassembledComponent, MapInitEvent>(
-            OnModSuitMapInit, after: [typeof(ModularSuitSystem)]);
-
-        // Хардсьюты и другая одежда с переключаемым шлемом: ToggleableClothingSystem спавнит
-        // шлем (ClothingUid) в MapInitEvent. Тегируем шлем если сам скафандр помечен.
-        SubscribeLocalEvent<ToggleableClothingComponent, MapInitEvent>(
-            OnToggleableClothingMapInit, after: [typeof(ToggleableClothingSystem)]);
+        // МОД-скафандры и прочее: содержимое (модули, батарея, части брони) спавнится и
+        // вкладывается в контейнеры уже ПОСЛЕ того, как MarkIssuedRecursive отработал на самом
+        // предмете. Нельзя повторно подписаться на ModularSuitPreassembledComponent/MapInitEvent
+        // (этим уже владеет ModularSuitSystem), поэтому ловим само вкладывание в контейнер: если
+        // владелец контейнера помечен как выданный аренной — помечаем и вложенную сущность.
+        // Этот же обработчик покрывает переключаемый шлем хардсьютов: ToggleableClothingSystem
+        // спавнит ClothingUid в MapInitEvent и вкладывает его в контейнер скафандра — вставка
+        // помеченного аренной предмета тегирует шлем. Отдельная подписка на
+        // ToggleableClothingComponent/MapInitEvent не нужна (и запрещена — ею владеет
+        // ToggleableClothingSystem).
+        SubscribeLocalEvent<ArenaIssuedItemComponent, EntInsertedIntoContainerMessage>(OnIssuedInsert);
 
         // Аирдроп-ящик снаряжения: StorageFill кладёт лут в MapInitEvent. Подписываемся
         // после StorageSystem, чтобы содержимое уже было в ящике, и помечаем ящик + весь
@@ -76,15 +89,6 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
             EnsureComp<ArenaIssuedItemComponent>(uid);
     }
 
-    private void OnToggleableClothingMapInit(EntityUid uid, ToggleableClothingComponent comp, MapInitEvent args)
-    {
-        if (!HasComp<ArenaIssuedItemComponent>(uid))
-            return;
-
-        if (comp.ClothingUid != null)
-            MarkIssuedRecursive(comp.ClothingUid.Value);
-    }
-
     /// <summary>
     /// Тегирует сущность и всё вложенное в её контейнеры тегом <see cref="ArenaIssuedItemComponent"/>.
     /// Используется при спавне предметов из арена-ящика и кубика войны.
@@ -107,21 +111,12 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
                 MarkIssuedRecursive(contained);
     }
 
-    private void OnModSuitMapInit(EntityUid uid, ModularSuitPreassembledComponent comp, MapInitEvent args)
+    private void OnIssuedInsert(EntityUid uid, ArenaIssuedItemComponent comp, EntInsertedIntoContainerMessage args)
     {
-        // Если скафандр не помечен как выданный аренной — не трогаем.
-        if (!HasComp<ArenaIssuedItemComponent>(uid))
-            return;
-
-        // Тегируем все вложенные сущности (модули, батарея, части брони).
-        if (!TryComp<ContainerManagerComponent>(uid, out var manager))
-            return;
-
-        foreach (var container in _container.GetAllContainers(uid, manager))
-        {
-            foreach (var contained in container.ContainedEntities)
-                EnsureComp<ArenaIssuedItemComponent>(contained);
-        }
+        // Сущность вложили в контейнер предмета, который сам помечен как выданный аренной
+        // (например, модуль в МОД-скафандр при пре-сборке). Помечаем вложенное рекурсивно,
+        // чтобы очистка арены убрала и его.
+        MarkIssuedRecursive(args.Entity);
     }
 
     private void OnSignalReceived(EntityUid uid, DuelArenaCleanupComponent comp, ref SignalReceivedEvent args)
@@ -175,6 +170,14 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
             if (Transform(itemUid).Anchored)
                 continue;
 
+            // Обувь без статов (нет ускорения/магнитов/анти-скольжения) — косметика, как
+            // собственные ботинки игрока. Не удаляем и снимаем тег, чтобы не трогать впредь.
+            if (IsStatlessFootwear(itemUid))
+            {
+                RemCompDeferred<ArenaIssuedItemComponent>(itemUid);
+                continue;
+            }
+
             // Вколотый имплант: принудительно вынимаем, чтобы SharedSubdermalImplantSystem
             // корректно снял дарованные действия/компоненты.
             if (_container.TryGetContainingContainer((itemUid, null), out var container)
@@ -204,6 +207,60 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
 
             QueueDel(puddleUid);
         }
+
+        // 3. Брёвна, оставшиеся после уничтожения деревьев на арене.
+        var logQuery = EntityQueryEnumerator<LogComponent>();
+        while (logQuery.MoveNext(out var logUid, out _))
+        {
+            if (!InRange(logUid, origin, range))
+                continue;
+            if (Transform(logUid).Anchored)
+                continue;
+
+            QueueDel(logUid);
+        }
+
+        // 4. Сами арена-ящики (Full/Melee Arsenal — помечены markIssuedItems) — убираем вместе
+        // с выданным снаряжением, чтобы после боя на арене не оставалось пустых ящиков.
+        var crateQuery = EntityQueryEnumerator<SurplusBundleComponent>();
+        while (crateQuery.MoveNext(out var crateUid, out var bundle))
+        {
+            if (!bundle.MarkIssuedItems)
+                continue;
+            if (!InRange(crateUid, origin, range))
+                continue;
+
+            QueueDel(crateUid);
+        }
+
+        // 5. Останавливаем спавнер дуэльного аирдропа: после конца боя ящики снаряжения
+        // больше не падают автоматически (без повторного нажатия кнопки).
+        var spawnerQuery = EntityQueryEnumerator<SpawnerSignalControlComponent, TimedSpawnerComponent>();
+        while (spawnerQuery.MoveNext(out var spawnerUid, out _, out var timed))
+        {
+            if (!timed.Enabled)
+                continue;
+            if (!timed.Prototypes.Contains(DuelSupplyDropProto))
+                continue;
+            if (!InRange(spawnerUid, origin, range))
+                continue;
+
+            _spawner.SetEnabled(spawnerUid, timed, false);
+        }
+    }
+
+    /// <summary>
+    /// Обувь без эффектов на характеристики (скорость, магботы, анти-скольжение) — считаем
+    /// косметической и не удаляем при очистке арены.
+    /// </summary>
+    private bool IsStatlessFootwear(EntityUid uid)
+    {
+        if (!TryComp<ClothingComponent>(uid, out var clothing) || (clothing.Slots & SlotFlags.FEET) == 0)
+            return false;
+
+        return !HasComp<ClothingSpeedModifierComponent>(uid)
+            && !HasComp<MagbootsComponent>(uid)
+            && !HasComp<NoSlipComponent>(uid);
     }
 
     private bool InRange(EntityUid target, MapCoordinates origin, float range)

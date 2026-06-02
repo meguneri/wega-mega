@@ -643,12 +643,13 @@ public sealed class DiceOfFateSystem : EntitySystem
     private static readonly Color GlowBerserk = Color.FromHex("#AA44FF"); // фиолетовый — берсерк
     private static readonly Color GlowRegen   = Color.FromHex("#44FF88"); // зелёный   — регенерация
 
-    // Названия баффов для попапа над головой.
-    private const string LabelRush    = "⚡ РЫВОК";
-    private const string LabelSpeed   = ">> АДРЕНАЛИН";
-    private const string LabelArmor   = "## БРОНЯ";
-    private const string LabelBerserk = "!! БЕРСЕРК";
-    private const string LabelRegen   = "+ РЕГЕНЕРАЦИЯ";
+    // Названия баффов для попапа над головой. Делаем подписи явными: что именно дал бафф,
+    // насколько и на сколько секунд — чтобы игрок сразу понимал, что ему выпало.
+    private const string LabelRush    = "⚡ РЫВОК — скорость ×1.8 на 10 сек";
+    private const string LabelSpeed   = "🏃 АДРЕНАЛИН — скорость ×1.3 на 30 сек";
+    private const string LabelArmor   = "🛡 БРОНЯ — урон по тебе −50% на 30 сек";
+    private const string LabelBerserk = "⚔ БЕРСЕРК — скорость + броня на 30 сек";
+    private const string LabelRegen   = "✚ РЕГЕНЕРАЦИЯ — лечение на 30 сек";
 
     /// <summary>
     /// Тройная пульсирующая вспышка + крупный попап над игроком (виден всем)
@@ -661,8 +662,19 @@ public sealed class DiceOfFateSystem : EntitySystem
 
     private void ApplyTempGlow(EntityUid user, Color color, float seconds, string label, EntProtoId effect)
     {
-        // Крупный попап — все вокруг видят название баффа.
-        _popup.PopupEntity(label, user, PopupType.LargeCaution);
+        // Крупный попап — все вокруг видят название баффа. Время жизни попапа зависит от длины
+        // текста и для короткой надписи составляет ~0.7 c, поэтому повторяем его на всём
+        // протяжении баффа: иначе подпись пропадает почти мгновенно, хотя бафф длится seconds.
+        const float popupInterval = 1.5f;
+        var popupTicks = Math.Max(1, (int)MathF.Ceiling(seconds / popupInterval));
+        for (var i = 0; i < popupTicks; i++)
+        {
+            Timer.Spawn(TimeSpan.FromSeconds(popupInterval * i), () =>
+            {
+                if (!Deleted(user))
+                    _popup.PopupEntity(label, user, PopupType.LargeCaution);
+            });
+        }
 
         // Анимация эффекта поверх игрока в момент срабатывания.
         Spawn(effect, Transform(user).Coordinates);
