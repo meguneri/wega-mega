@@ -143,7 +143,6 @@
         - ReagentId: Tricordrazine
           Quantity: 0
   - type: SolutionRegeneration
-    solution: hypospray
     generated:
       reagents:
       - ReagentId: Tricordrazine
@@ -402,7 +401,7 @@
   - type: Tag
     tags:
     - Itemborg
- 
+
 - type: entity
   parent: BorgHypo
   suffix: epinephrine
@@ -449,4 +448,3 @@
   - type: Tag
     tags:
     - Itemborg
- 
