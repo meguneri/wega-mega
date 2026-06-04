@@ -85,7 +85,10 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
 
     private void OnCartridgeStartup(EntityUid uid, CartridgeAmmoComponent comp, ComponentStartup args)
     {
-        if (IsDuelActive())
+        // Тегаем гильзу только если она появилась в радиусе активной арены — иначе тег
+        // повесился бы на каждый картридж, заспавненный где угодно на сервере во время боя
+        // (перезарядка/стрельба вне арены), и чужие гильзы могла бы удалить очистка.
+        if (IsInActiveDuelRange(uid))
             EnsureComp<ArenaIssuedItemComponent>(uid);
     }
 
@@ -131,12 +134,22 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         _chat.DispatchServerAnnouncement("Арена очищена: выданное снаряжение убрано.", Color.Gold);
     }
 
-    private bool IsDuelActive()
+    /// <summary>
+    /// Находится ли сущность в радиусе (<see cref="DuelArenaComponent.ScanRange"/>) какой-либо
+    /// активной дуэльной арены. Используется, чтобы тегать только то, что заспавнилось на арене
+    /// во время боя, а не где угодно на сервере.
+    /// </summary>
+    private bool IsInActiveDuelRange(EntityUid target)
     {
+        var targetXform = Transform(target);
+        var pos = targetXform.MapPosition;
+        var targetGrid = targetXform.GridUid;
         var query = EntityQueryEnumerator<DuelArenaComponent>();
-        while (query.MoveNext(out _, out var arena))
+        while (query.MoveNext(out var arenaUid, out var arena))
         {
-            if (arena.IsActive)
+            if (!arena.IsActive)
+                continue;
+            if (InRange(arenaUid, pos, targetGrid, arena.ScanRange))
                 return true;
         }
         return false;
@@ -144,13 +157,15 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
 
     private bool IsDuelActiveNearby(EntityUid originEntity, float range)
     {
-        var origin = Transform(originEntity).MapPosition;
+        var originXform = Transform(originEntity);
+        var origin = originXform.MapPosition;
+        var originGrid = originXform.GridUid;
         var query = EntityQueryEnumerator<DuelArenaComponent>();
         while (query.MoveNext(out var arenaUid, out var arena))
         {
             if (!arena.IsActive)
                 continue;
-            if (InRange(arenaUid, origin, range))
+            if (InRange(arenaUid, origin, originGrid, range))
                 return true;
         }
         return false;
@@ -158,13 +173,15 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
 
     public void CleanupArea(EntityUid originEntity, float range)
     {
-        var origin = Transform(originEntity).MapPosition;
+        var originXform = Transform(originEntity);
+        var origin = originXform.MapPosition;
+        var originGrid = originXform.GridUid;
 
         // 1. Снаряжение из ящика + гильзы (все помечены ArenaIssuedItemComponent).
         var issuedQuery = EntityQueryEnumerator<ArenaIssuedItemComponent>();
         while (issuedQuery.MoveNext(out var itemUid, out _))
         {
-            if (!InRange(itemUid, origin, range))
+            if (!InRange(itemUid, origin, originGrid, range))
                 continue;
 
             if (Transform(itemUid).Anchored)
@@ -202,7 +219,7 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         var puddleQuery = EntityQueryEnumerator<PuddleComponent>();
         while (puddleQuery.MoveNext(out var puddleUid, out _))
         {
-            if (!InRange(puddleUid, origin, range))
+            if (!InRange(puddleUid, origin, originGrid, range))
                 continue;
 
             QueueDel(puddleUid);
@@ -212,7 +229,7 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         var logQuery = EntityQueryEnumerator<LogComponent>();
         while (logQuery.MoveNext(out var logUid, out _))
         {
-            if (!InRange(logUid, origin, range))
+            if (!InRange(logUid, origin, originGrid, range))
                 continue;
             if (Transform(logUid).Anchored)
                 continue;
@@ -227,7 +244,7 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
         {
             if (!bundle.MarkIssuedItems)
                 continue;
-            if (!InRange(crateUid, origin, range))
+            if (!InRange(crateUid, origin, originGrid, range))
                 continue;
 
             QueueDel(crateUid);
@@ -242,7 +259,7 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
                 continue;
             if (!timed.Prototypes.Contains(DuelSupplyDropProto))
                 continue;
-            if (!InRange(spawnerUid, origin, range))
+            if (!InRange(spawnerUid, origin, originGrid, range))
                 continue;
 
             _spawner.SetEnabled(spawnerUid, timed, false);
@@ -263,9 +280,18 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
             && !HasComp<NoSlipComponent>(uid);
     }
 
-    private bool InRange(EntityUid target, MapCoordinates origin, float range)
+    /// <summary>
+    /// Цель в зоне арены. Арена — отдельный грид, поэтому требуем совпадения грида с источником
+    /// (это покрывает всю арену и не задевает станцию); дистанция остаётся доп. страховкой.
+    /// Если у источника нет грида (в космосе) — откатываемся на проверку только по дистанции.
+    /// </summary>
+    private bool InRange(EntityUid target, MapCoordinates origin, EntityUid? originGrid, float range)
     {
-        var pos = Transform(target).MapPosition;
+        var targetXform = Transform(target);
+        if (originGrid != null && targetXform.GridUid != originGrid)
+            return false;
+
+        var pos = targetXform.MapPosition;
         if (pos.MapId != origin.MapId)
             return false;
         return (pos.Position - origin.Position).Length() <= range;

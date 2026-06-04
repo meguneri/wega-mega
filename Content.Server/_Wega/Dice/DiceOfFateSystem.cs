@@ -38,6 +38,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Dice;
 
@@ -723,44 +724,105 @@ public sealed class DiceOfFateSystem : EntitySystem
         });
     }
 
+    // ── Учёт перекрывающихся временных баффов ────────────────────────────────
+    // Раньше каждый бафф запоминал ТЕКУЩУЮ базу/мод и восстанавливал её по своему таймеру.
+    // При перекрытии двух баффов поздний таймер восстанавливал уже разогнанное значение —
+    // бафф залипал навсегда. Теперь храним «чистое» состояние (до любых баффов) и список
+    // активных множителей: база = чистая × произведение активных множителей; восстановление
+    // в чистое — только когда спал последний бафф.
+    private readonly Dictionary<EntityUid, (float Walk, float Sprint, float Accel)> _pristineSpeed = new();
+    private readonly Dictionary<EntityUid, List<float>> _speedMults = new();
+    private readonly Dictionary<EntityUid, (ProtoId<DamageModifierSetPrototype>? Original, int Count)> _damageBuffs = new();
+
     /// <summary>
     /// Временно умножает базовую скорость и возвращает исходную через <paramref name="seconds"/> секунд.
+    /// Корректно стакается с другими временными баффами (множители перемножаются).
     /// </summary>
     private void TempSpeedMultiplier(EntityUid user, float multiplier, float seconds)
     {
         if (!TryComp<MovementSpeedModifierComponent>(user, out var move))
             return;
 
-        var walk = move.BaseWalkSpeed;
-        var sprint = move.BaseSprintSpeed;
-        var accel = move.Acceleration;
+        // Чистую базу фиксируем один раз — пока на игроке нет ни одного активного множителя.
+        if (!_pristineSpeed.ContainsKey(user))
+            _pristineSpeed[user] = (move.BaseWalkSpeed, move.BaseSprintSpeed, move.Acceleration);
 
-        _speed.ChangeBaseSpeed(user, walk * multiplier, sprint * multiplier, accel, move);
+        var mults = _speedMults.GetOrNew(user);
+        mults.Add(multiplier);
+        ApplySpeedMults(user, move);
 
         Timer.Spawn(TimeSpan.FromSeconds(seconds), () =>
         {
-            if (Deleted(user) || !TryComp<MovementSpeedModifierComponent>(user, out var current))
+            if (!_speedMults.TryGetValue(user, out var active))
                 return;
-            _speed.ChangeBaseSpeed(user, walk, sprint, accel, current);
+
+            active.Remove(multiplier);
+
+            if (Deleted(user) || !TryComp<MovementSpeedModifierComponent>(user, out var current))
+            {
+                _speedMults.Remove(user);
+                _pristineSpeed.Remove(user);
+                return;
+            }
+
+            if (active.Count == 0)
+            {
+                if (_pristineSpeed.TryGetValue(user, out var pristine))
+                    _speed.ChangeBaseSpeed(user, pristine.Walk, pristine.Sprint, pristine.Accel, current);
+                _speedMults.Remove(user);
+                _pristineSpeed.Remove(user);
+            }
+            else
+            {
+                ApplySpeedMults(user, current);
+            }
         });
+    }
+
+    private void ApplySpeedMults(EntityUid user, MovementSpeedModifierComponent move)
+    {
+        if (!_pristineSpeed.TryGetValue(user, out var pristine) || !_speedMults.TryGetValue(user, out var mults))
+            return;
+
+        var product = 1f;
+        foreach (var m in mults)
+            product *= m;
+
+        _speed.ChangeBaseSpeed(user, pristine.Walk * product, pristine.Sprint * product, pristine.Accel, move);
     }
 
     /// <summary>
     /// Временно ставит набор модификаторов урона и возвращает исходный через <paramref name="seconds"/> секунд.
+    /// Перекрывающиеся баффы считаются по рефкаунту: оригинал восстанавливается, когда спал последний.
     /// </summary>
     private void TempDamageMod(EntityUid user, ProtoId<DamageModifierSetPrototype> mod, float seconds)
     {
         if (!TryComp<DamageableComponent>(user, out var damageable))
             return;
 
-        var original = damageable.DamageModifierSetId;
+        // Оригинал фиксируем только при первом баффе, иначе «оригиналом» станет сам бафф.
+        if (_damageBuffs.TryGetValue(user, out var state))
+            _damageBuffs[user] = (state.Original, state.Count + 1);
+        else
+            _damageBuffs[user] = (damageable.DamageModifierSetId, 1);
+
         _damage.SetDamageModifierSetId(user, mod);
 
         Timer.Spawn(TimeSpan.FromSeconds(seconds), () =>
         {
-            if (Deleted(user))
+            if (!_damageBuffs.TryGetValue(user, out var cur))
                 return;
-            _damage.SetDamageModifierSetId(user, original);
+
+            if (cur.Count <= 1)
+            {
+                if (!Deleted(user))
+                    _damage.SetDamageModifierSetId(user, cur.Original);
+                _damageBuffs.Remove(user);
+            }
+            else
+            {
+                _damageBuffs[user] = (cur.Original, cur.Count - 1);
+            }
         });
     }
 }

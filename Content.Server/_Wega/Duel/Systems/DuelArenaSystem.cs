@@ -2,6 +2,7 @@ using Content.Server._Wega.Duel.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking.Events;
+using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -96,17 +97,27 @@ public sealed class DuelArenaSystem : EntitySystem
         => Exists(uid) ? MetaData(uid).EntityName : "?";
 
     /// <summary>
-    /// Собирает живых мобов в радиусе арены.
+    /// Собирает живых дуэлянтов-гуманоидов на арене. Учитываются только гуманоиды (игроки):
+    /// мыши, обезьяны и прочие мобы не должны регистрироваться бойцами и блокировать сброс
+    /// заброшенной дуэли. Арена — отдельный грид, поэтому ограничиваем охват гридом трекера:
+    /// это покрывает всю арену и гарантированно не цепляет станцию. Дистанция (ScanRange)
+    /// остаётся дополнительной страховкой.
     /// </summary>
     private HashSet<EntityUid> GetAliveInRange(EntityUid uid, DuelArenaComponent comp)
     {
-        var trackerPos = Transform(uid).MapPosition;
+        var trackerXform = Transform(uid);
+        var trackerPos = trackerXform.MapPosition;
+        var trackerGrid = trackerXform.GridUid;
 
         var alive = new HashSet<EntityUid>();
-        var mobQuery = EntityQueryEnumerator<MobStateComponent>();
-        while (mobQuery.MoveNext(out var mobUid, out _))
+        var mobQuery = EntityQueryEnumerator<MobStateComponent, HumanoidProfileComponent>();
+        while (mobQuery.MoveNext(out var mobUid, out _, out _))
         {
-            var mobPos = Transform(mobUid).MapPosition;
+            var mobXform = Transform(mobUid);
+            if (trackerGrid != null && mobXform.GridUid != trackerGrid)
+                continue;
+
+            var mobPos = mobXform.MapPosition;
             if (mobPos.MapId != trackerPos.MapId)
                 continue;
             if ((mobPos.Position - trackerPos.Position).Length() > comp.ScanRange)
