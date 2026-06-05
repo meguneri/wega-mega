@@ -260,22 +260,25 @@ public sealed class DuelArenaSystem : EntitySystem
         if (winner != null)
         {
             var winnerName = SafeName(winner.Value);
-            var loser = arena.Duelists.FirstOrDefault(d => d != winner.Value);
-            var loserName = SafeName(loser);
+
+            // Проигравшие — все остальные зарегистрированные бойцы (для дуэлей 3+ их несколько).
+            var losers = arena.Duelists.Where(d => d != winner.Value).ToList();
+            var loserNames = losers.Count > 0
+                ? string.Join(", ", losers.Select(SafeName))
+                : "противники";
 
             // Счёт ведём по игроку (NetUserId), а не по телу: иначе после клона/респавна
             // боец получает новый EntityUid и счёт каждый раунд начинается заново.
             var winnerUser = GetUser(winner.Value);
-            var loserUser  = loser.Valid ? GetUser(loser) : null;
 
             if (winnerUser != null)
                 arena.Scores[winnerUser.Value] = arena.Scores.GetValueOrDefault(winnerUser.Value) + 1;
 
             var winnerScore = winnerUser != null ? arena.Scores.GetValueOrDefault(winnerUser.Value) : 0;
-            var loserScore  = loserUser  != null ? arena.Scores.GetValueOrDefault(loserUser.Value)  : 0;
 
-            msg = $"Дуэль завершена! Победитель: {winnerName}! {loserName} потерял сознание. " +
-                  $"Счёт: {winnerName} {winnerScore} — {loserScore} {loserName}. Снаряжение убрано.";
+            var loseVerb = losers.Count == 1 ? "потерял сознание" : "потеряли сознание";
+            msg = $"Дуэль завершена! Победитель: {winnerName} (побед: {winnerScore})! " +
+                  $"{loserNames} {loseVerb}. Снаряжение убрано.";
         }
         else
         {

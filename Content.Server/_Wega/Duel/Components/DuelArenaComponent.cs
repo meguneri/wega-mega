@@ -52,7 +52,7 @@ public sealed partial class DuelArenaComponent : Component
     public readonly Dictionary<NetUserId, int> Scores = new();
 
     /// <summary>
-    /// Дуэль «вооружена»: в зоне есть пара бойцов и ждём исхода.
+    /// Дуэль «вооружена»: в зоне есть минимум двое бойцов (поддерживается 3+) и ждём исхода.
     /// </summary>
     public bool IsActive;
 

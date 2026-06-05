@@ -1858,7 +1858,7 @@
   id: FullArsenalAmmoBoxShotgun
   name: full-arsenal-ammo-box-shotgun-name
   description: full-arsenal-ammo-box-shotgun-desc
-  productEntity: MagazineBoxShotgun
+  productEntity: BoxMagazineShotgun
   cost:
     Telecrystal: 1
   categories:

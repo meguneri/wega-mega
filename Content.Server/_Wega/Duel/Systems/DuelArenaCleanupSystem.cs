@@ -41,8 +41,11 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
     [Dependency] private readonly ModularSuitSystem _modSuit = default!;
     [Dependency] private readonly SpawnerSystem _spawner = default!;
 
-    /// <summary>Прототип дуэльного ящика-аирдропа — спавнер, кидающий именно его, гасим в конце боя.</summary>
-    private static readonly EntProtoId DuelSupplyDropProto = "CrateDuelSupplyDrop";
+    /// <summary>
+    /// Прототип, который кидает дуэльный спавнер-аирдроп. Спавнер кидает не сам ящик, а
+    /// маяк-телеграф (DuelSupplyDropBeacon); по этому id находим и гасим спавнер в конце боя.
+    /// </summary>
+    private static readonly EntProtoId DuelSupplyDropProto = "DuelSupplyDropBeacon";
 
     public override void Initialize()
     {

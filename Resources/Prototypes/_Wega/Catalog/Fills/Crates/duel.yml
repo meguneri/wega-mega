@@ -1,5 +1,58 @@
+# ── МАЯК СБРОСА (Supply Drop Beacon) ─────────────────────────────────────────
+# Спавнер арены кидает СНАЧАЛА этот маяк в случайную точку (телеграф), а не сам
+# ящик. Маяк ярко горит и мигает, проигрывает сигнал тревоги на весь сервер, и
+# через 5 секунд (TimedDespawn) на его месте появляется ящик CrateDuelSupplyDrop
+# (через SpawnOnDespawn). За эти 5 секунд все дуэлянты видят, КУДА упадёт лут.
+#
+# Если раунд закончится во время телеграфа — очистка арены удалит маяк через тег
+# ArenaSupplyDrop, и SpawnOnDespawn НЕ сработает (QueueDel не шлёт TimedDespawnEvent),
+# то есть «фантомный» ящик после конца боя не появится.
+
+- type: entity
+  id: DuelSupplyDropBeacon
+  name: supply drop beacon
+  suffix: Duel Arena
+  description: Сигнальный маяк. Отмечает точку, куда вот-вот рухнет ящик снаряжения.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  # НЕ наследуемся от MarkerBase: его компонент Marker скрывает спрайт от обычных
+  # игроков (виден только в редакторе). Маяк же должны видеть все дуэлянты.
+  - type: Sprite
+    drawdepth: Overlays
+    sprite: Objects/Misc/flare.rsi
+    layers:
+      - state: flare_burn
+        shader: unshaded
+        color: "#ff8800"
+  - type: PointLight
+    radius: 8.0
+    energy: 6.0
+    color: "#ff8800"
+  - type: LightBehaviour
+    behaviours:
+      # Пульсация энергии — маяк заметно мигает, привлекая внимание.
+      - !type:PulseBehaviour
+        maxDuration: 1.2
+        startValue: 3.0
+        endValue: 6.0
+        property: Energy
+        isLooped: true
+  - type: EmitGlobalSoundOnSpawn
+    sound:
+      path: /Audio/Effects/alert.ogg
+  - type: TimedDespawn
+    lifetime: 5
+  - type: SpawnOnDespawn
+    prototype: CrateDuelSupplyDrop
+  # Помечает маяк как аренное снаряжение — если бой кончится во время телеграфа,
+  # очистка арены уберёт и маяк.
+  - type: ArenaSupplyDrop
+
 # ── ДУЭЛЬНЫЙ ЯЩИК СНАРЯЖЕНИЯ (Supply Drop) ───────────────────────────────────
-# Спавнится в центре арены каждые 45 секунд, исчезает через 44 секунды.
+# Падает на месте маяка (см. выше), исчезает через 44 секунды.
 # При спавне: колокол слышен всем на станции, ящик светится оранжевым.
 #
 # Лут рандомный — 5 независимых слотов (orGroup):
