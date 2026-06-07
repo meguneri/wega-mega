@@ -1357,7 +1357,7 @@
   description: full-arsenal-stunbaton-desc
   productEntity: Stunbaton
   cost:
-    Telecrystal: 2
+    Telecrystal: 3
   categories:
   - FullArsenal
 
@@ -4799,7 +4799,7 @@
   description: full-arsenal-makeshift-laser-desc
   productEntity: WeaponMakeshiftLaser
   cost:
-    Telecrystal: 2
+    Telecrystal: 3
   categories:
   - FullArsenal
 

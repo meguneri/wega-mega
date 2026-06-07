@@ -29,13 +29,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSubMachineGun
+        startingItem: MagazineP90
         insertSound: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/SMGs/p90_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazinePistolSubMachineGun
+          - MagazineP90
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol
@@ -145,13 +145,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolHighCapacity
+        startingItem: MagazineMP7
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/mp7/mp7_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/mp7/mp7_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazinePistolSubMachineGun
+          - MagazineMP7
       gun_chamber:
         name: Chamber
         startingItem: CartridgePistol
@@ -631,88 +631,3 @@
       sprintModifier: 0.99
     - type: Contraband
       allowedDepartments: [ CentralCommand, Security ]
-
-- type: entity
-  name: Drozd Mk2
-  parent: WeaponSubMachineGunDrozdMk2
-  id: WeaponSubMachineGunDrozdMk2Empty
-  categories: [HideSpawnMenu]
-  components:
-    - type: ItemSlots
-      slots:
-        gun_magazine:
-          name: Magazine
-          startingItem: null
-          insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-          ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-          priority: 2
-          whitelist:
-            tags:
-            - MagazinePistolSubMachineGun
-          whitelistFailPopup: gun-magazine-whitelist-fail
-        gun_chamber:
-          name: Chamber
-          startingItem: null
-          priority: 1
-          whitelist:
-            tags:
-            - CartridgePistol
-
-- type: entity
-  name: C-40r submachine gun
-  parent: [BaseWeaponSubMachineGun, BaseSyndicateContraband]
-  id: WeaponSubMachineGunC40r
-  description: Early model of classic 20-round bullpup submachine gun by "Waffle Corp" chambered for .40 high-stopping-power rounds. Previously widely used by the Gorlex Marauders. Effective at short to medium ranges, capable of 2-round burst or fully automatic fire.
-  components:
-  - type: Sprite
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Clothing
-    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/c40r.rsi
-  - type: Wieldable
-    unwieldOnUse: false
-  - type: GunWieldBonus
-    minAngle: -19
-    maxAngle: -16
-  - type: Gun
-    minAngle: 21
-    maxAngle: 32
-    shotsPerBurst: 2
-    burstFireRate: 14
-    availableModes:
-    - Burst
-    - FullAuto
-    soundGunshot:
-      collection: aug
-  - type: ChamberMagazineAmmoProvider
-    autoEject: true
-  - type: MagazineVisuals
-    magState: mag
-    steps: 6
-    zeroVisible: true
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazinePistolSubMachineGun
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-          - MagazinePistolSubMachineGun
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        startingItem: CartridgePistol
-        priority: 1
-        whitelist:
-          tags:
-          - CartridgePistol
-  - type: Appearance
-  - type: StaticPrice
-    price: 5000

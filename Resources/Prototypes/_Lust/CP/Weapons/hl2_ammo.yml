@@ -23,7 +23,6 @@
   id: MagazineMP7
   name: MP7 magazine
   parent: BaseItem
-  suffix: HL2
   components:
   - type: Tag
     tags:

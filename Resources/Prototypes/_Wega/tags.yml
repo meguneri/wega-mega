@@ -12,6 +12,9 @@
   id: MagazineMP7
 
 - type: Tag
+  id: MagazineP90
+
+- type: Tag
   id: StunSword
 
 - type: Tag
