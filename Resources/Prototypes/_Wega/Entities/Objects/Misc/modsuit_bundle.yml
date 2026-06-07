@@ -1,0 +1,40 @@
+# ── ПУЛ МОДУЛЕЙ МОДУЛЬНОГО СКАФАНДРА ─────────────────────────────────────────
+# Случайная выборка из 3 полезных модулей (с повторами). Используется в
+# синдикатских хардсьют-бандлах (SyndicateHardsuitExtrasEntityTable в
+# Catalog/Fills/Backpacks/duffelbag.yml), которые умеют выдавать модульный
+# скафандр. В пул входят только боеспособные/полезные модули; гриферские,
+# требующие отдельного ядра (antigrav/teleporter) и перманентно-конфликтные
+# (регулятор температуры / компрессия) — исключены.
+- type: entityTable
+  id: ModularSuitModulesEntityTable
+  table: !type:GroupSelector
+    rolls: 3
+    children:
+    - id: ArmorBossterSuitModule
+    - id: AdvancedArmorBossterSuitModule
+      weight: 0.5
+    - id: EnergyShieldSuitModule
+      weight: 0.5
+    - id: HolsterSuitModule
+    - id: JetpackSuitModule
+    - id: JetpackAdvancedSuitModule
+    - id: MagnetSuitModule
+    - id: MagnetAdvancedSuitModule
+    - id: NoSlipSuitModule
+    - id: EMPShieldSuitModule
+    - id: EMPShieldAdvancedSuitModule
+      weight: 0.5
+    - id: RadiationShieldSuitModule
+    - id: DefibrillatorSuitModule
+    - id: HealthAnalyzerSuitModule
+    - id: InjectorSuitModule
+    - id: VisorMedicalSuitModule
+    - id: VisorSecuritySuitModule
+    - id: VisorMesonSuitModule
+    - id: WeldingSuitModule
+    - id: AdvancedFlashlightSuitModule
+    - id: StorageLargeSuitModule
+    - id: StorageHoldingSuitModule
+      weight: 0.5
+    - id: QuickCarrySuitModule
+    - id: TetherSuitModule

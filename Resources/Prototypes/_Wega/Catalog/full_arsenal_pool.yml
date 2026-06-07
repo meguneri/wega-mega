@@ -996,6 +996,20 @@
   - FullArsenal
   - FullArsenalArmor
 
+# Силовая броня космодесанта — доступна во всех ящиках (и арсенал, и ближний бой).
+- type: listing
+  id: FullArsenalHardsuitSpaceMarine
+  name: full-arsenal-hardsuit-spacemarine-name
+  description: full-arsenal-hardsuit-spacemarine-desc
+  productEntity: ClothingOuterHardsuitSpaceMarine
+  cost:
+    Telecrystal: 25
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
 - type: listing
   id: FullArsenalHardsuitEVA
   name: full-arsenal-hardsuit-eva-name
@@ -1639,9 +1653,9 @@
   id: FullArsenalDuffelCarbine
   name: full-arsenal-duffel-carbine-name
   description: full-arsenal-duffel-carbine-desc
-  productEntity: ClothingBackpackDuffelSyndicateFilledCarbine
+  productEntity: ClothingBackpackDuffelArenaM90gl
   cost:
-    Telecrystal: 15
+    Telecrystal: 10
   categories:
   - FullArsenal
 
@@ -2697,6 +2711,16 @@
   categories:
   - FullArsenal
 
+- type: listing
+  id: FullArsenalParryBuckler
+  name: full-arsenal-parry-buckler-name
+  description: full-arsenal-parry-buckler-desc
+  productEntity: ArenaParryBuckler
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
 # Medkits (filled)
 - type: listing
   id: FullArsenalMedkitBrute
@@ -3482,6 +3506,16 @@
   productEntity: WeaponRifleM90GrenadeLauncher
   cost:
     Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleBolter
+  name: full-arsenal-rifle-bolter-name
+  description: full-arsenal-rifle-bolter-desc
+  productEntity: WeaponRifleBolter
+  cost:
+    Telecrystal: 10
   categories:
   - FullArsenal
 

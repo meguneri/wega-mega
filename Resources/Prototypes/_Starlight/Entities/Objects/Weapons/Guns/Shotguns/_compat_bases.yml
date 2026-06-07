@@ -1,0 +1,57 @@
+# Compat bases for ported Starlight/Sunrise shotguns (Wega lacks pump mechanics).
+- type: entity
+  abstract: true
+  id: BaseGunShotgunSound
+
+- type: entity
+  parent: [BaseItem, GunMedium, BaseGunShotgunSound]
+  id: BaseWeaponShotgunAny
+  abstract: true
+  description: A rooty tooty point and shooty.
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,4,0
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: AmmoCounter
+  - type: Gun
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: xm1014
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
+  - type: StaticPrice
+    price: 500
+
+- type: entity
+  parent: [BaseWeaponShotgunAny, GunLight]
+  id: BaseWeaponShotgunPump
+  abstract: true
+  components:
+  - type: Gun
+    fireRate: 1.5
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgun
+    capacity: 7
+    proto: ShellShotgun
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg

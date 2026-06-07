@@ -89,6 +89,12 @@
             sprite: Corvax/Mobs/Species/displacement.rsi
             state: socks
       # Corvax-Wega-end
+      # Wega-Digitigrade-OuterClothing
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Corvax/Mobs/Species/displacement.rsi
+            state: outerclothing
     displacements:
       head:
         sizeMaps:
@@ -119,6 +125,12 @@
             sprite: Corvax/Mobs/Species/displacement.rsi
             state: socks
     # Corvax-Wega-end
+    # Wega-Digitigrade-OuterClothing
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: Corvax/Mobs/Species/displacement.rsi
+            state: outerclothing
   - type: InitialBody
     organs:
       Torso: OrganReptilianTorso

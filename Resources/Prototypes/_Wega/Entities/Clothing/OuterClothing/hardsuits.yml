@@ -127,3 +127,42 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitBlueShield
   
+# Wega arena — Space Marine power armor
+# Heavy bruiser: superb vs physical & heat, but slow and weak to radiation/caustic/stun.
+- type: entity
+  parent: ClothingOuterHardsuitBase
+  id: ClothingOuterHardsuitSpaceMarine
+  name: space marine power armor
+  description: A massive slab of ceramite plate forged for the arena's heaviest hitters. It shrugs off blades and bullets, but its sheer weight drags the wearer down.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Hardsuits/spacemarine.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/OuterClothing/Hardsuits/spacemarine.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: TemperatureProtection
+    heatingCoefficient: 0.001
+    coolingCoefficient: 0.001
+  - type: ExplosionResistance
+    damageCoefficient: 0.35
+  - type: FireProtection
+    reduction: 0.7
+  - type: StaminaResistance # heavy plate soaks stun
+    damageCoefficient: 0.35
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.15
+        Slash: 0.15
+        Piercing: 0.2
+        Heat: 0.25
+        Radiation: 0.6   # weak point: not sealed against rads
+        Caustic: 0.6     # weak point: chems eat through the seals
+  - type: ClothingSpeedModifier # the trade-off: it is heavy — halves movement speed
+    walkModifier: 0.5
+    sprintModifier: 0.5
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitSpaceMarine

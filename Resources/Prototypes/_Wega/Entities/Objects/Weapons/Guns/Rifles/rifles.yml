@@ -51,6 +51,71 @@
     zeroVisible: true
   - type: Appearance
 
+# Wega arena — Bolter. Тяжёлый болтер космодесанта: бьёт сильно, но медленный и кучность
+# держит только в захвате двумя руками. Использует стандартные винтовочные магазины.
+- type: entity
+  parent: BaseWeaponRifle
+  id: WeaponRifleBolter
+  name: bolter
+  description: A massive ceramite-plated automatic weapon that hurls self-propelled explosive bolts. Heavy, loud and unsubtle — the arena's answer to standing still.
+  suffix: Rifles
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Rifles/bolter.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Wega/Objects/Weapons/Guns/Rifles/bolter.rsi
+  - type: Item
+    size: Large
+  - type: GunWieldBonus
+    minAngle: -18
+    maxAngle: -34
+  - type: Gun
+    fireRate: 4.0
+    minAngle: 18
+    maxAngle: 36
+    angleIncrease: 3.0
+    angleDecay: 2.0
+    projectileSpeed: 45
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/batrifle.ogg
+  - type: ChamberMagazineAmmoProvider
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineRifle
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeRifle
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
 - type: entity
   name: jay
   parent: BaseWeaponRifle

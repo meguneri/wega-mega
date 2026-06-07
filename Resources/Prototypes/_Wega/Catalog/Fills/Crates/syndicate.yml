@@ -41,6 +41,13 @@
       FullArsenalGrenade: 9
       FullArsenalAmmo: 12
       FullArsenalBag: 1
+    # Гранатомёты/пусковые исключены из мега-ящика (кроме M90GL): слишком мощно на 120 ТК.
+    excludedListings:
+      - FullArsenalLauncherHydra
+      - FullArsenalLauncherHydraLethal
+      - FullArsenalLauncherRocket
+      - FullArsenalORG430
+      - FullArsenalDuffelGrenadeLauncher
 
 # Расширенный ящик полного арсенала — тот же пул, бюджет 60 ТК.
 # Броня/шлемы зафиксированы (2/2) как в обычном ящике; масштабируются только гранаты/патроны (×1.5).

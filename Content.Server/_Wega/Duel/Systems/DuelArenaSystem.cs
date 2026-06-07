@@ -8,6 +8,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -55,6 +56,17 @@ public sealed class DuelArenaSystem : EntitySystem
             {
                 comp.GateCloseAt = null;
                 _signalSystem.SendSignal(uid, comp.ResetPort, true);
+            }
+
+            // Авто-дроп снабжения во время активного боя: сбрасываем маяк в центр арены
+            // (он сам даёт колокол/свет и спавнит ящик), затем перепланируем по интервалу.
+            if (comp.IsActive && comp.SupplyDropProto != null
+                && comp.SupplyDropAt != null && now >= comp.SupplyDropAt)
+            {
+                Spawn(comp.SupplyDropProto.Value, Transform(uid).Coordinates);
+                comp.SupplyDropAt = comp.SupplyDropInterval > 0f
+                    ? now + TimeSpan.FromSeconds(comp.SupplyDropInterval)
+                    : null;
             }
 
             // Сканируем только вооружённые арены — чтобы вовремя снять взвод,
@@ -144,9 +156,9 @@ public sealed class DuelArenaSystem : EntitySystem
         if (duelists.Count < 2)
         {
             _chatManager.DispatchServerAnnouncement(
-                duelists.Count == 0
-                    ? "Дуэль не началась: в зоне нет бойцов."
-                    : "Дуэль не началась: нужно минимум 2 бойца.",
+                Loc.GetString(duelists.Count == 0
+                    ? "duel-arena-not-started-no-fighters"
+                    : "duel-arena-not-started-need-two"),
                 Color.Gray);
             return;
         }
@@ -161,8 +173,15 @@ public sealed class DuelArenaSystem : EntitySystem
         comp.GateCloseAt = null;
         _signalSystem.SendSignal(uid, comp.ResetPort, false);
 
-        var names = string.Join(" против ", comp.Duelists.Select(d => MetaData(d).EntityName));
-        _chatManager.DispatchServerAnnouncement($"Дуэль началась! {names}", Color.Gold);
+        // Планируем первый авто-дроп снабжения (если включён для этой арены).
+        comp.SupplyDropAt = comp.SupplyDropProto != null
+            ? _timing.CurTime + TimeSpan.FromSeconds(comp.SupplyDropDelay)
+            : null;
+
+        var vsSep = $" {Loc.GetString("duel-arena-connector-vs")} ";
+        var names = string.Join(vsSep, comp.Duelists.Select(d => MetaData(d).EntityName));
+        _chatManager.DispatchServerAnnouncement(
+            Loc.GetString("duel-arena-started", ("fighters", names)), Color.Gold);
     }
 
     private void OnSignalReceived(EntityUid uid, DuelArenaComponent comp, ref SignalReceivedEvent args)
@@ -186,6 +205,9 @@ public sealed class DuelArenaSystem : EntitySystem
         comp.Duelists.Clear();
         comp.IsActive = false;
 
+        // Останавливаем авто-дроп снабжения до следующего боя.
+        comp.SupplyDropAt = null;
+
         // Шлюзы закроем через ReturnGrace секунд — чтобы бойцы успели вернуться в свои базы.
         comp.GateCloseAt = _timing.CurTime + TimeSpan.FromSeconds(comp.ReturnGrace);
     }
@@ -204,11 +226,14 @@ public sealed class DuelArenaSystem : EntitySystem
                 continue;
 
             comp.Scores.Clear();
+            comp.ScoreNames.Clear();
+            comp.StreakUser = null;
+            comp.Streak = 0;
             cleared++;
         }
 
         if (cleared > 0)
-            _chatManager.DispatchServerAnnouncement("Счёт дуэльной арены обнулён.", Color.Gold);
+            _chatManager.DispatchServerAnnouncement(Loc.GetString("duel-arena-scores-reset"), Color.Gold);
 
         return cleared;
     }
@@ -219,6 +244,23 @@ public sealed class DuelArenaSystem : EntitySystem
     private NetUserId? GetUser(EntityUid body)
     {
         return _mind.TryGetMind(body, out _, out var mind) ? mind.UserId : null;
+    }
+
+    /// <summary>
+    /// Собирает строку общего счёта арены: «Имя — N», сортировка по убыванию побед, затем по имени.
+    /// Возвращает null, если счёта ещё нет.
+    /// </summary>
+    private string? BuildScoreboard(DuelArenaComponent arena)
+    {
+        if (arena.Scores.Count == 0)
+            return null;
+
+        var entries = arena.Scores
+            .OrderByDescending(kv => kv.Value)
+            .ThenBy(kv => arena.ScoreNames.GetValueOrDefault(kv.Key, "?"))
+            .Select(kv => $"{arena.ScoreNames.GetValueOrDefault(kv.Key, "?")} — {kv.Value}");
+
+        return string.Join(", ", entries);
     }
 
     private void OnMobStateChanged(MobStateChangedEvent args)
@@ -254,7 +296,19 @@ public sealed class DuelArenaSystem : EntitySystem
 
         arena.IsActive = false;
 
+        // Останавливаем авто-дроп снабжения — бой окончен.
+        arena.SupplyDropAt = null;
+
         EntityUid? winner = aliveDuelists.Count == 1 ? aliveDuelists[0] : null;
+
+        // Запоминаем актуальные имена всех бойцов этого боя по их NetUserId — чтобы общий счёт
+        // ниже отображался с именами, даже если кто-то из них не участвует в следующих раундах.
+        foreach (var duelist in arena.Duelists)
+        {
+            var user = GetUser(duelist);
+            if (user != null)
+                arena.ScoreNames[user.Value] = SafeName(duelist);
+        }
 
         string msg;
         if (winner != null)
@@ -265,7 +319,7 @@ public sealed class DuelArenaSystem : EntitySystem
             var losers = arena.Duelists.Where(d => d != winner.Value).ToList();
             var loserNames = losers.Count > 0
                 ? string.Join(", ", losers.Select(SafeName))
-                : "противники";
+                : Loc.GetString("duel-arena-losers-fallback");
 
             // Счёт ведём по игроку (NetUserId), а не по телу: иначе после клона/респавна
             // боец получает новый EntityUid и счёт каждый раунд начинается заново.
@@ -274,20 +328,38 @@ public sealed class DuelArenaSystem : EntitySystem
             if (winnerUser != null)
                 arena.Scores[winnerUser.Value] = arena.Scores.GetValueOrDefault(winnerUser.Value) + 1;
 
-            var winnerScore = winnerUser != null ? arena.Scores.GetValueOrDefault(winnerUser.Value) : 0;
+            // Серия побед подряд: растёт, если победил тот же игрок, иначе начинается заново.
+            if (winnerUser != null && arena.StreakUser == winnerUser)
+                arena.Streak++;
+            else
+            {
+                arena.StreakUser = winnerUser;
+                arena.Streak = 1;
+            }
 
-            var loseVerb = losers.Count == 1 ? "потерял сознание" : "потеряли сознание";
-            msg = $"Дуэль завершена! Победитель: {winnerName} (побед: {winnerScore})! " +
-                  $"{loserNames} {loseVerb}. Снаряжение убрано.";
+            msg = Loc.GetString("duel-arena-concluded-winner",
+                ("winner", winnerName),
+                ("streak", arena.Streak),
+                ("losers", loserNames),
+                ("loserCount", losers.Count));
         }
         else
         {
-            // Никого живого — ничья.
-            var names = string.Join(" и ", arena.Duelists.Select(SafeName));
-            msg = $"Ничья! {names} потеряли сознание. Снаряжение убрано.";
+            // Никого живого — ничья: серия прерывается.
+            arena.StreakUser = null;
+            arena.Streak = 0;
+
+            var andSep = $" {Loc.GetString("duel-arena-connector-and")} ";
+            var names = string.Join(andSep, arena.Duelists.Select(SafeName));
+            msg = Loc.GetString("duel-arena-concluded-draw", ("fighters", names));
         }
 
         arena.Duelists.Clear();
+
+        // Дописываем общий накопленный счёт арены (все игроки, сортировка по убыванию побед).
+        var scoreboard = BuildScoreboard(arena);
+        if (scoreboard != null)
+            msg += "\n" + Loc.GetString("duel-arena-scoreboard", ("scores", scoreboard));
 
         // Убираем снаряжение и объявляем результат одним сообщением.
         _cleanup.CleanupArea(arenaUid, arena.CleanupRange);

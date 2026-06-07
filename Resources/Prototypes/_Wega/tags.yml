@@ -1,6 +1,19 @@
 - type: Tag
   id: Android
 
+# Lust-station weapons (HL2 + melee)
+- type: Tag
+  id: CartridgeAR2
+
+- type: Tag
+  id: MagazineAR2
+
+- type: Tag
+  id: MagazineMP7
+
+- type: Tag
+  id: StunSword
+
 - type: Tag
   id: AndroidPart
 

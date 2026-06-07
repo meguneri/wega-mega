@@ -1,0 +1,82 @@
+- type: entity
+  id: CartridgeAR2
+  name: cartridge (AR2)
+  parent: [BaseCartridge, BaseSecurityContraband]
+  suffix: HL2
+  categories: [HideSpawnMenu]
+  components:
+  - type: Tag
+    tags:
+    - CartridgeAR2
+  - type: CartridgeAmmo
+    proto: BulletLaser
+  - type: Sprite
+    sprite: _Lust/CP/Guns/Ammunition/Casings/ar2.rsi
+    scale: 0.80, 0.80
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Appearance
+  - type: SpentAmmoVisuals
+
+- type: entity
+  id: MagazineMP7
+  name: MP7 magazine
+  parent: BaseItem
+  suffix: HL2
+  components:
+  - type: Tag
+    tags:
+    - MagazineMP7
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    proto: CartridgePistol
+    whitelist:
+      tags:
+      - CartridgePistol
+    capacity: 35
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/mp7.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
+  id: MagazineAR2
+  name: AR2 magazine
+  parent: BaseItem
+  suffix: HL2
+  components:
+  - type: Tag
+    tags:
+    - MagazineAR2
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    proto: CartridgeAR2
+    whitelist:
+      tags:
+      - CartridgeAR2
+    capacity: 30
+  - type: Item
+    size: Small
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: Sprite
+    sprite: _Lust/CP/Guns/Ammunition/Magazines/ar2.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+  - type: Appearance

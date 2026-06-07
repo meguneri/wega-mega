@@ -97,3 +97,28 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+
+# Wega arena — Space Marine helmet (pairs with ClothingOuterHardsuitSpaceMarine)
+- type: entity
+  parent: ClothingHeadHelmetHardsuitSyndie
+  id: ClothingHeadHelmetHardsuitSpaceMarine
+  name: space marine helm
+  description: A heavy ceramite war-helm with a reinforced visor. Built to take a hit to the face.
+  components:
+  - type: BreathMask
+  - type: Sprite
+    sprite: _Wega/Clothing/Head/Hardsuits/spacemarine.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Head/Hardsuits/spacemarine.rsi
+  - type: PointLight
+    color: red
+  - type: PressureProtection
+    highPressureMultiplier: 0.3
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.9
+        Slash: 0.9
+        Piercing: 0.9
+        Heat: 0.9

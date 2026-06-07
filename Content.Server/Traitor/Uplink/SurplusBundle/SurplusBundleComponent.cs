@@ -28,6 +28,13 @@ public sealed partial class SurplusBundleComponent : Component
     public Dictionary<string, int> CategoryLimits = new();
 
     /// <summary>
+    ///     Listing IDs that are never rolled into this bundle. Lets a single shared pool exclude
+    ///     specific items from one crate (e.g. drop grenade launchers from the big chaos box only).
+    /// </summary>
+    [DataField]
+    public HashSet<string> ExcludedListings = new();
+
+    /// <summary>
     ///     Categories from which at least one item is guaranteed to be picked before the
     ///     regular random fill, as long as the budget allows. Used, for example, to ensure
     ///     a melee arena crate always contains at least one melee weapon.

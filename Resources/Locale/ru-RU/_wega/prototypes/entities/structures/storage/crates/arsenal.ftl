@@ -1,8 +1,8 @@
-ent-CrateSyndicateFullArsenal = Ящик хаоса (40 ТК)
+ent-CrateSyndicateFullArsenal = ящик хаоса (40 ТК)
     .desc = { uplink-full-arsenal-bundle-desc }
-ent-CrateSyndicateFullArsenalPlus = Расширенный ящик хаоса (60 ТК)
+ent-CrateSyndicateFullArsenalPlus = расширенный ящик хаоса (60 ТК)
     .desc = { uplink-full-arsenal-plus-bundle-desc }
-ent-CrateSyndicateFullArsenalMega = Мега ящик хаоса (120 ТК)
+ent-CrateSyndicateFullArsenalMega = мега ящик хаоса (120 ТК)
     .desc = { uplink-full-arsenal-mega-bundle-desc }
-ent-CrateSyndicateMeleeArsenal = Ящик хаоса ближнего боя (40 ТК)
+ent-CrateSyndicateMeleeArsenal = ящик хаоса ближнего боя (40 ТК)
     .desc = { uplink-melee-arsenal-bundle-desc }

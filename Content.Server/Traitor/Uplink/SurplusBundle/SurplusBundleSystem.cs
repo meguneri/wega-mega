@@ -61,6 +61,7 @@ public sealed class SurplusBundleSystem : EntitySystem
         var categoryCounts = new Dictionary<string, int>();
 
         var listings = _store.GetAvailableListings(ent, null, ent.Comp2.Categories)
+            .Where(p => !ent.Comp1.ExcludedListings.Contains(p.ID))
             .OrderBy(p => p.Cost.Values.Sum())
             .ToList();
 

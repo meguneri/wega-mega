@@ -13,6 +13,7 @@ using Content.Shared.Clothing.Components;
 using Content.Shared.Modular.Suit;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DeviceLinking.Events;
+using Robust.Shared.Localization;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Inventory;
@@ -134,7 +135,7 @@ public sealed class DuelArenaCleanupSystem : EntitySystem
             return;
 
         CleanupArea(uid, comp.Range);
-        _chat.DispatchServerAnnouncement("Арена очищена: выданное снаряжение убрано.", Color.Gold);
+        _chat.DispatchServerAnnouncement(Loc.GetString("duel-arena-cleaned"), Color.Gold);
     }
 
     /// <summary>

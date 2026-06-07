@@ -7,7 +7,7 @@
   - type: Item
     size: Small
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/syndicate.rsi
+    sprite: _Wega/Objects/Consumable/Smokeables/smoker_kit.rsi
     state: closed
   - type: SpawnItemsOnUse
     items:

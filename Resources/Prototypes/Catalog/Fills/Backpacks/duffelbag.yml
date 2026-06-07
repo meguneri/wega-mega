@@ -362,6 +362,11 @@
     - id: ClothingHandsGlovesCombat
     - id: DoubleEmergencyOxygenTankFilled
     - id: DoubleEmergencyNitrogenTankFilled
+    # Эти бандлы умеют выдавать модульный скафандр (см. селекторы), поэтому кладём
+    # отвёртку и три случайных совместимых модуля — Wega-ModularSuits-Edit.
+    - id: Screwdriver
+    - !type:NestedSelector
+      tableId: ModularSuitModulesEntityTable
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
