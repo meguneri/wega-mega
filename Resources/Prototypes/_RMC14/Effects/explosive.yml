@@ -9,3 +9,39 @@
   - type: TimedDespawn
     lifetime: 0.5
   - type: RMCExplosionShockWave
+
+# Эффект дыма после взрыва (перенос из RMC14 / Sunrise).
+# Клиентская система RMCExplosionSmokeSystem анимирует раздувание и затухание спрайта.
+- type: entity
+  id: ExplosionEffectSmoke
+  name: smoke effect
+  suffix: RMC14, test-spawnable
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _Sunrise/Effects/explosion_smoke.rsi
+    layers:
+    - state: smoke
+      shader: unshaded
+  - type: ExplosionSmokeEffect
+  - type: TimedDespawn
+    lifetime: 5
+
+# Спрайт-вспышка взрыва (перенос из RMC14). Клиентская система масштабирует
+# и проигрывает анимацию спрайта.
+- type: entity
+  id: CMExplosionEffectGrenade
+  name: explosion effect
+  suffix: RMC14, test-spawnable
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/grenade_explosion.rsi
+    layers:
+    - state: grenade
+      shader: unshaded
+      map: ["base"]
+  - type: ExplosionEffect
+    lifeTime: 0.8   # длительность one-shot SpriteFlick-анимации
+  - type: TimedDespawn
+    lifetime: 0.85  # чуть дольше анимации, чтобы despawn не обрезал последний кадр

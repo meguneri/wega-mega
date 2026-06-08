@@ -3508,15 +3508,16 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalRifleBolter
-  name: full-arsenal-rifle-bolter-name
-  description: full-arsenal-rifle-bolter-desc
-  productEntity: WeaponRifleBolter
-  cost:
-    Telecrystal: 10
-  categories:
-  - FullArsenal
+# Временно отключён
+#- type: listing
+#  id: FullArsenalRifleBolter
+#  name: full-arsenal-rifle-bolter-name
+#  description: full-arsenal-rifle-bolter-desc
+#  productEntity: WeaponRifleBolter
+#  cost:
+#    Telecrystal: 10
+#  categories:
+#  - FullArsenal
 
 - type: listing
   id: FullArsenalRifleLecterXL8
@@ -5115,5 +5116,116 @@
   productEntity: WeaponGrapplingGun
   cost:
     Telecrystal: 3
+  categories:
+  - FullArsenal
+
+# ── Перенос из lust-station ────────────────────────────────────────────────
+- type: listing
+  id: FullArsenalCornivoreGloves
+  name: full-arsenal-cornivore-gloves-name
+  description: full-arsenal-cornivore-gloves-desc
+  productEntity: CornivoreGloves
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSmgP90
+  name: full-arsenal-smg-p90-name
+  description: full-arsenal-smg-p90-desc
+  productEntity: WeaponSubMachineGunP90
+  cost:
+    Telecrystal: 25
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleM16A4
+  name: full-arsenal-rifle-m16a4-name
+  description: full-arsenal-rifle-m16a4-desc
+  productEntity: WeaponRifleM16A4
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSmgMP7
+  name: full-arsenal-smg-mp7-name
+  description: full-arsenal-smg-mp7-desc
+  productEntity: WeaponSubMachineGunMP7
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleAR2
+  name: full-arsenal-rifle-ar2-name
+  description: full-arsenal-rifle-ar2-desc
+  productEntity: WeaponRifleAR2
+  cost:
+    Telecrystal: 14
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleAsh12
+  name: full-arsenal-rifle-ash12-name
+  description: full-arsenal-rifle-ash12-desc
+  productEntity: WeaponRifleAsh12
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleM52
+  name: full-arsenal-rifle-m52-name
+  description: full-arsenal-rifle-m52-desc
+  productEntity: WeaponRifleM52
+  cost:
+    Telecrystal: 11
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleFamas
+  name: full-arsenal-rifle-famas-name
+  description: full-arsenal-rifle-famas-desc
+  productEntity: WeaponRifleFamas
+  cost:
+    Telecrystal: 9
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSmgMP38
+  name: full-arsenal-smg-mp38-name
+  description: full-arsenal-smg-mp38-desc
+  productEntity: WeaponSubMachineGunMP38
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalMultiverseSword
+  name: full-arsenal-multiverse-sword-name
+  description: full-arsenal-multiverse-sword-desc
+  productEntity: WeaponMultiverseSword
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalShotgunMinotaur
+  name: full-arsenal-shotgun-minotaur-name
+  description: full-arsenal-shotgun-minotaur-desc
+  productEntity: WeaponShotgunMinotaur
+  cost:
+    Telecrystal: 12
   categories:
   - FullArsenal

@@ -67,6 +67,7 @@
 | Зелёная бензопила | `ChainsawGreen` | 4 TC |
 | Кувалда | `Sledgehammer` | 4 TC |
 | Потусторонний клинок | `EldritchBlade` | 4 TC |
+| Экстрапространственный клинок | `WeaponMultiverseSword` | 4 TC |
 | Нечестивая алебарда | `UnholyHalberd` | 5 TC |
 | Энергетический кинжал (видимый) | `EnergyDaggerLoud` | 6 TC |
 | Энергетическая сабля | `EnergyCutlass` | 7 TC |
@@ -119,6 +120,9 @@
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
 | ПП Atreides | `WeaponSubMachineGunAtreides` | 11 TC |
 | ПП C-20r | `WeaponSubMachineGunC20r` | 10 TC |
+| MP-38 | `WeaponSubMachineGunMP38` | 3 TC |
+| MP7 | `WeaponSubMachineGunMP7` | 10 TC |
+| P-90 | `WeaponSubMachineGunP90` | 25 TC |
 
 ---
 
@@ -134,6 +138,7 @@
 | Enforcer | `WeaponShotgunEnforcer` | 5 TC |
 | Hushpup | `WeaponShotgunHushpup` | 5 TC |
 | Bulldog | `WeaponShotgunBulldog` | 9 TC |
+| AS-12 «Минотавр» | `WeaponShotgunMinotaur` | 12 TC |
 | Самодельное ружьё | `WeaponShotgunImprovisedLoaded` | 1 TC |
 | Мушкетон | `WeaponShotgunBlunderbuss` | 2 TC |
 | Обрез | `WeaponShotgunSawn` | 2 TC |
@@ -146,7 +151,7 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Снайперка Мосин | `WeaponSniperMosin` | 1 TC |
-| Импровизированный лазер | `WeaponMakeshiftLaser` | 2 TC |
+| Импровизированный лазер | `WeaponMakeshiftLaser` | 3 TC |
 | Сигнальный пистолет | `WeaponFlareGun` | 2 TC |
 | Сигнальный пистолет (охрана) | `WeaponFlareGunSecurity` | 3 TC |
 | Лазерный карабин | `WeaponLaserCarbine` | 3 TC |
@@ -167,7 +172,12 @@
 | xC-67 (одиночно) | `WeaponRifleXC67` | 7 TC |
 | M-90gl (одиночно) | `WeaponRifleM90GrenadeLauncher` | 8 TC |
 | Lecter XL8 | `WeaponRifleLecterXL8` | 8 TC |
-| Болтер | `WeaponRifleBolter` | 10 TC |
+<!-- | Болтер | `WeaponRifleBolter` | 10 TC | временно отключён -->
+| M16A4 | `WeaponRifleM16A4` | 10 TC |
+| AR2 (импульсная) | `WeaponRifleAR2` | 14 TC |
+| ASH-12 | `WeaponRifleAsh12` | 6 TC |
+| M-52 | `WeaponRifleM52` | 11 TC |
+| Famas | `WeaponRifleFamas` | 9 TC |
 
 ---
 
@@ -196,7 +206,7 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
-| Электродубинка | `Stunbaton` | 2 TC |
+| Электродубинка | `Stunbaton` | 3 TC |
 | Дубинка | `Truncheon` | 2 TC |
 | Телескопическая дубинка | `Telescopicbaton` | 3 TC |
 | Стан-прод | `Stunprod` | 3 TC |
@@ -385,6 +395,7 @@
 | Контузионные перчатки | `ClothingHandsGlovesConcussiveGauntlets` | 5 TC |
 | Перчатки Крав-мага | `ClothingHandsGlovesKravMaga` | 5 TC |
 | Перчатки Полярной звезды | `ClothingHandsGlovesNorthStar` | 8 TC |
+| Перчатки алой жатвы корниворы | `CornivoreGloves` | 12 TC |
 
 ---
 

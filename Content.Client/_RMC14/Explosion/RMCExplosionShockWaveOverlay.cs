@@ -18,6 +18,8 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
     public override bool RequestScreenTexture => true;
 
+    private static readonly ProtoId<ShaderPrototype> ShockWaveShader = "RMCShockWave";
+
     private readonly ShaderInstance _shader;
 
     /// <summary>
@@ -28,7 +30,7 @@ public sealed class RMCExplosionShockWaveOverlay : Overlay, IEntityEventSubscrib
     public RMCExplosionShockWaveOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototypeManager.Index<ShaderPrototype>("RMCShockWave").Instance().Duplicate();
+        _shader = _prototypeManager.Index(ShockWaveShader).Instance().Duplicate();
     }
 
     private readonly Vector2[] _positions = new Vector2[MaxCount];

@@ -13,6 +13,24 @@
   fireStates: 3
   temperature: 800
 
+# Невидимый огонь на тайлах (fireColor прозрачный) — урон/свет как у Default,
+# но без «огненных квадратов». Используется снарядом China Lake (визуал даёт RMC-гриб).
+- type: explosion
+  id: RMCGrenadeNoTileFire
+  damagePerIntensity:
+    types:
+      Heat: 5
+      Blunt: 5
+      Piercing: 5
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 10, 30]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  fireColor: "#00000000"
+  texturePath: /Textures/Effects/fire.rsi
+  fireStates: 3
+  temperature: 800
+
 - type: explosion
   id: DemolitionCharge
   damagePerIntensity:
