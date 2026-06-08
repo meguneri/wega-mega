@@ -17,6 +17,11 @@
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
     projectileSpeed: 25
+  # Ствол точный (Gun min/max = 0), поэтому обнуляем и бонус хвата: иначе наследуемый -43/-43
+  # давал бы отрицательный угол разброса в хвате и ронял сервер (assert в GetRecoilAngle).
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
 
 - type: entity
   name: magmite proto-kinetic accelerator

@@ -41,13 +41,14 @@
         whitelist:
           tags:
           - MagazineLightRifle
+          - MagazineLightRifleBox
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifle
+        startingItem: CartridgeLightRifle
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle
+          - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -58,6 +59,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 1
   - type: GunRequiresWield
@@ -113,6 +116,7 @@
         whitelist:
           tags:
           - MagazineLightRifle
+          - MagazineLightRifleBox
       gun_chamber:
         name: Chamber
         startingItem: CartridgeLightRifle
@@ -130,6 +134,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.75
   - type: ChamberMagazineAmmoProvider
@@ -201,6 +207,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 1
   - type: GunRequiresWield
@@ -266,6 +274,7 @@
         whitelist:
           tags:
           - MagazineLightRifle
+          - MagazineLightRifleBox
       gun_chamber:
         name: Chamber
         startingItem: CartridgeLightRifle
@@ -297,7 +306,10 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-3
         map: ["enum.GunVisualLayers.Mag"]
-        type: ContainerContainer
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+        gun_chamber: !type:ContainerSlot
     - type: Clothing
       sprite: _Sunrise/Objects/Weapons/Guns/LMGs/piratecannon.rsi
     - type: Item
@@ -340,13 +352,14 @@
           whitelist:
             tags:
             - MagazineLightRifle
+            - MagazineLightRifleBox
         gun_chamber:
           name: Chamber
-          startingItem: CartridgeRifle
+          startingItem: CartridgeLightRifle
           priority: 1
           whitelist:
             tags:
-            - CartridgeRifle
+            - CartridgeLightRifle
     - type: SpeedModifiedOnWield
       walkModifier: 0.75
       sprintModifier: 0.75

@@ -134,6 +134,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
 
@@ -164,6 +166,11 @@
     fireRate: 6  # 10 в секунду - реалистично. 5, так как сс14
     soundGunshot:
       collection: ak47
+  # Бонус хвата подогнан под собственный разброс ствола (max 26): в хвате углы остаются
+  # положительными (≈1°/2°), иначе наследуемый -20/-30 уводил бы maxAngle в минус и ронял сервер.
+  - type: GunWieldBonus
+    minAngle: -1.8
+    maxAngle: -24
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -192,6 +199,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
   - type: ChamberMagazineAmmoProvider
@@ -235,6 +244,11 @@
         volume: 10
     shotsPerBurst: 3
     burstCooldown: 0.15
+  # Бонус хвата подогнан под собственный разброс ствола (max 28): в хвате углы остаются
+  # положительными (≈1°/2°), иначе наследуемый -20/-30 уводил бы maxAngle в минус и ронял сервер.
+  - type: GunWieldBonus
+    minAngle: -1.85
+    maxAngle: -26
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -263,6 +277,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
   - type: ChamberMagazineAmmoProvider
@@ -296,6 +312,11 @@
     fireRate: 5.5
     soundGunshot:
       path: /Audio/_Sunrise/Weapons/Guns/Rifles/g36/g36_shot.ogg
+  # Бонус хвата подогнан под собственный разброс ствола (max 25): в хвате углы остаются
+  # положительными (≈1°/2°), иначе наследуемый -20/-30 уводил бы maxAngle в минус и ронял сервер.
+  - type: GunWieldBonus
+    minAngle: -1
+    maxAngle: -23
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -500,6 +521,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.65
   - type: ChamberMagazineAmmoProvider
@@ -634,6 +657,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.75
   - type: CursorOffsetRequiresWield

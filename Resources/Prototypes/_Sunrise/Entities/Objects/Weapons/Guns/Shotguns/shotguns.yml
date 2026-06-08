@@ -13,6 +13,8 @@
   - type: BallisticAmmoProvider
     capacity: 8
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: GunRequiresWield
   - type: Gun
     fireRate: 2
@@ -42,6 +44,8 @@
     tags:
     - WeaponShotgunKammerer
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: GunRequiresWield
   - type: Gun
     fireRate: 1.8

@@ -2343,7 +2343,7 @@
   description: full-arsenal-energy-sword-double-desc
   productEntity: EnergySwordDouble
   cost:
-    Telecrystal: 16
+    Telecrystal: 20
   categories:
   - MeleeArsenal
   - MeleeArsenalWeapon

@@ -109,6 +109,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
 
@@ -165,6 +167,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
 
@@ -230,6 +234,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
   - type: ChamberMagazineAmmoProvider
@@ -287,6 +293,8 @@
           tags:
           - CartridgePistol
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: MagazineVisuals
     magState: mag
     steps: 1
@@ -338,6 +346,8 @@
     zeroVisible: true
   - type: Appearance
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: UseDelay
     delay: 0.5
 
@@ -432,6 +442,8 @@
     availableModes:
     - FullAuto
   - type: Wieldable
+    # Повторный use-in-hand (Z) передёргивает затвор, а не убирает оружие в одну руку — как у базовых wega-стволов.
+    unwieldOnUse: false
   - type: GunWieldBonus
     minAngle: -7.2
     maxAngle: -23

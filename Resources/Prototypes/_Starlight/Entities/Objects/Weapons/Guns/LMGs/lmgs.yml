@@ -51,6 +51,7 @@
         whitelist:
           tags:
           - MagazineLightRifle
+          - MagazineLightRifleBox
 - type: entity
   name: M492 "Incinerator"
   id: WeaponLightMachineGunM492Cburn
@@ -81,6 +82,7 @@
         whitelist:
           tags:
           - MagazineLightRifle
+          - MagazineLightRifleBox
 
 - type: entity
   name: DP-28 LMG
@@ -116,13 +118,14 @@
         whitelist:
           tags:
           - MagazineLightRifle
+          - MagazineLightRifleBox
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifle
+        startingItem: CartridgeLightRifle
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle
+          - CartridgeLightRifle
   - type: ClothingSpeedModifier
     walkModifier: 1
     sprintModifier: 0.85

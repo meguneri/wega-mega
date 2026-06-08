@@ -1,0 +1,11 @@
+# Эффект ударной волны взрыва (перенос из RMC14).
+# Спавнится в точке взрыва: клиентский оверлей RMCExplosionShockWaveOverlay рисует
+# экранное искажение (shock wave) через шейдер RMCShockWave, затем сущность исчезает.
+- type: entity
+  id: RMCExplosionEffectGrenadeShockWave
+  name: shockwave effect
+  suffix: RMC14, test-spawnable
+  components:
+  - type: TimedDespawn
+    lifetime: 0.5
+  - type: RMCExplosionShockWave

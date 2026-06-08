@@ -53,8 +53,27 @@
 | Клинок смерти | `WeaponDeathBlade` | 7 TC |
 | Высокочастотный клинок | `WeaponHighFrequencyBlade` | 7 TC |
 | Энергетический меч | `EnergySword` | 8 TC |
-| Двойной энергетический меч | `EnergySwordDouble` | 16 TC |
+| Двойной энергетический меч | `EnergySwordDouble` | 20 TC |
 | Рапира Синдиката (с ножнами) | `ClothingBeltSheathSyndicateFilled` | 8 TC |
+| Металлическая пила | `Saw` | 1 TC |
+| Дисковая пила Синдиката | `SawAdvanced` | 2 TC |
+| Мясницкий тесак | `ButchCleaver` | 2 TC |
+| Метательный нож | `ThrowingKnife` | 2 TC |
+| Боевой гвоздодёр | `CombatCrowbar` | 2 TC |
+| Нож выживальщика | `SurvivalKnife` | 2 TC |
+| Кукри | `KukriKnife` | 3 TC |
+| Клинок-трость | `CaneSheathFilled` | 3 TC |
+| Бензопила | `Chainsaw` | 4 TC |
+| Зелёная бензопила | `ChainsawGreen` | 4 TC |
+| Кувалда | `Sledgehammer` | 4 TC |
+| Потусторонний клинок | `EldritchBlade` | 4 TC |
+| Нечестивая алебарда | `UnholyHalberd` | 5 TC |
+| Энергетический кинжал (видимый) | `EnergyDaggerLoud` | 6 TC |
+| Энергетическая сабля | `EnergyCutlass` | 7 TC |
+| Клинок смерти (арена) | `WeaponDeathBladeArena` | 7 TC |
+| Лезвие руки | `ArmBlade` | 8 TC |
+| Молот сингулярности | `SingularityHammer` | 12 TC |
+| Мьёльнир | `Mjollnir` | 15 TC |
 
 ---
 
@@ -83,6 +102,10 @@
 | Desert Eagle AP | `WeaponPistolDesertEagleAP` | 6 TC |
 | Dominator (три режима) | `WeaponDominator` | 8 TC |
 | Импульсный пистолет | `WeaponPulsePistol` | 20 TC |
+| Пиратский пистолет | `WeaponRevolverPirate` | 2 TC |
+| Deckard | `WeaponRevolverDeckard` | 4 TC |
+| Энергетический магнум | `WeaponEnergyMagnum` | 5 TC |
+| Пистолет Echis | `WeaponPistolEchis` | 5 TC |
 
 ---
 
@@ -91,9 +114,10 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | ПП Дрозд | `WeaponSubMachineGunDrozd` | 4 TC |
-| ПП Donksoft | `WeaponSubMachineGunDonksoft` | 1 TC |
+| ПП Donksoft | `WeaponSubMachineGunDonksoft` | 16 TC |
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
+| ПП Atreides | `WeaponSubMachineGunAtreides` | 11 TC |
 | ПП C-20r | `WeaponSubMachineGunC20r` | 10 TC |
 
 ---
@@ -110,6 +134,10 @@
 | Enforcer | `WeaponShotgunEnforcer` | 5 TC |
 | Hushpup | `WeaponShotgunHushpup` | 5 TC |
 | Bulldog | `WeaponShotgunBulldog` | 9 TC |
+| Самодельное ружьё | `WeaponShotgunImprovisedLoaded` | 1 TC |
+| Мушкетон | `WeaponShotgunBlunderbuss` | 2 TC |
+| Обрез | `WeaponShotgunSawn` | 2 TC |
+| Энергетический дробовик | `WeaponEnergyShotgun` | 5 TC |
 
 ---
 
@@ -135,6 +163,11 @@
 | Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
 | Импульсный дробовик | `WeaponPulseShotgun` | 35 TC |
 | Импульсная снайперская винтовка | `WeaponPulseSniper` | 35 TC |
+| Мушкет | `Musket` | 6 TC |
+| xC-67 (одиночно) | `WeaponRifleXC67` | 7 TC |
+| M-90gl (одиночно) | `WeaponRifleM90GrenadeLauncher` | 8 TC |
+| Lecter XL8 | `WeaponRifleLecterXL8` | 8 TC |
+| Болтер | `WeaponRifleBolter` | 10 TC |
 
 ---
 
@@ -149,6 +182,13 @@
 | Рентгеновская пушка | `WeaponXrayCannon` | 8 TC |
 | Миниган | `WeaponMinigun` | 12 TC |
 | ORG430 (гранатомёт) | `WeaponORG430` | 18 TC |
+| Пневматическая пушка | `WeaponImprovisedPneumaticCannonFilled` | 2 TC |
+| Тесла-пистолет | `WeaponTeslaGun` | 6 TC |
+| Лазерная пушка | `WeaponLaserCannon` | 7 TC |
+| Протокинетический ускоритель | `WeaponProtoKineticAccelerator` | 8 TC |
+| Hydra (нелетальный) | `WeaponLauncherHydra` | 12 TC |
+| Hydra (летальный) | `WeaponLauncherHydraLethal` | 13 TC |
+| Ракетница | `WeaponLauncherRocket` | 18 TC |
 
 ---
 
@@ -189,6 +229,7 @@
 | Часовой щит | `ClockworkShield` | 3 TC |
 | Сломанный энергощит | `BrokenEnergyShield` | 1 TC |
 | Сломанный щит СЩ | `BrokenBlueSheildSheild` | 1 TC |
+| Парирующий баклер | `ArenaParryBuckler` | 5 TC |
 
 ---
 
@@ -237,6 +278,16 @@
 | Доги | `ClothingOuterDogi` | 2 TC |
 | Бронированный медицинский халат | `ClothingOuterCoatAMG` | 2 TC |
 | Одеяние флаггелянта (не под лимитом брони) | `ClothingOuterFlagellantRobe` | 2 TC |
+| Тонкий базовый бронежилет | `ClothingOuterArmorBasicSlim` | 3 TC |
+| Броня Синего щита | `ClothingOuterArmorBlueShield` | 5 TC |
+| Карапас капитана | `ClothingOuterArmorCaptainCarapace` | 5 TC |
+| Белый карапас капитана | `ClothingOuterArmorCaptainCarapaceWhite` | 5 TC |
+| Карапас шерифа | `ClothingOuterArmorSherifCarapace` | 5 TC |
+| Броня тамплиера | `ClothingOuterArmorTemplar` | 5 TC |
+| Карапас ЦентКом | `ClothingOuterArmorCentcommCarapace` | 6 TC |
+| Исследовательский костюм | `ClothingOuterArmorExplorerSuit` | 6 TC |
+| Исследовательский костюм (хаки) | `ClothingOuterArmorExplorerSuitKhaki` | 6 TC |
+| Медицинский исследовательский костюм | `ClothingOuterArmorExplorerSuitMedical` | 7 TC |
 
 ### Скафандры
 
@@ -275,6 +326,13 @@
 | CBURN | `ClothingOuterHardsuitCBURN` | 15 TC |
 | CBURN Лидер | `ClothingOuterHardsuitCBURNLeader` | 18 TC |
 | Отряд смерти | `ClothingOuterHardsuitDeathsquad` | 20 TC |
+| Скафандр космонавта | `ClothingOuterHardsuitSpatio` | 7 TC |
+| Скафандр Голиафа | `ClothingOuterHardsuitGoliath` | 8 TC |
+| Скафандр сальвейджа | `ClothingOuterHardsuitSalvage` | 8 TC |
+| Скафандр Синего щита | `ClothingOuterHardsuitBlueShield` | 10 TC |
+| Скафандр Пустоты | `ClothingOuterHardsuitVoid` | 10 TC |
+| Улучшенный скафандр Пустоты | `ClothingOuterHardsuitVoidAdvanced` | 12 TC |
+| Силовая броня космодесанта | `ClothingOuterHardsuitSpaceMarine` | 25 TC |
 
 ### МОД-скафандры (предсобранные)
 
@@ -305,6 +363,44 @@
 
 ---
 
+## Перчатки и кастеты
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Кастет | `ClothingHandsKnuckleDusters` | 1 TC |
+| Перчатки наёмника без пальцев | `ClothingHandsGlovesMercFingerless` | 1 TC |
+| Боевые перчатки | `ClothingHandsGlovesCombat` | 2 TC |
+| Боевые перчатки наёмника | `ClothingHandsMercGlovesCombat` | 2 TC |
+| Латунный кастет | `ClothingHandsKnuckleDustersBrass` | 2 TC |
+| Кастет квартирмейстера | `ClothingHandsKnuckleDustersQM` | 2 TC |
+| Боевые перчатки Синего щита | `ClothingHandsGlovesCombatBlueShield` | 3 TC |
+| Силовая перчатка | `ClothingHandsGlovesPowerglove` | 3 TC |
+| Дробители костей | `ClothingHandsKnuckleBoneCrushers` | 3 TC |
+| Накачанные боксёрские перчатки (синие) | `ClothingHandsGlovesBoxingRiggedBlue` | 4 TC |
+| Накачанные боксёрские перчатки (зелёные) | `ClothingHandsGlovesBoxingRiggedGreen` | 4 TC |
+| Накачанные боксёрские перчатки (красные) | `ClothingHandsGlovesBoxingRiggedRed` | 4 TC |
+| Накачанные боксёрские перчатки (жёлтые) | `ClothingHandsGlovesBoxingRiggedYellow` | 4 TC |
+| Перчатки космического ниндзя | `ClothingHandsGlovesSpaceNinja` | 4 TC |
+| Кастет Синдиката | `ClothingHandsKnuckleDustersSyndicate` | 4 TC |
+| Контузионные перчатки | `ClothingHandsGlovesConcussiveGauntlets` | 5 TC |
+| Перчатки Крав-мага | `ClothingHandsGlovesKravMaga` | 5 TC |
+| Перчатки Полярной звезды | `ClothingHandsGlovesNorthStar` | 8 TC |
+
+---
+
+## Магнитные ботинки
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Магнитные ботинки | `ClothingShoesBootsMag` | 2 TC |
+| Кроваво-красные магнитные ботинки | `ClothingShoesBootsMagSyndie` | 2 TC |
+| Боевые магнитные ботинки | `ClothingShoesBootsMagCombat` | 3 TC |
+| Улучшенные магнитные ботинки | `ClothingShoesBootsMagAdv` | 5 TC |
+| Улучшенные кроваво-красные магнитные ботинки | `ClothingShoesBootsMagAdvSynd` | 8 TC |
+| Молниеносные магнитные ботинки | `ClothingShoesBootsMagBlinding` | 8 TC |
+
+---
+
 ## Медицина
 
 | Предмет | Entity | Цена |
@@ -324,6 +420,26 @@
 | Продвинутая аптечка | `MedkitAdvancedFilled` | 5 TC |
 | Синдикатский дефибриллятор | `DefibrillatorSyndicate` | 12 TC |
 | Кремовый банановый пирог | `FoodPieBananaCream` | 5 TC |
+| Аритразин (бутылка) | `ChemistryBottleArithrazine` | 1 TC |
+| Бикаридин (бутылка) | `ChemistryBottleBicaridine` | 1 TC |
+| Дермалин (бутылка) | `ChemistryBottleDermaline` | 1 TC |
+| Диловен (бутылка) | `ChemistryBottleDylovene` | 1 TC |
+| Эпинефрин (бутылка) | `ChemistryBottleEpinephrine` | 1 TC |
+| Гиронализ (бутылка) | `ChemistryBottleHyronalin` | 1 TC |
+| Инаправалин (бутылка) | `ChemistryBottleInaprovaline` | 1 TC |
+| Келотан (бутылка) | `ChemistryBottleKelotane` | 1 TC |
+| Транексамовая кислота (бутылка) | `ChemistryBottleTranexamicAcid` | 1 TC |
+| Трикордразин (бутылка) | `ChemistryBottleTricordrazine` | 1 TC |
+| Омнизин (бутылка) | `ChemistryBottleOmnizine` | 2 TC |
+| Автоинъектор от травм | `BruteAutoInjector` | 1 TC |
+| Автоинъектор от ожогов | `BurnAutoInjector` | 1 TC |
+| Автоинъектор от проколов | `PunctAutoInjector` | 1 TC |
+| Автоинъектор от температуры | `PyraAutoInjector` | 1 TC |
+| Автоинъектор от радиации | `RadAutoInjector` | 1 TC |
+| Коробка автоинъекторов (полный набор) | `BoxAutoInjectorAll` | 3 TC |
+| Экстренный медипен | `EmergencyMedipen` | 2 TC |
+| Медипен выживания | `SurvivalMedipen` | 2 TC |
+| Боевой медипен | `CombatMedipen` | 4 TC |
 
 ---
 
@@ -334,10 +450,16 @@
 | Нескользящие ботинки | `ClothingShoesChameleonNoSlips` | 2 TC |
 | Наручники | `Handcuffs` | 1 TC |
 | Фонарик | `FlashlightSeclite` | 1 TC |
+| Солнцезащитные очки | `ClothingEyesGlassesSunglasses` | 2 TC |
 | Дымовая граната | `SmokeGrenade` | 1 TC |
 | Флэш | `Flash` | 1 TC |
 | Омега-мыло | `SoapOmega` | 2 TC |
 | Одноразовая баллистическая турель | `ToolboxElectricalTurretFilled` | 4 TC |
+| Кабельные стяжки | `Cablecuffs` | 1 TC |
+| Стяжки | `Zipties` | 1 TC |
+| Коробка наручников | `BoxHandcuff` | 2 TC |
+| Коробка стяжек | `BoxZiptie` | 2 TC |
+| Переносной зарядник | `PortableRecharger` | 2 TC |
 
 ---
 
@@ -359,6 +481,7 @@
 | Кассетная светошумовая (полная) | `ClusterBangFull` | 4 TC |
 | Мини-бомба синдиката | `SyndieMiniBomb` | 4 TC |
 | Хитрая бомба синдиката | `SyndieTrickyBomb` | 5 TC |
+| Граната-жалюзи | `GrenadeStinger` | 2 TC |
 
 ---
 
@@ -405,6 +528,7 @@
 | Безгильзовые патроны | `MagazineBoxCaselessRifle` |
 | Противоматериальные патроны | `MagazineBoxAntiMateriel` |
 | Дробовые патроны (стандарт) | `MagazineBoxShotgun` |
+| Дробовые патроны (коробка) | `BoxMagazineShotgun` |
 
 ---
 
@@ -437,6 +561,8 @@
 | Снайперский набор | `BriefcaseSyndieSniperBundleFilled` | 6 TC |
 | Чемодан-автомат (C-20K) | `WeaponSubMachineGunBriefcase` | 10 TC |
 | Набор лоббиста | `BriefcaseSyndieLobbyingBundleFilled` | 2 TC |
+| Набор метательных ножей | `ThrowingKnivesKit` | 3 TC |
+| Багетный набор | `CombatBakeryKit` | 4 TC |
 
 ---
 
@@ -457,13 +583,14 @@
 | Вещмешок гранатомёт | `ClothingBackpackDuffelSyndicateFilledGrenadeLauncher` | 25 TC |
 | Вещмешок пулемёт LMG | `ClothingBackpackDuffelSyndicateFilledLMG` | 30 TC |
 | Вещмешок стартовый набор | `ClothingBackpackDuffelSyndicateFilledStarterKit` | 40 TC |
-| Вещмешок C-4 | `ClothingBackpackDuffelSyndicateC4tBundle` | 8 TC |
 | Вещмешок скафандр Синдиката | `ClothingBackpackDuffelSyndicateHardsuitBundle` | 8 TC |
 | Вещмешок элитный скафандр | `ClothingBackpackDuffelSyndicateEliteHardsuitBundle` | 13 TC |
 | Армейская РПС | `ClothingBeltMilitaryWebbing` | 2 TC |
 | РПС шахтёра | `ClothingBeltSalvageWebbing` | 2 TC |
 | РПС охраны | `ClothingBeltSecurityWebbing` | 2 TC |
 | Вещмешок костюм клоуна | `ClothingBackpackDuffelSyndicateCostumeClown` | 1 TC |
+| ЕКД вещмешок Синдиката | `ClothingBackpackDuffelSyndicateEVABundle` | 3 TC |
+| Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
 
 ---
 
