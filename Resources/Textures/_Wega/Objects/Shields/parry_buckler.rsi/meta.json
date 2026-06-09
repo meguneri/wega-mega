@@ -1,14 +1,14 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Placeholder: reused from Objects/Weapons/Melee/shields.rsi (riot states). TODO: replace with dedicated parry buckler sprite.",
+    "copyright": "Wooden buckler sprites copied from Objects/Weapons/Melee/shields.rsi (buckler states). Taken from https://github.com/Citadel-Station-13/Citadel-Station-13/commit/84223c65f5caf667a84f3c0f49bc2a41cdc6c4e3, card shield sprites by TaoNewt (github)",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
         {
-            "name": "icon"
+            "name": "buckler-icon"
         },
         {
             "name": "buckler-inhand-left",

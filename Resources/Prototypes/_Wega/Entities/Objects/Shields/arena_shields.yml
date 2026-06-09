@@ -7,18 +7,18 @@
   components:
     - type: Sprite
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
-      state: icon
+      state: buckler-icon
     - type: Item
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
       size: Normal
       heldPrefix: buckler
-    # Hybrid: it can be swung as a blunt weapon
+    # Hybrid: it can be swung as a thermal weapon
     - type: MeleeWeapon
       wideAnimationRotation: -135
       attackRate: 1.2
       damage:
         types:
-          Blunt: 9
+          Heat: 12
       soundHit:
         collection: MetalThud
     # Defensive profile: great vs Blunt/Slash, weak vs Piercing
