@@ -21,14 +21,14 @@ namespace Content.Server._Wega.Duel.Systems;
 /// (порт <see cref="DuelArenaComponent.ResetPort"/>) отправляется не сразу, а спустя
 /// <see cref="DuelArenaComponent.ReturnGrace"/> секунд — чтобы дуэлянты успели вернуться в базы.
 /// </summary>
-public sealed class DuelArenaSystem : EntitySystem
+public sealed partial class DuelArenaSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _signalSystem = default!;
-    [Dependency] private readonly IChatManager _chatManager = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly DuelArenaCleanupSystem _cleanup = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private IChatManager _chatManager = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private DuelArenaCleanupSystem _cleanup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

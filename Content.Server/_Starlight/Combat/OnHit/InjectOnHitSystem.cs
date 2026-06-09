@@ -15,12 +15,12 @@ namespace Content.Server._Starlight.Combat.OnHit;
 ///     Injects reagents into entities hit by a melee weapon carrying
 ///     <see cref="InjectOnHitComponent"/>. Ported from lust-station / Starlight.
 /// </summary>
-public sealed class InjectOnHitSystem : EntitySystem
+public sealed partial class InjectOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly ReactiveSystem _reactiveSystem = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainers = default!;
-    [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private ReactiveSystem _reactiveSystem = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainers = default!;
+    [Dependency] private SharedColorFlashEffectSystem _color = default!;
 
     public override void Initialize()
     {

@@ -10,10 +10,10 @@ namespace Content.Server._Wega.DeviceLinking.Systems;
 /// Plays a station-wide sound when an entity with
 /// <see cref="EmitGlobalSoundOnSignalComponent"/> receives any device-link signal.
 /// </summary>
-public sealed class EmitGlobalSoundOnSignalSystem : EntitySystem
+public sealed partial class EmitGlobalSoundOnSignalSystem : EntitySystem
 {
-    [Dependency] private readonly ServerGlobalSoundSystem _globalSound = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {

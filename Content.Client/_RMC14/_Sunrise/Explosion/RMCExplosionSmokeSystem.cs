@@ -9,11 +9,11 @@ namespace Content.Client._RMC14._Sunrise.Explosion;
 
 // Анимирует дым после взрыва: раздувание (Offset) + затухание (Color alpha).
 // Перенос из lust-station / RMC14 (Sunrise).
-public sealed class RMCExplosionSmokeSystem : EntitySystem
+public sealed partial class RMCExplosionSmokeSystem : EntitySystem
 {
-    [Dependency] private readonly AnimationPlayerSystem _player = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private AnimationPlayerSystem _player = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
 
     private const string SmokeTrack = "smoke-animation";
 

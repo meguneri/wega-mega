@@ -3,9 +3,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14._Sunrise.Explosion;
 
-public sealed class ClientExplosionShockWaveSystem : EntitySystem
+public sealed partial class ClientExplosionShockWaveSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     public override void Initialize()
     {

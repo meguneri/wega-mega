@@ -6,9 +6,9 @@ using Robust.Shared.Localization;
 namespace Content.Server.Administration.Commands;
 
 [AdminCommand(AdminFlags.Fun)]
-public sealed class DuelScoreResetCommand : IConsoleCommand
+public sealed partial class DuelScoreResetCommand : IConsoleCommand
 {
-    [Dependency] private readonly IEntitySystemManager _sysMan = default!;
+    [Dependency] private IEntitySystemManager _sysMan = default!;
 
     public string Command => "duelscorereset";
     public string Description => Loc.GetString("cmd-duelscorereset-desc");

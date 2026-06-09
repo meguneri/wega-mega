@@ -34,13 +34,13 @@ namespace Content.Server._Wega.Duel.Systems;
 /// Замаппленные вещи карты не трогаются: они загружаются до старта дуэли
 /// и поэтому не получают тег ArenaIssuedItem.
 /// </summary>
-public sealed class DuelArenaCleanupSystem : EntitySystem
+public sealed partial class DuelArenaCleanupSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _link = default!;
-    [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly ModularSuitSystem _modSuit = default!;
-    [Dependency] private readonly SpawnerSystem _spawner = default!;
+    [Dependency] private DeviceLinkSystem _link = default!;
+    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private ModularSuitSystem _modSuit = default!;
+    [Dependency] private SpawnerSystem _spawner = default!;
 
     /// <summary>
     /// Прототип, который кидает дуэльный спавнер-аирдроп. Спавнер кидает не сам ящик, а
