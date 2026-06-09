@@ -907,6 +907,9 @@
   id: MagazinePistolSubMachineGunTopMounted # WeaponSubMachineGunWt550
 
 - type: Tag
+  id: MagazineSMGPPSH # WeaponSubMachineGunPPSH
+
+- type: Tag
   id: MagazineRifle # WeaponRifleLecter, WeaponRifleEstoc, WeaponRifleM90GrenadeLauncher
 
 - type: Tag

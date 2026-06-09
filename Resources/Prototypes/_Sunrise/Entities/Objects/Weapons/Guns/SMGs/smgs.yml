@@ -356,7 +356,7 @@
   name: PPSH 59 SMG
   parent: [BaseWeaponSubMachineGun, BaseMajorContraband]
   id: WeaponSubMachineGunPPSH
-  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses .35 ammo.
+  description: Beloved by USSP veterans and feared by friendly fire protocols everywhere. Uses .10 rifle ammo.
   components:
   - type: Sprite
     sprite: _Sunrise/Objects/Weapons/Guns/SMGs/ppsh41/big.rsi
@@ -395,21 +395,21 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSubMachineGun
+        startingItem: MagazinePistolSubMachineGunPPSHExtended
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazinePistolSubMachineGun
+          - MagazineSMGPPSH
         whitelistFailPopup: gun-magazine-whitelist-fail
       gun_chamber:
         name: Chamber
-        startingItem: CartridgePistol
+        startingItem: CartridgeMinigun
         priority: 1
         whitelist:
           tags:
-          - CartridgePistol
+          - CartridgeHeavyRifle
 
 - type: entity
   name: MS-42
