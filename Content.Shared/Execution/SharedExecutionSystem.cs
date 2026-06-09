@@ -33,7 +33,6 @@ public sealed partial class SharedExecutionSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSuicideSystem _suicide = default!;
     [Dependency] private SharedCombatModeSystem _combat = default!;
-    [Dependency] private SharedExecutionSystem _execution = default!;
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private SharedGunSystem _gun = default!; // Corvax-Wega-Suicide
     [Dependency] private SharedTransformSystem _transform = default!; // Corvax-Wega-Suicide

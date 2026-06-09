@@ -27,7 +27,6 @@ public sealed partial class VeilCultSystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EmpSystem _emp = default!;
     [Dependency] private EntityLookupSystem _entityLookup = default!;
-    [Dependency] private FlashSystem _flash = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedStunSystem _stun = default!;

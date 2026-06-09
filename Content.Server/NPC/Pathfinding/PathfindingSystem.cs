@@ -60,7 +60,7 @@ namespace Content.Server.NPC.Pathfinding
         [Dependency] private EntityQuery<ClimbableComponent> _climbableQuery = default!;
         [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
         [Dependency] private EntityQuery<MapGridComponent> _mapGridQuery = default!;
-        [Dependency] private EntityQuery<StepTriggerComponent> _stepTriggerQuery; // Corvax-Wega-Add
+        [Dependency] private EntityQuery<StepTriggerComponent> _stepTriggerQuery = default!; // Corvax-Wega-Add
 
         private readonly Dictionary<ICommonSession, PathfindingDebugMode> _subscribedSessions = new();
 

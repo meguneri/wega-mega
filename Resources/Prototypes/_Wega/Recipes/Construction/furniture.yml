@@ -310,3 +310,16 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
+
+- type: construction
+  id: DoubleBed
+  name: construction-recipe-double-bed
+  graph: DoubleBeds
+  startNode: start
+  targetNode: doubleBed
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

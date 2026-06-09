@@ -45,9 +45,11 @@
   - type: CultEquipment
     cult: Blood
 
+# Base robe without cult restriction so it can be worn by anyone (e.g. Full Arsenal buyers).
 - type: entity
+  abstract: true
   parent: ClothingOuterStorageBase
-  id: ClothingOuterFlagellantRobe
+  id: BaseClothingOuterFlagellantRobe
   name: flagellant robe
   description: Light clothes accelerate your movement, but bring you more damage.
   components:
@@ -69,8 +71,19 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.6
     sprintModifier: 1.6
+
+# Blood cult forge version: only blood cultists can wear it.
+- type: entity
+  parent: BaseClothingOuterFlagellantRobe
+  id: ClothingOuterFlagellantRobe
+  components:
   - type: CultEquipment
     cult: Blood
+
+# Full Arsenal version: no cult restriction, wearable by anyone.
+- type: entity
+  parent: BaseClothingOuterFlagellantRobe
+  id: ClothingOuterFlagellantRobeArsenal
 
 - type: entity
   parent: ClothingOuterStorageBase

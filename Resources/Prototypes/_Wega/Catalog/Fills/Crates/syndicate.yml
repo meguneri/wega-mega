@@ -91,6 +91,6 @@
       MeleeArsenalHead: 2
       MeleeArsenalGrenade: 3
       MeleeArsenalBag: 1
-    # Гарантируем минимум одно оружие ближнего боя в каждом ящике.
+    # Гарант хотя бы одного
     guaranteedCategories:
       - MeleeArsenalWeapon

@@ -938,7 +938,7 @@
   id: FullArsenalFlagellantRobe
   name: full-arsenal-flagellant-robe-name
   description: full-arsenal-flagellant-robe-desc
-  productEntity: ClothingOuterFlagellantRobe
+  productEntity: ClothingOuterFlagellantRobeArsenal
   cost:
     Telecrystal: 2
   categories:
