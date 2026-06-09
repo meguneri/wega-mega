@@ -115,7 +115,6 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | ПП Дрозд | `WeaponSubMachineGunDrozd` | 4 TC |
-| ПП Donksoft | `WeaponSubMachineGunDonksoft` | 16 TC |
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
 | ПП Atreides | `WeaponSubMachineGunAtreides` | 11 TC |

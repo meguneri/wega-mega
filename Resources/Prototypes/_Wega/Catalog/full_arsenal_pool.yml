@@ -336,16 +336,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalSMGDonksoft
-  name: full-arsenal-smg-donksoft-name
-  description: full-arsenal-smg-donksoft-desc
-  productEntity: WeaponSubMachineGunDonksoft
-  cost:
-    Telecrystal: 16
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalSMGWt550
   name: full-arsenal-smg-wt550-name
   description: full-arsenal-smg-wt550-desc
@@ -1745,6 +1735,7 @@
     Telecrystal: 8
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 # uplink price: 13 TC
 - type: listing
@@ -1756,6 +1747,7 @@
     Telecrystal: 13
   categories:
   - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalBeltMilitaryWebbing
@@ -3652,18 +3644,7 @@
   description: full-arsenal-armor-explorer-desc
   productEntity: ClothingOuterArmorExplorerSuit
   cost:
-    Telecrystal: 6
-  categories:
-  - FullArsenal
-  - FullArsenalArmor
-
-- type: listing
-  id: FullArsenalArmorExplorerSuitKhaki
-  name: full-arsenal-armor-explorer-khaki-name
-  description: full-arsenal-armor-explorer-khaki-desc
-  productEntity: ClothingOuterArmorExplorerSuitKhaki
-  cost:
-    Telecrystal: 6
+    Telecrystal: 4
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -3673,6 +3654,17 @@
   name: full-arsenal-armor-explorer-medical-name
   description: full-arsenal-armor-explorer-medical-desc
   productEntity: ClothingOuterArmorExplorerSuitMedical
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
+  id: FullArsenalArmorExplorerSuitReinforced
+  name: full-arsenal-armor-explorer-reinforced-name
+  description: full-arsenal-armor-explorer-reinforced-desc
+  productEntity: ClothingOuterArmorExplorerSuitReinforced
   cost:
     Telecrystal: 7
   categories:
