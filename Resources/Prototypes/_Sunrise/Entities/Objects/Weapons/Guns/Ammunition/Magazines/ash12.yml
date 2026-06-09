@@ -1,0 +1,36 @@
+# Магазин ASH-12 (перенос из lust-station, переведён на калибр .45 magnum).
+# Принимает любые .45-магнум патроны (whitelist по тегу CartridgeMagnum:
+# обычные, AP, зажигательные, урановые), по умолчанию снаряжён обычным .45.
+- type: entity
+  id: MagazineAsh12
+  name: "ash-12 magazine (.45 magnum)"
+  parent: [ BaseItem, BaseSecurityContraband ]
+  components:
+  - type: Tag
+    tags:
+      - MagazineAsh12
+  - type: Sprite
+    scale: 0.8,0.8
+    sprite: _Sunrise/Objects/Weapons/Guns/Ammunition/Magazines/ash12.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+  - type: BallisticAmmoProvider
+    mayTransfer: true
+    whitelist:
+      tags:
+        - CartridgeMagnum
+    capacity: 10
+    proto: CartridgeMagnum
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: MagazineVisuals
+    magState: mag
+    steps: 9
+    zeroVisible: false
+  - type: Appearance

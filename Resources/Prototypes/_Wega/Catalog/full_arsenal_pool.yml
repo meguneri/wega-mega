@@ -5176,7 +5176,7 @@
   description: full-arsenal-rifle-ash12-desc
   productEntity: WeaponRifleAsh12
   cost:
-    Telecrystal: 6
+    Telecrystal: 12
   categories:
   - FullArsenal
 

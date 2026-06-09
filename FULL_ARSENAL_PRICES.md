@@ -175,7 +175,7 @@
 <!-- | Болтер | `WeaponRifleBolter` | 10 TC | временно отключён -->
 | M16A4 | `WeaponRifleM16A4` | 10 TC |
 | AR2 (импульсная) | `WeaponRifleAR2` | 14 TC |
-| ASH-12 | `WeaponRifleAsh12` | 6 TC |
+| ASH-12 | `WeaponRifleAsh12` | 12 TC |
 | M-52 | `WeaponRifleM52` | 11 TC |
 | Famas | `WeaponRifleFamas` | 9 TC |
 
