@@ -85,6 +85,8 @@
 | Флинтлок | `WeaponPistolFlintlock` | 2 TC |
 | Пистолет Mk58 | `WeaponPistolMk58` | 2 TC |
 | Пистолет Viper | `WeaponPistolViper` | 2 TC |
+| M1911 | `WeaponPistolM1911` | 3 TC |
+| Снаб-револьвер | `WeaponRevolverSnubRevolver` | 3 TC |
 | Синий лазерный пистолет | `WeaponBlueLaserPistol` | 3 TC |
 | Пистолет N1984 | `WeaponPistolN1984` | 8 TC |
 | Пистолет Cobra | `WeaponPistolCobra` | 3 TC |
@@ -115,6 +117,8 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | ПП Дрозд | `WeaponSubMachineGunDrozd` | 4 TC |
+| Scorpion VZ-61 | `WeaponSubMachineGunSkorpion` | 4 TC |
+| MP5 | `WeaponSubMachineGunMP5` | 8 TC |
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
 | ПП Atreides | `WeaponSubMachineGunAtreides` | 11 TC |
@@ -122,6 +126,7 @@
 | MP-38 | `WeaponSubMachineGunMP38` | 3 TC |
 | MP7 | `WeaponSubMachineGunMP7` | 10 TC |
 | P-90 | `WeaponSubMachineGunP90` | 25 TC |
+| ППШ 59 | `WeaponSubMachineGunPPSH` | 10 TC |
 
 ---
 
@@ -130,6 +135,7 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Самодельный дробовик | `WeaponShotgunHandmade` | 1 TC |
+| Trenchgun L-4034 | `WeaponShotgunTrenchgun4034` | 4 TC |
 | Двустволка | `WeaponShotgunDoubleBarreled` | 2 TC |
 | Двустволка (резина) | `WeaponShotgunDoubleBarreledRubber` | 2 TC |
 | Kammerer | `WeaponShotgunKammerer` | 3 TC |
@@ -189,15 +195,12 @@
 | Пушка Форс | `WeaponForceGun` | 5 TC |
 | Замедлитель частиц | `WeaponParticleDecelerator` | 5 TC |
 | Рентгеновская пушка | `WeaponXrayCannon` | 8 TC |
-| Миниган | `WeaponMinigun` | 12 TC |
-| ORG430 (гранатомёт) | `WeaponORG430` | 18 TC |
+| Миниган | `WeaponMinigun` | 20 TC |
 | Пневматическая пушка | `WeaponImprovisedPneumaticCannonFilled` | 2 TC |
 | Тесла-пистолет | `WeaponTeslaGun` | 6 TC |
 | Лазерная пушка | `WeaponLaserCannon` | 7 TC |
 | Протокинетический ускоритель | `WeaponProtoKineticAccelerator` | 8 TC |
-| Hydra (нелетальный) | `WeaponLauncherHydra` | 12 TC |
-| Hydra (летальный) | `WeaponLauncherHydraLethal` | 13 TC |
-| Ракетница | `WeaponLauncherRocket` | 18 TC |
+| Ракетница (РПГ-7) | `WeaponLauncherRocket` | 18 TC |
 
 ---
 
@@ -698,10 +701,9 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Призыв существ | `SpawnSpellbook` | 10 TC |
-| Нокаут (Knock) | `KnockSpellbook` | 10 TC |
 | Самовозгорание | `FireSelfSpellbook` | 10 TC |
 | Мигание (Blink) | `BlinkBook` | 10 TC |
 | Стена силы | `ForceWallSpellbook` | 10 TC |
 | Руны | `ScrollRunes` | 10 TC |
-| Огненный шар | `FireballSpellbook` | 10 TC |
+| Огненный шар | `FireballSpellbook` | 25 TC |
 | Гримуар волшебника | `WizardsGrimoireNoRefund` | 30 TC |

@@ -23,3 +23,15 @@ This applies to `EntitySystem`s, `IConsoleCommand`s, `Overlay`s, and any other
 type that uses `[Dependency]` fields. Upstream already follows this standard, so
 keeping our `_Wega` / `_Starlight` / `_RMC14` / `_Sunrise` code aligned avoids
 recurring errors after every upstream sync.
+
+## Full Arsenal / arena price list
+
+`FULL_ARSENAL_PRICES.md` is the human-readable price list for the Full Arsenal
+arena crates (`CrateSyndicateFullArsenal*`). It must stay in sync with the
+`FullArsenal` listings in
+`Resources/Prototypes/_Wega/Catalog/full_arsenal_pool.yml`.
+
+**Always update `FULL_ARSENAL_PRICES.md` whenever you touch the arena / Full
+Arsenal pool** — adding, removing, or repricing any `FullArsenal` listing. Put
+each item in the matching category table with its display name, entity id, and
+TC cost.

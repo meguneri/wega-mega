@@ -262,6 +262,26 @@
 # ── PISTOLS ───────────────────────────────────────────────────────────────────
 
 - type: listing
+  id: FullArsenalPistolM1911
+  name: full-arsenal-pistol-m1911-name
+  description: full-arsenal-pistol-m1911-desc
+  productEntity: WeaponPistolM1911
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRevolverSnub
+  name: full-arsenal-revolver-snub-name
+  description: full-arsenal-revolver-snub-desc
+  productEntity: WeaponRevolverSnubRevolver
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalPistolMk58
   name: full-arsenal-pistol-mk58-name
   description: full-arsenal-pistol-mk58-desc
@@ -326,6 +346,26 @@
 # ── SMGs ──────────────────────────────────────────────────────────────────────
 
 - type: listing
+  id: FullArsenalSmgScorpion
+  name: full-arsenal-smg-scorpion-name
+  description: full-arsenal-smg-scorpion-desc
+  productEntity: WeaponSubMachineGunSkorpion
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSmgMP5
+  name: full-arsenal-smg-mp5-name
+  description: full-arsenal-smg-mp5-desc
+  productEntity: WeaponSubMachineGunMP5
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalSMGDrozd
   name: full-arsenal-smg-drozd-name
   description: full-arsenal-smg-drozd-desc
@@ -357,6 +397,16 @@
   - FullArsenal
 
 # ── SHOTGUNS ──────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalShotgunTrench
+  name: full-arsenal-shotgun-trench-name
+  description: full-arsenal-shotgun-trench-desc
+  productEntity: WeaponShotgunTrenchgun4034
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
 
 - type: listing
   id: FullArsenalShotgunDoubleBarreled
@@ -3542,26 +3592,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalLauncherHydra
-  name: full-arsenal-launcher-hydra-name
-  description: full-arsenal-launcher-hydra-desc
-  productEntity: WeaponLauncherHydra
-  cost:
-    Telecrystal: 12
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalLauncherHydraLethal
-  name: full-arsenal-launcher-hydra-lethal-name
-  description: full-arsenal-launcher-hydra-lethal-desc
-  productEntity: WeaponLauncherHydraLethal
-  cost:
-    Telecrystal: 13
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalLauncherRocket
   name: full-arsenal-launcher-rocket-name
   description: full-arsenal-launcher-rocket-desc
@@ -4169,7 +4199,7 @@
   description: full-arsenal-spellbookfireball-desc
   productEntity: FireballSpellbook
   cost:
-    Telecrystal: 10
+    Telecrystal: 25
   categories:
   - FullArsenal
 
@@ -4178,16 +4208,6 @@
   name: full-arsenal-spellbookblink-name
   description: full-arsenal-spellbookblink-desc
   productEntity: BlinkBook
-  cost:
-    Telecrystal: 10
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalSpellbookKnock
-  name: full-arsenal-spellbookknock-name
-  description: full-arsenal-spellbookknock-desc
-  productEntity: KnockSpellbook
   cost:
     Telecrystal: 10
   categories:
@@ -4365,7 +4385,7 @@
   description: full-arsenal-minigun-desc
   productEntity: WeaponMinigun
   cost:
-    Telecrystal: 12
+    Telecrystal: 20
   categories:
   - FullArsenal
 
@@ -4985,17 +5005,6 @@
   categories:
   - FullArsenal
 
-# china lake clone; same price as the original
-- type: listing
-  id: FullArsenalORG430
-  name: full-arsenal-org430-name
-  description: full-arsenal-org430-desc
-  productEntity: WeaponORG430
-  cost:
-    Telecrystal: 18
-  categories:
-  - FullArsenal
-
 # ── ADDITIONAL MELEE ──────────────────────────────────────────────────────────
 
 - type: listing
@@ -5199,6 +5208,16 @@
   productEntity: WeaponSubMachineGunMP38
   cost:
     Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSmgPPSH
+  name: full-arsenal-smg-ppsh-name
+  description: full-arsenal-smg-ppsh-desc
+  productEntity: WeaponSubMachineGunPPSH
+  cost:
+    Telecrystal: 10
   categories:
   - FullArsenal
 
