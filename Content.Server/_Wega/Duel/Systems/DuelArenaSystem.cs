@@ -86,34 +86,50 @@ public sealed partial class DuelArenaSystem : EntitySystem
     /// </summary>
     private void Scan(EntityUid uid, DuelArenaComponent comp)
     {
-        var aliveDuelists = comp.Duelists.Where(IsAliveDuelist).ToList();
-        if (aliveDuelists.Count <= 1)
+        // Присутствующие на арене бойцы (живые ИЛИ в криту/мертвы, но ещё не исчезли).
+        var present = comp.Duelists.Where(d => OnArena(uid, d)).ToList();
+
+        // Никого не осталось (все ушли с арены либо удалены/гибнуты без итога) — дуэль заброшена,
+        // тихо снимаем взвод без объявления победителя.
+        if (present.Count == 0)
         {
-            ConcludeDuel(uid, comp);
+            ResetDuel(comp);
             return;
         }
 
-        var aliveInRange = GetAliveInRange(uid, comp);
-        if (!comp.Duelists.Any(d => aliveInRange.Contains(d)))
-            ResetDuel(comp);
+        // На ногах остался ≤1 из присутствующих — подводим итог (победа выжившего или ничья,
+        // если оба слегли). ConcludeDuel сам определит победителя/ничью.
+        var standing = present.Count(d => !_mobState.IsIncapacitated(d));
+        if (standing <= 1)
+            ConcludeDuel(uid, comp);
     }
 
     /// <summary>
-    /// «Ещё в бою» ли дуэлянт. Боец считается стоящим, пока он не в крите и не мёртв —
-    /// предкрит (PreCritical) НЕ завершает дуэль. Безопасно к удалённым сущностям.
+    /// Присутствует ли дуэлянт на арене: существует (не гибнут/не удалён), имеет состояние мобa
+    /// и находится на гриде трекера. Уход с арены = исчезновение участника.
     /// </summary>
-    private bool IsAliveDuelist(EntityUid d)
-        => Exists(d) && HasComp<MobStateComponent>(d) && !_mobState.IsIncapacitated(d);
+    private bool OnArena(EntityUid arenaUid, EntityUid d)
+    {
+        if (!Exists(d) || !HasComp<MobStateComponent>(d))
+            return false;
+        var trackerGrid = Transform(arenaUid).GridUid;
+        return trackerGrid == null || Transform(d).GridUid == trackerGrid;
+    }
+
+    /// <summary>
+    /// «Ещё в бою» ли дуэлянт. Боец выбывает при лежачем крите, смерти, гибе/исчезновении или
+    /// уходе с арены. Предкрит (PreCritical) НЕ выводит из боя — дуэль продолжается.
+    /// </summary>
+    private bool IsActiveFighter(EntityUid arenaUid, EntityUid d)
+        => OnArena(arenaUid, d) && !_mobState.IsIncapacitated(d);
 
     private string SafeName(EntityUid uid)
         => Exists(uid) ? MetaData(uid).EntityName : "?";
 
     /// <summary>
-    /// Собирает живых дуэлянтов-гуманоидов на арене. Учитываются только гуманоиды (игроки):
-    /// мыши, обезьяны и прочие мобы не должны регистрироваться бойцами и блокировать сброс
-    /// заброшенной дуэли. Арена — отдельный грид, поэтому ограничиваем охват гридом трекера:
-    /// это покрывает всю арену и гарантированно не цепляет станцию. Дистанция (ScanRange)
-    /// остаётся дополнительной страховкой.
+    /// Собирает живых дуэлянтов-гуманоидов на арене. Арена — отдельный грид, поэтому охватываем
+    /// весь грид трекера целиком (без ограничения радиусом): это покрывает всю арену и не цепляет
+    /// станцию. Если трекер не на гриде (в космосе) — откатываемся на радиус <see cref="DuelArenaComponent.ScanRange"/>.
     /// </summary>
     private HashSet<EntityUid> GetAliveInRange(EntityUid uid, DuelArenaComponent comp)
     {
@@ -126,14 +142,25 @@ public sealed partial class DuelArenaSystem : EntitySystem
         while (mobQuery.MoveNext(out var mobUid, out _, out _))
         {
             var mobXform = Transform(mobUid);
-            if (trackerGrid != null && mobXform.GridUid != trackerGrid)
-                continue;
 
-            var mobPos = mobXform.MapPosition;
-            if (mobPos.MapId != trackerPos.MapId)
-                continue;
-            if ((mobPos.Position - trackerPos.Position).Length() > comp.ScanRange)
-                continue;
+            if (trackerGrid != null)
+            {
+                // Весь грид арены — без радиуса.
+                if (mobXform.GridUid != trackerGrid)
+                    continue;
+            }
+            else
+            {
+                // Космос/без грида: запасной охват по дистанции.
+                var mobPos = mobXform.MapPosition;
+                if (mobPos.MapId != trackerPos.MapId)
+                    continue;
+                if ((mobPos.Position - trackerPos.Position).Length() > comp.ScanRange)
+                    continue;
+            }
+            // Бойцами считаются и игроки, и гуманоидные NPC (например, синдикатские пехотинцы):
+            // дуэль может идти против мобов. Выбытие любого из них (крит/смерть/гиб/уход) учтётся
+            // в IsActiveFighter — поэтому лишних «вечно живых» бойцов это уже не создаёт.
             if (_mobState.IsAlive(mobUid))
                 alive.Add(mobUid);
         }
@@ -290,7 +317,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
         if (!arena.IsActive)
             return false;
 
-        var aliveDuelists = arena.Duelists.Where(IsAliveDuelist).ToList();
+        var aliveDuelists = arena.Duelists.Where(d => IsActiveFighter(arenaUid, d)).ToList();
         if (aliveDuelists.Count > 1)
             return false; // бой ещё идёт
 

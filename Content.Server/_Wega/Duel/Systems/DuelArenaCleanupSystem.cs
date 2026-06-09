@@ -285,16 +285,19 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     }
 
     /// <summary>
-    /// Цель в зоне арены. Арена — отдельный грид, поэтому требуем совпадения грида с источником
-    /// (это покрывает всю арену и не задевает станцию); дистанция остаётся доп. страховкой.
-    /// Если у источника нет грида (в космосе) — откатываемся на проверку только по дистанции.
+    /// Цель в зоне арены. Арена — отдельный грид, поэтому при наличии грида у источника охватываем
+    /// весь его грид целиком (без ограничения радиусом) — это покрывает всю арену и не задевает
+    /// станцию. Если у источника нет грида (в космосе) — откатываемся на проверку по дистанции.
     /// </summary>
     private bool InRange(EntityUid target, MapCoordinates origin, EntityUid? originGrid, float range)
     {
         var targetXform = Transform(target);
-        if (originGrid != null && targetXform.GridUid != originGrid)
-            return false;
 
+        // Весь грид арены — без радиуса.
+        if (originGrid != null)
+            return targetXform.GridUid == originGrid;
+
+        // Космос/без грида: запасной охват по дистанции.
         var pos = targetXform.MapPosition;
         if (pos.MapId != origin.MapId)
             return false;
