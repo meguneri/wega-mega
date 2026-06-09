@@ -1,5 +1,4 @@
 using Content.Server.StationEvents.Components;
-using Content.Server.Construction.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Containers;
@@ -8,25 +7,20 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Item;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
-using Content.Shared.Construction.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Ghost;
 
 namespace Content.Server.StationEvents.Events;
 
-public sealed class RadiationOutburstRuleSystem : StationEventSystem<RadiationOutburstRuleComponent> //port only with codeowner permision @4_ydo
+public sealed partial class RadiationOutburstRuleSystem : StationEventSystem<RadiationOutburstRuleComponent> //port only with codeowner permision @4_ydo
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedContainerSystem _containerSystem = default!;
+    [Dependency] private TagSystem _tagSystem = default!;
 
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<GhostComponent> _ghostQuery;
     private static readonly ProtoId<TagPrototype> HighRiskItemTag = "HighRiskItem";
-    private static readonly ProtoId<TagPrototype> OreTag = "Ore";
-    private static readonly ProtoId<TagPrototype> ConstructionMaterialTag = "ConstructionMaterial";
-    private static readonly ProtoId<TagPrototype> RawMaterialTag = "RawMaterial";
-    private static readonly ProtoId<TagPrototype> MaterialsThrophyTag = "MaterialsThrophy";
 
     public override void Initialize()
     {
@@ -58,8 +52,8 @@ public sealed class RadiationOutburstRuleSystem : StationEventSystem<RadiationOu
             if (_tagSystem.HasTag(targetUid, HighRiskItemTag))
                 continue;
 
-            //анти куча материалов чек
-            if (_tagSystem.HasTag(targetUid, OreTag) || _tagSystem.HasTag(targetUid, ConstructionMaterialTag) || _tagSystem.HasTag(targetUid, RawMaterialTag) || _tagSystem.HasTag(targetUid, MaterialsThrophyTag))
+            // анти стаки
+            if (HasComp<StackComponent>(targetUid))
                 continue;
 
             // анти педали айтем
@@ -101,7 +95,6 @@ public sealed class RadiationOutburstRuleSystem : StationEventSystem<RadiationOu
     private void SetRadiation(EntityUid target, float rads)
     {
         var radiationComp = EnsureComp<RadiationSourceComponent>(target);
-    //  radiationComp.Intensity += rads; пока легенько
         Dirty(target, radiationComp);
 
         Log.Debug($"RadiationOutburst: {target} теперь излучает +{rads} (всего: {radiationComp.Intensity})");

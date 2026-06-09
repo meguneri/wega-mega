@@ -17,11 +17,11 @@ namespace Content.Server._Wega.Spawners.EntitySystems;
 /// Broadcasts a global chat announcement on every toggle so all players know the state.
 /// </summary>
 [UsedImplicitly]
-public sealed class SpawnerSignalControlSystem : EntitySystem
+public sealed partial class SpawnerSignalControlSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLink = default!;
-    [Dependency] private readonly SpawnerSystem _spawner = default!;
-    [Dependency] private readonly ChatSystem _chat = default!;
+    [Dependency] private DeviceLinkSystem _deviceLink = default!;
+    [Dependency] private SpawnerSystem _spawner = default!;
+    [Dependency] private ChatSystem _chat = default!;
 
     public override void Initialize()
     {

@@ -7,11 +7,11 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Spawners.EntitySystems;
 
-public sealed class SpawnerSystem : EntitySystem
+public sealed partial class SpawnerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private TurfSystem _turf = default!;
 
     /// <summary>
     /// How many times to retry finding an unblocked tile before giving up and using the base position.

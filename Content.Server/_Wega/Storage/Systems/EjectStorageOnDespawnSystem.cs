@@ -9,9 +9,9 @@ namespace Content.Server._Wega.Storage.Systems;
 /// entity is removed by <see cref="TimedDespawnComponent"/>, so players or items inside are
 /// not deleted along with the container.
 /// </summary>
-public sealed class EjectStorageOnDespawnSystem : EntitySystem
+public sealed partial class EjectStorageOnDespawnSystem : EntitySystem
 {
-    [Dependency] private readonly EntityStorageSystem _storage = default!;
+    [Dependency] private EntityStorageSystem _storage = default!;
 
     public override void Initialize()
     {

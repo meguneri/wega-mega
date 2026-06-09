@@ -13,11 +13,11 @@ namespace Content.Server.Item.Selector;
 
 public sealed partial class ItemSelectorSystem : EntitySystem
 {
-    [Dependency] private readonly IAdminLogManager _admin = default!;
-    [Dependency] private readonly UserInterfaceSystem _ui = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] private readonly DuelArenaCleanupSystem _arenaCleanup = default!;
+    [Dependency] private IAdminLogManager _admin = default!;
+    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private IComponentFactory _componentFactory = default!;
+    [Dependency] private DuelArenaCleanupSystem _arenaCleanup = default!;
 
     public override void Initialize()
     {

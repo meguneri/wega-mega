@@ -10,9 +10,9 @@ namespace Content.Server.DeviceLinking.Systems;
 /// a paused (frozen) map are not skipped — regular EntityQueryEnumerator filters out
 /// paused entities, which caused AutoLink to silently fail for pre-placed map entities.
 /// </summary>
-public sealed class AutoLinkSystem : EntitySystem
+public sealed partial class AutoLinkSystem : EntitySystem
 {
-    [Dependency] private readonly DeviceLinkSystem _deviceLinkSystem = default!;
+    [Dependency] private DeviceLinkSystem _deviceLinkSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()

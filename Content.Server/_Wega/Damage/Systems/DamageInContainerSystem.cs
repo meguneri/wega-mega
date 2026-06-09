@@ -11,12 +11,12 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.Damage.Systems;
 
-public sealed class DamageInContainerSystem : EntitySystem
+public sealed partial class DamageInContainerSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
-    [Dependency] private readonly ContainerSystem _container = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private IGameTiming _gameTiming = default!;
+    [Dependency] private EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private ContainerSystem _container = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {
@@ -59,7 +59,7 @@ public sealed class DamageInContainerSystem : EntitySystem
                     finalDamage = comp.Damage.Clone();
                     if (comp.DamageGroups != null && !comp.DamageGroups.Empty)
                     {
-                        var groupsHeal = _damageable.CreateWeightedHealFromGroups(uid, comp.DamageGroups);
+                        var groupsHeal = _damageable.CreateWeightedHealFromGroups(contained, comp.DamageGroups);
                         finalDamage += groupsHeal;
                     }
                 }
@@ -69,12 +69,15 @@ public sealed class DamageInContainerSystem : EntitySystem
                 }
                 else if (comp.DamageGroups != null && !comp.DamageGroups.Empty)
                 {
-                    finalDamage = _damageable.CreateWeightedHealFromGroups(uid, comp.DamageGroups);
+                    finalDamage = _damageable.CreateWeightedHealFromGroups(contained, comp.DamageGroups);
                 }
                 else
                 {
                     continue;
                 }
+
+                if (finalDamage == null)
+                    continue;
 
                 if (TryComp<MobStateComponent>(contained, out var mobState))
                 {

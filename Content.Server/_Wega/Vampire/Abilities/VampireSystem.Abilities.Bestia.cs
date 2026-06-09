@@ -45,9 +45,9 @@ namespace Content.Server.Vampire;
 
 public sealed partial class VampireSystem
 {
-    [Dependency] private readonly SharedCuffableSystem _cuffable = default!;
-    [Dependency] private readonly SharedGunSystem _gun = default!;
-    [Dependency] private readonly SleepingSystem _sleeping = default!;
+    [Dependency] private SharedCuffableSystem _cuffable = default!;
+    [Dependency] private SharedGunSystem _gun = default!;
+    [Dependency] private SleepingSystem _sleeping = default!;
 
     private static readonly SoundSpecifier BestiaScream = new SoundPathSpecifier("/Audio/_Wega/Effects/Vampire/creepyshriek.ogg");
 
@@ -210,7 +210,8 @@ public sealed partial class VampireSystem
         if (!TryComp<EntityStorageComponent>(coffin, out var storage) || storage.Contents.ContainedEntities.Count == 0)
             return;
 
-        foreach (var contentsEnt in storage.Contents.ContainedEntities)
+        var entities = storage.Contents.ContainedEntities.ToList();
+        foreach (var contentsEnt in entities)
         {
             _container.Remove(contentsEnt, storage.Contents);
             _status.TryRemoveStatusEffect(contentsEnt, ForceSleeping);
