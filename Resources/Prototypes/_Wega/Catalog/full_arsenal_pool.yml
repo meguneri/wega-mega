@@ -1554,6 +1554,218 @@
   categories:
   - FullArsenal
 
+# Латунно-заводной набор (разблокированные арена-копии, без ограничения культа)
+- type: listing
+  id: FullArsenalBrassCuirass
+  name: full-arsenal-brass-cuirass-name
+  description: full-arsenal-brass-cuirass-desc
+  productEntity: VeilCultBrassCuirassArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkGauntlets
+  name: full-arsenal-clockwork-gauntlets-name
+  description: full-arsenal-clockwork-gauntlets-desc
+  productEntity: ClothingHandsClockworkGauntletsArena
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkTreads
+  name: full-arsenal-clockwork-treads-name
+  description: full-arsenal-clockwork-treads-desc
+  productEntity: ClothingShoesClockworkTreads
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkSword
+  name: full-arsenal-clockwork-sword-name
+  description: full-arsenal-clockwork-sword-desc
+  productEntity: WeaponClockworkSwordArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkSwordBorg
+  name: full-arsenal-clockwork-sword-borg-name
+  description: full-arsenal-clockwork-sword-borg-desc
+  productEntity: WeaponClockworkSwordBorg
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockHammer
+  name: full-arsenal-clock-hammer-name
+  description: full-arsenal-clock-hammer-desc
+  productEntity: WeaponClockHammerArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRatvarianSpear
+  name: full-arsenal-ratvarian-spear-name
+  description: full-arsenal-ratvarian-spear-desc
+  productEntity: WeaponRatvarianSpearArena
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+# Зачарованные латунно-заводные варианты
+- type: listing
+  id: FullArsenalBrassCuirassSmoke
+  name: full-arsenal-brass-cuirass-smoke-name
+  description: full-arsenal-brass-cuirass-smoke-desc
+  productEntity: VeilCultBrassCuirassSmokeArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBrassCuirassAbsorb
+  name: full-arsenal-brass-cuirass-absorb-name
+  description: full-arsenal-brass-cuirass-absorb-desc
+  productEntity: VeilCultBrassCuirassAbsorbArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBrassCuirassReflection
+  name: full-arsenal-brass-cuirass-reflection-name
+  description: full-arsenal-brass-cuirass-reflection-desc
+  productEntity: VeilCultBrassCuirassReflectionArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBrassCuirassHardenPlates
+  name: full-arsenal-brass-cuirass-hardenplates-name
+  description: full-arsenal-brass-cuirass-hardenplates-desc
+  productEntity: VeilCultBrassCuirassHardenPlatesArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkGauntletsNorthStar
+  name: full-arsenal-clockwork-gauntlets-northstar-name
+  description: full-arsenal-clockwork-gauntlets-northstar-desc
+  productEntity: ClothingHandsClockworkGauntletsNorthStarArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkGauntletsRedFlame
+  name: full-arsenal-clockwork-gauntlets-redflame-name
+  description: full-arsenal-clockwork-gauntlets-redflame-desc
+  productEntity: ClothingHandsClockworkGauntletsRedFlameArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkGauntletsStun
+  name: full-arsenal-clockwork-gauntlets-stun-name
+  description: full-arsenal-clockwork-gauntlets-stun-desc
+  productEntity: ClothingHandsClockworkGauntletsStunArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkSwordSwordsmen
+  name: full-arsenal-clockwork-sword-swordsmen-name
+  description: full-arsenal-clockwork-sword-swordsmen-desc
+  productEntity: WeaponClockworkSwordSwordsmenArena
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkSwordBloodshed
+  name: full-arsenal-clockwork-sword-bloodshed-name
+  description: full-arsenal-clockwork-sword-bloodshed-desc
+  productEntity: WeaponClockworkSwordBloodshedArena
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRatvarianSpearConfusion
+  name: full-arsenal-ratvarian-spear-confusion-name
+  description: full-arsenal-ratvarian-spear-confusion-desc
+  productEntity: WeaponRatvarianSpearConfusionArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRatvarianSpearElectricalTouch
+  name: full-arsenal-ratvarian-spear-electricaltouch-name
+  description: full-arsenal-ratvarian-spear-electricaltouch-desc
+  productEntity: WeaponRatvarianSpearElectricalTouchArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockHammerKnockback
+  name: full-arsenal-clock-hammer-knockback-name
+  description: full-arsenal-clock-hammer-knockback-desc
+  productEntity: WeaponClockHammerKnockbackArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockHammerCrusher
+  name: full-arsenal-clock-hammer-crusher-name
+  description: full-arsenal-clock-hammer-crusher-desc
+  productEntity: WeaponClockHammerCrusherArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockHammerDismantling
+  name: full-arsenal-clock-hammer-dismantling-name
+  description: full-arsenal-clock-hammer-dismantling-desc
+  productEntity: WeaponClockHammerDismantlingArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
 - type: listing
   id: FullArsenalBlueSheildSheild
   name: full-arsenal-blueshield-shield-name

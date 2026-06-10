@@ -75,6 +75,17 @@
 | Лезвие руки | `ArmBlade` | 8 TC |
 | Молот сингулярности | `SingularityHammer` | 12 TC |
 | Мьёльнир | `Mjollnir` | 15 TC |
+| Ратварианское копьё | `WeaponRatvarianSpearArena` | 4 TC |
+| Заводной меч | `WeaponClockworkSwordArena` | 5 TC |
+| Заводной меч (тяжёлый) | `WeaponClockworkSwordBorg` | 5 TC |
+| Заводной молот | `WeaponClockHammerArena` | 6 TC |
+| Заводной меч (Мечник) | `WeaponClockworkSwordSwordsmenArena` | 7 TC |
+| Заводной меч (Кровопролитие) | `WeaponClockworkSwordBloodshedArena` | 7 TC |
+| Ратварианское копьё (Дезориентация) | `WeaponRatvarianSpearConfusionArena` | 6 TC |
+| Ратварианское копьё (Электрический разряд) | `WeaponRatvarianSpearElectricalTouchArena` | 6 TC |
+| Заводной молот (Отброс) | `WeaponClockHammerKnockbackArena` | 8 TC |
+| Заводной молот (Дробление) | `WeaponClockHammerCrusherArena` | 8 TC |
+| Заводной молот (Демонтаж) | `WeaponClockHammerDismantlingArena` | 8 TC |
 
 ---
 
@@ -297,9 +308,14 @@
 | Карапас шерифа | `ClothingOuterArmorSherifCarapace` | 5 TC |
 | Броня тамплиера | `ClothingOuterArmorTemplar` | 5 TC |
 | Карапас ЦентКом | `ClothingOuterArmorCentcommCarapace` | 6 TC |
-| Исследовательский костюм | `ClothingOuterArmorExplorerSuit` | 6 TC |
-| Исследовательский костюм (хаки) | `ClothingOuterArmorExplorerSuitKhaki` | 6 TC |
-| Медицинский исследовательский костюм | `ClothingOuterArmorExplorerSuitMedical` | 7 TC |
+| Исследовательский костюм | `ClothingOuterArmorExplorerSuit` | 4 TC |
+| Медицинский исследовательский костюм | `ClothingOuterArmorExplorerSuitMedical` | 5 TC |
+| Усиленный исследовательский костюм | `ClothingOuterArmorExplorerSuitReinforced` | 7 TC |
+| Латунная кираса (с выдвижным шлемом) | `VeilCultBrassCuirassArena` | 6 TC |
+| Латунная кираса (Дым) | `VeilCultBrassCuirassSmokeArena` | 8 TC |
+| Латунная кираса (Поглощение) | `VeilCultBrassCuirassAbsorbArena` | 8 TC |
+| Латунная кираса (Отражение) | `VeilCultBrassCuirassReflectionArena` | 8 TC |
+| Латунная кираса (Укрепление) | `VeilCultBrassCuirassHardenPlatesArena` | 8 TC |
 
 ### Скафандры
 
@@ -398,6 +414,10 @@
 | Перчатки Крав-мага | `ClothingHandsGlovesKravMaga` | 5 TC |
 | Перчатки Полярной звезды | `ClothingHandsGlovesNorthStar` | 8 TC |
 | Перчатки алой жатвы корниворы | `CornivoreGloves` | 12 TC |
+| Латунные перчатки | `ClothingHandsClockworkGauntletsArena` | 3 TC |
+| Латунные перчатки (Полярная звезда) | `ClothingHandsClockworkGauntletsNorthStarArena` | 5 TC |
+| Латунные перчатки (Красное пламя) | `ClothingHandsClockworkGauntletsRedFlameArena` | 5 TC |
+| Латунные перчатки (Оглушение) | `ClothingHandsClockworkGauntletsStunArena` | 5 TC |
 
 ---
 
@@ -410,6 +430,7 @@
 | Боевые магнитные ботинки | `ClothingShoesBootsMagCombat` | 3 TC |
 | Улучшенные магнитные ботинки | `ClothingShoesBootsMagAdv` | 5 TC |
 | Улучшенные кроваво-красные магнитные ботинки | `ClothingShoesBootsMagAdvSynd` | 8 TC |
+| Заводные сапоги (немагнитные) | `ClothingShoesClockworkTreads` | 2 TC |
 | Молниеносные магнитные ботинки | `ClothingShoesBootsMagBlinding` | 8 TC |
 
 ---
