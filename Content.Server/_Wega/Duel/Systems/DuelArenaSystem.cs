@@ -1,6 +1,7 @@
 using Content.Server._Wega.Duel.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.DeviceLinking.Systems;
+using Content.Shared.Administration.Systems;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
@@ -29,6 +30,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private DuelArenaCleanupSystem _cleanup = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
 
     public override void Initialize()
     {
@@ -56,6 +58,10 @@ public sealed partial class DuelArenaSystem : EntitySystem
             {
                 comp.GateCloseAt = null;
                 _signalSystem.SendSignal(uid, comp.ResetPort, true);
+
+                // Бойцы уже успели вернуться в базы за grace-период — восстанавливаем
+                // стены, разрушенные за прошедшую дуэль, не рискуя зажать победителя.
+                RestoreWalls(uid, comp);
             }
 
             // Авто-дроп снабжения во время активного боя: сбрасываем маяк в центр арены
@@ -194,6 +200,10 @@ public sealed partial class DuelArenaSystem : EntitySystem
         foreach (var d in duelists)
             comp.Duelists.Add(d);
         comp.IsActive = true;
+
+        // Пока стены ещё целы (бой только начинается) — фиксируем их пристайн-снимок,
+        // чтобы после дуэли восстановить разрушенное. Срабатывает один раз за арену.
+        EnsureWallSnapshot(uid, comp);
 
         // Отменяем grace-период предыдущей дуэли — иначе Update отправит сигнал закрытия
         // шлюзов уже во время нового боя.
@@ -379,6 +389,13 @@ public sealed partial class DuelArenaSystem : EntitySystem
             var andSep = $" {Loc.GetString("duel-arena-connector-and")} ";
             var names = string.Join(andSep, arena.Duelists.Select(SafeName));
             msg = Loc.GetString("duel-arena-concluded-draw", ("fighters", names));
+        }
+
+        // Полное исцеление обоих участников по завершении дуэли (поднимает из крита, чинит весь урон).
+        foreach (var duelist in arena.Duelists)
+        {
+            if (Exists(duelist))
+                _rejuvenate.PerformRejuvenate(duelist);
         }
 
         arena.Duelists.Clear();

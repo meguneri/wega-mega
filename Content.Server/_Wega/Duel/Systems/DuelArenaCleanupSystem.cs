@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server._Wega.Duel.Components;
 using Content.Server.Botany.Components;
 using Content.Server.Chat.Managers;
@@ -17,6 +18,7 @@ using Robust.Shared.Localization;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Slippery;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
@@ -75,6 +77,43 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // лут рекурсивно — тогда очистка арены уберёт их после раунда.
         SubscribeLocalEvent<ArenaSupplyDropComponent, MapInitEvent>(
             OnSupplyDropMapInit, after: [typeof(StorageSystem)]);
+
+        // Упаковки со SpawnItemsOnUse (набор курильщика Интердайн, коробка гипопена и т.п.)
+        // при использовании спавнят НОВОЕ содержимое без метки арены, а сама упаковка
+        // самоудаляется. Если упаковка была выдана ареной — пробрасываем метку на содержимое
+        // рекурсивно, иначе пачка/зажигалка/гипопен (и сигарета во рту) остаются после боя.
+        SubscribeLocalEvent<ArenaIssuedItemComponent, SpawnItemsOnUsedEvent>(OnIssuedSpawnedItems);
+    }
+
+    private void OnIssuedSpawnedItems(EntityUid uid, ArenaIssuedItemComponent comp, SpawnItemsOnUsedEvent args)
+    {
+        foreach (var spawned in args.Spawned)
+            MarkIssuedRecursive(spawned);
+    }
+
+    /// <summary>
+    /// Извлекает из контейнеров предмета всех существ (мобов) перед его удалением, чтобы
+    /// каскадный <see cref="QueueDel"/> контейнера не удалил тело вместе с предметом
+    /// (например, соперника, спрятавшегося в коробке-невидимке <c>StealthBox</c>).
+    /// </summary>
+    private void EjectMobsBeforeDelete(EntityUid uid)
+    {
+        if (!TryComp<ContainerManagerComponent>(uid, out var manager))
+            return;
+
+        foreach (var container in _container.GetAllContainers(uid, manager))
+        {
+            // ToList: извлечение мобов модифицирует контейнер во время обхода.
+            foreach (var contained in container.ContainedEntities.ToList())
+            {
+                if (HasComp<MobStateComponent>(contained))
+                    // reparent — моб «выпадает» из коробки на её место, а не удаляется с ней.
+                    _container.Remove(contained, container, force: true);
+                else
+                    // Моб мог быть вложен глубже (контейнер в контейнере) — проверяем рекурсивно.
+                    EjectMobsBeforeDelete(contained);
+            }
+        }
     }
 
     private void OnSupplyDropMapInit(EntityUid uid, ArenaSupplyDropComponent comp, MapInitEvent args)
@@ -215,6 +254,11 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
                 foreach (var part in _modSuit.GetEquippedParts(itemUid))
                     QueueDel(part);
             }
+
+            // Внутри выданного предмета может сидеть существо (например, соперник в
+            // коробке-невидимке StealthBox). Извлекаем мобов перед удалением, иначе QueueDel
+            // контейнера каскадно удалит тело соперника вместе с коробкой.
+            EjectMobsBeforeDelete(itemUid);
 
             QueueDel(itemUid);
         }

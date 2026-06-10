@@ -1,4 +1,5 @@
 using Robust.Shared.GameObjects;
+using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
@@ -106,4 +107,16 @@ public sealed partial class DuelArenaComponent : Component
     /// null — закрытие не запланировано (бой идёт либо шлюзы уже закрыты).
     /// </summary>
     public TimeSpan? GateCloseAt;
+
+    /// <summary>
+    /// Снимок исходной (пристайн) планировки стен арены: тайл грида → прототип стены.
+    /// Снимается лениво при старте первой дуэли, пока стены ещё целы. После каждой дуэли
+    /// по этому снимку восстанавливаются стены, разрушенные в ходе боя.
+    /// </summary>
+    public readonly Dictionary<Vector2i, EntProtoId> WallSnapshot = new();
+
+    /// <summary>
+    /// Снимок стен уже сделан — не пересоздаём его на последующих боях.
+    /// </summary>
+    public bool WallSnapshotTaken;
 }

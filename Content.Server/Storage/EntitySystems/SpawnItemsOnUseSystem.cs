@@ -73,12 +73,20 @@ namespace Content.Server.Storage.EntitySystems
             var coords = Transform(args.User).Coordinates;
             var spawnEntities = GetSpawns(component.Items, _random);
             EntityUid? entityToPlaceInHands = null;
+            var spawned = new List<EntityUid>();
 
             foreach (var proto in spawnEntities)
             {
                 entityToPlaceInHands = Spawn(proto, coords);
+                spawned.Add(entityToPlaceInHands.Value);
                 _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
             }
+
+            // Wega: позволяем другим системам отреагировать на свежезаспавненное содержимое
+            // (например, дуэльная арена пробрасывает свою метку «выдано ареной» на распакованные
+            // предметы, чтобы они подчищались после боя — иначе пачка/зажигалка/гипопен из набора
+            // остаются на карте).
+            RaiseLocalEvent(uid, new SpawnItemsOnUsedEvent(spawned));
 
             // The entity is often deleted, so play the sound at its position rather than parenting
             if (component.Sound != null)
@@ -99,6 +107,20 @@ namespace Content.Server.Storage.EntitySystems
                 _hands.PickupOrDrop(args.User, entityToPlaceInHands.Value);
 
             args.Handled = true;
+        }
+    }
+
+    /// <summary>
+    /// Wega: направленное событие, поднимается на сущности-упаковке (<see cref="SpawnItemsOnUseComponent"/>)
+    /// сразу после спавна её содержимого. Содержит список заспавненных сущностей.
+    /// </summary>
+    public sealed class SpawnItemsOnUsedEvent : EntityEventArgs
+    {
+        public readonly List<EntityUid> Spawned;
+
+        public SpawnItemsOnUsedEvent(List<EntityUid> spawned)
+        {
+            Spawned = spawned;
         }
     }
 }
