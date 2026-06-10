@@ -275,6 +275,7 @@
 | Тяжёлая броня (красная) | `ClothingOuterArmorHeavyRed` | 18 TC |
 | Хитиновый панцирь | `ClothingOuterArmorChangeling` | 4 TC |
 | Костяная броня | `ClothingOuterArmorBone` | 12 TC |
+| Латунная кираса | `VeilCultBrassCuirassArsenal` | 8 TC |
 | Броня Pod Wars | `ClothingOuterArmorPodWars` | 8 TC |
 | Жилет детектива | `ClothingOuterVestDetective` | 2 TC |
 | Тренч детектива | `ClothingOuterCoatDetective` | 3 TC |
@@ -411,6 +412,7 @@
 | Перчатки космического ниндзя | `ClothingHandsGlovesSpaceNinja` | 4 TC |
 | Кастет Синдиката | `ClothingHandsKnuckleDustersSyndicate` | 4 TC |
 | Контузионные перчатки | `ClothingHandsGlovesConcussiveGauntlets` | 5 TC |
+| Латунные латные перчатки | `ClothingHandsClockworkGauntletsArsenal` | 6 TC |
 | Перчатки Крав-мага | `ClothingHandsGlovesKravMaga` | 5 TC |
 | Перчатки Полярной звезды | `ClothingHandsGlovesNorthStar` | 8 TC |
 | Перчатки алой жатвы корниворы | `CornivoreGloves` | 12 TC |

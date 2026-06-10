@@ -670,6 +670,17 @@
   - FullArsenalArmor
 
 - type: listing
+  id: FullArsenalArmorBrassCuirass
+  name: full-arsenal-armor-brass-cuirass-name
+  description: full-arsenal-armor-brass-cuirass-desc
+  productEntity: VeilCultBrassCuirassArsenal
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
   id: FullArsenalArmorPodWars
   name: full-arsenal-armor-pod-wars-name
   description: full-arsenal-armor-pod-wars-desc
@@ -4218,6 +4229,16 @@
   productEntity: ClothingHandsGlovesKravMaga
   cost:
     Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlovesClockworkGauntlets
+  name: full-arsenal-gloves-clockwork-gauntlets-name
+  description: full-arsenal-gloves-clockwork-gauntlets-desc
+  productEntity: ClothingHandsClockworkGauntletsArsenal
+  cost:
+    Telecrystal: 6
   categories:
   - FullArsenal
 
