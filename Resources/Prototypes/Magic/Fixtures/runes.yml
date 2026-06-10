@@ -5,6 +5,7 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: MagicRune # Corvax-Wega: метка для подчистки рун после раунда
     - type: Clickable
     - type: Sprite
       sprite: Structures/Magic/Cult/rune.rsi
