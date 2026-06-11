@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "SUNRISE | Ported to wega-mega from https://github.com/space-sunrise/lust-station (_Sunrise/Objects/Weapons/Guns/Rifles/ak514/big.rsi).",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "bolt-open"
+        },
+        {
+            "name": "base"
+        },
+        {
+            "name": "mag-0"
+        }
+    ]
+}

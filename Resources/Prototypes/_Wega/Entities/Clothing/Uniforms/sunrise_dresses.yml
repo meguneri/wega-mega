@@ -1,0 +1,97 @@
+# Dresses ported from lust-station / Sunrise (space-sunrise/lust-station, _Sunrise folder).
+# Sprites are CC-BY-SA-4.0 by bulbo44key (see meta.json); prototypes written for wega-mega.
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressMaidBlueSunrise
+  name: blue maid dress
+  suffix: Sunrise
+  description: A classic maid dress in calm blue tones. Dusting optional.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/maid_blue.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/maid_blue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressMaidLongSunrise
+  name: long maid dress
+  suffix: Sunrise
+  description: A modest floor-length maid dress for the traditionally minded housekeeper.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/maid_long.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/maid_long.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressMaidPinkSunrise
+  name: pink maid dress
+  suffix: Sunrise
+  description: A maid dress in playful pink. The feather duster is sold separately.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/maid_pink.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/maid_pink.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressSexySunrise
+  name: cocktail dress
+  suffix: Sunrise
+  description: A daring little dress that leaves remarkably little to the imagination.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/sexy_dress.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/sexy_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressSuccubusBlackSunrise
+  name: black succubus dress
+  suffix: Sunrise
+  description: A sleek black dress with a devilish cut. Soul not included.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/succubus_black.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/succubus_black.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressSuccubusWhiteSunrise
+  name: white succubus dress
+  suffix: Sunrise
+  description: The same devilish cut, but in innocent white. Nobody is fooled.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/succubus_white.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/succubus_white.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressTangoSunrise
+  name: tango dress
+  suffix: Sunrise
+  description: A fiery dress made for the dance floor. It takes two.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/tango_dress.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/tango_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressXenoSunrise
+  name: xeno dress
+  suffix: Sunrise
+  description: A dress styled after the dreaded xenomorph. Hisses not included.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Dresses/xeno_dress.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Dresses/xeno_dress.rsi

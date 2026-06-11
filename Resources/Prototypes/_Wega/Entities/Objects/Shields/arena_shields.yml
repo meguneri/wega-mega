@@ -3,7 +3,7 @@
   name: parry buckler
   parent: BaseShield
   id: ArenaParryBuckler
-  description: A compact dueling buckler. Light enough to swing as a bludgeon, angled to deflect energy bolts — but it offers little against a thrust.
+  description: A compact dueling buckler built around the counterattack — catch a blow on the raised face and the riposte lands twice as hard. Light enough to swing as a bludgeon and angled to deflect energy bolts.
   components:
     - type: Sprite
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
@@ -19,43 +19,53 @@
       damage:
         types:
           Heat: 12
+          Blunt: 2
       soundHit:
         collection: MetalThud
-    # Defensive profile: great vs Blunt/Slash, weak vs Piercing
+    # Duelist profile: modest passive protection, but a raised buckler
+    # shrugs off melee — piercing is still its weak spot
     - type: Blocking
       passiveBlockModifier:
         coefficients:
-          Blunt: 0.8
+          Blunt: 0.85
           Slash: 0.85
-          Piercing: 1.1
-          Heat: 0.9
+          Piercing: 0.6
+          Heat: 0.8
       activeBlockModifier:
         coefficients:
-          Blunt: 0.6
-          Slash: 0.65
-          Piercing: 1.0
-          Heat: 0.7
+          Blunt: 0.45
+          Slash: 0.5
+          Piercing: 0.5
+          Heat: 0.55
         flatReductions:
-          Blunt: 2
-          Slash: 1
-          Heat: 1
+          Blunt: 3
+          Slash: 2
+          Heat: 2
+    # Unique mechanic: parrying a melee hit while actively blocking primes a
+    # riposte — the next swing within the window hits harder and drains stamina
+    - type: ParryRiposte
+      riposteWindow: 2
+      riposteStaminaDamage: 35
+      riposteBonusDamage:
+        types:
+          Blunt: 8
     # Mechanic hook: angled face deflects energy
     - type: Reflect
       reflectProb: 0.35
       reflects:
         - Energy
-    # Less durable than a riot shield — the trade for offense
+    # Sturdier than it looks — built to eat parried hits
     - type: Destructible
       thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 90
+            damage: 160
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]
         - trigger:
             !type:DamageTrigger
-            damage: 65
+            damage: 120
           behaviors:
             - !type:DoActsBehavior
               acts: [ "Destruction" ]

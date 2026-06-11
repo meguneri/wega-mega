@@ -43,6 +43,30 @@ public sealed partial class SurplusBundleComponent : Component
     public List<string> GuaranteedCategories = new();
 
     /// <summary>
+    ///     Companion guarantees, keyed by trigger category -> companion category. If the rolled
+    ///     bundle contains any listing from the trigger category but none from the companion
+    ///     category, one random companion listing is added on top (even past the price budget).
+    ///     Used so an injector (hypospray/hypopen) never drops without at least one chem bottle.
+    /// </summary>
+    [DataField]
+    public Dictionary<string, string> CompanionCategories = new();
+
+    /// <summary>
+    ///     Store category holding ammo listings (magazines, speedloaders, boxes). When a gun has
+    ///     already been rolled into the bundle, ammo listings whose product carries a tag matching
+    ///     one of the gun's magazine/chamber whitelist tags get their pick weight multiplied by
+    ///     <see cref="AmmoAffinityMultiplier"/> — compatible ammo becomes much more likely.
+    /// </summary>
+    [DataField]
+    public string? AmmoAffinityCategory;
+
+    /// <summary>
+    ///     Weight multiplier applied to ammo compatible with an already-rolled gun.
+    /// </summary>
+    [DataField]
+    public double AmmoAffinityMultiplier = 4.0;
+
+    /// <summary>
     ///     If true, item picks are weighted by cost (probability ∝ price^<see cref="CostWeightExponent"/>)
     ///     instead of uniform. This biases the bundle toward more expensive gear, so each opening yields a
     ///     capable loadout rather than a pile of cheap filler — used by the duel arena crates.

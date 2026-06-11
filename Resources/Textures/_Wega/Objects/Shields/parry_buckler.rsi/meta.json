@@ -8,7 +8,13 @@
     },
     "states": [
         {
-            "name": "buckler-icon"
+            "name": "buckler-icon",
+            "delays": [
+                [
+                    0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1,
+                    0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1
+                ]
+            ]
         },
         {
             "name": "buckler-inhand-left",

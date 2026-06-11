@@ -1,0 +1,37 @@
+# Female clothing ported from lust-station (space-sunrise/lust-station).
+# Sprites are CC-BY-SA (see meta.json in each RSI); prototypes written for wega-mega.
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtElegantHosLust
+  name: elegant HoS uniform
+  suffix: Lust-Station
+  description: A tailored skirt uniform for the head of security — strict, sharp and undeniably elegant.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/elegant_hos.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/elegant_hos.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtCentcomFormalDressLust
+  name: Central Command formal dress
+  suffix: Lust-Station
+  description: A formal Central Command dress for official receptions and very unofficial inspections.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/centcom_formal_dress.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/centcom_formal_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtElegantIAALust
+  name: elegant IAA skirt suit
+  suffix: Lust-Station
+  description: An elegant skirt suit for the internal affairs agent. The law never looked this good.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/iaa_elegant_skirt.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/iaa_elegant_skirt.rsi

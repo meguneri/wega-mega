@@ -1,0 +1,96 @@
+# Wega arena — archer kits for the Full Arsenal pool
+- type: entity
+  parent: ClothingBeltQuiver
+  id: ArenaQuiverArrows
+  suffix: arena, filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ArrowRegular
+          amount: 16
+
+- type: entity
+  parent: ClothingBeltQuiver
+  id: ArenaQuiverArrowsElite
+  suffix: arena, elite, filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ArrowImprovisedPlasma
+          amount: 8
+        - id: ArrowImprovisedUranium
+          amount: 4
+        - id: ArrowImprovisedCarp
+          amount: 4
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSet
+  name: archer kit
+  description: An improvised shortbow and a quiver of sixteen steel arrows. Quiet, reusable, honest.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+
+# Arrows have RefillableSolution — dip them in the bottle before nocking.
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: ArenaBottleAmatoxin
+  suffix: amatoxin
+  components:
+  - type: Label
+    currentLabel: reagent-name-amatoxin
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Amatoxin
+        Quantity: 30
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSetPoison
+  name: poison archer kit
+  description: The standard archer kit plus a bottle of amatoxin. Dip, nock, apologize later.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+        - id: ArenaBottleAmatoxin
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSetNocturine
+  name: destabilizing archer kit
+  description: The standard archer kit plus a bottle of nocturine. One good hit and the target naps through the rest of the fight.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+        - id: ChemistryBottleNocturine
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSetElite
+  name: elite archer kit
+  description: An improvised shortbow with a quiver of specialty arrows — plasma, uranium and carp tooth. For the discerning sharpshooter.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrowsElite

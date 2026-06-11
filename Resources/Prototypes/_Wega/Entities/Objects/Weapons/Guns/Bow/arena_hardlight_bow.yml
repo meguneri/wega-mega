@@ -1,0 +1,262 @@
+# Ported from arcane-station (_Goobstation), AGPL-3.0-or-later.
+# Reworked: original used AmmoSelector + FoldingWeapon (not present here);
+# arrow switching is done via BatteryWeaponFireModes on a self-recharging battery instead.
+# Bee arrow dropped (SpawnEntitiesOnHit not present here).
+- type: entity
+  name: hardlight bow
+  parent: BaseItem
+  id: ArenaBowHardlight
+  description: Being a Donk Co. design based on the DT-12 Lawbringer, this bow can generate a multitude of arrow types to fit the user's needs.
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Bow/hardlight_bow.rsi
+    layers:
+    - state: bow
+      map: [ "base" ]
+    - state: unwielded-arrow
+      shader: unshaded
+      map: [ "bowstring" ]
+  - type: Item
+    size: Huge
+    heldPrefix: unfolded
+  - type: Clothing
+    sprite: _Wega/Objects/Weapons/Guns/Bow/hardlight_bow.rsi
+    equippedPrefix: unfolded
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Wieldable
+    wieldSound:
+      path: /Audio/Items/bow_pull.ogg
+  - type: UseDelay
+    delay: 1
+  - type: GunRequiresWield
+  - type: Gun
+    clumsyProof: true
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: BulletMiss
+    soundEmpty: null
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowEnergy
+    fireCost: 100
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowEnergy
+      fireCost: 100
+    - proto: ArenaArrowDisabler
+      fireCost: 100
+    - proto: ArenaArrowFiery
+      fireCost: 100
+    - proto: ArenaArrowFreeze
+      fireCost: 100
+    - proto: ArenaArrowExplosive
+      fireCost: 150
+    - proto: ArenaArrowXray
+      fireCost: 125
+    - proto: ArenaArrowIon
+      fireCost: 150
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRechargeRate: 40
+  - type: PointLight
+    radius: 1.5
+    energy: 1.5
+    color: white
+    netsync: false
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.WieldableVisuals.Wielded:
+        bowstring:
+          True: { state: wielded-arrow }
+          False: { state: unwielded-arrow }
+  - type: DisarmMalus
+    malus: 0.6
+
+- type: entity
+  id: ArenaBaseHardlightArrow
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Bow/arrow.rsi
+    state: icon
+    shader: unshaded
+  - type: Physics
+    bodyType: Dynamic
+    linearDamping: 0
+    angularDamping: 0
+  - type: Reflective
+    reflective:
+    - Energy
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.2,0.1,0.2"
+        hard: false
+        mask:
+        - Opaque
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    deleteOnCollide: false
+    onlyCollideWhenShot: true
+    damage:
+      types:
+        Heat: 45
+  - type: TimedDespawn
+    lifetime: 10
+  - type: PointLight
+    color: white
+    radius: 1.5
+    energy: 1.5
+
+- type: entity
+  id: ArenaBaseHardlightEmbeddableArrow
+  parent: BaseItem
+  abstract: true
+  components:
+  - type: Item
+    size: Small
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/star_hit.ogg
+    embedOnThrow: false
+    deleteOnRemove: true
+  - type: ThrowingAngle
+    angle: 0
+
+- type: entity
+  parent: [ ArenaBaseHardlightArrow, ArenaBaseHardlightEmbeddableArrow ]
+  id: ArenaArrowEnergy
+  name: energy arrow
+  description: An arrow made from hardlight.
+  components:
+  - type: Sprite
+    color: "#FFB200"
+  - type: PointLight
+    color: "#FFB200"
+
+- type: entity
+  parent: [ ArenaBaseHardlightArrow, ArenaBaseHardlightEmbeddableArrow ]
+  id: ArenaArrowDisabler
+  name: disabler arrow
+  description: An arrow made from hardlight. This one stuns the victim in a non-lethal way.
+  components:
+  - type: Sprite
+    color: "#00B2FF"
+  - type: PointLight
+    color: "#00B2FF"
+  - type: Projectile
+    damage:
+      types:
+        Heat: 0
+  - type: StaminaDamageOnCollide
+    damage: 60
+
+- type: entity
+  parent: [ ArenaBaseHardlightArrow, ArenaBaseHardlightEmbeddableArrow ]
+  id: ArenaArrowFiery
+  name: fiery arrow
+  description: An arrow made from hardlight. This one burns the victim.
+  components:
+  - type: Sprite
+    color: red
+  - type: PointLight
+    color: red
+  - type: Projectile
+    damage:
+      types:
+        Heat: 15
+  - type: IgniteOnCollide
+    fireStacks: 4
+
+- type: entity
+  parent: [ ArenaBaseHardlightArrow, ArenaBaseHardlightEmbeddableArrow ]
+  id: ArenaArrowFreeze
+  name: freezing arrow
+  description: An arrow made from hardlight. This one freezes the victim.
+  components:
+  - type: Sprite
+    color: blue
+  - type: PointLight
+    color: blue
+  - type: Projectile
+    damage:
+      types:
+        Cold: 10
+  - type: ChangeTemperatureOnCollide
+    heat: -600000
+
+- type: entity
+  parent: [ ArenaBaseHardlightArrow, ArenaBaseHardlightEmbeddableArrow ]
+  id: ArenaArrowExplosive
+  name: explosive arrow
+  description: An arrow made from hardlight. This one explodes on hit, but the energy dissapates quickly, it wont fly very far.
+  components:
+  - type: Sprite
+    color: "#7300FF"
+  - type: PointLight
+    color: "#7300FF"
+  - type: Projectile
+    damage:
+      types:
+        Heat: 0
+  - type: TimedDespawn
+    lifetime: 0.7
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: Default
+    totalIntensity: 18
+    intensitySlope: 0.6
+    maxIntensity: 6
+    canCreateVacuum: false
+
+- type: entity
+  parent: ArenaBaseHardlightArrow
+  id: ArenaArrowXray
+  name: x-ray arrow
+  description: An arrow made from hardlight. This one pierces through everything.
+  components:
+  - type: Sprite
+    color: "#1AE51A"
+  - type: PointLight
+    color: "#1AE51A"
+  - type: Projectile
+    penetrationThreshold: 1000
+    damage:
+      types:
+        Heat: 30
+  - type: TimedDespawn
+    lifetime: 0.7
+
+- type: entity
+  parent: [ ArenaBaseHardlightArrow, ArenaBaseHardlightEmbeddableArrow ]
+  id: ArenaArrowIon
+  name: ion arrow
+  description: An arrow made from hardlight. Causes EMP on hit.
+  components:
+  - type: Sprite
+    color: silver
+  - type: PointLight
+    color: silver
+  - type: Projectile
+    damage:
+      types:
+        Shock: 25
+  - type: TriggerOnCollide
+    fixtureID: projectile
+  - type: EmpOnTrigger
+    range: 1
+    energyConsumption: 360
+    disableDuration: 5

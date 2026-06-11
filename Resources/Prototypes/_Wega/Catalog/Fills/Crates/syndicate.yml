@@ -12,7 +12,13 @@
     totalPrice: 40
     weightByCost: true
     markIssuedItems: true
+    ammoAffinityCategory: FullArsenalAmmo
+    ammoAffinityMultiplier: 4
+    companionCategories:
+      FullArsenalInjector: FullArsenalMedsBottle
     categoryLimits:
+      FullArsenalBowSet: 1
+      FullArsenalInjector: 1
       FullArsenalArmor: 2
       FullArsenalHead: 2
       FullArsenalGrenade: 3
@@ -35,7 +41,13 @@
     totalPrice: 120
     weightByCost: true
     markIssuedItems: true
+    ammoAffinityCategory: FullArsenalAmmo
+    ammoAffinityMultiplier: 4
+    companionCategories:
+      FullArsenalInjector: FullArsenalMedsBottle
     categoryLimits:
+      FullArsenalBowSet: 1
+      FullArsenalInjector: 1
       FullArsenalArmor: 2
       FullArsenalHead: 2
       FullArsenalGrenade: 9
@@ -65,7 +77,13 @@
     totalPrice: 60
     weightByCost: true
     markIssuedItems: true
+    ammoAffinityCategory: FullArsenalAmmo
+    ammoAffinityMultiplier: 4
+    companionCategories:
+      FullArsenalInjector: FullArsenalMedsBottle
     categoryLimits:
+      FullArsenalBowSet: 1
+      FullArsenalInjector: 1
       FullArsenalArmor: 2
       FullArsenalHead: 2
       FullArsenalGrenade: 5
@@ -86,7 +104,13 @@
     totalPrice: 40
     weightByCost: true
     markIssuedItems: true
+    ammoAffinityCategory: FullArsenalAmmo
+    ammoAffinityMultiplier: 4
+    companionCategories:
+      FullArsenalInjector: FullArsenalMedsBottle
     categoryLimits:
+      FullArsenalBowSet: 1
+      FullArsenalInjector: 1
       MeleeArsenalArmor: 2
       MeleeArsenalHead: 2
       MeleeArsenalGrenade: 3

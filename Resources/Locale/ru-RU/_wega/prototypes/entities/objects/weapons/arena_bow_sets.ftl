@@ -1,0 +1,17 @@
+ent-ArenaQuiverArrows = { ent-ClothingBeltQuiver }
+    .suffix = арена, заполненный
+    .desc = { ent-ClothingBeltQuiver.desc }
+ent-ArenaQuiverArrowsElite = { ent-ClothingBeltQuiver }
+    .suffix = арена, элитный, заполненный
+    .desc = { ent-ClothingBeltQuiver.desc }
+ent-ArenaDuffelBowSet = набор лучника
+    .desc = Самодельный короткий лук и колчан с 16 стальными стрелами. Тихо, многоразово, честно.
+ent-ArenaDuffelBowSetElite = элитный набор лучника
+    .desc = Самодельный короткий лук и колчан особых стрел: плазменные, урановые и из карпьих зубов. Для разборчивого стрелка.
+ent-ArenaBottleAmatoxin = { ent-BaseChemistryBottleFilled }
+    .suffix = аматоксин
+    .desc = { ent-BaseChemistryBottleFilled.desc }
+ent-ArenaDuffelBowSetPoison = ядовитый набор лучника
+    .desc = Стандартный набор лучника плюс бутылочка аматоксина. Окуни, наложи, извинись позже.
+ent-ArenaDuffelBowSetNocturine = дестабилизирующий набор лучника
+    .desc = Стандартный набор лучника плюс бутылочка ноктюрина. Одно хорошее попадание — и цель проспит остаток боя.

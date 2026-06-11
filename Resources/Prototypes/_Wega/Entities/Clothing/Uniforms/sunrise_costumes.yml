@@ -1,0 +1,145 @@
+# Costumes and dresses ported from lust-station / Sunrise (space-sunrise/lust-station, _Sunrise folder).
+# Sprites are CC-BY-SA (see meta.json per RSI); prototypes written for wega-mega.
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformCostumeGeishaSunrise
+  name: geisha costume
+  suffix: Sunrise
+  description: A traditional geisha outfit. Grace in every fold.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/geisha.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/geisha.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformKimonoBlueSunrise
+  name: blue kimono
+  suffix: Sunrise
+  description: A flowing kimono in deep blue.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/kimono_blue.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/kimono_blue.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformKimonoPinkSunrise
+  name: pink kimono
+  suffix: Sunrise
+  description: A flowing kimono in blossom pink.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/kimono_pink.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/kimono_pink.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressRedSunrise
+  name: red dress
+  suffix: Sunrise
+  description: A long red dress that demands attention.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/red_dress.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/red_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressShortSunrise
+  name: short dress
+  suffix: Sunrise
+  description: A simple short dress for any occasion.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/short_dress.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/short_dress.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformDressShortRedSunrise
+  name: short red dress
+  suffix: Sunrise
+  description: A simple short dress in bold red.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/short_dress_red.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/short_dress_red.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformSwimsuitSunrise
+  name: swimsuit
+  suffix: Sunrise
+  description: A one-piece swimsuit. The station pool remains under construction.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Costume/swimsuit.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Costume/swimsuit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformQipaoSunrise
+  name: qipao
+  suffix: Sunrise
+  description: An elegant high-collared qipao dress.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/qipao.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/qipao.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDressBeltSunrise
+  name: belted wedding dress
+  suffix: Sunrise
+  description: A wedding dress with a neat waist belt. Say yes.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/weddingdressbelt.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/weddingdressbelt.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDressMagnificentSunrise
+  name: magnificent wedding dress
+  suffix: Sunrise
+  description: A magnificent wedding dress with a train fit for a stationwide ceremony.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/weddingdressmagnificent.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/weddingdressmagnificent.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformWeddingDressSplitSunrise
+  name: split wedding dress
+  suffix: Sunrise
+  description: A daring wedding dress with a high leg slit.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/weddingdresssplit.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/weddingdresssplit.rsi
+
+- type: entity
+  parent: ClothingUniformSkirtBase
+  id: ClothingUniformJumpskirtRainbowSunrise
+  name: rainbow jumpskirt
+  suffix: Sunrise
+  description: A jumpskirt in every colour at once.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/rainbow.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Uniforms/Jumpskirt/rainbow.rsi

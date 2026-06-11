@@ -912,6 +912,17 @@
   - FullArsenalArmor
 
 - type: listing
+  id: FullArsenalAdrenalineVest
+  name: full-arsenal-adrenaline-vest-name
+  description: full-arsenal-adrenaline-vest-desc
+  productEntity: ArenaAdrenalineVest
+  cost:
+    Telecrystal: 9
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
   id: FullArsenalVestWebMerc
   name: full-arsenal-vest-web-merc-name
   description: full-arsenal-vest-web-merc-desc
@@ -2397,6 +2408,7 @@
     Telecrystal: 6
   categories:
   - FullArsenal
+  - FullArsenalInjector
 
 # uplink price: 1 TC
 - type: listing
@@ -2419,6 +2431,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalInjector
 
 - type: listing
   id: FullArsenalStimpack
@@ -2459,6 +2472,7 @@
     Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalInjector
 
 - type: listing
   id: FullArsenalHypopenSingle
@@ -2469,6 +2483,7 @@
     Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalInjector
 
 - type: listing
   id: FullArsenalCyberPen
@@ -2981,7 +2996,7 @@
   description: full-arsenal-parry-buckler-desc
   productEntity: ArenaParryBuckler
   cost:
-    Telecrystal: 5
+    Telecrystal: 11
   categories:
   - FullArsenal
 
@@ -3021,16 +3036,6 @@
   name: full-arsenal-medkit-oxygen-name
   description: full-arsenal-medkit-oxygen-desc
   productEntity: MedkitOxygenFilled
-  cost:
-    Telecrystal: 2
-  categories:
-  - FullArsenal
-
-- type: listing
-  id: FullArsenalMedkitRadiation
-  name: full-arsenal-medkit-radiation-name
-  description: full-arsenal-medkit-radiation-desc
-  productEntity: MedkitRadiationFilled
   cost:
     Telecrystal: 2
   categories:
@@ -3108,16 +3113,6 @@
   - FullArsenal
 
 - type: listing
-  id: FullArsenalRadAutoInjector
-  name: full-arsenal-autoinjector-rad-name
-  description: full-arsenal-autoinjector-rad-desc
-  productEntity: RadAutoInjector
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalPunctAutoInjector
   name: full-arsenal-autoinjector-punct-name
   description: full-arsenal-autoinjector-punct-desc
@@ -3154,9 +3149,10 @@
   description: full-arsenal-bottle-bicaridine-desc
   productEntity: ChemistryBottleBicaridine
   cost:
-    Telecrystal: 1
+    Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleDermaline
@@ -3164,9 +3160,10 @@
   description: full-arsenal-bottle-dermaline-desc
   productEntity: ChemistryBottleDermaline
   cost:
-    Telecrystal: 1
+    Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleOmnizine
@@ -3174,9 +3171,10 @@
   description: full-arsenal-bottle-omnizine-desc
   productEntity: ChemistryBottleOmnizine
   cost:
-    Telecrystal: 2
+    Telecrystal: 4
   categories:
   - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleTricordrazine
@@ -3184,9 +3182,10 @@
   description: full-arsenal-bottle-tricordrazine-desc
   productEntity: ChemistryBottleTricordrazine
   cost:
-    Telecrystal: 1
+    Telecrystal: 2
   categories:
   - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleKelotane
@@ -3197,6 +3196,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleDylovene
@@ -3207,16 +3207,7 @@
     Telecrystal: 1
   categories:
   - FullArsenal
-
-- type: listing
-  id: FullArsenalBottleInaprovaline
-  name: full-arsenal-bottle-inaprovaline-name
-  description: full-arsenal-bottle-inaprovaline-desc
-  productEntity: ChemistryBottleInaprovaline
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleEpinephrine
@@ -3224,9 +3215,10 @@
   description: full-arsenal-bottle-epinephrine-desc
   productEntity: ChemistryBottleEpinephrine
   cost:
-    Telecrystal: 1
+    Telecrystal: 3
   categories:
   - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalBottleTranexamicAcid
@@ -3234,31 +3226,10 @@
   description: full-arsenal-bottle-tranexamic-desc
   productEntity: ChemistryBottleTranexamicAcid
   cost:
-    Telecrystal: 1
+    Telecrystal: 2
   categories:
   - FullArsenal
-
-
-- type: listing
-  id: FullArsenalBottleArithrazine
-  name: full-arsenal-bottle-arithrazine-name
-  description: full-arsenal-bottle-arithrazine-desc
-  productEntity: ChemistryBottleArithrazine
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
-
-
-- type: listing
-  id: FullArsenalBottleHyronalin
-  name: full-arsenal-bottle-hyronalin-name
-  description: full-arsenal-bottle-hyronalin-desc
-  productEntity: ChemistryBottleHyronalin
-  cost:
-    Telecrystal: 1
-  categories:
-  - FullArsenal
+  - FullArsenalMedsBottle
 
 - type: listing
   id: FullArsenalPieBananaCream
@@ -5473,3 +5444,155 @@
     Telecrystal: 12
   categories:
   - FullArsenal
+
+- type: listing
+  id: FullArsenalBowSet
+  name: full-arsenal-bow-set-name
+  description: full-arsenal-bow-set-desc
+  productEntity: ArenaDuffelBowSet
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalBowSet
+
+- type: listing
+  id: FullArsenalBowSetElite
+  name: full-arsenal-bow-set-elite-name
+  description: full-arsenal-bow-set-elite-desc
+  productEntity: ArenaDuffelBowSetElite
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalBowSet
+
+- type: listing
+  id: FullArsenalBowSetPoison
+  name: full-arsenal-bow-set-poison-name
+  description: full-arsenal-bow-set-poison-desc
+  productEntity: ArenaDuffelBowSetPoison
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalBowSet
+
+- type: listing
+  id: FullArsenalBowSetNocturine
+  name: full-arsenal-bow-set-nocturine-name
+  description: full-arsenal-bow-set-nocturine-desc
+  productEntity: ArenaDuffelBowSetNocturine
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalBowSet
+
+- type: listing
+  id: FullArsenalRifleAK514
+  name: full-arsenal-rifle-ak514-name
+  description: full-arsenal-rifle-ak514-desc
+  productEntity: WeaponRifleAK514
+  cost:
+    Telecrystal: 13
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDuffelAsh12
+  name: full-arsenal-duffel-ash12-name
+  description: full-arsenal-duffel-ash12-desc
+  productEntity: ArenaDuffelAsh12Bundle
+  cost:
+    Telecrystal: 15
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleSKM24
+  name: full-arsenal-rifle-skm24-name
+  description: full-arsenal-rifle-skm24-desc
+  productEntity: WeaponRifleSKM24
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBottleEphedrine
+  name: full-arsenal-bottle-ephedrine-name
+  description: full-arsenal-bottle-ephedrine-desc
+  productEntity: ChemistryBottleEphedrine
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+
+- type: listing
+  id: FullArsenalBottleSaline
+  name: full-arsenal-bottle-saline-name
+  description: full-arsenal-bottle-saline-desc
+  productEntity: ChemistryBottleSaline
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+
+- type: listing
+  id: FullArsenalBottlePuncturase
+  name: full-arsenal-bottle-puncturase-name
+  description: full-arsenal-bottle-puncturase-desc
+  productEntity: ChemistryBottlePuncturase
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+
+- type: listing
+  id: FullArsenalBottleBruizine
+  name: full-arsenal-bottle-bruizine-name
+  description: full-arsenal-bottle-bruizine-desc
+  productEntity: ChemistryBottleBruizine
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+
+- type: listing
+  id: FullArsenalBottleLacerinol
+  name: full-arsenal-bottle-lacerinol-name
+  description: full-arsenal-bottle-lacerinol-desc
+  productEntity: ChemistryBottleLacerinol
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+
+- type: listing
+  id: FullArsenalBottlePyrazine
+  name: full-arsenal-bottle-pyrazine-name
+  description: full-arsenal-bottle-pyrazine-desc
+  productEntity: ChemistryBottlePyrazine
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+
+- type: listing
+  id: FullArsenalBottleSynaptizine
+  name: full-arsenal-bottle-synaptizine-name
+  description: full-arsenal-bottle-synaptizine-desc
+  productEntity: ChemistryBottleSynaptizine
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalMedsBottle
+

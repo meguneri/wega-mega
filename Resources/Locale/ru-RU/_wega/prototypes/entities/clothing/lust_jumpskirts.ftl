@@ -1,0 +1,9 @@
+ent-ClothingUniformJumpskirtElegantHosLust = элегантная форма ГСБ
+    .suffix = Lust-Station
+    .desc = Приталенная форма с юбкой для главы службы безопасности — строго, остро и неоспоримо элегантно.
+ent-ClothingUniformJumpskirtCentcomFormalDressLust = парадное платье Центком
+    .suffix = Lust-Station
+    .desc = Парадное платье Центрального Командования для официальных приёмов и очень неофициальных инспекций.
+ent-ClothingUniformJumpskirtElegantIAALust = элегантный юбочный костюм АВД
+    .suffix = Lust-Station
+    .desc = Элегантный юбочный костюм агента внутренних дел. Закон ещё никогда не выглядел так хорошо.

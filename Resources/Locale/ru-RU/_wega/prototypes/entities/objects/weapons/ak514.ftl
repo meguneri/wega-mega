@@ -1,0 +1,17 @@
+ent-WeaponRifleAK514 = АК-514
+    .suffix = Sunrise
+    .desc = Осовремененный потомок легендарной схемы АК. Бьёт больно, разброс широкий — контролируй очереди. Питается магазинами .30.
+ent-MagazineLightRifleHPWega = магазин (.30 экспансивные, HP)
+    .desc = Экспансивные пули рвут плоть, но плохо работают по броне.
+ent-MagazineLightRifleFMJWega = магазин (.30 оболочечные, FMJ)
+    .desc = Оболочечные пули пробивают укрытия и грызут конструкции.
+ent-MagazineLightRifleAPWega = магазин (.30 бронебойные, AP)
+    .desc = Бронебойные пули полностью игнорируют броню ценой сырого урона.
+ent-CartridgeLightRifleHPWega = патрон (.30 HP)
+    .desc = Экспансивный патрон калибра .30.
+ent-CartridgeLightRifleFMJWega = патрон (.30 FMJ)
+    .desc = Оболочечный патрон калибра .30.
+ent-CartridgeLightRifleAPWega = патрон (.30 AP)
+    .desc = Бронебойный патрон калибра .30.
+ent-ArenaDuffelAsh12Bundle = вещмешок ASH-12
+    .desc = Штурмовая винтовка ASH-12 и два запасных магазина .45 магнум в комплекте.

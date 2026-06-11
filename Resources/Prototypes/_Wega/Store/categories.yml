@@ -113,6 +113,21 @@
   priority: 3
 
 - type: storeCategory
+  id: FullArsenalBowSet
+  name: store-category-full-arsenal-bow-set
+  priority: 7
+
+- type: storeCategory
+  id: FullArsenalInjector
+  name: store-category-full-arsenal-injector
+  priority: 5
+
+- type: storeCategory
+  id: FullArsenalMedsBottle
+  name: store-category-full-arsenal-meds-bottle
+  priority: 6
+
+- type: storeCategory
   id: FullArsenalAmmo
   name: store-category-full-arsenal-ammo
   priority: 4

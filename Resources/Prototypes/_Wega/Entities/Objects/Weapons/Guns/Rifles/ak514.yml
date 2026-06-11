@@ -1,0 +1,191 @@
+# AK-514 ported from lust-station / Sunrise (space-sunrise/lust-station).
+# Sprites are CC-BY-SA-3.0 by SUNRISE (see meta.json); prototypes and balance written for wega-mega.
+# Chambered in .30 rifle — shares magazines with the AKMS, Mosin and L6 SAW.
+- type: entity
+  parent: BaseWeaponRifle
+  id: WeaponRifleAK514
+  name: AK-514
+  suffix: Sunrise
+  description: A modernized descendant of the legendary AK pattern. Hits hard and sprays wide — control your bursts. Feeds from .30 rifle magazines.
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Rifles/ak514/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Wega/Objects/Weapons/Guns/Rifles/ak514/tiny.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,2,2
+    sprite: _Wega/Objects/Weapons/Guns/Rifles/ak514/tiny.rsi
+  # Fires only when wielded; the wield bonus is zeroed so the Gun angles below
+  # are the actual wielded spread (inherited -20/-30 bonus would push maxAngle
+  # negative and trip the recoil assert in GunSystem).
+  - type: GunRequiresWield
+  - type: GunWieldBonus
+    minAngle: 0
+    maxAngle: 0
+  # Slightly tighter first shots than the AKMS (wielded 1/2 deg), but sustained
+  # fire still blooms to 3 deg — accurate, not a laser.
+  - type: Gun
+    minAngle: 0.8
+    maxAngle: 3
+    angleIncrease: 0.6
+    angleDecay: 5
+    fireRate: 6
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineLightRifle
+        whitelistFailPopup: gun-magazine-whitelist-fail
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeLightRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+
+# --- .30 rifle magazine variants (balance written for wega-mega, inspired by Sunrise's SP/HP/FMJ/AP line) ---
+
+- type: entity
+  parent: BaseBullet
+  id: BulletLightRifleHPWega
+  name: bullet (.30 rifle HP)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 26
+
+- type: entity
+  parent: BaseBullet
+  id: BulletLightRifleFMJWega
+  name: bullet (.30 rifle FMJ)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 16
+        Structural: 8
+
+- type: entity
+  parent: BaseBullet
+  id: BulletLightRifleAPWega
+  name: bullet (.30 rifle AP)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    ignoreResistances: true
+    damage:
+      types:
+        Piercing: 14
+
+- type: entity
+  parent: BaseCartridgeLightRifle
+  id: CartridgeLightRifleHPWega
+  name: cartridge (.30 rifle HP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLightRifleHPWega
+
+- type: entity
+  parent: BaseCartridgeLightRifle
+  id: CartridgeLightRifleFMJWega
+  name: cartridge (.30 rifle FMJ)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLightRifleFMJWega
+
+- type: entity
+  parent: BaseCartridgeLightRifle
+  id: CartridgeLightRifleAPWega
+  name: cartridge (.30 rifle AP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletLightRifleAPWega
+
+- type: entity
+  parent: MagazineLightRifle
+  id: MagazineLightRifleHPWega
+  name: magazine (.30 rifle HP)
+  description: Hollow point rounds tear flesh apart but fare poorly against armor plate.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleHPWega
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#D74A4A"
+
+- type: entity
+  parent: MagazineLightRifle
+  id: MagazineLightRifleFMJWega
+  name: magazine (.30 rifle FMJ)
+  description: Full metal jacket rounds punch through cover and chew up structures.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleFMJWega
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#C8C151"
+
+- type: entity
+  parent: MagazineLightRifle
+  id: MagazineLightRifleAPWega
+  name: magazine (.30 rifle AP)
+  description: Armor-piercing rounds ignore personal armor entirely, trading raw damage for it.
+  components:
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifleAPWega
+  - type: Sprite
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: stripe
+      color: "#4B4F54"
+
+# ASH-12 bundle for the arena pool: the rifle plus two spare magazines.
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelAsh12Bundle
+  name: ASH-12 bundle
+  description: An ASH-12 battle rifle bundled with two spare .45 magnum magazines.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRifleAsh12
+        - id: MagazineAsh12
+          amount: 2

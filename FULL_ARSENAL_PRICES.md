@@ -7,7 +7,9 @@
 - Шлемы/противогазы (`FullArsenalHead`): **макс. 2**
 - Гранаты (`FullArsenalGrenade`): **макс. 3**
 - Патроны (`FullArsenalAmmo`): **макс. 4**
-- Пустые сумки/рюкзаки/вещмешки (`FullArsenalBag`): **макс. 1** (готовые комплекты-вещмешки с оружием/скафандрами сюда не входят)
+- Пустые сумки/рюкзаки/вещмешки (`FullArsenalBag`): **макс. 1**
+- Наборы лучника (`FullArsenalBowSet`): **макс. 1** (любой из четырёх вариантов)
+- Инжекторы (`FullArsenalInjector`): **макс. 1** (гипоспрей/гипоручка/гиподротик; к инжектору гарантированно докидывается минимум одна бутылочка с лекарством) (готовые комплекты-вещмешки с оружием/скафандрами сюда не входят)
 
 Броня и шлемы зафиксированы (2 / 2) во всех четырёх ящиках — с размером ящика они не растут.
 Увеличенные варианты (тот же пул, отдельные текстуры) масштабируют только гранаты/патроны:
@@ -173,6 +175,8 @@
 | Лазерный карабин | `WeaponLaserCarbine` | 3 TC |
 | Сойка | `WeaponRifleJay` | 10 TC |
 | Винтовка AK | `WeaponRifleAk` | 6 TC |
+| АК-514 | `WeaponRifleAK514` | 13 TC |
+| СКМ-24 | `WeaponRifleSKM24` | 8 TC |
 | Ионный карабин | `WeaponIonCarabine` | 5 TC |
 | Винтовка Lecter | `WeaponRifleLecter` | 5 TC |
 | Снайперка Estoc | `WeaponRifleEstoc` | 5 TC |
@@ -252,7 +256,7 @@
 | Часовой щит | `ClockworkShield` | 3 TC |
 | Сломанный энергощит | `BrokenEnergyShield` | 1 TC |
 | Сломанный щит СЩ | `BrokenBlueSheildSheild` | 1 TC |
-| Парирующий баклер | `ArenaParryBuckler` | 5 TC |
+| Парирующий баклер | `ArenaParryBuckler` | 11 TC |
 
 ---
 
@@ -297,6 +301,7 @@
 | Шинель службы безопасности | `ClothingOuterCoatSecurityOvercoat` | 3 TC |
 | Тактический жилет | `ClothingOuterVestWeb` | 6 TC |
 | Элитный тактический жилет | `ClothingOuterVestWebElite` | 8 TC |
+| Адреналиновый жилет | `ArenaAdrenalineVest` | 9 TC |
 | Тактический жилет наёмника | `ClothingOuterVestWebMerc` | 3 TC |
 | Тренч | `ClothingOuterCoatTrench` | 1 TC |
 | Доги | `ClothingOuterDogi` | 2 TC |
@@ -451,27 +456,29 @@
 | Аптечка (ожоги) | `MedkitBurnFilled` | 2 TC |
 | Аптечка (яды) | `MedkitToxinFilled` | 2 TC |
 | Аптечка (кислород) | `MedkitOxygenFilled` | 2 TC |
-| Аптечка (радиация) | `MedkitRadiationFilled` | 2 TC |
 | Боевая аптечка | `MedkitCombatFilled` | 5 TC |
 | Продвинутая аптечка | `MedkitAdvancedFilled` | 5 TC |
 | Синдикатский дефибриллятор | `DefibrillatorSyndicate` | 12 TC |
 | Кремовый банановый пирог | `FoodPieBananaCream` | 5 TC |
-| Аритразин (бутылка) | `ChemistryBottleArithrazine` | 1 TC |
-| Бикаридин (бутылка) | `ChemistryBottleBicaridine` | 1 TC |
-| Дермалин (бутылка) | `ChemistryBottleDermaline` | 1 TC |
+| Бикаридин (бутылка) | `ChemistryBottleBicaridine` | 2 TC |
+| Дермалин (бутылка) | `ChemistryBottleDermaline` | 2 TC |
 | Диловен (бутылка) | `ChemistryBottleDylovene` | 1 TC |
-| Эпинефрин (бутылка) | `ChemistryBottleEpinephrine` | 1 TC |
-| Гиронализ (бутылка) | `ChemistryBottleHyronalin` | 1 TC |
-| Инаправалин (бутылка) | `ChemistryBottleInaprovaline` | 1 TC |
+| Эпинефрин (бутылка) | `ChemistryBottleEpinephrine` | 3 TC |
 | Келотан (бутылка) | `ChemistryBottleKelotane` | 1 TC |
-| Транексамовая кислота (бутылка) | `ChemistryBottleTranexamicAcid` | 1 TC |
-| Трикордразин (бутылка) | `ChemistryBottleTricordrazine` | 1 TC |
-| Омнизин (бутылка) | `ChemistryBottleOmnizine` | 2 TC |
+| Транексамовая кислота (бутылка) | `ChemistryBottleTranexamicAcid` | 2 TC |
+| Трикордразин (бутылка) | `ChemistryBottleTricordrazine` | 2 TC |
+| Омнизин (бутылка) | `ChemistryBottleOmnizine` | 4 TC |
+| Эфедрин (бутылка) | `ChemistryBottleEphedrine` | 3 TC |
+| Физраствор (бутылка) | `ChemistryBottleSaline` | 1 TC |
+| Пунктураза (бутылка) | `ChemistryBottlePuncturase` | 2 TC |
+| Бруизин (бутылка) | `ChemistryBottleBruizine` | 2 TC |
+| Лацеринол (бутылка) | `ChemistryBottleLacerinol` | 2 TC |
+| Пиразин (бутылка) | `ChemistryBottlePyrazine` | 2 TC |
+| Синаптизин (бутылка) | `ChemistryBottleSynaptizine` | 2 TC |
 | Автоинъектор от травм | `BruteAutoInjector` | 1 TC |
 | Автоинъектор от ожогов | `BurnAutoInjector` | 1 TC |
 | Автоинъектор от проколов | `PunctAutoInjector` | 1 TC |
 | Автоинъектор от температуры | `PyraAutoInjector` | 1 TC |
-| Автоинъектор от радиации | `RadAutoInjector` | 1 TC |
 | Коробка автоинъекторов (полный набор) | `BoxAutoInjectorAll` | 3 TC |
 | Экстренный медипен | `EmergencyMedipen` | 2 TC |
 | Медипен выживания | `SurvivalMedipen` | 2 TC |
@@ -627,6 +634,11 @@
 | Вещмешок костюм клоуна | `ClothingBackpackDuffelSyndicateCostumeClown` | 1 TC |
 | ЕКД вещмешок Синдиката | `ClothingBackpackDuffelSyndicateEVABundle` | 3 TC |
 | Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
+| Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 15 TC |
+| Набор лучника | `ArenaDuffelBowSet` | 4 TC |
+| Ядовитый набор лучника | `ArenaDuffelBowSetPoison` | 8 TC |
+| Дестабилизирующий набор лучника | `ArenaDuffelBowSetNocturine` | 8 TC |
+| Элитный набор лучника | `ArenaDuffelBowSetElite` | 8 TC |
 
 ---
 
