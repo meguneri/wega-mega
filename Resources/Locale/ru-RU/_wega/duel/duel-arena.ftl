@@ -1,3 +1,8 @@
+# Анонс переключения спавнера снабжения (SpawnerSignalControlSystem).
+# { $seconds } подставляется из реального интервала спавнера — число не хардкодится.
+spawner-signal-control-enabled = Сброс снаряжения активирован. Ящики будут появляться в центре арены каждые { $seconds } секунд.
+spawner-signal-control-disabled = Сброс снаряжения остановлен.
+
 # Анонсы дуэльной арены (DuelArenaSystem)
 
 duel-arena-not-started-no-fighters = Дуэль не началась: в зоне нет бойцов.

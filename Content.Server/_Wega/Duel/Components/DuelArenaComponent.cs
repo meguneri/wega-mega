@@ -1,4 +1,5 @@
 using Robust.Shared.GameObjects;
+using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -53,13 +54,13 @@ public sealed partial class DuelArenaComponent : Component
     /// Через сколько секунд после старта боя падает первый ящик снабжения.
     /// </summary>
     [DataField]
-    public float SupplyDropDelay = 45f;
+    public float SupplyDropDelay = 30f;
 
     /// <summary>
     /// Интервал повторных сбросов снабжения (в секундах). 0 — одноразовый сброс за бой.
     /// </summary>
     [DataField]
-    public float SupplyDropInterval = 45f;
+    public float SupplyDropInterval = 30f;
 
     /// <summary>
     /// Время следующего сброса снабжения во время боя. null — не запланирован.
@@ -110,13 +111,29 @@ public sealed partial class DuelArenaComponent : Component
 
     /// <summary>
     /// Снимок исходной (пристайн) планировки стен арены: тайл грида → прототип стены.
-    /// Снимается лениво при старте первой дуэли, пока стены ещё целы. После каждой дуэли
-    /// по этому снимку восстанавливаются стены, разрушенные в ходе боя.
+    /// Пополняется при КАЖДОМ старте дуэли (мерж: новые тайлы добавляются, старые записи не
+    /// перезаписываются) — так снимок самовосстанавливается, даже если первый проход вышел
+    /// неполным. После каждой дуэли по снимку восстанавливаются разрушенные стены.
     /// </summary>
     public readonly Dictionary<Vector2i, EntProtoId> WallSnapshot = new();
 
     /// <summary>
-    /// Снимок стен уже сделан — не пересоздаём его на последующих боях.
+    /// Тайл пола под каждой стеной снимка. Если за бой пол под стеной уничтожили (дыра в
+    /// космос), стену нельзя заякорить — сначала восстанавливаем пол по этому снимку.
     /// </summary>
-    public bool WallSnapshotTaken;
+    public readonly Dictionary<Vector2i, Tile> WallTileSnapshot = new();
+
+    /// <summary>
+    /// Отложенное восстановление стен: выставляется при завершении/сбросе дуэли, выполняется
+    /// в Update на следующем тике — вне стека события смерти (MobStateChanged), где удаление
+    /// и спавн сущностей могут конфликтовать с обработкой урона.
+    /// </summary>
+    public bool PendingWallRestore;
+
+    /// <summary>
+    /// Время последней обработки сигнала старта (порт Open). Используется для дебаунса: один и тот
+    /// же импульс может прийти дважды (двойная линковка, фронты high/low, несколько передатчиков на
+    /// канале DuelFight), из-за чего объявление «нужно минимум 2 бойца» дублировалось в чате.
+    /// </summary>
+    public TimeSpan? LastStartSignal;
 }

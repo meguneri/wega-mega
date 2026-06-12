@@ -9,6 +9,8 @@ using Content.Shared._Wega.Spawners.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Modular.Suit;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared._Wega.Magic;
+using Content.Shared.Blood.Cult.Components;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Modular.Suit;
@@ -18,8 +20,10 @@ using Robust.Shared.Localization;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Materials;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Slippery;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -43,6 +47,9 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ModularSuitSystem _modSuit = default!;
     [Dependency] private SpawnerSystem _spawner = default!;
+    [Dependency] private TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> SheetTag = "Sheet";
 
     /// <summary>
     /// Прототип, который кидает дуэльный спавнер-аирдроп. Спавнер кидает не сам ящик, а
@@ -59,6 +66,14 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // Тегаем гильзы и прочие картриджи, заспавненные во время активной дуэли,
         // чтобы клинап их убрал независимо от того, из чьего оружия они вылетели.
         SubscribeLocalEvent<CartridgeAmmoComponent, ComponentStartup>(OnCartridgeStartup);
+
+        // То же правило «создано во время боя на арене → убирается клинапом» для:
+        // — рун культа и магических рун со свитка (нарисованы/наспавнены во время дуэли);
+        // — листов материалов, выпавших из сломанных за бой стен.
+        // Всё, что игрок принёс с собой (заспавнено НЕ в активной дуэли), метку не получает.
+        SubscribeLocalEvent<BloodRuneComponent, ComponentStartup>(OnRuneStartup);
+        SubscribeLocalEvent<MagicRuneComponent, ComponentStartup>(OnRuneStartup);
+        SubscribeLocalEvent<MaterialComponent, ComponentStartup>(OnMaterialStartup);
 
         // МОД-скафандры и прочее: содержимое (модули, батарея, части брони) спавнится и
         // вкладывается в контейнеры уже ПОСЛЕ того, как MarkIssuedRecursive отработал на самом
@@ -131,6 +146,29 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // Тегаем гильзу только если она появилась в радиусе активной арены — иначе тег
         // повесился бы на каждый картридж, заспавненный где угодно на сервере во время боя
         // (перезарядка/стрельба вне арены), и чужие гильзы могла бы удалить очистка.
+        if (IsInActiveDuelRange(uid))
+            EnsureComp<ArenaIssuedItemComponent>(uid);
+    }
+
+    private void OnRuneStartup(EntityUid uid, BloodRuneComponent comp, ComponentStartup args)
+        => TagIfBattleDebris(uid);
+
+    private void OnRuneStartup(EntityUid uid, MagicRuneComponent comp, ComponentStartup args)
+        => TagIfBattleDebris(uid);
+
+    private void OnMaterialStartup(EntityUid uid, MaterialComponent comp, ComponentStartup args)
+    {
+        // Только листы материалов (обломки сломанных стен), не руда/слитки в чьём-то инвентаре.
+        if (_tag.HasTag(uid, SheetTag))
+            TagIfBattleDebris(uid);
+    }
+
+    /// <summary>
+    /// Помечает сущность как «выданную аренной» (а значит — подлежащую очистке), но только если
+    /// она появилась в зоне активной дуэли. Принесённое игроком извне метку не получает.
+    /// </summary>
+    private void TagIfBattleDebris(EntityUid uid)
+    {
         if (IsInActiveDuelRange(uid))
             EnsureComp<ArenaIssuedItemComponent>(uid);
     }
@@ -227,7 +265,11 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
             if (!InRange(itemUid, origin, originGrid, range))
                 continue;
 
-            if (Transform(itemUid).Anchored)
+            // Заякоренное не трогаем (стены, мебель карты) — КРОМЕ рун: руны размещаются на
+            // снапгриде заякоренными, и без этого исключения нарисованные за бой руны
+            // переживали бы очистку.
+            if (Transform(itemUid).Anchored
+                && !HasComp<MagicRuneComponent>(itemUid) && !HasComp<BloodRuneComponent>(itemUid))
                 continue;
 
             // Обувь без статов (нет ускорения/магнитов/анти-скольжения) — косметика, как
@@ -284,6 +326,11 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
 
             QueueDel(logUid);
         }
+
+        // Руны (культа и со свитка) и листы материалов от сломанных стен НЕ чистятся здесь
+        // блэнкетом: они помечаются ArenaIssuedItem при спавне во время активной дуэли
+        // (см. OnRuneStartup/OnMaterialStartup) и убираются общим проходом по меткам в п.1.
+        // Так принесённое игроком извне (его руны/материалы) не удаляется.
 
         // 4. Сами арена-ящики (Full/Melee Arsenal — помечены markIssuedItems) — убираем вместе
         // с выданным снаряжением, чтобы после боя на арене не оставалось пустых ящиков.

@@ -5,6 +5,8 @@ using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.DirtVisuals;
+using Content.Shared.FixedPoint;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 
@@ -19,6 +21,14 @@ namespace Content.Server.Shower
         [Dependency] private PuddleSystem _puddle = default!;
         [Dependency] private EntityLookupSystem _lookup = default!;
         [Dependency] private ReactiveSystem _reactive = default!;
+        [Dependency] private StatusEffectsSystem _statusEffects = default!;
+
+        /// <summary>
+        ///     «Холодный душ» — антидот афродизиака: смывает любовное опьянение
+        ///     и вымывает остатки реагента из крови, чтобы эффект не вернулся.
+        /// </summary>
+        private const string LoveVisionEffect = "StatusEffectLoveVision";
+        private const string AphrodisiacReagent = "Aphrodisiac";
 
         public override void Initialize()
         {
@@ -114,6 +124,10 @@ namespace Content.Server.Shower
             {
                 var mobSolution = _solutionContainer.SplitSolution(showerSol.Value, amountPerTarget);
                 _reactive.DoEntityReaction(mob, mobSolution, ReactionMethod.Touch);
+
+                _statusEffects.TryRemoveStatusEffect(mob, LoveVisionEffect);
+                if (_solutionContainer.TryGetSolution(mob.Owner, "chemicals", out var chemSol, out _))
+                    _solutionContainer.RemoveReagent(chemSol.Value, AphrodisiacReagent, FixedPoint2.New(100));
             }
 
             var floorSolution = _solutionContainer.SplitSolution(showerSol.Value, amountPerTarget);

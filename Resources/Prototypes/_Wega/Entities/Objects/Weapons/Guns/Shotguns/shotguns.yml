@@ -1,0 +1,17 @@
+# Override: AS-12 Minotaur стартует с XL-барабаном (16 патронов) вместо стандартного.
+- type: entity
+  id: WeaponShotgunMinotaur
+  parent: [BaseWeaponShotgunAny, BaseGunWieldable, BaseSyndicateContraband]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineShotgunXL
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineShotgun
+        whitelistFailPopup: gun-magazine-whitelist-fail
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg

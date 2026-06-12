@@ -1,0 +1,24 @@
+# Подарок-рулетка — одно случайное оружие из ВСЕХ прототипов игры.
+# Пул собирается динамически системой RandomWeaponGiftSystem: любой предмет
+# с огнестрелом или MeleeWeapon с уроном от 5 — без ручного списка.
+# Распаковывается как новогодний подарок: использовать в руке.
+- type: entity
+  parent: BaseItem
+  id: PresentWeaponRoulette
+  name: оружейная рулетка
+  description: Празднично упакованная коробка. Внутри ровно одно оружие — любое, какое вообще существует в игре. Повезёт — двуручный энергомеч или пулемёт. Не повезёт — нож для масла.
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Fun/weapon_roulette_gift.rsi
+    layers:
+      - state: present
+  - type: Item
+    size: Normal
+  - type: RandomWeaponGift
+    wrapper: PresentTrash
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+    contentsViewers:
+      components:
+      - Ghost
+      - Santa

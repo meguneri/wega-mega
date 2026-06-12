@@ -189,3 +189,18 @@
         - id: WeaponRifleAsh12
         - id: MagazineAsh12
           amount: 2
+
+# AS-12 'Minotaur' bundle for the arena pool: the shotgun plus two spare XL drums.
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelMinotaurBundle
+  name: AS-12 'Minotaur' bundle
+  description: An AS-12 'Minotaur' automatic shotgun bundled with two spare XL 12g pellet drums.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponShotgunMinotaur
+        - id: MagazineShotgunXL
+          amount: 2

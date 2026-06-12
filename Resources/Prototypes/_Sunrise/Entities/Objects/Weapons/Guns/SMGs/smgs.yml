@@ -1,5 +1,5 @@
 - type: entity
-  name: P-90
+  name: P90
   parent: BaseWeaponSubMachineGun
   id: WeaponSubMachineGunP90
   components:

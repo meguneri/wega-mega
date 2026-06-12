@@ -1,0 +1,73 @@
+# Афродизиак — портирован из lust-station, расширен дозозависимыми эффектами:
+#   любая доза  — розовый оверлей с сердечками (StatusEffectLoveVision) и попапы;
+#   от 8u в крови  — дрожь и стоны/смех, заметные окружающим;
+#   от 15u (передоз) — пацифизм (не может атаковать) и заплетающаяся речь.
+# Антидот — холодный душ: смывает эффект и выводит реагент из крови (ShowerSystem).
+- type: reagent
+  id: Aphrodisiac
+  name: reagent-name-aphrodisiac
+  group: Special
+  desc: reagent-desc-aphrodisiac
+  physicalDesc: reagent-physical-desc-aphrodisiac
+  flavor: funny
+  color: "#FF00E8"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:PopupMessage
+        type: Local
+        messages: [ "aphrodisiac-effect1", "aphrodisiac-effect2", "aphrodisiac-effect3", "aphrodisiac-effect4", "aphrodisiac-effect5" ]
+        probability: 0.1
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectLoveVision
+        time: 10  # Полная баночка (30u) = 5 минут
+        type: Add
+      # Средняя доза: ноги подкашиваются — персонаж периодически падает и подёргивается.
+      - !type:ModifyKnockdown
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 8
+        time: 2
+        probability: 0.12
+      # Средняя доза: дрожь и эмоуты, которые видят окружающие.
+      - !type:Jitter
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 8
+        refresh: false
+        time: 1.0
+        amplitude: 2
+        frequency: 5
+      - !type:Emote
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 8
+        emote: Moan
+        showInChat: true
+        probability: 0.05
+      - !type:Emote
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 8
+        emote: Laugh
+        showInChat: true
+        probability: 0.03
+      # Передоз: жертва слишком влюблена в мир, чтобы драться, и слегка заплетается.
+      - !type:GenericStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 15
+        key: Pacified
+        component: Pacified
+        time: 4
+      - !type:Drunk
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 15
+        boozePower: 4

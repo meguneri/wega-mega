@@ -35,3 +35,12 @@ arena crates (`CrateSyndicateFullArsenal*`). It must stay in sync with the
 Arsenal pool** — adding, removing, or repricing any `FullArsenal` listing. Put
 each item in the matching category table with its display name, entity id, and
 TC cost.
+
+`MELEE_ARSENAL_PRICES.md` is the same kind of price list for the Melee Arsenal
+crate, kept in sync with the `MeleeArsenal` listings in
+`Resources/Prototypes/_Wega/Catalog/melee_arsenal_pool.yml`.
+
+**Always update `MELEE_ARSENAL_PRICES.md` whenever you touch the Melee Arsenal
+pool**, the same way as the Full Arsenal list. Any new melee weapon, shield, or
+armor added to the Full Arsenal pool must also be added to the Melee Arsenal
+pool (melee/armor items belong in both crates) and to both price lists.

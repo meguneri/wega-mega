@@ -47,11 +47,12 @@ public sealed partial class SpawnerSignalControlSystem : EntitySystem
         // Toggle: disable if enabled, enable if disabled.
         _spawner.SetEnabled(uid, timedSpawner, !timedSpawner.Enabled);
 
-        // Announce the new state to all players.
+        // Announce the new state to all players. The interval is taken straight from the
+        // spawner, so the announced period always matches the real one (no hardcoded number).
         if (timedSpawner.Enabled)
         {
             _chat.DispatchGlobalAnnouncement(
-                comp.EnabledMessage,
+                Loc.GetString(comp.EnabledMessage, ("seconds", (int) timedSpawner.IntervalSeconds.TotalSeconds)),
                 sender: comp.AnnounceSender,
                 playSound: false,
                 colorOverride: Color.Orange);
@@ -59,7 +60,7 @@ public sealed partial class SpawnerSignalControlSystem : EntitySystem
         else
         {
             _chat.DispatchGlobalAnnouncement(
-                comp.DisabledMessage,
+                Loc.GetString(comp.DisabledMessage),
                 sender: comp.AnnounceSender,
                 playSound: false,
                 colorOverride: Color.Gray);

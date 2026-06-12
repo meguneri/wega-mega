@@ -1,0 +1,7 @@
+# Любовное опьянение — статус-эффект афродизиака (розовый оверлей с сердечками).
+- type: entity
+  parent: MobStatusEffectDebuff
+  id: StatusEffectLoveVision
+  name: любовное опьянение
+  components:
+  - type: LoveVisionStatusEffect

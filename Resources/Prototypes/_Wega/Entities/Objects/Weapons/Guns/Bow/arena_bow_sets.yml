@@ -4,6 +4,11 @@
   id: ArenaQuiverArrows
   suffix: arena, filled
   components:
+  # Base quiver is Ginormous, which can't fit in the duffel (maxItemSize Huge):
+  # ContainerFill would drop it on the floor untagged, so the arena cleanup never
+  # removes it. Shrink it to Huge so it nests in the kit duffel and gets tagged.
+  - type: Item
+    size: Huge
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -16,6 +21,8 @@
   id: ArenaQuiverArrowsElite
   suffix: arena, elite, filled
   components:
+  - type: Item
+    size: Huge
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
@@ -29,9 +36,8 @@
 
 - type: entity
   parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSet
-  name: archer kit
-  description: An improvised shortbow and a quiver of sixteen steel arrows. Quiet, reusable, honest.
+  id: ArenaDuffelBowSetFilled
+  suffix: filled
   components:
   - type: EntityTableContainerFill
     containers:
@@ -39,6 +45,23 @@
         children:
         - id: BowImprovised
         - id: ArenaQuiverArrows
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaDuffelBowSet
+  name: archer kit
+  description: A wrapped package containing an improvised shortbow and a quiver of sixteen steel arrows. Quiet, reusable, honest.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ArenaDuffelBowSetFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 # Arrows have RefillableSolution — dip them in the bottle before nocking.
 - type: entity
@@ -55,38 +78,86 @@
         Quantity: 30
 
 - type: entity
+  parent: BaseChemistryBottleFilled
+  id: ArenaBottleNocturine
+  suffix: nocturine
+  components:
+  - type: Label
+    currentLabel: reagent-name-nocturine
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 30
+
+# Filled duffel — bottle listed first so it always survives the fill
+# (ContainerFill drops the rest if any single insert fails).
+- type: entity
   parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSetPoisonFilled
+  suffix: poison, filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ArenaBottleAmatoxin
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSetNocturineFilled
+  suffix: nocturine, filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ArenaBottleNocturine
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+
+# Wrapped packages (smoker-kit style): a single object that unwraps into the
+# filled duffel above.
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
   id: ArenaDuffelBowSetPoison
   name: poison archer kit
-  description: The standard archer kit plus a bottle of amatoxin. Dip, nock, apologize later.
+  description: A wrapped package containing the standard archer kit and a bottle of amatoxin. Dip, nock, apologize later.
   components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: BowImprovised
-        - id: ArenaQuiverArrows
-        - id: ArenaBottleAmatoxin
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ArenaDuffelBowSetPoisonFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
-  parent: ClothingBackpackDuffel
+  parent: [BaseItem, BaseSyndicateContraband]
   id: ArenaDuffelBowSetNocturine
   name: destabilizing archer kit
-  description: The standard archer kit plus a bottle of nocturine. One good hit and the target naps through the rest of the fight.
+  description: A wrapped package containing the standard archer kit and a bottle of nocturine. One good hit and the target naps through the rest of the fight.
   components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: BowImprovised
-        - id: ArenaQuiverArrows
-        - id: ChemistryBottleNocturine
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ArenaDuffelBowSetNocturineFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSetElite
-  name: elite archer kit
-  description: An improvised shortbow with a quiver of specialty arrows — plasma, uranium and carp tooth. For the discerning sharpshooter.
+  id: ArenaDuffelBowSetEliteFilled
+  suffix: elite, filled
   components:
   - type: EntityTableContainerFill
     containers:
@@ -94,3 +165,66 @@
         children:
         - id: BowImprovised
         - id: ArenaQuiverArrowsElite
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaDuffelBowSetElite
+  name: elite archer kit
+  description: A wrapped package containing an improvised shortbow with a quiver of specialty arrows — plasma, uranium and carp tooth. For the discerning sharpshooter.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ArenaDuffelBowSetEliteFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+- type: entity
+  parent: BaseChemistryBottleFilled
+  id: ArenaBottleAphrodisiac
+  suffix: aphrodisiac
+  components:
+  - type: Label
+    currentLabel: reagent-name-aphrodisiac
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Aphrodisiac
+        Quantity: 30
+
+# Filled duffel — bottles listed first so they always survive the fill
+# (ContainerFill drops the rest if any single insert fails).
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ArenaDuffelBowSetAphrodisiacFilled
+  suffix: aphrodisiac, filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ArenaBottleAphrodisiac
+          amount: 2
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaDuffelBowSetAphrodisiac
+  name: amorous archer kit
+  description: A wrapped package containing the standard archer kit and two bottles of aphrodisiac. Dip, nock, and watch the target lose all interest in fighting.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ArenaDuffelBowSetAphrodisiacFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg

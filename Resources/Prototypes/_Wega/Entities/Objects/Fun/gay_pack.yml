@@ -1,0 +1,12 @@
+# Full Arsenal — gay pack (a backpack with pride flag + pin + cloak inside)
+- type: entity
+  parent: ClothingBackpackDebug3
+  id: BackpackGayPack
+  name: gay pack
+  description: A fabulous little care package — pride scarf, pin and cloak included.
+  components:
+  - type: StorageFill
+    contents:
+    - id: ClothingNeckScarfStripedGay
+    - id: ClothingNeckGayPin
+    - id: ClothingNeckCloakGay

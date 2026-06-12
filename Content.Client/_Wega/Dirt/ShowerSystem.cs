@@ -24,6 +24,16 @@ namespace Content.Client.Shower
                 spraying = false;
 
             _sprite.LayerSetVisible(uid, ShowerVisuals.Spraying, spraying);
+
+            // При включении заново запускаем анимацию струи: невидимый слой не тикает
+            // (FrameUpdate пропускает !Visible), а если предыдущий показ доиграл до конца без
+            // зацикливания — слой сам выставил AutoAnimated=false и «застыл» на последнем кадре.
+            // Включаем авто-анимацию и сбрасываем на нулевой кадр, чтобы струя проигрывалась заново.
+            if (spraying)
+            {
+                _sprite.LayerSetAutoAnimated(uid, ShowerVisuals.Spraying, true);
+                _sprite.LayerSetAnimationTime(uid, ShowerVisuals.Spraying, 0f);
+            }
         }
     }
 }

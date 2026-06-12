@@ -415,6 +415,24 @@ full-arsenal-backpack-security-desc = Стандартный рюкзак слу
 full-arsenal-backpack-merc-name = Рюкзак наёмника
 full-arsenal-backpack-merc-desc = Тактический рюкзак в военном стиле.
 
+# Рюкзаки ОБР / эскадрона смерти — огромная вместимость и взрывозащита
+full-arsenal-backpack-ert-leader-name = Рюкзак ОБР (лидер)
+full-arsenal-backpack-ert-leader-desc = Вместительный рюкзак лидера отряда быстрого реагирования. Куча места и защита от взрывов.
+full-arsenal-backpack-ert-security-name = Рюкзак ОБР (охрана)
+full-arsenal-backpack-ert-security-desc = Вместительный рюкзак офицера ОБР. Куча места и защита от взрывов.
+full-arsenal-backpack-ert-medical-name = Рюкзак ОБР (медик)
+full-arsenal-backpack-ert-medical-desc = Вместительный рюкзак медика ОБР. Куча места и защита от взрывов.
+full-arsenal-backpack-ert-engineer-name = Рюкзак ОБР (инженер)
+full-arsenal-backpack-ert-engineer-desc = Вместительный рюкзак инженера ОБР. Куча места и защита от взрывов.
+full-arsenal-backpack-ert-janitor-name = Рюкзак ОБР (уборщик)
+full-arsenal-backpack-ert-janitor-desc = Вместительный рюкзак уборщика ОБР. Куча места и защита от взрывов.
+full-arsenal-backpack-ert-clown-name = Рюкзак ОБР (клоун)
+full-arsenal-backpack-ert-clown-desc = Вместительный рюкзак клоуна ОБР. Куча места и защита от взрывов.
+full-arsenal-backpack-ert-chaplain-name = Рюкзак ОБР (священник)
+full-arsenal-backpack-ert-chaplain-desc = Вместительный рюкзак священника ОБР. Куча места и защита от взрывов.
+full-arsenal-backpack-death-squad-name = Рюкзак эскадрона смерти
+full-arsenal-backpack-death-squad-desc = Рюкзак самых грозных агентов ЦентКома. Максимум места и защита от взрывов.
+
 # EVA bundle
 full-arsenal-eva-bundle-name = ЕКД вещмешок Синдиката
 full-arsenal-eva-bundle-desc = Вещмешок с костюмом ЕКД Синдиката для работы в открытом космосе.
@@ -558,6 +576,8 @@ full-arsenal-crusher-glaive-name = Глефа-дробилка
 full-arsenal-crusher-glaive-desc = Ранняя версия протокинетического ускорителя в форме глефы. Хуже заряжает удар, но лечит владельца.
 full-arsenal-magmite-crusher-glaive-name = Магмитовая глефа-дробилка
 full-arsenal-magmite-crusher-glaive-desc = Версия глефы-дробилки из магмита. Улучшенные характеристики по сравнению со стандартной.
+full-arsenal-magmite-crusher-name = Магмитовый крушитель
+full-arsenal-magmite-crusher-desc = Тяжёлый крушитель из магмита. Бьёт по площади и хорошо ломает структуры при ударе с двух рук.
 full-arsenal-arm-blade-name = Лезвие руки
 full-arsenal-arm-blade-desc = Острейшее лезвие, крепящееся к руке. Оружие чейнджлинга.
 full-arsenal-energy-sword-double-name = Двойной энергетический меч
@@ -970,6 +990,13 @@ full-arsenal-cursed-katana-desc = Катана, одержимая жаждой 
 full-arsenal-energy-sword-name = Энергетический меч
 full-arsenal-energy-sword-desc = Классический энергомеч. Отражает выстрелы.
 
+full-arsenal-hell-blade-name = Адский клинок
+full-arsenal-hell-blade-desc = Пылающий клинок агонии прямиком из преисподней. 25 урона огнём за удар.
+full-arsenal-blood-blade-name = Кровавый клинок
+full-arsenal-blood-blade-desc = Застывший меч из жидкой крови. 30 урона режущим за удар.
+full-arsenal-unreal-sword-name = Нереальный меч
+full-arsenal-unreal-sword-desc = Бьёт всеми типами урона сразу — но крохотными долями. Чистая эстетика, в бою бесполезен.
+
 # Пистолеты и револьверы
 full-arsenal-pistol-flintlock-name = Кремнёвый пистолет
 full-arsenal-pistol-flintlock-desc = Старинный однозарядный пистолет.
@@ -1023,6 +1050,12 @@ full-arsenal-smg-berkut-name = ПП «Беркут»
 full-arsenal-smg-berkut-desc = Компактный скорострельный пистолет-пулемёт.
 full-arsenal-smg-c20r-name = ПП C-20r
 full-arsenal-smg-c20r-desc = Классический пистолет-пулемёт Синдиката.
+full-arsenal-smg-sp91rc-name = ПП SP-91-RC
+full-arsenal-smg-sp91rc-desc = Компактный пистолет-пулемёт для подавления беспорядков. Стреляет очередями по пять.
+full-arsenal-smg-uzi-name = ПП «Узи» U3
+full-arsenal-smg-uzi-desc = Лёгкий пистолет-пулемёт на 32 патрона с одиночным режимом и очередью по четыре.
+full-arsenal-smg-siar52-name = ПП SIAR-52
+full-arsenal-smg-siar52-desc = Скорострельный пистолет-пулемёт со встроенным глушителем.
 
 # Дробовики
 full-arsenal-shotgun-handmade-name = Самодельный дробовик
@@ -1220,7 +1253,7 @@ full-arsenal-baguette-name = Багет
 full-arsenal-baguette-desc = Чёрствый французский батон. На удивление, рубит не хуже меча.
 full-arsenal-cornivore-gloves-name = Перчатки алой жатвы корниворы
 full-arsenal-cornivore-gloves-desc = Когти, пропитанные токсином. Автоатака и впрыск яда при ударе.
-full-arsenal-smg-p90-name = Пистолет-пулемёт «П-90»
+full-arsenal-smg-p90-name = Пистолет-пулемёт «P90»
 full-arsenal-smg-p90-desc = Компактный пистолет-пулемёт с магазином на 50 патронов.
 full-arsenal-rifle-m16a4-name = Винтовка «М16А4»
 full-arsenal-rifle-m16a4-desc = Классическая штурмовая винтовка с режимом очереди.
@@ -1255,6 +1288,10 @@ full-arsenal-bow-set-poison-name = Ядовитый набор лучника
 full-arsenal-bow-set-poison-desc = Стандартный набор лучника плюс бутылочка аматоксина. Окуни, наложи, извинись позже.
 full-arsenal-bow-set-nocturine-name = Дестабилизирующий набор лучника
 full-arsenal-bow-set-nocturine-desc = Стандартный набор лучника плюс бутылочка ноктюрина. Одно хорошее попадание — и цель проспит остаток боя.
+full-arsenal-bow-set-aphrodisiac-name = Любовный набор лучника
+full-arsenal-bow-set-aphrodisiac-desc = Стандартный набор лучника плюс две бутылочки афродизиака. Окуни, наложи — и цели станет совсем не до боя.
+full-arsenal-communism-set-name = Воин коммунизма
+full-arsenal-communism-set-desc = АКМС с двумя запасными магазинами, финка, манифест коммунистической партии, политическая система СССП, значок СССП и полный комплект экипировки наёмника. Во славу революции!
 full-arsenal-rifle-ak514-name = АК-514
 full-arsenal-rifle-ak514-desc = Осовремененный потомок легендарной схемы АК под .30 калибр. Бьёт больно, разброс широкий — контролируй очереди.
 full-arsenal-ammo-mag-light-rifle-hp-name = Магазин .30 (экспансивные, HP)
@@ -1265,6 +1302,8 @@ full-arsenal-ammo-mag-light-rifle-ap-name = Магазин .30 (бронебой
 full-arsenal-ammo-mag-light-rifle-ap-desc = Бронебойные пули полностью игнорируют броню ценой сырого урона.
 full-arsenal-duffel-ash12-name = Вещмешок ASH-12
 full-arsenal-duffel-ash12-desc = Штурмовая винтовка ASH-12 и два запасных магазина .45 магнум в комплекте.
+full-arsenal-duffel-minotaur-name = Вещмешок АС-12 «Минотавр»
+full-arsenal-duffel-minotaur-desc = Автоматический дробовик АС-12 «Минотавр» и два запасных XL-барабана на 16 патронов в комплекте.
 full-arsenal-rifle-skm24-name = СКМ-24
 full-arsenal-rifle-skm24-desc = Дёшево и надёжно. Огневой мощи достаточно, точности — мало. Калибр .30.
 full-arsenal-bottle-ephedrine-name = Эфедрин (бутылка)
@@ -1287,3 +1326,6 @@ full-arsenal-bottle-synaptizine-name = Синаптизин (бутылка)
 full-arsenal-bottle-synaptizine-desc = Сокращает время оглушения.
 full-arsenal-bottle-ultravasculine-name = Ультраваскулин (бутылка)
 full-arsenal-bottle-ultravasculine-desc = Мощно выводит токсины.
+
+full-arsenal-gay-pack-name = Гей-пак
+full-arsenal-gay-pack-desc = Гордый набор: радужный шарф, значок и плащ.

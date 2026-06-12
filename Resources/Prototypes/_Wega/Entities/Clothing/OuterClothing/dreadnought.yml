@@ -1,0 +1,76 @@
+# Скафандр «Дредноут» Cybersun — портирован из arcane-station (_Goobstation).
+# Goob-компоненты, которых нет в нашем форке (traumaDeductions, ignoreArmorPierceFlags,
+# FlashSoundSuppression, SpeechSoundsReplacer), убраны; остальной баланс сохранён:
+# тяжелейшая броня в обмен на сильное замедление и долгое снятие.
+- type: entity
+  parent: [ ClothingOuterHardsuitBase, BaseSyndicateContraband ]
+  id: ClothingOuterHardsuitCybersunDreadnought
+  name: скафандр дредноута Cybersun
+  description: Синдикат возложил свою славу на ваши плечи — не разочаруйте его.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Hardsuits/dreadnought.rsi
+  - type: Item
+    size: Ginormous
+  - type: Clothing
+    sprite: _Wega/Clothing/OuterClothing/Hardsuits/dreadnought.rsi
+    equipDelay: 15
+    unequipDelay: 600 # снять в бою невозможно — почти как Unremoveable, но надеть всё же можно
+  - type: PressureProtection
+    highPressureMultiplier: 0.05
+    lowPressureMultiplier: 1000
+  - type: ExplosionResistance
+    damageCoefficient: 0.1
+  - type: FireProtection
+    reduction: 0.9
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.2
+        Slash: 0.2
+        Piercing: 0.1
+        Heat: 0.2
+        Radiation: 0.25 # радиация — намеренная слабость
+        Caustic: 0.4
+  - type: ClothingSpeedModifier
+    walkModifier: 0.7
+    sprintModifier: 0.5
+  - type: HeldSpeedModifier
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitDreadnought
+  - type: DiseaseProtection # Corvax-Wega-Disease
+    protection: 0.2
+  - type: Tag
+    tags:
+    - Hardsuit
+    - ModNotEquipable # Corvax-Wega-ModularSuit
+    - WhitelistChameleon
+
+- type: entity
+  parent: [ ClothingHeadHardsuitBase, ClothingHeadSuitWithLightBase ]
+  id: ClothingHeadHelmetHardsuitDreadnought
+  name: шлем дредноута Cybersun
+  description: Глядя на этот шлем, сложно понять, есть ли внутри кто-то живой.
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/Head/Hardsuits/dreadnought.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/Head/Hardsuits/dreadnought.rsi
+  - type: PointLight
+    color: red
+  - type: PressureProtection
+    highPressureMultiplier: 0.08
+    lowPressureMultiplier: 1000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.15
+        Slash: 0.15
+        Piercing: 0.15
+        Heat: 0.15
+        Radiation: 0.25
+        Caustic: 0.4
+  - type: FlashImmunity
+  - type: Tag
+    tags:
+    - WhitelistChameleon

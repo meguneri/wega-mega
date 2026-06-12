@@ -1,0 +1,38 @@
+# Wega arena — "Warrior of Communism" kit for the Full Arsenal pool.
+# A wrapped package that unwraps directly into the full loadout. We spawn the
+# items loose (not in a duffel) on purpose: the AKMS alone is Huge (16 cells)
+# and the full mercenary outfit + books overflow a duffel's 8x5 grid, which
+# would drop the overflow on the floor untagged during ContainerFill and leave
+# it behind after the round. SpawnItemsOnUse adds every spawned entity to
+# SpawnItemsOnUsedEvent, so the arena cleanup tags and removes all of them.
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaCommunismSet
+  name: warrior of communism kit
+  description: A wrapped package that unpacks into an AKMS with two spare magazines, a finka, the manifesto of the communist party, the political system of the USSP, a USSP pin and a full mercenary outfit. For the glory of the revolution.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: WeaponRifleAk
+    - id: MagazineLightRifle
+      amount: 2
+    - id: Finka
+    - id: BibleCommunistManifesto
+    - id: BookUSSP
+    - id: ClothingNeckUSSPPin
+    - id: ClothingEyesGlassesMercenary
+    - id: ClothingHeadHelmetMerc
+    - id: ClothingUniformJumpsuitMercenary
+    - id: ClothingOuterVestWebMerc
+    - id: ClothingMaskGasMerc
+    - id: ClothingHandsMercGlovesCombat
+    - id: ClothingBeltMercWebbing
+    - id: ClothingShoesBootsMerc
+    - id: ClothingBackpackMerc
+    sound:
+      path: /Audio/Effects/unwrap.ogg

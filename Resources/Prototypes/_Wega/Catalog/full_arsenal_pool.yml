@@ -138,6 +138,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalMagmiteCrusher
+  name: full-arsenal-magmite-crusher-name
+  description: full-arsenal-magmite-crusher-desc
+  productEntity: WeaponMagmiteCrusher
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalMachete
   name: full-arsenal-machete-name
   description: full-arsenal-machete-desc
@@ -256,6 +266,36 @@
   productEntity: EnergySword
   cost:
     Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHellBlade
+  name: full-arsenal-hell-blade-name
+  description: full-arsenal-hell-blade-desc
+  productEntity: ArenaHellBlade
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalBloodBlade
+  name: full-arsenal-blood-blade-name
+  description: full-arsenal-blood-blade-desc
+  productEntity: ArenaBloodBlade
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalUnrealSword
+  name: full-arsenal-unreal-sword-name
+  description: full-arsenal-unreal-sword-desc
+  productEntity: WeaponUnrealSword
+  cost:
+    Telecrystal: 5
   categories:
   - FullArsenal
 
@@ -393,6 +433,36 @@
   productEntity: WeaponSubMachineGunC20r
   cost:
     Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSMGSP91RC
+  name: full-arsenal-smg-sp91rc-name
+  description: full-arsenal-smg-sp91rc-desc
+  productEntity: WeaponSubMachineGunSP91RC
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSMGUzi
+  name: full-arsenal-smg-uzi-name
+  description: full-arsenal-smg-uzi-desc
+  productEntity: SunriseWeaponSubMachineGunUzi
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSMGSiar52
+  name: full-arsenal-smg-siar52-name
+  description: full-arsenal-smg-siar52-desc
+  productEntity: WeaponSIAR52
+  cost:
+    Telecrystal: 6
   categories:
   - FullArsenal
 
@@ -3332,6 +3402,95 @@
   - FullArsenal
   - FullArsenalBag
 
+# Рюкзаки ОБР и эскадрона смерти — огромная вместимость + взрывозащита (−90%).
+- type: listing
+  id: FullArsenalBackpackERTLeader
+  name: full-arsenal-backpack-ert-leader-name
+  description: full-arsenal-backpack-ert-leader-desc
+  productEntity: ClothingBackpackERTLeader
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackERTSecurity
+  name: full-arsenal-backpack-ert-security-name
+  description: full-arsenal-backpack-ert-security-desc
+  productEntity: ClothingBackpackERTSecurity
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackERTMedical
+  name: full-arsenal-backpack-ert-medical-name
+  description: full-arsenal-backpack-ert-medical-desc
+  productEntity: ClothingBackpackERTMedical
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackERTEngineer
+  name: full-arsenal-backpack-ert-engineer-name
+  description: full-arsenal-backpack-ert-engineer-desc
+  productEntity: ClothingBackpackERTEngineer
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackERTJanitor
+  name: full-arsenal-backpack-ert-janitor-name
+  description: full-arsenal-backpack-ert-janitor-desc
+  productEntity: ClothingBackpackERTJanitor
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackERTClown
+  name: full-arsenal-backpack-ert-clown-name
+  description: full-arsenal-backpack-ert-clown-desc
+  productEntity: ClothingBackpackERTClown
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackERTChaplain
+  name: full-arsenal-backpack-ert-chaplain-name
+  description: full-arsenal-backpack-ert-chaplain-desc
+  productEntity: ClothingBackpackERTChaplain
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
+- type: listing
+  id: FullArsenalBackpackDeathSquad
+  name: full-arsenal-backpack-death-squad-name
+  description: full-arsenal-backpack-death-squad-desc
+  productEntity: ClothingBackpackDeathSquad
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+  - FullArsenalBag
+
 # Кожаная поясная сумка — пояс (не для инструментов). Слот пояса, под лимит сумок не идёт.
 - type: listing
   id: FullArsenalLeatherWaistbag
@@ -4398,16 +4557,6 @@
 # ── SPELLBOOKS (physical) ────────────────────────────────────────────────────
 
 - type: listing
-  id: FullArsenalSpellbookFireball
-  name: full-arsenal-spellbookfireball-name
-  description: full-arsenal-spellbookfireball-desc
-  productEntity: FireballSpellbook
-  cost:
-    Telecrystal: 25
-  categories:
-  - FullArsenal
-
-- type: listing
   id: FullArsenalSpellbookBlink
   name: full-arsenal-spellbookblink-name
   description: full-arsenal-spellbookblink-desc
@@ -4457,15 +4606,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalWizardsGrimoire
-  name: full-arsenal-wizardsgrimoire-name
-  description: full-arsenal-wizardsgrimoire-desc
-  productEntity: WizardsGrimoireNoRefund
-  cost:
-    Telecrystal: 30
-  categories:
-  - FullArsenal
 
 # ── SECURITY / DISABLERS ──────────────────────────────────────────────────────
 
@@ -5490,6 +5630,27 @@
   - FullArsenalBowSet
 
 - type: listing
+  id: FullArsenalBowSetAphrodisiac
+  name: full-arsenal-bow-set-aphrodisiac-name
+  description: full-arsenal-bow-set-aphrodisiac-desc
+  productEntity: ArenaDuffelBowSetAphrodisiac
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalBowSet
+
+- type: listing
+  id: FullArsenalCommunismSet
+  name: full-arsenal-communism-set-name
+  description: full-arsenal-communism-set-desc
+  productEntity: ArenaCommunismSet
+  cost:
+    Telecrystal: 22
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalRifleAK514
   name: full-arsenal-rifle-ak514-name
   description: full-arsenal-rifle-ak514-desc
@@ -5506,6 +5667,16 @@
   productEntity: ArenaDuffelAsh12Bundle
   cost:
     Telecrystal: 15
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDuffelMinotaur
+  name: full-arsenal-duffel-minotaur-name
+  description: full-arsenal-duffel-minotaur-desc
+  productEntity: ArenaDuffelMinotaurBundle
+  cost:
+    Telecrystal: 20
   categories:
   - FullArsenal
 
@@ -5595,4 +5766,16 @@
   categories:
   - FullArsenal
   - FullArsenalMedsBottle
+
+# ── FUN ───────────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalGayPack
+  name: full-arsenal-gay-pack-name
+  description: full-arsenal-gay-pack-desc
+  productEntity: BackpackGayPack
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
 

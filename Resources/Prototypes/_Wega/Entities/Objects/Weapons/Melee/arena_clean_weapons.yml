@@ -1,0 +1,66 @@
+# Arena clean copies — versions of role-locked weapons with the whitelist
+# (CultWeapon, cult construction, etc.) stripped, so any arena player can use them.
+
+# Hell blade without the Blood-cult whitelist. Stats identical to WeaponHellBlade.
+- type: entity
+  id: ArenaHellBlade
+  parent: BaseItem
+  name: hell blade
+  description: A blazing axe of agony, straight from the underworld.
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Melee/hell_blade.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+  - type: Item
+    storedRotation: -45
+    size: Normal
+    shape:
+    - 0,0,2,1
+    - 1,2,1,1
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Heat: 25
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: DisarmMalus
+
+# Blood blade without the Blood-cult whitelist (no CultWeapon / cult construction).
+# Stats identical to WeaponBloodBlade.
+- type: entity
+  id: ArenaBloodBlade
+  parent: BaseItem
+  name: blood blade
+  description: The red formation of liquid blood in the shape of a sword is a very mysterious sight.
+  components:
+  - type: Sharp
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Melee/blood_blade.rsi
+    state: icon
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - back
+    - suitStorage
+  - type: Item
+    storedRotation: -45
+    size: Normal
+    shape:
+    - 0,0,0,2
+  - type: MeleeWeapon
+    wideAnimationRotation: -135
+    attackRate: 1
+    damage:
+      types:
+        Slash: 30
+    soundHit:
+        path: /Audio/Weapons/bladeslice.ogg
+  - type: DisarmMalus

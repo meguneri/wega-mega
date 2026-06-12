@@ -8,7 +8,7 @@
 - Гранаты (`FullArsenalGrenade`): **макс. 3**
 - Патроны (`FullArsenalAmmo`): **макс. 4**
 - Пустые сумки/рюкзаки/вещмешки (`FullArsenalBag`): **макс. 1**
-- Наборы лучника (`FullArsenalBowSet`): **макс. 1** (любой из четырёх вариантов)
+- Наборы лучника (`FullArsenalBowSet`): **макс. 1** (любой из пяти вариантов)
 - Инжекторы (`FullArsenalInjector`): **макс. 1** (гипоспрей/гипоручка/гиподротик; к инжектору гарантированно докидывается минимум одна бутылочка с лекарством) (готовые комплекты-вещмешки с оружием/скафандрами сюда не входят)
 
 Броня и шлемы зафиксированы (2 / 2) во всех четырёх ящиках — с размером ящика они не растут.
@@ -35,6 +35,7 @@
 | Копьё из зуба акулы-мальки | `SpearSharkMinnow` | 3 TC |
 | Глефа-дробилка | `WeaponCrusherGlaive` | 5 TC |
 | Магмитовая глефа-дробилка | `WeaponMagmiteCrusherGlaive` | 6 TC |
+| Магмитовый крушитель | `WeaponMagmiteCrusher` | 6 TC |
 | Мачете | `Machete` | 1 TC |
 | Пожарный топор | `FireAxe` | 1 TC |
 | Пылающий пожарный топор | `FireAxeFlaming` | 4 TC |
@@ -56,6 +57,9 @@
 | Высокочастотный клинок | `WeaponHighFrequencyBlade` | 7 TC |
 | Энергетический меч | `EnergySword` | 8 TC |
 | Двойной энергетический меч | `EnergySwordDouble` | 20 TC |
+| Адский клинок | `ArenaHellBlade` | 4 TC |
+| Кровавый клинок | `ArenaBloodBlade` | 5 TC |
+| Нереальный меч | `WeaponUnrealSword` | 5 TC |
 | Рапира Синдиката (с ножнами) | `ClothingBeltSheathSyndicateFilled` | 8 TC |
 | Металлическая пила | `Saw` | 1 TC |
 | Дисковая пила Синдиката | `SawAdvanced` | 2 TC |
@@ -140,6 +144,9 @@
 | MP7 | `WeaponSubMachineGunMP7` | 10 TC |
 | P-90 | `WeaponSubMachineGunP90` | 25 TC |
 | ППШ 59 | `WeaponSubMachineGunPPSH` | 10 TC |
+| SP-91-RC | `WeaponSubMachineGunSP91RC` | 6 TC |
+| Узи U3 | `SunriseWeaponSubMachineGunUzi` | 5 TC |
+| SIAR-52 | `WeaponSIAR52` | 6 TC |
 
 ---
 
@@ -635,10 +642,13 @@
 | ЕКД вещмешок Синдиката | `ClothingBackpackDuffelSyndicateEVABundle` | 3 TC |
 | Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
 | Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 15 TC |
+| Вещмешок АС-12 «Минотавр» | `ArenaDuffelMinotaurBundle` | 20 TC |
 | Набор лучника | `ArenaDuffelBowSet` | 4 TC |
 | Ядовитый набор лучника | `ArenaDuffelBowSetPoison` | 8 TC |
 | Дестабилизирующий набор лучника | `ArenaDuffelBowSetNocturine` | 8 TC |
+| Любовный набор лучника | `ArenaDuffelBowSetAphrodisiac` | 8 TC |
 | Элитный набор лучника | `ArenaDuffelBowSetElite` | 8 TC |
+| Воин коммунизма | `ArenaCommunismSet` | 22 TC |
 
 ---
 
@@ -654,6 +664,19 @@
 | Кожаная сумка | `ClothingBackpackSatchelLeather` | 1 TC |
 | Сумка | `ClothingBackpackSatchel` | 1 TC |
 | Вещмешок | `ClothingBackpackDuffel` | 1 TC |
+
+Рюкзаки ОБР / эскадрона смерти (огромная вместимость + взрывозащита −90%, тоже `FullArsenalBag`, лимит 1):
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Рюкзак ОБР (лидер) | `ClothingBackpackERTLeader` | 3 TC |
+| Рюкзак ОБР (охрана) | `ClothingBackpackERTSecurity` | 3 TC |
+| Рюкзак ОБР (медик) | `ClothingBackpackERTMedical` | 3 TC |
+| Рюкзак ОБР (инженер) | `ClothingBackpackERTEngineer` | 3 TC |
+| Рюкзак ОБР (уборщик) | `ClothingBackpackERTJanitor` | 3 TC |
+| Рюкзак ОБР (клоун) | `ClothingBackpackERTClown` | 3 TC |
+| Рюкзак ОБР (священник) | `ClothingBackpackERTChaplain` | 3 TC |
+| Рюкзак эскадрона смерти | `ClothingBackpackDeathSquad` | 4 TC |
 
 Не считаются «сумкой» (отдельный слот, под лимит не идут):
 - Кожаная поясная сумка | `ClothingBeltStorageWaistbag` | 1 TC — слот пояса.
@@ -728,6 +751,7 @@
 | Пистолет-пугач | `RevolverCapGun` | 10 TC |
 | Пистолет-пугач (фальшивый) | `RevolverCapGunFake` | 10 TC |
 | Игрушечный световой меч | `ToySword` | 8 TC |
+| Гей-пак (шарф + значок + плащ) | `BackpackGayPack` | 2 TC |
 
 ---
 
@@ -740,5 +764,3 @@
 | Мигание (Blink) | `BlinkBook` | 10 TC |
 | Стена силы | `ForceWallSpellbook` | 10 TC |
 | Руны | `ScrollRunes` | 10 TC |
-| Огненный шар | `FireballSpellbook` | 25 TC |
-| Гримуар волшебника | `WizardsGrimoireNoRefund` | 30 TC |

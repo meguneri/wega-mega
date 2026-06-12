@@ -1,0 +1,5 @@
+# Шейдер любовного опьянения (афродизиак), портирован из lust-station.
+- type: shader
+  id: LoveVision
+  kind: source
+  path: "/Textures/_Wega/Shaders/lovevision.swsl"

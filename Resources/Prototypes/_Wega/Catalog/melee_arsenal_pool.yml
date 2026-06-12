@@ -147,6 +147,17 @@
   - MeleeArsenalWeapon
 
 - type: listing
+  id: MeleeArsenalMagmiteCrusher
+  name: full-arsenal-magmite-crusher-name
+  description: full-arsenal-magmite-crusher-desc
+  productEntity: WeaponMagmiteCrusher
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
   id: MeleeArsenalMachete
   name: full-arsenal-machete-name
   description: full-arsenal-machete-desc
@@ -284,6 +295,39 @@
   productEntity: EnergySword
   cost:
     Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalHellBlade
+  name: full-arsenal-hell-blade-name
+  description: full-arsenal-hell-blade-desc
+  productEntity: ArenaHellBlade
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalBloodBlade
+  name: full-arsenal-blood-blade-name
+  description: full-arsenal-blood-blade-desc
+  productEntity: ArenaBloodBlade
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalUnrealSword
+  name: full-arsenal-unreal-sword-name
+  description: full-arsenal-unreal-sword-desc
+  productEntity: WeaponUnrealSword
+  cost:
+    Telecrystal: 5
   categories:
   - MeleeArsenal
   - MeleeArsenalWeapon
@@ -3481,6 +3525,318 @@
   productEntity: WeaponDeathBladeArena
   cost:
     Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+# Brass/clockwork set + arena melee gear — mirrored from the Full Arsenal pool so
+# all melee weapons and armor are available in the Melee crate too.
+- type: listing
+  id: MeleeArsenalParryBuckler
+  name: full-arsenal-parry-buckler-name
+  description: full-arsenal-parry-buckler-desc
+  productEntity: ArenaParryBuckler
+  cost:
+    Telecrystal: 11
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalAdrenalineVest
+  name: full-arsenal-adrenaline-vest-name
+  description: full-arsenal-adrenaline-vest-desc
+  productEntity: ArenaAdrenalineVest
+  cost:
+    Telecrystal: 9
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalFlagellantRobe
+  name: full-arsenal-flagellant-robe-name
+  description: full-arsenal-flagellant-robe-desc
+  productEntity: ClothingOuterFlagellantRobeArsenal
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorBrassCuirass
+  name: full-arsenal-armor-brass-cuirass-name
+  description: full-arsenal-armor-brass-cuirass-desc
+  productEntity: VeilCultBrassCuirassArsenal
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalBrassCuirass
+  name: full-arsenal-brass-cuirass-name
+  description: full-arsenal-brass-cuirass-desc
+  productEntity: VeilCultBrassCuirassArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalBrassCuirassAbsorb
+  name: full-arsenal-brass-cuirass-absorb-name
+  description: full-arsenal-brass-cuirass-absorb-desc
+  productEntity: VeilCultBrassCuirassAbsorbArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalBrassCuirassHardenPlates
+  name: full-arsenal-brass-cuirass-hardenplates-name
+  description: full-arsenal-brass-cuirass-hardenplates-desc
+  productEntity: VeilCultBrassCuirassHardenPlatesArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalBrassCuirassReflection
+  name: full-arsenal-brass-cuirass-reflection-name
+  description: full-arsenal-brass-cuirass-reflection-desc
+  productEntity: VeilCultBrassCuirassReflectionArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalBrassCuirassSmoke
+  name: full-arsenal-brass-cuirass-smoke-name
+  description: full-arsenal-brass-cuirass-smoke-desc
+  productEntity: VeilCultBrassCuirassSmokeArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalClockworkTreads
+  name: full-arsenal-clockwork-treads-name
+  description: full-arsenal-clockwork-treads-desc
+  productEntity: ClothingShoesClockworkTreads
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalClockworkGauntlets
+  name: full-arsenal-clockwork-gauntlets-name
+  description: full-arsenal-clockwork-gauntlets-desc
+  productEntity: ClothingHandsClockworkGauntletsArena
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlovesClockworkGauntlets
+  name: full-arsenal-gloves-clockwork-gauntlets-name
+  description: full-arsenal-gloves-clockwork-gauntlets-desc
+  productEntity: ClothingHandsClockworkGauntletsArsenal
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalClockworkGauntletsNorthStar
+  name: full-arsenal-clockwork-gauntlets-northstar-name
+  description: full-arsenal-clockwork-gauntlets-northstar-desc
+  productEntity: ClothingHandsClockworkGauntletsNorthStarArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalClockworkGauntletsRedFlame
+  name: full-arsenal-clockwork-gauntlets-redflame-name
+  description: full-arsenal-clockwork-gauntlets-redflame-desc
+  productEntity: ClothingHandsClockworkGauntletsRedFlameArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalClockworkGauntletsStun
+  name: full-arsenal-clockwork-gauntlets-stun-name
+  description: full-arsenal-clockwork-gauntlets-stun-desc
+  productEntity: ClothingHandsClockworkGauntletsStunArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalKnuckleDustersStun
+  name: full-arsenal-knuckle-dusters-stun-name
+  description: full-arsenal-knuckle-dusters-stun-desc
+  productEntity: ClothingHandsKnuckleDustersStun
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalCornivoreGloves
+  name: full-arsenal-cornivore-gloves-name
+  description: full-arsenal-cornivore-gloves-desc
+  productEntity: CornivoreGloves
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalClockworkSword
+  name: full-arsenal-clockwork-sword-name
+  description: full-arsenal-clockwork-sword-desc
+  productEntity: WeaponClockworkSwordArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockworkSwordBorg
+  name: full-arsenal-clockwork-sword-borg-name
+  description: full-arsenal-clockwork-sword-borg-desc
+  productEntity: WeaponClockworkSwordBorg
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockworkSwordBloodshed
+  name: full-arsenal-clockwork-sword-bloodshed-name
+  description: full-arsenal-clockwork-sword-bloodshed-desc
+  productEntity: WeaponClockworkSwordBloodshedArena
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockworkSwordSwordsmen
+  name: full-arsenal-clockwork-sword-swordsmen-name
+  description: full-arsenal-clockwork-sword-swordsmen-desc
+  productEntity: WeaponClockworkSwordSwordsmenArena
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockHammer
+  name: full-arsenal-clock-hammer-name
+  description: full-arsenal-clock-hammer-desc
+  productEntity: WeaponClockHammerArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockHammerCrusher
+  name: full-arsenal-clock-hammer-crusher-name
+  description: full-arsenal-clock-hammer-crusher-desc
+  productEntity: WeaponClockHammerCrusherArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockHammerDismantling
+  name: full-arsenal-clock-hammer-dismantling-name
+  description: full-arsenal-clock-hammer-dismantling-desc
+  productEntity: WeaponClockHammerDismantlingArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalClockHammerKnockback
+  name: full-arsenal-clock-hammer-knockback-name
+  description: full-arsenal-clock-hammer-knockback-desc
+  productEntity: WeaponClockHammerKnockbackArena
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalRatvarianSpear
+  name: full-arsenal-ratvarian-spear-name
+  description: full-arsenal-ratvarian-spear-desc
+  productEntity: WeaponRatvarianSpearArena
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalRatvarianSpearConfusion
+  name: full-arsenal-ratvarian-spear-confusion-name
+  description: full-arsenal-ratvarian-spear-confusion-desc
+  productEntity: WeaponRatvarianSpearConfusionArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalRatvarianSpearElectricalTouch
+  name: full-arsenal-ratvarian-spear-electricaltouch-name
+  description: full-arsenal-ratvarian-spear-electricaltouch-desc
+  productEntity: WeaponRatvarianSpearElectricalTouchArena
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalMultiverseSword
+  name: full-arsenal-multiverse-sword-name
+  description: full-arsenal-multiverse-sword-desc
+  productEntity: WeaponMultiverseSword
+  cost:
+    Telecrystal: 4
   categories:
   - MeleeArsenal
   - MeleeArsenalWeapon

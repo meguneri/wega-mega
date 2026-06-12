@@ -8,6 +8,8 @@
     - type: Sprite
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
       state: buckler-icon
+      # Полупрозрачный «энергетический» баклер — альфа ~50%.
+      color: "#FFFFFF80"
     - type: Item
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
       size: Normal
@@ -21,9 +23,16 @@
           Heat: 12
           Blunt: 2
       soundHit:
-        collection: MetalThud
+        path: /Audio/Weapons/eblade1.ogg
     # Duelist profile: modest passive protection, but a raised buckler
     # shrugs off melee — piercing is still its weak spot
+    # Постоянное гудение, как у активного энергомеча/энергощита
+    - type: AmbientSound
+      enabled: true
+      range: 4
+      volume: -4
+      sound:
+        path: /Audio/Weapons/ebladehum.ogg
     - type: Blocking
       passiveBlockModifier:
         coefficients:

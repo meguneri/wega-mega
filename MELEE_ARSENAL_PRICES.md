@@ -37,6 +37,7 @@
 | Копьё из зуба акулы-мальки | `SpearSharkMinnow` | 3 TC |
 | Глефа-дробилка | `WeaponCrusherGlaive` | 5 TC |
 | Магмитовая глефа-дробилка | `WeaponMagmiteCrusherGlaive` | 6 TC |
+| Магмитовый крушитель | `WeaponMagmiteCrusher` | 6 TC |
 | Мачете | `Machete` | 1 TC |
 | Пожарный топор | `FireAxe` | 1 TC |
 | Пылающий пожарный топор | `FireAxeFlaming` | 4 TC |
@@ -48,6 +49,9 @@
 | Сабля капитана | `CaptainSabre` | 3 TC |
 | Клеймор | `Claymore` | 4 TC |
 | Энергетический меч | `EnergySword` | 8 TC |
+| Адский клинок | `ArenaHellBlade` | 4 TC |
+| Кровавый клинок | `ArenaBloodBlade` | 5 TC |
+| Нереальный меч | `WeaponUnrealSword` | 5 TC |
 
 ## Броня и одежда с бронёй
 
@@ -462,3 +466,39 @@
 | Силовой меч | `WeaponForceSword` | 5 TC |
 | Дробилка | `WeaponCrusher` | 5 TC |
 | Клинок смерти | `WeaponDeathBlade` | 7 TC |
+
+## Латунный/часовой набор и арена-снаряжение (ближний бой и броня)
+
+Зеркалирует листинги Full Arsenal — всё мили-оружие и броня этого набора доступны и в мили-ящике.
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Парирующий баклер | `ArenaParryBuckler` | 11 TC |
+| Адреналиновый жилет | `ArenaAdrenalineVest` | 9 TC |
+| Одеяние флаггелянта | `ClothingOuterFlagellantRobeArsenal` | 2 TC |
+| Латунная кираса | `VeilCultBrassCuirassArsenal` | 8 TC |
+| Латунная кираса (с выдвижным шлемом) | `VeilCultBrassCuirassArena` | 6 TC |
+| Латунная кираса (Поглощение) | `VeilCultBrassCuirassAbsorbArena` | 8 TC |
+| Латунная кираса (Укрепление) | `VeilCultBrassCuirassHardenPlatesArena` | 8 TC |
+| Латунная кираса (Отражение) | `VeilCultBrassCuirassReflectionArena` | 8 TC |
+| Латунная кираса (Дым) | `VeilCultBrassCuirassSmokeArena` | 8 TC |
+| Заводные сапоги (немагнитные) | `ClothingShoesClockworkTreads` | 2 TC |
+| Латунные перчатки | `ClothingHandsClockworkGauntletsArena` | 3 TC |
+| Латунные латные перчатки | `ClothingHandsClockworkGauntletsArsenal` | 6 TC |
+| Латунные перчатки (Полярная звезда) | `ClothingHandsClockworkGauntletsNorthStarArena` | 5 TC |
+| Латунные перчатки (Красное пламя) | `ClothingHandsClockworkGauntletsRedFlameArena` | 5 TC |
+| Латунные перчатки (Оглушение) | `ClothingHandsClockworkGauntletsStunArena` | 5 TC |
+| Кастет с оглушением | `ClothingHandsKnuckleDustersStun` | 5 TC |
+| Перчатки алой жатвы корниворы | `CornivoreGloves` | 12 TC |
+| Заводной меч | `WeaponClockworkSwordArena` | 5 TC |
+| Заводной меч (тяжёлый) | `WeaponClockworkSwordBorg` | 5 TC |
+| Заводной меч (Кровопролитие) | `WeaponClockworkSwordBloodshedArena` | 7 TC |
+| Заводной меч (Мечник) | `WeaponClockworkSwordSwordsmenArena` | 7 TC |
+| Заводной молот | `WeaponClockHammerArena` | 6 TC |
+| Заводной молот (Дробление) | `WeaponClockHammerCrusherArena` | 8 TC |
+| Заводной молот (Демонтаж) | `WeaponClockHammerDismantlingArena` | 8 TC |
+| Заводной молот (Отброс) | `WeaponClockHammerKnockbackArena` | 8 TC |
+| Ратварианское копьё | `WeaponRatvarianSpearArena` | 4 TC |
+| Ратварианское копьё (Дезориентация) | `WeaponRatvarianSpearConfusionArena` | 6 TC |
+| Ратварианское копьё (Электрический разряд) | `WeaponRatvarianSpearElectricalTouchArena` | 6 TC |
+| Экстрапространственный клинок | `WeaponMultiverseSword` | 4 TC |

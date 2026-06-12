@@ -1,5 +1,6 @@
 using Content.Shared.DeviceLinking;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Localization;
 
 namespace Content.Shared._Wega.Spawners.Components;
 
@@ -27,14 +28,15 @@ public sealed partial class SpawnerSignalControlComponent : Component
     public string AnnounceSender = "Арена";
 
     /// <summary>
-    /// Message broadcast when the spawner is turned ON.
+    /// Locale id broadcast when the spawner is turned ON. Receives an <c>$seconds</c> argument
+    /// (the spawner's actual interval), so the announced period never drifts from the real one.
     /// </summary>
     [DataField]
-    public string EnabledMessage = "Сброс снаряжения активирован. Ящики будут появляться в центре арены каждые 45 секунд.";
+    public LocId EnabledMessage = "spawner-signal-control-enabled";
 
     /// <summary>
-    /// Message broadcast when the spawner is turned OFF.
+    /// Locale id broadcast when the spawner is turned OFF.
     /// </summary>
     [DataField]
-    public string DisabledMessage = "Сброс снаряжения остановлен.";
+    public LocId DisabledMessage = "spawner-signal-control-disabled";
 }

@@ -1,13 +1,17 @@
 using Content.Server._Wega.Duel.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.DeviceLinking.Systems;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Systems;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Humanoid;
+using Content.Shared.Magic.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
@@ -31,6 +35,8 @@ public sealed partial class DuelArenaSystem : EntitySystem
     [Dependency] private DuelArenaCleanupSystem _cleanup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
+    [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
 
     public override void Initialize()
     {
@@ -52,16 +58,25 @@ public sealed partial class DuelArenaSystem : EntitySystem
         var query = EntityQueryEnumerator<DuelArenaComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
+            // Отложенное восстановление стен: запланировано в ConcludeDuel/ResetDuel, выполняем
+            // здесь — на тике ПОСЛЕ завершения боя, вне стека события смерти (MobStateChanged).
+            // Удаление/спавн стен прямо из обработчика смертельного удара могло конфликтовать
+            // с обработкой урона и срывать восстановление.
+            if (comp.PendingWallRestore)
+            {
+                comp.PendingWallRestore = false;
+                RestoreWalls(uid, comp);
+            }
+
             // Истёк grace-период после боя — шлём на шлюзы баз сигнал закрытия.
             // Дуэлянты уже успели вернуться по открытым шлюзам.
+            // (Восстановление стен НЕ привязано к этому таймеру — оно выполняется сразу при
+            // завершении боя в ConcludeDuel/ResetDuel, иначе при быстром старте нового боя
+            // grace отменяется и стены чинятся хаотично уже во время следующего раунда.)
             if (comp.GateCloseAt != null && now >= comp.GateCloseAt)
             {
                 comp.GateCloseAt = null;
                 _signalSystem.SendSignal(uid, comp.ResetPort, true);
-
-                // Бойцы уже успели вернуться в базы за grace-период — восстанавливаем
-                // стены, разрушенные за прошедшую дуэль, не рискуя зажать победителя.
-                RestoreWalls(uid, comp);
             }
 
             // Авто-дроп снабжения во время активного боя: сбрасываем маяк в центр арены
@@ -99,7 +114,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // тихо снимаем взвод без объявления победителя.
         if (present.Count == 0)
         {
-            ResetDuel(comp);
+            ResetDuel(uid, comp);
             return;
         }
 
@@ -201,9 +216,11 @@ public sealed partial class DuelArenaSystem : EntitySystem
             comp.Duelists.Add(d);
         comp.IsActive = true;
 
-        // Пока стены ещё целы (бой только начинается) — фиксируем их пристайн-снимок,
-        // чтобы после дуэли восстановить разрушенное. Срабатывает один раз за арену.
-        EnsureWallSnapshot(uid, comp);
+        // Пока стены ещё целы (бой только начинается) — мержим их планировку в снимок,
+        // чтобы после дуэли восстановить разрушенное. Мерж на каждом старте: новые тайлы
+        // добавляются, старые не перезаписываются — снимок самовосстанавливается, даже
+        // если какой-то из проходов вышел неполным.
+        SnapshotWalls(uid, comp);
 
         // Отменяем grace-период предыдущей дуэли — иначе Update отправит сигнал закрытия
         // шлюзов уже во время нового боя.
@@ -227,17 +244,25 @@ public sealed partial class DuelArenaSystem : EntitySystem
         {
             // Сигнал старта (после отсчёта таймера) — вооружаем дуэль.
             case "Open":
+                // Дебаунс: один импульс старта может прийти дважды за короткое время (двойная
+                // линковка/фронты сигнала/несколько передатчиков на канале). Без этого объявление
+                // «нужно минимум 2 бойца» дублировалось бы в чате. Успешный старт и так защищён
+                // проверкой IsActive в ArmDuel, а здесь гасим и повтор неудачной попытки.
+                var now = _timing.CurTime;
+                if (comp.LastStartSignal is { } last && now - last < TimeSpan.FromSeconds(0.5))
+                    break;
+                comp.LastStartSignal = now;
                 ArmDuel(uid, comp);
                 break;
             // Ручной сброс текущего боя (кнопка сброса). Накопленный счёт не трогает —
             // его обнуляет только админ-команда duelscorereset.
             case "Toggle":
-                ResetDuel(comp);
+                ResetDuel(uid, comp);
                 break;
         }
     }
 
-    private void ResetDuel(DuelArenaComponent comp)
+    private void ResetDuel(EntityUid uid, DuelArenaComponent comp)
     {
         comp.Duelists.Clear();
         comp.IsActive = false;
@@ -247,6 +272,10 @@ public sealed partial class DuelArenaSystem : EntitySystem
 
         // Шлюзы закроем через ReturnGrace секунд — чтобы бойцы успели вернуться в свои базы.
         comp.GateCloseAt = _timing.CurTime + TimeSpan.FromSeconds(comp.ReturnGrace);
+
+        // Стены чиним на следующем тике (см. Update) — вне стека текущего события,
+        // чтобы арена была целой к следующему раунду.
+        comp.PendingWallRestore = true;
     }
 
     /// <summary>
@@ -394,8 +423,15 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // Полное исцеление обоих участников по завершении дуэли (поднимает из крита, чинит весь урон).
         foreach (var duelist in arena.Duelists)
         {
-            if (Exists(duelist))
-                _rejuvenate.PerformRejuvenate(duelist);
+            if (!Exists(duelist))
+                continue;
+
+            _rejuvenate.PerformRejuvenate(duelist);
+            // Принудительно пересчитываем модификаторы скорости: иначе замедление от
+            // SlowOnDamage, навешенное в крите, может остаться закешированным после
+            // полного исцеления (переход из крита гонится с обновлением модификатора).
+            _movementSpeed.RefreshMovementSpeedModifiers(duelist);
+            PurgeDuelistTraces(duelist);
         }
 
         arena.Duelists.Clear();
@@ -409,9 +445,53 @@ public sealed partial class DuelArenaSystem : EntitySystem
         _cleanup.CleanupArea(arenaUid, arena.CleanupRange);
         _chatManager.DispatchServerAnnouncement(msg, Color.Gold);
 
+        // Восстанавливаем разрушенные за бой стены на следующем тике (см. Update): сразу по
+        // завершении, но вне стека события смерти — удаление/спавн стен из обработчика
+        // смертельного удара могло срывать восстановление. RestoreWalls сам отодвигает
+        // бойцов с тайлов под стенами, так что никого не зажмёт.
+        arena.PendingWallRestore = true;
+
         // Сигнал закрытия шлюзов шлём не сразу, а через ReturnGrace секунд: дуэлянты
         // возвращаются в базы по открытым шлюзам, и только потом те закрываются (см. Update).
         arena.GateCloseAt = _timing.CurTime + TimeSpan.FromSeconds(arena.ReturnGrace);
         return true;
+    }
+
+    /// <summary>
+    /// Снимает с дуэлянта «следы» боя, которые не убирает обычное исцеление:
+    /// — «критовые» действия (последнее слово / сдаться / притвориться мёртвым): переход из
+    ///   крита их обычно снимает, но ревайв через Rejuvenate может оставить их висеть в тулбаре;
+    /// — магические спеллы из гримуара (любое action со <see cref="MagicComponent"/>).
+    /// Руны (со свитка рун и культа) чистятся отдельно в <c>CleanupArea</c> по зоне арены.
+    /// </summary>
+    private void PurgeDuelistTraces(EntityUid duelist)
+    {
+        if (TryComp<MobStateActionsComponent>(duelist, out var mobActions))
+        {
+            foreach (var act in mobActions.GrantedActions)
+                Del(act);
+            mobActions.GrantedActions.Clear();
+        }
+
+        // Спеллы из гримуара покупаются в магазине и кладутся в контейнер действий РАЗУМА
+        // (ActionsContainer разума), а к телу лишь «прикрепляются». Поэтому простой RemoveAction
+        // (отвязка) их не убирает: сущность-действие остаётся в разуме и возвращается на тело.
+        // Собираем все магические действия, привязанные к телу или его разуму, и УДАЛЯЕМ сами
+        // сущности — тогда они исчезают и из разума.
+        EntityUid? mindUid = _mind.TryGetMind(duelist, out var mind, out _) ? mind : null;
+
+        var spells = new List<EntityUid>();
+        var query = EntityQueryEnumerator<MagicComponent, ActionComponent>();
+        while (query.MoveNext(out var actionUid, out _, out var action))
+        {
+            if (action.AttachedEntity == duelist || (mindUid != null && action.AttachedEntity == mindUid))
+                spells.Add(actionUid);
+        }
+
+        foreach (var spell in spells)
+        {
+            _actions.RemoveAction(spell);
+            QueueDel(spell);
+        }
     }
 }
