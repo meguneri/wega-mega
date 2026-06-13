@@ -1329,3 +1329,14 @@ full-arsenal-bottle-ultravasculine-desc = Мощно выводит токсин
 
 full-arsenal-gay-pack-name = Гей-пак
 full-arsenal-gay-pack-desc = Гордый набор: радужный шарф, значок и плащ.
+
+uplink-contractor-baton-name = дубинка контрактника
+uplink-contractor-baton-desc = Когда нужно кого-то украсть - это ваш лучший друг!
+uplink-thieving-name = воровские перчатки
+uplink-thieving-desc = Позволяет вам незаметно красть у жертвы, однако, эти перчатки не дают вам полный навык, из-за чего при попытке кражи из некоторых мест вас всё же могут заметить.
+uplink-pressure-upgrade-name = модкит ПКУ (давление)
+uplink-pressure-upgrade-desc = Модкит, который отключает защитные механизмы ПКУ и заставляет его всегда работать на всю!
+uplink-smoke-implant-name = Имплант "Дым"
+uplink-smoke-implant-desc = Имплант, который даст вам возможность выпустить облако дыма, очень полезен при отступлении или побеге.
+uplink-jumpsuit-ventcrawler-name = комбинезон лазальщика
+uplink-jumpsuit-ventcrawler-desc = Специальный комбинезон, внешне идентичный тому, что носят атмосферные техники, позволяет пользователю лазить по вентиляциям, не забудьте про то, что там может быть давление!
