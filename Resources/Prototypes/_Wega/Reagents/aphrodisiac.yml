@@ -1,7 +1,8 @@
 # Афродизиак — портирован из lust-station, расширен дозозависимыми эффектами:
 #   любая доза  — розовый оверлей с сердечками (StatusEffectLoveVision) и попапы;
-#   от 8u в крови  — дрожь и стоны/смех, заметные окружающим;
-#   от 15u (передоз) — пацифизм (не может атаковать) и заплетающаяся речь.
+#   от 6u в крови  — ноги подкашиваются (периодическое падение), дрожь и стоны/смех;
+#   от 10u  — оглушение на 10 секунд;
+#   от 12u (передоз) — пацифизм (не может атаковать) и заплетающаяся речь.
 # Антидот — холодный душ: смывает эффект и выводит реагент из крови (ShowerSystem).
 - type: reagent
   id: Aphrodisiac
@@ -18,24 +19,36 @@
         type: Local
         messages: [ "aphrodisiac-effect1", "aphrodisiac-effect2", "aphrodisiac-effect3", "aphrodisiac-effect4", "aphrodisiac-effect5" ]
         probability: 0.1
+      # Update держит оставшееся время на ~15с, пока реагент в крови (не накапливается),
+      # и плавно спадает в течение ~10с после того, как вещество выведено.
       - !type:ModifyStatusEffect
         effectProto: StatusEffectLoveVision
-        time: 10  # Полная баночка (30u) = 5 минут
-        type: Add
+        time: 15
+        type: Update
       # Средняя доза: ноги подкашиваются — персонаж периодически падает и подёргивается.
       - !type:ModifyKnockdown
         conditions:
         - !type:ReagentCondition
           reagent: Aphrodisiac
-          min: 8
+          min: 6
         time: 2
         probability: 0.12
+      # Высокая доза: накрывает с головой — оглушение. Update, а не Add, поэтому
+      # длительность не суммируется: держится ~10с, пока доза ≥10u, и спадает после.
+      - !type:ModifyStatusEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Aphrodisiac
+          min: 10
+        effectProto: StatusEffectStunned
+        time: 10
+        type: Update
       # Средняя доза: дрожь и эмоуты, которые видят окружающие.
       - !type:Jitter
         conditions:
         - !type:ReagentCondition
           reagent: Aphrodisiac
-          min: 8
+          min: 6
         refresh: false
         time: 1.0
         amplitude: 2
@@ -44,7 +57,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Aphrodisiac
-          min: 8
+          min: 6
         emote: Moan
         showInChat: true
         probability: 0.05
@@ -52,7 +65,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Aphrodisiac
-          min: 8
+          min: 6
         emote: Laugh
         showInChat: true
         probability: 0.03
@@ -61,7 +74,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Aphrodisiac
-          min: 15
+          min: 12
         key: Pacified
         component: Pacified
         time: 4
@@ -69,5 +82,5 @@
         conditions:
         - !type:ReagentCondition
           reagent: Aphrodisiac
-          min: 15
+          min: 12
         boozePower: 4

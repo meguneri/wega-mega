@@ -1,0 +1,145 @@
+# Wega arena — themed LARP kits and mini survival kits for the Full Arsenal pool.
+# Same pattern as ArenaCommunismSet: a wrapped present that unpacks loose items via
+# SpawnItemsOnUse (loose, not in a duffel — so arena cleanup tags and removes every spawned item).
+
+# ── GLADIATOR ─────────────────────────────────────────────────────────────────
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaGladiatorSet
+  name: gladiator kit
+  description: A wrapped package that unpacks into a claymore, a spear, a buckler and a full combat gladiator outfit. Are you not entertained?
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: Claymore
+    - id: Spear
+    - id: WoodenBuckler
+    - id: ClothingUniformJumpsuitGladiatorArena
+    - id: ClothingHeadHatGladiatorArena
+    - id: ClothingShoesLeather
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+# ── SAMURAI ───────────────────────────────────────────────────────────────────
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaSamuraiSet
+  name: samurai kit
+  description: A wrapped package that unpacks into a katana, a samurai dogi, a kimono, a straw hat, a mask, wizard shoes and a belt bag. Honor the duel.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: Katana
+    - id: ClothingOuterDogi
+    - id: ClothingUniformJumpsuitKimono
+    - id: ClothingHeadHatStrawHat
+    - id: ClothingMaskNinja
+    - id: ClothingShoesWizard
+    - id: ClothingBeltStorageWaistbag
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+# ── WILD WEST GUNSLINGER ──────────────────────────────────────────────────────
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaWestSet
+  name: gunslinger kit
+  description: A wrapped package that unpacks into a revolver with two speed loaders, a poncho, a cowboy hat and boots. This town ain't big enough.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: WeaponRevolverPython
+    - id: SpeedLoaderMagnum
+      amount: 2
+    - id: ClothingOuterPoncho
+    - id: ClothingHeadHatCowboyBrown
+    - id: ClothingShoesBootsCowboyBrownFilled
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+# ── CAPITALIST ────────────────────────────────────────────────────────────────
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaCapitalistSet
+  name: capitalist kit
+  description: A wrapped package that unpacks into a sheathed cane blade, a snub revolver, a top hat, a monocle, a fine black suit, a gold medal and a stack of cash. Greed is good.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: CaneSheathFilled
+    - id: WeaponRevolverSnubRevolver
+    - id: ClothingHeadHatTophat
+    - id: ClothingEyesGlassesMonocle
+    - id: ClothingUniformJumpsuitLawyerBlack
+    - id: ClothingShoesLeather
+    - id: ClothingNeckGoldmedal
+    - id: SpaceCash1000
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+# ── HOLY MAN ──────────────────────────────────────────────────────────────────
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaHolyManSet
+  name: holy man kit
+  description: A wrapped package that unpacks into a monastic robe, a nun hood, a belt bag, a holy hand grenade, a bottle of cahors, a bottle of holy water, a hot cross bun, a slice of holy melon and a watermelon halo. Smite thy foes.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingUniformJumpsuitMonasticRobeDark
+    - id: ClothingHeadHatHoodNunHood
+    - id: ClothingBeltStorageWaistbag
+    - id: HolyHandGrenade
+    - id: DrinkNTCahorsBottleFull
+    - id: ChemistryBottleHolywater
+    - id: FoodBakedBunHotX
+    - id: FoodHolymelonSlice
+    - id: ClothingHeadHatHolyWatermelon
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
+# ── «ЧУМБА, ТЫ СОВСЕМ Ё@%&ТЫЙ?» ─────────────────────────────────────────────────
+# Билд кулачного бога: арена-сандэвистан (скорость + bullet-time + броня) замыкает на стиль
+# полярной звезды — никакого оружия, кроме её перчаток.
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaNorthStarSet
+  name: чумба, ты совсем ё@%&тый?
+  description: "Свёрток, который разворачивается в перчатки полярной звезды и арена-сандэвистан. Кулаки решают всё."
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingHandsGlovesNorthStar
+    - id: ClothingEyesSandevistanArena
+    sound:
+      path: /Audio/Effects/unwrap.ogg

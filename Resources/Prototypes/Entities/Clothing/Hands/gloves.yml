@@ -473,6 +473,8 @@
     tags:
     - Kangaroo
     - WhitelistChameleon
+  # Разрешены при активном арена-замке сандэвистана (см. SandevistanArenaLock).
+  - type: ArenaAllowedWeapon
 
 - type: entity
   parent: [ClothingHandsBase, BaseSecurityContraband]

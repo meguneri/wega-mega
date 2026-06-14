@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Construction;
 using Content.Shared.Destructible;
@@ -27,6 +28,11 @@ public abstract partial class SharedBuckleSystem
 
     private void OnStrapStartup(EntityUid uid, StrapComponent component, ComponentStartup args)
     {
+        // Wega: fold the legacy single offset into the multi-offset list so vanilla prototypes
+        // (which only set buckleOffset) keep their one spot.
+        if (component.BuckleOffsets.Count == 0 && component.BuckleOffset != Vector2.Zero)
+            component.BuckleOffsets.Add(component.BuckleOffset);
+
         Appearance.SetData(uid, StrapVisuals.State, component.BuckledEntities.Count != 0);
     }
 

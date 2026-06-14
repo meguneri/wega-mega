@@ -40,9 +40,28 @@ public sealed partial class StrapComponent : Component
 
     /// <summary>
     /// The buckled entity will be offset by this amount from the center of the strap object.
+    /// Single-offset form, kept for backward compatibility with vanilla prototypes — at startup
+    /// it is folded into <see cref="BuckleOffsets"/> if that list is empty.
     /// </summary>
     [DataField, AutoNetworkedField]
     public Vector2 BuckleOffset = Vector2.Zero;
+
+    // Wega-Start: multi-occupant strap offsets (ported from lust-station / Sunrise) so structures
+    // like the double bed can seat several mobs at distinct positions instead of stacking them.
+    /// <summary>
+    /// One offset per available seat/spot. Each buckled entity is assigned the first free offset.
+    /// If left empty, <see cref="BuckleOffset"/> is used (a single spot).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<Vector2> BuckleOffsets = new();
+
+    /// <summary>
+    /// Maps each currently buckled entity to the offset it was assigned, so its spot is freed on
+    /// unbuckle and restored correctly when it leaves.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Dictionary<EntityUid, Vector2> CurrentOffsets = new();
+    // Wega-End
 
     /// <summary>
     /// The angle to rotate the player by when they get strapped

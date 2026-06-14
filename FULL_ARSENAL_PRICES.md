@@ -114,6 +114,7 @@
 | Револьвер Python | `WeaponRevolverPython` | 4 TC |
 | Инспектор | `WeaponRevolverInspector` | 3 TC |
 | Револьвер Mateba | `WeaponRevolverMateba` | 4 TC |
+| Револьвер «Спирхед» (чёрный) | `WeaponRevolverSpearheadBlack` | 5 TC |
 | Улучшенный лазер | `WeaponAdvancedLaser` | 5 TC |
 | Энергетический арбалет | `WeaponEnergyCrossbow` | 5 TC |
 | Револьвер Python AP | `WeaponRevolverPythonAP` | 6 TC |
@@ -168,6 +169,7 @@
 | Мушкетон | `WeaponShotgunBlunderbuss` | 2 TC |
 | Обрез | `WeaponShotgunSawn` | 2 TC |
 | Энергетический дробовик | `WeaponEnergyShotgun` | 5 TC |
+| Револьвер «Ткач» GA-12 | `WeaponShotgunGA12` | 4 TC |
 
 ---
 
@@ -193,7 +195,7 @@
 | Снайперка Hristov МК2 | `WeaponSniperHristovAdvanced` | 12 TC |
 | Пулемёт L6 | `WeaponLightMachineGunL6` | 12 TC |
 | Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
-| Импульсный дробовик | `WeaponPulseShotgun` | 35 TC |
+| Импульсный дробовик | `WeaponPulseShotgun` | 40 TC |
 | Импульсная снайперская винтовка | `WeaponPulseSniper` | 35 TC |
 | Мушкет | `Musket` | 6 TC |
 | xC-67 (одиночно) | `WeaponRifleXC67` | 7 TC |
@@ -219,7 +221,7 @@
 | Рентгеновская пушка | `WeaponXrayCannon` | 8 TC |
 | Миниган | `WeaponMinigun` | 20 TC |
 | Пневматическая пушка | `WeaponImprovisedPneumaticCannonFilled` | 2 TC |
-| Тесла-пистолет | `WeaponTeslaGun` | 6 TC |
+| Тесла-пистолет | `WeaponTeslaGun` | 12 TC |
 | Лазерная пушка | `WeaponLaserCannon` | 7 TC |
 | Протокинетический ускоритель | `WeaponProtoKineticAccelerator` | 8 TC |
 | Ракетница (РПГ-7) | `WeaponLauncherRocket` | 18 TC |
@@ -285,6 +287,7 @@
 | Тяжёлая броня (зелёная) | `ClothingOuterArmorHeavyGreen` | 18 TC |
 | Тяжёлая броня (красная) | `ClothingOuterArmorHeavyRed` | 18 TC |
 | Хитиновый панцирь | `ClothingOuterArmorChangeling` | 4 TC |
+| Набор рейдерского костюма Синдиката | `ClothingBackpackSyndicateRaidBundle` | 8 TC |
 | Костяная броня | `ClothingOuterArmorBone` | 12 TC |
 | Латунная кираса | `VeilCultBrassCuirassArsenal` | 8 TC |
 | Броня Pod Wars | `ClothingOuterArmorPodWars` | 8 TC |
@@ -455,6 +458,7 @@
 |---|---|---|
 | Пластырь от ушибов | `Brutepack` | 1 TC |
 | Мазь | `Ointment` | 1 TC |
+| Мазь алоэ | `AloeCream` | 1 TC |
 | Медицинские швы | `MedicatedSuture` | 1 TC |
 | Бинт | `Gauze` | 1 TC |
 | Пакет крови | `Bloodpack` | 1 TC |
@@ -629,10 +633,8 @@
 | Вещмешок Hristov МК2 | `ClothingBackpackDuffelSyndicateFilledHristov` | 18 TC |
 | Вещмешок XC67 | `ClothingBackpackDuffelSyndicateFilledXC67` | 19 TC |
 | Вещмешок дробовик | `ClothingBackpackDuffelSyndicateFilledShotgun` | 20 TC |
-| Вещмешок медицина | `ClothingBackpackDuffelSyndicateMedicalBundleFilled` | 24 TC |
 | Вещмешок гранатомёт | `ClothingBackpackDuffelSyndicateFilledGrenadeLauncher` | 25 TC |
 | Вещмешок пулемёт LMG | `ClothingBackpackDuffelSyndicateFilledLMG` | 30 TC |
-| Вещмешок стартовый набор | `ClothingBackpackDuffelSyndicateFilledStarterKit` | 40 TC |
 | Вещмешок скафандр Синдиката | `ClothingBackpackDuffelSyndicateHardsuitBundle` | 8 TC |
 | Вещмешок элитный скафандр | `ClothingBackpackDuffelSyndicateEliteHardsuitBundle` | 13 TC |
 | Армейская РПС | `ClothingBeltMilitaryWebbing` | 2 TC |
@@ -643,12 +645,26 @@
 | Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
 | Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 15 TC |
 | Вещмешок АС-12 «Минотавр» | `ArenaDuffelMinotaurBundle` | 20 TC |
+| Вещмешок P90 | `ArenaDuffelP90Bundle` | 30 TC |
 | Набор лучника | `ArenaDuffelBowSet` | 4 TC |
 | Ядовитый набор лучника | `ArenaDuffelBowSetPoison` | 8 TC |
 | Дестабилизирующий набор лучника | `ArenaDuffelBowSetNocturine` | 8 TC |
-| Любовный набор лучника | `ArenaDuffelBowSetAphrodisiac` | 8 TC |
+| Набор купидона | `ArenaDuffelBowSetAphrodisiac` | 8 TC |
 | Элитный набор лучника | `ArenaDuffelBowSetElite` | 8 TC |
 | Воин коммунизма | `ArenaCommunismSet` | 22 TC |
+| Набор гладиатора | `ArenaGladiatorSet` | 8 TC |
+| Набор самурая | `ArenaSamuraiSet` | 5 TC |
+| Набор стрелка | `ArenaWestSet` | 7 TC |
+| Набор капиталиста | `ArenaCapitalistSet` | 5 TC |
+| Чумба, ты совсем ё@%&тый? | `ArenaNorthStarSet` | 20 TC |
+| Набор святоши | `ArenaHolyManSet` | 6 TC |
+| Травматическая аптечка | `ArenaSurvivalTraumaKit` | 6 TC |
+| Противоожоговая аптечка | `ArenaSurvivalBurnKit` | 6 TC |
+| Детокс-аптечка | `ArenaSurvivalDetoxKit` | 6 TC |
+| Набор берсерка | `ArenaSurvivalBerserkerKit` | 9 TC |
+| Блиц-набор | `ArenaSurvivalBlitzKit` | 10 TC |
+| Набор полевого медика | `ArenaSurvivalFieldKit` | 7 TC |
+| Перевязочный набор | `ArenaSurvivalDressingKit` | 4 TC |
 
 ---
 
@@ -736,6 +752,8 @@
 |---|---|---|
 | Арбузная шляпа | `ClothingHeadHatWatermelon` | 1 TC |
 | Синдикатское мыло | `SoapSyndie` | 1 TC |
+| Кластерное мыло Синдиката | `SlipocalypseClusterSoap` | 3 TC |
+| Скользкий тип | `ArenaDuffelSlipperyBundle` | 10 TC |
 | Набор курильщика Интердайн | `InterdyneSmokerKit` | 2 TC |
 | Синдикатский плеер | `SyndiePlayerInstrument` | 1 TC |
 | Синдикатский кошелёк | `PouchSyndie` | 1 TC |

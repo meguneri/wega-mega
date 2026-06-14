@@ -44,3 +44,15 @@ crate, kept in sync with the `MeleeArsenal` listings in
 pool**, the same way as the Full Arsenal list. Any new melee weapon, shield, or
 armor added to the Full Arsenal pool must also be added to the Melee Arsenal
 pool (melee/armor items belong in both crates) and to both price lists.
+
+## Full Arsenal items must be translated (ru-RU)
+
+Every item available in the Full Arsenal pool
+(`Resources/Prototypes/_Wega/Catalog/full_arsenal_pool.yml`) **must have a
+Russian name and description** — both the listing (`full-arsenal-*-name` /
+`-desc` keys) and the product entity itself (`ent-<EntityId>` in a `ru-RU`
+`.ftl`). When you add or port a weapon, bundle, or any other `productEntity`
+into the pool, add its `ru-RU` locale in the same change. No Full Arsenal entry
+should ever display an English name or description in game. Ported weapons keep
+their model designation (e.g. `АС-12 «Минотавр»`, `АШ-12`), but the name and
+description still get a `ru-RU` entry so nothing falls back to English.

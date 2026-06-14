@@ -1,0 +1,19 @@
+# Wega arena — non-weapon kit bundles for the Full / Melee Arsenal pools.
+# (Weapon-specific bundles like ASH-12 / Minotaur / P90 currently live next to
+# their guns.)
+
+# "Slippery type" bundle: three cluster soaps and a pair of no-slip galoshes so
+# you can flood the floor without going down yourself.
+- type: entity
+  parent: ClothingBackpackDuffelSyndicate
+  id: ArenaDuffelSlipperyBundle
+  name: slippery type
+  description: Three cluster soaps and a pair of no-slip galoshes — flood the arena and stay on your feet.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: SlipocalypseClusterSoap
+          amount: 3
+        - id: ClothingShoesGaloshes

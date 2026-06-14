@@ -1,0 +1,98 @@
+# Приёмы Сатору Годжо. Построены на ванильной системе магии (MagicSystem):
+# ProjectileSpellEvent кидает снаряд, TeleportSpellEvent телепортирует — нового C# не нужно.
+# Снаряды/иконки — placeholder из ванильных магических ассетов.
+
+# Лиловое — мощный взрывной снаряд.
+- type: entity
+  parent: BaseAction
+  id: ActionGojoHollowPurple
+  name: Лиловое
+  description: Столкновение Синего и Красного. Сносит всё на своём пути.
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 12
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Effects/singularity_form.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: fireball
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileGojoHollowPurple
+
+# Синее — быстрый притягивающий снаряд (placeholder: ледяная игла).
+- type: entity
+  parent: BaseAction
+  id: ActionGojoLapseBlue
+  name: Синее
+  description: Обратная сторона техники — точка притяжения, что тянет всё к себе.
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 6
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: blink
+  - type: TargetAction
+    range: 40
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileGojoLapseBlue
+
+# Красное — снаряд, отталкивающий всё от места попадания.
+- type: entity
+  parent: BaseAction
+  id: ActionGojoReversalRed
+  name: Красное
+  description: Прямая сторона техники — взрыв отторжения, что расшвыривает всё прочь.
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 6
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: fireball
+  - type: TargetAction
+    range: 40
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileGojoReversalRed
+
+# Прыжок Пустоты — мгновенное перемещение (placeholder: Blink).
+- type: entity
+  parent: BaseAction
+  id: ActionGojoVoidStep
+  name: Прыжок Пустоты
+  description: Мгновенный разрыв расстояния — там, где захочет Сильнейший.
+  components:
+  - type: Magic
+  - type: Action
+    useDelay: 8
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/blink.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: blink
+  - type: TargetAction
+    range: 16
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:TeleportSpellEvent

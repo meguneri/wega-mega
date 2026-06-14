@@ -29,6 +29,7 @@ namespace Content.Server.Shower
         /// </summary>
         private const string LoveVisionEffect = "StatusEffectLoveVision";
         private const string AphrodisiacReagent = "Aphrodisiac";
+        private const string ArenaAphrodisiacReagent = "ArenaAphrodisiac";
 
         public override void Initialize()
         {
@@ -127,7 +128,10 @@ namespace Content.Server.Shower
 
                 _statusEffects.TryRemoveStatusEffect(mob, LoveVisionEffect);
                 if (_solutionContainer.TryGetSolution(mob.Owner, "chemicals", out var chemSol, out _))
+                {
                     _solutionContainer.RemoveReagent(chemSol.Value, AphrodisiacReagent, FixedPoint2.New(100));
+                    _solutionContainer.RemoveReagent(chemSol.Value, ArenaAphrodisiacReagent, FixedPoint2.New(100));
+                }
             }
 
             var floorSolution = _solutionContainer.SplitSolution(showerSol.Value, amountPerTarget);

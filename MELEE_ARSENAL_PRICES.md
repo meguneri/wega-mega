@@ -67,6 +67,7 @@
 | Тяжёлая броня (зелёная) | `ClothingOuterArmorHeavyGreen` | 18 TC |
 | Тяжёлая броня (красная) | `ClothingOuterArmorHeavyRed` | 18 TC |
 | Хитиновый панцирь | `ClothingOuterArmorChangeling` | 4 TC |
+| Набор рейдерского костюма Синдиката | `ClothingBackpackSyndicateRaidBundle` | 8 TC |
 | Костяная броня | `ClothingOuterArmorBone` | 12 TC |
 | Броня Pod Wars | `ClothingOuterArmorPodWars` | 8 TC |
 | Тренч детектива | `ClothingOuterCoatDetective` | 3 TC |
@@ -218,6 +219,8 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Синдикатское мыло | `SoapSyndie` | 1 TC |
+| Кластерное мыло Синдиката | `SlipocalypseClusterSoap` | 3 TC |
+| Скользкий тип | `ArenaDuffelSlipperyBundle` | 10 TC |
 | Синдикатский плеер | `SyndiePlayerInstrument` | 1 TC |
 | Синдикатский кошелёк | `PouchSyndie` | 1 TC |
 | Кошачьи ушки | `ClothingHeadHatCatEars` | 26 TC |

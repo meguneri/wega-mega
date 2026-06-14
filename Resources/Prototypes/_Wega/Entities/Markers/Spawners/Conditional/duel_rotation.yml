@@ -1,0 +1,24 @@
+# DuelRotationController — невидимый контроллер арена-ротации.
+# Ставится ОДИН раз (на любой карте) и включает режим карусели арен: общий счёт по всем аренам и
+# перенос бойцов с одной арены на другую после каждого раунда.
+#
+# В поле arenas перечисли пути к картам-аренам (.yml в Resources). Они предзагрузятся при старте,
+# а на каждой из них должны стоять маркеры DuelArenaSpawnMarker (точки появления бойцов) и трекер
+# DuelArenaTracker (как у обычной дуэли).
+#
+# Если этот контроллер НЕ ставить — дуэль работает в обычном одиночном режиме без изменений.
+
+- type: entity
+  id: DuelRotationController
+  parent: MarkerBase
+  name: Duel Rotation Controller
+  suffix: Duel Rotation
+  description: Невидимый контроллер ротации арен. Держит общий счёт и переключает поля боя между раундами.
+  components:
+  - type: Sprite
+    layers:
+      - state: pink
+  - type: DuelRotation
+    arenas:
+      - /Maps/_Wega/Arena/DMarenaWALLrotation.yml
+      - /Maps/_Wega/Arena/DMarena2urban.yml

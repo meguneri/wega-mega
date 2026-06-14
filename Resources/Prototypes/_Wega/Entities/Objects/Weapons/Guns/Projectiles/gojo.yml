@@ -1,0 +1,100 @@
+# Снаряд «Лиловое» (Hollow Purple) Сатору Годжо.
+# Фиолетовый снаряд, который искажает пространство вокруг себя на манер
+# сингулярности (SingularityDistortion) на всём пути полёта, включая момент выпуска.
+- type: entity
+  id: ProjectileGojoHollowPurple
+  parent: ProjectileFireball
+  name: лиловое
+  description: Столкновение Синего и Красного — схлопывание пространства в одной точке.
+  categories: [ HideSpawnMenu ]
+  components:
+  # Фиолетовое свечение вместо оранжевого огненного.
+  - type: PointLight
+    color: "#9D00FF"
+    radius: 3.0
+    energy: 6.0
+  # Фиолетовый окрас снаряда.
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+      color: "#9D00FF"
+  # Гравитационное искажение пространства вокруг снаряда — «как сингулярность».
+  - type: SingularityDistortion
+    intensity: 40.0
+    falloffPower: 2.0
+
+# Снаряд «Синее» (Lapse Blue) — при попадании создаёт точку притяжения, что тянет всё к себе
+# (аналог гравитационного импульса: RepulseAttract с отрицательной скоростью = притяжение).
+- type: entity
+  id: ProjectileGojoLapseBlue
+  parent: ProjectileIcicle
+  name: синее
+  description: Обратная сторона техники — точка притяжения, что тянет всё к себе.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    color: "#1E90FF"
+    radius: 3.0
+    energy: 5.0
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+      color: "#1E90FF"
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 5
+  - type: TriggerOnCollide
+    fixtureID: projectile
+    maxTriggers: 1
+  # Отрицательная скорость = ПРИТЯЖЕНИЕ всех мобов к точке попадания.
+  - type: RepulseAttractOnTrigger
+    speed: -60
+    range: 6
+    whitelist:
+      components:
+      - MobMover
+  - type: SpawnOnTrigger
+    proto: EffectGravityPulse
+    predicted: true
+
+# Снаряд «Красное» (Reversal Red) — при попадании отталкивает всё от точки удара
+# (RepulseAttract с положительной скоростью = отталкивание).
+- type: entity
+  id: ProjectileGojoReversalRed
+  parent: ProjectileIcicle
+  name: красное
+  description: Прямая сторона техники — взрыв отторжения, что расшвыривает всё прочь.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PointLight
+    color: "#FF2222"
+    radius: 3.0
+    energy: 5.0
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Projectiles/magic.rsi
+    layers:
+    - state: fireball
+      shader: unshaded
+      color: "#FF2222"
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 5
+  - type: TriggerOnCollide
+    fixtureID: projectile
+    maxTriggers: 1
+  # Положительная скорость = ОТТАЛКИВАНИЕ всех мобов от точки попадания.
+  - type: RepulseAttractOnTrigger
+    speed: 60
+    range: 6
+    whitelist:
+      components:
+      - MobMover
+  - type: SpawnOnTrigger
+    proto: EffectGravityPulse
+    predicted: true

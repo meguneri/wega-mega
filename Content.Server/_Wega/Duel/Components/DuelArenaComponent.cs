@@ -7,8 +7,13 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._Wega.Duel.Components;
 
 [RegisterComponent]
-public sealed partial class DuelArenaComponent : Component
+public sealed partial class DuelArenaComponent : Component, IDuelScoreStore
 {
+    Dictionary<NetUserId, int> IDuelScoreStore.Scores => Scores;
+    Dictionary<NetUserId, string> IDuelScoreStore.ScoreNames => ScoreNames;
+    NetUserId? IDuelScoreStore.StreakUser { get => StreakUser; set => StreakUser = value; }
+    int IDuelScoreStore.Streak { get => Streak; set => Streak = value; }
+
     /// <summary>
     /// Охват арены — весь грид трекера (дуэлянты считаются по всему гриду, без радиуса).
     /// Это значение — лишь запасной радиус (в тайлах) на случай, если трекер не на гриде (в космосе).
@@ -131,9 +136,26 @@ public sealed partial class DuelArenaComponent : Component
     public bool PendingWallRestore;
 
     /// <summary>
+    /// Отложенное вооружение раунда ротации: выставляется, когда контроллер переносит бойцов на
+    /// эту арену (см. <c>DuelRotationSystem.MoveAndStart</c>), и срабатывает в Update на СЛЕДУЮЩЕМ
+    /// тике. Нужно потому, что перенос и полное исцеление проигравшего происходят синхронно в
+    /// ConcludeDuel: если вооружать сразу, GetAliveInRange может не увидеть бойцов (грид ещё не
+    /// обновился / воскрешённый ещё не «жив»), раунд не вооружится и «дуэль начата» не объявится.
+    /// </summary>
+    public bool PendingRotationArm;
+
+    /// <summary>
     /// Время последней обработки сигнала старта (порт Open). Используется для дебаунса: один и тот
     /// же импульс может прийти дважды (двойная линковка, фронты high/low, несколько передатчиков на
     /// канале DuelFight), из-за чего объявление «нужно минимум 2 бойца» дублировалось в чате.
     /// </summary>
     public TimeSpan? LastStartSignal;
+
+    /// <summary>
+    /// Контроллер арена-ротации, которому эта арена подчинена. <c>null</c> (по умолчанию) — арена
+    /// одиночная и ведёт свой счёт сама (прежнее поведение). Если задан — арена входит в ротацию:
+    /// исход раунда уходит контроллеру (общий счёт), а он переключает поля боя между раундами.
+    /// Связывается контроллером при предзагрузке арен, в маппинге вручную не выставляется.
+    /// </summary>
+    public EntityUid? RotationController;
 }

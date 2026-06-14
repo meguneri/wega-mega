@@ -153,7 +153,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineShotgun
+        startingItem: MagazineShotgunXL # Wega: стартует с XL-барабаном (16 патронов)
         priority: 2
         whitelist:
           tags:

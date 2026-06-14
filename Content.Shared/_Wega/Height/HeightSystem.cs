@@ -15,6 +15,18 @@ public sealed partial class HeightSystem : EntitySystem
         SubscribeLocalEvent<BigHeightComponent, ComponentShutdown>(OnBigHeightComponentShutdown);
     }
 
+    /// <summary>
+    /// Forces a humanoid's height (in cm) and replicates it to clients.
+    /// </summary>
+    public void SetHeight(Entity<HumanoidProfileComponent?> ent, float height)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return;
+
+        ent.Comp.Height = height;
+        Dirty(ent.Owner, ent.Comp);
+    }
+
     private void OnSmallHeightComponentStartup(Entity<SmallHeightComponent> ent, ref ComponentStartup args)
     {
         if (!TryComp<HumanoidProfileComponent>(ent, out var humanoid))

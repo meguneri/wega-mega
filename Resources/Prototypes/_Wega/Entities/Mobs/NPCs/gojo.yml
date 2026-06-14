@@ -1,0 +1,79 @@
+# Сатору Годжо — босс (placeholder-арт: перекрашенный человек + повязка).
+# Приёмы реализованы на ванильной системе магии (ProjectileSpellEvent / TeleportSpellEvent),
+# нового C# не требуют. «Бесконечность» — пассивное отражение снарядов + большой запас HP.
+
+- type: startingGear
+  id: GojoGear
+  equipment:
+    eyes: ClothingEyesBlindfold
+    jumpsuit: ClothingUniformJumpsuitColorBlack
+    shoes: ClothingShoesColorBlack
+    gloves: ClothingHandsGlovesColorBlack
+
+- type: entity
+  name: Сатору Годжо
+  id: MobGojo
+  parent: [ MobHuman, BaseMobMegafauna ]
+  description: Сильнейший. Его глаза скрыты повязкой, а вокруг — нерушимая Бесконечность.
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  # Годжо всегда выглядит одинаково: рост 185 см и белая причёска «Колючая 2».
+  # Применяется после рандомизации (см. FixedHumanoidAppearanceSystem).
+  - type: FixedHumanoidAppearance
+    height: 185
+    markings:
+      Head:
+        Hair:
+        - markingId: HumanHairSpiky
+          markingColor:
+          - "#FFFFFF"
+  - type: NpcFactionMember
+    factions:
+    - AllHostile
+  # Сильнейший сражается только своими техниками — оружие он не подбирает.
+  - type: CannotPickup
+  - type: Loadout
+    prototypes:
+    - GojoGear
+  - type: InputMover
+  - type: MobMover
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4.5
+    baseSprintSpeed: 6.5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1500: Dead
+  # «Бесконечность»: входящие снаряды почти всегда отражаются.
+  - type: Reflect
+    reflectProb: 0.9
+    reflects:
+    - Energy
+  # Мощный ближний бой («Чёрная вспышка»).
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 35
+        Structural: 60
+  - type: Actions
+  # ИИ применяет приёмы по цели; они же дают действия мобу (для игрока в ghost-role).
+  - type: NPCUseActionsOnTarget
+    actionIds:
+    - ActionGojoHollowPurple
+    - ActionGojoLapseBlue
+    - ActionGojoVoidStep
+    actionChances:
+      ActionGojoHollowPurple: 0.5
+      ActionGojoLapseBlue: 0.7
+      ActionGojoVoidStep: 0.4
+  - type: HTN
+    rootTask:
+      task: SimpleHumanoidHostileCompound
+  - type: GhostRole
+    name: ghost-role-information-gojo-name
+    description: ghost-role-information-gojo-description
+    rules: ghost-role-information-antagonist-rules
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable

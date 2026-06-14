@@ -14,12 +14,12 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._Wega.Duel.Systems;
 
 /// <summary>
-/// Восстановление стен дуэльной арены. При каждом старте дуэли (стены целы) планировка стен
-/// мержится в снимок (тайл → прототип стены + тайл пола под ней). После каждого раунда стены
-/// приводятся к снимку: целая правильная стена чинится (помятая становится новой); отсутствующая /
-/// разрушенная до балки / чужая стена убирается и заново ставится свежей; уничтоженный пол под
-/// стеной восстанавливается. Восстановление выполняется отложенно (см. PendingWallRestore) — на
-/// тике после завершения боя, вне стека события смерти.
+/// Восстановление стен и окон дуэльной арены. При каждом старте дуэли (конструкции целы) планировка
+/// стен и окон мержится в снимок (тайл → прототип + тайл пола под ним). После каждого раунда
+/// конструкции приводятся к снимку: целая правильная стена/окно чинится (помятая/треснувшее
+/// становится новым); отсутствующая / разрушенная до балки / чужая конструкция убирается и заново
+/// ставится свежей; уничтоженный пол под ней восстанавливается. Восстановление выполняется отложенно
+/// (см. PendingWallRestore) — на тике после завершения боя, вне стека события смерти.
 /// </summary>
 public sealed partial class DuelArenaSystem
 {
@@ -30,6 +30,18 @@ public sealed partial class DuelArenaSystem
     [Dependency] private DamageableSystem _damageable = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
+    private static readonly ProtoId<TagPrototype> WindowTag = "Window";
+
+    /// <summary>
+    /// Восстанавливаемая конструкция арены — стена (тег <see cref="WallTag"/>) или окно
+    /// (тег <see cref="WindowTag"/>). И то, и другое попадает в снимок и чинится/переставляется
+    /// по одинаковой логике.
+    /// </summary>
+    private bool IsRestorableStructure(EntityUid uid)
+        => _tag.HasTag(uid, WallTag) || _tag.HasTag(uid, WindowTag);
+
+    private bool IsRestorableStructure(TagComponent tagComp)
+        => _tag.HasTag(tagComp, WallTag) || _tag.HasTag(tagComp, WindowTag);
 
     /// <summary>
     /// Мержит текущую планировку стен арены в снимок. Вызывается при КАЖДОМ старте дуэли (стены
@@ -53,7 +65,7 @@ public sealed partial class DuelArenaSystem
         var query = EntityQueryEnumerator<TagComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var tagComp, out var xform))
         {
-            if (xform.GridUid != grid || !_tag.HasTag(tagComp, WallTag))
+            if (xform.GridUid != grid || !IsRestorableStructure(tagComp))
                 continue;
 
             if (MetaData(uid).EntityPrototype?.ID is not { } proto)
@@ -110,18 +122,18 @@ public sealed partial class DuelArenaSystem
                 anchored.Clear();
                 _map.GetAnchoredEntities((grid.Value, gridComp), tile, anchored);
 
-                // Ищем стену на тайле.
+                // Ищем стену/окно на тайле.
                 EntityUid? wall = null;
                 foreach (var e in anchored)
                 {
-                    if (Exists(e) && _tag.HasTag(e, WallTag))
+                    if (Exists(e) && IsRestorableStructure(e))
                     {
                         wall = e;
                         break;
                     }
                 }
 
-                // Правильная стена уже стоит — просто чиним повреждения (помятая → новая) и идём дальше.
+                // Правильная стена/окно уже стоит — просто чиним повреждения (помятая → новая) и идём дальше.
                 if (wall is { } existing && MetaData(existing).EntityPrototype?.ID == proto.Id)
                 {
                     // Сбрасываем урон в ноль — помятая/повреждённая стена становится как новая.
@@ -140,7 +152,7 @@ public sealed partial class DuelArenaSystem
                 // пережить восстановление стены.
                 foreach (var debris in anchored)
                 {
-                    if (Exists(debris) && (IsWallDebris(debris) || _tag.HasTag(debris, WallTag)))
+                    if (Exists(debris) && (IsWallDebris(debris) || IsRestorableStructure(debris)))
                         Del(debris);
                 }
 
@@ -234,7 +246,7 @@ public sealed partial class DuelArenaSystem
 
                     check.Clear();
                     _map.GetAnchoredEntities((gridUid, gridComp), candidate, check);
-                    if (check.Any(e => _tag.HasTag(e, WallTag)))
+                    if (check.Any(IsRestorableStructure))
                         continue;
 
                     coords = _map.GridTileToLocal(gridUid, gridComp, candidate);

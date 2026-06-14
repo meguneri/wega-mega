@@ -29,7 +29,10 @@
   - type: Strap
     position: Down
     rotation: -90
-    buckleOffset: "0,0.05"
+    # Два спальных места: сони ложатся рядом, а не друг на друга.
+    buckleOffsets:
+    - "0,-0.15"
+    - "0,0.25"
     size: 200
   # Construction has to be before PlaceableSurface or you'll place things onto the entity instead of deconstructing it.
   - type: Construction

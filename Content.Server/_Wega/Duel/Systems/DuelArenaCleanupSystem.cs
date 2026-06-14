@@ -48,8 +48,10 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     [Dependency] private ModularSuitSystem _modSuit = default!;
     [Dependency] private SpawnerSystem _spawner = default!;
     [Dependency] private TagSystem _tag = default!;
+    [Dependency] private IMapManager _mapManager = default!;
 
     private static readonly ProtoId<TagPrototype> SheetTag = "Sheet";
+    private static readonly ProtoId<TagPrototype> SoapTag = "Soap";
 
     /// <summary>
     /// Прототип, который кидает дуэльный спавнер-аирдроп. Спавнер кидает не сам ящик, а
@@ -74,6 +76,12 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         SubscribeLocalEvent<BloodRuneComponent, ComponentStartup>(OnRuneStartup);
         SubscribeLocalEvent<MagicRuneComponent, ComponentStartup>(OnRuneStartup);
         SubscribeLocalEvent<MaterialComponent, ComponentStartup>(OnMaterialStartup);
+
+        // Кластерное мыло (SlipocalypseClusterSoap) при срабатывании спавнит НОВЫЕ обмылки
+        // (SoapletSyndie) через Spawn(FillPrototype) — они не лежат в контейнере мыла, поэтому
+        // MarkIssuedRecursive их не достаёт. Метим любой свежий Slippery-предмет с тегом Soap,
+        // появившийся в зоне активной дуэли, как боевой мусор — иначе обмылки переживут очистку.
+        SubscribeLocalEvent<SlipperyComponent, ComponentStartup>(OnSlipperyStartup);
 
         // МОД-скафандры и прочее: содержимое (модули, батарея, части брони) спавнится и
         // вкладывается в контейнеры уже ПОСЛЕ того, как MarkIssuedRecursive отработал на самом
@@ -161,6 +169,57 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // Только листы материалов (обломки сломанных стен), не руда/слитки в чьём-то инвентаре.
         if (_tag.HasTag(uid, SheetTag))
             TagIfBattleDebris(uid);
+    }
+
+    private void OnSlipperyStartup(EntityUid uid, SlipperyComponent comp, ComponentStartup args)
+    {
+        // Только мыло/обмылки (тег Soap) — рассыпанные кластерным мылом куски, а не чужие
+        // банановые корки или прочие скользкие вещи, принесённые игроком.
+        if (!_tag.HasTag(uid, SoapTag))
+            return;
+
+        // ВАЖНО: обмылки спавнятся кластерным мылом через Spawn(prototype, MapCoordinates).
+        // На этот момент обход гридов ещё не перепривязал сущность к гриду арены — её GridUid
+        // указывает на карту, поэтому грид-проверка в IsInActiveDuelRange/TagIfBattleDebris даёт
+        // false и тег не ставится (в отличие от гильз, что вылетают сразу на гриде стрелка).
+        // Поэтому грид под обмылком ищем по его мировой позиции через карту.
+        if (IsOnActiveArenaGrid(uid))
+            EnsureComp<ArenaIssuedItemComponent>(uid);
+    }
+
+    /// <summary>
+    /// Стоит ли сущность над гридом активной арены (весь грид, а не радиус). Грид определяется по
+    /// мировой позиции цели через <see cref="IMapManager.TryFindGridAt"/>, поэтому не зависит от
+    /// её собственного GridUid — нужно для предметов, заспавненных по MapCoordinates (обмылки
+    /// кластерного мыла), у которых грид на момент старта ещё не разрешён. В космосе (у арены нет
+    /// грида) откатываемся на радиус <see cref="DuelArenaComponent.ScanRange"/>.
+    /// </summary>
+    private bool IsOnActiveArenaGrid(EntityUid target)
+    {
+        var pos = Transform(target).MapPosition;
+        var gridUnderTarget = _mapManager.TryFindGridAt(pos, out var gridUid, out _) ? gridUid : (EntityUid?)null;
+
+        var query = EntityQueryEnumerator<DuelArenaComponent>();
+        while (query.MoveNext(out var arenaUid, out var arena))
+        {
+            if (!arena.IsActive)
+                continue;
+
+            var arenaGrid = Transform(arenaUid).GridUid;
+
+            // Весь грид арены: цель физически над тем же гридом, что и маяк арены.
+            if (arenaGrid != null && gridUnderTarget == arenaGrid)
+                return true;
+
+            // Космос/без грида: запасной охват по дистанции до маяка.
+            if (arenaGrid == null)
+            {
+                var arenaPos = Transform(arenaUid).MapPosition;
+                if (arenaPos.MapId == pos.MapId && (arenaPos.Position - pos.Position).Length() <= arena.ScanRange)
+                    return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
@@ -386,7 +445,16 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
 
         // Весь грид арены — без радиуса.
         if (originGrid != null)
-            return targetXform.GridUid == originGrid;
+        {
+            if (targetXform.GridUid == originGrid)
+                return true;
+
+            // Надетые/зажатые предметы лежат в контейнерах инвентаря — у них GridUid == null,
+            // поэтому прямая проверка грида их пропускает (перчатки/очки/импланты переживали
+            // очистку). Резолвим грид по мировой позиции — она проходит через держателя.
+            var wornPos = targetXform.MapPosition;
+            return _mapManager.TryFindGridAt(wornPos, out var gridUid, out _) && gridUid == originGrid;
+        }
 
         // Космос/без грида: запасной охват по дистанции.
         var pos = targetXform.MapPosition;

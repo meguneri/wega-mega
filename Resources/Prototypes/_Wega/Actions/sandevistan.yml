@@ -1,0 +1,16 @@
+# Действие активации Сандэвистана. raiseOnUser НЕ ставим — событие летит на предмет-контейнер
+# (на нём висит SandevistanComponent), а носитель приходит в args.Performer.
+- type: entity
+  parent: BaseAction
+  id: ActionSandevistan
+  name: Сандэвистан
+  description: "Разогнать рефлексы до предела: рывок скорости и сниженный урон на несколько секунд."
+  components:
+  - type: Action
+    useDelay: 30
+    itemIconStyle: BigAction
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: blink
+  - type: InstantAction
+    event: !type:SandevistanActivateEvent

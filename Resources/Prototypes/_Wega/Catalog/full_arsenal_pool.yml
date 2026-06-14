@@ -729,6 +729,17 @@
   - FullArsenalArmor
 
 - type: listing
+  id: FullArsenalArmorRaidSuit
+  name: full-arsenal-armor-raid-suit-name
+  description: full-arsenal-armor-raid-suit-desc
+  productEntity: ClothingBackpackSyndicateRaidBundle
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
   id: FullArsenalArmorBone
   name: full-arsenal-armor-bone-name
   description: full-arsenal-armor-bone-desc
@@ -2057,28 +2068,6 @@
   categories:
   - FullArsenal
 
-# uplink NukeOps price: 24 TC
-- type: listing
-  id: FullArsenalDuffelMedical
-  name: full-arsenal-duffel-medical-name
-  description: full-arsenal-duffel-medical-desc
-  productEntity: ClothingBackpackDuffelSyndicateMedicalBundleFilled
-  cost:
-    Telecrystal: 24
-  categories:
-  - FullArsenal
-
-# uplink NukeOps price: 40 TC — uses entire budget, spawns as sole item
-- type: listing
-  id: FullArsenalDuffelStarterKit
-  name: full-arsenal-duffel-starter-name
-  description: full-arsenal-duffel-starter-desc
-  productEntity: ClothingBackpackDuffelSyndicateFilledStarterKit
-  cost:
-    Telecrystal: 40
-  categories:
-  - FullArsenal
-
 # uplink price: 8 TC
 - type: listing
   id: FullArsenalDuffelHardsuitBundle
@@ -2834,6 +2823,26 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalClusterSoap
+  name: full-arsenal-clustersoap-name
+  description: full-arsenal-clustersoap-desc
+  productEntity: SlipocalypseClusterSoap
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSlipperyBundle
+  name: full-arsenal-slippery-bundle-name
+  description: full-arsenal-slippery-bundle-desc
+  productEntity: ArenaDuffelSlipperyBundle
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalSoapOmega
   name: full-arsenal-soap-omega-name
   description: full-arsenal-soap-omega-desc
@@ -2995,6 +3004,16 @@
   name: full-arsenal-ointment-name
   description: full-arsenal-ointment-desc
   productEntity: Ointment
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalAloeCream
+  name: full-arsenal-aloe-cream-name
+  description: full-arsenal-aloe-cream-desc
+  productEntity: AloeCream
   cost:
     Telecrystal: 1
   categories:
@@ -4687,7 +4706,7 @@
   description: full-arsenal-pulse-shotgun-desc
   productEntity: WeaponPulseShotgun
   cost:
-    Telecrystal: 35
+    Telecrystal: 40
   categories:
   - FullArsenal
 
@@ -4717,7 +4736,7 @@
   description: full-arsenal-tesla-gun-desc
   productEntity: WeaponTeslaGun
   cost:
-    Telecrystal: 6
+    Telecrystal: 12
   categories:
   - FullArsenal
 
@@ -5650,6 +5669,157 @@
   categories:
   - FullArsenal
 
+# ── THEMED LARP KITS & MINI SURVIVAL KITS ─────────────────────────────────────
+- type: listing
+  id: FullArsenalGladiatorSet
+  name: full-arsenal-gladiator-set-name
+  description: full-arsenal-gladiator-set-desc
+  productEntity: ArenaGladiatorSet
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHolyManSet
+  name: full-arsenal-holyman-set-name
+  description: full-arsenal-holyman-set-desc
+  productEntity: ArenaHolyManSet
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRevolverSpearheadBlack
+  name: full-arsenal-revolver-spearhead-black-name
+  description: full-arsenal-revolver-spearhead-black-desc
+  productEntity: WeaponRevolverSpearheadBlack
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalShotgunGA12
+  name: full-arsenal-shotgun-ga12-name
+  description: full-arsenal-shotgun-ga12-desc
+  productEntity: WeaponShotgunGA12
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSamuraiSet
+  name: full-arsenal-samurai-set-name
+  description: full-arsenal-samurai-set-desc
+  productEntity: ArenaSamuraiSet
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalWestSet
+  name: full-arsenal-west-set-name
+  description: full-arsenal-west-set-desc
+  productEntity: ArenaWestSet
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalCapitalistSet
+  name: full-arsenal-capitalist-set-name
+  description: full-arsenal-capitalist-set-desc
+  productEntity: ArenaCapitalistSet
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalNorthStarSet
+  name: full-arsenal-north-star-set-name
+  description: full-arsenal-north-star-set-desc
+  productEntity: ArenaNorthStarSet
+  cost:
+    Telecrystal: 20
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalTraumaKit
+  name: full-arsenal-survival-trauma-name
+  description: full-arsenal-survival-trauma-desc
+  productEntity: ArenaSurvivalTraumaKit
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalBurnKit
+  name: full-arsenal-survival-burn-name
+  description: full-arsenal-survival-burn-desc
+  productEntity: ArenaSurvivalBurnKit
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalDetoxKit
+  name: full-arsenal-survival-detox-name
+  description: full-arsenal-survival-detox-desc
+  productEntity: ArenaSurvivalDetoxKit
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalBerserkerKit
+  name: full-arsenal-survival-berserker-name
+  description: full-arsenal-survival-berserker-desc
+  productEntity: ArenaSurvivalBerserkerKit
+  cost:
+    Telecrystal: 9
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalBlitzKit
+  name: full-arsenal-survival-blitz-name
+  description: full-arsenal-survival-blitz-desc
+  productEntity: ArenaSurvivalBlitzKit
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalFieldKit
+  name: full-arsenal-survival-field-name
+  description: full-arsenal-survival-field-desc
+  productEntity: ArenaSurvivalFieldKit
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalSurvivalDressingKit
+  name: full-arsenal-survival-dressing-name
+  description: full-arsenal-survival-dressing-desc
+  productEntity: ArenaSurvivalDressingKit
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
 - type: listing
   id: FullArsenalRifleAK514
   name: full-arsenal-rifle-ak514-name
@@ -5677,6 +5847,16 @@
   productEntity: ArenaDuffelMinotaurBundle
   cost:
     Telecrystal: 20
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDuffelP90
+  name: full-arsenal-duffel-p90-name
+  description: full-arsenal-duffel-p90-desc
+  productEntity: ArenaDuffelP90Bundle
+  cost:
+    Telecrystal: 30
   categories:
   - FullArsenal
 

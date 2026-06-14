@@ -8,12 +8,20 @@
     - type: Sprite
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
       state: buckler-icon
-      # Полупрозрачный «энергетический» баклер — альфа ~50%.
-      color: "#FFFFFF80"
+      # Полупрозрачный «энергетический» баклер — прозрачность ~30% (альфа ~0.7).
+      color: "#FFFFFFB3"
     - type: Item
       sprite: _Wega/Objects/Shields/parry_buckler.rsi
       size: Normal
       heldPrefix: buckler
+      # Полупрозрачный «энергетический» баклер и в руках — прозрачность ~30% (альфа ~0.7).
+      inhandVisuals:
+        left:
+        - state: buckler-inhand-left
+          color: "#FFFFFFB3"
+        right:
+        - state: buckler-inhand-right
+          color: "#FFFFFFB3"
     # Hybrid: it can be swung as a thermal weapon
     - type: MeleeWeapon
       wideAnimationRotation: -135
@@ -26,13 +34,14 @@
         path: /Audio/Weapons/eblade1.ogg
     # Duelist profile: modest passive protection, but a raised buckler
     # shrugs off melee — piercing is still its weak spot
-    # Постоянное гудение, как у активного энергомеча/энергощита
+    # Гудение энергощита — только когда баклер в руках (AmbientSoundOnHeld).
     - type: AmbientSound
-      enabled: true
+      enabled: false
       range: 4
       volume: -4
       sound:
         path: /Audio/Weapons/ebladehum.ogg
+    - type: AmbientSoundOnHeld
     - type: Blocking
       passiveBlockModifier:
         coefficients:

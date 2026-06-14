@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
@@ -140,6 +141,25 @@ public abstract partial class SharedBuckleSystem
             return;
         }
 
+        // Wega: validate the mob against any configured seat offset (multi-occupant straps),
+        // so a second sleeper sitting at a different spot on the double bed isn't unbuckled.
+        if (strapComp.BuckleOffsets.Count > 0)
+        {
+            var isValid = false;
+            foreach (var off in strapComp.BuckleOffsets)
+            {
+                if ((xform.LocalPosition - off).LengthSquared() <= 1e-5)
+                {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            if (!isValid)
+                Unbuckle(buckle, (strapUid, strapComp), null);
+            return;
+        }
+
         var delta = (xform.LocalPosition - strapComp.BuckleOffset).LengthSquared();
         if (delta > 1e-5)
             Unbuckle(buckle, (strapUid, strapComp), null);
@@ -202,6 +222,7 @@ public abstract partial class SharedBuckleSystem
         if (TryComp(buckle.Comp.BuckledTo, out StrapComponent? old))
         {
             old.BuckledEntities.Remove(buckle);
+            old.CurrentOffsets.Remove(buckle.Owner); // Wega: free the seat when leaving a strap
             Dirty(buckle.Comp.BuckledTo.Value, old);
         }
 
@@ -380,7 +401,19 @@ public abstract partial class SharedBuckleSystem
         _rotationVisuals.SetHorizontalAngle(buckle.Owner, strap.Comp.Rotation);
 
         var xform = Transform(buckle);
-        var coords = new EntityCoordinates(strap, strap.Comp.BuckleOffset);
+        // Wega: assign the first free seat offset (multi-occupant straps like the double bed).
+        // Falls back to the single BuckleOffset when no list is configured.
+        var offset = strap.Comp.BuckleOffset;
+        for (var i = 0; i < strap.Comp.BuckleOffsets.Count; i++)
+        {
+            if (!strap.Comp.CurrentOffsets.Values.Contains(strap.Comp.BuckleOffsets[i]))
+            {
+                offset = strap.Comp.BuckleOffsets[i];
+                break;
+            }
+        }
+        strap.Comp.CurrentOffsets[buckle.Owner] = offset;
+        var coords = new EntityCoordinates(strap, offset);
         _transform.SetCoordinates(buckle, xform, coords, rotation: Angle.Zero);
 
         _joints.SetRelay(buckle, strap);
@@ -478,11 +511,14 @@ public abstract partial class SharedBuckleSystem
             _transform.SetWorldRotationNoLerp((buckle, buckleXform), oldBuckledToWorldRot);
 
             // TODO: This is doing 4 moveevents this is why I left the warning in, if you're going to remove it make it only do 1 moveevent.
-            if (strap.Comp.BuckleOffset != Vector2.Zero)
+            // Wega: undo the occupant's own assigned seat offset, then free the seat.
+            if (strap.Comp.CurrentOffsets.TryGetValue(buckle.Owner, out var offset) && offset != Vector2.Zero)
             {
-                _transform.SetCoordinates(buckle, buckleXform, oldBuckledXform.Coordinates.Offset(strap.Comp.BuckleOffset));
+                _transform.SetCoordinates(buckle, buckleXform, oldBuckledXform.Coordinates.Offset(offset));
             }
         }
+
+        strap.Comp.CurrentOffsets.Remove(buckle.Owner);
 
         _rotationVisuals.ResetHorizontalAngle(buckle.Owner);
         Appearance.SetData(strap, StrapVisuals.State, strap.Comp.BuckledEntities.Count != 0);

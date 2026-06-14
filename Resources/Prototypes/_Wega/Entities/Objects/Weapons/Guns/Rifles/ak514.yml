@@ -177,7 +177,7 @@
 
 # ASH-12 bundle for the arena pool: the rifle plus two spare magazines.
 - type: entity
-  parent: ClothingBackpackDuffel
+  parent: ClothingBackpackDuffelSyndicate
   id: ArenaDuffelAsh12Bundle
   name: ASH-12 bundle
   description: An ASH-12 battle rifle bundled with two spare .45 magnum magazines.
@@ -192,7 +192,7 @@
 
 # AS-12 'Minotaur' bundle for the arena pool: the shotgun plus two spare XL drums.
 - type: entity
-  parent: ClothingBackpackDuffel
+  parent: ClothingBackpackDuffelSyndicate
   id: ArenaDuffelMinotaurBundle
   name: AS-12 'Minotaur' bundle
   description: An AS-12 'Minotaur' automatic shotgun bundled with two spare XL 12g pellet drums.
@@ -204,3 +204,17 @@
         - id: WeaponShotgunMinotaur
         - id: MagazineShotgunXL
           amount: 2
+
+# P90 bundle for the arena pool: the SMG plus one spare 50-round magazine.
+- type: entity
+  parent: ClothingBackpackDuffelSyndicate
+  id: ArenaDuffelP90Bundle
+  name: P90 bundle
+  description: A P90 submachine gun bundled with one spare 50-round magazine.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponSubMachineGunP90
+        - id: MagazineP90

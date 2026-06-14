@@ -208,7 +208,7 @@ entity-effect-guidebook-knockdown =
         [update]{ $chance ->
                 [1] Causes
                 *[other] cause
-            } { LOC($key) } for at least { NATURALFIXED($time, 3) } { MANY("second", $time) } without accumulation
+            } knockdown for at least { NATURALFIXED($time, 3) } { MANY("second", $time) } without accumulation
         [add]   { $chance ->
                 [1] Causes
                 *[other] cause

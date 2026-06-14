@@ -1,0 +1,121 @@
+# Wega arena — themed first-aid kits for the Full Arsenal pool. Real medkit containers (not wrapped
+# presents): the fighter opens the kit and pulls items out. Each kit is themed for a damage profile.
+
+# Trauma kit — for melee duelists: brute + puncture injectors, a brutepack and a tourniquet.
+- type: entity
+  parent: MedkitBrute
+  id: ArenaSurvivalTraumaKit
+  suffix: Arena
+  name: trauma treatment kit
+  description: "A first-aid kit for close-quarters wounds: brute and puncture injectors, a brutepack and a tourniquet."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BruteAutoInjector
+        - id: PunctAutoInjector
+        - id: Brutepack
+        - id: Tourniquet
+
+# Burn kit — for energy/fire fights: burn + pyrazine injectors, ointment and an emergency medipen.
+- type: entity
+  parent: MedkitBurn
+  id: ArenaSurvivalBurnKit
+  suffix: Arena
+  name: burn treatment kit
+  description: "A first-aid kit for energy and fire wounds: burn and pyrazine injectors, ointment and an emergency medipen."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BurnAutoInjector
+        - id: PyraAutoInjector
+        - id: Ointment
+        - id: EmergencyMedipen
+
+# Detox kit — for chem/poison fights: anti-poison medipen, rad injector, an emergency medipen and a bloodpack.
+- type: entity
+  parent: MedkitToxin
+  id: ArenaSurvivalDetoxKit
+  suffix: Arena
+  name: detox treatment kit
+  description: "A first-aid kit for poison and radiation: anti-poison medipen, rad injector, an emergency medipen and a bloodpack."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: AntiPoisonMedipen
+        - id: RadAutoInjector
+        - id: EmergencyMedipen
+        - id: Bloodpack
+
+# Berserker kit — pure aggression: a hyperzine stim, a combat medipen and brute + burn injectors. Stay on the offensive.
+- type: entity
+  parent: MedkitCombat
+  id: ArenaSurvivalBerserkerKit
+  suffix: Arena
+  name: berserker stim kit
+  description: "An aggressive first-aid kit: a hyperzine stim, a combat medipen and brute and burn injectors. Stay on the offensive."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Stimpack
+        - id: CombatMedipen
+        - id: BruteAutoInjector
+        - id: BurnAutoInjector
+
+# Blitz kit — fast aggressive comeback: pyrazine + puncturase injectors, a hyperzine stim and a combat medipen.
+- type: entity
+  parent: MedkitCombat
+  id: ArenaSurvivalBlitzKit
+  suffix: Arena
+  name: blitz stim kit
+  description: "A fast-recovery kit: pyrazine and puncturase injectors, a hyperzine stim and a combat medipen."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: PyraAutoInjector
+        - id: PunctAutoInjector
+        - id: Stimpack
+        - id: CombatMedipen
+
+# Field medic kit — covers every damage type: brute, burn, puncture and pyrazine injectors.
+- type: entity
+  parent: MedkitAdvanced
+  id: ArenaSurvivalFieldKit
+  suffix: Arena
+  name: field medic kit
+  description: "An all-rounder kit with one injector for each damage type: brute, burn, puncture and pyrazine."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BruteAutoInjector
+        - id: BurnAutoInjector
+        - id: PunctAutoInjector
+        - id: PyraAutoInjector
+
+# Dressing kit — no-chem field dressings: tourniquet, brutepack, gauze and ointment. Cheap and reliable.
+- type: entity
+  parent: MedkitBrute
+  id: ArenaSurvivalDressingKit
+  suffix: Arena
+  name: field dressing kit
+  description: "A chem-free dressing kit: tourniquet, brutepack, gauze and ointment. Cheap and reliable."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: Tourniquet
+        - id: Brutepack
+        - id: Gauze
+        - id: Ointment

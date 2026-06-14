@@ -1,4 +1,27 @@
-# Wega arena — archer kits for the Full Arsenal pool
+# Wega arena — archer kits for the Full Arsenal pool.
+# Each kit is a ready-to-use duffel bag (no gift wrapping), tinted to match its
+# theme so they're easy to tell apart in the pool.
+
+# Arena arrow: holds and injects 4u instead of the vanilla 2u, so a single
+# dipped hit delivers a meaningful dose. Vanilla arrows have a 2u melee
+# solution, which made dose-dependent reagents (aphrodisiac, nocturine) never
+# accumulate fast enough to matter. Only used by the arena archer kits.
+- type: entity
+  parent: ArrowRegular
+  id: ArenaArrowRegular
+  suffix: arena, 4u
+  categories: [ DoNotMap ]
+  components:
+  - type: Solution
+    id: melee
+    solution:
+      maxVol: 4
+  - type: SolutionInjectOnEmbed
+    transferAmount: 4
+    solution: melee
+  - type: SolutionTransfer
+    maxTransferAmount: 4
+
 - type: entity
   parent: ClothingBeltQuiver
   id: ArenaQuiverArrows
@@ -13,7 +36,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ArrowRegular
+        - id: ArenaArrowRegular
           amount: 16
 
 - type: entity
@@ -34,197 +57,191 @@
         - id: ArrowImprovisedCarp
           amount: 4
 
-- type: entity
-  parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSetFilled
-  suffix: filled
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: BowImprovised
-        - id: ArenaQuiverArrows
-
-- type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
-  id: ArenaDuffelBowSet
-  name: archer kit
-  description: A wrapped package containing an improvised shortbow and a quiver of sixteen steel arrows. Quiet, reusable, honest.
-  components:
-  - type: Item
-    size: Normal
-  - type: Sprite
-    sprite: Objects/Decoration/present.rsi
-    state: present
-  - type: SpawnItemsOnUse
-    items:
-    - id: ArenaDuffelBowSetFilled
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
 # Arrows have RefillableSolution — dip them in the bottle before nocking.
+# Карпотоксин вместо аматоксина: аматоксин слишком быстро добивал (печёночный
+# урон), карпотоксин даёт управляемый дозозависимый токсиновый урон.
 - type: entity
   parent: BaseChemistryBottleFilled
-  id: ArenaBottleAmatoxin
-  suffix: amatoxin
+  id: ArenaBottleCarpotoxin
+  suffix: carpotoxin
   components:
   - type: Label
-    currentLabel: reagent-name-amatoxin
+    currentLabel: reagent-name-carpotoxin
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Amatoxin
+      - ReagentId: CarpoToxin
         Quantity: 30
 
+# Ноктюрин и афродизиак для арены — собственные медленно-метаболизирующие версии
+# (ArenaNocturine / ArenaAphrodisiac), чтобы дозу реально было накопить
+# выстрелами. См. _Wega/Reagents/arena_reagents.yml.
 - type: entity
   parent: BaseChemistryBottleFilled
   id: ArenaBottleNocturine
-  suffix: nocturine
+  suffix: nocturine, arena
   components:
   - type: Label
     currentLabel: reagent-name-nocturine
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Nocturine
+      - ReagentId: ArenaNocturine
         Quantity: 30
-
-# Filled duffel — bottle listed first so it always survives the fill
-# (ContainerFill drops the rest if any single insert fails).
-- type: entity
-  parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSetPoisonFilled
-  suffix: poison, filled
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ArenaBottleAmatoxin
-        - id: BowImprovised
-        - id: ArenaQuiverArrows
-
-- type: entity
-  parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSetNocturineFilled
-  suffix: nocturine, filled
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: ArenaBottleNocturine
-        - id: BowImprovised
-        - id: ArenaQuiverArrows
-
-# Wrapped packages (smoker-kit style): a single object that unwraps into the
-# filled duffel above.
-- type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
-  id: ArenaDuffelBowSetPoison
-  name: poison archer kit
-  description: A wrapped package containing the standard archer kit and a bottle of amatoxin. Dip, nock, apologize later.
-  components:
-  - type: Item
-    size: Normal
-  - type: Sprite
-    sprite: Objects/Decoration/present.rsi
-    state: present
-  - type: SpawnItemsOnUse
-    items:
-    - id: ArenaDuffelBowSetPoisonFilled
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-- type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
-  id: ArenaDuffelBowSetNocturine
-  name: destabilizing archer kit
-  description: A wrapped package containing the standard archer kit and a bottle of nocturine. One good hit and the target naps through the rest of the fight.
-  components:
-  - type: Item
-    size: Normal
-  - type: Sprite
-    sprite: Objects/Decoration/present.rsi
-    state: present
-  - type: SpawnItemsOnUse
-    items:
-    - id: ArenaDuffelBowSetNocturineFilled
-    sound:
-      path: /Audio/Effects/unwrap.ogg
-
-- type: entity
-  parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSetEliteFilled
-  suffix: elite, filled
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: BowImprovised
-        - id: ArenaQuiverArrowsElite
-
-- type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
-  id: ArenaDuffelBowSetElite
-  name: elite archer kit
-  description: A wrapped package containing an improvised shortbow with a quiver of specialty arrows — plasma, uranium and carp tooth. For the discerning sharpshooter.
-  components:
-  - type: Item
-    size: Normal
-  - type: Sprite
-    sprite: Objects/Decoration/present.rsi
-    state: present
-  - type: SpawnItemsOnUse
-    items:
-    - id: ArenaDuffelBowSetEliteFilled
-    sound:
-      path: /Audio/Effects/unwrap.ogg
 
 - type: entity
   parent: BaseChemistryBottleFilled
   id: ArenaBottleAphrodisiac
-  suffix: aphrodisiac
+  suffix: aphrodisiac, arena
   components:
   - type: Label
     currentLabel: reagent-name-aphrodisiac
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Aphrodisiac
+      - ReagentId: ArenaAphrodisiac
         Quantity: 30
 
-# Filled duffel — bottles listed first so they always survive the fill
-# (ContainerFill drops the rest if any single insert fails).
+# ----- Kit duffels -------------------------------------------------------------
+# Big items (bow, quiver, clothing) are listed first so they get packed into the
+# grid before the small reagent bottle — otherwise the bottle claims space the
+# boots need and the fill drops them on the floor.
+
+# Базовый набор — стальные стрелы. Хаки-окрас.
 - type: entity
-  parent: ClothingBackpackDuffel
-  id: ArenaDuffelBowSetAphrodisiacFilled
-  suffix: aphrodisiac, filled
+  parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
+  id: ArenaDuffelBowSet
+  name: archer kit
+  description: An improvised shortbow and a quiver of sixteen steel arrows. Quiet, reusable, honest.
   components:
+  - type: Sprite
+    sprite: Clothing/Back/Duffels/duffel.rsi
+    color: "#9c8f5a"
+  - type: Clothing
+    sprite: Clothing/Back/Duffels/duffel.rsi
+  # Roomier grid: the Huge quiver (4x4) fragments the default 8x5 grid so the
+  # small hat/bottle no longer fit — widen it so the whole kit packs in.
+  - type: Storage
+    grid:
+    - 0,0,9,4
   - type: EntityTableContainerFill
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ArenaBottleAphrodisiac
-          amount: 2
         - id: BowImprovised
         - id: ArenaQuiverArrows
+        - id: ClothingUniformJumpsuitCossack
+        - id: ClothingShoesBootsSalvage
+        - id: ClothingHeadHatHetmanHat
 
+# Ядовитый набор — аматоксин. Токсично-зелёный окрас.
 - type: entity
-  parent: [BaseItem, BaseSyndicateContraband]
-  id: ArenaDuffelBowSetAphrodisiac
-  name: amorous archer kit
-  description: A wrapped package containing the standard archer kit and two bottles of aphrodisiac. Dip, nock, and watch the target lose all interest in fighting.
+  parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
+  id: ArenaDuffelBowSetPoison
+  name: poison archer kit
+  description: The standard archer kit plus a bottle of carpotoxin. Dip, nock, apologize later.
   components:
-  - type: Item
-    size: Normal
   - type: Sprite
-    sprite: Objects/Decoration/present.rsi
-    state: present
-  - type: SpawnItemsOnUse
-    items:
-    - id: ArenaDuffelBowSetAphrodisiacFilled
-    sound:
-      path: /Audio/Effects/unwrap.ogg
+    sprite: Clothing/Back/Duffels/duffel.rsi
+    color: "#79c34a"
+  - type: Clothing
+    sprite: Clothing/Back/Duffels/duffel.rsi
+  # Roomier grid: the Huge quiver (4x4) fragments the default 8x5 grid so the
+  # small hat/bottle no longer fit — widen it so the whole kit packs in.
+  - type: Storage
+    grid:
+    - 0,0,9,4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+        - id: ClothingUniformJumpsuitCossack
+        - id: ClothingShoesBootsSalvage
+        - id: ClothingHeadHatHetmanHat
+        - id: ArenaBottleCarpotoxin
+
+# Дестабилизирующий набор — ноктюрин. Индиго-окрас.
+- type: entity
+  parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
+  id: ArenaDuffelBowSetNocturine
+  name: destabilizing archer kit
+  description: The standard archer kit plus a bottle of nocturine. One good hit and the target naps through the rest of the fight.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Duffels/duffel.rsi
+    color: "#7a6fd0"
+  - type: Clothing
+    sprite: Clothing/Back/Duffels/duffel.rsi
+  # Roomier grid: the Huge quiver (4x4) fragments the default 8x5 grid so the
+  # small hat/bottle no longer fit — widen it so the whole kit packs in.
+  - type: Storage
+    grid:
+    - 0,0,9,4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+        - id: ClothingUniformJumpsuitCossack
+        - id: ClothingShoesBootsSalvage
+        - id: ClothingHeadHatHetmanHat
+        - id: ArenaBottleNocturine
+
+# Набор купидона — две бутыли афродизиака. Розовый окрас.
+- type: entity
+  parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
+  id: ArenaDuffelBowSetAphrodisiac
+  name: набор купидона
+  description: Набор лучника с двумя бутылями афродизиака. Обмакни, наложи стрелу — и цель потеряет всякий интерес к бою.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Duffels/duffel.rsi
+    color: "#ff7fb5"
+  - type: Clothing
+    sprite: Clothing/Back/Duffels/duffel.rsi
+  # Roomier grid: the Huge quiver (4x4) fragments the default 8x5 grid so the
+  # small hat/bottle no longer fit — widen it so the whole kit packs in.
+  - type: Storage
+    grid:
+    - 0,0,9,4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrows
+        - id: ClothingUniformJumpsuitCossack
+        - id: ClothingShoesBootsSalvage
+        - id: ClothingHeadHatHetmanHat
+        - id: ArenaBottleAphrodisiac
+          amount: 2
+
+# Элитный набор — особые стрелы. Золотой окрас.
+- type: entity
+  parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
+  id: ArenaDuffelBowSetElite
+  name: elite archer kit
+  description: An improvised shortbow with a quiver of specialty arrows — plasma, uranium and carp tooth. For the discerning sharpshooter.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Duffels/duffel.rsi
+    color: "#d8b840"
+  - type: Clothing
+    sprite: Clothing/Back/Duffels/duffel.rsi
+  # Roomier grid: the Huge quiver (4x4) fragments the default 8x5 grid so the
+  # small hat/bottle no longer fit — widen it so the whole kit packs in.
+  - type: Storage
+    grid:
+    - 0,0,9,4
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: BowImprovised
+        - id: ArenaQuiverArrowsElite
+        - id: ClothingUniformJumpsuitCossack
+        - id: ClothingShoesBootsSalvage
+        - id: ClothingHeadHatHetmanHat

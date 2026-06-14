@@ -15,7 +15,6 @@ using Content.Shared.Hands;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.DamageOnPickupSystem.Systems;
 
@@ -28,7 +27,6 @@ public sealed partial class DamageOnInteractSystem : EntitySystem
     [Dependency] private InventorySystem _inventorySystem = default!;
     [Dependency] private ThrowingSystem _throwingSystem = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()

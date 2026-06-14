@@ -1,0 +1,28 @@
+# DuelArenaEntryMarker — кнопка входа на арену с хаба ротации.
+# Ставится на хаб-карту (где стоит DuelRotationController). При НАЖАТИИ игроком собирает ВСЕХ
+# мобов на гриде хаба (игроков И NPC) и переносит их на спавн-маркеры арены с заданным ArenaIndex.
+# Бой при этом НЕ стартует — раунд запускается отдельно кнопкой старта на самой арене.
+# Дальше (после первого боя) ротация идёт автоматически.
+#
+# Это настоящая нажимаемая кнопка (на базе SignalButton) — линковать ничего не нужно, просто кликни.
+# ArenaIndex — индекс арены в списке arenas контроллера (0 = первая, 1 = вторая, ...).
+
+- type: entity
+  parent: SignalButton
+  id: DuelArenaEntryMarker0
+  name: arena entry button
+  suffix: Duel Rotation, Arena 0
+  description: Кнопка входа на первую арену. Телепортирует игроков с хаба и стартует раунд.
+  components:
+  - type: DuelArenaEntry
+    arenaIndex: 0
+
+- type: entity
+  parent: SignalButton
+  id: DuelArenaEntryMarker1
+  name: arena entry button
+  suffix: Duel Rotation, Arena 1
+  description: Кнопка входа на вторую арену. Телепортирует игроков с хаба и стартует раунд.
+  components:
+  - type: DuelArenaEntry
+    arenaIndex: 1

@@ -1,6 +1,7 @@
 using Content.Server._Wega.Duel.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.DeviceLinking.Systems;
+using Content.Shared._Wega.Clothing.Sandevistan;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Systems;
@@ -37,6 +38,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private DuelRotationSystem _rotation = default!;
 
     public override void Initialize()
     {
@@ -66,6 +68,14 @@ public sealed partial class DuelArenaSystem : EntitySystem
             {
                 comp.PendingWallRestore = false;
                 RestoreWalls(uid, comp);
+            }
+
+            // Отложенное вооружение раунда ротации: бойцы перенесены на эту арену на прошлом тике,
+            // теперь грид/состояние осели — ArmDuel корректно увидит их и объявит «дуэль начата».
+            if (comp.PendingRotationArm)
+            {
+                comp.PendingRotationArm = false;
+                ArmDuel(uid, comp);
             }
 
             // Истёк grace-период после боя — шлём на шлюзы баз сигнал закрытия.
@@ -238,6 +248,19 @@ public sealed partial class DuelArenaSystem : EntitySystem
             Loc.GetString("duel-arena-started", ("fighters", names)), Color.Gold);
     }
 
+    /// <summary>
+    /// Планирует запуск раунда на арене в режиме ротации. Вооружение НЕ выполняется сразу: контроллер
+    /// зовёт это синхронно из ConcludeDuel — сразу после телепорта бойцов и полного исцеления
+    /// проигравшего, когда грид/состояние ещё не «осели». Поэтому ставим флаг и вооружаем на
+    /// следующем тике в Update (см. <see cref="DuelArenaComponent.PendingRotationArm"/>), когда
+    /// GetAliveInRange уже корректно увидит прибывших бойцов и объявит старт.
+    /// </summary>
+    public void StartRotationRound(EntityUid arenaUid)
+    {
+        if (TryComp<DuelArenaComponent>(arenaUid, out var comp))
+            comp.PendingRotationArm = true;
+    }
+
     private void OnSignalReceived(EntityUid uid, DuelArenaComponent comp, ref SignalReceivedEvent args)
     {
         switch (args.Port)
@@ -298,6 +321,20 @@ public sealed partial class DuelArenaSystem : EntitySystem
             cleared++;
         }
 
+        // Общий счёт контроллеров ротации — тоже обнуляем.
+        var rotQuery = EntityQueryEnumerator<DuelRotationComponent>();
+        while (rotQuery.MoveNext(out _, out var rot))
+        {
+            if (rot.Scores.Count == 0)
+                continue;
+
+            rot.Scores.Clear();
+            rot.ScoreNames.Clear();
+            rot.StreakUser = null;
+            rot.Streak = 0;
+            cleared++;
+        }
+
         if (cleared > 0)
             _chatManager.DispatchServerAnnouncement(Loc.GetString("duel-arena-scores-reset"), Color.Gold);
 
@@ -313,18 +350,19 @@ public sealed partial class DuelArenaSystem : EntitySystem
     }
 
     /// <summary>
-    /// Собирает строку общего счёта арены: «Имя — N», сортировка по убыванию побед, затем по имени.
+    /// Собирает строку общего счёта: «Имя — N», сортировка по убыванию побед, затем по имени.
+    /// Источник — одиночная арена или контроллер ротации (см. <see cref="IDuelScoreStore"/>).
     /// Возвращает null, если счёта ещё нет.
     /// </summary>
-    private string? BuildScoreboard(DuelArenaComponent arena)
+    private string? BuildScoreboard(IDuelScoreStore store)
     {
-        if (arena.Scores.Count == 0)
+        if (store.Scores.Count == 0)
             return null;
 
-        var entries = arena.Scores
+        var entries = store.Scores
             .OrderByDescending(kv => kv.Value)
-            .ThenBy(kv => arena.ScoreNames.GetValueOrDefault(kv.Key, "?"))
-            .Select(kv => $"{arena.ScoreNames.GetValueOrDefault(kv.Key, "?")} — {kv.Value}");
+            .ThenBy(kv => store.ScoreNames.GetValueOrDefault(kv.Key, "?"))
+            .Select(kv => $"{store.ScoreNames.GetValueOrDefault(kv.Key, "?")} — {kv.Value}");
 
         return string.Join(", ", entries);
     }
@@ -365,6 +403,16 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // Останавливаем авто-дроп снабжения — бой окончен.
         arena.SupplyDropAt = null;
 
+        // Куда писать счёт: одиночная арена ведёт его сама; в режиме ротации — общий счёт на
+        // контроллере. Развилка по флагу RotationController (пусто = старое поведение).
+        DuelRotationComponent? ctrl = null;
+        var inRotation = arena.RotationController is { } ctrlUid
+            && TryComp(ctrlUid, out ctrl);
+        IDuelScoreStore store = inRotation ? ctrl! : arena;
+
+        // Состав боя фиксируем до очистки списка — нужен для перехода на следующую арену.
+        var roundDuelists = arena.Duelists.ToList();
+
         EntityUid? winner = aliveDuelists.Count == 1 ? aliveDuelists[0] : null;
 
         // Запоминаем актуальные имена всех бойцов этого боя по их NetUserId — чтобы общий счёт
@@ -373,7 +421,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
         {
             var user = GetUser(duelist);
             if (user != null)
-                arena.ScoreNames[user.Value] = SafeName(duelist);
+                store.ScoreNames[user.Value] = SafeName(duelist);
         }
 
         string msg;
@@ -392,28 +440,28 @@ public sealed partial class DuelArenaSystem : EntitySystem
             var winnerUser = GetUser(winner.Value);
 
             if (winnerUser != null)
-                arena.Scores[winnerUser.Value] = arena.Scores.GetValueOrDefault(winnerUser.Value) + 1;
+                store.Scores[winnerUser.Value] = store.Scores.GetValueOrDefault(winnerUser.Value) + 1;
 
             // Серия побед подряд: растёт, если победил тот же игрок, иначе начинается заново.
-            if (winnerUser != null && arena.StreakUser == winnerUser)
-                arena.Streak++;
+            if (winnerUser != null && store.StreakUser == winnerUser)
+                store.Streak++;
             else
             {
-                arena.StreakUser = winnerUser;
-                arena.Streak = 1;
+                store.StreakUser = winnerUser;
+                store.Streak = 1;
             }
 
             msg = Loc.GetString("duel-arena-concluded-winner",
                 ("winner", winnerName),
-                ("streak", arena.Streak),
+                ("streak", store.Streak),
                 ("losers", loserNames),
                 ("loserCount", losers.Count));
         }
         else
         {
             // Никого живого — ничья: серия прерывается.
-            arena.StreakUser = null;
-            arena.Streak = 0;
+            store.StreakUser = null;
+            store.Streak = 0;
 
             var andSep = $" {Loc.GetString("duel-arena-connector-and")} ";
             var names = string.Join(andSep, arena.Duelists.Select(SafeName));
@@ -436,8 +484,8 @@ public sealed partial class DuelArenaSystem : EntitySystem
 
         arena.Duelists.Clear();
 
-        // Дописываем общий накопленный счёт арены (все игроки, сортировка по убыванию побед).
-        var scoreboard = BuildScoreboard(arena);
+        // Дописываем общий накопленный счёт (одиночная арена или контроллер ротации).
+        var scoreboard = BuildScoreboard(store);
         if (scoreboard != null)
             msg += "\n" + Loc.GetString("duel-arena-scoreboard", ("scores", scoreboard));
 
@@ -454,6 +502,12 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // Сигнал закрытия шлюзов шлём не сразу, а через ReturnGrace секунд: дуэлянты
         // возвращаются в базы по открытым шлюзам, и только потом те закрываются (см. Update).
         arena.GateCloseAt = _timing.CurTime + TimeSpan.FromSeconds(arena.ReturnGrace);
+
+        // Режим ротации: переносим бойцов на следующую арену и запускаем там раунд. Бойцы уже
+        // исцелены выше, прошлая арена восстановится на следующем тике (на ней уже никого не будет).
+        if (inRotation)
+            _rotation.AdvanceToNextArena((arena.RotationController!.Value, ctrl!), roundDuelists);
+
         return true;
     }
 
@@ -466,6 +520,17 @@ public sealed partial class DuelArenaSystem : EntitySystem
     /// </summary>
     private void PurgeDuelistTraces(EntityUid duelist)
     {
+        // Активный сандэвистан: если раунд кончился, пока он действует, баф (скорость + глобальный
+        // bullet-time) висит на бойце и уехал бы с ним на следующую арену, замедляя нового соперника.
+        // Снимаем его и пересчитываем скорость. Заодно снимаем замок оружия арена-версии — иначе
+        // после удаления очков боец остался бы с запретом на оружие.
+        if (HasComp<SandevistanActiveComponent>(duelist))
+        {
+            RemComp<SandevistanActiveComponent>(duelist);
+            _movementSpeed.RefreshMovementSpeedModifiers(duelist);
+        }
+        RemComp<ArenaWeaponLockComponent>(duelist);
+
         if (TryComp<MobStateActionsComponent>(duelist, out var mobActions))
         {
             foreach (var act in mobActions.GrantedActions)
