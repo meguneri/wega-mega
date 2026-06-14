@@ -9,6 +9,7 @@ using Content.Shared._Wega.Spawners.Components;
 using Content.Server.DeviceLinking.Systems;
 using Content.Server.Modular.Suit;
 using Content.Server.Storage.EntitySystems;
+using Content.Shared.Storage.Components;
 using Content.Shared._Wega.Magic;
 using Content.Shared.Blood.Cult.Components;
 using Content.Shared.Clothing;
@@ -45,6 +46,7 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     [Dependency] private DeviceLinkSystem _link = default!;
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private EntityStorageSystem _entityStorage = default!;
     [Dependency] private ModularSuitSystem _modSuit = default!;
     [Dependency] private SpawnerSystem _spawner = default!;
     [Dependency] private TagSystem _tag = default!;
@@ -121,11 +123,30 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     /// </summary>
     private void EjectMobsBeforeDelete(EntityUid uid)
     {
+        // EntityStorage (коробка-невидимка StealthBox, шкафы и т.п.): жертва лежит в контейнере
+        // entity_storage. Извлекать её надо ЧЕРЕЗ систему хранилища, иначе прямое удаление из
+        // контейнера ненадёжно и моб удаляется каскадом вместе с коробкой при QueueDel. Remove
+        // реперентит контент на позицию коробки — моб «выпадает» и выживает.
+        if (TryComp<EntityStorageComponent>(uid, out var storage))
+        {
+            foreach (var contained in storage.Contents.ContainedEntities.ToList())
+            {
+                if (HasComp<MobStateComponent>(contained))
+                    _entityStorage.Remove(contained, uid, storage);
+                else
+                    EjectMobsBeforeDelete(contained);
+            }
+        }
+
         if (!TryComp<ContainerManagerComponent>(uid, out var manager))
             return;
 
         foreach (var container in _container.GetAllContainers(uid, manager))
         {
+            // EntityStorage-контейнер уже разобран выше — не трогаем повторно.
+            if (TryComp(uid, out EntityStorageComponent? es) && container.ID == es.Contents.ID)
+                continue;
+
             // ToList: извлечение мобов модифицирует контейнер во время обхода.
             foreach (var contained in container.ContainedEntities.ToList())
             {
