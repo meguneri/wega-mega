@@ -34,6 +34,14 @@ public sealed partial class SandevistanComponent : Component
     [DataField, AutoNetworkedField]
     public float DamageCoefficient = 0.85f;
 
+    /// <summary>
+    /// Chance (0–1) to fully dodge each incoming attack while the burst is active. Because hitscan
+    /// shots land instantly and can't be physically slowed, this is what lets you slip them in
+    /// bullet time. Copied into the active component on activation; 0 disables it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DodgeChance = 0f;
+
     /// <summary>Radius (tiles) within which other mobs are slowed to a crawl ("bullet time").
     /// Ignored when <see cref="AffectWholeMap"/> is true.</summary>
     [DataField, AutoNetworkedField]
@@ -90,6 +98,9 @@ public sealed partial class SandevistanActiveComponent : Component
     public float DamageCoefficient = 0.85f;
 
     [DataField, AutoNetworkedField]
+    public float DodgeChance;
+
+    [DataField, AutoNetworkedField]
     public float SlowRadius = 6f;
 
     [DataField, AutoNetworkedField]
@@ -137,6 +148,14 @@ public sealed partial class SandevistanSlowedComponent : Component
 
     [DataField, AutoNetworkedField]
     public float SlowModifier = 0.35f;
+
+    /// <summary>
+    /// Server-side throttle: earliest time this mob may fire a gun again. Bullet time stretches the
+    /// trigger the same way it stretches melee swings, so ranged fire rate is actually cut instead of
+    /// only the bullets being slowed in flight. Not networked — gated against server time.
+    /// </summary>
+    [DataField]
+    public TimeSpan NextAllowedShot;
 }
 
 /// <summary>

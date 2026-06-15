@@ -7,12 +7,15 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Random;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 
@@ -27,6 +30,7 @@ public sealed partial class SandevistanSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -42,8 +46,58 @@ public sealed partial class SandevistanSystem : EntitySystem
         SubscribeLocalEvent<SandevistanComponent, SandevistanActivateEvent>(OnActivate);
 
         SubscribeLocalEvent<SandevistanActiveComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
+        SubscribeLocalEvent<SandevistanActiveComponent, DamageModifyEvent>(OnActiveDamageModify);
         SubscribeLocalEvent<SandevistanSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSlowed);
         SubscribeLocalEvent<SandevistanSlowedComponent, GetMeleeAttackRateEvent>(OnSlowedAttackRate);
+        SubscribeLocalEvent<SandevistanSlowedComponent, ShotAttemptedEvent>(OnSlowedShotAttempt);
+    }
+
+    // While the burst is active the wearer is reacting at superhuman speed: roll a chance to fully
+    // dodge each incoming attack (the only way to slip instant hitscan shots — those can't be slowed
+    // in flight), and otherwise apply the standing incoming-damage reduction.
+    private void OnActiveDamageModify(Entity<SandevistanActiveComponent> ent, ref DamageModifyEvent args)
+    {
+        // Only react to actual incoming attacks from someone, never healing or environmental damage.
+        if (args.Origin == null || args.Damage.GetTotal() <= 0)
+            return;
+
+        // The dodge roll is random, so decide it on the server and let the negated damage replicate —
+        // otherwise the client would flicker the hit.
+        if (ent.Comp.DodgeChance > 0f && _net.IsServer && _random.Prob(ent.Comp.DodgeChance))
+        {
+            args.Damage = new DamageSpecifier();
+            _popup.PopupEntity(Loc.GetString("evasion-dodged"), ent.Owner, ent.Owner, PopupType.SmallCaution);
+            return;
+        }
+
+        if (ent.Comp.DamageCoefficient < 1f)
+            args.Damage *= ent.Comp.DamageCoefficient;
+    }
+
+    // Bullet time drags the trigger as well as the feet: a slowed mob may only fire its gun on the
+    // same stretched cadence we slow its movement/melee by. Server-authoritative throttle.
+    private void OnSlowedShotAttempt(Entity<SandevistanSlowedComponent> ent, ref ShotAttemptedEvent args)
+    {
+        if (!_net.IsServer || args.Cancelled)
+            return;
+
+        var curTime = _timing.CurTime;
+
+        // Still inside the stretched cooldown left by the previous shot.
+        if (curTime < ent.Comp.NextAllowedShot)
+        {
+            args.Cancel();
+            return;
+        }
+
+        // Stretch the gun's own fire interval by the same factor we slow everything else.
+        var gun = args.Used.Comp;
+        var baseRate = gun.FireRateModified > 0f ? gun.FireRateModified : gun.FireRate;
+        if (baseRate <= 0f || ent.Comp.SlowModifier <= 0f)
+            return;
+
+        var slowedInterval = TimeSpan.FromSeconds(1f / baseRate / ent.Comp.SlowModifier);
+        ent.Comp.NextAllowedShot = curTime + slowedInterval;
     }
 
     // Caught in bullet time, a mob's swings slow to a crawl as well as its feet — otherwise a wide
@@ -91,6 +145,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         active.EndTime = curTime + ent.Comp.Duration;
         active.SpeedModifier = ent.Comp.SpeedModifier;
         active.DamageCoefficient = ent.Comp.DamageCoefficient;
+        active.DodgeChance = ent.Comp.DodgeChance;
         active.SlowRadius = ent.Comp.SlowRadius;
         active.AffectWholeMap = ent.Comp.AffectWholeMap;
         active.SlowModifier = ent.Comp.SlowModifier;
@@ -132,6 +187,7 @@ public sealed partial class SandevistanSystem : EntitySystem
 
             SlowMobs(uid, active, curTime);
             SlowProjectiles(uid, active, curTime);
+            SlowThrownItems(uid, active, curTime, frameTime);
             SpawnAfterimages((uid, active), curTime);
         }
 
@@ -251,6 +307,59 @@ public sealed partial class SandevistanSystem : EntitySystem
             var slowedProj = AddComp<SandevistanSlowedProjectileComponent>(uid);
             slowedProj.Factor = active.SlowModifier;
             slowedProj.EndTime = window;
+
+            _physics.SetLinearVelocity(uid, body.LinearVelocity * active.SlowModifier, body: body);
+            _physics.SetAngularVelocity(uid, body.AngularVelocity * active.SlowModifier, body: body);
+        }
+    }
+
+    /// <summary>
+    /// Same bullet-time treatment as <see cref="SlowProjectiles"/>, but for thrown items (which are
+    /// not projectiles): their flight velocity is scaled down and their landing timer is stretched so
+    /// they actually crawl through the air instead of dropping early. The user's own throws keep full
+    /// speed, just like their own shots. Restored by the shared marker cleanup in <see cref="Update"/>.
+    /// </summary>
+    private void SlowThrownItems(EntityUid user, SandevistanActiveComponent active, TimeSpan curTime, float frameTime)
+    {
+        if (active.SlowModifier <= 0f)
+            return;
+
+        var window = curTime + TimeSpan.FromSeconds(0.6);
+        var userMap = Transform(user).MapID;
+        var userCoords = Transform(user).Coordinates;
+
+        var query = EntityQueryEnumerator<ThrownItemComponent, PhysicsComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var thrown, out var body, out var xform))
+        {
+            // The user's own thrown items keep full speed — only the world around them slows.
+            if (thrown.Thrower == user)
+                continue;
+
+            if (xform.MapID != userMap)
+                continue;
+
+            if (!active.AffectWholeMap
+                && (xform.Coordinates.TryDistance(EntityManager, _transform, userCoords, out var dist) ? dist : float.MaxValue) > active.SlowRadius)
+                continue;
+
+            // Stretch the landing countdown so the slowed item stays airborne proportionally longer
+            // (only the slowed fraction of real time counts toward landing).
+            if (thrown.LandTime is { } landTime)
+            {
+                thrown.LandTime = landTime + TimeSpan.FromSeconds(frameTime * (1f - active.SlowModifier));
+                Dirty(uid, thrown);
+            }
+
+            // Already slowed by an active burst — just refresh its window.
+            if (TryComp<SandevistanSlowedProjectileComponent>(uid, out var existing))
+            {
+                existing.EndTime = window;
+                continue;
+            }
+
+            var slowed = AddComp<SandevistanSlowedProjectileComponent>(uid);
+            slowed.Factor = active.SlowModifier;
+            slowed.EndTime = window;
 
             _physics.SetLinearVelocity(uid, body.LinearVelocity * active.SlowModifier, body: body);
             _physics.SetAngularVelocity(uid, body.AngularVelocity * active.SlowModifier, body: body);
