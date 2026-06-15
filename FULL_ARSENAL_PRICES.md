@@ -658,7 +658,7 @@
 | Дестабилизирующий набор лучника | `ArenaDuffelBowSetNocturine` | 8 TC |
 | Набор купидона | `ArenaDuffelBowSetAphrodisiac` | 8 TC |
 | Элитный набор лучника | `ArenaDuffelBowSetElite` | 8 TC |
-| Кубик лучника | `ArenaBowLuckDie` | 8 TC |
+| Кубик лучника | `ArenaBowLuckDie` | 120 TC |
 | Воин коммунизма | `ArenaCommunismSet` | 22 TC |
 | Набор гладиатора | `ArenaGladiatorSet` | 8 TC |
 | Набор самурая | `ArenaSamuraiSet` | 5 TC |

@@ -5736,7 +5736,7 @@
   description: full-arsenal-bow-luck-die-desc
   productEntity: ArenaBowLuckDie
   cost:
-    Telecrystal: 8
+    Telecrystal: 120
   categories:
   - FullArsenal
   - FullArsenalBowSet
