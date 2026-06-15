@@ -1,4 +1,6 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Wega.Clothing.Sandevistan;
 
@@ -27,7 +29,29 @@ public sealed partial class ArenaWeaponLockComponent : Component
 /// Flags a weapon as usable while an <see cref="ArenaWeaponLockComponent"/> is active (i.e. the
 /// gloves of the north star). Everything without this marker is blocked.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ArenaAllowedWeaponComponent : Component
 {
+    /// <summary>
+    /// Count of landed hits while the wielder wears the arena Sandevistan. Every 3rd hit lands an
+    /// armour-piercing strike instead of the normal blow (see <see cref="ArmorPierceEveryNthHit"/>).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int HitCount;
+
+    /// <summary>Every N-th landed hit pierces armour.</summary>
+    [DataField]
+    public int ArmorPierceEveryNthHit = 3;
+
+    /// <summary>Blunt damage dealt by the armour-piercing strike (ignores resistances).</summary>
+    [DataField]
+    public float PierceDamage = 10f;
+
+    /// <summary>Sound played on the target when the armour-piercing strike lands.</summary>
+    [DataField]
+    public SoundSpecifier PierceSound = new SoundPathSpecifier("/Audio/Weapons/pierce.ogg");
+
+    /// <summary>Visual effect spawned on the target when the armour-piercing strike lands.</summary>
+    [DataField]
+    public EntProtoId PierceEffect = "EffectSparks";
 }

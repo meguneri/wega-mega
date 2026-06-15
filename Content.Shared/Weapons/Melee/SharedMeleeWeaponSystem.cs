@@ -265,6 +265,9 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
 
         var ev = new GetMeleeAttackRateEvent(uid, component.AttackRate, 1, user);
         RaiseLocalEvent(uid, ref ev);
+        // Also raised on the attacker so per-user effects (e.g. Sandevistan bullet-time slow) can
+        // modify their attack rate, not just effects sitting on the weapon. _Wega
+        RaiseLocalEvent(user, ref ev);
 
         return ev.Rate * ev.Multipliers;
     }

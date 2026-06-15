@@ -7,12 +7,14 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Medical.Healing;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._Wega.Clothing.Sandevistan;
 
@@ -26,6 +28,7 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -40,6 +43,7 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
         SubscribeLocalEvent<ArenaWeaponLockComponent, PickupAttemptEvent>(OnPickupAttempt);
 
         SubscribeLocalEvent<ArenaAllowedWeaponComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
+        SubscribeLocalEvent<ArenaAllowedWeaponComponent, MeleeHitEvent>(OnMeleeHit);
     }
 
     /// <summary>
@@ -89,15 +93,74 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     }
 
     /// <summary>
-    /// Перчатки полярной звезды бьют сильнее (до 15), но только если на носителе именно
-    /// арена-версия сандэвистана (т.е. активен <see cref="ArenaWeaponLockComponent"/>).
+    /// Перчатки полярной звезды бьют сильнее (15 блант), но только если на носителе именно
+    /// арена-версия сандэвистана (т.е. активен <see cref="ArenaWeaponLockComponent"/>). Каждый
+    /// N-й удар (по умолчанию третий) вместо этого наносит 10 блант, которые игнорируют броню —
+    /// чтобы у кулаков был ответ на тяжёлую защиту.
     /// </summary>
     private void OnGetMeleeDamage(Entity<ArenaAllowedWeaponComponent> ent, ref GetMeleeDamageEvent args)
     {
         if (!HasComp<ArenaWeaponLockComponent>(args.User))
             return;
 
-        args.Damage.DamageDict["Blunt"] = 15;
+        // GetMeleeDamageEvent поднимается отдельно для урона и для проверки пробития до того, как
+        // удар «приземлится» (счётчик растёт в OnMeleeHit), поэтому следующий удар — это HitCount + 1.
+        if (IsPiercingHit(ent.Comp))
+        {
+            args.Damage.DamageDict["Blunt"] = ent.Comp.PierceDamage;
+            args.ResistanceBypass = true;
+        }
+        else
+        {
+            args.Damage.DamageDict["Blunt"] = 15;
+        }
+    }
+
+    /// <summary>Будет ли следующий приземлившийся удар бронебойным.</summary>
+    private static bool IsPiercingHit(ArenaAllowedWeaponComponent comp)
+    {
+        return (comp.HitCount + 1) % comp.ArmorPierceEveryNthHit == 0;
+    }
+
+    /// <summary>
+    /// Считаем только удары арена-носителя, попавшие по живому существу — на них завязан цикл
+    /// пробития. Удары по стенам, окнам, шкафам и прочим объектам цикл не двигают, иначе бронебойный
+    /// удар можно было бы «зарядить», просто молотя по стене.
+    /// </summary>
+    private void OnMeleeHit(Entity<ArenaAllowedWeaponComponent> ent, ref MeleeHitEvent args)
+    {
+        if (!HasComp<ArenaWeaponLockComponent>(args.User))
+            return;
+
+        var hitMob = false;
+        foreach (var hit in args.HitEntities)
+        {
+            if (HasComp<MobStateComponent>(hit))
+            {
+                hitMob = true;
+                break;
+            }
+        }
+
+        if (!hitMob)
+            return;
+
+        // This landed hit is the armour-piercing one (the counter hasn't been bumped for it yet) —
+        // give it visible/audible feedback on every mob it connected with.
+        if (IsPiercingHit(ent.Comp))
+        {
+            foreach (var hit in args.HitEntities)
+            {
+                if (!HasComp<MobStateComponent>(hit))
+                    continue;
+
+                _audio.PlayPredicted(ent.Comp.PierceSound, hit, args.User);
+                PredictedSpawnAttachedTo(ent.Comp.PierceEffect, Transform(hit).Coordinates);
+            }
+        }
+
+        ent.Comp.HitCount++;
+        Dirty(ent);
     }
 
     private void OnEquipped(Entity<SandevistanArenaLockComponent> ent, ref ClothingGotEquippedEvent args)

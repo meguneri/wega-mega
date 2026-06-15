@@ -7,6 +7,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
@@ -42,6 +43,16 @@ public sealed partial class SandevistanSystem : EntitySystem
 
         SubscribeLocalEvent<SandevistanActiveComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<SandevistanSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSlowed);
+        SubscribeLocalEvent<SandevistanSlowedComponent, GetMeleeAttackRateEvent>(OnSlowedAttackRate);
+    }
+
+    // Caught in bullet time, a mob's swings slow to a crawl as well as its feet — otherwise a wide
+    // melee arc would still connect at full speed despite the "frozen" world. We scale the attack
+    // rate down by the same factor as movement, so the swing is slow and telegraphed (dodgeable),
+    // not blocked outright.
+    private void OnSlowedAttackRate(Entity<SandevistanSlowedComponent> ent, ref GetMeleeAttackRateEvent args)
+    {
+        args.Multipliers *= ent.Comp.SlowModifier;
     }
 
     private void OnRefreshSlowed(Entity<SandevistanSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -86,7 +97,6 @@ public sealed partial class SandevistanSystem : EntitySystem
         active.AfterimageInterval = ent.Comp.AfterimageInterval;
         active.AfterimageLifetime = ent.Comp.AfterimageLifetime;
         active.NextAfterimageTime = curTime;
-        active.ColorAccumulator = 0f;
         Dirty(wearer, active);
 
         _movement.RefreshMovementSpeedModifiers(wearer);
@@ -248,14 +258,12 @@ public sealed partial class SandevistanSystem : EntitySystem
     }
 
     /// <summary>
-    /// Leaves a trail of translucent rainbow "ghosts" behind the moving user (David Martinez
+    /// Leaves a trail of translucent blue "ghosts" behind the moving user (David Martinez
     /// style). Bare entities are spawned at the user's spot; the client copies the user's sprite
     /// onto them, and they fade out via <see cref="TimedDespawnComponent"/>.
     /// </summary>
     private void SpawnAfterimages(Entity<SandevistanActiveComponent> ent, TimeSpan curTime)
     {
-        ent.Comp.ColorAccumulator += 4f;
-
         if (curTime < ent.Comp.NextAfterimageTime)
             return;
 
@@ -266,7 +274,6 @@ public sealed partial class SandevistanSystem : EntitySystem
 
         var comp = EnsureComp<SandevistanAfterimageComponent>(afterimage);
         comp.SourceEntity = ent.Owner;
-        comp.Hue = ent.Comp.ColorAccumulator % 100f / 100f;
         comp.DirectionOverride = xform.LocalRotation.GetCardinalDir();
         Dirty(afterimage, comp);
 

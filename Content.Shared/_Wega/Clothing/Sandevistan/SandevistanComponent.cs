@@ -98,7 +98,7 @@ public sealed partial class SandevistanActiveComponent : Component
     [DataField, AutoNetworkedField]
     public float SlowModifier = 0.35f;
 
-    // Afterimage trail ("David Martinez" rainbow blur).
+    // Afterimage trail ("David Martinez" blue blur).
     [DataField, AutoNetworkedField]
     public TimeSpan AfterimageInterval = TimeSpan.FromSeconds(0.1);
 
@@ -107,10 +107,6 @@ public sealed partial class SandevistanActiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan NextAfterimageTime;
-
-    /// <summary>Drives the rainbow hue cycle of the afterimages.</summary>
-    [DataField, AutoNetworkedField]
-    public float ColorAccumulator;
 }
 
 /// <summary>
@@ -123,10 +119,6 @@ public sealed partial class SandevistanAfterimageComponent : Component
     /// <summary>The user this afterimage was copied from.</summary>
     [DataField, AutoNetworkedField]
     public EntityUid SourceEntity;
-
-    /// <summary>Hue (0..1) for the rainbow tint.</summary>
-    [DataField, AutoNetworkedField]
-    public float Hue;
 
     /// <summary>Facing the user had when this afterimage was spawned.</summary>
     [DataField, AutoNetworkedField]

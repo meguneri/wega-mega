@@ -14,3 +14,11 @@
       state: blink
   - type: InstantAction
     event: !type:SandevistanActivateEvent
+
+# Арена-версия: тот же эффект, но короче перезарядка кнопки (совпадает с cooldown импланта 12с).
+- type: entity
+  parent: ActionSandevistan
+  id: ActionSandevistanArena
+  components:
+  - type: Action
+    useDelay: 12
