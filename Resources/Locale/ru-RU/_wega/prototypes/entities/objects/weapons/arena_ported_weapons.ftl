@@ -40,7 +40,7 @@ ent-ArenaArrowIon = ионная стрела
 
 # Кубик лучника и его залоченные на один режим варианты лука
 ent-ArenaBowLuckDie = кубик лучника
-    .desc = Гадальный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 6.
+    .desc = Гадальный семигранный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 7 — все типы стрел.
 ent-ArenaBowHardlightDisabler = { ent-ArenaBowHardlight }
     .desc = { ent-ArenaBowHardlight.desc }
 ent-ArenaBowHardlightFiery = { ent-ArenaBowHardlight }
@@ -52,6 +52,8 @@ ent-ArenaBowHardlightExplosive = { ent-ArenaBowHardlight }
 ent-ArenaBowHardlightXray = { ent-ArenaBowHardlight }
     .desc = { ent-ArenaBowHardlight.desc }
 ent-ArenaBowHardlightIon = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+ent-ArenaBowHardlightEnergy = { ent-ArenaBowHardlight }
     .desc = { ent-ArenaBowHardlight.desc }
 
 # Попап при броске кубика лучника

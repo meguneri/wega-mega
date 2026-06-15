@@ -7,17 +7,17 @@
   id: ArenaBowLuckDie
   name: кубик лучника
   suffix: Arena
-  description: Гадальный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 6.
+  description: Гадальный семигранный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 7 — все типы стрел.
   components:
   - type: Sprite
     sprite: Objects/Fun/dice.rsi
-    state: d6_6
+    state: d8_8
   - type: Item
     size: Small
   - type: ArenaBowLuckDie
     rollSound:
       collection: Dice
-    # Индекс = выпавшее число − 1.
+    # Индекс = выпавшее число − 1. Семь граней — все типы стрел лука.
     outcomes:
     - ArenaBowHardlightDisabler  # 1
     - ArenaBowHardlightFiery     # 2
@@ -25,6 +25,7 @@
     - ArenaBowHardlightExplosive # 4
     - ArenaBowHardlightXray      # 5
     - ArenaBowHardlightIon       # 6
+    - ArenaBowHardlightEnergy    # 7
 
 # ── Залоченные на один режим варианты лука ──────────────────────────────────────
 # Каждый — ArenaBowHardlight с единственным режимом огня, так что цикл переключения
@@ -107,3 +108,16 @@
     fireModes:
     - proto: ArenaArrowIon
       fireCost: 150
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightEnergy
+  suffix: Energy
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowEnergy
+    fireCost: 100
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowEnergy
+      fireCost: 100
