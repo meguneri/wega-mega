@@ -1,8 +1,10 @@
 using System.Linq;
 using Content.Server._Wega.Duel.Components;
+using Content.Server.Light.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.Light.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Tag;
 using Robust.Shared.GameObjects;
@@ -28,6 +30,7 @@ public sealed partial class DuelArenaSystem
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private PoweredLightSystem _poweredLight = default!;
 
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
     private static readonly ProtoId<TagPrototype> WindowTag = "Window";
@@ -256,5 +259,151 @@ public sealed partial class DuelArenaSystem
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Мержит текущую расстановку светильников арены в снимок (тайл → прототип + поворот).
+    /// Вызывается при КАЖДОМ старте дуэли по той же логике, что и снимок стен: новые светильники
+    /// добавляются, уже записанные не перезаписываются. Берёт любые сущности с
+    /// <see cref="PoweredLightComponent"/> на гриде арены.
+    /// </summary>
+    private void SnapshotLights(EntityUid arenaUid, DuelArenaComponent comp)
+    {
+        var grid = Transform(arenaUid).GridUid;
+        if (grid == null || !TryComp<MapGridComponent>(grid, out var gridComp))
+            return;
+
+        var added = 0;
+
+        var query = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.GridUid != grid)
+                continue;
+
+            if (MetaData(uid).EntityPrototype?.ID is not { } proto)
+                continue;
+
+            var tile = _map.TileIndicesFor(grid.Value, gridComp, xform.Coordinates);
+            if (comp.LightSnapshot.TryAdd(tile, proto))
+            {
+                comp.LightRotationSnapshot[tile] = xform.LocalRotation;
+                added++;
+            }
+        }
+
+        if (added > 0)
+            Log.Info($"[duel-arena] снимок светильников пополнен: +{added}, всего {comp.LightSnapshot.Count} тайлов");
+    }
+
+    /// <summary>
+    /// Приводит светильники арены к снимку <see cref="DuelArenaComponent.LightSnapshot"/>. Для каждого
+    /// тайла: если светильник нужного типа на месте — чиним корпус (помятый → как новый) и лампу
+    /// (разбитую/перегоревшую/отсутствующую меняем на свежую); если светильник уничтожен целиком —
+    /// ставим новый с тем же поворотом. Каждый тайл обрабатывается независимо. Вызывается из Update
+    /// на тике после завершения боя, рядом с восстановлением стен.
+    /// </summary>
+    private void RestoreLights(EntityUid arenaUid, DuelArenaComponent comp)
+    {
+        if (comp.LightSnapshot.Count == 0)
+            return;
+
+        var grid = Transform(arenaUid).GridUid;
+        if (grid == null || !TryComp<MapGridComponent>(grid, out var gridComp))
+            return;
+
+        var healed = 0;
+        var respawned = 0;
+        var failed = 0;
+
+        var anchored = new List<EntityUid>();
+        foreach (var (tile, proto) in comp.LightSnapshot)
+        {
+            try
+            {
+                anchored.Clear();
+                _map.GetAnchoredEntities((grid.Value, gridComp), tile, anchored);
+
+                // Светильник нужного типа на тайле?
+                EntityUid? fixture = null;
+                foreach (var e in anchored)
+                {
+                    if (Exists(e) && HasComp<PoweredLightComponent>(e) && MetaData(e).EntityPrototype?.ID == proto.Id)
+                    {
+                        fixture = e;
+                        break;
+                    }
+                }
+
+                // Светильник уцелел — чиним корпус и лампу на месте (сохраняя поворот/проводку).
+                if (fixture is { } light)
+                {
+                    if (TryComp<DamageableComponent>(light, out var dmg))
+                        _damageable.SetAllDamage((light, dmg), FixedPoint2.Zero);
+
+                    RestoreBulb(light);
+                    healed++;
+                    continue;
+                }
+
+                // Светильник уничтожен — убираем обломки своего типа и ставим свежий.
+                foreach (var debris in anchored)
+                {
+                    if (Exists(debris) && HasComp<PoweredLightComponent>(debris))
+                        Del(debris);
+                }
+
+                var coords = _map.GridTileToLocal(grid.Value, gridComp, tile);
+                var newLight = Spawn(proto, coords);
+
+                if (comp.LightRotationSnapshot.TryGetValue(tile, out var rot))
+                    _transform.SetLocalRotation(newLight, rot);
+
+                if (_transform.AnchorEntity(newLight))
+                {
+                    respawned++;
+                }
+                else
+                {
+                    failed++;
+                    Log.Warning($"[duel-arena] не удалось заякорить восстановленный светильник {proto} на тайле {tile}");
+                }
+            }
+            catch (Exception e)
+            {
+                failed++;
+                Log.Error($"[duel-arena] ошибка восстановления светильника на тайле {tile}: {e}");
+            }
+        }
+
+        Log.Info($"[duel-arena] восстановление светильников ({ToPrettyString(arenaUid)}): снимок {comp.LightSnapshot.Count}, "
+            + $"вылечено {healed}, переставлено {respawned}, ошибок {failed}");
+    }
+
+    /// <summary>
+    /// Возвращает лампу светильника в рабочее состояние: целую и горящую не трогает, а разбитую,
+    /// перегоревшую или отсутствующую заменяет свежей (по <see cref="PoweredLightComponent.HasLampOnSpawn"/>).
+    /// </summary>
+    private void RestoreBulb(EntityUid light)
+    {
+        if (!TryComp<PoweredLightComponent>(light, out var comp))
+            return;
+
+        var bulb = _poweredLight.GetBulb(light, comp);
+
+        // Лампа на месте и цела — ничего не делаем.
+        if (bulb is { } present && TryComp<LightBulbComponent>(present, out var bulbComp) && bulbComp.State == LightBulbState.Normal)
+            return;
+
+        // Нечем заменить (у светильника не задана лампа по умолчанию) — оставляем как есть.
+        if (comp.HasLampOnSpawn is not { } lampProto)
+            return;
+
+        // Удаляем разбитую/перегоревшую лампу (Del, а не выброс — чтобы не сорить осколками в арене).
+        if (bulb is { } old)
+            Del(old);
+
+        var fresh = Spawn(lampProto, Transform(light).Coordinates);
+        _poweredLight.InsertBulb(light, fresh, comp);
     }
 }

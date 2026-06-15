@@ -7,6 +7,7 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Administration.Systems;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Humanoid;
+using Content.Shared.Inventory;
 using Content.Shared.Magic.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -39,6 +40,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
     [Dependency] private MovementSpeedModifierSystem _movementSpeed = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private DuelRotationSystem _rotation = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -68,6 +70,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
             {
                 comp.PendingWallRestore = false;
                 RestoreWalls(uid, comp);
+                RestoreLights(uid, comp);
             }
 
             // Отложенное вооружение раунда ротации: бойцы перенесены на эту арену на прошлом тике,
@@ -231,6 +234,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // добавляются, старые не перезаписываются — снимок самовосстанавливается, даже
         // если какой-то из проходов вышел неполным.
         SnapshotWalls(uid, comp);
+        SnapshotLights(uid, comp);
 
         // Отменяем grace-период предыдущей дуэли — иначе Update отправит сигнал закрытия
         // шлюзов уже во время нового боя.
@@ -529,7 +533,13 @@ public sealed partial class DuelArenaSystem : EntitySystem
             RemComp<SandevistanActiveComponent>(duelist);
             _movementSpeed.RefreshMovementSpeedModifiers(duelist);
         }
-        RemComp<ArenaWeaponLockComponent>(duelist);
+
+        // Замок оружия снимаем ТОЛЬКО если арена-сандэвистан уже не надет: иначе боец, оставшийся
+        // в очках на следующий раунд, потерял бы запрет и смог бы взять оружие/броню прямо в них.
+        // Когда очки реально снимают/удаляют, замок убирает обработчик ClothingGotUnequipped; здесь
+        // лишь подчищаем «осиротевший» замок, переживший удаление очков.
+        if (!IsWearingArenaSandevistan(duelist))
+            RemComp<ArenaWeaponLockComponent>(duelist);
 
         if (TryComp<MobStateActionsComponent>(duelist, out var mobActions))
         {
@@ -558,5 +568,23 @@ public sealed partial class DuelArenaSystem : EntitySystem
             _actions.RemoveAction(spell);
             QueueDel(spell);
         }
+    }
+
+    /// <summary>
+    /// Носит ли боец сейчас арена-версию сандэвистана (очки с <see cref="SandevistanArenaLockComponent"/>).
+    /// Пока носит — замок оружия должен оставаться, чтобы в очках нельзя было взять оружие или броню.
+    /// </summary>
+    private bool IsWearingArenaSandevistan(EntityUid duelist)
+    {
+        if (!_inventory.TryGetContainerSlotEnumerator(duelist, out var slots))
+            return false;
+
+        while (slots.MoveNext(out var slot))
+        {
+            if (slot.ContainedEntity is { } worn && HasComp<SandevistanArenaLockComponent>(worn))
+                return true;
+        }
+
+        return false;
     }
 }

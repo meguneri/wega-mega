@@ -1,0 +1,109 @@
+# Кубик удачи лучника: используешь в руке — выпадает число 1-6, и в руку спавнится лук жёсткого
+# света, намертво залоченный на один тип стрел (режим переключить нельзя — что выпало, тем и стреляешь).
+# Сами луки — варианты ArenaBowHardlight с единственным режимом в BatteryWeaponFireModes.
+
+- type: entity
+  parent: BaseItem
+  id: ArenaBowLuckDie
+  name: кубик лучника
+  suffix: Arena
+  description: Гадальный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 6.
+  components:
+  - type: Sprite
+    sprite: Objects/Fun/dice.rsi
+    state: d6_6
+  - type: Item
+    size: Small
+  - type: ArenaBowLuckDie
+    rollSound:
+      collection: Dice
+    # Индекс = выпавшее число − 1.
+    outcomes:
+    - ArenaBowHardlightDisabler  # 1
+    - ArenaBowHardlightFiery     # 2
+    - ArenaBowHardlightFreeze    # 3
+    - ArenaBowHardlightExplosive # 4
+    - ArenaBowHardlightXray      # 5
+    - ArenaBowHardlightIon       # 6
+
+# ── Залоченные на один режим варианты лука ──────────────────────────────────────
+# Каждый — ArenaBowHardlight с единственным режимом огня, так что цикл переключения
+# (BatteryWeaponFireModes) ничего не меняет: стрелы фиксированы.
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightDisabler
+  suffix: Disabler
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowDisabler
+    fireCost: 100
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowDisabler
+      fireCost: 100
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightFiery
+  suffix: Fiery
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowFiery
+    fireCost: 100
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowFiery
+      fireCost: 100
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightFreeze
+  suffix: Freeze
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowFreeze
+    fireCost: 100
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowFreeze
+      fireCost: 100
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightExplosive
+  suffix: Explosive
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowExplosive
+    fireCost: 150
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowExplosive
+      fireCost: 150
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightXray
+  suffix: Xray
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowXray
+    fireCost: 125
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowXray
+      fireCost: 125
+
+- type: entity
+  parent: ArenaBowHardlight
+  id: ArenaBowHardlightIon
+  suffix: Ion
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaArrowIon
+    fireCost: 150
+  - type: BatteryWeaponFireModes
+    fireModes:
+    - proto: ArenaArrowIon
+      fireCost: 150

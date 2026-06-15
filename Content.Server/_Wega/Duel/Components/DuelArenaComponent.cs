@@ -129,6 +129,19 @@ public sealed partial class DuelArenaComponent : Component, IDuelScoreStore
     public readonly Dictionary<Vector2i, Tile> WallTileSnapshot = new();
 
     /// <summary>
+    /// Снимок исходной расстановки светильников арены: тайл грида → прототип светильника.
+    /// Пополняется при КАЖДОМ старте дуэли (мерж, как у стен). После каждой дуэли по снимку
+    /// чинятся/переставляются разбитые лампы и уничтоженные светильники любого типа.
+    /// </summary>
+    public readonly Dictionary<Vector2i, EntProtoId> LightSnapshot = new();
+
+    /// <summary>
+    /// Поворот (к какой стене примонтирован) каждого светильника снимка — чтобы переставленный
+    /// заново светильник смотрел в ту же сторону, что и оригинал.
+    /// </summary>
+    public readonly Dictionary<Vector2i, Angle> LightRotationSnapshot = new();
+
+    /// <summary>
     /// Отложенное восстановление стен: выставляется при завершении/сбросе дуэли, выполняется
     /// в Update на следующем тике — вне стека события смерти (MobStateChanged), где удаление
     /// и спавн сущностей могут конфликтовать с обработкой урона.

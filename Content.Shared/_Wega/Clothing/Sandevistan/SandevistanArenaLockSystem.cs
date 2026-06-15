@@ -2,8 +2,10 @@ using System.Linq;
 using Content.Shared.Armor;
 using Content.Shared.Blocking;
 using Content.Shared.Clothing;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
 using Content.Shared.Medical.Healing;
@@ -29,6 +31,7 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private InventorySystem _inventory = default!;
 
     public override void Initialize()
     {
@@ -41,6 +44,7 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
         SubscribeLocalEvent<ArenaWeaponLockComponent, ShotAttemptedEvent>(OnShotAttempt);
         SubscribeLocalEvent<ArenaWeaponLockComponent, IsEquippingTargetAttemptEvent>(OnEquipTargetAttempt);
         SubscribeLocalEvent<ArenaWeaponLockComponent, PickupAttemptEvent>(OnPickupAttempt);
+        SubscribeLocalEvent<ArenaWeaponLockComponent, DidEquipHandEvent>(OnDidEquipHand);
 
         SubscribeLocalEvent<ArenaAllowedWeaponComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<ArenaAllowedWeaponComponent, MeleeHitEvent>(OnMeleeHit);
@@ -55,6 +59,17 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     {
         if (IsHandLocked(args.Item))
             args.Cancel();
+    }
+
+    /// <summary>
+    /// Подстраховка к запрету подбора: некоторые пути выдачи кладут предмет прямо в руку через
+    /// <c>PickupOrDrop</c> в обход <see cref="PickupAttemptEvent"/> (рулетка оружия, наборы
+    /// <c>SpawnItemsOnUse</c>). Если так в руку попало заблокированное оружие/щит — роняем его сразу.
+    /// </summary>
+    private void OnDidEquipHand(Entity<ArenaWeaponLockComponent> ent, ref DidEquipHandEvent args)
+    {
+        if (IsHandLocked(args.Equipped))
+            _hands.TryDrop(ent.Owner, args.Equipped, checkActionBlocker: false);
     }
 
     /// <summary>Оружие или щит, не помеченные как разрешённые — такое в руках держать нельзя.</summary>
@@ -79,17 +94,28 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     /// </summary>
     private void OnEquipTargetAttempt(Entity<ArenaWeaponLockComponent> ent, ref IsEquippingTargetAttemptEvent args)
     {
-        var item = args.Equipment;
-
-        var isArmor = HasComp<ArmorComponent>(item);
-        var isSpeedBoost = TryComp<ClothingSpeedModifierComponent>(item, out var speed)
-            && (speed.WalkModifier > 1f || speed.SprintModifier > 1f);
-
-        if (!isArmor && !isSpeedBoost)
+        if (!IsSlotLocked(args.Equipment))
             return;
 
         args.Reason = "sandevistan-arena-gear-locked";
         args.Cancel();
+    }
+
+    /// <summary>
+    /// Носимая экипировка, запрещённая под арена-сандэвистаном: броня (<c>Armor</c>) и ускоряющая
+    /// одежда (<c>ClothingSpeedModifier</c> с бустом &gt; 1). Сам арена-сандэвистан и перчатки полярной
+    /// звезды исключены — иначе при выдаче замка слетел бы сам сандэвистан (у него есть буст скорости).
+    /// </summary>
+    private bool IsSlotLocked(EntityUid item)
+    {
+        if (HasComp<SandevistanArenaLockComponent>(item) || HasComp<ArenaAllowedWeaponComponent>(item))
+            return false;
+
+        if (HasComp<ArmorComponent>(item))
+            return true;
+
+        return TryComp<ClothingSpeedModifierComponent>(item, out var speed)
+            && (speed.WalkModifier > 1f || speed.SprintModifier > 1f);
     }
 
     /// <summary>
@@ -166,13 +192,36 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     private void OnEquipped(Entity<SandevistanArenaLockComponent> ent, ref ClothingGotEquippedEvent args)
     {
         EnsureComp<ArenaWeaponLockComponent>(args.Wearer);
+        DropLockedGear(args.Wearer);
+    }
 
-        // Уже зажатое оружие/щиты сразу выпадают из рук.
-        foreach (var held in _hands.EnumerateHeld(args.Wearer).ToList())
+    /// <summary>
+    /// Сбрасывает с бойца всё, что запрещено под арена-сандэвистаном: зажатое оружие/щиты выпадают
+    /// из рук, надетая броня и ускоряющая одежда — из слотов. Вызывается при надевании очков.
+    /// </summary>
+    private void DropLockedGear(EntityUid wearer)
+    {
+        // Оружие/щиты из рук.
+        foreach (var held in _hands.EnumerateHeld(wearer).ToList())
         {
             if (IsHandLocked(held))
-                _hands.TryDrop(args.Wearer, held, checkActionBlocker: false);
+                _hands.TryDrop(wearer, held, checkActionBlocker: false);
         }
+
+        // Броня и ускоряющая одежда из слотов. Снимаем после перечисления, чтобы не менять
+        // контейнеры прямо во время обхода.
+        if (!_inventory.TryGetContainerSlotEnumerator(wearer, out var slots, SlotFlags.WITHOUT_POCKET))
+            return;
+
+        var toUnequip = new List<string>();
+        while (slots.MoveNext(out var container, out var slotDef))
+        {
+            if (container.ContainedEntity is { } worn && IsSlotLocked(worn))
+                toUnequip.Add(slotDef.Name);
+        }
+
+        foreach (var slot in toUnequip)
+            _inventory.TryUnequip(wearer, slot, force: true);
     }
 
     private void OnUnequipped(Entity<SandevistanArenaLockComponent> ent, ref ClothingGotUnequippedEvent args)

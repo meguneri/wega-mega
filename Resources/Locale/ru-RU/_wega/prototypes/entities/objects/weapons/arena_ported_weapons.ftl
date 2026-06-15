@@ -37,3 +37,22 @@ ent-ArenaArrowXray = рентгеновская стрела
     .desc = Стрела из жёсткого света. Пробивает всё насквозь.
 ent-ArenaArrowIon = ионная стрела
     .desc = Стрела из жёсткого света. Вызывает ЭМИ при попадании.
+
+# Кубик лучника и его залоченные на один режим варианты лука
+ent-ArenaBowLuckDie = кубик лучника
+    .desc = Гадальный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 6.
+ent-ArenaBowHardlightDisabler = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+ent-ArenaBowHardlightFiery = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+ent-ArenaBowHardlightFreeze = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+ent-ArenaBowHardlightExplosive = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+ent-ArenaBowHardlightXray = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+ent-ArenaBowHardlightIon = { ent-ArenaBowHardlight }
+    .desc = { ent-ArenaBowHardlight.desc }
+
+# Попап при броске кубика лучника
+arena-bow-die-rolled = Выпало: { $roll }!

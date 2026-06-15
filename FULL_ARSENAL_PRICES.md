@@ -8,7 +8,7 @@
 - Гранаты (`FullArsenalGrenade`): **макс. 3**
 - Патроны (`FullArsenalAmmo`): **макс. 4**
 - Пустые сумки/рюкзаки/вещмешки (`FullArsenalBag`): **макс. 1**
-- Наборы лучника (`FullArsenalBowSet`): **макс. 1** (любой из пяти вариантов)
+- Наборы лучника (`FullArsenalBowSet`): **макс. 1** (любой из шести вариантов, включая кубик лучника)
 - Инжекторы (`FullArsenalInjector`): **макс. 1** (гипоспрей/гипоручка/гиподротик; к инжектору гарантированно докидывается минимум одна бутылочка с лекарством) (готовые комплекты-вещмешки с оружием/скафандрами сюда не входят)
 
 Броня и шлемы зафиксированы (2 / 2) во всех четырёх ящиках — с размером ящика они не растут.
@@ -505,6 +505,13 @@
 | Наручники | `Handcuffs` | 1 TC |
 | Фонарик | `FlashlightSeclite` | 1 TC |
 | Солнцезащитные очки | `ClothingEyesGlassesSunglasses` | 2 TC |
+| Очки охраны | `ClothingEyesGlassesSecurity` | 2 TC |
+| Мед-охранные очки | `ClothingEyesGlassesMedSecSunglasses` | 2 TC |
+| Медицинский визор | `ClothingEyesHudMedical` | 1 TC |
+| Визор охраны | `ClothingEyesHudSecurity` | 1 TC |
+| Мед-охранный визор | `ClothingEyesHudMedSec` | 2 TC |
+| Медицинский моновизор | `ClothingEyesEyepatchHudMedical` | 1 TC |
+| Моновизор охраны | `ClothingEyesEyepatchHudSecurity` | 1 TC |
 | Дымовая граната | `SmokeGrenade` | 1 TC |
 | Флэш | `Flash` | 1 TC |
 | Омега-мыло | `SoapOmega` | 2 TC |
@@ -651,12 +658,13 @@
 | Дестабилизирующий набор лучника | `ArenaDuffelBowSetNocturine` | 8 TC |
 | Набор купидона | `ArenaDuffelBowSetAphrodisiac` | 8 TC |
 | Элитный набор лучника | `ArenaDuffelBowSetElite` | 8 TC |
+| Кубик лучника | `ArenaBowLuckDie` | 8 TC |
 | Воин коммунизма | `ArenaCommunismSet` | 22 TC |
 | Набор гладиатора | `ArenaGladiatorSet` | 8 TC |
 | Набор самурая | `ArenaSamuraiSet` | 5 TC |
 | Набор стрелка | `ArenaWestSet` | 7 TC |
 | Набор капиталиста | `ArenaCapitalistSet` | 5 TC |
-| Чумба, ты совсем ё@%&тый? | `ArenaNorthStarSet` | 20 TC |
+| Чумба, ты совсем ё@%&тый? | `ArenaNorthStarSet` | 120 TC |
 | Набор святоши | `ArenaHolyManSet` | 6 TC |
 | Травматическая аптечка | `ArenaSurvivalTraumaKit` | 6 TC |
 | Противоожоговая аптечка | `ArenaSurvivalBurnKit` | 6 TC |

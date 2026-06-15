@@ -83,6 +83,12 @@ public sealed partial class SandevistanSystem : EntitySystem
 
         var curTime = _timing.CurTime;
 
+        // Slow already lapsed (burst ended; component not yet GC'd, e.g. on a paused arena map between
+        // rounds) — fire at full rate. Effects key off EndTime, not mere component existence, so the
+        // throttle can never outlive the burst.
+        if (ent.Comp.EndTime <= curTime)
+            return;
+
         // Still inside the stretched cooldown left by the previous shot.
         if (curTime < ent.Comp.NextAllowedShot)
         {
@@ -106,11 +112,20 @@ public sealed partial class SandevistanSystem : EntitySystem
     // not blocked outright.
     private void OnSlowedAttackRate(Entity<SandevistanSlowedComponent> ent, ref GetMeleeAttackRateEvent args)
     {
+        // Don't slow once the burst has lapsed, even if the component lingers a tick (see OnSlowedShotAttempt).
+        if (ent.Comp.EndTime <= _timing.CurTime)
+            return;
+
         args.Multipliers *= ent.Comp.SlowModifier;
     }
 
     private void OnRefreshSlowed(Entity<SandevistanSlowedComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
     {
+        // Don't re-apply the move slow after the burst lapsed: a stray RefreshMovementSpeedModifiers
+        // while the component is still pending removal would otherwise leave the mob crawling.
+        if (ent.Comp.EndTime <= _timing.CurTime)
+            return;
+
         args.ModifySpeed(ent.Comp.SlowModifier, ent.Comp.SlowModifier);
     }
 

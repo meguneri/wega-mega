@@ -1472,6 +1472,77 @@
   categories:
   - FullArsenal
 
+# HUD eyewear (med/sec) — glasses, visors and monovisors
+- type: listing
+  id: FullArsenalGlassesSecurity
+  name: full-arsenal-glasses-security-name
+  description: full-arsenal-glasses-security-desc
+  productEntity: ClothingEyesGlassesSecurity
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlassesMedSec
+  name: full-arsenal-glasses-medsec-name
+  description: full-arsenal-glasses-medsec-desc
+  productEntity: ClothingEyesGlassesMedSecSunglasses
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHudMedical
+  name: full-arsenal-hud-medical-name
+  description: full-arsenal-hud-medical-desc
+  productEntity: ClothingEyesHudMedical
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHudSecurity
+  name: full-arsenal-hud-security-name
+  description: full-arsenal-hud-security-desc
+  productEntity: ClothingEyesHudSecurity
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHudMedSec
+  name: full-arsenal-hud-medsec-name
+  description: full-arsenal-hud-medsec-desc
+  productEntity: ClothingEyesHudMedSec
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalEyepatchHudMedical
+  name: full-arsenal-eyepatch-hud-medical-name
+  description: full-arsenal-eyepatch-hud-medical-desc
+  productEntity: ClothingEyesEyepatchHudMedical
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalEyepatchHudSecurity
+  name: full-arsenal-eyepatch-hud-security-name
+  description: full-arsenal-eyepatch-hud-security-desc
+  productEntity: ClothingEyesEyepatchHudSecurity
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
 # uplink price: 1 TC
 - type: listing
   id: FullArsenalSmokeGrenade
@@ -5660,6 +5731,17 @@
   - FullArsenalBowSet
 
 - type: listing
+  id: FullArsenalBowLuckDie
+  name: full-arsenal-bow-luck-die-name
+  description: full-arsenal-bow-luck-die-desc
+  productEntity: ArenaBowLuckDie
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
+  - FullArsenalBowSet
+
+- type: listing
   id: FullArsenalCommunismSet
   name: full-arsenal-communism-set-name
   description: full-arsenal-communism-set-desc
@@ -5746,7 +5828,7 @@
   description: full-arsenal-north-star-set-desc
   productEntity: ArenaNorthStarSet
   cost:
-    Telecrystal: 20
+    Telecrystal: 120
   categories:
   - FullArsenal
 
