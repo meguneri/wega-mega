@@ -1,5 +1,6 @@
-# Кубик удачи лучника: используешь в руке — выпадает число 1-6, и в руку спавнится лук жёсткого
+# Кубик удачи лучника: используешь в руке — выпадает число 1-8, и в руку спавнится лук жёсткого
 # света, намертво залоченный на один тип стрел (режим переключить нельзя — что выпало, тем и стреляешь).
+# Восьмая грань — счастливая: выпадает полный лук со всеми режимами стрел.
 # Сами луки — варианты ArenaBowHardlight с единственным режимом в BatteryWeaponFireModes.
 
 - type: entity
@@ -7,7 +8,7 @@
   id: ArenaBowLuckDie
   name: кубик лучника
   suffix: Arena
-  description: Гадальный семигранный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 7 — все типы стрел.
+  description: Гадальный восьмигранный кубик Donk Co. Брось его — и судьба выберет, каким лучом жёсткого света тебе сегодня воевать. От 1 до 7 — отдельные типы стрел, а 8 — джекпот с луком на все режимы.
   components:
   - type: Sprite
     sprite: Objects/Fun/dice.rsi
@@ -17,7 +18,7 @@
   - type: ArenaBowLuckDie
     rollSound:
       collection: Dice
-    # Индекс = выпавшее число − 1. Семь граней — все типы стрел лука.
+    # Индекс = выпавшее число − 1. Восемь граней: 1-7 — залоченные типы стрел, 8 — полный лук.
     outcomes:
     - ArenaBowHardlightDisabler  # 1
     - ArenaBowHardlightFiery     # 2
@@ -26,6 +27,14 @@
     - ArenaBowHardlightXray      # 5
     - ArenaBowHardlightIon       # 6
     - ArenaBowHardlightEnergy    # 7
+    - ArenaBowHardlight          # 8 — все режимы
+    # Счастливая «семёрка»: вдобавок к луку под ноги падает гламурный набор.
+    bonusDrops:
+      7:
+      - ClothingUniformDressSexySunrise # коктейльное платье
+      - ClothingShoesWizard             # обувь волшебника
+      - ClothingHandsGoldBrasetGem      # браслет с сердечками
+      - ClothingHeadHatHolyWatermelonArena # арбузный ореол (баффнутый арена-вариант)
 
 # ── Залоченные на один режим варианты лука ──────────────────────────────────────
 # Каждый — ArenaBowHardlight с единственным режимом огня, так что цикл переключения
@@ -121,3 +130,25 @@
     fireModes:
     - proto: ArenaArrowEnergy
       fireCost: 100
+
+# Баффнутый арбузный ореол из «семёрки» кубика лучника: +20% ко всем резистам (коэффициент 0.8)
+# и +10% к скорости. База ClothingHeadHatHolyWatermelon не трогается — она ещё в наборе святого.
+- type: entity
+  parent: ClothingHeadHatHolyWatermelon
+  id: ClothingHeadHatHolyWatermelonArena
+  suffix: Arena
+  components:
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.8
+        Slash: 0.8
+        Piercing: 0.8
+        Heat: 0.8
+        Cold: 0.8
+        Shock: 0.8
+        Caustic: 0.8
+        Radiation: 0.8
+  - type: ClothingSpeedModifier
+    walkModifier: 1.1
+    sprintModifier: 1.1

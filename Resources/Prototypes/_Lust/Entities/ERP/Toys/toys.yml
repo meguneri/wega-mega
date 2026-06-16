@@ -388,12 +388,8 @@
     unequipDelay: 4
 
 
-- type: soundCollection
-  id: Whips
-  files:
-  - /Audio/_Lust/Interactions/whip/whip_1.ogg
-  - /Audio/_Lust/Interactions/whip/whip_2.ogg
-  - /Audio/_Lust/Interactions/whip/whip_3.ogg
+# Коллекция Whips определена в _Wega/SoundCollections/intimate.yml — здесь не дублируем
+# (дубликат ID ломал загрузку прототипов).
 
 - type: entity
   parent: BaseItem

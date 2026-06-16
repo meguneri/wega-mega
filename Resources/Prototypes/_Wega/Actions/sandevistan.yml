@@ -22,3 +22,11 @@
   components:
   - type: Action
     useDelay: 12
+
+# «Стоп-кадр»: перезарядка кнопки совпадает с cooldown импланта (10с).
+- type: entity
+  parent: ActionSandevistan
+  id: ActionSandevistanFreeze
+  components:
+  - type: Action
+    useDelay: 10

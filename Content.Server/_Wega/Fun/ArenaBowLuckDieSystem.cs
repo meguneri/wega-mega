@@ -9,9 +9,9 @@ using Robust.Shared.Random;
 namespace Content.Server._Wega.Fun;
 
 /// <summary>
-/// Бросок «кубика лучника» (<see cref="ArenaBowLuckDieComponent"/>): использование в руке катит d6,
-/// показывает выпавшее число и выдаёт в руку соответствующий залоченный лук жёсткого света. Кубик
-/// одноразовый — уходит в nullspace и удаляется.
+/// Бросок «кубика лучника» (<see cref="ArenaBowLuckDieComponent"/>): использование в руке катит d8,
+/// показывает выпавшее число и выдаёт в руку соответствующий лук жёсткого света (1-7 — залоченные
+/// типы стрел, 8 — полный лук со всеми режимами). Кубик одноразовый — уходит в nullspace и удаляется.
 /// </summary>
 public sealed partial class ArenaBowLuckDieSystem : EntitySystem
 {
@@ -40,6 +40,13 @@ public sealed partial class ArenaBowLuckDieSystem : EntitySystem
 
         var coords = Transform(args.User).Coordinates;
         var bow = Spawn(proto, coords);
+
+        // Бонусный дроп под ноги по выпавшему числу (например, наряд на «семёрку»).
+        if (comp.BonusDrops.TryGetValue(roll, out var bonus))
+        {
+            foreach (var bonusProto in bonus)
+                Spawn(bonusProto, coords);
+        }
 
         _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low,
             $"{ToPrettyString(args.User)} rolled {roll} on {ToPrettyString(uid)} and got {ToPrettyString(bow)}");

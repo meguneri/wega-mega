@@ -55,13 +55,16 @@
 # Падает на месте маяка (см. выше), исчезает через 44 секунды.
 # При спавне: колокол слышен всем на станции, ящик светится оранжевым.
 #
-# Лут рандомный — 5 независимых слотов (orGroup):
-#   Medicine    — всегда один предмет из полного пула медицины
-#   Ammo        — два независимых случайных типа боеприпасов
-#   Utility     — зарядник / дымовуха / флэш / стимпак или ничего (~17%)
+# Лут рандомный — независимые слоты (orGroup):
+#   Medicine    — один предмет из полного пула медицины
+#   Medicine2   — второй гарантированный медипен/аптечка
+#   Ammo        — случайный тип боеприпасов
+#   Ammo2       — второй независимый тип боеприпасов
+#   Throwable   — граната / метательное или ничего (~30%)
+#   Utility     — зарядник / стим / дымовуха / носимый щит или ничего
 #   Melee       — холодное оружие или ничего (~14%)
 #
-# Все предметы в группе — вес prob: 1 (равная вероятность).
+# Все предметы в группе — вес prob: 1 (равная вероятность), кроме помеченных явно.
 
 - type: entity
   parent: CrateGenericSteel
@@ -154,6 +157,29 @@
         orGroup: Medicine
         prob: 1
 
+      # ── Медицина: второй гарантированный слот (медипен/аптечка) ─────────────
+      - id: EmergencyMedipen
+        orGroup: Medicine2
+        prob: 1
+      - id: SurvivalMedipen
+        orGroup: Medicine2
+        prob: 1
+      - id: CombatMedipen
+        orGroup: Medicine2
+        prob: 1
+      - id: MedkitCombatFilled
+        orGroup: Medicine2
+        prob: 1
+      - id: MedkitBruteFilled
+        orGroup: Medicine2
+        prob: 1
+      - id: MedkitBurnFilled
+        orGroup: Medicine2
+        prob: 1
+      - id: MedkitAdvancedFilled
+        orGroup: Medicine2
+        prob: 1
+
       # ── Боеприпасы (два независимых случайных типа) ────────────────────────
       # Пистолетные
       - id: MagazineBoxPistol
@@ -226,7 +252,7 @@
         orGroup: Ammo
         prob: 1
 
-      # Второй независимый слот патронов
+      # ── Боеприпасы: второй независимый слот ────────────────────────────────
       - id: MagazineBoxPistol
         orGroup: Ammo2
         prob: 1
@@ -291,7 +317,35 @@
         orGroup: Ammo2
         prob: 1
 
-      # ── Утилита (или ничего — ~17%) ─────────────────────────────────────────
+      # ── Граната / метательное (или ничего) ─────────────────────────────────
+      - id: GrenadeFlashBang
+        orGroup: Throwable
+        prob: 1
+      - id: GrenadeShrapnel
+        orGroup: Throwable
+        prob: 1
+      - id: GrenadeIncendiary
+        orGroup: Throwable
+        prob: 1
+      - id: GrenadeStinger
+        orGroup: Throwable
+        prob: 1
+      - id: EmpGrenade
+        orGroup: Throwable
+        prob: 1
+      - id: ThrowingKnivesKit
+        orGroup: Throwable
+        prob: 1
+      # Кластерная граната — редкий, самый «злой» вариант слота.
+      - id: ClusterGrenade
+        orGroup: Throwable
+        prob: 0.25
+      - orGroup: Throwable   # ничего (~30%)
+        prob: 1
+      - orGroup: Throwable
+        prob: 1
+
+      # ── Утилита (или ничего) ────────────────────────────────────────────────
       - id: SmokeGrenade
         orGroup: Utility
         prob: 1
@@ -307,7 +361,14 @@
       - id: PortableRecharger
         orGroup: Utility
         prob: 1
-      - orGroup: Utility   # ничего не спавнится (~17%)
+      # Носимая защита — шанс «отыграться» при невыгодном размене.
+      - id: TelescopicShield
+        orGroup: Utility
+        prob: 1
+      - id: RiotShield
+        orGroup: Utility
+        prob: 1
+      - orGroup: Utility   # ничего не спавнится
         prob: 1
 
       # ── Холодное оружие (или ничего — ~14%) ────────────────────────────────

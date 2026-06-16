@@ -382,6 +382,12 @@ entity-effect-guidebook-ignite =
         *[other] ignite
     } the metabolizer
 
+entity-effect-guidebook-damage =
+    { $chance ->
+        [1] Наносит
+        *[other] наносят
+    } { $amount } ед. урона типа «{ $kind }»
+
 entity-effect-guidebook-make-sentient =
     { $chance ->
         [1] Makes

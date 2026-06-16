@@ -1,0 +1,58 @@
+# Взаимодействия с уникальными звуками (перенос аудио из _Lust в родную систему веги).
+- type: interactionAction
+  parent: BaseAliveMobAction
+  id: WhipInteraction
+  name: interaction-whip-name
+  cooldown: 3.5
+  conditions:
+  - !type:DistanceCondition
+    maxRange: 1.5
+  effects:
+  - !type:PlaySoundEffect
+    sound:
+      collection: Whips
+  - !type:StaminaDamageEffect
+    amount: 8
+  - !type:PopupMessageEffect
+    targetMessage: interaction-action-whip-target
+    otherMessage: interaction-action-whip-other
+  - !type:SendMessageEffect
+    message: interaction-action-whip-emote
+
+- type: interactionAction
+  parent: BaseAliveMobAction
+  id: LotsOfKissesInteraction
+  name: interaction-lots-of-kisses-name
+  cooldown: 4
+  conditions:
+  - !type:DistanceCondition
+    maxRange: 1.2
+  effects:
+  - !type:PlaySoundEffect
+    sound:
+      path: /Audio/_Wega/Interacrtions/Kisses/alot_of_kisses.ogg
+  - !type:PopupMessageEffect
+    targetMessage: interaction-action-lots-of-kisses-target
+    otherMessage: interaction-action-lots-of-kisses-other
+  - !type:SendMessageEffect
+    message: interaction-action-lots-of-kisses-emote
+  - !type:SpawnEntitiesEffect
+    spawnEntities: [ EffectHearts ]
+
+- type: interactionAction
+  parent: BaseAliveMobAction
+  id: SlurpInteraction
+  name: interaction-slurp-name
+  cooldown: 3
+  conditions:
+  - !type:DistanceCondition
+    maxRange: 1.2
+  effects:
+  - !type:PlaySoundEffect
+    sound:
+      collection: Slurps
+  - !type:PopupMessageEffect
+    targetMessage: interaction-action-slurp-target
+    otherMessage: interaction-action-slurp-other
+  - !type:SendMessageEffect
+    message: interaction-action-slurp-emote

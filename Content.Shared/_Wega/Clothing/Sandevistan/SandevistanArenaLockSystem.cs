@@ -17,6 +17,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 
 namespace Content.Shared._Wega.Clothing.Sandevistan;
 
@@ -32,6 +33,7 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private INetManager _net = default!;
 
     public override void Initialize()
     {
@@ -191,6 +193,11 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
 
     private void OnEquipped(Entity<SandevistanArenaLockComponent> ent, ref ClothingGotEquippedEvent args)
     {
+        // Серверная мутация: компонент сетевой и приедет клиенту состоянием. Добавлять его на клиенте
+        // (особенно во время сброса предсказанных сущностей) нельзя — это ломает обход коллекции.
+        if (_net.IsClient)
+            return;
+
         EnsureComp<ArenaWeaponLockComponent>(args.Wearer);
         DropLockedGear(args.Wearer);
     }
@@ -226,6 +233,10 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
 
     private void OnUnequipped(Entity<SandevistanArenaLockComponent> ent, ref ClothingGotUnequippedEvent args)
     {
+        // Снятие компонента — тоже только на сервере (см. OnEquipped).
+        if (_net.IsClient)
+            return;
+
         RemComp<ArenaWeaponLockComponent>(args.Wearer);
     }
 

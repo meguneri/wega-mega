@@ -1,0 +1,14 @@
+- type: soundCollection
+  id: Whips
+  files:
+    - /Audio/_Wega/Interacrtions/Whips/whip_1.ogg
+    - /Audio/_Wega/Interacrtions/Whips/whip_2.ogg
+    - /Audio/_Wega/Interacrtions/Whips/whip_3.ogg
+
+- type: soundCollection
+  id: Slurps
+  files:
+    - /Audio/_Wega/Interacrtions/Slurps/hlup_1.ogg
+    - /Audio/_Wega/Interacrtions/Slurps/hlup_2.ogg
+    - /Audio/_Wega/Interacrtions/Slurps/hlup_3.ogg
+    - /Audio/_Wega/Interacrtions/Slurps/hlup_4.ogg

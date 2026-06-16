@@ -369,6 +369,12 @@ entity-effect-guidebook-ignite =
         *[other] ignite
     } the metabolizer
 
+entity-effect-guidebook-damage =
+    { $chance ->
+        [1] Deals
+        *[other] deal
+    } { $amount } { $kind } damage
+
 entity-effect-guidebook-make-sentient =
     { $chance ->
         [1] Makes

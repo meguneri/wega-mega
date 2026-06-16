@@ -505,6 +505,10 @@
 | Наручники | `Handcuffs` | 1 TC |
 | Фонарик | `FlashlightSeclite` | 1 TC |
 | Солнцезащитные очки | `ClothingEyesGlassesSunglasses` | 2 TC |
+| Очки наёмника | `ClothingEyesGlassesMercenary` | 2 TC |
+| Визор ниндзя | `ClothingEyesVisorNinja` | 1 TC |
+| Нуар-очки | `ClothingEyesGlassesNoir` | 1 TC |
+| Тепловизор | `ClothingEyesGlassesThermal` | 3 TC |
 | Очки охраны | `ClothingEyesGlassesSecurity` | 2 TC |
 | Мед-охранные очки | `ClothingEyesGlassesMedSecSunglasses` | 2 TC |
 | Медицинский визор | `ClothingEyesHudMedical` | 1 TC |

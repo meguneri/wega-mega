@@ -21,3 +21,19 @@ interaction-harm-gun = Ударить оружеем
 # Specific
 interaction-harm-cultist-cut-vein = Порезать вену
 interaction-respiration-name = Сделать искуственное дыхание
+
+# Intimate (уникальные звуки)
+interaction-whip-name = Хлестнуть
+interaction-action-whip-emote = хлещет плетью {$target}
+interaction-action-whip-target = {$user} хлещет вас плетью!
+interaction-action-whip-other = {$user} хлещет плетью {$target}.
+
+interaction-lots-of-kisses-name = Осыпать поцелуями
+interaction-action-lots-of-kisses-emote = осыпает поцелуями {$target}
+interaction-action-lots-of-kisses-target = {$user} осыпает вас поцелуями.
+interaction-action-lots-of-kisses-other = {$user} осыпает поцелуями {$target}.
+
+interaction-slurp-name = Облизать
+interaction-action-slurp-emote = смачно облизывает {$target}
+interaction-action-slurp-target = {$user} смачно облизывает вас.
+interaction-action-slurp-other = {$user} смачно облизывает {$target}.

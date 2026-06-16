@@ -1543,6 +1543,47 @@
   categories:
   - FullArsenal
 
+# Protective / vision eyewear with arena-useful effects (flash immunity, thermal sight)
+- type: listing
+  id: FullArsenalGlassesMercenary
+  name: full-arsenal-glasses-mercenary-name
+  description: full-arsenal-glasses-mercenary-desc
+  productEntity: ClothingEyesGlassesMercenary
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalVisorNinja
+  name: full-arsenal-visor-ninja-name
+  description: full-arsenal-visor-ninja-desc
+  productEntity: ClothingEyesVisorNinja
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlassesNoir
+  name: full-arsenal-glasses-noir-name
+  description: full-arsenal-glasses-noir-desc
+  productEntity: ClothingEyesGlassesNoir
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlassesThermal
+  name: full-arsenal-glasses-thermal-name
+  description: full-arsenal-glasses-thermal-desc
+  productEntity: ClothingEyesGlassesThermal
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
 # uplink price: 1 TC
 - type: listing
   id: FullArsenalSmokeGrenade

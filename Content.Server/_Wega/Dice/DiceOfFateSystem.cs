@@ -112,17 +112,20 @@ public sealed partial class DiceOfFateSystem : EntitySystem
 
     private void ApplyRollResult(EntityUid diceUid, DiceOfFateComponent comp, DiceComponent dice, EntityUid user)
     {
-        var text = Loc.GetString("dice-component-on-roll-land", ("die", diceUid), ("currentSide", dice.CurrentValue));
-
         if (comp.Arena)
         {
-            // Арена: только бросивший видит результат, в админ-лог не пишем.
-            _popup.PopupEntity(text, diceUid, user);
+            // Арена: единый попап в стиле кубика лучника — число + что именно выпало.
+            // Только бросивший видит результат, в админ-лог не пишем.
+            var effect = Loc.GetString($"arena-war-die-effect-{dice.CurrentValue}");
+            var arenaText = Loc.GetString("arena-war-die-rolled",
+                ("roll", dice.CurrentValue), ("effect", effect));
+            _popup.PopupEntity(arenaText, user, user, PopupType.Large);
             RollArena(user, dice.CurrentValue);
         }
         else
         {
             // Обычный кубик: публичный попап + звук для всех в зоне видимости + админ-лог.
+            var text = Loc.GetString("dice-component-on-roll-land", ("die", diceUid), ("currentSide", dice.CurrentValue));
             _popup.PopupPredicted(text, diceUid, user);
             _audio.PlayPredicted(dice.Sound, diceUid, user);
             var success = RollClassic(user, dice.CurrentValue);
@@ -472,7 +475,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
 
     private bool ArenaMegaJackpot(EntityUid user)
     {
-        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, LabelBerserk, EffectWave);
+        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, EffectWave);
         TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         _hands.TryForcePickupAnyHand(user, SpawnArena(StrongWeapon, user));
@@ -493,7 +496,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
 
     private bool ArenaAdrenaline(EntityUid user)
     {
-        ApplyTempGlow(user, GlowSpeed, ArenaBuffSeconds, LabelSpeed, EffectWave);
+        ApplyTempGlow(user, GlowSpeed, ArenaBuffSeconds, EffectWave);
         TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
         return true;
     }
@@ -506,7 +509,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
 
     private bool ArenaTemporaryArmor(EntityUid user)
     {
-        ApplyTempGlow(user, GlowArmor, ArenaBuffSeconds, LabelArmor, EffectSparks);
+        ApplyTempGlow(user, GlowArmor, ArenaBuffSeconds, EffectSparks);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         return true;
     }
@@ -526,7 +529,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
 
     private bool ArenaBerserk(EntityUid user)
     {
-        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, LabelBerserk, EffectWave);
+        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, EffectWave);
         TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         return true;
@@ -535,7 +538,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
     // Грань 17: бита с нокбеком + временная броня — неожиданный вариант.
     private bool ArenaWarJackpot(EntityUid user)
     {
-        ApplyTempGlow(user, GlowArmor, ArenaBuffSeconds, LabelArmor, EffectSparks);
+        ApplyTempGlow(user, GlowArmor, ArenaBuffSeconds, EffectSparks);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         _hands.TryForcePickupAnyHand(user, SpawnArena(StrongWeaponBat, user));
         return true;
@@ -546,7 +549,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
     // Грань 8: короткий но мощный рывок — ×1.8 скорость на 10 сек.
     private bool ArenaRush(EntityUid user)
     {
-        ApplyTempGlow(user, GlowRush, ArenaRushSeconds, LabelRush, EffectWave);
+        ApplyTempGlow(user, GlowRush, ArenaRushSeconds, EffectWave);
         TempSpeedMultiplier(user, 1.8f, ArenaRushSeconds);
         return true;
     }
@@ -570,7 +573,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
     // Грань 15: периодическая регенерация — лечит постепенно за 30 сек.
     private bool ArenaRegen(EntityUid user)
     {
-        ApplyTempGlow(user, GlowRegen, ArenaBuffSeconds, LabelRegen, EffectRegen);
+        ApplyTempGlow(user, GlowRegen, ArenaBuffSeconds, EffectRegen);
         const int ticks = 10;
         const float interval = ArenaBuffSeconds / ticks; // 3 сек на тик
         var heal = new DamageSpecifier { DamageDict =
@@ -604,7 +607,7 @@ public sealed partial class DiceOfFateSystem : EntitySystem
     // Грань 18: берсерк (скорость + броня) + боевая аптечка.
     private bool ArenaBerserkAndMedkit(EntityUid user)
     {
-        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, LabelBerserk, EffectWave);
+        ApplyTempGlow(user, GlowBerserk, ArenaBuffSeconds, EffectWave);
         TempSpeedMultiplier(user, 1.3f, ArenaBuffSeconds);
         TempDamageMod(user, ArenaArmorMod, ArenaBuffSeconds);
         _hands.TryForcePickupAnyHand(user, SpawnArena(CombatMedkit, user));
@@ -644,14 +647,6 @@ public sealed partial class DiceOfFateSystem : EntitySystem
     private static readonly Color GlowBerserk = Color.FromHex("#AA44FF"); // фиолетовый — берсерк
     private static readonly Color GlowRegen   = Color.FromHex("#44FF88"); // зелёный   — регенерация
 
-    // Названия баффов для попапа над головой. Делаем подписи явными: что именно дал бафф,
-    // насколько и на сколько секунд — чтобы игрок сразу понимал, что ему выпало.
-    private const string LabelRush    = "⚡ РЫВОК — скорость ×1.8 на 10 сек";
-    private const string LabelSpeed   = "🏃 АДРЕНАЛИН — скорость ×1.3 на 30 сек";
-    private const string LabelArmor   = "🛡 БРОНЯ — урон по тебе −50% на 30 сек";
-    private const string LabelBerserk = "⚔ БЕРСЕРК — скорость + броня на 30 сек";
-    private const string LabelRegen   = "✚ РЕГЕНЕРАЦИЯ — лечение на 30 сек";
-
     /// <summary>
     /// Тройная пульсирующая вспышка + крупный попап над игроком (виден всем)
     /// + постоянное свечение на время баффа.
@@ -661,21 +656,10 @@ public sealed partial class DiceOfFateSystem : EntitySystem
     private static readonly EntProtoId EffectSparks = "EffectSparks";     // искры — броня
     private static readonly EntProtoId EffectRegen = "EffectDiceRegen";   // голограмма — регенерация
 
-    private void ApplyTempGlow(EntityUid user, Color color, float seconds, string label, EntProtoId effect)
+    private void ApplyTempGlow(EntityUid user, Color color, float seconds, EntProtoId effect)
     {
-        // Крупный попап — все вокруг видят название баффа. Время жизни попапа зависит от длины
-        // текста и для короткой надписи составляет ~0.7 c, поэтому повторяем его на всём
-        // протяжении баффа: иначе подпись пропадает почти мгновенно, хотя бафф длится seconds.
-        const float popupInterval = 1.5f;
-        var popupTicks = Math.Max(1, (int)MathF.Ceiling(seconds / popupInterval));
-        for (var i = 0; i < popupTicks; i++)
-        {
-            Timer.Spawn(TimeSpan.FromSeconds(popupInterval * i), () =>
-            {
-                if (!Deleted(user))
-                    _popup.PopupEntity(label, user, PopupType.LargeCaution);
-            });
-        }
+        // Текст результата показывает единый попап броска (arena-war-die-rolled), поэтому здесь
+        // подпись не дублируем — оставляем только визуал: эффект, вспышку и свечение на время баффа.
 
         // Анимация эффекта поверх игрока в момент срабатывания.
         Spawn(effect, Transform(user).Coordinates);
