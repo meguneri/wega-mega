@@ -26,3 +26,31 @@
   components:
   - type: DuelArenaEntry
     arenaIndex: 1
+
+# ── Персональные кнопки выбора спавна ─────────────────────────────────────────
+# В отличие от кнопок выше, эти переносят ТОЛЬКО нажавшего — на спавн-маркер арены с тем же
+# номером (spawnIndex). На хабе ставят по кнопке на каждое место спавна: каждый боец сам жмёт
+# «свою» и встаёт в нужный угол. arenaIndex — на какую арену (0 = первая); spawnIndex должен
+# совпадать с DuelArenaSpawn.spawnIndex нужного маркера на карте арены.
+
+- type: entity
+  parent: SignalButton
+  id: DuelArenaEntrySpawn0
+  name: arena spawn button (1)
+  suffix: Duel Rotation, Arena 0, Spawn 0
+  description: Кнопка входа на первую арену, спавн №1. Переносит только нажавшего на эту точку.
+  components:
+  - type: DuelArenaEntry
+    arenaIndex: 0
+    spawnIndex: 0
+
+- type: entity
+  parent: SignalButton
+  id: DuelArenaEntrySpawn1
+  name: arena spawn button (2)
+  suffix: Duel Rotation, Arena 0, Spawn 1
+  description: Кнопка входа на первую арену, спавн №2. Переносит только нажавшего на эту точку.
+  components:
+  - type: DuelArenaEntry
+    arenaIndex: 0
+    spawnIndex: 1

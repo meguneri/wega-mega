@@ -24,6 +24,7 @@
       FullArsenalGrenade: 3
       FullArsenalAmmo: 4
       FullArsenalBag: 1
+      FullArsenalFood: 3
 
 # Большой ящик полного арсенала — тот же пул, бюджет 120 ТК.
 # Броня/шлемы зафиксированы (2/2) как в обычном ящике; масштабируются только гранаты/патроны (×3).
@@ -53,6 +54,7 @@
       FullArsenalGrenade: 9
       FullArsenalAmmo: 12
       FullArsenalBag: 1
+      FullArsenalFood: 3
     # Гранатомёты/пусковые исключены из мега-ящика (кроме M90GL): слишком мощно на 120 ТК.
     excludedListings:
       - FullArsenalLauncherHydra
@@ -89,6 +91,7 @@
       FullArsenalGrenade: 5
       FullArsenalAmmo: 6
       FullArsenalBag: 1
+      FullArsenalFood: 3
 
 - type: entity
   parent: [ CrateSyndicate, StorePresetMeleeArsenal, BaseSyndicateContraband ]
@@ -115,6 +118,7 @@
       MeleeArsenalHead: 2
       MeleeArsenalGrenade: 3
       MeleeArsenalBag: 1
+      MeleeArsenalFood: 3
     # Гарант хотя бы одного
     guaranteedCategories:
       - MeleeArsenalWeapon

@@ -299,6 +299,17 @@
   categories:
   - FullArsenal
 
+# энергетическая голо-кирка: компактное энерго-оружие ближнего боя с шансом отражения
+- type: listing
+  id: FullArsenalHolopickaxe
+  name: full-arsenal-holopickaxe-name
+  description: full-arsenal-holopickaxe-desc
+  productEntity: EnergyPickaxe
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
 # ── PISTOLS ───────────────────────────────────────────────────────────────────
 
 - type: listing
@@ -3441,6 +3452,277 @@
     Telecrystal: 5
   categories:
   - FullArsenal
+
+# ── HEALING FOOD ──────────────────────────────────────────────────────────────
+# Лечащая еда: восстанавливает здоровье за счёт реагентов в составе
+# (Omnizine — лечит всё, Bicaridine — ушибы, Kelotane/Dermaline — ожоги,
+# Ichor — драконьи блюда, лечит всё + кровопотерю).
+
+# Omnizine 3 — лечит все типы урона
+- type: listing
+  id: FullArsenalAmbrosiaDeus
+  name: full-arsenal-ambrosia-deus-name
+  description: full-arsenal-ambrosia-deus-desc
+  productEntity: FoodAmbrosiaDeus
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Bicaridine 5 + Kelotane 5 (есть побочка: токсины)
+- type: listing
+  id: FullArsenalAmbrosiaVulgaris
+  name: full-arsenal-ambrosia-vulgaris-name
+  description: full-arsenal-ambrosia-vulgaris-desc
+  productEntity: FoodAmbrosiaVulgaris
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Dermaline 10 — ожоги
+- type: listing
+  id: FullArsenalAloe
+  name: full-arsenal-aloe-name
+  description: full-arsenal-aloe-desc
+  productEntity: FoodAloe
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Bicaridine 10 — ушибы
+- type: listing
+  id: FullArsenalPoppy
+  name: full-arsenal-poppy-name
+  description: full-arsenal-poppy-desc
+  productEntity: FoodPoppy
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Bicaridine 10 — ушибы
+- type: listing
+  id: FullArsenalLily
+  name: full-arsenal-lily-name
+  description: full-arsenal-lily-desc
+  productEntity: FoodLily
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Omnizine 8 — самый сильный лечащий приём пищи
+- type: listing
+  id: FullArsenalSaladAesir
+  name: full-arsenal-salad-aesir-name
+  description: full-arsenal-salad-aesir-desc
+  productEntity: FoodSaladAesir
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Bicaridine 15 + Kelotane 15 — ушибы + ожоги
+- type: listing
+  id: FullArsenalSaladHerb
+  name: full-arsenal-salad-herb-name
+  description: full-arsenal-salad-herb-desc
+  productEntity: FoodSaladHerb
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Omnizine 5 — лечит всё
+- type: listing
+  id: FullArsenalSaladEden
+  name: full-arsenal-salad-eden-name
+  description: full-arsenal-salad-eden-desc
+  productEntity: FoodSaladEden
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Omnizine 3 — лечит всё
+- type: listing
+  id: FullArsenalSoupNettle
+  name: full-arsenal-soup-nettle-name
+  description: full-arsenal-soup-nettle-desc
+  productEntity: FoodSoupNettle
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Omnizine 3 — тёплые донк-покеты лечат только в разогретом виде
+- type: listing
+  id: FullArsenalDonkpocketHonkWarm
+  name: full-arsenal-donkpocket-honk-warm-name
+  description: full-arsenal-donkpocket-honk-warm-desc
+  productEntity: FoodDonkpocketHonkWarm
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+- type: listing
+  id: FullArsenalDonkpocketBerryWarm
+  name: full-arsenal-donkpocket-berry-warm-name
+  description: full-arsenal-donkpocket-berry-warm-desc
+  productEntity: FoodDonkpocketBerryWarm
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+- type: listing
+  id: FullArsenalDonkpocketMothWarm
+  name: full-arsenal-donkpocket-moth-warm-name
+  description: full-arsenal-donkpocket-moth-warm-desc
+  productEntity: FoodDonkpocketMothWarm
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Omnizine 1
+- type: listing
+  id: FullArsenalShrimp
+  name: full-arsenal-shrimp-name
+  description: full-arsenal-shrimp-desc
+  productEntity: Shrimp
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Omnizine 2.5 + Saline 2.5 (восстанавливает и кровь)
+- type: listing
+  id: FullArsenalCactusFruit
+  name: full-arsenal-cactus-fruit-name
+  description: full-arsenal-cactus-fruit-desc
+  productEntity: FoodFloraCactusFruit
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# ── DRAGON MEAT (Ichor — лечит всё + кровопотерю) ─────────────────────────────
+
+# Ichor 10 — сырая драконья плоть
+- type: listing
+  id: FullArsenalDragonFlesh
+  name: full-arsenal-dragon-flesh-name
+  description: full-arsenal-dragon-flesh-desc
+  productEntity: FoodMeatDragon
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Ichor 5 — приготовленный стейк
+- type: listing
+  id: FullArsenalDragonSteak
+  name: full-arsenal-dragon-steak-name
+  description: full-arsenal-dragon-steak-desc
+  productEntity: FoodMeatDragonCooked
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Ichor 2 — сырая вырезка
+- type: listing
+  id: FullArsenalDragonCutletRaw
+  name: full-arsenal-dragon-cutlet-raw-name
+  description: full-arsenal-dragon-cutlet-raw-desc
+  productEntity: FoodMeatDragonCutlet
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Ichor 1 — приготовленная вырезка
+- type: listing
+  id: FullArsenalDragonCutlet
+  name: full-arsenal-dragon-cutlet-name
+  description: full-arsenal-dragon-cutlet-desc
+  productEntity: FoodMeatDragonCutletCooked
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
+
+# Ichor 2 — драконий тако
+- type: listing
+  id: FullArsenalDracoTaco
+  name: full-arsenal-draco-taco-name
+  description: full-arsenal-draco-taco-desc
+  productEntity: FoodTacoDragon
+  cost:
+    Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalFood
+  - MeleeArsenal
+  - MeleeArsenalFood
 
 # ── BACKPACKS ─────────────────────────────────────────────────────────────────
 

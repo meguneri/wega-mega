@@ -1,4 +1,6 @@
 using Content.Server.Administration.Logs;
+using Content.Server._Wega.Duel.Components;
+using Content.Server._Wega.Duel.Systems;
 using Content.Server.Hands.Systems;
 using Content.Shared.Database;
 using Content.Shared.Interaction.Events;
@@ -21,6 +23,7 @@ public sealed partial class ArenaBowLuckDieSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IAdminLogManager _adminLogger = default!;
+    [Dependency] private DuelArenaCleanupSystem _arenaCleanup = default!;
 
     public override void Initialize()
     {
@@ -38,14 +41,24 @@ public sealed partial class ArenaBowLuckDieSystem : EntitySystem
         var roll = _random.Next(1, comp.Outcomes.Count + 1);
         var proto = comp.Outcomes[roll - 1];
 
+        // Был ли сам кубик выдан ареной: если да — лук и бонусы тоже метим как выданное
+        // снаряжение, иначе свежезаспавненный лук жёсткого света переживёт очистку арены.
+        var issued = HasComp<ArenaIssuedItemComponent>(uid);
+
         var coords = Transform(args.User).Coordinates;
         var bow = Spawn(proto, coords);
+        if (issued)
+            _arenaCleanup.MarkIssuedRecursive(bow);
 
         // Бонусный дроп под ноги по выпавшему числу (например, наряд на «семёрку»).
         if (comp.BonusDrops.TryGetValue(roll, out var bonus))
         {
             foreach (var bonusProto in bonus)
-                Spawn(bonusProto, coords);
+            {
+                var dropped = Spawn(bonusProto, coords);
+                if (issued)
+                    _arenaCleanup.MarkIssuedRecursive(dropped);
+            }
         }
 
         _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low,

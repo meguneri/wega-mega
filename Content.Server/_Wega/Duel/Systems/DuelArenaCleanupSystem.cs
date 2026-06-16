@@ -46,9 +46,9 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     [Dependency] private DeviceLinkSystem _link = default!;
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private EntityStorageSystem _entityStorage = default!;
     [Dependency] private ModularSuitSystem _modSuit = default!;
     [Dependency] private SpawnerSystem _spawner = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private IMapManager _mapManager = default!;
 
@@ -117,45 +117,47 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     }
 
     /// <summary>
-    /// Извлекает из контейнеров предмета всех существ (мобов) перед его удалением, чтобы
-    /// каскадный <see cref="QueueDel"/> контейнера не удалил тело вместе с предметом
-    /// (например, соперника, спрятавшегося в коробке-невидимке <c>StealthBox</c>).
+    /// Извлекает всех существ (мобов) из удаляемого предмета перед его <see cref="QueueDel"/>, чтобы
+    /// каскадное удаление не забрало тело вместе с предметом (например, соперника, спрятавшегося в
+    /// коробке-невидимке <c>StealthBox</c>).
+    ///
+    /// Обходим именно ДЕТЕЙ трансформа, а не конкретные типы контейнеров: каскадное удаление идёт по
+    /// дереву трансформа, поэтому ловить мобов надо там же. Это покрывает любой случай — entity_storage
+    /// закрытой коробки, вложенный контейнер, да и моба, припаркованного прямо на трансформе предмета.
+    /// Каждого моба вынимаем из его контейнера (если он в нём) и реперентим на грид/карту, где лежит
+    /// удаляемый предмет — так он «выпадает» на месте коробки и переживает её удаление.
     /// </summary>
     private void EjectMobsBeforeDelete(EntityUid uid)
     {
-        // EntityStorage (коробка-невидимка StealthBox, шкафы и т.п.): жертва лежит в контейнере
-        // entity_storage. Извлекать её надо ЧЕРЕЗ систему хранилища, иначе прямое удаление из
-        // контейнера ненадёжно и моб удаляется каскадом вместе с коробкой при QueueDel. Remove
-        // реперентит контент на позицию коробки — моб «выпадает» и выживает.
-        if (TryComp<EntityStorageComponent>(uid, out var storage))
+        var dropParent = Transform(uid).ParentUid;
+        EjectMobsRecursive(uid, dropParent, Transform(uid).Coordinates);
+    }
+
+    private void EjectMobsRecursive(EntityUid uid, EntityUid dropParent, EntityCoordinates dropAt)
+    {
+        // Снимок детей: вынимание мобов меняет дерево трансформа во время обхода.
+        var children = new List<EntityUid>();
+        var en = Transform(uid).ChildEnumerator;
+        while (en.MoveNext(out var child))
+            children.Add(child);
+
+        foreach (var child in children)
         {
-            foreach (var contained in storage.Contents.ContainedEntities.ToList())
+            if (HasComp<MobStateComponent>(child))
             {
-                if (HasComp<MobStateComponent>(contained))
-                    _entityStorage.Remove(contained, uid, storage);
-                else
-                    EjectMobsBeforeDelete(contained);
+                // Вынимаем из контейнера (entity_storage коробки и т.п.) — это уже реперентит моба
+                // наружу. На всякий случай дотягиваем его до грида/карты предмета, чтобы он
+                // гарантированно не остался ребёнком удаляемой сущности.
+                if (_container.TryGetContainingContainer((child, null), out var cont))
+                    _container.Remove(child, cont, force: true, reparent: true);
+
+                if (Transform(child).ParentUid == uid && dropParent.IsValid())
+                    _transform.SetCoordinates(child, dropAt);
             }
-        }
-
-        if (!TryComp<ContainerManagerComponent>(uid, out var manager))
-            return;
-
-        foreach (var container in _container.GetAllContainers(uid, manager))
-        {
-            // EntityStorage-контейнер уже разобран выше — не трогаем повторно.
-            if (TryComp(uid, out EntityStorageComponent? es) && container.ID == es.Contents.ID)
-                continue;
-
-            // ToList: извлечение мобов модифицирует контейнер во время обхода.
-            foreach (var contained in container.ContainedEntities.ToList())
+            else
             {
-                if (HasComp<MobStateComponent>(contained))
-                    // reparent — моб «выпадает» из коробки на её место, а не удаляется с ней.
-                    _container.Remove(contained, container, force: true);
-                else
-                    // Моб мог быть вложен глубже (контейнер в контейнере) — проверяем рекурсивно.
-                    EjectMobsBeforeDelete(contained);
+                // Моб может сидеть глубже (контейнер в контейнере, ящик в ящике) — идём рекурсивно.
+                EjectMobsRecursive(child, dropParent, dropAt);
             }
         }
     }
@@ -259,6 +261,13 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     /// </summary>
     public void MarkIssuedRecursive(EntityUid uid)
     {
+        // Никогда не метим живых существ (игроков/NPC) и не лезем в их инвентарь. Иначе боец,
+        // залезший в выданную ареной коробку-невидимку, получал бы метку «выданного снаряжения»
+        // (через OnIssuedInsert при вкладывании в контейнер коробки) и удалялся очисткой — даже
+        // после выхода из коробки. Вещи в инвентаре моба — это его собственность, не снаряжение арены.
+        if (HasComp<MobStateComponent>(uid))
+            return;
+
         EnsureComp<ArenaIssuedItemComponent>(uid);
 
         // Пристёгнутая одежда (шлем хардсьюта и т.п.): её сущность (ClothingUid) при
@@ -344,6 +353,15 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         {
             if (!InRange(itemUid, origin, originGrid, range))
                 continue;
+
+            // Подстраховка: живое существо (боец) никогда не считается выданным снаряжением и не
+            // удаляется. Если метка как-то на него попала (например, со старого бага коробки) —
+            // снимаем её и пропускаем, чтобы очистка не убила игрока.
+            if (HasComp<MobStateComponent>(itemUid))
+            {
+                RemCompDeferred<ArenaIssuedItemComponent>(itemUid);
+                continue;
+            }
 
             // Заякоренное не трогаем (стены, мебель карты) — КРОМЕ рун: руны размещаются на
             // снапгриде заякоренными, и без этого исключения нарисованные за бой руны

@@ -3871,3 +3871,323 @@
   categories:
   - MeleeArsenal
   - MeleeArsenalWeapon
+
+# ── HOLOPICKAXE (перенос из обычного ящика) ───────────────────────────────────
+
+- type: listing
+  id: MeleeArsenalHolopickaxe
+  name: full-arsenal-holopickaxe-name
+  description: full-arsenal-holopickaxe-desc
+  productEntity: EnergyPickaxe
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+# ── BATONS & STUNPROD (перенос из обычного ящика) ─────────────────────────────
+
+- type: listing
+  id: MeleeArsenalStunbaton
+  name: full-arsenal-stunbaton-name
+  description: full-arsenal-stunbaton-desc
+  productEntity: Stunbaton
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalStunbatonBlueshield
+  name: full-arsenal-stunbaton-blueshield-name
+  description: full-arsenal-stunbaton-blueshield-desc
+  productEntity: StunbatonBlueshield
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalTelescopicbaton
+  name: full-arsenal-telescopic-baton-name
+  description: full-arsenal-telescopic-baton-desc
+  productEntity: Telescopicbaton
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalTruncheon
+  name: full-arsenal-truncheon-name
+  description: full-arsenal-truncheon-desc
+  productEntity: Truncheon
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalStunprod
+  name: full-arsenal-stunprod-name
+  description: full-arsenal-stunprod-desc
+  productEntity: Stunprod
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+# ── HUD-ОПТИКА (перенос из обычного ящика) ────────────────────────────────────
+
+- type: listing
+  id: MeleeArsenalGlassesSecurity
+  name: full-arsenal-glasses-security-name
+  description: full-arsenal-glasses-security-desc
+  productEntity: ClothingEyesGlassesSecurity
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalGlassesMedSec
+  name: full-arsenal-glasses-medsec-name
+  description: full-arsenal-glasses-medsec-desc
+  productEntity: ClothingEyesGlassesMedSecSunglasses
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalHudMedical
+  name: full-arsenal-hud-medical-name
+  description: full-arsenal-hud-medical-desc
+  productEntity: ClothingEyesHudMedical
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalHudSecurity
+  name: full-arsenal-hud-security-name
+  description: full-arsenal-hud-security-desc
+  productEntity: ClothingEyesHudSecurity
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalHudMedSec
+  name: full-arsenal-hud-medsec-name
+  description: full-arsenal-hud-medsec-desc
+  productEntity: ClothingEyesHudMedSec
+  cost:
+    Telecrystal: 2
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalEyepatchHudMedical
+  name: full-arsenal-eyepatch-hud-medical-name
+  description: full-arsenal-eyepatch-hud-medical-desc
+  productEntity: ClothingEyesEyepatchHudMedical
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+- type: listing
+  id: MeleeArsenalEyepatchHudSecurity
+  name: full-arsenal-eyepatch-hud-security-name
+  description: full-arsenal-eyepatch-hud-security-desc
+  productEntity: ClothingEyesEyepatchHudSecurity
+  cost:
+    Telecrystal: 1
+  categories:
+  - MeleeArsenal
+
+# ── БРОНЯ: МОД-скафандры и усиленный костюм (перенос из обычного ящика) ───────
+
+- type: listing
+  id: MeleeArsenalModSuitResponsory
+  name: full-arsenal-modsuit-responsory-name
+  description: full-arsenal-modsuit-responsory-desc
+  productEntity: ClothingModularControllerResponsoryPreassembled
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitInquisitory
+  name: full-arsenal-modsuit-inquisitory-name
+  description: full-arsenal-modsuit-inquisitory-desc
+  productEntity: ClothingModularControllerInquisitoryPreassembled
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitStandard
+  name: full-arsenal-modsuit-standard-name
+  description: full-arsenal-modsuit-standard-desc
+  productEntity: ClothingModularControllerStandardPreassembled
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitCivilian
+  name: full-arsenal-modsuit-civilian-name
+  description: full-arsenal-modsuit-civilian-desc
+  productEntity: ClothingModularControllerCivilianPreassembled
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitCosmohonk
+  name: full-arsenal-modsuit-cosmohonk-name
+  description: full-arsenal-modsuit-cosmohonk-desc
+  productEntity: ClothingModularControllerCosmohonkPreassembled
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitLoader
+  name: full-arsenal-modsuit-loader-name
+  description: full-arsenal-modsuit-loader-desc
+  productEntity: ClothingModularControllerLoaderPreassembled
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitPrototype
+  name: full-arsenal-modsuit-prototype-name
+  description: full-arsenal-modsuit-prototype-desc
+  productEntity: ClothingModularControllerPrototypePreassembled
+  cost:
+    Telecrystal: 4
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitAtmospheric
+  name: full-arsenal-modsuit-atmospheric-name
+  description: full-arsenal-modsuit-atmospheric-desc
+  productEntity: ClothingModularControllerAtmosphericPreassembled
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitAsteroid
+  name: full-arsenal-modsuit-asteroid-name
+  description: full-arsenal-modsuit-asteroid-desc
+  productEntity: ClothingModularControllerAsteroidPreassembled
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitResearch
+  name: full-arsenal-modsuit-research-name
+  description: full-arsenal-modsuit-research-desc
+  productEntity: ClothingModularControllerResearchPreassembled
+  cost:
+    Telecrystal: 6
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitAdvanced
+  name: full-arsenal-modsuit-advanced-name
+  description: full-arsenal-modsuit-advanced-desc
+  productEntity: ClothingModularControllerAdvancedPreassembled
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitMagnate
+  name: full-arsenal-modsuit-magnate-name
+  description: full-arsenal-modsuit-magnate-desc
+  productEntity: ClothingModularControllerMagnatePreassembled
+  cost:
+    Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitRescue
+  name: full-arsenal-modsuit-rescue-name
+  description: full-arsenal-modsuit-rescue-desc
+  productEntity: ClothingModularControllerRescuePreassembled
+  cost:
+    Telecrystal: 11
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitSafeguard
+  name: full-arsenal-modsuit-safeguard-name
+  description: full-arsenal-modsuit-safeguard-desc
+  productEntity: ClothingModularControllerSafeguardPreassembled
+  cost:
+    Telecrystal: 12
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalModSuitCorporate
+  name: full-arsenal-modsuit-corporate-name
+  description: full-arsenal-modsuit-corporate-desc
+  productEntity: ClothingModularControllerCorporatePreassembled
+  cost:
+    Telecrystal: 14
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorExplorerSuitReinforced
+  name: full-arsenal-armor-explorer-reinforced-name
+  description: full-arsenal-armor-explorer-reinforced-desc
+  productEntity: ClothingOuterArmorExplorerSuitReinforced
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor

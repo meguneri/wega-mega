@@ -138,6 +138,18 @@
   name: store-category-full-arsenal
   priority: 5
 
+# Лечащая еда — лимит 3 на ящик.
+- type: storeCategory
+  id: FullArsenalFood
+  name: store-category-full-arsenal
+  priority: 5
+
+# Лечащая еда в ящике ближнего боя — лимит 3 на ящик.
+- type: storeCategory
+  id: MeleeArsenalFood
+  name: store-category-full-arsenal
+  priority: 5
+
 #melee arsenal crate pool
 - type: storeCategory
   id: MeleeArsenal

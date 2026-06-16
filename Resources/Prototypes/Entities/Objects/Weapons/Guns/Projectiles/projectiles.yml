@@ -882,6 +882,14 @@
     layers:
       - state: grenade
   - type: ExplodeOnTrigger
+  # China Lake: в точке взрыва спавнит ударную волну (RMC) + дым — как у осколочного снаряда.
+  - type: SpawnEntityTableOnTrigger
+    useMapCoords: true
+    table: !type:AllSelector
+      children:
+      - id: CMExplosionEffectGrenade
+      - id: RMCExplosionEffectGrenadeShockWave
+      - id: ExplosionEffectSmoke
   - type: Explosive
     explosionType: Default
     totalIntensity: 150 # a ~2 tile radius

@@ -26,6 +26,7 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
+| Голо-кирка | `EnergyPickaxe` | 5 TC |
 | Бейсбольная бита | `BaseBallBat` | 1 TC |
 | Копьё | `Spear` | 1 TC |
 | Костяное копьё | `SpearBone` | 1 TC |
@@ -494,6 +495,34 @@
 | Экстренный медипен | `EmergencyMedipen` | 2 TC |
 | Медипен выживания | `SurvivalMedipen` | 2 TC |
 | Боевой медипен | `CombatMedipen` | 4 TC |
+
+---
+
+## Лечащая еда
+
+Восстанавливает здоровье за счёт реагентов в составе (Omnizine — лечит всё, Bicaridine — ушибы, Kelotane/Dermaline — ожоги, Ichor — драконьи блюда, лечит всё + кровопотерю).
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Амброзия деус | `FoodAmbrosiaDeus` | 2 TC |
+| Амброзия вульгарис | `FoodAmbrosiaVulgaris` | 1 TC |
+| Алоэ | `FoodAloe` | 1 TC |
+| Мак | `FoodPoppy` | 1 TC |
+| Лилия | `FoodLily` | 1 TC |
+| Божественный салат | `FoodSaladAesir` | 3 TC |
+| Травяной салат | `FoodSaladHerb` | 2 TC |
+| Эдемский салат | `FoodSaladEden` | 2 TC |
+| Крапивный суп | `FoodSoupNettle` | 1 TC |
+| Тёплый хонк-покет | `FoodDonkpocketHonkWarm` | 1 TC |
+| Тёплый ягодный покет | `FoodDonkpocketBerryWarm` | 1 TC |
+| Тёплый моль-покет | `FoodDonkpocketMothWarm` | 1 TC |
+| Креветка | `Shrimp` | 1 TC |
+| Плод кактуса-бочонка | `FoodFloraCactusFruit` | 1 TC |
+| Драконья плоть | `FoodMeatDragon` | 2 TC |
+| Драконий стейк | `FoodMeatDragonCooked` | 2 TC |
+| Сырая драконья вырезка | `FoodMeatDragonCutlet` | 1 TC |
+| Драконья вырезка | `FoodMeatDragonCutletCooked` | 1 TC |
+| Драко (тако) | `FoodTacoDragon` | 1 TC |
 
 ---
 

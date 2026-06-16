@@ -19,4 +19,15 @@ public sealed partial class DuelArenaEntryComponent : Component
     /// </summary>
     [DataField]
     public int ArenaIndex;
+
+    /// <summary>
+    /// Если задан — кнопка персональная: переносит ТОЛЬКО нажавшего на спавн-маркер арены с этим
+    /// номером (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>). Так на хабе ставят по кнопке на
+    /// каждое место спавна («Спавн 1», «Спавн 2», …) и каждый боец выбирает свой угол сам.
+    ///
+    /// Если null — старое поведение: кнопка собирает всех мобов на гриде хаба и раскидывает их по
+    /// спавн-маркерам арены по кругу.
+    /// </summary>
+    [DataField]
+    public int? SpawnIndex;
 }

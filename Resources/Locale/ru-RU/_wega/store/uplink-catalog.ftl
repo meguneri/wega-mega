@@ -387,6 +387,46 @@ full-arsenal-bottle-phalanximine-desc = Бутылка Фаланксимина 
 full-arsenal-bottle-hyronalin-name = Гиронализ (бутылка)
 full-arsenal-bottle-hyronalin-desc = Бутылка Гиронализа — лечит радиационное облучение.
 
+# Healing food
+full-arsenal-ambrosia-deus-name = Амброзия деус
+full-arsenal-ambrosia-deus-desc = Священное растение с Омнизином — лечит все типы урона. Лучшая натуральная аптечка.
+full-arsenal-ambrosia-vulgaris-name = Амброзия вульгарис
+full-arsenal-ambrosia-vulgaris-desc = Лечит ушибы и ожоги, но с побочкой — в составе есть токсины. Жуйте осторожно.
+full-arsenal-aloe-name = Алоэ
+full-arsenal-aloe-desc = Сочный лист алоэ с Дермалином — лечит ожоги.
+full-arsenal-poppy-name = Мак
+full-arsenal-poppy-desc = Цветок мака с Бикардином — лечит ушибы.
+full-arsenal-lily-name = Лилия
+full-arsenal-lily-desc = Лилия с Бикардином — лечит ушибы.
+full-arsenal-salad-aesir-name = Божественный салат
+full-arsenal-salad-aesir-desc = Салат с большой дозой Омнизина — самый сильный лечащий приём пищи.
+full-arsenal-salad-herb-name = Травяной салат
+full-arsenal-salad-herb-desc = Травяной салат с Бикардином и Келотаном — лечит ушибы и ожоги.
+full-arsenal-salad-eden-name = Эдемский салат
+full-arsenal-salad-eden-desc = Райский салат с Омнизином — лечит все типы урона.
+full-arsenal-soup-nettle-name = Крапивный суп
+full-arsenal-soup-nettle-desc = Горячий крапивный суп с Омнизином — лечит все типы урона.
+full-arsenal-donkpocket-honk-warm-name = Тёплый хонк-покет
+full-arsenal-donkpocket-honk-warm-desc = Разогретый хонк-покет с Омнизином — лечит, пока тёплый.
+full-arsenal-donkpocket-berry-warm-name = Тёплый ягодный покет
+full-arsenal-donkpocket-berry-warm-desc = Разогретый ягодный покет с Омнизином — лечит, пока тёплый.
+full-arsenal-donkpocket-moth-warm-name = Тёплый моль-покет
+full-arsenal-donkpocket-moth-warm-desc = Разогретый моль-покет с Омнизином — лечит, пока тёплый.
+full-arsenal-shrimp-name = Креветка
+full-arsenal-shrimp-desc = Креветка с щепоткой Омнизина — немного восстанавливает здоровье.
+full-arsenal-cactus-fruit-name = Плод кактуса-бочонка
+full-arsenal-cactus-fruit-desc = Сочный плод кактуса с Омнизином и Салином — лечит и восполняет кровь.
+full-arsenal-dragon-flesh-name = Драконья плоть
+full-arsenal-dragon-flesh-desc = Сырая драконья плоть, насыщенная Ихором — мощно лечит все типы урона и кровопотерю.
+full-arsenal-dragon-steak-name = Драконий стейк
+full-arsenal-dragon-steak-desc = Приготовленный драконий стейк с Ихором — лечит все типы урона и кровопотерю.
+full-arsenal-dragon-cutlet-raw-name = Сырая драконья вырезка
+full-arsenal-dragon-cutlet-raw-desc = Сырая драконья вырезка с Ихором — лечит все типы урона.
+full-arsenal-dragon-cutlet-name = Драконья вырезка
+full-arsenal-dragon-cutlet-desc = Приготовленная драконья вырезка с Ихором — немного лечит все типы урона.
+full-arsenal-draco-taco-name = Драко
+full-arsenal-draco-taco-desc = Острый тако с драконьим мясом и Ихором — лечит и согревает.
+
 # Webbing
 full-arsenal-belt-military-webbing-name = Армейская РПС
 full-arsenal-belt-military-webbing-desc = Военная разгрузочная система для переноски боеприпасов и снаряжения.
@@ -1000,6 +1040,8 @@ full-arsenal-blood-blade-name = Кровавый клинок
 full-arsenal-blood-blade-desc = Застывший меч из жидкой крови. 30 урона режущим за удар.
 full-arsenal-unreal-sword-name = Нереальный меч
 full-arsenal-unreal-sword-desc = Бьёт всеми типами урона сразу — но крохотными долями. Чистая эстетика, в бою бесполезен.
+full-arsenal-holopickaxe-name = Голо-кирка
+full-arsenal-holopickaxe-desc = Компактная энергетическая голо-кирка ближнего боя с шансом отразить выстрел. Бьёт слабее энергомеча, но всегда под рукой.
 
 # Пистолеты и револьверы
 full-arsenal-pistol-flintlock-name = Кремнёвый пистолет

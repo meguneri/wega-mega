@@ -27,6 +27,13 @@ public sealed partial class DuelRotationSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private DuelArenaSystem _arena = default!;
 
+    /// <summary>
+    /// Защита от рекурсии: пока идёт предзагрузка арен, загрузка карты-арены может сама содержать
+    /// контроллер ротации (или в <see cref="DuelRotationComponent.Arenas"/> по ошибке попал путь
+    /// этой же карты). Без этого флага его MapInit запустил бы предзагрузку снова — и так до зависания.
+    /// </summary>
+    private bool _preloading;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -36,6 +43,14 @@ public sealed partial class DuelRotationSystem : EntitySystem
 
     private void OnMapInit(EntityUid uid, DuelRotationComponent comp, MapInitEvent args)
     {
+        // Этот контроллер появился из карты, загружаемой как арена — нейтрализуем его, чтобы он
+        // не запустил предзагрузку тех же арен повторно (иначе бесконечная рекурсия и зависание).
+        if (_preloading)
+        {
+            comp.Loaded = true;
+            return;
+        }
+
         PreloadArenas(uid, comp);
     }
 
@@ -50,23 +65,34 @@ public sealed partial class DuelRotationSystem : EntitySystem
         if (comp.Loaded)
             return;
 
-        var opts = new DeserializationOptions { InitializeMaps = true };
-
-        for (var i = 0; i < comp.Arenas.Count; i++)
+        // Помечаем загруженным сразу и поднимаем флаг реентерабельности до начала загрузки карт:
+        // TryLoadMap инициализирует карту синхронно, и если на ней есть контроллер ротации, его
+        // MapInit не должен снова войти сюда.
+        comp.Loaded = true;
+        _preloading = true;
+        try
         {
-            var path = comp.Arenas[i];
-            if (!_mapLoader.TryLoadMap(path, out var map, out _, opts))
-            {
-                Log.Error($"[duel-rotation] не удалось загрузить арену {path} (индекс {i})");
-                continue;
-            }
+            var opts = new DeserializationOptions { InitializeMaps = true };
 
-            var mapId = map.Value.Comp.MapId;
-            comp.LoadedArenas[i] = mapId;
-            LinkArenaTrackers(mapId, uid);
+            for (var i = 0; i < comp.Arenas.Count; i++)
+            {
+                var path = comp.Arenas[i];
+                if (!_mapLoader.TryLoadMap(path, out var map, out _, opts))
+                {
+                    Log.Error($"[duel-rotation] не удалось загрузить арену {path} (индекс {i})");
+                    continue;
+                }
+
+                var mapId = map.Value.Comp.MapId;
+                comp.LoadedArenas[i] = mapId;
+                LinkArenaTrackers(mapId, uid);
+            }
+        }
+        finally
+        {
+            _preloading = false;
         }
 
-        comp.Loaded = true;
         Log.Info($"[duel-rotation] предзагружено арен: {comp.LoadedArenas.Count} из {comp.Arenas.Count}");
     }
 
@@ -107,7 +133,10 @@ public sealed partial class DuelRotationSystem : EntitySystem
         }
 
         var nextIndex = _random.Pick(candidates);
-        MoveAndStart(comp, nextIndex, duelists, startRound: true);
+        // Только переносим бойцов на следующую арену — раунд НЕ вооружаем автоматически.
+        // Старт объявляется лишь после нажатия кнопки старта на самой арене (как и первый раунд),
+        // иначе «дуэль началась» печаталось бы до нажатия кнопки.
+        MoveAndStart(comp, nextIndex, duelists, startRound: false);
     }
 
     /// <summary>
@@ -168,6 +197,13 @@ public sealed partial class DuelRotationSystem : EntitySystem
             return;
         }
 
+        // Персональная кнопка: переносим ТОЛЬКО нажавшего на спавн с заданным номером.
+        if (comp.SpawnIndex is { } spawnIndex)
+        {
+            MoveOneToSpawn(ctrl, comp.ArenaIndex, args.User, spawnIndex);
+            return;
+        }
+
         var grid = Transform(uid).GridUid;
         if (grid == null)
             return;
@@ -184,17 +220,55 @@ public sealed partial class DuelRotationSystem : EntitySystem
         MoveAndStart(ctrl, comp.ArenaIndex, fighters, startRound: false);
     }
 
-    /// <summary>Все спавн-маркеры на карте.</summary>
+    /// <summary>
+    /// Переносит одного бойца на спавн-маркер арены с номером <paramref name="spawnIndex"/>
+    /// (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>). Используется персональными кнопками входа
+    /// на хабе — каждый игрок выбирает свой угол сам. Бой не вооружается (как и общий вход).
+    /// </summary>
+    private void MoveOneToSpawn(DuelRotationComponent comp, int arenaIndex, EntityUid fighter, int spawnIndex)
+    {
+        if (!comp.LoadedArenas.TryGetValue(arenaIndex, out var map))
+        {
+            Log.Warning($"[duel-rotation] арена (индекс {arenaIndex}) не загружена — вход отменён");
+            return;
+        }
+
+        if (!TryGetSpawnByIndex(map, spawnIndex, out var target))
+        {
+            Log.Warning($"[duel-rotation] на арене (индекс {arenaIndex}) нет спавн-маркера с номером {spawnIndex} — вход отменён");
+            return;
+        }
+
+        _transform.SetCoordinates(fighter, Transform(target).Coordinates);
+    }
+
+    /// <summary>Спавн-маркер на карте с заданным номером (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>).</summary>
+    private bool TryGetSpawnByIndex(MapId mapId, int spawnIndex, out EntityUid spawn)
+    {
+        var query = EntityQueryEnumerator<DuelArenaSpawnComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var marker, out var xform))
+        {
+            if (xform.MapID != mapId || marker.SpawnIndex != spawnIndex)
+                continue;
+            spawn = uid;
+            return true;
+        }
+        spawn = default;
+        return false;
+    }
+
+    /// <summary>Все спавн-маркеры на карте, отсортированные по номеру (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>)
+    /// для предсказуемого распределения при общем входе.</summary>
     private List<EntityUid> GetSpawns(MapId mapId)
     {
-        var result = new List<EntityUid>();
+        var result = new List<(int Index, EntityUid Uid)>();
         var query = EntityQueryEnumerator<DuelArenaSpawnComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
+        while (query.MoveNext(out var uid, out var marker, out var xform))
         {
             if (xform.MapID == mapId)
-                result.Add(uid);
+                result.Add((marker.SpawnIndex, uid));
         }
-        return result;
+        return result.OrderBy(s => s.Index).Select(s => s.Uid).ToList();
     }
 
     /// <summary>Первый трекер дуэли на карте.</summary>

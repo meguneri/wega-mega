@@ -278,6 +278,66 @@
 | Бутылочка хироналина | `ChemistryBottleHyronalin` | 1 TC |
 | Кремовый банановый пирог | `FoodPieBananaCream` | 5 TC |
 
+## Лечащая еда (лимит 3 за открытие)
+
+Восстанавливает здоровье за счёт реагентов в составе (Omnizine — лечит всё, Bicaridine — ушибы, Kelotane/Dermaline — ожоги, Ichor — драконьи блюда, лечит всё + кровопотерю).
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Амброзия деус | `FoodAmbrosiaDeus` | 2 TC |
+| Амброзия вульгарис | `FoodAmbrosiaVulgaris` | 1 TC |
+| Алоэ | `FoodAloe` | 1 TC |
+| Мак | `FoodPoppy` | 1 TC |
+| Лилия | `FoodLily` | 1 TC |
+| Божественный салат | `FoodSaladAesir` | 3 TC |
+| Травяной салат | `FoodSaladHerb` | 2 TC |
+| Эдемский салат | `FoodSaladEden` | 2 TC |
+| Крапивный суп | `FoodSoupNettle` | 1 TC |
+| Тёплый хонк-покет | `FoodDonkpocketHonkWarm` | 1 TC |
+| Тёплый ягодный покет | `FoodDonkpocketBerryWarm` | 1 TC |
+| Тёплый моль-покет | `FoodDonkpocketMothWarm` | 1 TC |
+| Креветка | `Shrimp` | 1 TC |
+| Плод кактуса-бочонка | `FoodFloraCactusFruit` | 1 TC |
+| Драконья плоть | `FoodMeatDragon` | 2 TC |
+| Драконий стейк | `FoodMeatDragonCooked` | 2 TC |
+| Сырая драконья вырезка | `FoodMeatDragonCutlet` | 1 TC |
+| Драконья вырезка | `FoodMeatDragonCutletCooked` | 1 TC |
+| Драко (тако) | `FoodTacoDragon` | 1 TC |
+
+## Перенос из обычного ящика (оружие ближнего боя, броня, HUD)
+
+| Предмет | Entity | Цена |
+|---|---|---|
+| Голо-кирка | `EnergyPickaxe` | 5 TC |
+| Электродубинка | `Stunbaton` | 3 TC |
+| Электродубинка Блюшилда | `StunbatonBlueshield` | 4 TC |
+| Телескопическая дубинка | `Telescopicbaton` | 3 TC |
+| Дубинка | `Truncheon` | 2 TC |
+| Электрошокер (самодельный) | `Stunprod` | 2 TC |
+| Очки-ХУД охраны | `ClothingEyesGlassesSecurity` | 2 TC |
+| Очки-ХУД мед/сек | `ClothingEyesGlassesMedSecSunglasses` | 2 TC |
+| Медицинский ХУД | `ClothingEyesHudMedical` | 1 TC |
+| ХУД охраны | `ClothingEyesHudSecurity` | 1 TC |
+| Мед/сек ХУД | `ClothingEyesHudMedSec` | 2 TC |
+| Медицинский ХУД-наглазник | `ClothingEyesEyepatchHudMedical` | 1 TC |
+| ХУД-наглазник охраны | `ClothingEyesEyepatchHudSecurity` | 1 TC |
+| МОД Ответный | `ClothingModularControllerResponsoryPreassembled` | 12 TC |
+| МОД Инквизиторский | `ClothingModularControllerInquisitoryPreassembled` | 12 TC |
+| МОД Стандартный | `ClothingModularControllerStandardPreassembled` | 3 TC |
+| МОД Гражданский | `ClothingModularControllerCivilianPreassembled` | 3 TC |
+| МОД Космохонк | `ClothingModularControllerCosmohonkPreassembled` | 3 TC |
+| МОД Погрузчик | `ClothingModularControllerLoaderPreassembled` | 4 TC |
+| МОД Прототип | `ClothingModularControllerPrototypePreassembled` | 4 TC |
+| МОД Атмосферный | `ClothingModularControllerAtmosphericPreassembled` | 6 TC |
+| МОД Астероидный | `ClothingModularControllerAsteroidPreassembled` | 6 TC |
+| МОД Исследовательский | `ClothingModularControllerResearchPreassembled` | 6 TC |
+| МОД Продвинутый | `ClothingModularControllerAdvancedPreassembled` | 8 TC |
+| МОД Магнат | `ClothingModularControllerMagnatePreassembled` | 8 TC |
+| МОД Спасательный | `ClothingModularControllerRescuePreassembled` | 11 TC |
+| МОД Страж | `ClothingModularControllerSafeguardPreassembled` | 12 TC |
+| МОД Корпоративный | `ClothingModularControllerCorporatePreassembled` | 14 TC |
+| Усиленный костюм исследователя | `ClothingOuterArmorExplorerSuitReinforced` | 7 TC |
+
 ## Рюкзаки и сумки
 
 | Предмет | Entity | Цена |

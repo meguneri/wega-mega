@@ -12,4 +12,11 @@ namespace Content.Server._Wega.Duel.Components;
 [RegisterComponent]
 public sealed partial class DuelArenaSpawnComponent : Component
 {
+    /// <summary>
+    /// Номер точки спавна на арене. Персональные кнопки входа (<see cref="DuelArenaEntryComponent.SpawnIndex"/>)
+    /// ссылаются на этот номер, чтобы посадить конкретного бойца на конкретный спавн. При обычном
+    /// (общем) входе маркеры также сортируются по этому номеру для предсказуемого распределения.
+    /// </summary>
+    [DataField]
+    public int SpawnIndex;
 }
