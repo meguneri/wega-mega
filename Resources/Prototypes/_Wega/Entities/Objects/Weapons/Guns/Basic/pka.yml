@@ -22,6 +22,8 @@
   - type: GunWieldBonus
     minAngle: 0
     maxAngle: 0
+  - type: Wieldable
+    wielded: false
 
 - type: entity
   name: magmite proto-kinetic accelerator
