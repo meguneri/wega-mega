@@ -27,7 +27,7 @@
   # сильнее «замирание» врагов (мир вокруг почти стоит).
   - type: Sandevistan
     duration: 6
-    cooldown: 13
+    cooldown: 12
     action: ActionSandevistanArena
     speedModifier: 2.0
     # Враги замедлены, но не «заморожены» — у них остаётся шанс отреагировать.
@@ -76,5 +76,9 @@
     duration: 8
     cooldown: 10
     action: ActionSandevistanFreeze
+    # Личная скорость носителя выше арена-версии (×2.0) — мир почти замер, можно двигаться вольготно.
+    speedModifier: 2.2
     # 0.001 = замедление на 99.9% всего, что попало под эффект.
     slowModifier: 0.001
+    # Густой шлейф послеобразов, как у арена-версии.
+    afterimageInterval: 0.05

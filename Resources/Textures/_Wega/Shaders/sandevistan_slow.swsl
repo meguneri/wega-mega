@@ -1,0 +1,24 @@
+// Sandevistan victim overlay: when you are caught in someone's "bullet time", the world
+// goes cold and desaturated with darkened edges. Drawn fullscreen while slowed.
+
+uniform sampler2D SCREEN_TEXTURE;
+// 0..1 fade factor (eased in/out by the overlay so it doesn't pop on the 0.6s refresh window).
+uniform highp float intensity;
+
+void fragment() {
+    highp vec2 coord = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
+    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, coord);
+
+    // Desaturate, then push toward a cold blue (the Sandevistan trail colour).
+    highp float gray = zGrayscale(color.rgb);
+    highp vec3 cold = vec3(gray) * vec3(0.55, 0.75, 1.15);
+    highp vec3 graded = mix(color.rgb, cold, 0.6);
+
+    // Vignette: darken toward the edges so attention pulls to the centre.
+    highp vec2 d = coord - vec2(0.5);
+    highp float vig = 1.0 - dot(d, d) * 1.6;
+    vig = clamp(vig, 0.0, 1.0);
+    graded *= mix(1.0, vig, 0.7);
+
+    COLOR = vec4(mix(color.rgb, graded, intensity), color.a);
+}

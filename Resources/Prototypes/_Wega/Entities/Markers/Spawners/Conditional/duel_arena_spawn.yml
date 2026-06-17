@@ -6,14 +6,26 @@
 # На одиночную арену (без контроллера ротации) не влияет — там бойцы не телепортируются, маркеры
 # просто игнорируются. Безопасно оставлять на карте в любом случае.
 
+# Базовый маркер (spawnIndex 0). Это же «Спавн 1» для персональных кнопок входа
+# (DuelArenaEntrySpawn0). Для второго спавна ставь DuelArenaSpawnMarker1 и т.д.
 - type: entity
   id: DuelArenaSpawnMarker
   parent: MarkerBase
   name: Duel Arena Spawn
-  suffix: Duel Rotation
+  suffix: Duel Rotation, Spawn 0
   description: Невидимая точка появления бойца на арене. Контроллер ротации телепортирует сюда дуэлянтов.
   components:
   - type: Sprite
     layers:
       - state: green
   - type: DuelArenaSpawn
+    spawnIndex: 0
+
+# Второй спавн (spawnIndex 1) — цель персональной кнопки DuelArenaEntrySpawn1 («Спавн 2»).
+- type: entity
+  parent: DuelArenaSpawnMarker
+  id: DuelArenaSpawnMarker1
+  suffix: Duel Rotation, Spawn 1
+  components:
+  - type: DuelArenaSpawn
+    spawnIndex: 1

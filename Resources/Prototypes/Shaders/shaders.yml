@@ -155,3 +155,13 @@
   id: NullDamage
   kind: source
   path: "/Textures/_Wega/Shaders/nulldamage.swsl"
+
+- type: shader
+  id: SandevistanSlow
+  kind: source
+  path: "/Textures/_Wega/Shaders/sandevistan_slow.swsl"
+
+- type: shader
+  id: SandevistanActive
+  kind: source
+  path: "/Textures/_Wega/Shaders/sandevistan_active.swsl"

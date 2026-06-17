@@ -1,0 +1,16 @@
+// Sandevistan WEARER overlay: while your own burst is active the screen takes on a faint cool
+// blue wash — a subtle "in the zone" hint. No contrast/desaturation, no strobe; just a light tint.
+
+uniform sampler2D SCREEN_TEXTURE;
+// 0..1 fade factor (eased in/out by the overlay).
+uniform highp float intensity;
+
+void fragment() {
+    highp vec2 coord = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
+    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, coord);
+
+    // Gentle push toward a cool blue, keeping the original brightness/contrast.
+    highp vec3 tinted = color.rgb * vec3(0.92, 0.97, 1.08);
+
+    COLOR = vec4(mix(color.rgb, tinted, intensity), color.a);
+}

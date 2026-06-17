@@ -1,0 +1,100 @@
+# Сандэвистан как подкожный имплант (хромированная имплантация, а не носимые очки).
+# Действие выдаётся через SubdermalImplant.implantAction — система SandevistanSystem не меняется,
+# событие SandevistanActivateEvent приходит на сам имплант, носитель — в args.Performer.
+# Ставится имплантером (инъекция). Арена-версия остаётся отдельной носимой («полярная звезда»).
+
+# ── Импланты ────────────────────────────────────────────────────────────────────
+
+# Базовый сандэвистан: рывок скорости + снижение урона + замедление окружения.
+- type: entity
+  parent: BaseSubdermalImplant
+  id: SandevistanImplant
+  name: имплант «сандэвистан»
+  description: Военная киберимплантация рефлексов. На миг разгоняет носителя до предела — мир будто замирает.
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Medical/Surgery/implants.rsi
+    state: syndicate
+    color: "#ff3b3b"
+  - type: SubdermalImplant
+    implantAction: ActionSandevistan
+  # Значения берутся из дефолтов SandevistanComponent (как у базовых очков):
+  # duration 6 / cooldown 30 / speedModifier 1.8 / slowModifier 0.35 / affectWholeMap true.
+  - type: Sandevistan
+
+# «Стоп-кадр»: экспериментальный имплант, замедляющий вокруг практически всё (на 99.9%).
+- type: entity
+  parent: BaseSubdermalImplant
+  id: SandevistanImplantFreeze
+  name: имплант «сандэвистан стоп-кадр»
+  description: "Экспериментальная киберимплантация: при активации мир вокруг почти полностью замирает."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Medical/Surgery/implants.rsi
+    state: syndicate
+    color: "#b23bff"
+  - type: SubdermalImplant
+    implantAction: ActionSandevistanFreeze
+  # Те же значения, что у носимого «стоп-кадра» (ClothingEyesSandevistanFreeze).
+  - type: Sandevistan
+    duration: 8
+    cooldown: 10
+    speedModifier: 2.2
+    # 0.001 = замедление на 99.9% всего, что попало под эффект.
+    slowModifier: 0.001
+
+# ── Имплантеры (инъекция) ─────────────────────────────────────────────────────────
+
+- type: entity
+  parent: BaseImplantOnlyImplanterSyndi
+  id: SandevistanImplanter
+  name: имплантер «сандэвистан»
+  components:
+  - type: Implanter
+    implant: SandevistanImplant
+
+- type: entity
+  parent: BaseImplantOnlyImplanterSyndi
+  id: SandevistanImplanterFreeze
+  name: имплантер «сандэвистан стоп-кадр»
+  components:
+  - type: Implanter
+    implant: SandevistanImplantFreeze
+
+# ── Арена «полярная звезда» (имплант-версия носимой) ──────────────────────────────
+# Замок оружия/брони (ArenaWeaponLock) и пассивные бонусы (SandevistanArenaPassive: броня 15%,
+# evasion 8%, +10% скорости) приезжают на носителя через implantComponents — добавляются при
+# вживлении, снимаются при извлечении. Ограничения работают так же, как у носимых очков.
+- type: entity
+  parent: BaseSubdermalImplant
+  id: SandevistanImplantArena
+  name: имплант «сандэвистан полярная звезда»
+  description: "Боевая киберимплантация для арены: разгоняет носителя и замирает мир. Замкнута на стиль полярной звезды — в руках не стерпит ничего, кроме её перчаток."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Medical/Surgery/implants.rsi
+    state: syndicate
+    color: "#3ba0ff"
+  # Маркер арена-замка: его ImplantImplanted/Removed события вешают/снимают замок на носителе
+  # с reference-count (тот же замок, что у носимых очков, не конфликтует при наличии обоих).
+  - type: SandevistanArenaLock
+  - type: SubdermalImplant
+    implantAction: ActionSandevistanArena
+    implantComponents:
+    - type: SandevistanArenaPassive
+  # Значения совпадают с носимой ареной (ClothingEyesSandevistanArena).
+  - type: Sandevistan
+    duration: 6
+    cooldown: 12
+    speedModifier: 2.0
+    slowModifier: 0.3
+    dodgeChance: 0.1
+    afterimageInterval: 0.05
+
+- type: entity
+  parent: BaseImplantOnlyImplanterSyndi
+  id: SandevistanImplanterArena
+  name: имплантер «сандэвистан полярная звезда»
+  components:
+  - type: Implanter
+    implant: SandevistanImplantArena

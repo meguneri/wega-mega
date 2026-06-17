@@ -10,6 +10,7 @@ using Content.Shared.Projectiles;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
@@ -38,6 +39,22 @@ public sealed partial class SandevistanSystem : EntitySystem
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
+    /// <summary>Low, slowed-down phase tone played to a victim the moment bullet-time grabs them.</summary>
+    private static readonly SoundSpecifier SlowedSound = new SoundPathSpecifier("/Audio/Machines/phasein.ogg",
+        AudioParams.Default.WithPitchScale(0.6f).WithVolume(-4f));
+
+    /// <summary>Looping energetic hum the wearer hears for the whole burst ("you're in the zone").</summary>
+    private static readonly SoundSpecifier WearerLoopSound = new SoundPathSpecifier("/Audio/Weapons/ebladehum.ogg",
+        AudioParams.Default.WithLoop(true).WithPitchScale(1.25f).WithVolume(-10f));
+
+    /// <summary>Looping deep "time-warp" drone every slowed victim hears while caught in bullet-time.</summary>
+    private static readonly SoundSpecifier SlowLoopSound = new SoundPathSpecifier("/Audio/Effects/Grenades/Supermatter/supermatter_loop.ogg",
+        AudioParams.Default.WithLoop(true).WithPitchScale(0.7f).WithVolume(-8f));
+
+    /// <summary>Soft "phase out / time resumes" cue when the burst ends or is interrupted.</summary>
+    private static readonly SoundSpecifier EndSound = new SoundPathSpecifier("/Audio/Machines/phasein.ogg",
+        AudioParams.Default.WithPitchScale(0.85f).WithVolume(-6f));
+
     public override void Initialize()
     {
         base.Initialize();
@@ -50,6 +67,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         SubscribeLocalEvent<SandevistanSlowedComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSlowed);
         SubscribeLocalEvent<SandevistanSlowedComponent, GetMeleeAttackRateEvent>(OnSlowedAttackRate);
         SubscribeLocalEvent<SandevistanSlowedComponent, ShotAttemptedEvent>(OnSlowedShotAttempt);
+        SubscribeLocalEvent<SandevistanActiveComponent, ShotAttemptedEvent>(OnActiveShotAttempt);
     }
 
     // While the burst is active the wearer is reacting at superhuman speed: roll a chance to fully
@@ -78,6 +96,22 @@ public sealed partial class SandevistanSystem : EntitySystem
     // same stretched cadence we slow its movement/melee by. Server-authoritative throttle.
     private void OnSlowedShotAttempt(Entity<SandevistanSlowedComponent> ent, ref ShotAttemptedEvent args)
     {
+        ThrottleShot(ref args, ent.Comp.EndTime, ent.Comp.SlowModifier, ref ent.Comp.NextAllowedShot);
+    }
+
+    // The wearer's own ranged fire is stretched by the same factor too: shooting/throwing carry the
+    // bullet-time slowdown, so guns are no free advantage — only melee stays at the wearer's full speed.
+    private void OnActiveShotAttempt(Entity<SandevistanActiveComponent> ent, ref ShotAttemptedEvent args)
+    {
+        ThrottleShot(ref args, ent.Comp.EndTime, ent.Comp.SlowModifier, ref ent.Comp.NextAllowedShot);
+    }
+
+    /// <summary>
+    /// Shared fire-rate throttle: while the burst/slow is live, stretch the gun's fire interval by
+    /// <paramref name="slowModifier"/> and gate the next shot against server time. Server-authoritative.
+    /// </summary>
+    private void ThrottleShot(ref ShotAttemptedEvent args, TimeSpan endTime, float slowModifier, ref TimeSpan nextAllowedShot)
+    {
         if (!_net.IsServer || args.Cancelled)
             return;
 
@@ -86,11 +120,11 @@ public sealed partial class SandevistanSystem : EntitySystem
         // Slow already lapsed (burst ended; component not yet GC'd, e.g. on a paused arena map between
         // rounds) — fire at full rate. Effects key off EndTime, not mere component existence, so the
         // throttle can never outlive the burst.
-        if (ent.Comp.EndTime <= curTime)
+        if (endTime <= curTime)
             return;
 
         // Still inside the stretched cooldown left by the previous shot.
-        if (curTime < ent.Comp.NextAllowedShot)
+        if (curTime < nextAllowedShot)
         {
             args.Cancel();
             return;
@@ -99,11 +133,10 @@ public sealed partial class SandevistanSystem : EntitySystem
         // Stretch the gun's own fire interval by the same factor we slow everything else.
         var gun = args.Used.Comp;
         var baseRate = gun.FireRateModified > 0f ? gun.FireRateModified : gun.FireRate;
-        if (baseRate <= 0f || ent.Comp.SlowModifier <= 0f)
+        if (baseRate <= 0f || slowModifier <= 0f)
             return;
 
-        var slowedInterval = TimeSpan.FromSeconds(1f / baseRate / ent.Comp.SlowModifier);
-        ent.Comp.NextAllowedShot = curTime + slowedInterval;
+        nextAllowedShot = curTime + TimeSpan.FromSeconds(1f / baseRate / slowModifier);
     }
 
     // Caught in bullet time, a mob's swings slow to a crawl as well as its feet — otherwise a wide
@@ -139,11 +172,12 @@ public sealed partial class SandevistanSystem : EntitySystem
 
     private void OnActivate(Entity<SandevistanComponent> ent, ref SandevistanActivateEvent args)
     {
-        args.Handled = true;
-
         var wearer = args.Performer;
         var curTime = _timing.CurTime;
 
+        // Leave args.Handled = false on rejection: marking it handled would make the action system
+        // (re)apply the action's useDelay, putting an already-ready button straight back on cooldown
+        // ("повторная перезарядка"). We only own the cooldown via NextActivation below.
         if (ent.Comp.NextActivation is { } next && next > curTime)
         {
             _popup.PopupClient(Loc.GetString("sandevistan-recharging"), wearer, wearer);
@@ -153,6 +187,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         if (HasComp<SandevistanActiveComponent>(wearer))
             return;
 
+        args.Handled = true;
         ent.Comp.NextActivation = curTime + ent.Comp.Cooldown;
         Dirty(ent);
 
@@ -172,6 +207,11 @@ public sealed partial class SandevistanSystem : EntitySystem
         _movement.RefreshMovementSpeedModifiers(wearer);
         _audio.PlayPredicted(ent.Comp.ActivationSound, wearer, wearer);
         _popup.PopupClient(Loc.GetString("sandevistan-activated"), wearer, wearer, PopupType.Large);
+
+        // Looping "in the zone" hum for the whole burst. Server-spawned so it persists and can be
+        // stopped on expiry; the activation one-shot above stays predicted for snappy feedback.
+        if (_net.IsServer)
+            active.LoopSound = _audio.PlayPvs(WearerLoopSound, wearer)?.Entity;
     }
 
     private void OnRefreshSpeed(Entity<SandevistanActiveComponent> ent, ref RefreshMovementSpeedModifiersEvent args)
@@ -195,6 +235,9 @@ public sealed partial class SandevistanSystem : EntitySystem
         {
             if (active.EndTime <= curTime)
             {
+                // Cut the looping hum and snap "time resumes" cue as the burst ends/interrupts.
+                _audio.Stop(active.LoopSound);
+                _audio.PlayPvs(EndSound, uid);
                 RemComp<SandevistanActiveComponent>(uid);
                 _movement.RefreshMovementSpeedModifiers(uid);
                 continue;
@@ -203,7 +246,8 @@ public sealed partial class SandevistanSystem : EntitySystem
             SlowMobs(uid, active, curTime);
             SlowProjectiles(uid, active, curTime);
             SlowThrownItems(uid, active, curTime, frameTime);
-            SpawnAfterimages((uid, active), curTime);
+            // Afterimages spawn client-side (SandevistanAfterimageSpawnerSystem) so they appear at
+            // the locally-predicted position with no network lag — otherwise they trail far behind.
         }
 
         // Expire the mob slow once the user has moved away / the burst ended.
@@ -213,6 +257,7 @@ public sealed partial class SandevistanSystem : EntitySystem
             if (slowed.EndTime > curTime)
                 continue;
 
+            _audio.Stop(slowed.LoopSound);
             RemComp<SandevistanSlowedComponent>(uid);
             _movement.RefreshMovementSpeedModifiers(uid);
         }
@@ -283,6 +328,18 @@ public sealed partial class SandevistanSystem : EntitySystem
         // would thrash the movement system.
         if (changed)
             _movement.RefreshMovementSpeedModifiers(mob);
+
+        // First time the victim is caught this burst: tell them why the world just crawled. The
+        // fullscreen "bullet time" overlay is driven client-side by SandevistanSlowedComponent;
+        // here we add the in-fiction feedback (popup + a low phase-out tone). Server-only so it
+        // fires once per entry, not every refresh tick.
+        if (isNew && _net.IsServer)
+        {
+            _popup.PopupEntity(Loc.GetString("sandevistan-slowed-victim"), mob, mob, PopupType.MediumCaution);
+            _audio.PlayEntity(SlowedSound, mob, mob);
+            // Looping "time-warp" drone for as long as the victim stays slowed; stopped when the slow lifts.
+            slowed.LoopSound = _audio.PlayPvs(SlowLoopSound, mob)?.Entity;
+        }
     }
 
     /// <summary>
@@ -301,10 +358,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         var query = EntityQueryEnumerator<ProjectileComponent, PhysicsComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var proj, out var body, out var xform))
         {
-            // The user's own shots keep full speed — only the world around them slows.
-            if (proj.Shooter == user)
-                continue;
-
+            // The wearer's own shots are slowed too — bullet-time applies the same drag to their fire.
             if (xform.MapID != userMap)
                 continue;
 
@@ -346,10 +400,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         var query = EntityQueryEnumerator<ThrownItemComponent, PhysicsComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var thrown, out var body, out var xform))
         {
-            // The user's own thrown items keep full speed — only the world around them slows.
-            if (thrown.Thrower == user)
-                continue;
-
+            // The wearer's own thrown items are slowed too — same bullet-time drag as their shots.
             if (xform.MapID != userMap)
                 continue;
 
@@ -379,29 +430,5 @@ public sealed partial class SandevistanSystem : EntitySystem
             _physics.SetLinearVelocity(uid, body.LinearVelocity * active.SlowModifier, body: body);
             _physics.SetAngularVelocity(uid, body.AngularVelocity * active.SlowModifier, body: body);
         }
-    }
-
-    /// <summary>
-    /// Leaves a trail of translucent blue "ghosts" behind the moving user (David Martinez
-    /// style). Bare entities are spawned at the user's spot; the client copies the user's sprite
-    /// onto them, and they fade out via <see cref="TimedDespawnComponent"/>.
-    /// </summary>
-    private void SpawnAfterimages(Entity<SandevistanActiveComponent> ent, TimeSpan curTime)
-    {
-        if (curTime < ent.Comp.NextAfterimageTime)
-            return;
-
-        ent.Comp.NextAfterimageTime = curTime + ent.Comp.AfterimageInterval;
-
-        var xform = Transform(ent.Owner);
-        var afterimage = Spawn(null, xform.Coordinates);
-
-        var comp = EnsureComp<SandevistanAfterimageComponent>(afterimage);
-        comp.SourceEntity = ent.Owner;
-        comp.DirectionOverride = xform.LocalRotation.GetCardinalDir();
-        Dirty(afterimage, comp);
-
-        var despawn = EnsureComp<TimedDespawnComponent>(afterimage);
-        despawn.Lifetime = (float) ent.Comp.AfterimageLifetime.TotalSeconds;
     }
 }

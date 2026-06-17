@@ -23,6 +23,12 @@ public sealed partial class SandevistanArenaLockComponent : Component
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ArenaWeaponLockComponent : Component
 {
+    /// <summary>
+    /// How many independent sources currently impose the lock (worn arena eyewear and/or the arena
+    /// implant). The component — and thus the lock — lifts only when this drops back to zero, so
+    /// taking off the glasses never removes a lock the implant is still holding. Server-side bookkeeping.
+    /// </summary>
+    public int Sources;
 }
 
 /// <summary>

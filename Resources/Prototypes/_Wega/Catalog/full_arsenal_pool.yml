@@ -6156,6 +6156,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalNorthStarImplantSet
+  name: full-arsenal-north-star-implant-set-name
+  description: full-arsenal-north-star-implant-set-desc
+  productEntity: ArenaNorthStarImplantSet
+  cost:
+    Telecrystal: 120
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalSurvivalTraumaKit
   name: full-arsenal-survival-trauma-name
   description: full-arsenal-survival-trauma-desc

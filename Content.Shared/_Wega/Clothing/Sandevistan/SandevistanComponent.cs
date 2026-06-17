@@ -64,7 +64,7 @@ public sealed partial class SandevistanComponent : Component
 
     /// <summary>How long each afterimage lingers before fading out.</summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan AfterimageLifetime = TimeSpan.FromSeconds(0.6);
+    public TimeSpan AfterimageLifetime = TimeSpan.FromSeconds(0.9);
 
     /// <summary>Action granted to the wearer.</summary>
     [DataField]
@@ -109,6 +109,18 @@ public sealed partial class SandevistanActiveComponent : Component
     [DataField, AutoNetworkedField]
     public float SlowModifier = 0.35f;
 
+    /// <summary>Looping "you're charged" hum played to the wearer for the whole burst (server-spawned
+    /// audio entity, stopped when the burst ends). Not networked — held on the server only.</summary>
+    public EntityUid? LoopSound;
+
+    /// <summary>
+    /// Server-side throttle: earliest time the wearer may fire a gun again. In bullet-time the
+    /// wearer's own ranged fire is stretched by <see cref="SlowModifier"/> just like everyone else's
+    /// (so shooting/throwing carry the same slowdown), while their melee stays at normal speed.
+    /// Not networked — gated against server time.
+    /// </summary>
+    public TimeSpan NextAllowedShot;
+
     // Afterimage trail ("David Martinez" blue blur).
     [DataField, AutoNetworkedField]
     public TimeSpan AfterimageInterval = TimeSpan.FromSeconds(0.1);
@@ -134,6 +146,17 @@ public sealed partial class SandevistanAfterimageComponent : Component
     /// <summary>Facing the user had when this afterimage was spawned.</summary>
     [DataField, AutoNetworkedField]
     public Direction DirectionOverride;
+
+    /// <summary>
+    /// Total lifetime of the ghost (matches the <see cref="TimedDespawnComponent"/> lifetime). Used
+    /// client-side to fade the ghost's alpha out over its life instead of popping out instantly.
+    /// </summary>
+    [DataField]
+    public float FadeDuration = 0.6f;
+
+    /// <summary>Starting colour/alpha the ghost fades from (set when its visuals are applied).</summary>
+    [ViewVariables]
+    public Color BaseColor = new(0.55f, 0.85f, 1f, 0.55f);
 }
 
 /// <summary>
@@ -156,6 +179,10 @@ public sealed partial class SandevistanSlowedComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan NextAllowedShot;
+
+    /// <summary>Looping "world slowed" drone played to this victim while slowed (server-spawned audio
+    /// entity, stopped when the slow lifts). Not networked — held on the server only.</summary>
+    public EntityUid? LoopSound;
 }
 
 /// <summary>

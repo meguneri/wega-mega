@@ -4,6 +4,7 @@ using Content.Shared.Blocking;
 using Content.Shared.Clothing;
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Implants;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -41,6 +42,15 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
 
         SubscribeLocalEvent<SandevistanArenaLockComponent, ClothingGotEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<SandevistanArenaLockComponent, ClothingGotUnequippedEvent>(OnUnequipped);
+
+        // Same marker, but on the arena implant: route its implant/extract lifecycle into the same
+        // reference-counted lock, so the implant and the eyewear can't clobber each other.
+        SubscribeLocalEvent<SandevistanArenaLockComponent, ImplantImplantedEvent>(OnImplanted);
+        SubscribeLocalEvent<SandevistanArenaLockComponent, ImplantRemovedEvent>(OnImplantRemoved);
+
+        // Drops the now-forbidden gear the moment the lock attaches, whatever the source — worn
+        // eyewear or the arena implant.
+        SubscribeLocalEvent<ArenaWeaponLockComponent, ComponentStartup>(OnLockStartup);
 
         SubscribeLocalEvent<ArenaWeaponLockComponent, AttackAttemptEvent>(OnAttackAttempt);
         SubscribeLocalEvent<ArenaWeaponLockComponent, ShotAttemptedEvent>(OnShotAttempt);
@@ -198,8 +208,21 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        EnsureComp<ArenaWeaponLockComponent>(args.Wearer);
-        DropLockedGear(args.Wearer);
+        AddArenaLock(args.Wearer);
+    }
+
+    /// <summary>
+    /// The weapon lock just attached to a mob — worn arena eyewear was equipped, or the arena implant
+    /// was inserted (which adds <see cref="ArenaWeaponLockComponent"/> via its
+    /// <c>implantComponents</c>). Drop everything the lock forbids. Server-only: this mutates
+    /// hands/inventory authoritatively and the component replicates to the client on its own.
+    /// </summary>
+    private void OnLockStartup(Entity<ArenaWeaponLockComponent> ent, ref ComponentStartup args)
+    {
+        if (_net.IsClient)
+            return;
+
+        DropLockedGear(ent.Owner);
     }
 
     /// <summary>
@@ -237,7 +260,50 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        RemComp<ArenaWeaponLockComponent>(args.Wearer);
+        RemoveArenaLock(args.Wearer);
+    }
+
+    // The arena Sandevistan implant was inserted/extracted (events raised on the implant entity).
+    // Funnel into the same reference-counted lock the eyewear uses.
+    private void OnImplanted(Entity<SandevistanArenaLockComponent> ent, ref ImplantImplantedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        AddArenaLock(args.Implanted);
+    }
+
+    private void OnImplantRemoved(Entity<SandevistanArenaLockComponent> ent, ref ImplantRemovedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        RemoveArenaLock(args.Implanted);
+    }
+
+    /// <summary>
+    /// Adds one lock source to <paramref name="mob"/>. The first source attaches
+    /// <see cref="ArenaWeaponLockComponent"/> (whose ComponentStartup drops the forbidden gear);
+    /// further sources only bump the counter.
+    /// </summary>
+    private void AddArenaLock(EntityUid mob)
+    {
+        var lockComp = EnsureComp<ArenaWeaponLockComponent>(mob);
+        lockComp.Sources++;
+    }
+
+    /// <summary>
+    /// Removes one lock source from <paramref name="mob"/>. The lock itself lifts only once the last
+    /// source is gone, so removing one of two (glasses + implant) keeps it active.
+    /// </summary>
+    private void RemoveArenaLock(EntityUid mob)
+    {
+        if (!TryComp<ArenaWeaponLockComponent>(mob, out var lockComp))
+            return;
+
+        lockComp.Sources--;
+        if (lockComp.Sources <= 0)
+            RemComp<ArenaWeaponLockComponent>(mob);
     }
 
     private void OnAttackAttempt(Entity<ArenaWeaponLockComponent> ent, ref AttackAttemptEvent args)

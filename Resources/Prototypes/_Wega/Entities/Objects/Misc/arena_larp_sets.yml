@@ -143,3 +143,23 @@
     - id: ClothingEyesSandevistanArena
     sound:
       path: /Audio/Effects/unwrap.ogg
+
+# Имплант-версия набора полярной звезды: те же перчатки, но сандэвистан выдаётся имплантером
+# (вколол — замок оружия/брони и пассивки приезжают через имплант).
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaNorthStarImplantSet
+  name: чумба, ты совсем ё@%&тый? (имплант)
+  description: "Свёрток: перчатки полярной звезды и имплантер арена-сандэвистана. Кулаки решают всё."
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: ClothingHandsGlovesNorthStar
+    - id: SandevistanImplanterArena
+    sound:
+      path: /Audio/Effects/unwrap.ogg
