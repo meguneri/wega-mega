@@ -139,8 +139,8 @@
     delay: 0.75
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 7
-    pvsIncrease: 0.7
+    maxOffset: 2
+    pvsIncrease: 0.2
   - type: SpeedModifiedOnWield
     walkModifier: 0.85
     sprintModifier: 0.85

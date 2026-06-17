@@ -4,3 +4,6 @@ ent-ChemistryBottleFormaldehyde = { ent-BaseChemistryBottleFilled }
 ent-ChemistryBottleStabilizingSerumP = { ent-BaseChemistryBottleFilled }
     .suffix = сыворотка стабилизации
     .desc = { ent-BaseChemistryBottleFilled.desc }
+ent-ChemistryBottleNapalmPhlogiston = { ent-BaseChemistryBottleFilled }
+    .suffix = напалм + флогистон
+    .desc = { ent-BaseChemistryBottleFilled.desc }

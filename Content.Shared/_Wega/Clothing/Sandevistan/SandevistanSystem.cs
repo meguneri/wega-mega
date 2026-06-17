@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared.Actions;
 using Content.Shared.Clothing;
+using Content.Shared.Implants;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Mobs.Components;
@@ -61,6 +62,13 @@ public sealed partial class SandevistanSystem : EntitySystem
 
         SubscribeLocalEvent<SandevistanComponent, GetItemActionsEvent>(OnGetActions);
         SubscribeLocalEvent<SandevistanComponent, SandevistanActivateEvent>(OnActivate);
+
+        // Track who currently carries a Sandevistan (any version) so the gloves of the north star can
+        // hit harder under all of them, not just the arena lock.
+        SubscribeLocalEvent<SandevistanComponent, ClothingGotEquippedEvent>(OnWearerEquipped);
+        SubscribeLocalEvent<SandevistanComponent, ClothingGotUnequippedEvent>(OnWearerUnequipped);
+        SubscribeLocalEvent<SandevistanComponent, ImplantImplantedEvent>(OnWearerImplanted);
+        SubscribeLocalEvent<SandevistanComponent, ImplantRemovedEvent>(OnWearerImplantRemoved);
 
         SubscribeLocalEvent<SandevistanActiveComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshSpeed);
         SubscribeLocalEvent<SandevistanActiveComponent, DamageModifyEvent>(OnActiveDamageModify);
@@ -168,6 +176,51 @@ public sealed partial class SandevistanSystem : EntitySystem
     private void OnGetActions(EntityUid uid, SandevistanComponent comp, GetItemActionsEvent args)
     {
         args.AddAction(ref comp.ActionEntity, comp.Action);
+    }
+
+    // ── Wearer marker bookkeeping ────────────────────────────────────────────────────────────────
+    // Server-only mutation: the marker is networked and replicates to the client on its own. Adding it
+    // client-side (especially during predicted-entity resets) breaks the iteration, same as the arena lock.
+
+    private void OnWearerEquipped(Entity<SandevistanComponent> ent, ref ClothingGotEquippedEvent args)
+    {
+        AddWearerMarker(args.Wearer);
+    }
+
+    private void OnWearerUnequipped(Entity<SandevistanComponent> ent, ref ClothingGotUnequippedEvent args)
+    {
+        RemoveWearerMarker(args.Wearer);
+    }
+
+    private void OnWearerImplanted(Entity<SandevistanComponent> ent, ref ImplantImplantedEvent args)
+    {
+        AddWearerMarker(args.Implanted);
+    }
+
+    private void OnWearerImplantRemoved(Entity<SandevistanComponent> ent, ref ImplantRemovedEvent args)
+    {
+        RemoveWearerMarker(args.Implanted);
+    }
+
+    /// <summary>Adds one Sandevistan source to <paramref name="mob"/>, attaching the marker on the first.</summary>
+    private void AddWearerMarker(EntityUid mob)
+    {
+        if (!_net.IsServer)
+            return;
+
+        var marker = EnsureComp<SandevistanWearerComponent>(mob);
+        marker.Sources++;
+    }
+
+    /// <summary>Removes one Sandevistan source; the marker lifts only once the last source is gone.</summary>
+    private void RemoveWearerMarker(EntityUid mob)
+    {
+        if (!_net.IsServer || !TryComp<SandevistanWearerComponent>(mob, out var marker))
+            return;
+
+        marker.Sources--;
+        if (marker.Sources <= 0)
+            RemComp<SandevistanWearerComponent>(mob);
     }
 
     private void OnActivate(Entity<SandevistanComponent> ent, ref SandevistanActivateEvent args)

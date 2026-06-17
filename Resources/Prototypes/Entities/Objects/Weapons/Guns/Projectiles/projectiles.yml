@@ -891,7 +891,8 @@
       - id: RMCExplosionEffectGrenadeShockWave
       - id: ExplosionEffectSmoke
   - type: Explosive
-    explosionType: Default
+    # RMCGrenadeNoTileFire — без огненных тайлов, как у осколочного снаряда (а не Default).
+    explosionType: RMCGrenadeNoTileFire
     totalIntensity: 150 # a ~2 tile radius
     intensitySlope: 5
     maxIntensity: 10

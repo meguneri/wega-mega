@@ -26,4 +26,6 @@ store-category-full-arsenal-grenade = Гранаты
 store-category-full-arsenal-ammo = Патроны
 store-category-full-arsenal-injector = Инжекторы
 store-category-full-arsenal-meds-bottle = Бутылочки с лекарствами
+store-category-full-arsenal-water-gun = Водяное оружие
+store-category-full-arsenal-napalm-bottle = Зажигательная заправка
 store-category-full-arsenal-bow-set = Наборы лучника

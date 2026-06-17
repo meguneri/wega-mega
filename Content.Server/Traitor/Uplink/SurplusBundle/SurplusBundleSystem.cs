@@ -135,6 +135,11 @@ public sealed partial class SurplusBundleSystem : EntitySystem
             if (ret.Any(l => l.Categories.Any(c => c.Id == companion)))
                 continue;
 
+            // Optional chance: a trigger listed in CompanionChances only spawns its companion on a
+            // successful roll; otherwise the guarantee is unconditional (chance 1.0).
+            if (ent.Comp1.CompanionChances.TryGetValue(trigger, out var chance) && !_random.Prob(chance))
+                continue;
+
             var companions = listings
                 .Where(l => l.Categories.Any(c => c.Id == companion))
                 .ToList();

@@ -2501,6 +2501,17 @@
   - MeleeArsenalWeapon
 
 - type: listing
+  id: MeleeArsenalCleawingSaw
+  name: full-arsenal-cleawing-saw-name
+  description: full-arsenal-cleawing-saw-desc
+  productEntity: WeaponCleawingSaw
+  cost:
+    Telecrystal: 3
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
   id: MeleeArsenalCombatCrowbar
   name: full-arsenal-combat-crowbar-name
   description: full-arsenal-combat-crowbar-desc
@@ -3556,6 +3567,17 @@
   productEntity: WeaponDeathBladeArena
   cost:
     Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalWeapon
+
+- type: listing
+  id: MeleeArsenalDeathDagger
+  name: full-arsenal-death-dagger-name
+  description: full-arsenal-death-dagger-desc
+  productEntity: WeaponDeathDaggerArena
+  cost:
+    Telecrystal: 3
   categories:
   - MeleeArsenal
   - MeleeArsenalWeapon

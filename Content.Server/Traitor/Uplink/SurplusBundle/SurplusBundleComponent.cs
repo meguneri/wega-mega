@@ -52,6 +52,15 @@ public sealed partial class SurplusBundleComponent : Component
     public Dictionary<string, string> CompanionCategories = new();
 
     /// <summary>
+    ///     Optional spawn chance (0..1) for a companion guarantee, keyed by the same trigger
+    ///     category as <see cref="CompanionCategories"/>. A trigger without an entry here always
+    ///     adds its companion (chance 1.0); with an entry, the companion is only added on a random
+    ///     roll. Used so a water gun only sometimes drops with a napalm/phlogiston refill bottle.
+    /// </summary>
+    [DataField]
+    public Dictionary<string, float> CompanionChances = new();
+
+    /// <summary>
     ///     Store category holding ammo listings (magazines, speedloaders, boxes). When a gun has
     ///     already been rolled into the bundle, ammo listings whose product carries a tag matching
     ///     one of the gun's magazine/chamber whitelist tags get their pick weight multiplied by

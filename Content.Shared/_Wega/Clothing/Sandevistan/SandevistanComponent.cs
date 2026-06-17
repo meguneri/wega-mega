@@ -202,5 +202,22 @@ public sealed partial class SandevistanSlowedProjectileComponent : Component
     public float Factor = 1f;
 }
 
+/// <summary>
+/// Wearer-side marker: present (reference-counted) while the mob has any Sandevistan equipped or
+/// implanted, in any version (base / arena / freeze, worn or implant). Lets the gloves of the north
+/// star know to hit harder regardless of which Sandevistan the wearer is running. Server-managed and
+/// networked, like <see cref="ArenaWeaponLockComponent"/>.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+public sealed partial class SandevistanWearerComponent : Component
+{
+    /// <summary>
+    /// How many Sandevistan sources (worn eyewear + implants) currently sit on the mob. The marker —
+    /// and thus the gloves buff — lifts only when this drops back to zero, so removing one of two
+    /// sources keeps it active. Server-side bookkeeping.
+    /// </summary>
+    public int Sources;
+}
+
 /// <summary>Raised on the cyberware item when its action is used.</summary>
 public sealed partial class SandevistanActivateEvent : InstantActionEvent;

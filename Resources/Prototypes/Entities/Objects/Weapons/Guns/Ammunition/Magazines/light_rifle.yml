@@ -55,6 +55,34 @@
     zeroVisible: false
   - type: Appearance
 
+# DP-28 pan disc — ported from the Starlight DP-28, rechambered to .30 rifle.
+- type: entity
+  parent: BaseMagazineLightRifle
+  id: MagazineLightRifleMaxim
+  name: "pan magazine (.30 rifle)"
+  description: Flat 47-round pan magazine for the DP-28 light machine gun. Intended to hold general-purpose kinetic ammunition.
+  components:
+  - type: Tag
+    tags:
+      - MagazineLightRifle
+      - MagazineLightRiflePan
+  - type: BallisticAmmoProvider
+    proto: CartridgeLightRifle
+    capacity: 47
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Magazine/LightRifle/maxim.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+
 - type: entity
   parent: BaseMagazineLightRifle
   id: MagazineLightRifle

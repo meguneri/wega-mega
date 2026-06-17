@@ -167,7 +167,7 @@
   parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
   id: ArenaDuffelBowSetNocturine
   name: destabilizing archer kit
-  description: The standard archer kit plus a bottle of nocturine. One good hit and the target naps through the rest of the fight.
+  description: The standard archer kit plus two bottles of nocturine. One good hit and the target naps through the rest of the fight.
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/duffel.rsi
@@ -189,6 +189,7 @@
         - id: ClothingShoesBootsSalvage
         - id: ClothingHeadHatHetmanHat
         - id: ArenaBottleNocturine
+          amount: 2
 
 # Набор купидона — две бутыли афродизиака. Розовый окрас.
 - type: entity

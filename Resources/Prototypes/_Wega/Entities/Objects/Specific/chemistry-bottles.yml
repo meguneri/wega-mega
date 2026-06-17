@@ -12,3 +12,23 @@
         reagents:
         - ReagentId: StabilizingSerumPotion
           Quantity: 30
+
+# Incendiary refill for water guns — 2:1 napalm-to-phlogiston: the phlogiston self-ignites on
+# contact, the napalm carries the sustained burn and the extra fire stacks. Pour it into a water
+# gun's chamber and it sprays self-igniting fire.
+- type: entity
+  id: ChemistryBottleNapalmPhlogiston
+  suffix: napalm + phlogiston
+  parent: BaseChemistryBottleFilled
+  components:
+  - type: Label
+    currentLabel: reagent-name-napalm
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: Napalm
+          Quantity: 20
+        - ReagentId: Phlogiston
+          Quantity: 10

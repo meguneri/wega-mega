@@ -65,6 +65,7 @@
 | Металлическая пила | `Saw` | 1 TC |
 | Дисковая пила Синдиката | `SawAdvanced` | 2 TC |
 | Мясницкий тесак | `ButchCleaver` | 2 TC |
+| Боевой секач | `WeaponCleawingSaw` | 3 TC |
 | Метательный нож | `ThrowingKnife` | 2 TC |
 | Боевой гвоздодёр | `CombatCrowbar` | 2 TC |
 | Нож выживальщика | `SurvivalKnife` | 2 TC |
@@ -79,6 +80,7 @@
 | Энергетический кинжал (видимый) | `EnergyDaggerLoud` | 6 TC |
 | Энергетическая сабля | `EnergyCutlass` | 7 TC |
 | Клинок смерти (арена) | `WeaponDeathBladeArena` | 7 TC |
+| Ритуальный кинжал смерти (арена) | `WeaponDeathDaggerArena` | 3 TC |
 | Лезвие руки | `ArmBlade` | 8 TC |
 | Молот сингулярности | `SingularityHammer` | 12 TC |
 | Мьёльнир | `Mjollnir` | 15 TC |
@@ -104,6 +106,12 @@
 | Пистолет Mk58 | `WeaponPistolMk58` | 2 TC |
 | Пистолет Viper | `WeaponPistolViper` | 2 TC |
 | M1911 | `WeaponPistolM1911` | 3 TC |
+| Глок-22 Авто | `WeaponPistolG22Auto` | 4 TC |
+| Стечкин | `WeaponPistolStechkin` | 3 TC |
+| Водяной пистолет | `WeaponWaterPistol` | 5 TC |
+| Водяной бластер | `WeaponWaterBlaster` | 7 TC |
+| Водяной супер-бластер | `WeaponWaterBlasterSuper` | 14 TC |
+| Набор «Не грози южному централу» | `ClothingBackpackDuffelHoodStarter` | 6 TC |
 | Снаб-револьвер | `WeaponRevolverSnubRevolver` | 3 TC |
 | Синий лазерный пистолет | `WeaponBlueLaserPistol` | 3 TC |
 | Пистолет N1984 | `WeaponPistolN1984` | 8 TC |
@@ -158,6 +166,7 @@
 |---|---|---|
 | Самодельный дробовик | `WeaponShotgunHandmade` | 1 TC |
 | Trenchgun L-4034 | `WeaponShotgunTrenchgun4034` | 4 TC |
+| Спас-12 | `WeaponShotgunSPAS12` | 5 TC |
 | Двустволка | `WeaponShotgunDoubleBarreled` | 2 TC |
 | Двустволка (резина) | `WeaponShotgunDoubleBarreledRubber` | 2 TC |
 | Kammerer | `WeaponShotgunKammerer` | 3 TC |
@@ -195,6 +204,7 @@
 | Пулемёт L6C (компакт) | `WeaponLightMachineGunL6C` | 10 TC |
 | Снайперка Hristov МК2 | `WeaponSniperHristovAdvanced` | 12 TC |
 | Пулемёт L6 | `WeaponLightMachineGunL6` | 12 TC |
+| Пулемёт ДП-28 | `WeaponLightMachineGunDP28` | 11 TC |
 | Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
 | Импульсный дробовик | `WeaponPulseShotgun` | 40 TC |
 | Импульсная снайперская винтовка | `WeaponPulseSniper` | 35 TC |
@@ -208,6 +218,7 @@
 | ASH-12 | `WeaponRifleAsh12` | 12 TC |
 | M-52 | `WeaponRifleM52` | 11 TC |
 | Famas | `WeaponRifleFamas` | 9 TC |
+| G-36 | `WeaponRifleG36` | 9 TC |
 
 ---
 
@@ -487,6 +498,7 @@
 | Лацеринол (бутылка) | `ChemistryBottleLacerinol` | 2 TC |
 | Пиразин (бутылка) | `ChemistryBottlePyrazine` | 2 TC |
 | Синаптизин (бутылка) | `ChemistryBottleSynaptizine` | 2 TC |
+| Зажигательная смесь напалм+флогистон (компаньон к водяному оружию) | `ChemistryBottleNapalmPhlogiston` | 3 TC |
 | Автоинъектор от травм | `BruteAutoInjector` | 1 TC |
 | Автоинъектор от ожогов | `BurnAutoInjector` | 1 TC |
 | Автоинъектор от проколов | `PunctAutoInjector` | 1 TC |

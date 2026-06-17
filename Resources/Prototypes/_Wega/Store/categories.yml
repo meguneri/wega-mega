@@ -132,6 +132,18 @@
   name: store-category-full-arsenal-ammo
   priority: 4
 
+# Водяное оружие — триггер для бутылки напалма-флогистона (см. companionCategories ящика).
+- type: storeCategory
+  id: FullArsenalWaterGun
+  name: store-category-full-arsenal-water-gun
+  priority: 4
+
+# Зажигательная заправка к водяному оружию — спавнится только как компаньон, в общий пул не идёт.
+- type: storeCategory
+  id: FullArsenalNapalmBottle
+  name: store-category-full-arsenal-napalm-bottle
+  priority: 6
+
 # Пустые сумки/рюкзаки/вещмешки — лимит 1 на ящик (готовые комплекты-вещмешки сюда не входят).
 - type: storeCategory
   id: FullArsenalBag

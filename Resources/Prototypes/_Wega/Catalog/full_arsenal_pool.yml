@@ -323,6 +323,82 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalPistolG22Auto
+  name: full-arsenal-pistol-g22auto-name
+  description: full-arsenal-pistol-g22auto-desc
+  productEntity: WeaponPistolG22Auto
+  cost:
+    Telecrystal: 4
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalHoodStarter
+  name: full-arsenal-hood-starter-name
+  description: full-arsenal-hood-starter-desc
+  productEntity: ClothingBackpackDuffelHoodStarter
+  cost:
+    Telecrystal: 6
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalPistolStechkin
+  name: full-arsenal-pistol-stechkin-name
+  description: full-arsenal-pistol-stechkin-desc
+  productEntity: WeaponPistolStechkin
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalWaterPistol
+  name: full-arsenal-water-pistol-name
+  description: full-arsenal-water-pistol-desc
+  productEntity: WeaponWaterPistol
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+  - FullArsenalWaterGun
+
+- type: listing
+  id: FullArsenalWaterBlaster
+  name: full-arsenal-water-blaster-name
+  description: full-arsenal-water-blaster-desc
+  productEntity: WeaponWaterBlaster
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+  - FullArsenalWaterGun
+
+- type: listing
+  id: FullArsenalWaterBlasterSuper
+  name: full-arsenal-water-blaster-super-name
+  description: full-arsenal-water-blaster-super-desc
+  productEntity: WeaponWaterBlasterSuper
+  cost:
+    Telecrystal: 14
+  categories:
+  - FullArsenal
+  - FullArsenalWaterGun
+
+# Зажигательная заправка к водяному оружию (напалм + флогистон, 2:1). Только как компаньон —
+# спавнится с некоторым шансом, когда в ящик попало водяное оружие (см. ящик Full Arsenal).
+- type: listing
+  id: FullArsenalNapalmBottle
+  name: full-arsenal-napalm-bottle-name
+  description: full-arsenal-napalm-bottle-desc
+  productEntity: ChemistryBottleNapalmPhlogiston
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+  - FullArsenalNapalmBottle
+
+- type: listing
   id: FullArsenalRevolverSnub
   name: full-arsenal-revolver-snub-name
   description: full-arsenal-revolver-snub-desc
@@ -490,6 +566,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalShotgunSpas12
+  name: full-arsenal-shotgun-spas12-name
+  description: full-arsenal-shotgun-spas12-desc
+  productEntity: WeaponShotgunSPAS12
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalShotgunDoubleBarreled
   name: full-arsenal-shotgun-double-name
   description: full-arsenal-shotgun-double-desc
@@ -624,6 +710,16 @@
   productEntity: WeaponLightMachineGunL6
   cost:
     Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalLMGDP28
+  name: full-arsenal-lmg-dp28-name
+  description: full-arsenal-lmg-dp28-desc
+  productEntity: WeaponLightMachineGunDP28
+  cost:
+    Telecrystal: 11
   categories:
   - FullArsenal
 
@@ -4195,6 +4291,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalCleawingSaw
+  name: full-arsenal-cleawing-saw-name
+  description: full-arsenal-cleawing-saw-desc
+  productEntity: WeaponCleawingSaw
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalCombatCrowbar
   name: full-arsenal-combat-crowbar-name
   description: full-arsenal-combat-crowbar-desc
@@ -5844,6 +5950,16 @@
   categories:
   - FullArsenal
 
+- type: listing
+  id: FullArsenalDeathDagger
+  name: full-arsenal-death-dagger-name
+  description: full-arsenal-death-dagger-desc
+  productEntity: WeaponDeathDaggerArena
+  cost:
+    Telecrystal: 3
+  categories:
+  - FullArsenal
+
 # ── DESTABILIZERS / SPECIAL ───────────────────────────────────────────────────
 
 # changes target's temperature — non-lethal harassment
@@ -5953,6 +6069,16 @@
   name: full-arsenal-rifle-famas-name
   description: full-arsenal-rifle-famas-desc
   productEntity: WeaponRifleFamas
+  cost:
+    Telecrystal: 9
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleG36
+  name: full-arsenal-rifle-g36-name
+  description: full-arsenal-rifle-g36-desc
+  productEntity: WeaponRifleG36
   cost:
     Telecrystal: 9
   categories:

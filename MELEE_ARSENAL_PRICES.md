@@ -387,6 +387,7 @@
 | Нож выживания | `SurvivalKnife` | 2 TC |
 | Нож кукри | `KukriKnife` | 3 TC |
 | Мясницкий тесак | `ButchCleaver` | 2 TC |
+| Боевой секач | `WeaponCleawingSaw` | 3 TC |
 | Боевой лом | `CombatCrowbar` | 2 TC |
 
 ## Броня (дополнительно)
@@ -529,6 +530,7 @@
 | Силовой меч | `WeaponForceSword` | 5 TC |
 | Дробилка | `WeaponCrusher` | 5 TC |
 | Клинок смерти | `WeaponDeathBlade` | 7 TC |
+| Ритуальный кинжал смерти (арена) | `WeaponDeathDaggerArena` | 3 TC |
 
 ## Латунный/часовой набор и арена-снаряжение (ближний бой и броня)
 

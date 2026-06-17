@@ -175,7 +175,7 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: null
+        startingItem: MagazinePistolHighCapacity
         insertSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Pistols/glock22/glock22_unload.ogg
         priority: 2

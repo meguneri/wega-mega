@@ -131,14 +131,14 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     }
 
     /// <summary>
-    /// Перчатки полярной звезды бьют сильнее (15 блант), но только если на носителе именно
-    /// арена-версия сандэвистана (т.е. активен <see cref="ArenaWeaponLockComponent"/>). Каждый
-    /// N-й удар (по умолчанию третий) вместо этого наносит 10 блант, которые игнорируют броню —
+    /// Перчатки полярной звезды бьют сильнее (15 блант), если на носителе есть любой сандэвистан
+    /// (<see cref="SandevistanWearerComponent"/>) — арена, базовый или «стоп-кадр», очки или имплант.
+    /// Каждый N-й удар (по умолчанию третий) вместо этого наносит 10 блант, которые игнорируют броню —
     /// чтобы у кулаков был ответ на тяжёлую защиту.
     /// </summary>
     private void OnGetMeleeDamage(Entity<ArenaAllowedWeaponComponent> ent, ref GetMeleeDamageEvent args)
     {
-        if (!HasComp<ArenaWeaponLockComponent>(args.User))
+        if (!HasComp<SandevistanWearerComponent>(args.User))
             return;
 
         // GetMeleeDamageEvent поднимается отдельно для урона и для проверки пробития до того, как
@@ -161,13 +161,13 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
     }
 
     /// <summary>
-    /// Считаем только удары арена-носителя, попавшие по живому существу — на них завязан цикл
+    /// Считаем только удары носителя сандэвистана, попавшие по живому существу — на них завязан цикл
     /// пробития. Удары по стенам, окнам, шкафам и прочим объектам цикл не двигают, иначе бронебойный
     /// удар можно было бы «зарядить», просто молотя по стене.
     /// </summary>
     private void OnMeleeHit(Entity<ArenaAllowedWeaponComponent> ent, ref MeleeHitEvent args)
     {
-        if (!HasComp<ArenaWeaponLockComponent>(args.User))
+        if (!HasComp<SandevistanWearerComponent>(args.User))
             return;
 
         var hitMob = false;

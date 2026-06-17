@@ -29,15 +29,15 @@ void fragment() {
     highp float cb = zTextureSpec(SCREEN_TEXTURE, coord - dir * ca).b;
     highp vec3 col = vec3(mix(base.r, cr, intensity), base.g, mix(base.b, cb, intensity));
 
-    // Cool-blue tint with a slight contrast punch around mid-grey.
-    highp vec3 tint = col * vec3(0.88, 0.96, 1.12);
-    tint = (tint - vec3(0.5)) * 1.08 + vec3(0.5);
-    col = mix(col, tint, intensity);
+    // Gentle cool-blue tint with a very light contrast nudge around mid-grey.
+    highp vec3 tint = col * vec3(0.95, 0.99, 1.05);
+    tint = (tint - vec3(0.5)) * 1.03 + vec3(0.5);
+    col = mix(col, tint, intensity * 0.6);
 
-    // Breathing vignette: cool down and darken the edges, gently pulsing.
-    highp float pulse = 0.9 + 0.1 * sin(TIME * 5.0);
-    highp float vig = smoothstep(0.85, 0.35, rad);
-    col *= mix(1.0, mix(vig, 1.0, 0.25) * pulse, intensity * 0.7);
+    // Breathing vignette: softly cool the edges, gently pulsing — keep the center clear.
+    highp float pulse = 0.95 + 0.05 * sin(TIME * 5.0);
+    highp float vig = smoothstep(0.95, 0.45, rad);
+    col *= mix(1.0, mix(vig, 1.0, 0.55) * pulse, intensity * 0.4);
 
     // Shimmering radial speed lines, concentrated near the edges. Each ray pulses at a random phase
     // (smooth sine, not a hard strobe) so the rim "buzzes" with motion without flashing.
@@ -46,8 +46,8 @@ void fragment() {
     highp float phase = hash11(ri) * TAU;
     highp float flick = 0.5 + 0.5 * sin(phase + TIME * 12.0);
     highp float edge = smoothstep(0.30, 0.85, rad);
-    highp float streak = smoothstep(0.65, 1.0, flick) * edge;
-    col += streak * intensity * vec3(0.45, 0.75, 1.0) * 0.5;
+    highp float streak = smoothstep(0.72, 1.0, flick) * edge;
+    col += streak * intensity * vec3(0.45, 0.75, 1.0) * 0.28;
 
     COLOR = vec4(col, base.a);
 }

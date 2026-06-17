@@ -16,6 +16,9 @@
     ammoAffinityMultiplier: 4
     companionCategories:
       FullArsenalInjector: FullArsenalMedsBottle
+      FullArsenalWaterGun: FullArsenalNapalmBottle
+    companionChances:
+      FullArsenalWaterGun: 0.5
     categoryLimits:
       FullArsenalBowSet: 1
       FullArsenalInjector: 1
@@ -46,6 +49,9 @@
     ammoAffinityMultiplier: 4
     companionCategories:
       FullArsenalInjector: FullArsenalMedsBottle
+      FullArsenalWaterGun: FullArsenalNapalmBottle
+    companionChances:
+      FullArsenalWaterGun: 0.5
     categoryLimits:
       FullArsenalBowSet: 1
       FullArsenalInjector: 1
@@ -83,6 +89,9 @@
     ammoAffinityMultiplier: 4
     companionCategories:
       FullArsenalInjector: FullArsenalMedsBottle
+      FullArsenalWaterGun: FullArsenalNapalmBottle
+    companionChances:
+      FullArsenalWaterGun: 0.5
     categoryLimits:
       FullArsenalBowSet: 1
       FullArsenalInjector: 1
@@ -111,6 +120,9 @@
     ammoAffinityMultiplier: 4
     companionCategories:
       FullArsenalInjector: FullArsenalMedsBottle
+      FullArsenalWaterGun: FullArsenalNapalmBottle
+    companionChances:
+      FullArsenalWaterGun: 0.5
     categoryLimits:
       FullArsenalBowSet: 1
       FullArsenalInjector: 1

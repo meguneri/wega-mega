@@ -118,3 +118,21 @@
         children:
         - id: EnergyShieldSuitModule
           amount: 5
+
+# "Don't Be a Menace" hood starter kit — Glock-22 Auto, two spare auto mags, a black
+# cap and a carton of juice (because you can't menace South Central while drinking it).
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelHoodStarter
+  name: hood starter kit
+  description: Everything an aspiring menace needs — a full-auto Glock, two spare mags, a fresh cap, and a carton of juice. Don't drink it in the hood.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponPistolG22Auto
+        - id: MagazinePistolHighCapacity
+          amount: 2
+        - id: ClothingHeadHatBlacksoft
+        - id: DrinkJuiceOrangeCarton
