@@ -38,7 +38,39 @@ public sealed partial class DuelRotationSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<DuelRotationComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<DuelArenaComponent, MapInitEvent>(OnArenaTrackerMapInit);
         SubscribeLocalEvent<DuelArenaEntryComponent, ActivateInWorldEvent>(OnEntryActivate);
+    }
+
+    /// <summary>
+    /// Любой трекер дуэли, появившийся на карте уже загруженной арены, сам привязывается к её
+    /// контроллеру ротации. Нужно для подмены трекера прямо во время игры (например, замена обычного
+    /// трекера на трекер со штормом): без этого новый трекер остался бы с пустым
+    /// <see cref="DuelArenaComponent.RotationController"/>, и его раунды выпали бы из ротации —
+    /// бойцов не переносило бы на следующую арену и карты не менялись.
+    /// </summary>
+    private void OnArenaTrackerMapInit(EntityUid uid, DuelArenaComponent arena, MapInitEvent args)
+    {
+        // Уже привязан вручную/ранее — не трогаем.
+        if (arena.RotationController != null)
+            return;
+
+        // Свежезагруженные при предзагрузке арены привязывает сам PreloadArenas (их карты ещё не
+        // занесены в LoadedArenas на этот момент) — здесь дублировать не нужно.
+        if (_preloading)
+            return;
+
+        var map = Transform(uid).MapID;
+        var query = EntityQueryEnumerator<DuelRotationComponent>();
+        while (query.MoveNext(out var ctrlUid, out var ctrl))
+        {
+            if (!ctrl.Loaded || !ctrl.LoadedArenas.Any(kv => kv.Value == map))
+                continue;
+
+            arena.RotationController = ctrlUid;
+            Log.Info($"[duel-rotation] трекер на карте {map} привязан к контроллеру (подмена во время игры)");
+            return;
+        }
     }
 
     private void OnMapInit(EntityUid uid, DuelRotationComponent comp, MapInitEvent args)
@@ -121,19 +153,38 @@ public sealed partial class DuelRotationSystem : EntitySystem
     {
         var comp = controller.Comp;
 
-        // Индекс арены, на которой только что закончился бой (по карте любого из бойцов / контроллера).
-        var currentMap = duelists.Select(d => Transform(d).MapID).FirstOrDefault();
-        var currentIndex = comp.LoadedArenas.FirstOrDefault(kv => kv.Value == currentMap).Key;
-
-        var candidates = comp.LoadedArenas.Keys.Where(i => i != currentIndex).ToList();
-        if (candidates.Count == 0)
+        if (comp.LoadedArenas.Count == 0)
         {
-            Log.Warning("[duel-rotation] нет других загруженных арен для перехода — раунд завершён без ротации");
+            Log.Warning("[duel-rotation] нет загруженных арен — переход после боя невозможен");
             return;
         }
 
-        var nextIndex = _random.Pick(candidates);
-        // Только переносим бойцов на следующую арену — раунд НЕ вооружаем автоматически.
+        // Индекс арены, на которой только что закончился бой (по карте любого из бойцов).
+        // Важно искать честно: FirstOrDefault на словаре вернул бы Key=0 при ненайденной карте,
+        // из-за чего реальная текущая арена могла бы остаться в кандидатах (телепорт на ту же
+        // карту → «карта не меняется») либо единственная арена выпасть из кандидатов (нет телепорта).
+        int currentIndex = -1;
+        var currentMap = duelists.Select(d => Transform(d).MapID).FirstOrDefault();
+        foreach (var kv in comp.LoadedArenas)
+        {
+            if (kv.Value == currentMap)
+            {
+                currentIndex = kv.Key;
+                break;
+            }
+        }
+
+        // Предпочитаем ДРУГУЮ арену (тогда поле боя сменится). Если другой нет — переигрываем на
+        // текущей: бойцов всё равно возвращаем на спавн-маркеры, чтобы новый раунд начался с углов.
+        var candidates = comp.LoadedArenas.Keys.Where(i => i != currentIndex).ToList();
+        var nextIndex = candidates.Count > 0
+            ? _random.Pick(candidates)
+            : (currentIndex >= 0 ? currentIndex : _random.Pick(comp.LoadedArenas.Keys.ToList()));
+
+        if (candidates.Count == 0)
+            Log.Info("[duel-rotation] других арен нет — переигрываем на текущей, бойцы возвращены на спавны");
+
+        // Только переносим бойцов на арену — раунд НЕ вооружаем автоматически.
         // Старт объявляется лишь после нажатия кнопки старта на самой арене (как и первый раунд),
         // иначе «дуэль началась» печаталось бы до нажатия кнопки.
         MoveAndStart(comp, nextIndex, duelists, startRound: false);
@@ -197,16 +248,28 @@ public sealed partial class DuelRotationSystem : EntitySystem
             return;
         }
 
-        // Персональная кнопка: переносим ТОЛЬКО нажавшего на спавн с заданным номером.
-        if (comp.SpawnIndex is { } spawnIndex)
-        {
-            MoveOneToSpawn(ctrl, comp.ArenaIndex, args.User, spawnIndex);
-            return;
-        }
-
         var grid = Transform(uid).GridUid;
         if (grid == null)
             return;
+
+        // Персональная кнопка: нажавшего ставим на выбранный спавн, а остальных бойцов с хаба
+        // подтягиваем на ту же арену — каждого на свой свободный спавн (чтобы оба дуэлянта попали
+        // на арену, даже если кнопку нажал только один).
+        if (comp.SpawnIndex is { } spawnIndex)
+        {
+            // Сначала нажавший — он занимает выбранный (или ближайший свободный) спавн.
+            MoveOneToSpawn(ctrl, comp.ArenaIndex, args.User, spawnIndex);
+
+            // Затем остальные мобы с хаба — на оставшиеся свободные спавны той же арены.
+            var others = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
+            while (others.MoveNext(out var mob, out _, out var xform))
+            {
+                if (mob == args.User || xform.GridUid != grid)
+                    continue;
+                MoveOneToSpawn(ctrl, comp.ArenaIndex, mob, spawnIndex);
+            }
+            return;
+        }
 
         // Все мобы (игроки и NPC) на гриде хаба.
         var fighters = new List<EntityUid>();
@@ -221,9 +284,11 @@ public sealed partial class DuelRotationSystem : EntitySystem
     }
 
     /// <summary>
-    /// Переносит одного бойца на спавн-маркер арены с номером <paramref name="spawnIndex"/>
-    /// (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>). Используется персональными кнопками входа
-    /// на хабе — каждый игрок выбирает свой угол сам. Бой не вооружается (как и общий вход).
+    /// Переносит одного бойца на спавн-маркер арены, начиная с номера <paramref name="spawnIndex"/>
+    /// (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>). Если этот спавн уже занят другим бойцом —
+    /// ищем следующий свободный по возрастанию номера (и заворачиваем с начала). Так двое дуэлянтов
+    /// могут жать одну и ту же кнопку: первый встаёт на спавн №0, второй — на следующий свободный.
+    /// Используется персональными кнопками входа на хабе. Бой не вооружается (как и общий вход).
     /// </summary>
     private void MoveOneToSpawn(DuelRotationComponent comp, int arenaIndex, EntityUid fighter, int spawnIndex)
     {
@@ -233,27 +298,75 @@ public sealed partial class DuelRotationSystem : EntitySystem
             return;
         }
 
-        if (!TryGetSpawnByIndex(map, spawnIndex, out var target))
+        if (!TryGetFreeSpawn(map, spawnIndex, fighter, out var target))
         {
-            Log.Warning($"[duel-rotation] на арене (индекс {arenaIndex}) нет спавн-маркера с номером {spawnIndex} — вход отменён");
+            Log.Warning($"[duel-rotation] на арене (индекс {arenaIndex}) нет свободного спавн-маркера (с номера {spawnIndex}) — вход отменён");
             return;
         }
 
         _transform.SetCoordinates(fighter, Transform(target).Coordinates);
     }
 
-    /// <summary>Спавн-маркер на карте с заданным номером (<see cref="DuelArenaSpawnComponent.SpawnIndex"/>).</summary>
-    private bool TryGetSpawnByIndex(MapId mapId, int spawnIndex, out EntityUid spawn)
+    /// <summary>
+    /// Свободный спавн-маркер на карте. Маркеры берём по возрастанию номера, начиная с
+    /// <paramref name="preferredIndex"/> (и заворачивая в начало списка), и выбираем первый, на
+    /// чьей клетке не стоит чужой боец. Если все заняты — берём предпочитаемый (или первый),
+    /// чтобы вход не блокировался. <paramref name="self"/> исключается из проверки занятости.
+    /// </summary>
+    private bool TryGetFreeSpawn(MapId mapId, int preferredIndex, EntityUid self, out EntityUid spawn)
     {
+        var spawns = new List<(int Index, EntityUid Uid)>();
         var query = EntityQueryEnumerator<DuelArenaSpawnComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var marker, out var xform))
         {
-            if (xform.MapID != mapId || marker.SpawnIndex != spawnIndex)
-                continue;
-            spawn = uid;
-            return true;
+            if (xform.MapID == mapId)
+                spawns.Add((marker.SpawnIndex, uid));
         }
-        spawn = default;
+
+        if (spawns.Count == 0)
+        {
+            spawn = default;
+            return false;
+        }
+
+        spawns.Sort((a, b) => a.Index.CompareTo(b.Index));
+
+        // Стартуем перебор с предпочитаемого спавна (или с ближайшего следующего), затем по кругу.
+        var start = spawns.FindIndex(s => s.Index >= preferredIndex);
+        if (start < 0)
+            start = 0;
+
+        for (var i = 0; i < spawns.Count; i++)
+        {
+            var candidate = spawns[(start + i) % spawns.Count].Uid;
+            if (!IsSpawnOccupied(candidate, self))
+            {
+                spawn = candidate;
+                return true;
+            }
+        }
+
+        // Все спавны заняты — не блокируем вход, ставим на предпочитаемый.
+        spawn = spawns[start].Uid;
+        return true;
+    }
+
+    /// <summary>На клетке спавна <paramref name="spawn"/> стоит чужой моб (не <paramref name="self"/>)?</summary>
+    private bool IsSpawnOccupied(EntityUid spawn, EntityUid self)
+    {
+        var spawnXform = Transform(spawn);
+        var grid = spawnXform.GridUid;
+        var spawnPos = _transform.GetWorldPosition(spawn);
+
+        var mobs = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
+        while (mobs.MoveNext(out var mob, out _, out var xform))
+        {
+            if (mob == self || xform.GridUid != grid)
+                continue;
+
+            if ((_transform.GetWorldPosition(mob) - spawnPos).LengthSquared() <= 0.25f)
+                return true;
+        }
         return false;
     }
 

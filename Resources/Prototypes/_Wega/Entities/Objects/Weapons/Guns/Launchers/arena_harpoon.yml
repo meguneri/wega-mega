@@ -4,16 +4,18 @@
   name: arena harpoon
   parent: BaseItem
   id: WeaponArenaHarpoon
-  description: Боевой крюк-кошка для арены: цепляет врага и тянет к себе — или дёргает тебя к стене.
+  description: "Боевой крюк-кошка для арены: цепляет врага и тянет к себе — или дёргает тебя к стене."
   categories: [ DoNotMap ]
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
     layers:
     - state: base
+      color: "#c23030" # хаос-перекрас: багровый металл
     - state: base-unshaded
       shader: unshaded
       map: [ "unshaded" ]
+      color: "#ff1f1f" # алое свечение вместо штатного циана
   - type: Item
     size: Normal
   - type: Clothing
@@ -42,7 +44,7 @@
   - type: PointLight
     radius: 1.5
     energy: 1.2
-    color: "#26e0ff"
+    color: "#ff2020"
     netsync: false
   - type: Appearance
 
@@ -56,6 +58,7 @@
   - type: Sprite
     noRot: false
     sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    color: "#ff3030" # хаос-перекрас крюка
     layers:
     - state: hook
   - type: Projectile
@@ -67,27 +70,32 @@
     pullSpeed: 12
     damage:
       types:
-        Piercing: 6
+        Piercing: 10
   - type: TimedDespawn
     lifetime: 2
 
-# Трос-луч, рисуется на миг от стрелка к точке зацепа.
+# ── Потрошащая версия гарпуна ────────────────────────────────────────────────
+# При зацепе моба тянет его как обычно, но когда он оказывается вплотную — короткая «потрошащая»
+# вспышка и у жертвы отрывается одна случайная конечность.
 - type: entity
-  name: harpoon rope
-  id: ArenaHarpoonRope
+  parent: WeaponArenaHarpoon
+  id: WeaponArenaHarpoonReaper
+  name: arena reaper harpoon
+  suffix: Dismember
+  description: "Боевой крюк-кошка для арены. Цепляет врага, тянет к себе — и в упор срывает конечность."
+  components:
+  - type: BatteryAmmoProvider
+    proto: ArenaHarpoonReaperHook
+    fireCost: 100
+  # КД 10 с: 100 заряда / 10 в секунду = 10 с между выстрелами (у обычного гарпуна 25/с ≈ 4 с).
+  - type: BatterySelfRecharger
+    autoRechargeRate: 10
+
+- type: entity
+  parent: ArenaHarpoonHook
+  id: ArenaHarpoonReaperHook
   categories: [ HideSpawnMenu ]
   components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
-    drawdepth: Effects
-    layers:
-    - state: rope
-      shader: unshaded
-  - type: Physics
-    canCollide: false
-  - type: Beam
-  - type: TimedDespawn
-    lifetime: 1
-  - type: Tag
-    tags:
-    - HideContextMenu
+  - type: ArenaHarpoonProjectile
+    dismemberOnArrive: true
+    stunDuration: 1 # потрошителю стан короче — 1 с

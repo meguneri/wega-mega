@@ -106,8 +106,8 @@
 | Пистолет Mk58 | `WeaponPistolMk58` | 2 TC |
 | Пистолет Viper | `WeaponPistolViper` | 2 TC |
 | M1911 | `WeaponPistolM1911` | 3 TC |
-| Глок-22 Авто | `WeaponPistolG22Auto` | 4 TC |
-| Стечкин | `WeaponPistolStechkin` | 3 TC |
+| Glock-22 Auto | `WeaponPistolG22Auto` | 4 TC |
+| Stechkin | `WeaponPistolStechkin` | 3 TC |
 | Водяной пистолет | `WeaponWaterPistol` | 5 TC |
 | Водяной бластер | `WeaponWaterBlaster` | 7 TC |
 | Водяной супер-бластер | `WeaponWaterBlasterSuper` | 14 TC |
@@ -123,7 +123,7 @@
 | Револьвер Python | `WeaponRevolverPython` | 4 TC |
 | Инспектор | `WeaponRevolverInspector` | 3 TC |
 | Револьвер Mateba | `WeaponRevolverMateba` | 4 TC |
-| Револьвер «Спирхед» (чёрный) | `WeaponRevolverSpearheadBlack` | 5 TC |
+| Револьвер «Spearhead» (чёрный) | `WeaponRevolverSpearheadBlack` | 5 TC |
 | Улучшенный лазер | `WeaponAdvancedLaser` | 5 TC |
 | Энергетический арбалет | `WeaponEnergyCrossbow` | 5 TC |
 | Револьвер Python AP | `WeaponRevolverPythonAP` | 6 TC |
@@ -153,7 +153,7 @@
 | MP-38 | `WeaponSubMachineGunMP38` | 3 TC |
 | MP7 | `WeaponSubMachineGunMP7` | 10 TC |
 | P-90 | `WeaponSubMachineGunP90` | 25 TC |
-| ППШ 59 | `WeaponSubMachineGunPPSH` | 10 TC |
+| PPSH-59 | `WeaponSubMachineGunPPSH` | 10 TC |
 | SP-91-RC | `WeaponSubMachineGunSP91RC` | 6 TC |
 | Узи U3 | `SunriseWeaponSubMachineGunUzi` | 5 TC |
 | SIAR-52 | `WeaponSIAR52` | 6 TC |
@@ -166,7 +166,7 @@
 |---|---|---|
 | Самодельный дробовик | `WeaponShotgunHandmade` | 1 TC |
 | Trenchgun L-4034 | `WeaponShotgunTrenchgun4034` | 4 TC |
-| Спас-12 | `WeaponShotgunSPAS12` | 5 TC |
+| Spas-12 | `WeaponShotgunSPAS12` | 5 TC |
 | Двустволка | `WeaponShotgunDoubleBarreled` | 2 TC |
 | Двустволка (резина) | `WeaponShotgunDoubleBarreledRubber` | 2 TC |
 | Kammerer | `WeaponShotgunKammerer` | 3 TC |
@@ -179,7 +179,7 @@
 | Мушкетон | `WeaponShotgunBlunderbuss` | 2 TC |
 | Обрез | `WeaponShotgunSawn` | 2 TC |
 | Энергетический дробовик | `WeaponEnergyShotgun` | 5 TC |
-| Револьвер «Ткач» GA-12 | `WeaponShotgunGA12` | 4 TC |
+| Револьвер Tkach GA-12 | `WeaponShotgunGA12` | 4 TC |
 
 ---
 
@@ -195,7 +195,7 @@
 | Сойка | `WeaponRifleJay` | 10 TC |
 | Винтовка AK | `WeaponRifleAk` | 6 TC |
 | АК-514 | `WeaponRifleAK514` | 13 TC |
-| СКМ-24 | `WeaponRifleSKM24` | 8 TC |
+| SKM-24 | `WeaponRifleSKM24` | 8 TC |
 | Ионный карабин | `WeaponIonCarabine` | 5 TC |
 | Винтовка Lecter | `WeaponRifleLecter` | 5 TC |
 | Снайперка Estoc | `WeaponRifleEstoc` | 5 TC |
@@ -204,7 +204,7 @@
 | Пулемёт L6C (компакт) | `WeaponLightMachineGunL6C` | 10 TC |
 | Снайперка Hristov МК2 | `WeaponSniperHristovAdvanced` | 12 TC |
 | Пулемёт L6 | `WeaponLightMachineGunL6` | 12 TC |
-| Пулемёт ДП-28 | `WeaponLightMachineGunDP28` | 11 TC |
+| Пулемёт DP-28 | `WeaponLightMachineGunDP28` | 11 TC |
 | Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
 | Импульсный дробовик | `WeaponPulseShotgun` | 40 TC |
 | Импульсная снайперская винтовка | `WeaponPulseSniper` | 35 TC |
@@ -696,7 +696,7 @@
 | ЕКД вещмешок Синдиката | `ClothingBackpackDuffelSyndicateEVABundle` | 3 TC |
 | Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
 | Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 15 TC |
-| Вещмешок АС-12 «Минотавр» | `ArenaDuffelMinotaurBundle` | 20 TC |
+| Вещмешок AS-12 «Минотавр» | `ArenaDuffelMinotaurBundle` | 20 TC |
 | Вещмешок P90 | `ArenaDuffelP90Bundle` | 30 TC |
 | Набор лучника | `ArenaDuffelBowSet` | 4 TC |
 | Ядовитый набор лучника | `ArenaDuffelBowSetPoison` | 8 TC |

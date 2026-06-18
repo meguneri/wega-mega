@@ -150,6 +150,14 @@
     sprite: _Wega/Structures/Storage/Crates/chaos_ultimate.rsi
   - type: Sprite
     sprite: _Wega/Structures/Storage/Crates/chaos_ultimate.rsi
+  - type: AmbientSound
+    enabled: false
+    volume: -4
+    range: 6
+    sound:
+      path: /Audio/Items/Anomaly/shadow_crit.ogg
+      params:
+        loop: true
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector

@@ -21,54 +21,54 @@ ent-BackpackGayPack = набор гордости
     .desc = Шикарный маленький подарочный набор — шарф, значок и плащ прайда в комплекте.
 ent-ClothingBackpackDuffelArenaM90gl = вещмешок M-90gl
     .desc = Универсальная боевая винтовка с подствольным гранатомётом, в комплекте 3 магазина.
-ent-ClothingBackpackDuffelSyndicateFilledRevolverStandard = вещмешок «Питон»
-    .desc = Револьвер «Магнум Питон» в комплекте с двумя обоймами-ускорителями.
+ent-ClothingBackpackDuffelSyndicateFilledRevolverStandard = вещмешок «Python»
+    .desc = Револьвер «Magnum Python» в комплекте с двумя обоймами-ускорителями.
 ent-ClothingBackpackDuffelHoodStarter = набор «Не грози южному централу»
-    .desc = Всё, что нужно начинающему гангста: автоматический «Глок-22 Авто», два запасных магазина, свежая кепка и пакетик сока. Только не пей его в гетто.
+    .desc = Всё, что нужно начинающему гангста: автоматический «Glock-22 Auto», два запасных магазина, свежая кепка и пакетик сока. Только не пей его в гетто.
 ent-ClothingShoesBootsSpeedFilled = ботинки скорохода
 ent-WeaponImprovisedPneumaticCannonFilled = пневматическая пушка
 
 # --- Пистолеты и револьверы ---
-ent-WeaponPistolDesertEagleAP = «Пустынный орёл»
-ent-WeaponPistolG22Auto = Глок-22 Авто
-    .desc = Разработка отдела стрелкового вооружения «Нанотрейзен». Полностью автоматический «Глок-22 Авто» — премиальная замена обычному «Глоку-22» с надёжной автоматикой на основе отдачи. Использует .35 пистолетные магазины.
-ent-WeaponPistolStechkin = Стечкин
+ent-WeaponPistolDesertEagleAP = Desert Eagle
+ent-WeaponPistolG22Auto = Glock-22 Auto
+    .desc = Разработка отдела стрелкового вооружения «Нанотрейзен». Полностью автоматический «Glock-22 Auto» — премиальная замена обычному «Glock-22» с надёжной автоматикой на основе отдачи. Использует .35 пистолетные магазины.
+ent-WeaponPistolStechkin = Stechkin
     .desc = Компактный легко скрываемый пистолет под .40. Ствол с резьбой под глушитель. Использует патроны .40.
 ent-WeaponPistolM1911 = M1911
     .desc = Классический пистолет под .45 с небольшой ёмкостью магазина.
 ent-WeaponRevolverSnubRevolver = короткоствольный револьвер
     .desc = Револьвер одиночного действия, выпускаемый разными компаниями. Свободно продаётся на гражданском рынке, потому популярен у частных детективов. Держа его в руке, чувствуешь себя везунчиком. Заряжается 6 патронами .45 магнум.
-ent-WeaponRevolverSpearheadBlack = револьвер «Спирхед» (чёрный)
+ent-WeaponRevolverSpearheadBlack = револьвер «Spearhead» (чёрный)
     .desc = Компактный самозарядный револьвер в чёрном исполнении.
 
 # --- Винтовки ---
 ent-WeaponRifleAR2 = AR2
     .desc = Импульсная винтовка родом со старой Земли. Использует батарейные картриджи.
-ent-WeaponRifleAsh12 = АШ-12
+ent-WeaponRifleAsh12 = ASH-12
 ent-WeaponRifleBolter = болтер
     .desc = Массивное автоматическое оружие в керамитовой броне, метающее самодвижущиеся разрывные болты. Тяжёлый, громкий и прямолинейный — ответ арены тем, кто стоит на месте.
 ent-WeaponRifleFamas = FAMAS
-ent-WeaponRifleG36 = Г-36
+ent-WeaponRifleG36 = G-36
 ent-WeaponRifleM16A4 = M16A4
-ent-WeaponRifleM52 = М-52
+ent-WeaponRifleM52 = M-52
     .desc = Один из наименее популярных образцов тяжёлых штурмовых винтовок. Обладает впечатляющей огневой мощью.
-ent-WeaponRifleSKM24 = СКМ-24
+ent-WeaponRifleSKM24 = SKM-24
     .desc = Дёшево и надёжно. Достаточно мощи, мало точности. Легко чинить, тяжело удержать на длинной очереди.
 ent-WeaponSIAR52 = SIAR-52
     .desc = Скорострельное оружие со встроенным глушителем.
 
 # --- Пулемёты ---
-ent-WeaponLightMachineGunDP28 = ДП-28
+ent-WeaponLightMachineGunDP28 = DP-28
     .desc = От РА-ТА-ТА-ТА с любовью. Использует патроны .30.
 ent-MagazineLightRifleMaxim = дисковый магазин (.30 винтовочный)
-    .desc = Плоский дисковый магазин на 47 патронов для пулемёта ДП-28. Рассчитан на обычные кинетические патроны.
+    .desc = Плоский дисковый магазин на 47 патронов для пулемёта DP-28. Рассчитан на обычные кинетические патроны.
 
 # --- Дробовики ---
-ent-WeaponShotgunSPAS12 = Спас-12
-ent-WeaponShotgunMinotaur = АС-12 «Минотавр»
+ent-WeaponShotgunSPAS12 = Spas-12
+ent-WeaponShotgunMinotaur = AS-12 «Минотавр»
     .desc = Гладкий, мощный и абсолютно нелегальный. Новейший полностью автоматический дробовик на рынке, использует стандартные барабаны 12-го калибра. Собственность Горлекских Мародёров.
 ent-WeaponShotgunTrenchgun4034 = траншейное ружьё L-4034
-ent-WeaponShotgunGA12 = револьвер «Ткач» Я-Суи GA-12
+ent-WeaponShotgunGA12 = револьвер Tkach Ya-Sui GA-12
     .desc = Устаревший пистолет, изредка встречающийся у некоторых ЧВК на фронтире. Барабан на три патрона — именно патрона: стреляет 12-м калибром.
 
 # --- Пистолеты-пулемёты ---
@@ -78,8 +78,8 @@ ent-WeaponSubMachineGunMP38 = MP-38
 ent-WeaponSubMachineGunMP5 = MP5
 ent-WeaponSubMachineGunMP7 = MP7
 ent-WeaponSubMachineGunP90 = P90
-ent-WeaponSubMachineGunPPSH = ППШ-59
+ent-WeaponSubMachineGunPPSH = PPSH-59
     .desc = Любимец ветеранов СССП и кошмар протоколов дружественного огня. Использует винтовочные патроны .10.
 ent-WeaponSubMachineGunSP91RC = SP-91-RC
     .desc = Компактный пистолет-пулемёт для подавления беспорядков.
-ent-WeaponSubMachineGunSkorpion = Скорпион VZ-61
+ent-WeaponSubMachineGunSkorpion = Scorpion VZ-61

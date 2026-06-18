@@ -1,23 +1,55 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Made by Meguneri for Wega (chaos ultimate crate; base copied from full_arsenal_mega, repaint pending)",
+    "copyright": "Made by Meguneri for Wega (chaos ultimate crate)",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
         {
-            "name": "icon"
+            "name": "icon",
+            "delays": [
+                [
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3
+                ]
+            ]
         },
         {
-            "name": "base"
+            "name": "base",
+            "delays": [
+                [
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3
+                ]
+            ]
         },
         {
-            "name": "closed"
+            "name": "closed",
+            "delays": [
+                [
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3
+                ]
+            ]
         },
         {
-            "name": "open"
+            "name": "open",
+            "delays": [
+                [
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3
+                ]
+            ]
         },
         {
             "name": "welded"
@@ -26,12 +58,12 @@
             "name": "sparking",
             "delays": [
                 [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3,
+                    0.3
                 ]
             ]
         }

@@ -2,4 +2,8 @@
 ent-WeaponArenaHarpoon = арена-гарпун
     .desc = Боевой крюк-кошка для арены: цепляет врага и тянет к себе — или дёргает тебя к стене.
 ent-ArenaHarpoonHook = крюк гарпуна
-ent-ArenaHarpoonRope = трос гарпуна
+
+# Потрошащая версия.
+ent-WeaponArenaHarpoonReaper = гарпун-потрошитель
+    .desc = Боевой крюк-кошка для арены. Цепляет врага, тянет к себе — и в упор срывает конечность.
+ent-ArenaHarpoonReaperHook = крюк потрошителя
