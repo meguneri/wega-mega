@@ -39,3 +39,30 @@
   - type: DuelArena
     # Радиус в тайлах — должен покрывать всю арену. Ставь трекер в центр.
     scanRange: 200
+
+# Вариант трекера со «штормом» (battle-royale): во время боя безопасная зона —
+# круг от позиции трекера — постепенно сжимается к центру, всё за её пределами получает урон.
+# Ставь строго в ЦЕНТР арены (центр зоны = позиция трекера). Подгони initialRadius под размер арены.
+- type: entity
+  id: DuelArenaTrackerStorm
+  parent: DuelArenaTracker
+  suffix: Duel Arena, Storm
+  components:
+  # Порты Open/Toggle наследуются от DuelArenaTracker; добавляем управление штормом.
+  # StormCancel — отменить сужение на текущий бой; StormStart — (пере)запустить сужение.
+  - type: DeviceLinkSink
+    ports:
+      - Open
+      - Toggle
+      - StormCancel
+      - StormStart
+  - type: ArenaStorm
+    initialRadius: 28
+    minRadius: 4
+    shrinkStep: 4
+    shrinkInterval: 12
+    startDelay: 30
+    damageInterval: 1
+    damage:
+      types:
+        Heat: 5

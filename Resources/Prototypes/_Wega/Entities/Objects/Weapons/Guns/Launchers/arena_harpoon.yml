@@ -1,0 +1,93 @@
+# Арена-гарпун: крюк-кошка для арены. Попал в бойца — притянул его к себе; попал в стену —
+# рывком подлетел сам. Самоперезаряжаемая батарея даёт фиксированный «кулдаун» между выстрелами.
+- type: entity
+  name: arena harpoon
+  parent: BaseItem
+  id: WeaponArenaHarpoon
+  description: Боевой крюк-кошка для арены: цепляет врага и тянет к себе — или дёргает тебя к стене.
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    layers:
+    - state: base
+    - state: base-unshaded
+      shader: unshaded
+      map: [ "unshaded" ]
+  - type: Item
+    size: Normal
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    quickEquip: false
+    slots:
+    - Back
+    - suitStorage
+  - type: Gun
+    fireRate: 1
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    clumsyProof: true
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/harpoon.ogg
+    soundEmpty: null
+  - type: BatteryAmmoProvider
+    proto: ArenaHarpoonHook
+    fireCost: 100
+  - type: Battery
+    maxCharge: 100
+    startingCharge: 100
+  - type: BatterySelfRecharger
+    autoRechargeRate: 25 # ~4 с между выстрелами
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#26e0ff"
+    netsync: false
+  - type: Appearance
+
+# Снаряд-крюк. Логику зацепа (притянуть моба / рывок к стене) обрабатывает ArenaHarpoonSystem.
+- type: entity
+  name: harpoon hook
+  parent: BaseBullet
+  id: ArenaHarpoonHook
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    noRot: false
+    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    layers:
+    - state: hook
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Piercing: 0
+  - type: ArenaHarpoonProjectile
+    pullSpeed: 12
+    damage:
+      types:
+        Piercing: 6
+  - type: TimedDespawn
+    lifetime: 2
+
+# Трос-луч, рисуется на миг от стрелка к точке зацепа.
+- type: entity
+  name: harpoon rope
+  id: ArenaHarpoonRope
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    drawdepth: Effects
+    layers:
+    - state: rope
+      shader: unshaded
+  - type: Physics
+    canCollide: false
+  - type: Beam
+  - type: TimedDespawn
+    lifetime: 1
+  - type: Tag
+    tags:
+    - HideContextMenu

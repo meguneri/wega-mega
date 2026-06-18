@@ -134,3 +134,35 @@
     # Гарант хотя бы одного
     guaranteedCategories:
       - MeleeArsenalWeapon
+
+# Ультимативный ящик хаоса — НЕ случайный: фиксированный набор «всё и сразу».
+# Арена-сандэвистан «полярная звезда» (внимание: замыкает руки — кроме перчаток полярной
+# звезды в очках не взять оружие, так что стволы из ящика работают только без очков),
+# набор ПП «Донксофт» (ПП + 2 магазина) с наручниками и тактическим жилетом мерка,
+# лук жёсткого света и импульсная винтовка.
+- type: entity
+  parent: [ CrateSyndicate, BaseSyndicateContraband ]
+  id: CrateSyndicateChaosUltimate
+  name: Ультимативный ящик хаоса
+  description: Не случайность, а гарантия. Сандэвистан, ПП «Донксофт» с наручниками и тактическим жилетом, лук жёсткого света и импульсная винтовка — всё и сразу.
+  components:
+  - type: Icon
+    sprite: _Wega/Structures/Storage/Crates/chaos_ultimate.rsi
+  - type: Sprite
+    sprite: _Wega/Structures/Storage/Crates/chaos_ultimate.rsi
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        # Арена-версия сандэвистана «полярная звезда»
+        - id: ClothingEyesSandevistanArena
+        # Набор ПП «Донксофт» с наручниками и тактическим жилетом
+        - id: WeaponSubMachineGunDonksoft
+        - id: MagazinePistolSubMachineGunFoam
+        - id: MagazinePistolSubMachineGunFoam
+        - id: Handcuffs
+        - id: ClothingOuterVestWebMerc
+        # Лук жёсткого света
+        - id: ArenaBowHardlight
+        # Импульсная винтовка
+        - id: WeaponPulseRifle
