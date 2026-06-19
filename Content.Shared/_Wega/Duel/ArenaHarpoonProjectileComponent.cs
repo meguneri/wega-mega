@@ -16,6 +16,12 @@ public sealed partial class ArenaHarpoonProjectileComponent : Component
     [DataField]
     public float PullSpeed = 12f;
 
+    /// <summary>На каком расстоянии до якоря считаем, что «долетел», и завершаем подмотку (стан/потрошение
+    /// для моба или рывок к стене для стрелка). Берётся с запасом (~тайл), чтобы сработать раньше, чем
+    /// хитбоксы упрутся друг в друга, иначе стан не повесился бы.</summary>
+    [DataField]
+    public float ArriveDistance = 1.0f;
+
     /// <summary>Урон цели при зацепе (помимо притяжения).</summary>
     [DataField]
     public DamageSpecifier? Damage;
@@ -23,6 +29,11 @@ public sealed partial class ArenaHarpoonProjectileComponent : Component
     /// <summary>Звук срабатывания зацепа.</summary>
     [DataField]
     public string? HitSound = "/Audio/Weapons/Guns/Gunshots/harpoon.ogg";
+
+    /// <summary>Звук «прилёта»: глухой удар в момент, когда стрелок дёрнулся к стене вплотную или цель
+    /// влетела к стрелку (кроме потрошащего финала — у него свой звук). null — без звука.</summary>
+    [DataField]
+    public string? LandSound = "/Audio/Effects/metal_slam1.ogg";
 
     /// <summary>Сколько секунд цель станит (paralyze), когда её подтянуло вплотную к стрелку.</summary>
     [DataField]
@@ -32,19 +43,35 @@ public sealed partial class ArenaHarpoonProjectileComponent : Component
     [DataField]
     public TimeSpan MaxPullTime = TimeSpan.FromSeconds(2);
 
-    /// <summary>Если true — когда притянутый моб оказывается вплотную, проигрывается короткая
-    /// «потрошащая» анимация и у него отрывается одна случайная конечность.</summary>
+    /// <summary>Что гарпун делает с притянутой вплотную жертвой по умолчанию. На потрошителе режим
+    /// переключается в руке (<see cref="ArenaHarpoonModeComponent"/>) и переопределяет это значение.</summary>
     [DataField]
-    public bool DismemberOnArrive;
+    public ArenaHarpoonFinisher Finisher = ArenaHarpoonFinisher.None;
 
-    /// <summary>Звук «завода» потрошителя: запускается, когда жертва уже близко и вот-вот лишится
-    /// конечности — нарастающий металлический скрежет под учащающиеся вспышки телеграфа.</summary>
+    /// <summary>На каком расстоянии до якоря потрошитель начинает телеграфить добивание
+    /// (нарастающие алые вспышки + тряска камеры + звук «завода»).</summary>
+    [DataField]
+    public float TelegraphDistance = 2.5f;
+
+    /// <summary>Звук «завода» перед срывом конечности — нарастающий металлический скрежет.</summary>
     [DataField]
     public string? DismemberWindupSound = "/Audio/Weapons/chainsaw_rev.ogg";
 
     /// <summary>Звук самого отрыва конечности в упор.</summary>
     [DataField]
     public string? DismemberSound = "/Audio/Effects/gib3.ogg";
+
+    /// <summary>Звук «завода» перед обезглавливанием — намеренно жутче скрежета потрошителя.</summary>
+    [DataField]
+    public string? BeheadWindupSound = "/Audio/Effects/demon_attack1.ogg";
+
+    /// <summary>Звук самого обезглавливания в упор — самый страшный из добиваний гарпуна.</summary>
+    [DataField]
+    public string? BeheadSound = "/Audio/Effects/demon_consume.ogg";
+
+    /// <summary>Звук, когда вместо головы гарпун вдребезги разбивает шлем-с-резистами (голова уцелела).</summary>
+    [DataField]
+    public string? HelmetBreakSound = "/Audio/Effects/metal_break1.ogg";
 
     /// <summary>Крюк уже сработал — защита от повторной обработки нескольких контактов за тик.</summary>
     public bool Used;

@@ -1,12 +1,20 @@
 using System.Numerics;
 using Content.Server.Effects;
 using Content.Shared._Wega.Duel;
+using Content.Shared.Armor;
 using Content.Shared.Body;
 using Content.Shared.Camera;
 using Content.Shared.Damage.Systems;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
+using Content.Shared.Verbs;
 using Robust.Server.Audio;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
@@ -18,6 +26,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Server._Wega.Duel.Systems;
 
@@ -43,6 +52,18 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
     [Dependency] private AudioSystem _audio = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+
+    /// <summary>Сила толчка камеры на «прилёте» (рывок к стене вплотную / влёт цели), кроме добивания.</summary>
+    private const float LandCameraKick = 0.5f;
+
+    /// <summary>Слот головы (шлем/шапка) — его срывает обезглавливающий гарпун вместо самой головы.</summary>
+    private const string HeadSlot = "head";
+
+    /// <summary>Категория органа-головы, которую сносит обезглавливающий гарпун.</summary>
+    private const string HeadCategory = "Head";
 
     /// <summary>Категории «органов»-конечностей, которые может оторвать потрошащий гарпун.</summary>
     private static readonly string[] LimbCategories =
@@ -55,7 +76,49 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ArenaHarpoonProjectileComponent, StartCollideEvent>(OnHookCollide);
+        SubscribeLocalEvent<ArenaHarpoonModeComponent, UseInHandEvent>(OnModeUseInHand);
+        SubscribeLocalEvent<ArenaHarpoonModeComponent, GetVerbsEvent<AlternativeVerb>>(OnModeVerb);
     }
+
+    /// <summary>Использование потрошителя в руке (Z) перебирает режим добивания (срыв конечности ↔ обезглавливание).</summary>
+    private void OnModeUseInHand(EntityUid uid, ArenaHarpoonModeComponent comp, UseInHandEvent args)
+    {
+        if (args.Handled || comp.Modes.Count <= 1)
+            return;
+
+        CycleMode(uid, comp, args.User);
+        args.Handled = true;
+    }
+
+    /// <summary>Пункт контекстного меню (Alt-ЛКМ) для смены режима добивания — как селектор режима огня
+    /// у обычного оружия. Дублирует переключение из руки, чтобы режим был доступен и через меню.</summary>
+    private void OnModeVerb(EntityUid uid, ArenaHarpoonModeComponent comp, GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract || comp.Modes.Count <= 1)
+            return;
+
+        var nextMode = comp.Modes[(comp.Index + 1) % comp.Modes.Count];
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Act = () => CycleMode(uid, comp, args.User),
+            Text = Loc.GetString("arena-harpoon-mode-verb", ("mode", GetModeLoc(nextMode))),
+            Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/fold.svg.192dpi.png")),
+        });
+    }
+
+    /// <summary>Переключает режим добивания на следующий по кругу и сообщает об этом всплывашкой.</summary>
+    private void CycleMode(EntityUid uid, ArenaHarpoonModeComponent comp, EntityUid? user)
+    {
+        comp.Index = (comp.Index + 1) % comp.Modes.Count;
+        _popup.PopupEntity(Loc.GetString("arena-harpoon-mode-switched", ("mode", GetModeLoc(comp.Current))), uid, user ?? uid, PopupType.Medium);
+    }
+
+    private string GetModeLoc(ArenaHarpoonFinisher mode) => Loc.GetString(mode switch
+    {
+        ArenaHarpoonFinisher.Behead => "arena-harpoon-mode-behead",
+        _ => "arena-harpoon-mode-dismember",
+    });
 
     private void OnHookCollide(EntityUid uid, ArenaHarpoonProjectileComponent comp, ref StartCollideEvent args)
     {
@@ -87,20 +150,25 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
 
         comp.Used = true;
 
+        // Вид добивания берём с самого оружия (потрошитель переключается в руке), иначе — дефолт снаряда.
+        var finisher = comp.Finisher;
+        if (projectile.Weapon is { } weapon && TryComp<ArenaHarpoonModeComponent>(weapon, out var mode))
+            finisher = mode.Current;
+
         if (isMob)
         {
-            // Урон по цели и плавная подмотка её к стрелку; вплотную — стан (и, возможно, потрошение).
+            // Урон по цели и плавная подмотка её к стрелку; вплотную — стан (и, возможно, добивание).
             if (comp.Damage != null)
                 _damageable.TryChangeDamage(other, comp.Damage, origin: shooter);
 
             // Валим с ног на время подмотки, чтобы цель ехала к стрелку, а не сопротивлялась ходьбой.
             _stun.TryKnockdown(other, comp.MaxPullTime, refresh: true);
-            StartPull(other, anchor: shooter, comp, stunOnArrive: comp.StunDuration, dismember: comp.DismemberOnArrive);
+            StartPull(other, anchor: shooter, comp, stunOnArrive: comp.StunDuration, finisher: finisher);
         }
         else
         {
-            // Рывок самого стрелка к точке зацепа (стена/конструкция). Без стана и потрошения.
-            StartPull(shooter, anchor: other, comp, stunOnArrive: null, dismember: false);
+            // Рывок самого стрелка к точке зацепа (стена/конструкция). Без стана и добивания.
+            StartPull(shooter, anchor: other, comp, stunOnArrive: null, finisher: ArenaHarpoonFinisher.None);
         }
 
         if (comp.HitSound != null)
@@ -111,16 +179,35 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
 
     /// <summary>Навешивает на сущность состояние «подматывается гарпуном» к якорю-сущности
     /// <paramref name="anchor"/> (стрелок при притяжении моба или стена при рывке к ней).</summary>
-    private void StartPull(EntityUid puller, EntityUid anchor, ArenaHarpoonProjectileComponent comp, TimeSpan? stunOnArrive, bool dismember)
+    private void StartPull(EntityUid puller, EntityUid anchor, ArenaHarpoonProjectileComponent comp, TimeSpan? stunOnArrive, ArenaHarpoonFinisher finisher)
     {
         var pull = EnsureComp<ArenaHarpoonPulledComponent>(puller);
         pull.Anchor = anchor;
         pull.AnchorPoint = _transform.GetMapCoordinates(anchor);
         pull.Speed = comp.PullSpeed;
+        pull.ArriveDistance = comp.ArriveDistance;
+        pull.TelegraphDistance = comp.TelegraphDistance;
         pull.StunOnArrive = stunOnArrive;
-        pull.DismemberOnArrive = dismember;
-        pull.WindupSound = comp.DismemberWindupSound;
-        pull.DismemberSound = comp.DismemberSound;
+        pull.Finisher = finisher;
+        pull.LandSound = comp.LandSound;
+        pull.HelmetBreakSound = comp.HelmetBreakSound;
+        // Сброс телеграфа на случай повторного зацепа той же цели, пока компонент ещё висел.
+        pull.TelegraphStarted = false;
+        pull.NextTelegraphTick = TimeSpan.Zero;
+
+        // Звуки «завода» и финала зависят от вида добивания: обезглавливание звучит намеренно страшнее.
+        switch (finisher)
+        {
+            case ArenaHarpoonFinisher.Dismember:
+                pull.WindupSound = comp.DismemberWindupSound;
+                pull.FinisherSound = comp.DismemberSound;
+                break;
+            case ArenaHarpoonFinisher.Behead:
+                pull.WindupSound = comp.BeheadWindupSound;
+                pull.FinisherSound = comp.BeheadSound;
+                break;
+        }
+
         pull.EndTime = _timing.CurTime + comp.MaxPullTime;
 
         // Трос привязан к живому якорю — клиентский оверлей сам рисует его между концами по их
@@ -156,9 +243,9 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
             var delta = anchorPos.Position - pullerPos.Position;
             var dist = delta.Length();
 
-            // Потрошитель: пока жертву ещё тянет, но она уже близко — заранее «заводимся».
-            if (pull.DismemberOnArrive)
-                UpdateDismemberTelegraph(uid, pull, dist);
+            // Добивающий гарпун: пока жертву ещё тянет, но она уже близко — заранее «заводимся».
+            if (pull.Finisher != ArenaHarpoonFinisher.None)
+                UpdateFinisherTelegraph(uid, pull, dist);
 
             if (dist <= pull.ArriveDistance)
             {
@@ -171,11 +258,12 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
     }
 
     /// <summary>
-    /// Телеграф потрошителя: когда подтягиваемая жертва входит в опасную дистанцию, запускается
+    /// Телеграф добивания: когда подтягиваемая жертва входит в опасную дистанцию, запускается
     /// нарастающий «завод» — учащающиеся алые вспышки и всё более резкая тряска камеры, тем сильнее,
-    /// чем ближе жертва. Так момент отрыва конечности читается заранее и нагнетает напряжение.
+    /// чем ближе жертва. Так момент добивания читается заранее и нагнетает напряжение. Звук «завода»
+    /// зависит от вида добивания (скрежет потрошителя / жуткий вой обезглавливания).
     /// </summary>
-    private void UpdateDismemberTelegraph(EntityUid victim, ArenaHarpoonPulledComponent pull, float dist)
+    private void UpdateFinisherTelegraph(EntityUid victim, ArenaHarpoonPulledComponent pull, float dist)
     {
         if (dist > pull.TelegraphDistance)
             return;
@@ -215,8 +303,26 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
             if (pull.StunOnArrive is { } stun)
                 _stun.TryUpdateParalyzeDuration(uid, stun);
 
-            if (pull.DismemberOnArrive)
-                TryDismember(uid, pull);
+            switch (pull.Finisher)
+            {
+                // Добивания сами себе кульминация (вспышка + мощный кик + звук) — отдельный «прилёт» не нужен.
+                case ArenaHarpoonFinisher.Dismember:
+                    TryDismember(uid, pull);
+                    break;
+                case ArenaHarpoonFinisher.Behead:
+                    TryBehead(uid, pull);
+                    break;
+                default:
+                    // Глухой «прилёт»: рывок стрелка к стене вплотную или влёт цели к нему ощущается весомее
+                    // с ударным звуком и лёгким толчком камеры.
+                    if (pull.LandSound != null)
+                        _audio.PlayPvs(new SoundPathSpecifier(pull.LandSound), uid);
+
+                    _recoil.KickCamera(uid, new Vector2(
+                        (_random.NextFloat() * 2f - 1f) * LandCameraKick,
+                        (_random.NextFloat() * 2f - 1f) * LandCameraKick));
+                    break;
+            }
         }
 
         // Трос больше не нужен — снимаем, оверлей сразу перестаёт его рисовать.
@@ -254,7 +360,74 @@ public sealed partial class ArenaHarpoonSystem : EntitySystem
         _color.RaiseEffect(Color.Red, new List<EntityUid> { victim }, pvs);
         _recoil.KickCamera(victim, new Vector2(_random.NextFloat() * 2f - 1f, _random.NextFloat() * 2f - 1f) * 1.5f);
 
-        if (pull.DismemberSound != null)
-            _audio.PlayPvs(new SoundPathSpecifier(pull.DismemberSound), victim);
+        if (pull.FinisherSound != null)
+            _audio.PlayPvs(new SoundPathSpecifier(pull.FinisherSound), victim);
+    }
+
+    /// <summary>Обезглавливание в упор. Если на жертве надет шлем <b>с резистами</b> (есть
+    /// <see cref="ArmorComponent"/>) — гарпун вдребезги разбивает его, и голова уцелела. Уничтожение
+    /// шлема-скафандра попутно снимает у скафандра действие-переключатель и сам
+    /// <c>ToggleableClothingComponent</c> (см. <c>ToggleableClothingSystem.OnRemoveAttached</c>), так что
+    /// надеть шлем обратно уже нельзя. Шлем без резистов (или его отсутствие) не спасает — голова
+    /// слетает (орган выпадает на пол) с самым страшным звуком из добиваний, вспышкой и сильным киком.</summary>
+    private void TryBehead(EntityUid victim, ArenaHarpoonPulledComponent pull)
+    {
+        var pvs = Filter.Pvs(victim, entityManager: EntityManager);
+
+        // Шлем с резистами спасает голову ценой себя: разрушаем его — и обезглавливания не будет.
+        if (_inventory.TryGetSlotEntity(victim, HeadSlot, out var helmet) && HasComp<ArmorComponent>(helmet))
+        {
+            QueueDel(helmet.Value);
+
+            if (pull.HelmetBreakSound != null)
+                _audio.PlayPvs(new SoundPathSpecifier(pull.HelmetBreakSound), victim);
+
+            _color.RaiseEffect(Color.Red, new List<EntityUid> { victim }, pvs);
+            _recoil.KickCamera(victim, new Vector2(
+                (_random.NextFloat() * 2f - 1f) * LandCameraKick,
+                (_random.NextFloat() * 2f - 1f) * LandCameraKick));
+
+            _popup.PopupEntity(
+                Loc.GetString("arena-harpoon-helmet-destroyed", ("victim", Identity.Entity(victim, EntityManager))),
+                victim, pvs, true, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!TryComp<BodyComponent>(victim, out var body) || body.Organs is not { } organs)
+            return;
+
+        EntityUid? head = null;
+        foreach (var organ in organs.ContainedEntities)
+        {
+            if (TryComp<OrganComponent>(organ, out var organComp)
+                && organComp.Category is { } cat
+                && cat.Id == HeadCategory)
+            {
+                head = organ;
+                break;
+            }
+        }
+
+        if (head == null)
+            return;
+
+        _container.Remove(head.Value, organs);
+
+        // Без головы моб обязан умереть. Эта body-система не связывает органы с жизнью (жив/мёртв решают
+        // только пороги урона), поэтому смерть выставляем явно — иначе обезглавленный продолжал бы ходить.
+        // origin — стрелок (для притянутого моба якорь и есть стрелок), чтобы кил корректно засчитался.
+        if (HasComp<MobStateComponent>(victim))
+            _mobState.ChangeMobState(victim, MobState.Dead, origin: pull.Anchor);
+
+        // Самый страшный финал: алая вспышка, сильный толчок камеры, жуткий звук обезглавливания.
+        _color.RaiseEffect(Color.Red, new List<EntityUid> { victim }, pvs);
+        _recoil.KickCamera(victim, new Vector2(_random.NextFloat() * 2f - 1f, _random.NextFloat() * 2f - 1f) * 2f);
+
+        if (pull.FinisherSound != null)
+            _audio.PlayPvs(new SoundPathSpecifier(pull.FinisherSound), victim);
+
+        _popup.PopupEntity(
+            Loc.GetString("arena-harpoon-beheaded", ("victim", Identity.Entity(victim, EntityManager))),
+            victim, pvs, true, PopupType.LargeCaution);
     }
 }

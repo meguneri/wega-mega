@@ -226,7 +226,6 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
-| Крюк-кошка | `WeaponGrapplingGun` | 3 TC |
 | Температурный пистолет | `WeaponTemperatureGun` | 3 TC |
 | Пушка Форс | `WeaponForceGun` | 5 TC |
 | Замедлитель частиц | `WeaponParticleDecelerator` | 5 TC |

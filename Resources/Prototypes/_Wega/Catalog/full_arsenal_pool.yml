@@ -5983,16 +5983,6 @@
   categories:
   - FullArsenal
 
-- type: listing
-  id: FullArsenalGrapplingGun
-  name: full-arsenal-grappling-gun-name
-  description: full-arsenal-grappling-gun-desc
-  productEntity: WeaponGrapplingGun
-  cost:
-    Telecrystal: 3
-  categories:
-  - FullArsenal
-
 # ── Перенос из lust-station ────────────────────────────────────────────────
 - type: listing
   id: FullArsenalCornivoreGloves

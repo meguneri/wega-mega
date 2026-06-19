@@ -29,8 +29,14 @@ public sealed partial class ArenaHarpoonPulledComponent : Component
     /// <summary>Если задано — при достижении якоря притянутого станит (paralyze) на это время.</summary>
     public TimeSpan? StunOnArrive;
 
-    /// <summary>Если true — при достижении якоря оторвать притянутому одну случайную конечность.</summary>
-    public bool DismemberOnArrive;
+    /// <summary>Звук «прилёта» (глухой удар на финише подмотки), если это не потрошащий финал. null — тихо.</summary>
+    public string? LandSound;
+
+    /// <summary>Что сделать с притянутым вплотную (срыв конечности / обезглавливание / ничего).</summary>
+    public ArenaHarpoonFinisher Finisher;
+
+    /// <summary>Звук, когда обезглавливание разбивает шлем-с-резистами вместо головы.</summary>
+    public string? HelmetBreakSound;
 
     /// <summary>Предохранитель: после этого момента пул завершается принудительно (цель застряла и т.п.).</summary>
     public TimeSpan EndTime;
@@ -49,9 +55,9 @@ public sealed partial class ArenaHarpoonPulledComponent : Component
     /// <summary>Когда в следующий раз дёрнуть вспышку/тряску телеграфа.</summary>
     public TimeSpan NextTelegraphTick;
 
-    /// <summary>Звук «завода» потрошителя (нарастающий скрежет перед отрывом конечности).</summary>
+    /// <summary>Звук «завода» перед добиванием (зависит от вида: скрежет / жуткий вой).</summary>
     public string? WindupSound;
 
-    /// <summary>Звук самого отрыва конечности.</summary>
-    public string? DismemberSound;
+    /// <summary>Звук самого добивания в упор (отрыв конечности или обезглавливание).</summary>
+    public string? FinisherSound;
 }

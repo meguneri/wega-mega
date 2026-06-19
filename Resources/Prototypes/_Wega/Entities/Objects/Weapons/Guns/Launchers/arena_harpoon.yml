@@ -8,18 +8,16 @@
   categories: [ DoNotMap ]
   components:
   - type: Sprite
-    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    sprite: _Wega/Objects/Weapons/Guns/Launchers/arena_harpoon.rsi
     layers:
     - state: base
-      color: "#c23030" # хаос-перекрас: багровый металл
     - state: base-unshaded
       shader: unshaded
       map: [ "unshaded" ]
-      color: "#ff1f1f" # алое свечение вместо штатного циана
   - type: Item
     size: Normal
   - type: Clothing
-    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
+    sprite: _Wega/Objects/Weapons/Guns/Launchers/arena_harpoon.rsi
     quickEquip: false
     slots:
     - Back
@@ -44,7 +42,7 @@
   - type: PointLight
     radius: 1.5
     energy: 1.2
-    color: "#ff2020"
+    color: "#26e0ff" # циановая подсветка арена-гарпуна
     netsync: false
   - type: Appearance
 
@@ -57,8 +55,7 @@
   components:
   - type: Sprite
     noRot: false
-    sprite: Objects/Weapons/Guns/Launchers/grappling_gun.rsi
-    color: "#ff3030" # хаос-перекрас крюка
+    sprite: _Wega/Objects/Weapons/Guns/Launchers/arena_harpoon.rsi
     layers:
     - state: hook
   - type: Projectile
@@ -75,27 +72,50 @@
     lifetime: 2
 
 # ── Потрошащая версия гарпуна ────────────────────────────────────────────────
-# При зацепе моба тянет его как обычно, но когда он оказывается вплотную — короткая «потрошащая»
-# вспышка и у жертвы отрывается одна случайная конечность.
+# При зацепе моба тянет его как обычно, но когда он оказывается вплотную — короткая добивающая
+# вспышка. Режим добивания переключается использованием в руке: срыв случайной конечности или
+# обезглавливание (если на жертве шлем — вместо головы слетает шлем).
 - type: entity
   parent: WeaponArenaHarpoon
   id: WeaponArenaHarpoonReaper
   name: arena reaper harpoon
-  suffix: Dismember
-  description: "Боевой крюк-кошка для арены. Цепляет врага, тянет к себе — и в упор срывает конечность."
+  suffix: Reaper
+  description: "Боевой крюк-кошка для арены. Цепляет врага, тянет к себе — и в упор добивает. Использование в руке меняет добивание: срыв конечности или обезглавливание."
   components:
+  # Свой вид потрошителя — кроваво-красный (перекрас крюк-кошки).
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Launchers/arena_harpoon_reaper.rsi
+    layers:
+    - state: base
+    - state: base-unshaded
+      shader: unshaded
+      map: [ "unshaded" ]
+  - type: Clothing
+    sprite: _Wega/Objects/Weapons/Guns/Launchers/arena_harpoon_reaper.rsi
+  # Красная подсветка вместо циановой базовой.
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#ff2a2a"
+    netsync: false
   - type: BatteryAmmoProvider
     proto: ArenaHarpoonReaperHook
     fireCost: 100
   # КД 10 с: 100 заряда / 10 в секунду = 10 с между выстрелами (у обычного гарпуна 25/с ≈ 4 с).
   - type: BatterySelfRecharger
     autoRechargeRate: 10
+  # Переключатель режима добивания (Use-in-hand). По умолчанию — срыв конечности.
+  - type: ArenaHarpoonMode
 
 - type: entity
   parent: ArenaHarpoonHook
   id: ArenaHarpoonReaperHook
   categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Guns/Launchers/arena_harpoon_reaper.rsi
+    layers:
+    - state: hook
   - type: ArenaHarpoonProjectile
-    dismemberOnArrive: true
+    finisher: Dismember # дефолт, если режим на оружии не задан
     stunDuration: 1 # потрошителю стан короче — 1 с

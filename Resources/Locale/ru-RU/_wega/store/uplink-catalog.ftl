@@ -1172,8 +1172,6 @@ full-arsenal-lmg-dp28-name = Пулемёт «DP-28»
 full-arsenal-lmg-dp28-desc = Классический ручной пулемёт с дисковым магазином на 47 патронов .30. Идёт с заряженным диском.
 
 # Тяжёлое и специальное оружие
-full-arsenal-grappling-gun-name = Крюк-кошка
-full-arsenal-grappling-gun-desc = Выстреливает крюком, подтягивая владельца.
 full-arsenal-temperature-gun-name = Температурный пистолет
 full-arsenal-temperature-gun-desc = Меняет температуру цели — жар или холод.
 full-arsenal-force-gun-name = Пушка Форс
