@@ -1105,7 +1105,18 @@
   description: full-arsenal-adrenaline-vest-desc
   productEntity: ArenaAdrenalineVest
   cost:
-    Telecrystal: 9
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
+  id: FullArsenalAdaptiveArmor
+  name: full-arsenal-adaptive-armor-name
+  description: full-arsenal-adaptive-armor-desc
+  productEntity: ArenaAdaptiveArmor
+  cost:
+    Telecrystal: 16
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -1724,6 +1735,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalTravelCamera
+  name: full-arsenal-travel-camera-name
+  description: full-arsenal-travel-camera-desc
+  productEntity: TravelCamera
+  cost:
+    Telecrystal: 2
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalStunbaton
   name: full-arsenal-stunbaton-name
   description: full-arsenal-stunbaton-desc
@@ -1888,6 +1909,16 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalClockworkRobe
+  name: full-arsenal-clockwork-robe-name
+  description: full-arsenal-clockwork-robe-desc
+  productEntity: ClothingOuterVeilCultRobesArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalClockworkGauntlets
   name: full-arsenal-clockwork-gauntlets-name
   description: full-arsenal-clockwork-gauntlets-desc
@@ -1985,6 +2016,26 @@
   productEntity: VeilCultBrassCuirassHardenPlatesArena
   cost:
     Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkRobeHaste
+  name: full-arsenal-clockwork-robe-haste-name
+  description: full-arsenal-clockwork-robe-haste-desc
+  productEntity: ClothingOuterVeilCultRobesHasteArena
+  cost:
+    Telecrystal: 7
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalClockworkRobeCamouflage
+  name: full-arsenal-clockwork-robe-camouflage-name
+  description: full-arsenal-clockwork-robe-camouflage-desc
+  productEntity: ClothingOuterVeilCultRobesCamouflageArena
+  cost:
+    Telecrystal: 7
   categories:
   - FullArsenal
 

@@ -70,6 +70,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
             {
                 comp.PendingWallRestore = false;
                 RestoreWalls(uid, comp);
+                RestoreGrilles(uid, comp);
                 RestoreLights(uid, comp);
             }
 
@@ -234,6 +235,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // добавляются, старые не перезаписываются — снимок самовосстанавливается, даже
         // если какой-то из проходов вышел неполным.
         SnapshotWalls(uid, comp);
+        SnapshotGrilles(uid, comp);
         SnapshotLights(uid, comp);
 
         // Отменяем grace-период предыдущей дуэли — иначе Update отправит сигнал закрытия
@@ -348,7 +350,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
     /// <summary>
     /// Возвращает идентификатор игрока, управляющего телом, или null для тел без разума (NPC).
     /// </summary>
-    private NetUserId? GetUser(EntityUid body)
+    public NetUserId? GetUser(EntityUid body)
     {
         return _mind.TryGetMind(body, out _, out var mind) ? mind.UserId : null;
     }

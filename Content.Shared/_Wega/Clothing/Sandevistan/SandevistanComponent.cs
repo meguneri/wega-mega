@@ -58,6 +58,15 @@ public sealed partial class SandevistanComponent : Component
     [DataField, AutoNetworkedField]
     public float SlowModifier = 0.35f;
 
+    /// <summary>
+    /// "Projection" technique (Naoya Zenin): while active, every mob the wearer strikes with a bare
+    /// hand ("touch") is frozen solid — fully stunned in place — for this duration. Anyone who can't
+    /// keep pace with the wearer's 24-frames-a-second movement simply stops. Copied into the active
+    /// component on activation; <see cref="TimeSpan.Zero"/> disables it (every non-projection version).
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan TouchFreezeDuration = TimeSpan.Zero;
+
     /// <summary>Time between trailing afterimages spawned while active.</summary>
     [DataField, AutoNetworkedField]
     public TimeSpan AfterimageInterval = TimeSpan.FromSeconds(0.1);
@@ -109,16 +118,23 @@ public sealed partial class SandevistanActiveComponent : Component
     [DataField, AutoNetworkedField]
     public float SlowModifier = 0.35f;
 
+    /// <summary>"Projection" freeze-on-touch duration (see <see cref="SandevistanComponent.TouchFreezeDuration"/>);
+    /// <see cref="TimeSpan.Zero"/> on every non-projection version.</summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan TouchFreezeDuration = TimeSpan.Zero;
+
     /// <summary>Looping "you're charged" hum played to the wearer for the whole burst (server-spawned
     /// audio entity, stopped when the burst ends). Not networked — held on the server only.</summary>
     public EntityUid? LoopSound;
 
     /// <summary>
-    /// Server-side throttle: earliest time the wearer may fire a gun again. In bullet-time the
-    /// wearer's own ranged fire is stretched by <see cref="SlowModifier"/> just like everyone else's
-    /// (so shooting/throwing carry the same slowdown), while their melee stays at normal speed.
-    /// Not networked — gated against server time.
+    /// Earliest time the wearer may fire a gun again. In bullet-time the wearer's own ranged fire is
+    /// stretched by <see cref="SlowModifier"/> just like everyone else's (so shooting/throwing carry the
+    /// same slowdown), while their melee stays at normal speed. Networked so the shot throttle runs the
+    /// same on client and server — a server-only throttle would let the client mispredict every shot the
+    /// server rejects, desyncing (and jamming) the gun.
     /// </summary>
+    [DataField, AutoNetworkedField]
     public TimeSpan NextAllowedShot;
 
     // Afterimage trail ("David Martinez" blue blur).
@@ -173,11 +189,13 @@ public sealed partial class SandevistanSlowedComponent : Component
     public float SlowModifier = 0.35f;
 
     /// <summary>
-    /// Server-side throttle: earliest time this mob may fire a gun again. Bullet time stretches the
-    /// trigger the same way it stretches melee swings, so ranged fire rate is actually cut instead of
-    /// only the bullets being slowed in flight. Not networked — gated against server time.
+    /// Earliest time this mob may fire a gun again. Bullet time stretches the trigger the same way it
+    /// stretches melee swings, so ranged fire rate is actually cut instead of only the bullets being
+    /// slowed in flight. Networked so the throttle runs identically on client and server — a server-only
+    /// throttle lets the client mispredict every rejected shot, which desyncs and jams the gun (it stays
+    /// broken even after the slow lifts).
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan NextAllowedShot;
 
     /// <summary>Looping "world slowed" drone played to this victim while slowed (server-spawned audio
@@ -204,7 +222,7 @@ public sealed partial class SandevistanSlowedProjectileComponent : Component
 
 /// <summary>
 /// Wearer-side marker: present (reference-counted) while the mob has any Sandevistan equipped or
-/// implanted, in any version (base / arena / freeze, worn or implant). Lets the gloves of the north
+/// implanted, in any version (base / arena / freeze / projection, worn or implant). Lets the gloves of the north
 /// star know to hit harder regardless of which Sandevistan the wearer is running. Server-managed and
 /// networked, like <see cref="ArenaWeaponLockComponent"/>.
 /// </summary>

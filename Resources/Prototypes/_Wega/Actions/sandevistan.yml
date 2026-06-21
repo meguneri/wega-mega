@@ -30,3 +30,13 @@
   components:
   - type: Action
     useDelay: 10
+
+# «Проекция» (техника Наои Дзенина): перезарядка кнопки совпадает с cooldown импланта (20с).
+- type: entity
+  parent: ActionSandevistan
+  id: ActionSandevistanProjection
+  name: Сандэвистан «проекция»
+  description: "Делишь секунду на 24 кадра. Любой, кого коснёшься голой рукой, не успевает за тобой и застывает на миг."
+  components:
+  - type: Action
+    useDelay: 20

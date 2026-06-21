@@ -3,6 +3,8 @@
 
 ent-VeilCultBrassCuirassArena = { ent-VeilCultBrassCuirass }
     .desc = { ent-VeilCultBrassCuirass.desc }
+ent-ClothingOuterVeilCultRobesArena = { ent-ClothingOuterVeilCultRobes }
+    .desc = { ent-ClothingOuterVeilCultRobes.desc }
 ent-ClothingHandsClockworkGauntletsArena = { ent-ClothingHandsClockworkGauntlets }
     .desc = { ent-ClothingHandsClockworkGauntlets.desc }
 ent-WeaponClockworkSwordArena = { ent-WeaponClockworkSword }
@@ -13,6 +15,10 @@ ent-WeaponRatvarianSpearArena = { ent-WeaponRatvarianSpear }
     .desc = { ent-WeaponRatvarianSpear.desc }
 
 # Зачарованные варианты — переиспользуют имя/описание своей арена-базы.
+ent-ClothingOuterVeilCultRobesHasteArena = { ent-ClothingOuterVeilCultRobesArena }
+    .desc = { ent-ClothingOuterVeilCultRobesArena.desc }
+ent-ClothingOuterVeilCultRobesCamouflageArena = { ent-ClothingOuterVeilCultRobesArena }
+    .desc = { ent-ClothingOuterVeilCultRobesArena.desc }
 ent-VeilCultBrassCuirassSmokeArena = { ent-VeilCultBrassCuirassArena }
     .desc = { ent-VeilCultBrassCuirassArena.desc }
 ent-VeilCultBrassCuirassAbsorbArena = { ent-VeilCultBrassCuirassArena }

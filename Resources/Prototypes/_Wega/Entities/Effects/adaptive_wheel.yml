@@ -1,0 +1,57 @@
+# Колесо адаптации (в духе Махораги): постоянно висит над головой носителя адаптивной брони
+# и следует за ним. Само колесо (ступица + спицы-наконечники + 8 колец) стоит неподвижно и
+# прокручивается целиком на один оборот в момент адаптации; сервер задаёт цвет свечения по типу
+# урона и зажигает кольца по мере адаптации. Спавнится из AdaptiveArmorSystem при надевании брони
+# и удаляется при снятии.
+- type: entity
+  id: EffectMahoragaWheel
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    # Приподнято над головой носителя.
+    scale: 0.8,0.8
+    offset: 0,0.95
+    sprite: _Wega/Effects/mahoraga_wheel.rsi
+    layers:
+    # Свечение (тинтуется по типу урона, неподвижно), спицы вместе с 8 кольцами (доворачиваются на паз
+    # +45° при адаптации — кольца крутятся вместе со спицами, всегда все видны) и неподвижная рама
+    # (обод + ступица) поверх спиц.
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Glow"]
+      state: glow
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Spokes"]
+      state: spokes
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Frame"]
+      state: frame
+  - type: Appearance
+  - type: AdaptiveWheel
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Одноразовая расходящаяся ударная волна — выбрасывается в момент поглощения удара, тинтуется по типу.
+# Исходит от самого колеса над головой (тот же offset, что и у колеса), а не от торса носителя.
+- type: entity
+  id: EffectAdaptiveShockwave
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    scale: 1.3,1.3
+    offset: 0,0.95
+    sprite: _Wega/Effects/adaptive_shockwave.rsi
+    layers:
+    - shader: unshaded
+      state: pulse
+  - type: Appearance
+  - type: AdaptiveShockwave
+  - type: TimedDespawn
+    lifetime: 0.55
+  - type: Tag
+    tags:
+    - HideContextMenu

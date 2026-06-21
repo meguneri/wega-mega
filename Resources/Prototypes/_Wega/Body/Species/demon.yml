@@ -84,8 +84,7 @@
   - type: Speech
     speechSounds: Lizard
   - type: Wagging
-  - type: Damageable
-    damageModifierSet: Demon
+  - type: Damageable # резисты как у людей: нейтральные коэффициенты 1.0 (без damageModifierSet)
   - type: Injurable
     damageContainer: Biological
   - type: MeleeWeapon

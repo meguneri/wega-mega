@@ -170,6 +170,10 @@ public sealed partial class SandevistanArenaLockSystem : EntitySystem
         if (!HasComp<SandevistanWearerComponent>(args.User))
             return;
 
+        // Swap the sharp punch for a deeper, muffled "gorilla-arms" thud while a Sandevistan is worn.
+        // Mobs carry no MeleeSoundComponent, so this override actually plays on them (see MeleeSoundSystem).
+        args.HitSoundOverride = ent.Comp.SandevistanHitSound;
+
         var hitMob = false;
         foreach (var hit in args.HitEntities)
         {

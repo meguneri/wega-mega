@@ -47,6 +47,13 @@ public sealed partial class DuelRotationComponent : Component, IDuelScoreStore
     /// </summary>
     public int CurrentArena = -1;
 
+    /// <summary>
+    /// Запомненный спавн каждого игрока (NetUserId → <see cref="DuelArenaSpawnComponent.SpawnIndex"/>),
+    /// выбранный персональной кнопкой входа. При переходе между раундами боец возвращается на свой угол,
+    /// а не раскидывается по маркерам в порядке списка (иначе после дуэли спавнило бы на чужой спавн).
+    /// </summary>
+    public readonly Dictionary<NetUserId, int> PreferredSpawns = new();
+
     // --- Общий счёт по всем аренам (та же схема, что в DuelArenaComponent, но единый на ротацию) ---
 
     /// <summary>

@@ -57,6 +57,17 @@ public sealed partial class ArenaAllowedWeaponComponent : Component
     [DataField]
     public SoundSpecifier PierceSound = new SoundPathSpecifier("/Audio/Weapons/pierce.ogg");
 
+    /// <summary>
+    /// Hit sound used while the wielder wears a Sandevistan (<see cref="SandevistanWearerComponent"/>):
+    /// a heavy metallic thud, like striking with iron gauntlets, instead of the default sharp punch.
+    /// Slightly lowered pitch so it reads as weighty iron rather than a ringing clang — no new assets.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier SandevistanHitSound = new SoundCollectionSpecifier("MetalThud")
+    {
+        Params = AudioParams.Default.WithPitchScale(0.9f).WithVolume(-1f)
+    };
+
     /// <summary>Visual effect spawned on the target when the armour-piercing strike lands.</summary>
     [DataField]
     public EntProtoId PierceEffect = "EffectSparks";

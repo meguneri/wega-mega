@@ -8,7 +8,9 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
+using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Robust.Shared.Prototypes;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Robust.Shared.Audio;
@@ -39,6 +41,7 @@ public sealed partial class SandevistanSystem : EntitySystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedStunSystem _stun = default!;
 
     /// <summary>Low, slowed-down phase tone played to a victim the moment bullet-time grabs them.</summary>
     private static readonly SoundSpecifier SlowedSound = new SoundPathSpecifier("/Audio/Machines/phasein.ogg",
@@ -55,6 +58,9 @@ public sealed partial class SandevistanSystem : EntitySystem
     /// <summary>Soft "phase out / time resumes" cue when the burst ends or is interrupted.</summary>
     private static readonly SoundSpecifier EndSound = new SoundPathSpecifier("/Audio/Machines/phasein.ogg",
         AudioParams.Default.WithPitchScale(0.85f).WithVolume(-6f));
+
+    /// <summary>Chrono-field "time distortion" visual spawned on a mob the instant Projection's touch freezes it.</summary>
+    private static readonly EntProtoId ProjectionFreezeEffect = "EffectDesynchronizer";
 
     public override void Initialize()
     {
@@ -76,6 +82,40 @@ public sealed partial class SandevistanSystem : EntitySystem
         SubscribeLocalEvent<SandevistanSlowedComponent, GetMeleeAttackRateEvent>(OnSlowedAttackRate);
         SubscribeLocalEvent<SandevistanSlowedComponent, ShotAttemptedEvent>(OnSlowedShotAttempt);
         SubscribeLocalEvent<SandevistanActiveComponent, ShotAttemptedEvent>(OnActiveShotAttempt);
+
+        // "Projection": the wearer's bare-handed strike ("touch") freezes whoever it lands on.
+        SubscribeLocalEvent<SandevistanActiveComponent, MeleeHitEvent>(OnActiveMeleeTouch);
+    }
+
+    /// <summary>
+    /// Projection Sorcery (Naoya Zenin): while the burst is active, every mob the wearer strikes with
+    /// a bare hand is frozen solid — fully stunned in place — for <see cref="SandevistanActiveComponent.TouchFreezeDuration"/>.
+    /// Unarmed melee raises <see cref="MeleeHitEvent"/> on the user entity itself (their own fists are
+    /// the "weapon"), so this directed handler only fires for the wearer's own touch, never for a held
+    /// weapon — fitting a contact technique. Server-authoritative: the stun isn't predicted.
+    /// </summary>
+    private void OnActiveMeleeTouch(Entity<SandevistanActiveComponent> ent, ref MeleeHitEvent args)
+    {
+        if (ent.Comp.TouchFreezeDuration <= TimeSpan.Zero || !_net.IsServer)
+            return;
+
+        // Don't freeze once the burst has lapsed, even if the component lingers a tick (see OnSlowedShotAttempt).
+        if (ent.Comp.EndTime <= _timing.CurTime)
+            return;
+
+        foreach (var hit in args.HitEntities)
+        {
+            if (hit == ent.Owner || !HasComp<MobStateComponent>(hit))
+                continue;
+
+            if (!_stun.TryUpdateStunDuration(hit, ent.Comp.TouchFreezeDuration))
+                continue;
+
+            _popup.PopupEntity(Loc.GetString("sandevistan-projection-frozen"), hit, hit, PopupType.LargeCaution);
+            _audio.PlayPvs(SlowedSound, hit);
+            // Chrono-field flash on the frozen target — "time stopped here". Server-spawned; replicates.
+            SpawnAttachedTo(ProjectionFreezeEffect, Transform(hit).Coordinates);
+        }
     }
 
     // While the burst is active the wearer is reacting at superhuman speed: roll a chance to fully
@@ -101,27 +141,35 @@ public sealed partial class SandevistanSystem : EntitySystem
     }
 
     // Bullet time drags the trigger as well as the feet: a slowed mob may only fire its gun on the
-    // same stretched cadence we slow its movement/melee by. Server-authoritative throttle.
+    // same stretched cadence we slow its movement/melee by. Predicted (runs on both sides).
     private void OnSlowedShotAttempt(Entity<SandevistanSlowedComponent> ent, ref ShotAttemptedEvent args)
     {
-        ThrottleShot(ref args, ent.Comp.EndTime, ent.Comp.SlowModifier, ref ent.Comp.NextAllowedShot);
+        if (ThrottleShot(ref args, ent.Comp.EndTime, ent.Comp.SlowModifier, ref ent.Comp.NextAllowedShot) && _net.IsServer)
+            Dirty(ent);
     }
 
     // The wearer's own ranged fire is stretched by the same factor too: shooting/throwing carry the
     // bullet-time slowdown, so guns are no free advantage — only melee stays at the wearer's full speed.
     private void OnActiveShotAttempt(Entity<SandevistanActiveComponent> ent, ref ShotAttemptedEvent args)
     {
-        ThrottleShot(ref args, ent.Comp.EndTime, ent.Comp.SlowModifier, ref ent.Comp.NextAllowedShot);
+        if (ThrottleShot(ref args, ent.Comp.EndTime, ent.Comp.SlowModifier, ref ent.Comp.NextAllowedShot) && _net.IsServer)
+            Dirty(ent);
     }
 
     /// <summary>
     /// Shared fire-rate throttle: while the burst/slow is live, stretch the gun's fire interval by
-    /// <paramref name="slowModifier"/> and gate the next shot against server time. Server-authoritative.
+    /// <paramref name="slowModifier"/> and gate the next shot. This must run on <em>both</em> client and
+    /// server — like every other <see cref="ShotAttemptedEvent"/> handler — so the shooter's predicted gun
+    /// stays in lockstep with the server; a server-only cancel would have the client fire shots the server
+    /// rejects, draining the predicted magazine and jamming the gun (it then stays broken even after the
+    /// burst ends). The gate (<paramref name="nextAllowedShot"/>) is a networked field, so the prediction
+    /// reconciles cleanly. Returns true when the gate was advanced (a shot was let through), so the caller
+    /// can dirty the networked field on the server.
     /// </summary>
-    private void ThrottleShot(ref ShotAttemptedEvent args, TimeSpan endTime, float slowModifier, ref TimeSpan nextAllowedShot)
+    private bool ThrottleShot(ref ShotAttemptedEvent args, TimeSpan endTime, float slowModifier, ref TimeSpan nextAllowedShot)
     {
-        if (!_net.IsServer || args.Cancelled)
-            return;
+        if (args.Cancelled)
+            return false;
 
         var curTime = _timing.CurTime;
 
@@ -129,22 +177,23 @@ public sealed partial class SandevistanSystem : EntitySystem
         // rounds) — fire at full rate. Effects key off EndTime, not mere component existence, so the
         // throttle can never outlive the burst.
         if (endTime <= curTime)
-            return;
+            return false;
 
         // Still inside the stretched cooldown left by the previous shot.
         if (curTime < nextAllowedShot)
         {
             args.Cancel();
-            return;
+            return false;
         }
 
         // Stretch the gun's own fire interval by the same factor we slow everything else.
         var gun = args.Used.Comp;
         var baseRate = gun.FireRateModified > 0f ? gun.FireRateModified : gun.FireRate;
         if (baseRate <= 0f || slowModifier <= 0f)
-            return;
+            return false;
 
         nextAllowedShot = curTime + TimeSpan.FromSeconds(1f / baseRate / slowModifier);
+        return true;
     }
 
     // Caught in bullet time, a mob's swings slow to a crawl as well as its feet — otherwise a wide
@@ -252,6 +301,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         active.SlowRadius = ent.Comp.SlowRadius;
         active.AffectWholeMap = ent.Comp.AffectWholeMap;
         active.SlowModifier = ent.Comp.SlowModifier;
+        active.TouchFreezeDuration = ent.Comp.TouchFreezeDuration;
         active.AfterimageInterval = ent.Comp.AfterimageInterval;
         active.AfterimageLifetime = ent.Comp.AfterimageLifetime;
         active.NextAfterimageTime = curTime;

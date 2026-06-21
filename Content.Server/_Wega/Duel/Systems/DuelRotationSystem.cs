@@ -214,10 +214,71 @@ public sealed partial class DuelRotationSystem : EntitySystem
 
         // Раскидываем бойцов по спавн-маркерам по кругу (если бойцов больше, чем маркеров).
         var ordered = fighters.Where(Exists).ToList();
+
+        if (ordered.Count > spawns.Count)
+            Log.Warning($"[duel-rotation] на арене (индекс {arenaIndex}) бойцов ({ordered.Count}) больше, " +
+                $"чем спавн-маркеров ({spawns.Count}) — лишние ставятся со сдвигом, чтобы не оказаться на одном тайле");
+
+        // Назначаем каждому бойцу маркер БЕЗ коллизий, в два прохода. Раньше слот считался как
+        // i % spawns.Count и лишь затем, возможно, переопределялся закреплённым спавном — но слоты не
+        // резервировались, поэтому round-robin одного бойца и закреплённый спавн другого могли совпасть:
+        // второго сдвигало на соседний тайл вместо свободного маркера (баг «не на тот спавн» между
+        // раундами при входе персональными кнопками). Теперь сначала резервируем закреплённые спавны,
+        // потом раздаём оставшиеся свободные; сдвиг — только если бойцов реально больше, чем маркеров.
+        var slotOf = new int[ordered.Count];
+        var reserved = new bool[spawns.Count];
+
+        // Проход 1: закреплённые за игроком спавны (по DuelArenaSpawnComponent.SpawnIndex), если маркер
+        // ещё свободен. Так боец возвращается на свой угол, выбранный кнопкой входа.
         for (var i = 0; i < ordered.Count; i++)
         {
-            var target = spawns[i % spawns.Count];
-            _transform.SetCoordinates(ordered[i], Transform(target).Coordinates);
+            slotOf[i] = -1;
+            if (_arena.GetUser(ordered[i]) is not { } user
+                || !comp.PreferredSpawns.TryGetValue(user, out var pref))
+                continue;
+
+            var idx = spawns.FindIndex(s => Comp<DuelArenaSpawnComponent>(s).SpawnIndex == pref);
+            if (idx >= 0 && !reserved[idx])
+            {
+                slotOf[i] = idx;
+                reserved[idx] = true;
+            }
+        }
+
+        // Проход 2: остальные занимают ближайший ещё свободный маркер по порядку.
+        var nextFree = 0;
+        for (var i = 0; i < ordered.Count; i++)
+        {
+            if (slotOf[i] >= 0)
+                continue;
+
+            while (nextFree < spawns.Count && reserved[nextFree])
+                nextFree++;
+
+            if (nextFree < spawns.Count)
+            {
+                slotOf[i] = nextFree;
+                reserved[nextFree] = true;
+            }
+            else
+            {
+                // Бойцов больше, чем маркеров — заворачиваем по кругу; лишних разведёт сдвиг ниже.
+                slotOf[i] = i % spawns.Count;
+            }
+        }
+
+        // Расставляем. Сдвиг на соседнюю клетку (n,0) применяется только когда на один маркер реально
+        // попало больше одного бойца (бойцов больше, чем маркеров) — иначе двое оказались бы на тайле.
+        var usage = new int[spawns.Count];
+        for (var i = 0; i < ordered.Count; i++)
+        {
+            var slot = slotOf[i];
+            var coords = Transform(spawns[slot]).Coordinates;
+            if (usage[slot] > 0)
+                coords = coords.Offset(new System.Numerics.Vector2(usage[slot], 0f));
+            usage[slot]++;
+
+            _transform.SetCoordinates(ordered[i], coords);
         }
 
         comp.CurrentArena = arenaIndex;
@@ -305,6 +366,10 @@ public sealed partial class DuelRotationSystem : EntitySystem
         }
 
         _transform.SetCoordinates(fighter, Transform(target).Coordinates);
+
+        // Запоминаем, на каком спавне игрок реально оказался, чтобы между раундами возвращать его сюда же.
+        if (_arena.GetUser(fighter) is { } user)
+            comp.PreferredSpawns[user] = Comp<DuelArenaSpawnComponent>(target).SpawnIndex;
     }
 
     /// <summary>

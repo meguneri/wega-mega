@@ -322,7 +322,8 @@
 | Шинель службы безопасности | `ClothingOuterCoatSecurityOvercoat` | 3 TC |
 | Тактический жилет | `ClothingOuterVestWeb` | 6 TC |
 | Элитный тактический жилет | `ClothingOuterVestWebElite` | 8 TC |
-| Адреналиновый жилет | `ArenaAdrenalineVest` | 9 TC |
+| Адреналиновый жилет | `ArenaAdrenalineVest` | 10 TC |
+| Адаптивная броня | `ArenaAdaptiveArmor` | 16 TC |
 | Тактический жилет наёмника | `ClothingOuterVestWebMerc` | 3 TC |
 | Тренч | `ClothingOuterCoatTrench` | 1 TC |
 | Доги | `ClothingOuterDogi` | 2 TC |
@@ -343,6 +344,9 @@
 | Латунная кираса (Поглощение) | `VeilCultBrassCuirassAbsorbArena` | 8 TC |
 | Латунная кираса (Отражение) | `VeilCultBrassCuirassReflectionArena` | 8 TC |
 | Латунная кираса (Укрепление) | `VeilCultBrassCuirassHardenPlatesArena` | 8 TC |
+| Латунная роба | `ClothingOuterVeilCultRobesArena` | 5 TC |
+| Латунная роба (Спешка) | `ClothingOuterVeilCultRobesHasteArena` | 7 TC |
+| Латунная роба (Маскировка) | `ClothingOuterVeilCultRobesCamouflageArena` | 7 TC |
 
 ### Скафандры
 
@@ -558,6 +562,7 @@
 | Моновизор охраны | `ClothingEyesEyepatchHudSecurity` | 1 TC |
 | Дымовая граната | `SmokeGrenade` | 1 TC |
 | Флэш | `Flash` | 1 TC |
+| Туристическая камера | `TravelCamera` | 2 TC |
 | Омега-мыло | `SoapOmega` | 2 TC |
 | Одноразовая баллистическая турель | `ToolboxElectricalTurretFilled` | 4 TC |
 | Кабельные стяжки | `Cablecuffs` | 1 TC |

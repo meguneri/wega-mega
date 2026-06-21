@@ -46,6 +46,32 @@
     # редкие послеобразы по дефолту — рассинхрон с очками).
     afterimageInterval: 0.05
 
+# «Проекция»: техника Наои Дзенина. Носитель движется как 24 кадра/сек; касание голой рукой
+# замораживает цель ровно на 1 секунду. Мир вокруг НЕ замедляется — вся сила в касании.
+- type: entity
+  parent: BaseSubdermalImplant
+  id: SandevistanImplantProjection
+  name: имплант «сандэвистан проекция»
+  description: "Экспериментальная киберимплантация на основе техники проекции: носитель движется как 24 кадра в секунду, и любой, кого он коснётся, застывает во времени."
+  components:
+  - type: Sprite
+    sprite: _Wega/Objects/Specific/Medical/Surgery/implants.rsi
+    state: syndicate
+    color: "#ffca3b"
+  - type: SubdermalImplant
+    implantAction: ActionSandevistanProjection
+  # Те же значения, что у носимой «проекции» (ClothingEyesSandevistanProjection).
+  - type: Sandevistan
+    duration: 6
+    cooldown: 20
+    speedModifier: 2.2
+    affectWholeMap: false
+    slowRadius: 0
+    slowModifier: 1.0
+    touchFreezeDuration: 1
+    dodgeChance: 0.15
+    afterimageInterval: 0.05
+
 # ── Имплантеры (инъекция) ─────────────────────────────────────────────────────────
 
 - type: entity
@@ -63,6 +89,14 @@
   components:
   - type: Implanter
     implant: SandevistanImplantFreeze
+
+- type: entity
+  parent: BaseImplantOnlyImplanterSyndi
+  id: SandevistanImplanterProjection
+  name: имплантер «сандэвистан проекция»
+  components:
+  - type: Implanter
+    implant: SandevistanImplantProjection
 
 # ── Арена «полярная звезда» (имплант-версия носимой) ──────────────────────────────
 # Замок оружия/брони (ArenaWeaponLock) и пассивные бонусы (SandevistanArenaPassive: броня 15%,

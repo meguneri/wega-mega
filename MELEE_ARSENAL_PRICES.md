@@ -539,7 +539,8 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Парирующий баклер | `ArenaParryBuckler` | 11 TC |
-| Адреналиновый жилет | `ArenaAdrenalineVest` | 9 TC |
+| Адреналиновый жилет | `ArenaAdrenalineVest` | 10 TC |
+| Адаптивная броня | `ArenaAdaptiveArmor` | 16 TC |
 | Одеяние флаггелянта | `ClothingOuterFlagellantRobeArsenal` | 2 TC |
 | Латунная кираса | `VeilCultBrassCuirassArsenal` | 8 TC |
 | Латунная кираса (с выдвижным шлемом) | `VeilCultBrassCuirassArena` | 6 TC |
@@ -547,6 +548,9 @@
 | Латунная кираса (Укрепление) | `VeilCultBrassCuirassHardenPlatesArena` | 8 TC |
 | Латунная кираса (Отражение) | `VeilCultBrassCuirassReflectionArena` | 8 TC |
 | Латунная кираса (Дым) | `VeilCultBrassCuirassSmokeArena` | 8 TC |
+| Латунная роба | `ClothingOuterVeilCultRobesArena` | 5 TC |
+| Латунная роба (Спешка) | `ClothingOuterVeilCultRobesHasteArena` | 7 TC |
+| Латунная роба (Маскировка) | `ClothingOuterVeilCultRobesCamouflageArena` | 7 TC |
 | Заводные сапоги (немагнитные) | `ClothingShoesClockworkTreads` | 2 TC |
 | Латунные перчатки | `ClothingHandsClockworkGauntletsArena` | 3 TC |
 | Латунные латные перчатки | `ClothingHandsClockworkGauntletsArsenal` | 6 TC |

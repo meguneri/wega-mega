@@ -32,6 +32,39 @@
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetClockworkCuirass
 
+# === РОБА ===
+
+- type: entity
+  parent: [ ClothingOuterStorageBase, BaseEnchantable ]
+  id: ClothingOuterVeilCultRobesArena
+  name: clockwork robe
+  description: "None of those can escape the fate of DEATH!"
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Coats/clockrobe.rsi
+  - type: Clothing
+    sprite: _Wega/Clothing/OuterClothing/Coats/clockrobe.rsi
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodVeilCultRobes
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.7
+        Slash: 0.7
+        Piercing: 0.7
+        Heat: 0.7
+  - type: ExplosionResistance
+    damageCoefficient: 0.8
+  - type: FireProtection
+    reduction: 0.75
+  - type: TemperatureProtection
+    heatingCoefficient: 0.7
+    coolingCoefficient: 0.7
+  - type: Enchantable
+    enchants:
+    - ClothingOuterVeilCultRobesCamouflageArena
+    - ClothingOuterVeilCultRobesHasteArena
+
 # === ПЕРЧАТКИ ===
 
 - type: entity
@@ -205,6 +238,51 @@
         Piercing: 15
 
 # === ЗАЧАРОВАННЫЕ ВАРИАНТЫ (наследуют арена-базы, без ограничения культа) ===
+
+# --- Роба ---
+- type: entity
+  parent: ClothingOuterVeilCultRobesArena
+  id: ClothingOuterVeilCultRobesHasteArena
+  suffix: Haste
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Coats/clockrobe.rsi
+    layers:
+    - state: icon
+    - state: haste
+      shader: unshaded
+      visible: true
+  - type: Enchanted
+  - type: HasteEnchant
+  - type: ActionGrant
+    actions:
+    - ActionVeilCultActivateHaste
+  - type: ItemActionGrant
+    actions:
+    - ActionVeilCultActivateHaste
+    activeIfWorn: true
+
+- type: entity
+  parent: ClothingOuterVeilCultRobesArena
+  id: ClothingOuterVeilCultRobesCamouflageArena
+  suffix: Camouflage
+  components:
+  - type: Sprite
+    sprite: _Wega/Clothing/OuterClothing/Coats/clockrobe.rsi
+    layers:
+    - state: icon
+    - state: camouflage
+      shader: unshaded
+      visible: true
+  - type: Enchanted
+  - type: CamouflageEnchant
+  - type: ActionGrant
+    actions:
+    - ActionVeilCultActivateCamouflage
+  - type: ItemActionGrant
+    actions:
+    - ActionVeilCultActivateCamouflage
+    activeIfWorn: true
 
 # --- Кираса ---
 - type: entity

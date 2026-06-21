@@ -3600,7 +3600,18 @@
   description: full-arsenal-adrenaline-vest-desc
   productEntity: ArenaAdrenalineVest
   cost:
-    Telecrystal: 9
+    Telecrystal: 10
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalAdaptiveArmor
+  name: full-arsenal-adaptive-armor-name
+  description: full-arsenal-adaptive-armor-desc
+  productEntity: ArenaAdaptiveArmor
+  cost:
+    Telecrystal: 16
   categories:
   - MeleeArsenal
   - MeleeArsenalArmor
@@ -3678,6 +3689,39 @@
   productEntity: VeilCultBrassCuirassSmokeArena
   cost:
     Telecrystal: 8
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalClockworkRobe
+  name: full-arsenal-clockwork-robe-name
+  description: full-arsenal-clockwork-robe-desc
+  productEntity: ClothingOuterVeilCultRobesArena
+  cost:
+    Telecrystal: 5
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalClockworkRobeHaste
+  name: full-arsenal-clockwork-robe-haste-name
+  description: full-arsenal-clockwork-robe-haste-desc
+  productEntity: ClothingOuterVeilCultRobesHasteArena
+  cost:
+    Telecrystal: 7
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalClockworkRobeCamouflage
+  name: full-arsenal-clockwork-robe-camouflage-name
+  description: full-arsenal-clockwork-robe-camouflage-desc
+  productEntity: ClothingOuterVeilCultRobesCamouflageArena
+  cost:
+    Telecrystal: 7
   categories:
   - MeleeArsenal
   - MeleeArsenalArmor

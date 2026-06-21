@@ -6,7 +6,9 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Light.Components;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Construction;
 using Content.Shared.Tag;
+using Robust.Server.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -211,6 +213,129 @@ public sealed partial class DuelArenaSystem
     }
 
     /// <summary>
+    /// Решётка любого вида (обычная, заводная, диагональная) — целая или сломанная. Опознаётся по
+    /// прототипу (Grille / ClockworkGrille / GrilleBroken и т.п.), потому что у решёток нет общего тега.
+    /// </summary>
+    private bool IsGrille(EntityUid uid)
+        => Exists(uid) && MetaData(uid).EntityPrototype?.ID is { } proto && proto.Contains("Grille");
+
+    /// <summary>
+    /// Мержит текущую расстановку решёток арены в снимок (тайл → прототип). Вызывается при КАЖДОМ
+    /// старте дуэли (решётки целы) по той же мерж-логике, что и стены. Целые решётки опознаются по
+    /// <see cref="SharedCanBuildWindowOnTopComponent"/> (есть только у целых решёток, не у сломанных).
+    /// </summary>
+    private void SnapshotGrilles(EntityUid arenaUid, DuelArenaComponent comp)
+    {
+        var grid = Transform(arenaUid).GridUid;
+        if (grid == null || !TryComp<MapGridComponent>(grid, out var gridComp))
+            return;
+
+        var added = 0;
+
+        var query = EntityQueryEnumerator<SharedCanBuildWindowOnTopComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.GridUid != grid)
+                continue;
+
+            if (MetaData(uid).EntityPrototype?.ID is not { } proto)
+                continue;
+
+            var tile = _map.TileIndicesFor(grid.Value, gridComp, xform.Coordinates);
+            if (comp.GrilleSnapshot.TryAdd(tile, proto))
+                added++;
+
+            comp.GrilleTileSnapshot.TryAdd(tile, _map.GetTileRef(grid.Value, gridComp, tile).Tile);
+        }
+
+        if (added > 0)
+            Log.Info($"[duel-arena] снимок решёток пополнен: +{added}, всего {comp.GrilleSnapshot.Count} тайлов");
+    }
+
+    /// <summary>
+    /// Приводит решётки арены к снимку <see cref="DuelArenaComponent.GrilleSnapshot"/>. Для каждого
+    /// тайла: целая правильная решётка — чиним урон; сломанная/чужая/отсутствующая — убираем и ставим
+    /// свежую (восстановив под ней пол, если уничтожен). Не трогает окна, стоящие на том же тайле.
+    /// </summary>
+    private void RestoreGrilles(EntityUid arenaUid, DuelArenaComponent comp)
+    {
+        if (comp.GrilleSnapshot.Count == 0)
+            return;
+
+        var grid = Transform(arenaUid).GridUid;
+        if (grid == null || !TryComp<MapGridComponent>(grid, out var gridComp))
+            return;
+
+        var healed = 0;
+        var respawned = 0;
+        var failed = 0;
+
+        var anchored = new List<EntityUid>();
+        foreach (var (tile, proto) in comp.GrilleSnapshot)
+        {
+            try
+            {
+                anchored.Clear();
+                _map.GetAnchoredEntities((grid.Value, gridComp), tile, anchored);
+
+                // Целая решётка нужного типа уже на месте?
+                EntityUid? intact = null;
+                foreach (var e in anchored)
+                {
+                    if (Exists(e) && HasComp<SharedCanBuildWindowOnTopComponent>(e)
+                        && MetaData(e).EntityPrototype?.ID == proto.Id)
+                    {
+                        intact = e;
+                        break;
+                    }
+                }
+
+                if (intact is { } grille)
+                {
+                    if (TryComp<DamageableComponent>(grille, out var dmg))
+                        _damageable.SetAllDamage((grille, dmg), FixedPoint2.Zero);
+                    healed++;
+                    continue;
+                }
+
+                // Сломанные/неправильные решётки на тайле убираем (окна и прочее не трогаем).
+                foreach (var debris in anchored)
+                {
+                    if (Exists(debris) && IsGrille(debris))
+                        Del(debris);
+                }
+
+                // Пол под решёткой уничтожен? Восстанавливаем по снимку, иначе не заякорить.
+                if (_map.GetTileRef(grid.Value, gridComp, tile).Tile.IsEmpty
+                    && comp.GrilleTileSnapshot.TryGetValue(tile, out var savedTile))
+                {
+                    _map.SetTile(grid.Value, gridComp, tile, savedTile);
+                }
+
+                var coords = _map.GridTileToLocal(grid.Value, gridComp, tile);
+                var newGrille = Spawn(proto, coords);
+                if (_transform.AnchorEntity(newGrille))
+                {
+                    respawned++;
+                }
+                else
+                {
+                    failed++;
+                    Log.Warning($"[duel-arena] не удалось заякорить восстановленную решётку {proto} на тайле {tile}");
+                }
+            }
+            catch (Exception e)
+            {
+                failed++;
+                Log.Error($"[duel-arena] ошибка восстановления решётки на тайле {tile}: {e}");
+            }
+        }
+
+        Log.Info($"[duel-arena] восстановление решёток ({ToPrettyString(arenaUid)}): снимок {comp.GrilleSnapshot.Count}, "
+            + $"вылечено {healed}, переставлено {respawned}, ошибок {failed}");
+    }
+
+    /// <summary>
     /// Остаток снесённой стены — балка (Girder/ReinforcedGirder/ClockworkGirder/BrassGirder и т.п.).
     /// Только такие сущности убираем перед восстановлением стены; настенные предметы не трогаем.
     /// </summary>
@@ -264,8 +389,10 @@ public sealed partial class DuelArenaSystem
     /// <summary>
     /// Мержит текущую расстановку светильников арены в снимок (тайл → прототип + поворот).
     /// Вызывается при КАЖДОМ старте дуэли по той же логике, что и снимок стен: новые светильники
-    /// добавляются, уже записанные не перезаписываются. Берёт любые сущности с
-    /// <see cref="PoweredLightComponent"/> на гриде арены.
+    /// добавляются, уже записанные не перезаписываются. Берёт любые анкоренные сущности-светильники
+    /// (с <see cref="PointLightComponent"/>) на гриде арены — это покрывает все типы: и обычные
+    /// светильники с лампой (<see cref="PoweredLightComponent"/>), и «always powered» напольные
+    /// светильники, фонарные столбы и маркеры, у которых нет лампы.
     /// </summary>
     private void SnapshotLights(EntityUid arenaUid, DuelArenaComponent comp)
     {
@@ -275,10 +402,10 @@ public sealed partial class DuelArenaSystem
 
         var added = 0;
 
-        var query = EntityQueryEnumerator<PoweredLightComponent, TransformComponent>();
+        var query = EntityQueryEnumerator<PointLightComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out _, out var xform))
         {
-            if (xform.GridUid != grid)
+            if (xform.GridUid != grid || !xform.Anchored)
                 continue;
 
             if (MetaData(uid).EntityPrototype?.ID is not { } proto)
@@ -328,14 +455,14 @@ public sealed partial class DuelArenaSystem
                 EntityUid? fixture = null;
                 foreach (var e in anchored)
                 {
-                    if (Exists(e) && HasComp<PoweredLightComponent>(e) && MetaData(e).EntityPrototype?.ID == proto.Id)
+                    if (Exists(e) && HasComp<PointLightComponent>(e) && MetaData(e).EntityPrototype?.ID == proto.Id)
                     {
                         fixture = e;
                         break;
                     }
                 }
 
-                // Светильник уцелел — чиним корпус и лампу на месте (сохраняя поворот/проводку).
+                // Светильник уцелел — чиним корпус и лампу (если есть) на месте, сохраняя поворот/проводку.
                 if (fixture is { } light)
                 {
                     if (TryComp<DamageableComponent>(light, out var dmg))
@@ -346,10 +473,10 @@ public sealed partial class DuelArenaSystem
                     continue;
                 }
 
-                // Светильник уничтожен — убираем обломки своего типа и ставим свежий.
+                // Светильник уничтожен — убираем обломки/светильники на тайле и ставим свежий.
                 foreach (var debris in anchored)
                 {
-                    if (Exists(debris) && HasComp<PoweredLightComponent>(debris))
+                    if (Exists(debris) && HasComp<PointLightComponent>(debris))
                         Del(debris);
                 }
 
