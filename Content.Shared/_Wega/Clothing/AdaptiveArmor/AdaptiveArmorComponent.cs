@@ -35,6 +35,10 @@ public sealed partial class AdaptiveWheelComponent : Component
 
     /// <summary>The rest angle the current ratchet started from, for interpolating the click.</summary>
     public float SpinStartAngle;
+
+    /// <summary>Settled colour for each of the 8 glow sectors; set from ActiveTypes in OnAppearanceChange
+    /// and used to restore sector colours after a flash fades.</summary>
+    public Color[] SectorColors = new Color[8];
 }
 
 /// <summary>Marks the one-shot expanding shockwave spawned when a blow is absorbed, so the client can tint it
@@ -44,13 +48,18 @@ public sealed partial class AdaptiveShockwaveComponent : Component;
 
 /// <summary>Appearance keys on the wheel/shockwave. The server bumps <see cref="Spin"/> each time the armour
 /// adapts (with <see cref="Strong"/> set when the blow was actually absorbed) so the client ratchets the
-/// spokes, and pushes the live <see cref="Type"/> so it can colour the glow.</summary>
+/// spokes, and pushes the live <see cref="Type"/> so it can colour the shockwave, plus the full
+/// <see cref="ActiveTypes"/> list so the client can colour each 45° sector of the glow independently.</summary>
 [Serializable, NetSerializable]
 public enum AdaptiveWheelVisuals : byte
 {
     Spin,
     Strong,
     Type,
+    /// <summary>Comma-separated string of significant adapted damage type ids, sorted alphabetically. Empty
+    /// string when idle. Only includes types with a distinct colour and damage ≥ 30% of the dominant type.
+    /// Drives per-sector colouring on the wheel (sector i gets the colour of types[i*N/8]).</summary>
+    ActiveTypes,
 }
 
 /// <summary>Maps damage type ids to the colour the wheel, shockwave and armour accent glow with, so a glance
@@ -65,9 +74,9 @@ public static class AdaptiveArmorColors
     private static readonly Dictionary<string, Color> Map = new()
     {
         ["Blunt"] = Color.FromHex("#DCE2EA"),     // silver-white
-        ["Slash"] = Color.FromHex("#FF3B3B"),     // red
+        ["Slash"] = Color.FromHex("#FF1A4B"),     // crimson-pink (clearly cooler than Heat's orange)
         ["Piercing"] = Color.FromHex("#FFC81E"),  // amber-yellow
-        ["Heat"] = Color.FromHex("#FF6A14"),      // orange
+        ["Heat"] = Color.FromHex("#FF7A00"),      // warm orange
         ["Shock"] = Color.FromHex("#22CCF2"),     // cyan
         ["Cold"] = Color.FromHex("#8FD4FF"),      // light blue
         ["Caustic"] = Color.FromHex("#6FE03A"),   // green
@@ -77,6 +86,10 @@ public static class AdaptiveArmorColors
 
     public static Color ForType(string? type)
         => type != null && Map.TryGetValue(type, out var color) ? color : Default;
+
+    /// <summary>True when the type has a dedicated, non-default colour. Types not in the map (e.g. Structural)
+    /// fall back to the idle gold and are excluded from sector colouring.</summary>
+    public static bool HasDistinctColor(string type) => Map.ContainsKey(type);
 }
 
 /// <summary>
@@ -126,6 +139,13 @@ public sealed partial class AdaptiveArmorActiveComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<string, TimeSpan> AdaptedTypes = new();
+
+    /// <summary>Last recorded incoming damage per type (pre-mitigation snapshot, updated each hit).
+    /// Server-only: used to filter noise from the wheel display so minor incidental types (e.g. Blunt 4.5
+    /// on an energy sword) don't pollute the sector colours. Not networked — only the resulting
+    /// comma-string is sent via appearance data.</summary>
+    [DataField]
+    public Dictionary<string, float> AdaptedAmounts = new();
 
     /// <summary>The vest itself, so we can drive its emissive accent (ToggleableVisuals) by adapted type.</summary>
     [DataField]

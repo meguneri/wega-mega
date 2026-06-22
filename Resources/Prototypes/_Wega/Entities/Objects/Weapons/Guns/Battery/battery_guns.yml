@@ -389,3 +389,55 @@
     maxCharge: 1000
     startingCharge: 1000
   - type: Appearance
+
+# S-13 «Black Mamba» — ported from lust-station/_Sunrise
+- type: entity
+  name: S-13 «Чёрная мамба»
+  parent: BaseWeaponBattery
+  id: WeaponSyndieLaserGun
+  description: Модернизированный Лектер, конвертированный под плазменный энергомодуль. Полностью автоматический, требует вскидки.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/syndielasergun.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,4,1
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/syndielasergun.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Battery/syndielasergun.rsi
+  - type: Gun
+    minAngle: 30
+    maxAngle: 50
+    angleIncrease: 2
+    angleDecay: 4
+    fireRate: 1.5
+    selectedMode: FullAuto
+    soundGunshot:
+      collection: red_mamba
+      params:
+        volume: 5
+    availableModes:
+    - FullAuto
+  - type: BatteryAmmoProvider
+    proto: RedHeavyLaser
+    fireCost: 50
+  - type: Wieldable
+  - type: GunWieldBonus
+    minAngle: -28
+    maxAngle: -45
+  - type: Battery
+    maxCharge: 3000
+    startingCharge: 3000
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 4
+    pvsIncrease: 0.4
+  - type: StaticPrice
+    price: 3500

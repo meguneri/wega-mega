@@ -1122,6 +1122,8 @@ full-arsenal-smg-sp91rc-name = ПП SP-91-RC
 full-arsenal-smg-sp91rc-desc = Компактный пистолет-пулемёт для подавления беспорядков. Стреляет очередями по пять.
 full-arsenal-smg-uzi-name = ПП «Узи» U3
 full-arsenal-smg-uzi-desc = Лёгкий пистолет-пулемёт на 32 патрона с одиночным режимом и очередью по четыре.
+full-arsenal-smg-aj100-name = ПП AJ-100
+full-arsenal-smg-aj100-desc = Высокоскоростной ПП с универсальным разъёмом: принимает стандартные пистолетные, высокоёмкие, SMG, P90 и MP7-магазины под .35 авто. Начальный магазин случаен.
 full-arsenal-smg-siar52-name = ПП SIAR-52
 full-arsenal-smg-siar52-desc = Скорострельный пистолет-пулемёт со встроенным глушителем.
 
@@ -1473,3 +1475,35 @@ uplink-smoke-implant-name = Имплант "Дым"
 uplink-smoke-implant-desc = Имплант, который даст вам возможность выпустить облако дыма, очень полезен при отступлении или побеге.
 uplink-jumpsuit-ventcrawler-name = комбинезон лазальщика
 uplink-jumpsuit-ventcrawler-desc = Специальный комбинезон, внешне идентичный тому, что носят атмосферные техники, позволяет пользователю лазить по вентиляциям, не забудьте про то, что там может быть давление!
+
+# SIAR-52 caseless magazine
+full-arsenal-smg-siar52-mag-name = Удлинённый магазин (безгильзовый)
+full-arsenal-smg-siar52-mag-desc = 35-зарядный удлинённый магазин для SIAR-52. Снаряжён безгильзовыми патронами.
+
+# SKM-28
+full-arsenal-rifle-skm28-name = Снайперская винтовка SKM-28
+full-arsenal-rifle-skm28-desc = Снайперская модификация стандартного SKM-24 с удлинённым тяжёлым стволом и переработанной механикой. Оснащена встроенным оптическим прицелом. Калибр .308.
+
+# Large energy crossbow
+full-arsenal-energy-crossbow-large-name = Энергетический арбалет (крупный)
+full-arsenal-energy-crossbow-large-desc = Двуручный арбалет, стреляющий кинетическими болтами с малой дальностью. Болт сбивает цель с ног и истощает выносливость. Требует вскидки.
+
+# SIAR-52 caseless extended mag (ammo listing)
+full-arsenal-ammo-siar52-mag-name = Магазин SIAR-52 (удлинённый безгильзовый)
+full-arsenal-ammo-siar52-mag-desc = 35-зарядный удлинённый магазин для SIAR-52. Снаряжён безгильзовыми патронами.
+
+# Infiltration hardsuit
+full-arsenal-hardsuit-infiltration-name = Скафандр инфильтратора
+full-arsenal-hardsuit-infiltration-desc = Боевой скафандр спецопераций Синдиката с встроенной системой маскировки. Потребляет заряд энергоячейки при активной невидимости. Снижает все виды урона на 40%, не замедляет владельца.
+
+# S-13 Black Mamba
+full-arsenal-energy-black-mamba-name = S-13 «Чёрная мамба»
+full-arsenal-energy-black-mamba-desc = Модернизированный Лектер под плазменный энергомодуль. Полностью автоматический, 60 зарядов по 50 единиц энергии. Требует вскидки.
+
+# Elite Sniper Bundle
+full-arsenal-elite-sniper-bundle-name = Набор "Элитный Снайпер"
+full-arsenal-elite-sniper-bundle-desc = Вещмешок с противоматериальной снайперской винтовкой Bauer127, двумя наборами магазинов всех типов (стандарт, пробойник, осколочный, взрыв, ЭМИ) и тепловизионными очками снайпера на ядерном элементе.
+
+# Bauer127 rifle
+full-arsenal-rifle-bauer127-name = Снайперская винтовка Bauer127
+full-arsenal-rifle-bauer127-desc = Тяжёлая противоматериальная снайперская винтовка под патрон 15x115mm. Поддерживает 6 типов магазинов. Значительно замедляет носителя.

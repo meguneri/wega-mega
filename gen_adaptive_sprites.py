@@ -15,7 +15,7 @@ import json
 import math
 import os
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 TEX = os.path.join(ROOT, "Resources", "Textures", "_Wega")
@@ -75,6 +75,27 @@ def draw_glow(pulse):
         a = int(min(255.0, (235.0 * halo + 70.0 * fill)) * pulse)
         circle(d, C, C, r, (255, 255, 255, max(0, a)))
     return down(img.filter(ImageFilter.GaussianBlur(SS * 0.6)))
+
+
+def draw_glow_sector(start_deg, end_deg, pulse):
+    """Same glow as draw_glow but masked to a pie-slice sector [start_deg, end_deg].
+    Angles follow PIL convention: 0° = 3 o'clock, increasing clockwise."""
+    img = cell()
+    d = ImageDraw.Draw(img)
+    rmax = u(15.5)
+    steps = 140
+    for i in range(steps):
+        r = rmax * (1 - i / (steps - 1))
+        rr = r / SS
+        halo = math.exp(-((rr - 12.5) / 4.0) ** 2)
+        fill_v = max(0.0, 1.0 - rr / 13.0)
+        a = int(min(255.0, (235.0 * halo + 70.0 * fill_v)) * pulse)
+        d.ellipse([C - r, C - r, C + r, C + r], fill=(255, 255, 255, max(0, a)))
+    img = img.filter(ImageFilter.GaussianBlur(SS * 0.6))
+    mask = Image.new("L", (S, S), 0)
+    ImageDraw.Draw(mask).pieslice([0, 0, S - 1, S - 1], start=start_deg, end=end_deg, fill=255)
+    r_ch, g_ch, b_ch, a_ch = img.split()
+    return down(Image.merge("RGBA", (r_ch, g_ch, b_ch, ImageChops.multiply(a_ch, mask))))
 
 
 HUB_R = u(2.3)
@@ -216,19 +237,25 @@ def main():
     # The layers are unshaded (self-lit), so over a dark background they look bright even at reduced alpha.
     # Push the alpha well down so the translucency actually reads: wheel ~60% opacity, glow ~40%.
     WHEEL_OPACITY = 0.35   # wheel ~65% transparent
-    GLOW_OPACITY = 0.15    # damage-colour circle ~85% transparent
-    save_png(draw_glow(GLOW_OPACITY), os.path.join(WHEEL_DIR, "glow.png"))
+    GLOW_OPACITY = 0.45    # damage-colour sectors — bumped so adjacent hues (e.g. Slash/Heat) read distinctly
     save_png(scale_alpha(draw_frame(), WHEEL_OPACITY), os.path.join(WHEEL_DIR, "frame.png"))
     save_png(scale_alpha(draw_spokes(), WHEEL_OPACITY), os.path.join(WHEEL_DIR, "spokes.png"))
 
-    stale = ["wheel.png", "ring.png"] + [f"seg{n}.png" for n in range(9)]
+    # 8 sector glow slices (45° each, sector 0 starts at 3 o'clock going clockwise).
+    # Together they tile the full circle; the client colours each sector independently
+    # based on which damage types the armour is currently adapted to.
+    for n in range(8):
+        save_png(draw_glow_sector(n * 45, (n + 1) * 45, GLOW_OPACITY),
+                 os.path.join(WHEEL_DIR, f"glow_sec{n}.png"))
+
+    stale = ["glow.png", "wheel.png", "ring.png"] + [f"seg{n}.png" for n in range(9)]
     for name in stale:
         path = os.path.join(WHEEL_DIR, name)
         if os.path.exists(path):
             os.remove(path)
             print("removed", name)
 
-    states = [{"name": "glow"}, {"name": "frame"}, {"name": "spokes"}]
+    states = [{"name": "frame"}, {"name": "spokes"}] + [{"name": f"glow_sec{n}"} for n in range(8)]
     write_meta(os.path.join(WHEEL_DIR, "meta.json"), states,
                "Procedurally drawn for the Wega fork - Mahoraga adaptation wheel "
                "(Dharmachakra) for the adaptive arena armor.")

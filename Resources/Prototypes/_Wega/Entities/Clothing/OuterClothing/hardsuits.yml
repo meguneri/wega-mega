@@ -166,3 +166,83 @@
   - type: HeldSpeedModifier
   - type: ToggleableClothing
     clothingPrototype: ClothingHeadHelmetHardsuitSpaceMarine
+
+# Syndicate infiltration hardsuit — ported from lust-station/_Sunrise
+# Phase-cloak suit: drains cell power while cloaked, 0.6 coefficient all damage, no speed penalty.
+- type: entity
+  parent: [ClothingOuterHardsuitBase, AllowSuitStorageClothing, BaseToggleClothing, BaseSyndicateContraband]
+  id: ClothingOuterHardsuitInfiltration
+  name: синдикатский скафандр инфильтратора
+  description: Боевой скафандр спецопераций Синдиката, созданный с упором на скрытность. Питает встроенную систему маскировки от энергоячейки.
+  components:
+  - type: Sprite
+    sprite: _Starlight/Objects/Clothing/OuterClothing/Hardsuits/infiltrationsyndie.rsi
+  - type: Clothing
+    sprite: _Starlight/Objects/Clothing/OuterClothing/Hardsuits/infiltrationsyndie.rsi
+  - type: Item
+    size: Huge
+    sprite: _Starlight/Objects/Clothing/OuterClothing/Hardsuits/infiltrationsyndie.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.525
+    lowPressureMultiplier: 10000
+  - type: Armor
+    modifiers:
+      coefficients:
+        Blunt: 0.6
+        Slash: 0.6
+        Piercing: 0.6
+        Heat: 0.6
+        Radiation: 0.6
+        Caustic: 0.6
+  - type: StaminaResistance
+    damageCoefficient: 0.4
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ToggleClothing
+    action: ActionTogglePhaseCloak
+    disableOnUnequip: true
+    targetSlot: outerClothing
+  - type: ItemToggle
+    canActivateInhand: false
+  - type: ComponentToggler
+    parent: true
+    components:
+      - type: Stealth
+        mirage: false
+        hadOutline: true
+        examineThreshold: 0.9
+      - type: StealthOnMove
+        passiveVisibilityRate: -1.25
+        movementVisibilityRate: 0.3
+  - type: PowerCellDraw
+    drawRate: 7
+  - type: ToggleCellDraw
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+    fitsInCharger: false
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+      toggleable-clothing: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSyndicate
+        disableEject: true
+        whitelist:
+          tags:
+            - PowerCell
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitInfiltration
+  - type: ClothingSpeedModifier
+    walkModifier: 1
+    sprintModifier: 1
+    requireActivated: false
+  - type: HeldSpeedModifier
+  - type: Tag
+    tags:
+    - Hardsuit
+    - WhitelistChameleon
+  - type: StaticPrice
+    price: 8500

@@ -28,3 +28,19 @@
         - id: ModuleSyndiWeapon
         - id: ModuleSyndiSupport
         - id: Screwdriver
+
+# Anti-materiel ammo kit for Bauer127 — ported from lust-station/_Sunrise
+- type: entity
+  parent: [BoxCardboard, BaseSyndicateContraband]
+  id: AntimaterialAmmoKit
+  name: antimaterial magazine kit
+  description: "Contains a full set of Bauer127 magazines: standard, penetrator, frag, blast, and EMP."
+  components:
+  - type: StorageFill
+    contents:
+    - id: MagazineBauer127
+      amount: 2
+    - id: MagazineBauer127Penetrator
+    - id: MagazineBauer127Frag
+    - id: MagazineBauer127Blast
+    - id: MagazineBauer127Emp

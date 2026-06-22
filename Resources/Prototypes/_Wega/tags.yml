@@ -564,3 +564,9 @@
 
 - type: Tag
   id: Morgue
+
+- type: Tag
+  id: MagazineCaselessRifle
+
+- type: Tag
+  id: MagazineBauer127

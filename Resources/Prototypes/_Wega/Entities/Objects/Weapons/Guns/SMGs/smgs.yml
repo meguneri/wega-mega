@@ -116,3 +116,97 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
+
+# Override: SIAR-52 fixed to use caseless magazines (MagazineCaselessRifle tag)
+- type: entity
+  parent: WeaponSIAR52
+  id: WeaponSIAR52Arena
+  suffix: Arena, caseless mag
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSubMachineGunCaselessExtended
+        insertSound: /Audio/Weapons/Guns/MagIn/lmg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/lmg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineCaselessRifle
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeCaselessRifle
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeCaselessRifle
+  - type: MagazineVisuals
+    magState: mag
+    steps: 8
+    zeroVisible: false
+
+# Override: universal magazine connector — accepts all pistol-calibre magazines
+- type: entity
+  parent: WeaponAJ100
+  id: WeaponAJ100Universal
+  suffix: Universal mag
+  description: >-
+    Высокоскоростной пистолет-пулемёт, оснащённый универсальным разъёмом для
+    широкого спектра магазинов пистолетного калибра. Совместим с патронами
+    .35 auto: стандартными пистолетными, высокоёмкими, SMG, P90 и MP7.
+    Не принимает магазины под дробовик, пулемёт, магнум или снайперский калибр.
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazinePistolSubMachineGun
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistol
+          - MagazinePistolHighCapacity
+          - MagazinePistolSubMachineGun
+          - MagazinePistolSubMachineGunTopMounted
+          - MagazinePistolCaselessRifle
+          - MagazinePistolSubMachineGunFoam
+          - MagazineSMGPPSH
+          - MagazineMP7
+          - MagazineP90
+
+# Full Arsenal variant — same universal connector, magazine randomised on spawn
+- type: entity
+  parent: WeaponAJ100Universal
+  id: WeaponAJ100Arena
+  suffix: Arena, random mag
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazinePistol
+          - MagazinePistolHighCapacity
+          - MagazinePistolSubMachineGun
+          - MagazinePistolSubMachineGunTopMounted
+          - MagazinePistolCaselessRifle
+          - MagazinePistolSubMachineGunFoam
+          - MagazineSMGPPSH
+          - MagazineMP7
+          - MagazineP90
+  - type: RandomMagazine
+    magazines:
+    - MagazinePistol
+    - MagazinePistolHighCapacity
+    - MagazinePistolSubMachineGun
+    - MagazinePistolSubMachineGunTopMounted
+    - MagazineSMGPPSH
+    - MagazineMP7
+    - MagazineP90

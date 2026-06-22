@@ -1,3 +1,49 @@
+# Fix Bauer127: correct magazine tag + bolt-action cycle (Z = wield, Z again = rack)
+- type: entity
+  parent: WeaponRifleBauer127
+  id: WeaponRifleBauer127Arena
+  suffix: Arena, proper mags
+  components:
+  - type: Gun
+    projectileSpeed: 40
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    fireRate: 0.75
+    minAngle: 24
+    maxAngle: 45
+    soundGunshot:
+      path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_shot.ogg
+      params:
+        volume: -1
+    soundEmpty:
+      path: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/empty.ogg
+  - type: ChamberMagazineAmmoProvider
+    autoEject: true
+    boltClosed: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineBauer127
+        insertSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/reload.ogg
+        ejectSound: /Audio/_Sunrise/Weapons/Guns/Snipers/Different/unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - MagazineBauer127
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeAntiMateriel
+        priority: 1
+        whitelist:
+          tags:
+          - CartridgeAntiMateriel
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+
 - type: entity
   parent: BaseItem
   id: WeaponSniperHristovAdvanced

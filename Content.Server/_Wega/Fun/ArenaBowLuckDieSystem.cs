@@ -41,9 +41,11 @@ public sealed partial class ArenaBowLuckDieSystem : EntitySystem
         var roll = _random.Next(1, comp.Outcomes.Count + 1);
         var proto = comp.Outcomes[roll - 1];
 
-        // Был ли сам кубик выдан ареной: если да — лук и бонусы тоже метим как выданное
-        // снаряжение, иначе свежезаспавненный лук жёсткого света переживёт очистку арены.
-        var issued = HasComp<ArenaIssuedItemComponent>(uid);
+        // Лук и бонусы помечаем для очистки арены, если кубик был выдан ареной ИЛИ пользователь
+        // бросил кубик прямо на гриде активной дуэли (кубик куплен из аплинка — метки нет, но
+        // спавн происходит в зоне боя, поэтому лук всё равно должен убраться после дуэли).
+        var issued = HasComp<ArenaIssuedItemComponent>(uid)
+            || _arenaCleanup.IsOnActiveArenaGrid(args.User);
 
         var coords = Transform(args.User).Coordinates;
         var bow = Spawn(proto, coords);

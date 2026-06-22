@@ -1,3 +1,10 @@
+#Spellbook Arena
+
+- type: storeCategory
+  id: SpellbookArena
+  name: store-category-spellbook-arena
+  priority: 0
+
 #ERT
 
 - type: storeCategory

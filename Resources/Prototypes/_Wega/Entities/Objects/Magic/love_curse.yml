@@ -1,0 +1,55 @@
+# --- Love Curse action ---
+
+- type: entity
+  parent: BaseAction
+  id: ActionLoveCurse
+  name: Проклятие страсти
+  description: Накладывает на цель проклятие. Через 30 минут жертва взорвётся. Снять можно только страстным сексом.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 60
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/staff_animation.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: spell_default
+  - type: InstantAction
+    event: !type:LoveCurseSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-love-curse
+  - type: Magic
+    requiresClothes: false
+
+# --- Grimoire of Passion ---
+
+- type: entity
+  parent: [ BaseItem, BaseMagicalContraband ]
+  id: GrimoireOfPassion
+  name: гримуар арены
+  description: Потрёпанная книга в кожаном переплёте, пахнущая розовым маслом.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/books.rsi
+    layers:
+    - state: paper_blood
+    - state: cover_strong
+      color: "#7a1a3a"
+    - state: decor_wingette_flat
+      color: "#b03060"
+    - state: icon_pentagramm
+      color: "#ffaacc"
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    refundAllowed: false
+    categories:
+    - SpellbookArena
+    currencyWhitelist:
+    - WizCoin
+    balance:
+      WizCoin: 5

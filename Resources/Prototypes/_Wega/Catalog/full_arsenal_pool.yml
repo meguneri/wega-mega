@@ -544,12 +544,22 @@
   - FullArsenal
 
 - type: listing
+  id: FullArsenalSMGAJ100
+  name: full-arsenal-smg-aj100-name
+  description: full-arsenal-smg-aj100-desc
+  productEntity: WeaponAJ100Arena
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
+
+- type: listing
   id: FullArsenalSMGSiar52
   name: full-arsenal-smg-siar52-name
   description: full-arsenal-smg-siar52-desc
-  productEntity: WeaponSIAR52
+  productEntity: WeaponSIAR52Arena
   cost:
-    Telecrystal: 6
+    Telecrystal: 10
   categories:
   - FullArsenal
 
@@ -628,6 +638,36 @@
   - FullArsenal
 
 # ── RIFLES / SNIPER / LMG ─────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalEliteSniperBundle
+  name: full-arsenal-elite-sniper-bundle-name
+  description: full-arsenal-elite-sniper-bundle-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledBauer127
+  cost:
+    Telecrystal: 20
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleBauer127
+  name: full-arsenal-rifle-bauer127-name
+  description: full-arsenal-rifle-bauer127-desc
+  productEntity: WeaponRifleBauer127Arena
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalRifleSKM28
+  name: full-arsenal-rifle-skm28-name
+  description: full-arsenal-rifle-skm28-desc
+  productEntity: WeaponRifleSKM28
+  cost:
+    Telecrystal: 10
+  categories:
+  - FullArsenal
 
 - type: listing
   id: FullArsenalRifleJay
@@ -724,6 +764,17 @@
   - FullArsenal
 
 # ── ARMOR ─────────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalHardsuitInfiltration
+  name: full-arsenal-hardsuit-infiltration-name
+  description: full-arsenal-hardsuit-infiltration-desc
+  productEntity: ClothingOuterHardsuitInfiltration
+  cost:
+    Telecrystal: 14
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
 
 - type: listing
   id: FullArsenalArmorBasic
@@ -2457,6 +2508,17 @@
   productEntity: MagazineBoxCaselessRifle
   cost:
     Telecrystal: 1
+  categories:
+  - FullArsenal
+  - FullArsenalAmmo
+
+- type: listing
+  id: FullArsenalAmmoSiar52Mag
+  name: full-arsenal-ammo-siar52-mag-name
+  description: full-arsenal-ammo-siar52-mag-desc
+  productEntity: MagazinePistolSubMachineGunCaselessExtended
+  cost:
+    Telecrystal: 2
   categories:
   - FullArsenal
   - FullArsenalAmmo
@@ -5230,6 +5292,26 @@
   - FullArsenal
 
 # ── ENERGY GUNS ───────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalEnergyBlackMamba
+  name: full-arsenal-energy-black-mamba-name
+  description: full-arsenal-energy-black-mamba-desc
+  productEntity: WeaponSyndieLaserGun
+  cost:
+    Telecrystal: 12
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalEnergyCrossbowLarge
+  name: full-arsenal-energy-crossbow-large-name
+  description: full-arsenal-energy-crossbow-large-desc
+  productEntity: WeaponEnergyCrossbowLarge
+  cost:
+    Telecrystal: 8
+  categories:
+  - FullArsenal
 
 - type: listing
   id: FullArsenalPulsePistol

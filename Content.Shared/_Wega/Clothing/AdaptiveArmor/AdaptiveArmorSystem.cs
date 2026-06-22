@@ -64,6 +64,9 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
 
     private void OnEquipped(Entity<AdaptiveArmorComponent> ent, ref ClothingGotEquippedEvent args)
     {
+        if (!_net.IsServer)
+            return;
+
         ent.Comp.Wearer = args.Wearer;
         Dirty(ent);
 
@@ -71,27 +74,24 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         active.AdaptDuration = ent.Comp.AdaptDuration;
         active.AdaptCoefficient = ent.Comp.AdaptCoefficient;
         active.Vest = ent.Owner;
+        active.WheelEffect = Spawn(AdaptWheelEffect, new EntityCoordinates(args.Wearer, default));
 
-        // Start with the accent dark; it lights up on the first adaptation.
         SetGlow(ent.Owner, false, AdaptiveArmorColors.Default);
-
-        // Hang the persistent wheel above the wearer's head, parented directly to the wearer so it
-        // follows them around on its own; we only remember it so we can delete it on unequip.
-        // Server-authoritative: the spawned entity replicates to every client.
-        if (_net.IsServer)
-            active.WheelEffect = Spawn(AdaptWheelEffect, new EntityCoordinates(args.Wearer, default));
 
         Dirty(args.Wearer, active);
     }
 
     private void OnUnequipped(Entity<AdaptiveArmorComponent> ent, ref ClothingGotUnequippedEvent args)
     {
+        if (!_net.IsServer)
+            return;
+
         ent.Comp.Wearer = null;
         Dirty(ent);
 
         SetGlow(ent.Owner, false, AdaptiveArmorColors.Default);
 
-        if (_net.IsServer && TryComp<AdaptiveArmorActiveComponent>(args.Wearer, out var active) && active.WheelEffect is { } wheel)
+        if (TryComp<AdaptiveArmorActiveComponent>(args.Wearer, out var active) && active.WheelEffect is { } wheel)
             QueueDel(wheel);
 
         RemComp<AdaptiveArmorActiveComponent>(args.Wearer);
@@ -118,6 +118,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
                 if (comp.AdaptedTypes[type] <= now)
                 {
                     comp.AdaptedTypes.Remove(type);
+                    comp.AdaptedAmounts.Remove(type);
                     changed = true;
                 }
             }
@@ -126,7 +127,12 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
             if (comp.AdaptedTypes.Count > 0)
             {
                 if (changed)
+                {
                     Dirty(uid, comp);
+                    // Refresh sector colours on the wheel to reflect the remaining adapted types.
+                    var dominant = comp.AdaptedTypes.OrderByDescending(kv => kv.Value).First().Key;
+                    SetWheelTint(comp, dominant);
+                }
                 continue;
             }
 
@@ -152,6 +158,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         // first means a multi-type weapon can't dodge adaptation by having its secondary type quietly slip
         // under the mitigated dominant.
         var incoming = new List<string>();
+        var incomingAmounts = new Dictionary<string, float>();
         string? dominant = null;
         var dominantValue = FixedPoint2.Zero;
         foreach (var (type, amount) in args.Damage.DamageDict)
@@ -159,7 +166,13 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
             if (amount <= FixedPoint2.Zero)
                 continue;
 
+            // Skip types without a dedicated colour — they're structural or meta-types that don't
+            // affect mob combat (e.g. Structural) and would pollute adaptation state and wheel display.
+            if (!AdaptiveArmorColors.HasDistinctColor(type))
+                continue;
+
             incoming.Add(type);
+            incomingAmounts[type] = (float)amount;
             if (amount > dominantValue)
             {
                 dominantValue = amount;
@@ -198,6 +211,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
                 learnedNew = true;
 
             comp.AdaptedTypes[type] = curTime + comp.AdaptDuration;
+            comp.AdaptedAmounts[type] = incomingAmounts[type];
         }
 
         comp.GlowActive = true;
@@ -237,11 +251,26 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         _appearance.SetData(uid, ToggleableVisuals.Color, color);
     }
 
-    /// <summary>Tint the wheel's glow by the live adapted type (empty = idle gold).</summary>
-    private void SetWheelTint(AdaptiveArmorActiveComponent comp, string? type)
+    /// <summary>Tint the wheel: push the dominant type for the shockwave and a comma-separated list of
+    /// "significant" adapted types for per-sector colouring.  A type is significant if it has a distinct
+    /// colour in <see cref="AdaptiveArmorColors"/> AND its recorded damage is at least 30% of the dominant
+    /// type's damage — this strips noise like minor Blunt or Structural from multi-type weapons so the
+    /// sectors reflect the actual threat composition.  Pass null to clear (all adaptations expired).</summary>
+    private void SetWheelTint(AdaptiveArmorActiveComponent comp, string? dominant)
     {
-        if (comp.WheelEffect is { } wheel)
-            _appearance.SetData(wheel, AdaptiveWheelVisuals.Type, type ?? string.Empty);
+        if (comp.WheelEffect is not { } wheel)
+            return;
+
+        _appearance.SetData(wheel, AdaptiveWheelVisuals.Type, dominant ?? string.Empty);
+
+        // Only types with a distinct colour can appear in AdaptedAmounts (filtered at OnDamageModify),
+        // so HasDistinctColor here is just a safety guard against stale state.
+        var activeTypesStr = dominant == null
+            ? string.Empty
+            : string.Join(",", comp.AdaptedAmounts.Keys
+                .Where(AdaptiveArmorColors.HasDistinctColor)
+                .OrderBy(t => t));
+        _appearance.SetData(wheel, AdaptiveWheelVisuals.ActiveTypes, activeTypesStr);
     }
 
     /// <summary>Ratchet the wheel one notch: bump the spin counter so the client advances the spokes (and

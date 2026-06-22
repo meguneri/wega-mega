@@ -15,15 +15,46 @@
     offset: 0,0.95
     sprite: _Wega/Effects/mahoraga_wheel.rsi
     layers:
-    # Свечение (тинтуется по типу урона, неподвижно), спицы вместе с 8 кольцами (доворачиваются на паз
-    # +45° при адаптации — кольца крутятся вместе со спицами, всегда все видны) и неподвижная рама
-    # (обод + ступица) поверх спиц.
+    # Восемь секторов свечения по 45° (glow_sec0..7). Каждый сектор тинтуется клиентом
+    # независимо по адаптированному типу урона: при одном типе все секторы одного цвета,
+    # при двух — по 4 сектора на тип, и т.д. Скрыты пока нет активных адаптаций.
     - shader: unshaded
-      map: ["enum.AdaptiveWheelLayers.Glow"]
-      state: glow
+      map: ["enum.AdaptiveWheelLayers.Sector0"]
+      state: glow_sec0
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector1"]
+      state: glow_sec1
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector2"]
+      state: glow_sec2
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector3"]
+      state: glow_sec3
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector4"]
+      state: glow_sec4
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector5"]
+      state: glow_sec5
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector6"]
+      state: glow_sec6
+      visible: false
+    - shader: unshaded
+      map: ["enum.AdaptiveWheelLayers.Sector7"]
+      state: glow_sec7
+      visible: false
+    # Спицы с 8 кольцами (доворачиваются на +45° при каждой адаптации).
     - shader: unshaded
       map: ["enum.AdaptiveWheelLayers.Spokes"]
       state: spokes
+    # Неподвижная рама (обод + ступица) поверх спиц.
     - shader: unshaded
       map: ["enum.AdaptiveWheelLayers.Frame"]
       state: frame

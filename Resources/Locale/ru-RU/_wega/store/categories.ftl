@@ -29,3 +29,5 @@ store-category-full-arsenal-meds-bottle = Бутылочки с лекарств
 store-category-full-arsenal-water-gun = Водяное оружие
 store-category-full-arsenal-napalm-bottle = Зажигательная заправка
 store-category-full-arsenal-bow-set = Наборы лучника
+
+store-category-spellbook-arena = Заклинания арены

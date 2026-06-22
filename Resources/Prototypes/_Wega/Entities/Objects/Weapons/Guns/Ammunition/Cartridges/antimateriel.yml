@@ -1,0 +1,50 @@
+# Special anti-materiel cartridges — ported from lust-station/_Sunrise
+# These extend the base CartridgeAntiMateriel with special projectile types.
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielFrag
+  name: cartridge (15mm frag)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielFrag
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielBlast
+  name: cartridge (15mm blast)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielBlast
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielEmp
+  name: cartridge (15mm EMP)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielEMP
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]
+
+- type: entity
+  parent: CartridgeAntiMateriel
+  id: CartridgeAntiMaterielPenetrator
+  name: cartridge (15mm penetrator)
+  components:
+  - type: CartridgeAmmo
+    proto: BulletAntiMaterielTracked
+  - type: Sprite
+    layers:
+    - state: base
+      map: [ "enum.AmmoVisualLayers.Base" ]

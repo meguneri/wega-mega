@@ -137,3 +137,21 @@
   - type: EyeProtection
   - type: CultEquipment
     cult: Veil
+
+# Sniper thermal goggles — ported from lust-station/_Sunrise
+# Always-on thermal vision (ThermalSightComponent from parent ClothingEyesGlassesThermal).
+- type: entity
+  parent: [ ClothingEyesGlassesThermal, BaseSyndicateContraband ]
+  id: ClothingEyesGlassesSniperThermalSyndie
+  name: оптические тепловизионные очки снайпера
+  description: Тепловизионные очки снайпера Синдиката. Тепловизор постоянно активен.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Clothing/Eyes/Glasses/sniper_thermal.rsi
+  - type: Clothing
+    sprite: _Sunrise/Clothing/Eyes/Glasses/sniper_thermal.rsi
+    clothingVisuals:
+      eyes:
+      - state: equipped-EYES
+      - state: equipped-EYES-unshaded
+        shader: unshaded

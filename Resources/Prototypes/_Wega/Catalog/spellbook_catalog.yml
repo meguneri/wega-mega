@@ -14,3 +14,17 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
+# Arena grimoire spells
+- type: listing
+  id: SpellbookLoveCurse
+  name: spellbook-love-curse-name
+  description: spellbook-love-curse-desc
+  productAction: ActionLoveCurse
+  cost:
+    WizCoin: 5
+  categories:
+  - SpellbookArena
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+

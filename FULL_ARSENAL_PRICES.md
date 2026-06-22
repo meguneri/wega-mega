@@ -126,6 +126,8 @@
 | Револьвер «Spearhead» (чёрный) | `WeaponRevolverSpearheadBlack` | 5 TC |
 | Улучшенный лазер | `WeaponAdvancedLaser` | 5 TC |
 | Энергетический арбалет | `WeaponEnergyCrossbow` | 5 TC |
+| Энергетический арбалет (крупный) | `WeaponEnergyCrossbowLarge` | 8 TC |
+| S-13 «Чёрная мамба» (плазменный, полный авто) | `WeaponSyndieLaserGun` | 12 TC |
 | Револьвер Python AP | `WeaponRevolverPythonAP` | 6 TC |
 | Revolving Mateba AP | `WeaponRevolverMatebaAP` | 8 TC |
 | Desert Eagle | `WeaponPistolDesertEagle` | 4 TC |
@@ -156,7 +158,8 @@
 | PPSH-59 | `WeaponSubMachineGunPPSH` | 10 TC |
 | SP-91-RC | `WeaponSubMachineGunSP91RC` | 6 TC |
 | Узи U3 | `SunriseWeaponSubMachineGunUzi` | 5 TC |
-| SIAR-52 | `WeaponSIAR52` | 6 TC |
+| SIAR-52 (безгильзовый магазин) | `WeaponSIAR52Arena` | 10 TC |
+| AJ-100 (универсальный разъём, рандомный магазин) | `WeaponAJ100Arena` | 10 TC |
 
 ---
 
@@ -196,6 +199,9 @@
 | Винтовка AK | `WeaponRifleAk` | 6 TC |
 | АК-514 | `WeaponRifleAK514` | 13 TC |
 | SKM-24 | `WeaponRifleSKM24` | 8 TC |
+| SKM-28 (снайперская, .308) | `WeaponRifleSKM28` | 10 TC |
+| Bauer127 (противоматериальная, 15mm) | `WeaponRifleBauer127Arena` | 12 TC |
+| Набор "Элитный Снайпер" (Bauer127 + 2×наборы магазинов + тепловизор) | `ClothingBackpackDuffelSyndicateFilledBauer127` | 20 TC |
 | Ионный карабин | `WeaponIonCarabine` | 5 TC |
 | Винтовка Lecter | `WeaponRifleLecter` | 5 TC |
 | Снайперка Estoc | `WeaponRifleEstoc` | 5 TC |
@@ -286,6 +292,7 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
+| Скафандр инфильтратора (маскировка) | `ClothingOuterHardsuitInfiltration` | 14 TC |
 | Базовая броня | `ClothingOuterArmorBasic` | 2 TC |
 | Мусорная броня | `ClothingOuterArmorScrap` | 4 TC |
 | Противоударная броня | `ClothingOuterArmorRiot` | 3 TC |
@@ -636,6 +643,7 @@
 | Винтовочные патроны | `MagazineBoxRifle` |
 | Магнум патроны | `MagazineBoxMagnum` |
 | Безгильзовые патроны | `MagazineBoxCaselessRifle` |
+| Магазин SIAR-52 удлинённый (безгильзовый, 35 зар.) | `MagazinePistolSubMachineGunCaselessExtended` | 2 TC |
 | Противоматериальные патроны | `MagazineBoxAntiMateriel` |
 | Дробовые патроны (стандарт) | `MagazineBoxShotgun` |
 | Дробовые патроны (коробка) | `BoxMagazineShotgun` |

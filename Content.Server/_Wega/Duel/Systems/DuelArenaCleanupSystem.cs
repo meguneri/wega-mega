@@ -182,10 +182,10 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     }
 
     private void OnRuneStartup(EntityUid uid, BloodRuneComponent comp, ComponentStartup args)
-        => TagIfBattleDebris(uid);
+        => TagIfBattleDebrisGrid(uid);
 
     private void OnRuneStartup(EntityUid uid, MagicRuneComponent comp, ComponentStartup args)
-        => TagIfBattleDebris(uid);
+        => TagIfBattleDebrisGrid(uid);
 
     private void OnMaterialStartup(EntityUid uid, MaterialComponent comp, ComponentStartup args)
     {
@@ -217,7 +217,7 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     /// кластерного мыла), у которых грид на момент старта ещё не разрешён. В космосе (у арены нет
     /// грида) откатываемся на радиус <see cref="DuelArenaComponent.ScanRange"/>.
     /// </summary>
-    private bool IsOnActiveArenaGrid(EntityUid target)
+    public bool IsOnActiveArenaGrid(EntityUid target)
     {
         var pos = Transform(target).MapPosition;
         var gridUnderTarget = _mapManager.TryFindGridAt(pos, out var gridUid, out _) ? gridUid : (EntityUid?)null;
@@ -246,12 +246,23 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     }
 
     /// <summary>
-    /// Помечает сущность как «выданную аренной» (а значит — подлежащую очистке), но только если
-    /// она появилась в зоне активной дуэли. Принесённое игроком извне метку не получает.
+    /// Помечает сущность как «выданную аренной», только если она появилась в зоне активной дуэли
+    /// (GridUid-проверка). Для предметов, у которых GridUid уже разрешён к моменту старта.
     /// </summary>
     private void TagIfBattleDebris(EntityUid uid)
     {
         if (IsInActiveDuelRange(uid))
+            EnsureComp<ArenaIssuedItemComponent>(uid);
+    }
+
+    /// <summary>
+    /// Как <see cref="TagIfBattleDebris"/>, но использует позиционную проверку через
+    /// <see cref="IsOnActiveArenaGrid"/>. Нужно для предметов, заспавненных по MapCoordinates
+    /// (руны, обмылки), у которых GridUid может быть ещё не разрешён в момент ComponentStartup.
+    /// </summary>
+    private void TagIfBattleDebrisGrid(EntityUid uid)
+    {
+        if (IsOnActiveArenaGrid(uid))
             EnsureComp<ArenaIssuedItemComponent>(uid);
     }
 

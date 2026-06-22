@@ -136,3 +136,19 @@
           amount: 2
         - id: ClothingHeadHatBlacksoft
         - id: DrinkJuiceOrangeCarton
+
+# Elite Sniper Bundle — ported from lust-station
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledBauer127
+  name: набор "Элитный Снайпер"
+  description: Снайперская винтовка Bauer127, два набора магазинов всех типов, и тепловизионные очки снайпера.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: WeaponRifleBauer127Arena
+        - id: AntimaterialAmmoKit
+          amount: 2
+        - id: ClothingEyesGlassesSniperThermalSyndie

@@ -6,30 +6,48 @@ namespace Content.Client._Wega.Clothing.AdaptiveArmor;
 
 /// <summary>
 /// Visuals for the Mahoraga adaptation wheel. The ring, spokes and glow spin/pulse on their own (looping
-/// RSI), so this system only drives the discrete state the server pushes: it tints the central glow by the
-/// currently-adapted damage type, fills the outer segment gauge as the plating learns more types, and pops
-/// a bright flash (eased back to the type colour) every time <see cref="AdaptiveWheelVisuals.Spin"/> ticks.
+/// RSI), so this system only drives the discrete state the server pushes: it colours each of the 8 glow
+/// sectors by the currently-adapted damage types (sector i gets colour of activeTypes[i*N/8]), fills the
+/// outer segment gauge as the plating learns more types, and pops a bright flash (eased back to each
+/// sector's own colour) every time <see cref="AdaptiveWheelVisuals.Spin"/> ticks.
 /// </summary>
 public sealed partial class AdaptiveWheelVisualsSystem : VisualizerSystem<AdaptiveWheelComponent>
 {
-    /// <summary>The colour the glow flashes to on the instant of an adaptation, before easing back.</summary>
     private static readonly Color FlashColor = Color.White;
+    private const int SectorCount = 8;
 
     protected override void OnAppearanceChange(EntityUid uid, AdaptiveWheelComponent comp, ref AppearanceChangeEvent args)
     {
         if (args.Sprite == null)
             return;
 
-        // Tint the glow by the live adapted type (empty/idle falls back to the resting gold).
-        if (AppearanceSystem.TryGetData<string>(uid, AdaptiveWheelVisuals.Type, out var type, args.Component))
+        // Recolour sectors whenever the active-types list changes (comma-separated string from server).
+        if (AppearanceSystem.TryGetData<string>(uid, AdaptiveWheelVisuals.ActiveTypes, out var typesStr, args.Component))
         {
-            comp.TypeColor = AdaptiveArmorColors.ForType(string.IsNullOrEmpty(type) ? null : type);
-            if (comp.FlashRemaining <= 0f)
-                SetGlow((uid, args.Sprite), comp.TypeColor);
+            var activeTypes = string.IsNullOrEmpty(typesStr)
+                ? Array.Empty<string>()
+                : typesStr.Split(',');
+
+            if (activeTypes.Length == 0)
+            {
+                HideAllSectors((uid, args.Sprite));
+            }
+            else
+            {
+                for (var i = 0; i < SectorCount; i++)
+                {
+                    var typeIdx = i * activeTypes.Length / SectorCount;
+                    comp.SectorColors[i] = AdaptiveArmorColors.ForType(activeTypes[typeIdx]);
+                }
+                // Keep TypeColor as dominant for any legacy callers.
+                comp.TypeColor = comp.SectorColors[0];
+
+                if (comp.FlashRemaining <= 0f)
+                    ApplySectorColors((uid, args.Sprite), comp);
+            }
         }
 
-        // A bumped spin counter means a fresh adaptation: turn the wheel one notch and pop a flash
-        // (both longer/brighter when the blow was actually absorbed).
+        // A bumped spin counter means a fresh adaptation: ratchet the spokes and pop a flash.
         if (AppearanceSystem.TryGetData<int>(uid, AdaptiveWheelVisuals.Spin, out var spin, args.Component)
             && spin != comp.LastSpin)
         {
@@ -37,7 +55,6 @@ public sealed partial class AdaptiveWheelVisualsSystem : VisualizerSystem<Adapti
             var strong = AppearanceSystem.TryGetData<bool>(uid, AdaptiveWheelVisuals.Strong, out var s, args.Component) && s;
             comp.FlashDuration = strong ? 0.5f : 0.3f;
             comp.FlashRemaining = comp.FlashDuration;
-            // Ratchet the spokes one 45° notch and hold there (no full revolution, no spring-back).
             comp.SpinStartAngle = comp.SpokeAngle;
             comp.SpokeAngle += MathF.PI / 4f;
             comp.SpinDuration = strong ? 0.4f : 0.32f;
@@ -59,15 +76,19 @@ public sealed partial class AdaptiveWheelVisualsSystem : VisualizerSystem<Adapti
             {
                 comp.FlashRemaining -= frameTime;
                 var t = comp.FlashDuration > 0f ? Math.Clamp(comp.FlashRemaining / comp.FlashDuration, 0f, 1f) : 0f;
-                SetGlow(ent, Color.InterpolateBetween(comp.TypeColor, FlashColor, t));
+                for (var i = 0; i < SectorCount; i++)
+                {
+                    var layer = SectorLayer(i);
+                    if (SpriteSystem.LayerMapTryGet((uid, sprite), layer, out var idx, false))
+                        SpriteSystem.LayerSetColor((uid, sprite), idx, Color.InterpolateBetween(comp.SectorColors[i], FlashColor, t));
+                }
                 if (comp.FlashRemaining <= 0f)
-                    SetGlow(ent, comp.TypeColor);
+                    ApplySectorColors(ent, comp);
             }
 
             if (comp.SpinRemaining > 0f)
             {
                 comp.SpinRemaining -= frameTime;
-                // Ease the spokes from the previous notch into the new one (ease-out cubic) and settle.
                 var p = comp.SpinDuration > 0f ? Math.Clamp(1f - comp.SpinRemaining / comp.SpinDuration, 0f, 1f) : 1f;
                 var eased = 1f - MathF.Pow(1f - p, 3f);
                 var angle = comp.SpinStartAngle + (comp.SpokeAngle - comp.SpinStartAngle) * eased;
@@ -76,15 +97,32 @@ public sealed partial class AdaptiveWheelVisualsSystem : VisualizerSystem<Adapti
         }
     }
 
-    private void SetGlow(Entity<SpriteComponent> ent, Color color)
+    private void ApplySectorColors(Entity<SpriteComponent> ent, AdaptiveWheelComponent comp)
     {
-        if (SpriteSystem.LayerMapTryGet((ent.Owner, ent.Comp), AdaptiveWheelLayers.Glow, out var layer, false))
-            SpriteSystem.LayerSetColor((ent.Owner, ent.Comp), layer, color);
+        for (var i = 0; i < SectorCount; i++)
+        {
+            var layer = SectorLayer(i);
+            if (!SpriteSystem.LayerMapTryGet((ent.Owner, ent.Comp), layer, out var idx, false))
+                continue;
+            SpriteSystem.LayerSetVisible((ent.Owner, ent.Comp), idx, true);
+            SpriteSystem.LayerSetColor((ent.Owner, ent.Comp), idx, comp.SectorColors[i]);
+        }
     }
+
+    private void HideAllSectors(Entity<SpriteComponent> ent)
+    {
+        for (var i = 0; i < SectorCount; i++)
+        {
+            var layer = SectorLayer(i);
+            if (SpriteSystem.LayerMapTryGet((ent.Owner, ent.Comp), layer, out var idx, false))
+                SpriteSystem.LayerSetVisible((ent.Owner, ent.Comp), idx, false);
+        }
+    }
+
+    private static AdaptiveWheelLayers SectorLayer(int i) => (AdaptiveWheelLayers)((int)AdaptiveWheelLayers.Sector0 + i);
 
     private void SetSpin(Entity<SpriteComponent> ent, float radians)
     {
-        // The spokes (with their rings) turn; the rim/hub (Frame) and glow stay put.
         if (SpriteSystem.LayerMapTryGet((ent.Owner, ent.Comp), AdaptiveWheelLayers.Spokes, out var spokes, false))
             SpriteSystem.LayerSetRotation((ent.Owner, ent.Comp), spokes, new Angle(radians));
     }
@@ -103,12 +141,19 @@ public sealed partial class AdaptiveShockwaveVisualsSystem : VisualizerSystem<Ad
     }
 }
 
-/// <summary>Layer-map keys on the wheel sprite: the static type-tinted <see cref="Glow"/> behind; the
-/// <see cref="Spokes"/> (spokes + the eight rings, all lit) — the moving part, ratcheted in code; and the
-/// static <see cref="Frame"/> (rim + hub) they turn within.</summary>
+/// <summary>Layer-map keys on the wheel sprite: the <see cref="Spokes"/> (spokes + the eight rings) that
+/// ratchet on each adaptation; the static <see cref="Frame"/> (rim + hub); and eight 45° glow sectors
+/// (<see cref="Sector0"/>–<see cref="Sector7"/>) that are individually coloured by the adapted damage types.</summary>
 public enum AdaptiveWheelLayers : byte
 {
-    Glow,
     Spokes,
     Frame,
+    Sector0,
+    Sector1,
+    Sector2,
+    Sector3,
+    Sector4,
+    Sector5,
+    Sector6,
+    Sector7,
 }

@@ -8,13 +8,34 @@
   },
   "states": [
     {
-      "name": "glow"
-    },
-    {
       "name": "frame"
     },
     {
       "name": "spokes"
+    },
+    {
+      "name": "glow_sec0"
+    },
+    {
+      "name": "glow_sec1"
+    },
+    {
+      "name": "glow_sec2"
+    },
+    {
+      "name": "glow_sec3"
+    },
+    {
+      "name": "glow_sec4"
+    },
+    {
+      "name": "glow_sec5"
+    },
+    {
+      "name": "glow_sec6"
+    },
+    {
+      "name": "glow_sec7"
     }
   ]
 }
