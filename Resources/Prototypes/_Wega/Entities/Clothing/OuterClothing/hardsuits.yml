@@ -201,14 +201,12 @@
   - type: ToggleClothing
     action: ActionTogglePhaseCloak
     disableOnUnequip: true
-    targetSlot: outerClothing
   - type: ItemToggle
-    canActivateInhand: false
+    onUse: false
   - type: ComponentToggler
     parent: true
     components:
       - type: Stealth
-        mirage: false
         hadOutline: true
         examineThreshold: 0.9
       - type: StealthOnMove

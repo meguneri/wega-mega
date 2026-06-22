@@ -198,7 +198,7 @@ public sealed partial class GunSystem : SharedGunSystem
         if (gun.Comp.Target is { } target && !TerminatingOrDeleted(target))
         {
             var targeted = EnsureComp<TargetedProjectileComponent>(uid);
-            targeted.Target = target;
+            targeted.Target = GetNetEntity(target);
             Dirty(uid, targeted);
         }
 

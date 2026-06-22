@@ -423,20 +423,20 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazineRifle
+        startingItem: MagazineLightRifle
         insertSound: /Audio/_Sunrise/Weapons/Guns/Rifles/skm24/skm_reload.ogg
         ejectSound: /Audio/_Sunrise/Weapons/Guns/Rifles/m28/m28_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - MagazineRifle
+          - MagazineLightRifle
       gun_chamber:
         name: Chamber
-        startingItem: CartridgeRifle
+        startingItem: CartridgeLightRifle
         priority: 1
         whitelist:
           tags:
-          - CartridgeRifle
+          - CartridgeLightRifle
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot
@@ -458,3 +458,41 @@
   - type: SpeedModifiedOnWield
     walkModifier: 0.9
     sprintModifier: 0.9
+
+# SKM-28 variants — same rifle, different finishes (sprites only).
+- type: entity
+  parent: WeaponRifleSKM28
+  id: WeaponRifleSKM28Syndi
+  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Good choice Nukie.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/big.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/tiny.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Syndicate/tiny.rsi
+
+- type: entity
+  parent: [BaseSecurityContraband, WeaponRifleSKM28]
+  id: WeaponRifleSKM28Nano
+  description: A marksman conversion of the standard SKM-24. Features an extended heavy barrel, reworked internals, and a mounted optical sight. Chambered in .308. Money doesn't smell.
+  components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/big.rsi
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/tiny.rsi
+  - type: Item
+    sprite: _Sunrise/Objects/Weapons/Guns/Rifles/skm28/Nano/tiny.rsi
+
+# Random-skin wrapper — spawns one of the three finishes at random and deletes itself.
+- type: entity
+  id: WeaponRifleSKM28RandomSkin
+  name: SKM-28
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: RandomSpawner
+    prototypes:
+    - WeaponRifleSKM28
+    - WeaponRifleSKM28Syndi
+    - WeaponRifleSKM28Nano
+    deleteSpawnerAfterSpawn: true

@@ -205,6 +205,38 @@
         - id: MagazineShotgunXL
           amount: 2
 
+# "Love Mage" arena kit for the Full Arsenal pool. A wrapped package that unpacks
+# directly into the full loadout. We spawn the items loose (not in a duffel) on
+# purpose: the death squad hardsuit + AS-12 + the rest overflow a duffel's grid,
+# which would drop the overflow on the floor untagged during ContainerFill and
+# leave it behind after the round. SpawnItemsOnUse adds every spawned entity to
+# SpawnItemsOnUsedEvent, so the arena cleanup tags and removes all of them.
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
+  id: ArenaLoveMageSet
+  name: love mage kit
+  description: A wrapped package that unpacks into the Grimoire of Passion, death squad armor, an AS-12 'Minotaur', a pulse pistol, a Donksoft SMG, an elegant maid dress, two pairs of handcuffs, shibari rope and a spiked truncheon.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: Objects/Decoration/present.rsi
+    state: present
+  - type: SpawnItemsOnUse
+    items:
+    - id: GrimoireOfPassion
+    - id: ClothingOuterHardsuitDeathsquad
+    - id: WeaponShotgunMinotaur
+    - id: WeaponPulsePistol
+    - id: ClothingUniformJumpskirtElegantMaid
+    - id: WeaponSubMachineGunDonksoft
+    - id: Handcuffs
+      amount: 2
+    - id: ERPShibariRope
+    - id: Truncheon
+    sound:
+      path: /Audio/Effects/unwrap.ogg
+
 # P90 bundle for the arena pool: the SMG plus one spare 50-round magazine.
 - type: entity
   parent: ClothingBackpackDuffelSyndicate

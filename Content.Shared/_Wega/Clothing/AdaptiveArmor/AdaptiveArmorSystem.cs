@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
@@ -52,6 +53,15 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
     /// <summary>One-shot expanding ring spat out at the moment a blow is absorbed.</summary>
     private static readonly EntProtoId AdaptShockwave = "EffectAdaptiveShockwave";
 
+    /// <summary>Synthetic adaptation key for explosions — they bypass <see cref="DamageModifyEvent"/> (applied
+    /// with ignoreResistances), so the armour learns them through their own resistance event instead of a
+    /// damage type.</summary>
+    private const string ExplosionKey = "Explosion";
+
+    /// <summary>Synthetic adaptation key for armour-piercing rounds — likewise applied with ignoreResistances,
+    /// so they never reach <see cref="DamageModifyEvent"/> and are tracked as their own learned threat.</summary>
+    private const string ArmorPiercingKey = "ArmorPiercing";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -60,6 +70,8 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         SubscribeLocalEvent<AdaptiveArmorComponent, ClothingGotUnequippedEvent>(OnUnequipped);
 
         SubscribeLocalEvent<AdaptiveArmorActiveComponent, DamageModifyEvent>(OnDamageModify);
+        SubscribeLocalEvent<AdaptiveArmorActiveComponent, GetExplosionResistanceEvent>(OnExplosionResistance);
+        SubscribeLocalEvent<AdaptiveArmorActiveComponent, ArmorPiercingHitEvent>(OnArmorPiercingHit);
     }
 
     private void OnEquipped(Entity<AdaptiveArmorComponent> ent, ref ClothingGotEquippedEvent args)
@@ -238,6 +250,81 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
             _audio.PlayPvs(AdaptLearnSound, ent.Owner);
             SpinWheel(comp, false);
         }
+    }
+
+    /// <summary>Adapt to explosions. Explosion damage is dealt with ignoreResistances, so it never reaches
+    /// <see cref="OnDamageModify"/>; we hook the explosion's own resistance event instead. The first blast
+    /// lands in full and teaches the plating; later blasts within the window have their whole coefficient cut
+    /// by <see cref="AdaptiveArmorActiveComponent.AdaptCoefficient"/>, exactly like a learned damage type.</summary>
+    private void OnExplosionResistance(Entity<AdaptiveArmorActiveComponent> ent, ref GetExplosionResistanceEvent args)
+    {
+        // Explosion processing is server-authoritative; nothing to keep in sync on the client.
+        if (!_net.IsServer)
+            return;
+
+        if (AdaptSynthetic(ent, ExplosionKey))
+            args.DamageCoefficient *= ent.Comp.AdaptCoefficient;
+    }
+
+    /// <summary>Adapt to armour-piercing rounds. AP bullets carry <c>IgnoreResistances</c> and so skip the
+    /// normal armour pass; <see cref="ArmorPiercingHitEvent"/> is fired for them just before the hit lands.
+    /// First AP round of a streak lands in full and is learned; subsequent ones within the window are softened
+    /// across every damage type they carry.</summary>
+    private void OnArmorPiercingHit(Entity<AdaptiveArmorActiveComponent> ent, ref ArmorPiercingHitEvent args)
+    {
+        // Projectile collisions resolve on the server; the mutated damage is what the server then applies.
+        if (!_net.IsServer)
+            return;
+
+        if (args.Origin == null || args.Damage.GetTotal() <= 0)
+            return;
+
+        if (!AdaptSynthetic(ent, ArmorPiercingKey))
+            return;
+
+        // Already hardened against AP — soften every type this round carries.
+        foreach (var type in args.Damage.DamageDict.Keys.ToArray())
+        {
+            if (args.Damage.DamageDict[type] > FixedPoint2.Zero)
+                args.Damage.DamageDict[type] *= ent.Comp.AdaptCoefficient;
+        }
+    }
+
+    /// <summary>Learn (or refresh) a synthetic adaptation that arrives outside the normal damage-type pipeline
+    /// — explosions and armour-piercing rounds. Drives the same glow/wheel/shockwave feedback as a real type
+    /// and returns whether the threat was <em>already</em> adapted coming in (i.e. this hit should be
+    /// mitigated). Server-authoritative.</summary>
+    private bool AdaptSynthetic(Entity<AdaptiveArmorActiveComponent> ent, string key)
+    {
+        var comp = ent.Comp;
+        var curTime = _timing.CurTime;
+        var alreadyAdapted = comp.AdaptedTypes.TryGetValue(key, out var expiry) && expiry > curTime;
+
+        comp.AdaptedTypes[key] = curTime + comp.AdaptDuration;
+        comp.AdaptedAmounts[key] = 1f;
+        comp.GlowActive = true;
+        Dirty(ent);
+
+        SetGlow(comp.Vest, true, AdaptiveArmorColors.ForType(key));
+        SetWheelTint(comp, key);
+
+        if (alreadyAdapted)
+        {
+            // The wheel had already turned for this threat — it eats the blow. Weighty click + shockwave.
+            _popup.PopupEntity(Loc.GetString("adaptive-armor-absorbed"), ent.Owner, ent.Owner, PopupType.Medium);
+            _audio.PlayPvs(AdaptSound, ent.Owner);
+            SpinWheel(comp, true);
+            SpawnShockwave(ent.Owner, key);
+        }
+        else
+        {
+            // First taste — lands in full, but the plating retunes for next time with a lighter click.
+            _popup.PopupEntity(Loc.GetString("adaptive-armor-adapted"), ent.Owner, ent.Owner, PopupType.SmallCaution);
+            _audio.PlayPvs(AdaptLearnSound, ent.Owner);
+            SpinWheel(comp, false);
+        }
+
+        return alreadyAdapted;
     }
 
     /// <summary>Light or darken the vest's emissive accent and set its tint, via the shared ToggleableVisuals

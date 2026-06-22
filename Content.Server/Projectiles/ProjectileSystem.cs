@@ -8,6 +8,7 @@ using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DirtVisuals; // Corvax-Wega-Dirtable
+using Content.Shared._Wega.Clothing.AdaptiveArmor; // Corvax-Wega-AdaptiveArmor
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
@@ -50,6 +51,15 @@ public sealed partial class ProjectileSystem : SharedProjectileSystem
 
         var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
+
+        // Corvax-Wega-AdaptiveArmor: armour-piercing rounds skip the normal armour/DamageModifyEvent pass via
+        // IgnoreResistances, so give adaptive plating its own chance to learn from and soften them. The handler
+        // mutates ev.Damage in place — the same instance applied by TryChangeDamage below.
+        if (component.IgnoreResistances)
+        {
+            var apEv = new ArmorPiercingHitEvent(ev.Damage, component.Shooter);
+            RaiseLocalEvent(target, ref apEv);
+        }
 
         var otherName = ToPrettyString(target);
         var damageRequired = _destructibleSystem.DestroyedAt(target);

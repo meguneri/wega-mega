@@ -1220,6 +1220,8 @@ full-arsenal-glasses-noir-name = Нуар-очки
 full-arsenal-glasses-noir-desc = Очки с защитой от вспышек и яркого света; мир в них — чёрно-белый, как в старом детективе.
 full-arsenal-glasses-thermal-name = Тепловизор
 full-arsenal-glasses-thermal-desc = Оптический тепловой сканер: выдаёт тёплые тела врагов сквозь стены и дым.
+full-arsenal-glasses-sniper-thermal-name = Тепловизионные очки снайпера
+full-arsenal-glasses-sniper-thermal-desc = Снайперская версия тепловизора с ядерной батареей. Включаемый тепловизор подсвечивает тёплые тела врагов сквозь стены и дым.
 full-arsenal-throwing-knives-kit-name = Набор метательных ножей
 full-arsenal-throwing-knives-kit-desc = Восемь фирменных метательных ножей Синдиката — отлично вонзаются в тело жертвы.
 full-arsenal-combat-bakery-kit-name = Багетный набор
@@ -1437,6 +1439,8 @@ full-arsenal-duffel-ash12-name = Вещмешок ASH-12
 full-arsenal-duffel-ash12-desc = Штурмовая винтовка ASH-12 и два запасных магазина .45 магнум в комплекте.
 full-arsenal-duffel-minotaur-name = Вещмешок AS-12 «Минотавр»
 full-arsenal-duffel-minotaur-desc = Автоматический дробовик AS-12 «Минотавр» и два запасных XL-барабана на 16 патронов в комплекте.
+full-arsenal-duffel-love-mage-name = Комплект «Маг любви»
+full-arsenal-duffel-love-mage-desc = Тематический набор арены: гримуар арены, броня эскадрона смерти, AS-12 «Минотавр», импульсный пистолет, ПП «Донксофт», элегантная форма горничной, две пары наручников, верёвка шибари и шипастая дубинка.
 full-arsenal-duffel-p90-name = Вещмешок P90
 full-arsenal-duffel-p90-desc = Пистолет-пулемёт P90 и один запасной магазин на 50 патронов в комплекте.
 full-arsenal-rifle-skm24-name = SKM-24
@@ -1482,7 +1486,7 @@ full-arsenal-smg-siar52-mag-desc = 35-зарядный удлинённый ма
 
 # SKM-28
 full-arsenal-rifle-skm28-name = Снайперская винтовка SKM-28
-full-arsenal-rifle-skm28-desc = Снайперская модификация стандартного SKM-24 с удлинённым тяжёлым стволом и переработанной механикой. Оснащена встроенным оптическим прицелом. Калибр .308.
+full-arsenal-rifle-skm28-desc = Снайперская модификация стандартного SKM-24 с удлинённым тяжёлым стволом и переработанной механикой. Оснащена встроенным оптическим прицелом. Калибр .30. Расцветка — сюрприз.
 
 # Large energy crossbow
 full-arsenal-energy-crossbow-large-name = Энергетический арбалет (крупный)
@@ -1502,8 +1506,8 @@ full-arsenal-energy-black-mamba-desc = Модернизированный Лек
 
 # Elite Sniper Bundle
 full-arsenal-elite-sniper-bundle-name = Набор "Элитный Снайпер"
-full-arsenal-elite-sniper-bundle-desc = Вещмешок с противоматериальной снайперской винтовкой Bauer127, двумя наборами магазинов всех типов (стандарт, пробойник, осколочный, взрыв, ЭМИ) и тепловизионными очками снайпера на ядерном элементе.
+full-arsenal-elite-sniper-bundle-desc = Вещмешок с противоматериальной снайперской винтовкой SR-127, двумя наборами магазинов всех типов (стандарт, пробойник, осколочный, взрыв, ЭМИ) и тепловизионными очками снайпера на ядерном элементе.
 
-# Bauer127 rifle
-full-arsenal-rifle-bauer127-name = Снайперская винтовка Bauer127
+# SR-127 rifle
+full-arsenal-rifle-bauer127-name = Снайперская винтовка SR-127
 full-arsenal-rifle-bauer127-desc = Тяжёлая противоматериальная снайперская винтовка под патрон 15x115mm. Поддерживает 6 типов магазинов. Значительно замедляет носителя.

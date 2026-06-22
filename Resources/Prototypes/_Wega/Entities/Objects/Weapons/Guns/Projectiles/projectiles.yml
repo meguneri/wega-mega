@@ -152,6 +152,7 @@
 
 # Large crossbow bolt — ported from lust-station/_Sunrise
 - type: entity
+  parent: BaseBullet
   id: EnergyCrossbowBoltLarge
   categories: [ HideSpawnMenu ]
   name: energy bolt

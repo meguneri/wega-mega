@@ -138,13 +138,14 @@
   - type: CultEquipment
     cult: Veil
 
-# Sniper thermal goggles — ported from lust-station/_Sunrise
-# Always-on thermal vision (ThermalSightComponent from parent ClothingEyesGlassesThermal).
+# Sniper thermal goggles — ported from lust-station/_Sunrise.
+# Toggleable thermal vision (ThermalVision system): action ActionToggleThermalVision adds
+# ThermalVisionComponent to the wearer, drawing power from a nuclear cell.
 - type: entity
-  parent: [ ClothingEyesGlassesThermal, BaseSyndicateContraband ]
+  parent: [ ClothingEyesBase, BaseToggleClothing, PowerCellSlotSmallItem, BaseSyndicateContraband ]
   id: ClothingEyesGlassesSniperThermalSyndie
   name: оптические тепловизионные очки снайпера
-  description: Тепловизионные очки снайпера Синдиката. Тепловизор постоянно активен.
+  description: Тепловизионные очки снайпера Синдиката. Активируемый тепловизор с ядерной батареей.
   components:
   - type: Sprite
     sprite: _Sunrise/Clothing/Eyes/Glasses/sniper_thermal.rsi
@@ -155,3 +156,39 @@
       - state: equipped-EYES
       - state: equipped-EYES-unshaded
         shader: unshaded
+  - type: GroupExamine
+  - type: IdentityBlocker
+    coverage: EYES
+  - type: ShowSyndicateIcons
+  - type: ToggleClothing
+    action: ActionToggleThermalVision
+    disableOnUnequip: true
+  - type: ComponentToggler
+    parent: true
+    components:
+    - type: ThermalVision
+  - type: ItemToggle
+    predictable: false # issues between ToggleCellDraw and ItemToggleActiveSound
+    onUse: false
+    soundActivate:
+      path: /Audio/_Sunrise/Items/Goggles/activate.ogg
+    soundDeactivate:
+      path: /Audio/_Sunrise/Items/Goggles/deactivate.ogg
+    soundFailToActivate:
+      path: /Audio/Machines/button.ogg
+  - type: PowerCellDraw
+    drawRate: 2
+    useCharge: 15
+  - type: ToggleCellDraw
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellSmallNuclear
+        disableEject: true
+        swap: false

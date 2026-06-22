@@ -117,12 +117,47 @@
     zeroVisible: true
   - type: Appearance
 
-# Override: SIAR-52 fixed to use caseless magazines (MagazineCaselessRifle tag)
+# SIAR-52 SMG (arena): caseless magazines (MagazineCaselessRifle tag). Self-contained —
+# the non-arena WeaponSIAR52 was removed, so all components are inlined here. The iar_52.rsi
+# only ships a single mag-0 state, so MagazineVisuals stays at steps: 1 / zeroVisible: true.
 - type: entity
-  parent: WeaponSIAR52
+  name: SIAR-52 SMG
+  parent: BaseWeaponSubMachineGun
   id: WeaponSIAR52Arena
   suffix: Arena, caseless mag
+  description: A high rate of fire weapon, equipped with integrated silencer.
   components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/iar_52.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/iar_52.rsi
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -4
+    maxAngle: -22
+  - type: Gun
+    minAngle: 7
+    maxAngle: 66
+    angleIncrease: 2
+    angleDecay: 22
+    fireRate: 7
+    selectedMode: FullAuto
+    soundGunshot:
+      collection: usp # SUNRISE new gun sounds
+      params:
+        volume: 10
+    availableModes:
+    - FullAuto
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -143,25 +178,60 @@
           - CartridgeCaselessRifle
   - type: MagazineVisuals
     magState: mag
-    steps: 8
-    zeroVisible: false
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
 
-# Override: universal magazine connector — accepts all pistol-calibre magazines
+# Full Arsenal AJ-100 — self-contained arena SMG with a universal magazine connector that also takes
+# .20 / .30 rifle mags; its magazine is randomised on spawn. The non-arena base/Universal variants were
+# removed, so everything is inlined here.
 - type: entity
-  parent: WeaponAJ100
-  id: WeaponAJ100Universal
-  suffix: Universal mag
+  name: AJ-100
+  parent: BaseWeaponSubMachineGun
+  id: WeaponAJ100Arena
+  suffix: Arena, random mag
   description: >-
     Высокоскоростной пистолет-пулемёт, оснащённый универсальным разъёмом для
     широкого спектра магазинов пистолетного калибра. Совместим с патронами
-    .35 auto: стандартными пистолетными, высокоёмкими, SMG, P90 и MP7.
-    Не принимает магазины под дробовик, пулемёт, магнум или снайперский калибр.
+    .35 auto: стандартными пистолетными, высокоёмкими, SMG, P90 и MP7, а также
+    с винтовочными магазинами .20 и .30. Не принимает магазины под дробовик,
+    пулемёт, магнум или снайперский калибр.
   components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/aj_100.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/SMGs/aj_100.rsi
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -3
+    maxAngle: -25
+  - type: Gun
+    minAngle: 6
+    maxAngle: 45
+    angleIncrease: 2.5
+    angleDecay: 18
+    fireRate: 6
+    selectedMode: FullAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
+    availableModes:
+    - FullAuto
+  - type: ChamberMagazineAmmoProvider
+    autoEject: true
   - type: ItemSlots
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: MagazinePistolSubMachineGun
         insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
         ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
         priority: 2
@@ -176,31 +246,20 @@
           - MagazineSMGPPSH
           - MagazineMP7
           - MagazineP90
-
-# Full Arsenal variant — same universal connector, magazine randomised on spawn
-- type: entity
-  parent: WeaponAJ100Universal
-  id: WeaponAJ100Arena
-  suffix: Arena, random mag
-  components:
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-        priority: 2
+          - MagazineRifle      # .20 винтовочные
+          - MagazineLightRifle # .30 винтовочные
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgePistol
+        priority: 1
         whitelist:
           tags:
-          - MagazinePistol
-          - MagazinePistolHighCapacity
-          - MagazinePistolSubMachineGun
-          - MagazinePistolSubMachineGunTopMounted
-          - MagazinePistolCaselessRifle
-          - MagazinePistolSubMachineGunFoam
-          - MagazineSMGPPSH
-          - MagazineMP7
-          - MagazineP90
+          - CartridgePistol
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
   - type: RandomMagazine
     magazines:
     - MagazinePistol

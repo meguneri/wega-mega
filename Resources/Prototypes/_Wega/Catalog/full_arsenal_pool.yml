@@ -393,7 +393,7 @@
   description: full-arsenal-napalm-bottle-desc
   productEntity: ChemistryBottleNapalmPhlogiston
   cost:
-    Telecrystal: 3
+    Telecrystal: 5
   categories:
   - FullArsenal
   - FullArsenalNapalmBottle
@@ -663,7 +663,7 @@
   id: FullArsenalRifleSKM28
   name: full-arsenal-rifle-skm28-name
   description: full-arsenal-rifle-skm28-desc
-  productEntity: WeaponRifleSKM28
+  productEntity: WeaponRifleSKM28RandomSkin
   cost:
     Telecrystal: 10
   categories:
@@ -1750,6 +1750,16 @@
   productEntity: ClothingEyesGlassesThermal
   cost:
     Telecrystal: 3
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalGlassesSniperThermal
+  name: full-arsenal-glasses-sniper-thermal-name
+  description: full-arsenal-glasses-sniper-thermal-desc
+  productEntity: ClothingEyesGlassesSniperThermalSyndie
+  cost:
+    Telecrystal: 10
   categories:
   - FullArsenal
 
@@ -5299,7 +5309,7 @@
   description: full-arsenal-energy-black-mamba-desc
   productEntity: WeaponSyndieLaserGun
   cost:
-    Telecrystal: 12
+    Telecrystal: 60
   categories:
   - FullArsenal
 
@@ -6511,6 +6521,16 @@
   productEntity: ArenaDuffelMinotaurBundle
   cost:
     Telecrystal: 20
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalDuffelLoveMage
+  name: full-arsenal-duffel-love-mage-name
+  description: full-arsenal-duffel-love-mage-desc
+  productEntity: ArenaLoveMageSet
+  cost:
+    Telecrystal: 120
   categories:
   - FullArsenal
 

@@ -1,9 +1,28 @@
-# Fix Bauer127: correct magazine tag + bolt-action cycle (Z = wield, Z again = rack)
+# Arena SR-127 — self-contained bolt-action AMR with the proper anti-materiel magazines and bolt cycle
+# (Z = wield, Z again = rack). The non-arena WeaponRifleBauer127 was removed, so everything is inlined here.
 - type: entity
-  parent: WeaponRifleBauer127
+  name: SR-127 sniper rifle
+  parent: [ BaseWeaponRifle, BaseGunWieldable ]
   id: WeaponRifleBauer127Arena
   suffix: Arena, proper mags
   components:
+  - type: Sprite
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/bauer127/big.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/bauer127/tiny.rsi
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,5,1
+    sprite: _Sunrise/Objects/Weapons/Guns/Snipers/bauer127/tiny.rsi
+  - type: GunWieldBonus
+    minAngle: -23
+    maxAngle: -43
   - type: Gun
     projectileSpeed: 40
     selectedMode: SemiAuto
@@ -21,6 +40,8 @@
   - type: ChamberMagazineAmmoProvider
     autoEject: true
     boltClosed: null
+    soundRack:
+      path: /Audio/_Sunrise/Weapons/Guns/Snipers/Bauer127/bauer127_bolt.ogg
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -39,10 +60,28 @@
         whitelist:
           tags:
           - CartridgeAntiMateriel
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
   - type: MagazineVisuals
     magState: mag
     steps: 1
     zeroVisible: true
+  - type: Appearance
+  - type: GunRequiresWield
+  - type: Wieldable
+  - type: UseDelay
+    delay: 1
+  - type: SpeedModifiedOnWield
+    walkModifier: 0.25
+    sprintModifier: 0.25
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 12
+    pvsIncrease: 1.2
+  - type: StaticPrice
+    price: 10000
 
 - type: entity
   parent: BaseItem

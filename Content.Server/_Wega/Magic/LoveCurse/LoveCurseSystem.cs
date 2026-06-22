@@ -26,7 +26,6 @@ public sealed partial class LoveCurseSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private ISharedPlayerManager _playerManager = default!;
 
     private static readonly string[] BodySlots = ["jumpsuit", "outerClothing", "underwearbottom"];
 

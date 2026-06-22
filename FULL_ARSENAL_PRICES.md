@@ -127,7 +127,7 @@
 | Улучшенный лазер | `WeaponAdvancedLaser` | 5 TC |
 | Энергетический арбалет | `WeaponEnergyCrossbow` | 5 TC |
 | Энергетический арбалет (крупный) | `WeaponEnergyCrossbowLarge` | 8 TC |
-| S-13 «Чёрная мамба» (плазменный, полный авто) | `WeaponSyndieLaserGun` | 12 TC |
+| S-13 «Чёрная мамба» (плазменный, полный авто) | `WeaponSyndieLaserGun` | 60 TC |
 | Револьвер Python AP | `WeaponRevolverPythonAP` | 6 TC |
 | Revolving Mateba AP | `WeaponRevolverMatebaAP` | 8 TC |
 | Desert Eagle | `WeaponPistolDesertEagle` | 4 TC |
@@ -508,7 +508,7 @@
 | Лацеринол (бутылка) | `ChemistryBottleLacerinol` | 2 TC |
 | Пиразин (бутылка) | `ChemistryBottlePyrazine` | 2 TC |
 | Синаптизин (бутылка) | `ChemistryBottleSynaptizine` | 2 TC |
-| Зажигательная смесь напалм+флогистон (компаньон к водяному оружию) | `ChemistryBottleNapalmPhlogiston` | 3 TC |
+| Зажигательная смесь напалм+флогистон (компаньон к водяному оружию) | `ChemistryBottleNapalmPhlogiston` | 5 TC |
 | Автоинъектор от травм | `BruteAutoInjector` | 1 TC |
 | Автоинъектор от ожогов | `BurnAutoInjector` | 1 TC |
 | Автоинъектор от проколов | `PunctAutoInjector` | 1 TC |
@@ -560,6 +560,7 @@
 | Визор ниндзя | `ClothingEyesVisorNinja` | 1 TC |
 | Нуар-очки | `ClothingEyesGlassesNoir` | 1 TC |
 | Тепловизор | `ClothingEyesGlassesThermal` | 3 TC |
+| Тепловизионные очки снайпера | `ClothingEyesGlassesSniperThermalSyndie` | 10 TC |
 | Очки охраны | `ClothingEyesGlassesSecurity` | 2 TC |
 | Мед-охранные очки | `ClothingEyesGlassesMedSecSunglasses` | 2 TC |
 | Медицинский визор | `ClothingEyesHudMedical` | 1 TC |
@@ -709,6 +710,7 @@
 | Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
 | Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 15 TC |
 | Вещмешок AS-12 «Минотавр» | `ArenaDuffelMinotaurBundle` | 20 TC |
+| Комплект «Маг любви» (подарок: гримуар арены, броня эскадрона смерти, AS-12, импульсный пистолет, ПП «Донксофт», форма горничной, 2×наручники, шибари, шипастая дубинка) | `ArenaLoveMageSet` | 120 TC |
 | Вещмешок P90 | `ArenaDuffelP90Bundle` | 30 TC |
 | Набор лучника | `ArenaDuffelBowSet` | 4 TC |
 | Ядовитый набор лучника | `ArenaDuffelBowSetPoison` | 8 TC |

@@ -1,8 +1,19 @@
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._Wega.Clothing.AdaptiveArmor;
+
+/// <summary>
+/// Raised on a target that is about to be hit by an armour-piercing projectile — one with
+/// <c>IgnoreResistances</c>, which skips the normal <see cref="Content.Shared.Damage.Systems.DamageModifyEvent"/>
+/// armour pass entirely. Lets adaptive plating still learn from and soften AP rounds the same way it does
+/// ordinary hits. Handlers mutate <see cref="Damage"/> in place; the projectile system fires the resulting
+/// damage. Server-side only (projectile collisions resolve on the server).
+/// </summary>
+[ByRefEvent]
+public record struct ArmorPiercingHitEvent(DamageSpecifier Damage, EntityUid? Origin);
 
 /// <summary>Marks the Mahoraga wheel effect so the client can drive its per-type tint, segment gauge and
 /// the bright flash it pops on every adaptation. The wheel's ring/spokes/glow spin on their own (looping
@@ -82,6 +93,12 @@ public static class AdaptiveArmorColors
         ["Caustic"] = Color.FromHex("#6FE03A"),   // green
         ["Poison"] = Color.FromHex("#9AB820"),    // olive
         ["Radiation"] = Color.FromHex("#B45CFF"), // violet
+        // Synthetic adaptation keys — not real damage types, but explosions and armour-piercing rounds both
+        // bypass the normal damage pipeline (ignoreResistances), so the armour tracks each as its own learned
+        // threat. Explosion is vermilion blast-red; armour-piercing is gunmetal — both kept clear of the real
+        // damage hues above.
+        ["Explosion"] = Color.FromHex("#FF4500"),
+        ["ArmorPiercing"] = Color.FromHex("#6E7B8B"),
     };
 
     public static Color ForType(string? type)
