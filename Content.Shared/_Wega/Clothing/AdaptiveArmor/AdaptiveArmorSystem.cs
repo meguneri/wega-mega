@@ -238,7 +238,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
             // The wheel turned in time: at least one type in this blow was absorbed. Ratchet it round one
             // notch with a weighty click, throw a shockwave and tell the wearer their armour just ate the hit.
             _popup.PopupEntity(Loc.GetString("adaptive-armor-absorbed"), ent.Owner, ent.Owner, PopupType.Medium);
-            _audio.PlayPvs(AdaptSound, ent.Owner);
+            _audio.PlayPvs(AdaptSound, Transform(ent.Owner).Coordinates);
             SpinWheel(comp, true);
             SpawnShockwave(ent.Owner, dominant);
         }
@@ -247,7 +247,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
             // First taste of a fresh threat — landed in full. The plating retunes for next time, with a
             // lighter click so the wearer hears the armour adapt even though this blow got through.
             _popup.PopupEntity(Loc.GetString("adaptive-armor-adapted"), ent.Owner, ent.Owner, PopupType.SmallCaution);
-            _audio.PlayPvs(AdaptLearnSound, ent.Owner);
+            _audio.PlayPvs(AdaptLearnSound, Transform(ent.Owner).Coordinates);
             SpinWheel(comp, false);
         }
     }
@@ -312,7 +312,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         {
             // The wheel had already turned for this threat — it eats the blow. Weighty click + shockwave.
             _popup.PopupEntity(Loc.GetString("adaptive-armor-absorbed"), ent.Owner, ent.Owner, PopupType.Medium);
-            _audio.PlayPvs(AdaptSound, ent.Owner);
+            _audio.PlayPvs(AdaptSound, Transform(ent.Owner).Coordinates);
             SpinWheel(comp, true);
             SpawnShockwave(ent.Owner, key);
         }
@@ -320,7 +320,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         {
             // First taste — lands in full, but the plating retunes for next time with a lighter click.
             _popup.PopupEntity(Loc.GetString("adaptive-armor-adapted"), ent.Owner, ent.Owner, PopupType.SmallCaution);
-            _audio.PlayPvs(AdaptLearnSound, ent.Owner);
+            _audio.PlayPvs(AdaptLearnSound, Transform(ent.Owner).Coordinates);
             SpinWheel(comp, false);
         }
 

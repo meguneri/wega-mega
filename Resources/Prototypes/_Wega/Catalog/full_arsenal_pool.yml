@@ -663,7 +663,7 @@
   id: FullArsenalRifleSKM28
   name: full-arsenal-rifle-skm28-name
   description: full-arsenal-rifle-skm28-desc
-  productEntity: WeaponRifleSKM28RandomSkin
+  productEntity: WeaponRifleSKM28Syndi
   cost:
     Telecrystal: 10
   categories:
@@ -4227,6 +4227,16 @@
   productEntity: ClothingShoesBootsMagBlinding
   cost:
     Telecrystal: 8
+  categories:
+  - FullArsenal
+
+- type: listing
+  id: FullArsenalShoesSpaceNinja
+  name: full-arsenal-shoes-spaceninja-name
+  description: full-arsenal-shoes-spaceninja-desc
+  productEntity: ClothingShoesSpaceNinja
+  cost:
+    Telecrystal: 20
   categories:
   - FullArsenal
 

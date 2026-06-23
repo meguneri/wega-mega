@@ -24,7 +24,9 @@ using Content.Shared.Inventory;
 using Content.Shared.Materials;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Slippery;
+using Content.Shared.Stacks;
 using Content.Shared.Tag;
+using Content.Shared.Damage.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -70,6 +72,20 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // Тегаем гильзы и прочие картриджи, заспавненные во время активной дуэли,
         // чтобы клинап их убрал независимо от того, из чьего оружия они вылетели.
         SubscribeLocalEvent<CartridgeAmmoComponent, ComponentStartup>(OnCartridgeStartup);
+
+        // Оружие из RandomSpawner-обёрток (например WeaponRifleSKM28RandomSkin — «случайный
+        // скин» SKM-28): обёртка из ящика помечается ArenaIssued, но она через RandomSpawner
+        // спавнит РЕАЛЬНУЮ винтовку (Spawn без события) и самоудаляется — заспавненный ствол
+        // метку не наследует и переживал очистку. RandomSpawner отрабатывает в MapInitEvent
+        // сразу при выдаче из ящика, т.е. ствол появляется на гриде активной дуэли — метим его
+        // тем же правилом «создано во время боя на арене → убирается клинапом», что и гильзы.
+        SubscribeLocalEvent<GunComponent, ComponentStartup>(OnGunStartup);
+
+        // Стаки (алоэ-крем, мази и прочее счётное снаряжение из ящика): сам стак из ящика
+        // метится, но при РАЗДЕЛЕНИИ стака (взять часть в руку, бросить часть, применить)
+        // создаётся НОВАЯ сущность-стак через Spawn без метки — она переживала очистку.
+        // Метим любой стак, появившийся на гриде активной арены, тем же правилом, что и гильзы.
+        SubscribeLocalEvent<StackComponent, ComponentStartup>(OnStackStartup);
 
         // То же правило «создано во время боя на арене → убирается клинапом» для:
         // — рун культа и магических рун со свитка (нарисованы/наспавнены во время дуэли);
@@ -177,6 +193,23 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // Тегаем гильзу только если она появилась в радиусе активной арены — иначе тег
         // повесился бы на каждый картридж, заспавненный где угодно на сервере во время боя
         // (перезарядка/стрельба вне арены), и чужие гильзы могла бы удалить очистка.
+        if (IsInActiveDuelRange(uid))
+            EnsureComp<ArenaIssuedItemComponent>(uid);
+    }
+
+    private void OnGunStartup(EntityUid uid, GunComponent comp, ComponentStartup args)
+    {
+        // Только оружие, заспавненное в зоне активной арены (RandomSpawner-обёртки из ящика и
+        // прочие наспавненные за бой стволы). Принесённое игроком извне ComponentStartup на
+        // арене не вызывает, поэтому его метка не касается.
+        if (IsInActiveDuelRange(uid))
+            EnsureComp<ArenaIssuedItemComponent>(uid);
+    }
+
+    private void OnStackStartup(EntityUid uid, StackComponent comp, ComponentStartup args)
+    {
+        // Только стаки, появившиеся в зоне активной арены (отделённые от выданного стака части
+        // и т.п.). Принесённое игроком извне ComponentStartup на арене не вызывает.
         if (IsInActiveDuelRange(uid))
             EnsureComp<ArenaIssuedItemComponent>(uid);
     }
@@ -481,7 +514,8 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
 
         return !HasComp<ClothingSpeedModifierComponent>(uid)
             && !HasComp<MagbootsComponent>(uid)
-            && !HasComp<NoSlipComponent>(uid);
+            && !HasComp<NoSlipComponent>(uid)
+            && !HasComp<ClothingSlowOnDamageModifierComponent>(uid);
     }
 
     /// <summary>

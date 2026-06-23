@@ -471,6 +471,7 @@
 | Улучшенные кроваво-красные магнитные ботинки | `ClothingShoesBootsMagAdvSynd` | 8 TC |
 | Заводные сапоги (немагнитные) | `ClothingShoesClockworkTreads` | 2 TC |
 | Молниеносные магнитные ботинки | `ClothingShoesBootsMagBlinding` | 8 TC |
+| Ботинки космического ниндзя | `ClothingShoesSpaceNinja` | 20 TC |
 
 ---
 

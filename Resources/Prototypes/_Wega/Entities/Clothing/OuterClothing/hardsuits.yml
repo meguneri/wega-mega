@@ -203,6 +203,7 @@
     disableOnUnequip: true
   - type: ItemToggle
     onUse: false
+  - type: BreakStealthOnDamage
   - type: ComponentToggler
     parent: true
     components:

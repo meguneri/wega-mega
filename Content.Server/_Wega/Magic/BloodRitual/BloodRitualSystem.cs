@@ -35,9 +35,6 @@ public sealed partial class BloodRitualSystem : EntitySystem
         DamageDict = { { "Slash", 15 } },
     };
 
-    /// <summary>Bleeding stacks applied to each victim.</summary>
-    private const float BleedAmount = 8f;
-
     /// <summary>Fraction of dealt damage returned to the caster as healing (life-steal).</summary>
     private const float LifeStealFraction = 0.4f;
 
@@ -71,7 +68,8 @@ public sealed partial class BloodRitualSystem : EntitySystem
             if (_damageable.TryChangeDamage(target.Owner, RitualDamage, out var dealt, origin: caster))
                 totalDamage += dealt.GetTotal();
 
-            _blood.TryModifyBleedAmount(target.Owner, BleedAmount);
+            // Fully exsanguinate the victim — drains every drop of blood onto the floor.
+            _blood.SpillAllSolutions(target.Owner);
 
             SpillBlood(target.Owner);
         }
