@@ -5,6 +5,26 @@
   name: store-category-spellbook-arena
   priority: 0
 
+- type: storeCategory
+  id: SpellbookArenaIce
+  name: store-category-spellbook-arena-ice
+  priority: 1
+
+- type: storeCategory
+  id: SpellbookArenaDark
+  name: store-category-spellbook-arena-dark
+  priority: 2
+
+- type: storeCategory
+  id: SpellbookArenaAir
+  name: store-category-spellbook-arena-air
+  priority: 3
+
+- type: storeCategory
+  id: SpellbookArenaLust
+  name: store-category-spellbook-arena-lust
+  priority: 4
+
 #ERT
 
 - type: storeCategory

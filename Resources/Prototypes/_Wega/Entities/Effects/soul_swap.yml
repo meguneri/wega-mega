@@ -1,0 +1,29 @@
+- type: entity
+  id: EffectSoulSwap
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: PointLight
+    radius: 4
+    energy: 3
+    softness: 2
+    color: "#6600cc"
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    layers:
+    - shader: unshaded
+      sprite: _Wega/Effects/adaptive_shockwave.rsi
+      state: pulse
+      color: "#aa00ff"
+    - shader: unshaded
+      sprite: _Wega/Effects/soulbeacon.rsi
+      state: beacon
+      color: "#cc44ff"
+  - type: TimedDespawn
+    lifetime: 1.2
+  - type: Tag
+    tags:
+    - HideContextMenu

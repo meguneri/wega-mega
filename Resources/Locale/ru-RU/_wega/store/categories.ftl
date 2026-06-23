@@ -30,4 +30,8 @@ store-category-full-arsenal-water-gun = Водяное оружие
 store-category-full-arsenal-napalm-bottle = Зажигательная заправка
 store-category-full-arsenal-bow-set = Наборы лучника
 
-store-category-spellbook-arena = Заклинания арены
+store-category-spellbook-arena = Все заклинания
+store-category-spellbook-arena-ice = ❄ Ледяная магия
+store-category-spellbook-arena-dark = Тёмная магия
+store-category-spellbook-arena-air = 🌬 Магия воздуха
+store-category-spellbook-arena-lust = Магия похоти

@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseAction
+  id: ActionSoulSwap
+  name: Обмен душ
+  description: Мгновенно меняет состояние здоровья кастера и цели местами, включая кровотечение.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 45
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/Eldritch/voidblink.ogg
+    icon:
+      sprite: Objects/Magic/Eldritch/eldritch_actions.rsi
+      state: voidblink
+  - type: TargetAction
+    range: 10
+    checkCanAccess: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MobState
+    canTargetSelf: false
+    event: !type:SoulSwapSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-soul-swap
+  - type: Magic
+    requiresClothes: false

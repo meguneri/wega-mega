@@ -49,7 +49,11 @@
     refundAllowed: false
     categories:
     - SpellbookArena
+    - SpellbookArenaIce
+    - SpellbookArenaDark
+    - SpellbookArenaAir
+    - SpellbookArenaLust
     currencyWhitelist:
     - WizCoin
     balance:
-      WizCoin: 5
+      WizCoin: 30

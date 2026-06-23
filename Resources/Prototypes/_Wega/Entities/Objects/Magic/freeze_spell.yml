@@ -1,0 +1,27 @@
+- type: entity
+  parent: BaseAction
+  id: ActionFreezeSpell
+  name: Заморозка
+  description: Вмораживает цель в ледяной блок на 6 секунд. Цель полностью обездвижена.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 25
+    sound: !type:SoundCollectionSpecifier
+      collection: AnomalyIceSupercritical
+    icon:
+      sprite: Structures/Specific/Anomalies/ice_anom.rsi
+      state: anom
+  - type: TargetAction
+    range: 8
+    checkCanAccess: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - MobState
+    canTargetSelf: false
+    event: !type:FreezeSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-freeze
+  - type: Magic
+    requiresClothes: false

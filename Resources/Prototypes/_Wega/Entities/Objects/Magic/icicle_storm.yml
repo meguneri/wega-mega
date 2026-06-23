@@ -1,0 +1,70 @@
+- type: entity
+  parent: BaseAction
+  id: ActionIcicleTripleShot
+  name: Тройной ледяной заряд
+  description: Выпускает три сосульки веером вперёд. Без самонаводки.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 8
+    sound: !type:SoundCollectionSpecifier
+      collection: AnomalyIceSupercritical
+    icon:
+      sprite: Structures/Specific/Anomalies/ice_anom.rsi
+      state: bullet
+  - type: TargetAction
+    range: 20
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:IcicleTripleShotSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-icicle-triple
+  - type: Magic
+    requiresClothes: false
+
+- type: entity
+  parent: BaseAction
+  id: ActionIcicleShot
+  name: Ледяной заряд
+  description: Выпускает одну быструю сосульку в указанную цель.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 5
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/blink.ogg
+    icon:
+      sprite: Structures/Specific/Anomalies/ice_anom.rsi
+      state: bullet
+  - type: TargetAction
+    range: 20
+    checkCanAccess: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileIcicle
+      speed: 25
+  - type: SpeakOnAction
+    sentence: action-speech-spell-icicle-shot
+  - type: Magic
+    requiresClothes: false
+
+- type: entity
+  parent: BaseAction
+  id: ActionIcicleStorm
+  name: Шторм сосулек
+  description: Выпускает град ледяных снарядов по всем целям в радиусе 8 метров.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 30
+    sound: !type:SoundCollectionSpecifier
+      collection: AnomalyIceSupercritical
+    icon:
+      sprite: Structures/Specific/Anomalies/ice_anom.rsi
+      state: pulse
+  - type: InstantAction
+    event: !type:IcicleStormSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-icicle-storm
+  - type: Magic
+    requiresClothes: false

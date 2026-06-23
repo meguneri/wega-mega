@@ -14,7 +14,60 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
-# Arena grimoire spells
+# ── Ледяная магия ──────────────────────────────────────────────
+- type: listing
+  id: SpellbookIcicleShot
+  name: spellbook-icicle-shot-name
+  description: spellbook-icicle-shot-desc
+  productAction: ActionIcicleShot
+  cost:
+    WizCoin: 2
+  categories:
+  - SpellbookArenaIce
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: SpellbookIcicleTripleShot
+  name: spellbook-icicle-triple-name
+  description: spellbook-icicle-triple-desc
+  productAction: ActionIcicleTripleShot
+  cost:
+    WizCoin: 2
+  categories:
+  - SpellbookArenaIce
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: SpellbookIcicleStorm
+  name: spellbook-icicle-storm-name
+  description: spellbook-icicle-storm-desc
+  productAction: ActionIcicleStorm
+  cost:
+    WizCoin: 3
+  categories:
+  - SpellbookArenaIce
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: SpellbookFreezeSpell
+  name: spellbook-freeze-spell-name
+  description: spellbook-freeze-spell-desc
+  productAction: ActionFreezeSpell
+  cost:
+    WizCoin: 3
+  categories:
+  - SpellbookArenaIce
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# ── Тёмная магия ───────────────────────────────────────────────
 - type: listing
   id: SpellbookLoveCurse
   name: spellbook-love-curse-name
@@ -23,8 +76,34 @@
   cost:
     WizCoin: 5
   categories:
-  - SpellbookArena
+  - SpellbookArenaLust
   conditions:
   - !type:ListingLimitedStockCondition
     stock: 1
 
+- type: listing
+  id: SpellbookSoulSwap
+  name: spellbook-soul-swap-name
+  description: spellbook-soul-swap-desc
+  productAction: ActionSoulSwap
+  cost:
+    WizCoin: 5
+  categories:
+  - SpellbookArenaDark
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+# ── Телекинез ──────────────────────────────────────────────────
+- type: listing
+  id: SpellbookTelekinesisGrab
+  name: spellbook-telekinesis-grab-name
+  description: spellbook-telekinesis-grab-desc
+  productAction: ActionTelekinesisGrab
+  cost:
+    WizCoin: 4
+  categories:
+  - SpellbookArenaAir
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
