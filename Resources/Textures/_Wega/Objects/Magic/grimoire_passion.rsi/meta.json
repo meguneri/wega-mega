@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Base sprite from tgstation (https://github.com/tgstation/tgstation/commit/37fb6bc6dd20005775dde8d886f48f7722606b77), split into layers by TheShuEd. Adapted for Wega grimoire of passion.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "paper_blood",
+      "delays": [
+        [
+          5,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cover_strong"
+    },
+    {
+      "name": "decor_wingette_flat"
+    },
+    {
+      "name": "icon_pentagramm"
+    }
+  ]
+}

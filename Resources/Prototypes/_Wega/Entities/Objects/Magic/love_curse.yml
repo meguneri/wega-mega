@@ -30,7 +30,7 @@
   description: Потрёпанная книга в кожаном переплёте, пахнущая розовым маслом.
   components:
   - type: Sprite
-    sprite: Objects/Misc/books.rsi
+    sprite: _Wega/Objects/Magic/grimoire_passion.rsi
     layers:
     - state: paper_blood
     - state: cover_strong
