@@ -4,7 +4,7 @@
   parent: BaseAction
   id: ActionLoveCurse
   name: Проклятие страсти
-  description: Накладывает на цель проклятие. Через 30 минут жертва взорвётся. Снять можно только страстным сексом.
+  description: Накладывает на цель проклятие. Через 30 минут жертву разорвёт на органы. Снять можно только страстным сексом.
   components:
   - type: Action
     itemIconStyle: BigAction

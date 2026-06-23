@@ -1,0 +1,22 @@
+# --- Blood Ritual action ---
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodRitual
+  name: Кровавый ритуал
+  description: "Чертит под ногами огромную пентаграмму. Всех вокруг разрывает изнутри: урон, кровотечение и фонтаны крови, а часть выпущенной крови исцеляет заклинателя."
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    useDelay: 25
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/staff_animation.ogg
+    icon:
+      sprite: Objects/Magic/magicactions.rsi
+      state: spell_default
+  - type: InstantAction
+    event: !type:BloodRitualSpellEvent
+  - type: SpeakOnAction
+    sentence: action-speech-spell-blood-ritual
+  - type: Magic
+    requiresClothes: false

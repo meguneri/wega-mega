@@ -1,6 +1,6 @@
 using System.Numerics;
-using Content.Server.Explosion.EntitySystems;
 using Content.Shared._Wega.Magic.LoveCurse;
+using Content.Shared.Gibbing;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
@@ -18,7 +18,7 @@ namespace Content.Server._Wega.Magic.LoveCurse;
 
 public sealed partial class LoveCurseSystem : EntitySystem
 {
-    [Dependency] private ExplosionSystem _explosion = default!;
+    [Dependency] private GibbingSystem _gibbing = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -45,16 +45,24 @@ public sealed partial class LoveCurseSystem : EntitySystem
         base.Update(frameTime);
 
         var now = _timing.CurTime;
+        _expired.Clear();
         var query = EntityQueryEnumerator<LoveCurseComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             if (now < comp.ExpiresAt)
                 continue;
 
-            _explosion.QueueExplosion(uid, "Default", 800f, 3f, 8f);
-            RemCompDeferred<LoveCurseComponent>(uid);
+            _expired.Add(uid);
+        }
+
+        foreach (var uid in _expired)
+        {
+            RemComp<LoveCurseComponent>(uid);
+            _gibbing.Gib(uid);
         }
     }
+
+    private readonly List<EntityUid> _expired = new();
 
     private void OnSpellCast(LoveCurseSpellEvent args)
     {

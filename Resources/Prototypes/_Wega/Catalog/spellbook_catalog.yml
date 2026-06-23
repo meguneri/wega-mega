@@ -94,6 +94,19 @@
   - !type:ListingLimitedStockCondition
     stock: 1
 
+- type: listing
+  id: SpellbookBloodRitual
+  name: spellbook-blood-ritual-name
+  description: spellbook-blood-ritual-desc
+  productAction: ActionBloodRitual
+  cost:
+    WizCoin: 3
+  categories:
+  - SpellbookArenaDark
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
 # ── Телекинез ──────────────────────────────────────────────────
 - type: listing
   id: SpellbookTelekinesisGrab
