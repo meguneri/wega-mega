@@ -1,0 +1,56 @@
+# Городские огни — тёплые оранжевые точки, много, кластерами
+[[layers]]
+type = "clear"
+color = "#000000"
+
+# Основная масса тёплых городских огней — оранжево-жёлтые
+[[layers]]
+type = "points"
+closecolor = "#FF8C00"
+count = 600
+seed = 2277
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 3
+maskpersistence = "0.6"
+maskpower = "0.3"
+masklacunarity = "2.0"
+maskfrequency = "4"
+maskthreshold = "0.45"
+maskseed = 9901
+
+# Их ореол — тёмно-оранжевый
+[[layers]]
+type = "points"
+closecolor = "#3D2000"
+pointsize = 2
+count = 600
+seed = 2277
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 3
+maskpersistence = "0.6"
+maskpower = "0.3"
+masklacunarity = "2.0"
+maskfrequency = "4"
+maskthreshold = "0.45"
+maskseed = 9901
+
+# Редкие белые огни — прожекторы, яркие точки
+[[layers]]
+type = "points"
+closecolor = "#FFF5CC"
+count = 80
+seed = 5563
+
+# Их ореол
+[[layers]]
+type = "points"
+closecolor = "#4A4020"
+pointsize = 2
+count = 80
+seed = 5563
+
+# Colour-to-alpha
+[[layers]]
+type = "toalpha"

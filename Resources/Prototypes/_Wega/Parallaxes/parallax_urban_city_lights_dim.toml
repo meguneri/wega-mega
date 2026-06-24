@@ -1,0 +1,38 @@
+# Тусклые городские огни второго плана — чуть красноватые
+[[layers]]
+type = "clear"
+color = "#000000"
+
+# Тёмно-красные точки — неоновые вывески вдали
+[[layers]]
+type = "points"
+closecolor = "#CC3300"
+count = 150
+seed = 7734
+
+# Их ореол
+[[layers]]
+type = "points"
+closecolor = "#330A00"
+pointsize = 2
+count = 150
+seed = 7734
+
+# Синеватые огни — полицейские маяки или реклама
+[[layers]]
+type = "points"
+closecolor = "#3399FF"
+count = 60
+seed = 3345
+
+# Их ореол
+[[layers]]
+type = "points"
+closecolor = "#001A40"
+pointsize = 2
+count = 60
+seed = 3345
+
+# Colour-to-alpha
+[[layers]]
+type = "toalpha"

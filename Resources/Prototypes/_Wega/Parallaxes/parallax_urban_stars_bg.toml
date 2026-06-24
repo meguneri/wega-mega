@@ -1,0 +1,41 @@
+# Фон — тёмно-янтарный, городское световое загрязнение
+[[layers]]
+type = "clear"
+color = "#0C0805"
+
+# Холодные синеватые звёзды — далёкие, фоновые
+[[layers]]
+type = "points"
+closecolor = "#8A90C8"
+count = 700
+seed = 8821
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.4"
+masklacunarity = "1.5"
+maskfrequency = "2.5"
+maskthreshold = "0.4"
+maskseed = 4412
+
+# Их тусклый ореол
+[[layers]]
+type = "points"
+closecolor = "#2D3060"
+pointsize = 2
+count = 700
+seed = 8821
+mask = true
+masknoise_type = "fbm"
+maskoctaves = 4
+maskpersistence = "0.5"
+maskpower = "0.4"
+masklacunarity = "1.5"
+maskfrequency = "2.5"
+maskthreshold = "0.4"
+maskseed = 4412
+
+# Colour-to-alpha
+[[layers]]
+type = "toalpha"

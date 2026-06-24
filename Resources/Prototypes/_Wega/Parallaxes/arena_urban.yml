@@ -1,0 +1,28 @@
+- type: parallax
+  id: WegaArenaUrban
+  layers:
+    # Тусклые холодные звёзды на фоне
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "wega_urban_stars_bg"
+        configPath: "/Prototypes/_Wega/Parallaxes/parallax_urban_stars_bg.toml"
+      slowness: 0.996625
+    # Яркие тёплые огни — как городские огни снизу
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "wega_urban_city_lights"
+        configPath: "/Prototypes/_Wega/Parallaxes/parallax_urban_city_lights.toml"
+      slowness: 0.989375
+    # Редкие яркие огни — фонари или вспышки
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: "wega_urban_city_lights_dim"
+        configPath: "/Prototypes/_Wega/Parallaxes/parallax_urban_city_lights_dim.toml"
+      slowness: 0.984352
+  layersLQ:
+    - texture:
+        !type:GeneratedParallaxTextureSource
+        id: ""
+        configPath: "/Prototypes/Parallaxes/parallax_config.toml"
+      slowness: 0.875
+  layersLQUseHQ: false

@@ -64,6 +64,9 @@ public sealed partial class ModularSuitItemModuleSystem : EntitySystem
 
     private void OnModuleToggled(Entity<ModularSuitItemModuleComponent> module, ref ModularSuitModuleToggledEvent args)
     {
+        if (TerminatingOrDeleted(module) || TerminatingOrDeleted(args.Suit))
+            return;
+
         if (args.Activated)
         {
             TryAddHand(args.Suit, module);
@@ -105,11 +108,14 @@ public sealed partial class ModularSuitItemModuleSystem : EntitySystem
         {
             var item = module.Comp.HandItem.Value;
 
-            _toggle.TryDeactivate(item);
-            RemComp<UnremoveableComponent>(item);
-            RaiseLocalEvent(item, new HandDeselectedEvent(suitComp.Wearer.Value));
-            var container = _container.GetContainer(module.Owner, module.Comp.ContainerId);
-            _container.Insert(item, container);
+            if (!TerminatingOrDeleted(item))
+            {
+                _toggle.TryDeactivate(item);
+                RemComp<UnremoveableComponent>(item);
+                RaiseLocalEvent(item, new HandDeselectedEvent(suitComp.Wearer.Value));
+                var container = _container.GetContainer(module.Owner, module.Comp.ContainerId);
+                _container.Insert(item, container);
+            }
 
             module.Comp.HandItem = null;
         }

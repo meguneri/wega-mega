@@ -85,7 +85,7 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
         // метится, но при РАЗДЕЛЕНИИ стака (взять часть в руку, бросить часть, применить)
         // создаётся НОВАЯ сущность-стак через Spawn без метки — она переживала очистку.
         // Метим любой стак, появившийся на гриде активной арены, тем же правилом, что и гильзы.
-        SubscribeLocalEvent<StackComponent, ComponentStartup>(OnStackStartup);
+        SubscribeLocalEvent<StackComponent, MapInitEvent>(OnStackStartup, after: [typeof(StorageSystem)]);
 
         // То же правило «создано во время боя на арене → убирается клинапом» для:
         // — рун культа и магических рун со свитка (нарисованы/наспавнены во время дуэли);
@@ -206,7 +206,7 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
             EnsureComp<ArenaIssuedItemComponent>(uid);
     }
 
-    private void OnStackStartup(EntityUid uid, StackComponent comp, ComponentStartup args)
+    private void OnStackStartup(EntityUid uid, StackComponent comp, MapInitEvent args)
     {
         // Только стаки, появившиеся в зоне активной арены (отделённые от выданного стака части
         // и т.п.). Принесённое игроком извне ComponentStartup на арене не вызывает.
