@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server._Wega.Duel.Components;
 using Content.Server.Botany.Components;
 using Content.Server.Chat.Managers;
+using Content.Server.Construction.Components;
 using Content.Server.Spawners.Components;
 using Content.Server.Spawners.EntitySystems;
 using Content.Server.Traitor.Uplink.SurplusBundle;
@@ -21,6 +22,8 @@ using Robust.Shared.Localization;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Implants.Components;
 using Content.Shared.Inventory;
+using Content.Shared.Light.Components;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Materials;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Slippery;
@@ -469,7 +472,60 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
             QueueDel(logUid);
         }
 
-        // Руны (культа и со свитка) и листы материалов от сломанных стен НЕ чистятся здесь
+        // 3b. Все магические руны со свитка рун (MagicRune) на гриде арены — удаляем блэнкетом,
+        // независимо от того, нарисованы они ДО начала дуэли или во время боя. Метку
+        // ArenaIssued получают только руны, заспавненные в активной дуэли (OnRuneStartup), поэтому
+        // заранее размещённые руны без этого прохода пережили бы очистку. InRange ограничивает
+        // удаление гридом арены, так что чужие руны вне дуэли не трогаются.
+        var runeQuery = EntityQueryEnumerator<MagicRuneComponent>();
+        while (runeQuery.MoveNext(out var runeUid, out _))
+        {
+            if (!InRange(runeUid, origin, originGrid, range))
+                continue;
+
+            QueueDel(runeUid);
+        }
+
+        // 3c. Обломки стен — гирдеры, оставшиеся после пролома стены за бой. Уникального компонента
+        // у них нет, поэтому фильтруем конструируемые сущности по id прототипа (любой «*Girder*»).
+        // Грид-скоуп (InRange) гарантирует, что чистится только сама арена.
+        var girderQuery = EntityQueryEnumerator<ConstructionComponent>();
+        while (girderQuery.MoveNext(out var girderUid, out _))
+        {
+            if (ProtoId(girderUid)?.Contains("Girder") != true)
+                continue;
+            if (!InRange(girderUid, origin, originGrid, range))
+                continue;
+
+            QueueDel(girderUid);
+        }
+
+        // 3d. Разбитые/перегоревшие лампочки и лампы. Целые (State Normal) НЕ трогаем, чтобы не
+        // гасить рабочее освещение арены — убираем только сломанные.
+        var bulbQuery = EntityQueryEnumerator<LightBulbComponent>();
+        while (bulbQuery.MoveNext(out var bulbUid, out var bulb))
+        {
+            if (bulb.State == LightBulbState.Normal)
+                continue;
+            if (!InRange(bulbUid, origin, originGrid, range))
+                continue;
+
+            QueueDel(bulbUid);
+        }
+
+        // 3e. Осколки стекла (ShardGlass*) от разбитых за бой окон/стёкол.
+        var shardQuery = EntityQueryEnumerator<SpaceGarbageComponent>();
+        while (shardQuery.MoveNext(out var shardUid, out _))
+        {
+            if (ProtoId(shardUid)?.StartsWith("ShardGlass") != true)
+                continue;
+            if (!InRange(shardUid, origin, originGrid, range))
+                continue;
+
+            QueueDel(shardUid);
+        }
+
+        // Руны культа (BloodRune) и листы материалов от сломанных стен НЕ чистятся здесь
         // блэнкетом: они помечаются ArenaIssuedItem при спавне во время активной дуэли
         // (см. OnRuneStartup/OnMaterialStartup) и убираются общим проходом по меткам в п.1.
         // Так принесённое игроком извне (его руны/материалы) не удаляется.
@@ -523,6 +579,11 @@ public sealed partial class DuelArenaCleanupSystem : EntitySystem
     /// весь его грид целиком (без ограничения радиусом) — это покрывает всю арену и не задевает
     /// станцию. Если у источника нет грида (в космосе) — откатываемся на проверку по дистанции.
     /// </summary>
+    /// <summary>Id прототипа сущности (или null). Нужен для отбора сущностей без уникального
+    /// компонента — гирдеров и осколков стекла — по их прототипу.</summary>
+    private string? ProtoId(EntityUid uid)
+        => MetaData(uid).EntityPrototype?.ID;
+
     private bool InRange(EntityUid target, MapCoordinates origin, EntityUid? originGrid, float range)
     {
         var targetXform = Transform(target);

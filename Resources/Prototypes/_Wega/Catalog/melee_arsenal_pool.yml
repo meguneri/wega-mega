@@ -357,6 +357,28 @@
   - MeleeArsenalArmor
 
 - type: listing
+  id: MeleeArsenalModsuitEnchanted
+  name: full-arsenal-modsuit-enchanted-name
+  description: full-arsenal-modsuit-enchanted-desc
+  productEntity: ClothingModularControllerEnchanted
+  cost:
+    Telecrystal: 16
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
+  id: MeleeArsenalArmorHostileEnv
+  name: full-arsenal-heck-suit-name
+  description: full-arsenal-heck-suit-desc
+  productEntity: ClothingOuterArmorHostileEnv
+  cost:
+    Telecrystal: 16
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalArmor
+
+- type: listing
   id: MeleeArsenalArmorScrap
   name: full-arsenal-armor-scrap-name
   description: full-arsenal-armor-scrap-desc
@@ -3122,6 +3144,17 @@
   productEntity: ClothingHeadHatHardhatArmored
   cost:
     Telecrystal: 2
+  categories:
+  - MeleeArsenal
+  - MeleeArsenalHead
+
+- type: listing
+  id: MeleeArsenalHelmetHostileEnv
+  name: full-arsenal-heck-helmet-name
+  description: full-arsenal-heck-helmet-desc
+  productEntity: ClothingHeadHelmetHostileEnv
+  cost:
+    Telecrystal: 5
   categories:
   - MeleeArsenal
   - MeleeArsenalHead

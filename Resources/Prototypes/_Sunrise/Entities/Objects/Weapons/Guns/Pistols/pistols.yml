@@ -311,8 +311,10 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/spearhead.rsi
+  # Small (like other sidearms) so it fits pockets and anywhere a pistol-form-factor gun goes,
+  # not just the suit/belt slots a Normal-size gun is limited to.
   - type: Item
-    size: Normal
+    size: Small
     shape:
     - 0,0,1,0
     - 0,1,0,1

@@ -777,6 +777,28 @@
   - FullArsenalArmor
 
 - type: listing
+  id: FullArsenalModsuitEnchanted
+  name: full-arsenal-modsuit-enchanted-name
+  description: full-arsenal-modsuit-enchanted-desc
+  productEntity: ClothingModularControllerEnchanted
+  cost:
+    Telecrystal: 16
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
+  id: FullArsenalArmorHostileEnv
+  name: full-arsenal-heck-suit-name
+  description: full-arsenal-heck-suit-desc
+  productEntity: ClothingOuterArmorHostileEnv
+  cost:
+    Telecrystal: 16
+  categories:
+  - FullArsenal
+  - FullArsenalArmor
+
+- type: listing
   id: FullArsenalArmorBasic
   name: full-arsenal-armor-basic-name
   description: full-arsenal-armor-basic-desc
@@ -5419,6 +5441,17 @@
   - FullArsenal
 
 # ── HELMETS ───────────────────────────────────────────────────────────────────
+
+- type: listing
+  id: FullArsenalHelmetHostileEnv
+  name: full-arsenal-heck-helmet-name
+  description: full-arsenal-heck-helmet-desc
+  productEntity: ClothingHeadHelmetHostileEnv
+  cost:
+    Telecrystal: 5
+  categories:
+  - FullArsenal
+  - FullArsenalHead
 
 - type: listing
   id: FullArsenalHardhatArmored

@@ -9,6 +9,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Store;
 using Content.Shared.Store.Components;
 using Content.Shared.Tag;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -67,7 +68,7 @@ public sealed partial class SurplusBundleSystem : EntitySystem
 
         var listings = _store.GetAvailableListings(ent, null, ent.Comp2.Categories)
             .Where(p => !ent.Comp1.ExcludedListings.Contains(p.ID))
-            .OrderBy(p => p.Cost.Values.Sum())
+            .OrderBy(p => EffectiveCost(p, ent.Comp1))
             .ToList();
 
         if (listings.Count == 0)
@@ -85,7 +86,7 @@ public sealed partial class SurplusBundleSystem : EntitySystem
 
             var eligible = listings
                 .Where(l => l.Categories.Any(c => c.Id == category) &&
-                            l.Cost.Values.Sum() <= remainingBudget &&
+                            EffectiveCost(l, ent.Comp1) <= remainingBudget &&
                             !ExceedsCategoryLimit(l, ent.Comp1.CategoryLimits, categoryCounts))
                 .ToList();
 
@@ -94,7 +95,7 @@ public sealed partial class SurplusBundleSystem : EntitySystem
 
             var guaranteed = PickItem(eligible, ent.Comp1);
             ret.Add(guaranteed);
-            totalCost += guaranteed.Cost.Values.Sum();
+            totalCost += EffectiveCost(guaranteed, ent.Comp1);
 
             foreach (var cat in guaranteed.Categories)
                 categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
@@ -102,13 +103,61 @@ public sealed partial class SurplusBundleSystem : EntitySystem
             listings.Remove(guaranteed);
         }
 
+        // Guaranteed weapon: every box should contain at least one thing to fight with. Picked early so a
+        // following compatible-ammo affinity (and the orphan-ammo gate below) can see the rolled gun.
+        if (ent.Comp1.GuaranteedWeapon && !ret.Any(l => IsWeaponProduct(l)))
+        {
+            var remainingBudget = ent.Comp1.TotalPrice - totalCost;
+
+            var eligible = listings
+                .Where(l => IsWeaponProduct(l) &&
+                            EffectiveCost(l, ent.Comp1) <= remainingBudget &&
+                            !ExceedsCategoryLimit(l, ent.Comp1.CategoryLimits, categoryCounts))
+                .ToList();
+
+            if (eligible.Count > 0)
+            {
+                var weapon = PickItem(eligible, ent.Comp1);
+                ret.Add(weapon);
+                totalCost += EffectiveCost(weapon, ent.Comp1);
+                foreach (var cat in weapon.Categories)
+                    categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
+                listings.Remove(weapon);
+            }
+        }
+
+        // Guaranteed value: force a few substantial items so the box can't roll entirely into cheap filler.
+        for (var i = 0; i < ent.Comp1.GuaranteedValueCount && ret.Count < ent.Comp1.MaxItems; i++)
+        {
+            var remainingBudget = ent.Comp1.TotalPrice - totalCost;
+
+            var eligible = listings
+                .Where(l => EffectiveCost(l, ent.Comp1) >= ent.Comp1.GuaranteedValueThreshold &&
+                            EffectiveCost(l, ent.Comp1) <= remainingBudget &&
+                            IsEligibleAmmo(l, ent.Comp1, ret) &&
+                            !ExceedsCategoryLimit(l, ent.Comp1.CategoryLimits, categoryCounts))
+                .ToList();
+
+            if (eligible.Count == 0)
+                break;
+
+            var pricey = PickItem(eligible, ent.Comp1, GetWantedAmmoTags(ret));
+            ret.Add(pricey);
+            totalCost += EffectiveCost(pricey, ent.Comp1);
+            foreach (var cat in pricey.Categories)
+                categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
+            listings.Remove(pricey);
+        }
+
         while (totalCost < ent.Comp1.TotalPrice && ret.Count < ent.Comp1.MaxItems)
         {
             var remainingBudget = ent.Comp1.TotalPrice - totalCost;
 
-            // Eligible: within budget and not over any category limit
+            // Eligible: within budget, not over any category limit, and — if RequireGunForAmmo is set —
+            // not orphan ammo (ammo for a gun the bundle doesn't contain).
             var eligible = listings
-                .Where(l => l.Cost.Values.Sum() <= remainingBudget &&
+                .Where(l => EffectiveCost(l, ent.Comp1) <= remainingBudget &&
+                            IsEligibleAmmo(l, ent.Comp1, ret) &&
                             !ExceedsCategoryLimit(l, ent.Comp1.CategoryLimits, categoryCounts))
                 .ToList();
 
@@ -117,7 +166,7 @@ public sealed partial class SurplusBundleSystem : EntitySystem
 
             var pick = PickItem(eligible, ent.Comp1, GetWantedAmmoTags(ret));
             ret.Add(pick);
-            totalCost += pick.Cost.Values.Sum();
+            totalCost += EffectiveCost(pick, ent.Comp1);
 
             foreach (var cat in pick.Categories)
                 categoryCounts[cat.Id] = categoryCounts.GetValueOrDefault(cat.Id) + 1;
@@ -179,7 +228,7 @@ public sealed partial class SurplusBundleSystem : EntitySystem
     private double Weight(ListingDataWithCostModifiers listing, SurplusBundleComponent comp, HashSet<string>? wantedAmmoTags)
     {
         var weight = comp.WeightByCost
-            ? Math.Pow(Math.Max(1.0, listing.Cost.Values.Sum().Double()), comp.CostWeightExponent)
+            ? Math.Pow(Math.Max(1.0, EffectiveCost(listing, comp).Double()), comp.CostWeightExponent)
             : 1.0;
 
         if (wantedAmmoTags is { Count: > 0 }
@@ -231,6 +280,48 @@ public sealed partial class SurplusBundleSystem : EntitySystem
         }
 
         return wanted;
+    }
+
+    /// <summary>
+    ///     The cost this bundle treats a listing as having: a per-crate <see cref="SurplusBundleComponent.CostOverrides"/>
+    ///     entry if present, otherwise the listing's shared pool price. Only affects this crate's selection and
+    ///     budget — the listing's real price elsewhere is unchanged.
+    /// </summary>
+    private FixedPoint2 EffectiveCost(ListingDataWithCostModifiers listing, SurplusBundleComponent comp)
+    {
+        return comp.CostOverrides.TryGetValue(listing.ID, out var tc)
+            ? tc
+            : listing.Cost.Values.Sum();
+    }
+
+    /// <summary>True if the listing's product is a usable weapon — has a gun or a melee-weapon component.</summary>
+    private bool IsWeaponProduct(ListingData listing)
+    {
+        if (listing.ProductEntity is not { } productId
+            || !_prototype.TryIndex<EntityPrototype>(productId, out var proto))
+        {
+            return false;
+        }
+
+        return proto.TryGetComponent<GunComponent>(out _, EntityManager.ComponentFactory)
+            || proto.TryGetComponent<MeleeWeaponComponent>(out _, EntityManager.ComponentFactory);
+    }
+
+    /// <summary>
+    ///     Gate for orphan ammo. When <see cref="SurplusBundleComponent.RequireGunForAmmo"/> is set, a
+    ///     listing in the ammo affinity category is only eligible once a compatible gun (matched by its
+    ///     magazine/chamber tags) is already in the bundle. Non-ammo listings always pass.
+    /// </summary>
+    private bool IsEligibleAmmo(ListingData listing, SurplusBundleComponent comp, List<ListingData> picked)
+    {
+        if (!comp.RequireGunForAmmo || comp.AmmoAffinityCategory is not { } ammoCategory)
+            return true;
+
+        if (!listing.Categories.Any(c => c.Id == ammoCategory))
+            return true;
+
+        var wanted = GetWantedAmmoTags(picked);
+        return wanted.Count > 0 && ListingHasAnyTag(listing, wanted);
     }
 
     private bool ListingHasAnyTag(ListingData listing, HashSet<string> wanted)

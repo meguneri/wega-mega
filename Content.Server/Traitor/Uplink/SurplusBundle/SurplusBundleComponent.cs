@@ -100,4 +100,43 @@ public sealed partial class SurplusBundleComponent : Component
     /// </summary>
     [DataField]
     public bool MarkIssuedItems;
+
+    /// <summary>
+    ///     If true, at least one usable weapon (a product with a <c>GunComponent</c> or
+    ///     <c>MeleeWeaponComponent</c>) is guaranteed in the bundle before the regular fill, budget
+    ///     permitting. Unlike <see cref="GuaranteedCategories"/> this works on the product's components,
+    ///     so the huge Full Arsenal pool doesn't need every gun hand-tagged into a weapon category — it
+    ///     just stops the "no weapon at all" openings.
+    /// </summary>
+    [DataField]
+    public bool GuaranteedWeapon;
+
+    /// <summary>
+    ///     Guarantee at least this many items costing at least <see cref="GuaranteedValueThreshold"/> TC,
+    ///     picked before the regular fill (budget permitting). Stops a box from rolling entirely into cheap
+    ///     filler (food, bags, 1-TC trinkets) and leaving the buyer with nothing of substance.
+    /// </summary>
+    [DataField]
+    public int GuaranteedValueCount;
+
+    /// <summary>Minimum cost (TC) for an item to count toward <see cref="GuaranteedValueCount"/>.</summary>
+    [DataField]
+    public int GuaranteedValueThreshold = 5;
+
+    /// <summary>
+    ///     Per-crate cost overrides, keyed by listing ID -> TC cost. Replaces the listing's pool price for the
+    ///     purposes of this bundle only (selection weighting and budget spend) — the shared pool price is left
+    ///     untouched for every other crate. Lets a single item be cheap in small crates but a pricey jackpot in
+    ///     a big-budget one (e.g. the deathsquad hardsuit costs 35 TC normally, 80 TC in the 120-TC mega crate).
+    /// </summary>
+    [DataField]
+    public Dictionary<string, int> CostOverrides = new();
+
+    /// <summary>
+    ///     If true, listings in <see cref="AmmoAffinityCategory"/> are only rolled once a compatible gun is
+    ///     already in the bundle (matched by the gun's magazine/chamber tags). Stops "orphan" ammo — boxes
+    ///     of magazines for a gun that never dropped.
+    /// </summary>
+    [DataField]
+    public bool RequireGunForAmmo;
 }

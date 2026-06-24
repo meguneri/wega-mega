@@ -57,6 +57,8 @@
 
 | Предмет | Entity | Цена |
 |---|---|---|
+| Зачарованный МОД-костюм (полный комплект) | `ClothingModularControllerEnchanted` | 16 TC |
+| H.E.C.K. костюм (−70% дроб/реж, взрыв/огонь) | `ClothingOuterArmorHostileEnv` | 16 TC |
 | Базовая броня | `ClothingOuterArmorBasic` | 2 TC |
 | Противоударная броня | `ClothingOuterArmorRiot` | 3 TC |
 | Мусорная броня | `ClothingOuterArmorScrap` | 4 TC |
@@ -475,6 +477,7 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Бронированная рабочая каска | `ClothingHeadHatHardhatArmored` | 2 TC |
+| H.E.C.K. шлем (броня, защита глаз, иммунитет к вспышкам) | `ClothingHeadHelmetHostileEnv` | 5 TC |
 | Базовый шлем | `ClothingHeadHelmetBasic` | 1 TC |
 | Мусорный шлем | `ClothingHeadHelmetScrap` | 1 TC |
 | Противоударный шлем | `ClothingHeadHelmetRiot` | 2 TC |

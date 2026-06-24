@@ -66,6 +66,9 @@
     - type: AdaptiveArmor
       adaptDuration: 6
       adaptCoefficient: 0.25
+      # Stamina/stun is softened far less than physical damage: 0.65 → ~35% absorbed (vs ~80%),
+      # so disablers and stun batons stay a viable counter even after the plating adapts.
+      staminaAdaptCoefficient: 0.65
     # Emissive accent: while an adaptation holds, the worn vest glows the adapted type's colour
     # (driven from AdaptiveArmorSystem via ToggleableVisuals' Enabled/Color appearance data).
     - type: Appearance

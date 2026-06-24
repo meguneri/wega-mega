@@ -293,6 +293,8 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Скафандр инфильтратора (маскировка) | `ClothingOuterHardsuitInfiltration` | 14 TC |
+| Зачарованный МОД-костюм (полный комплект) | `ClothingModularControllerEnchanted` | 16 TC |
+| H.E.C.K. костюм (−70% дроб/реж, взрыв/огонь) | `ClothingOuterArmorHostileEnv` | 16 TC |
 | Базовая броня | `ClothingOuterArmorBasic` | 2 TC |
 | Мусорная броня | `ClothingOuterArmorScrap` | 4 TC |
 | Противоударная броня | `ClothingOuterArmorRiot` | 3 TC |
@@ -391,7 +393,7 @@
 | Синдикат Командир | `ClothingOuterHardsuitSyndieCommander` | 15 TC |
 | CBURN | `ClothingOuterHardsuitCBURN` | 15 TC |
 | CBURN Лидер | `ClothingOuterHardsuitCBURNLeader` | 18 TC |
-| Отряд смерти | `ClothingOuterHardsuitDeathsquad` | 20 TC |
+| Отряд смерти | `ClothingOuterHardsuitDeathsquad` | 35 TC (80 TC в Мега-ящике 120 ТК) |
 | Скафандр космонавта | `ClothingOuterHardsuitSpatio` | 7 TC |
 | Скафандр Голиафа | `ClothingOuterHardsuitGoliath` | 8 TC |
 | Скафандр сальвейджа | `ClothingOuterHardsuitSalvage` | 8 TC |
@@ -425,7 +427,7 @@
 | МОД Ответный (ОБР) | `ClothingModularControllerResponsoryPreassembled` | 12 TC |
 | МОД Инквизиторский | `ClothingModularControllerInquisitoryPreassembled` | 12 TC |
 | МОД Корпоративный | `ClothingModularControllerCorporatePreassembled` | 14 TC |
-| МОД Апокрифический | `ClothingModularControllerApocryphalPreassembled` | 35 TC |
+| МОД Апокрифический | `ClothingModularControllerApocryphalPreassembled` | 35 TC (80 TC в Мега-ящике 120 ТК) |
 
 ---
 
@@ -773,6 +775,7 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Бронированная рабочая каска | `ClothingHeadHatHardhatArmored` | 2 TC |
+| H.E.C.K. шлем (броня, защита глаз, иммунитет к вспышкам) | `ClothingHeadHelmetHostileEnv` | 5 TC |
 | Базовый шлем | `ClothingHeadHelmetBasic` | 1 TC |
 | Мусорный шлем | `ClothingHeadHelmetScrap` | 1 TC |
 | Противоударный шлем | `ClothingHeadHelmetRiot` | 2 TC |

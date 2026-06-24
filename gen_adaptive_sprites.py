@@ -192,6 +192,13 @@ def save_png(img, path):
 
 # -- armor rim glow derived from equipped sprite ----------------------------
 def derive_glow(src_path, dst_path):
+    """Build the emissive accent from the armour's *internal* detail rather than its outline.
+
+    The base sprite carries a built-in "lattice of micro-cells" — warm amber/brown pixels (the
+    adaptive-cell recolour) running down the chest — plus bright metal highlights on the plates.
+    We light those specific parts up, so adapting makes the embedded cells and plate facets glow
+    individually instead of flooding a single colour around the whole silhouette. White base so the
+    type tint (applied via ToggleableVisuals.Color, unshaded) reads true."""
     src = Image.open(src_path).convert("RGBA")
     w, h = src.size
     cols, rows = w // CELL, h // CELL
@@ -200,16 +207,28 @@ def derive_glow(src_path, dst_path):
         for cx in range(cols):
             box = (cx * CELL, cy * CELL, cx * CELL + CELL, cy * CELL + CELL)
             tile = src.crop(box)
-            alpha = tile.split()[3]
-            # rim = a thin (~1px) inner edge of the silhouette, kept faint so the accent reads as a
-            # subtle energised outline rather than flooding the whole vest with one colour.
-            eroded = alpha.filter(ImageFilter.MinFilter(3))
-            rim = Image.composite(alpha, Image.new("L", tile.size, 0),
-                                  Image.eval(eroded, lambda a: 255 - a))
-            rim = rim.filter(ImageFilter.GaussianBlur(0.5))
-            rim = rim.point(lambda a: int(a * 0.45))
-            white = Image.new("RGBA", tile.size, (235, 240, 245, 255))
-            white.putalpha(rim)
+            px = tile.load()
+            # Per-pixel emission strength: the warm cells are the heart of the effect (full), the bright
+            # plate highlights catch a little of the energy too (half) so the glow reads as discrete lit
+            # nodes scattered over the armour, not a continuous edge.
+            core = Image.new("L", tile.size, 0)
+            cpx = core.load()
+            for y in range(CELL):
+                for x in range(CELL):
+                    r, g, b, a = px[x, y]
+                    if a == 0:
+                        continue
+                    if r > g >= b and r - b > 25:        # amber/brown adaptive cell
+                        cpx[x, y] = 255
+                    elif r + g + b > 600:                # bright metal highlight on a plate facet
+                        cpx[x, y] = 120
+            # Soft bloom so each lit cell blooms into a small node rather than a hard pixel, then a faint
+            # halo of the same map at low strength to bind neighbouring cells without washing the vest out.
+            node = core.filter(ImageFilter.GaussianBlur(0.6))
+            halo = core.filter(ImageFilter.GaussianBlur(1.6)).point(lambda v: int(v * 0.35))
+            glow = ImageChops.lighter(node, halo)
+            white = Image.new("RGBA", tile.size, (255, 255, 255, 255))
+            white.putalpha(glow)
             out.paste(white, box)
     out.save(dst_path)
     print("wrote", os.path.relpath(dst_path, ROOT))

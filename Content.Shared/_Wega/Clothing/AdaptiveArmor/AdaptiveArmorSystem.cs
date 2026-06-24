@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared.Clothing;
 using Content.Shared.Damage;
+using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Explosion;
 using Content.Shared.FixedPoint;
@@ -38,14 +39,14 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
     /// unmistakable, weighty click; no new audio assets needed.</summary>
     private static readonly SoundSpecifier AdaptSound =
         new SoundPathSpecifier("/Audio/Weapons/Guns/Cock/revolver_cock.ogg",
-            AudioParams.Default.WithPitchScale(0.6f).WithVolume(12f));
+            AudioParams.Default.WithPitchScale(0.55f).WithVolume(20f).WithMaxDistance(20f));
 
     /// <summary>Lighter, higher "the plating retunes" click, played when the armour first tastes a new damage
     /// type (the blow lands in full, but the wheel learns it for next time). Quieter and brighter than
     /// <see cref="AdaptSound"/> so the two events are clearly distinct by ear.</summary>
     private static readonly SoundSpecifier AdaptLearnSound =
         new SoundPathSpecifier("/Audio/Weapons/Guns/Cock/revolver_cock.ogg",
-            AudioParams.Default.WithPitchScale(1.25f).WithVolume(4f));
+            AudioParams.Default.WithPitchScale(1.25f).WithVolume(10f).WithMaxDistance(20f));
 
     /// <summary>Persistent spinning Dharmachakra that hovers above the wearer's head while the armour is worn.</summary>
     private static readonly EntProtoId AdaptWheelEffect = "EffectMahoragaWheel";
@@ -62,6 +63,11 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
     /// so they never reach <see cref="DamageModifyEvent"/> and are tracked as their own learned threat.</summary>
     private const string ArmorPiercingKey = "ArmorPiercing";
 
+    /// <summary>Synthetic adaptation key for stamina (fatigue/stun) damage — it arrives through
+    /// <see cref="BeforeStaminaDamageEvent"/> rather than the damage pipeline, and is softened by the
+    /// gentler <see cref="AdaptiveArmorActiveComponent.StaminaAdaptCoefficient"/> instead of the usual one.</summary>
+    private const string StaminaKey = "Stamina";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -72,6 +78,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         SubscribeLocalEvent<AdaptiveArmorActiveComponent, DamageModifyEvent>(OnDamageModify);
         SubscribeLocalEvent<AdaptiveArmorActiveComponent, GetExplosionResistanceEvent>(OnExplosionResistance);
         SubscribeLocalEvent<AdaptiveArmorActiveComponent, ArmorPiercingHitEvent>(OnArmorPiercingHit);
+        SubscribeLocalEvent<AdaptiveArmorActiveComponent, BeforeStaminaDamageEvent>(OnStaminaDamage);
     }
 
     private void OnEquipped(Entity<AdaptiveArmorComponent> ent, ref ClothingGotEquippedEvent args)
@@ -85,6 +92,7 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
         var active = EnsureComp<AdaptiveArmorActiveComponent>(args.Wearer);
         active.AdaptDuration = ent.Comp.AdaptDuration;
         active.AdaptCoefficient = ent.Comp.AdaptCoefficient;
+        active.StaminaAdaptCoefficient = ent.Comp.StaminaAdaptCoefficient;
         active.Vest = ent.Owner;
         active.WheelEffect = Spawn(AdaptWheelEffect, new EntityCoordinates(args.Wearer, default));
 
@@ -288,6 +296,28 @@ public sealed partial class AdaptiveArmorSystem : EntitySystem
             if (args.Damage.DamageDict[type] > FixedPoint2.Zero)
                 args.Damage.DamageDict[type] *= ent.Comp.AdaptCoefficient;
         }
+    }
+
+    /// <summary>Adapt to stamina (fatigue/stun) damage. It flows through <see cref="BeforeStaminaDamageEvent"/>,
+    /// not <see cref="DamageModifyEvent"/>, and is a single scalar rather than a typed set. The reduction runs
+    /// on both client and server so the predicted stun matches (mirroring vanilla stamina resistance); the
+    /// learning / glow / wheel feedback stays server-authoritative. Unlike other adaptations the absorbed
+    /// fraction is the gentler <see cref="AdaptiveArmorActiveComponent.StaminaAdaptCoefficient"/> (~35%, vs
+    /// ~80%), so stuns remain a real threat.</summary>
+    private void OnStaminaDamage(Entity<AdaptiveArmorActiveComponent> ent, ref BeforeStaminaDamageEvent args)
+    {
+        if (args.Cancelled || args.Value <= 0)
+            return;
+
+        var comp = ent.Comp;
+
+        // Already hardened against stun this window — soften it (predicted on both sides via networked state).
+        if (comp.AdaptedTypes.TryGetValue(StaminaKey, out var expiry) && expiry > _timing.CurTime)
+            args.Value *= comp.StaminaAdaptCoefficient;
+
+        // Learn / refresh + drive the feedback; server-authoritative like the other synthetic adaptations.
+        if (_net.IsServer)
+            AdaptSynthetic(ent, StaminaKey);
     }
 
     /// <summary>Learn (or refresh) a synthetic adaptation that arrives outside the normal damage-type pipeline

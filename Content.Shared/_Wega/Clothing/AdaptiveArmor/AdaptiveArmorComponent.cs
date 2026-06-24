@@ -99,6 +99,9 @@ public static class AdaptiveArmorColors
         // damage hues above.
         ["Explosion"] = Color.FromHex("#FF4500"),
         ["ArmorPiercing"] = Color.FromHex("#6E7B8B"),
+        // Stamina is also a synthetic key — fatigue/stun damage flows through BeforeStaminaDamageEvent,
+        // not the damage pipeline. Magenta so it stays clear of Shock's cyan and the cold blues.
+        ["Stamina"] = Color.FromHex("#FF5FD0"),
     };
 
     public static Color ForType(string? type)
@@ -130,6 +133,14 @@ public sealed partial class AdaptiveArmorComponent : Component
     [DataField, AutoNetworkedField]
     public float AdaptCoefficient = 0.25f;
 
+    /// <summary>
+    /// Separate, weaker multiplier for stamina (fatigue/stun) damage once the plating has adapted to it.
+    /// Stamina is deliberately softened less than physical/energy types — 0.65 ≈ 35% of the stun absorbed
+    /// while adapted, versus ~80% for ordinary damage — so disablers and stun batons stay a viable answer.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float StaminaAdaptCoefficient = 0.65f;
+
     /// <summary>Current wearer, if equipped to a torso slot.</summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Wearer;
@@ -147,6 +158,10 @@ public sealed partial class AdaptiveArmorActiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public float AdaptCoefficient = 0.25f;
+
+    /// <summary>Weaker multiplier applied to stamina damage once adapted (see config component).</summary>
+    [DataField, AutoNetworkedField]
+    public float StaminaAdaptCoefficient = 0.65f;
 
     /// <summary>
     /// Every damage type the armour is currently adapted to, mapped to when that adaptation expires.

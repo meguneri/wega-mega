@@ -12,6 +12,12 @@
     totalPrice: 40
     weightByCost: true
     markIssuedItems: true
+    # Каждый ящик гарантированно содержит хотя бы одно оружие и один весомый предмет (≥8 ТК),
+    # а патроны выпадают только под уже выпавший совместимый ствол — никакого мусора без боя.
+    guaranteedWeapon: true
+    requireGunForAmmo: true
+    guaranteedValueCount: 1
+    guaranteedValueThreshold: 8
     ammoAffinityCategory: FullArsenalAmmo
     ammoAffinityMultiplier: 4
     companionCategories:
@@ -45,6 +51,15 @@
     totalPrice: 120
     weightByCost: true
     markIssuedItems: true
+    guaranteedWeapon: true
+    requireGunForAmmo: true
+    guaranteedValueCount: 3
+    guaranteedValueThreshold: 10
+    # Топовая броня дорожает только в этом большом ящике: 35 ТК в обычных ящиках, 80 ТК здесь —
+    # редкий джекпот, съедающий бóльшую часть бюджета 120 ТК.
+    costOverrides:
+      FullArsenalModSuitApocryphal: 80
+      FullArsenalHardsuitDeathsquad: 80
     ammoAffinityCategory: FullArsenalAmmo
     ammoAffinityMultiplier: 4
     companionCategories:
@@ -85,6 +100,10 @@
     totalPrice: 60
     weightByCost: true
     markIssuedItems: true
+    guaranteedWeapon: true
+    requireGunForAmmo: true
+    guaranteedValueCount: 2
+    guaranteedValueThreshold: 8
     ammoAffinityCategory: FullArsenalAmmo
     ammoAffinityMultiplier: 4
     companionCategories:
