@@ -11,6 +11,9 @@
   - type: SurplusBundle
     totalPrice: 40
     weightByCost: true
+    # Понижено с дефолтных 0.5: мягче биас к дорогим позициям, реже дорогая
+    # косметика-троллфиллер (CatEars/ElegantMaid) съедает весь бюджет.
+    costWeightExponent: 0.35
     markIssuedItems: true
     # Каждый ящик гарантированно содержит хотя бы одно оружие и один весомый предмет (≥8 ТК),
     # а патроны выпадают только под уже выпавший совместимый ствол — никакого мусора без боя.
@@ -50,6 +53,9 @@
   - type: SurplusBundle
     totalPrice: 120
     weightByCost: true
+    # Понижено с дефолтных 0.5: мягче биас к дорогим позициям, реже дорогая
+    # косметика-троллфиллер (CatEars/ElegantMaid) съедает весь бюджет.
+    costWeightExponent: 0.35
     markIssuedItems: true
     guaranteedWeapon: true
     requireGunForAmmo: true
@@ -99,6 +105,9 @@
   - type: SurplusBundle
     totalPrice: 60
     weightByCost: true
+    # Понижено с дефолтных 0.5: мягче биас к дорогим позициям, реже дорогая
+    # косметика-троллфиллер (CatEars/ElegantMaid) съедает весь бюджет.
+    costWeightExponent: 0.35
     markIssuedItems: true
     guaranteedWeapon: true
     requireGunForAmmo: true
@@ -134,6 +143,9 @@
   - type: SurplusBundle
     totalPrice: 40
     weightByCost: true
+    # Понижено с дефолтных 0.5: мягче биас к дорогим позициям, реже дорогая
+    # косметика-троллфиллер (CatEars/ElegantMaid) съедает весь бюджет.
+    costWeightExponent: 0.35
     markIssuedItems: true
     ammoAffinityCategory: FullArsenalAmmo
     ammoAffinityMultiplier: 4

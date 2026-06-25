@@ -519,7 +519,7 @@
   description: full-arsenal-smg-c20r-desc
   productEntity: WeaponSubMachineGunC20r
   cost:
-    Telecrystal: 10
+    Telecrystal: 15
   categories:
   - FullArsenal
 
@@ -655,7 +655,7 @@
   description: full-arsenal-rifle-bauer127-desc
   productEntity: WeaponRifleBauer127Arena
   cost:
-    Telecrystal: 12
+    Telecrystal: 15
   categories:
   - FullArsenal
 
@@ -749,7 +749,7 @@
   description: full-arsenal-lmg-l6-desc
   productEntity: WeaponLightMachineGunL6
   cost:
-    Telecrystal: 12
+    Telecrystal: 20
   categories:
   - FullArsenal
 
@@ -759,7 +759,7 @@
   description: full-arsenal-lmg-dp28-desc
   productEntity: WeaponLightMachineGunDP28
   cost:
-    Telecrystal: 11
+    Telecrystal: 15
   categories:
   - FullArsenal
 
@@ -4301,7 +4301,7 @@
   description: full-arsenal-singularity-hammer-desc
   productEntity: SingularityHammer
   cost:
-    Telecrystal: 12
+    Telecrystal: 18
   categories:
   - FullArsenal
 
@@ -5361,7 +5361,7 @@
   description: full-arsenal-pulse-pistol-desc
   productEntity: WeaponPulsePistol
   cost:
-    Telecrystal: 20
+    Telecrystal: 24
   categories:
   - FullArsenal
 
@@ -5371,7 +5371,7 @@
   description: full-arsenal-pulse-carbine-desc
   productEntity: WeaponPulseCarbine
   cost:
-    Telecrystal: 20
+    Telecrystal: 28
   categories:
   - FullArsenal
 
@@ -5411,7 +5411,7 @@
   description: full-arsenal-tesla-gun-desc
   productEntity: WeaponTeslaGun
   cost:
-    Telecrystal: 12
+    Telecrystal: 18
   categories:
   - FullArsenal
 
@@ -5423,7 +5423,7 @@
   description: full-arsenal-minigun-desc
   productEntity: WeaponMinigun
   cost:
-    Telecrystal: 20
+    Telecrystal: 30
   categories:
   - FullArsenal
 
@@ -5436,7 +5436,7 @@
   description: full-arsenal-sniper-hristov-advanced-desc
   productEntity: WeaponSniperHristovAdvanced
   cost:
-    Telecrystal: 12
+    Telecrystal: 15
   categories:
   - FullArsenal
 
@@ -6226,7 +6226,7 @@
   description: full-arsenal-rifle-ash12-desc
   productEntity: WeaponRifleAsh12
   cost:
-    Telecrystal: 12
+    Telecrystal: 15
   categories:
   - FullArsenal
 
@@ -6296,7 +6296,7 @@
   description: full-arsenal-shotgun-minotaur-desc
   productEntity: WeaponShotgunMinotaur
   cost:
-    Telecrystal: 12
+    Telecrystal: 15
   categories:
   - FullArsenal
 
