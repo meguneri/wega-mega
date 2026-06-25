@@ -1,0 +1,31 @@
+- type: entity
+  parent: BaseAction
+  id: ActionRengokuFirstForm
+  name: "Первая форма: Неведомый огонь"
+  description: Веерный взмах пламени — поджигает и рассекает всех перед вами.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    priority: -10
+    useDelay: 8
+    icon:
+      sprite: _Wega/Objects/Weapons/Melee/katana.rsi
+      state: blade
+  - type: InstantAction
+    event: !type:RengokuFirstFormActionEvent
+
+- type: entity
+  parent: BaseAction
+  id: ActionRengokuNinthForm
+  name: "Девятая форма: Рэнгоку"
+  description: Коронный приём Пламенного столпа — огненный рывок сквозь врагов с испепеляющим взрывом.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    priority: -9
+    useDelay: 30
+    icon:
+      sprite: _Wega/Objects/Weapons/Melee/katana.rsi
+      state: blade
+  - type: InstantAction
+    event: !type:RengokuNinthFormActionEvent

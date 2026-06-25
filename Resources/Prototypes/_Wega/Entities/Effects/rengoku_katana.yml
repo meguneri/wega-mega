@@ -1,0 +1,84 @@
+# Визуальные эффекты приёмов катаны Рэнгоку. Спавнятся RengokuKatanaSystem
+# в позиции носителя и сами исчезают через TimedDespawn.
+
+- type: entity
+  id: EffectRengokuFirstForm
+  name: flame arc
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: Effects/fire.rsi
+    drawdepth: Effects
+    noRot: true
+    scale: 3, 3
+    color: "#FF6A00"
+    layers:
+    - state: fire
+  - type: PointLight
+    radius: 4
+    energy: 4
+    color: "#FF6A00"
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 0.8
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  id: EffectRengokuNinthForm
+  name: rengoku
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: Effects/fire.rsi
+    drawdepth: Effects
+    noRot: true
+    scale: 9, 9
+    color: "#FF4500"
+    layers:
+    - state: overcharged
+  - type: PointLight
+    radius: 10
+    energy: 9
+    color: "#FF4500"
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.6
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Средняя вспышка для кольца взрывов девятой формы.
+- type: entity
+  id: EffectRengokuNinthRing
+  name: flame burst
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    sprite: Effects/fire.rsi
+    drawdepth: Effects
+    noRot: true
+    scale: 4, 4
+    color: "#FF7A00"
+    layers:
+    - state: fire
+  - type: PointLight
+    radius: 5
+    energy: 5
+    color: "#FF7A00"
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 1.0
+  - type: Tag
+    tags:
+    - HideContextMenu

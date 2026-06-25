@@ -129,3 +129,84 @@
   - type: DisarmMalus
   - type: StaticPrice
     price: 25000
+
+# Катана Пламенного столпа Рэнгоку. Помимо усиленного огненного урона несёт
+# два приёма Дыхания Пламени (RengokuKatanaSystem), выдаваемых носителю как
+# действия через ItemActionGrant: «Первая форма» (конусный взмах) и
+# «Девятая форма: Рэнгоку» (огненный рывок-ультимейт).
+# Наследуется от BaseSword (а не ArenaBaseKatana), потому что использует цельный
+# нарисованный спрайт, а не разбивку blade/handle с покраской.
+- type: entity
+  name: rengoku's katana
+  description: The blade of the Flame Hashira. It burns with unwavering resolve. Set your heart ablaze.
+  parent: BaseSword
+  id: ArenaRengokuKatana
+  categories: [ DoNotMap ]
+  components:
+  # Мировой вид — кастомный нарисованный спрайт (цвета запечены, color не нужен).
+  - type: Sprite
+    sprite: _Wega/Objects/Weapons/Melee/rengoku_katana.rsi
+    state: icon
+  # Кадры в руках и за спиной/на поясе — сгенерированы из icon скриптом
+  # gen_rengoku_inhand.py (цельный спрайт, цвета запечены). Сначала запусти скрипт!
+  - type: Item
+    sprite: _Wega/Objects/Weapons/Melee/rengoku_katana.rsi
+    shape:
+    - 0,0,0,3
+    inhandVisuals:
+      left:
+      - state: inhand-left
+      right:
+      - state: inhand-right
+  - type: Clothing
+    sprite: _Wega/Objects/Weapons/Melee/rengoku_katana.rsi
+    slots:
+    - Back
+    - Belt
+    clothingVisuals:
+      back:
+      - state: equipped-BACKPACK
+      belt:
+      - state: equipped-BELT
+  - type: MeleeWeapon
+    # Оба типа атак — взмах мечом (дуга), а не тычок.
+    # animation = лёгкая атака (клик), wideAnimation = широкий замах.
+    animation: WeaponArcSlash
+    wideAnimation: WeaponArcSlash
+    wideAnimationRotation: -135
+    animationOffset: 0.7
+    attackRate: 1.25
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 18
+        Heat: 7
+  - type: DisarmMalus
+  # Пассивно поджигает при каждом ударе — это Пламенный столп.
+  - type: IgniteOnMeleeHit
+    fireStacks: 1.5
+  - type: ChangeTemperatureOnHit
+    heat: 80000
+  - type: PointLight
+    radius: 1.5
+    energy: 2.5
+    castShadows: false
+    color: "#FF6A00"
+  # Приёмы Дыхания Пламени.
+  - type: RengokuKatana
+    firstFormEffect: EffectRengokuFirstForm
+    ninthFormEffect: EffectRengokuNinthForm
+    ninthFormTrailEffect: EffectRengokuFirstForm
+    ninthFormRingEffect: EffectRengokuNinthRing
+  - type: ActionGrant
+    actions:
+    - ActionRengokuFirstForm
+    - ActionRengokuNinthForm
+  - type: ItemActionGrant
+    actions:
+    - ActionRengokuFirstForm
+    - ActionRengokuNinthForm
+    activeIfWorn: false
+  - type: StaticPrice
+    price: 30000
