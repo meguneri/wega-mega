@@ -66,6 +66,11 @@
     costOverrides:
       FullArsenalModSuitApocryphal: 80
       FullArsenalHardsuitDeathsquad: 80
+    # Без этого override цена 80 ТК подняла бы и вес выбора (80^0.35 ≈ 4.7), и джекпот падал бы ЧАЩЕ,
+    # а не реже. Явный низкий вес расцепляет «ест весь бюджет» и «выпадает редко».
+    weightOverrides:
+      FullArsenalModSuitApocryphal: 0.5
+      FullArsenalHardsuitDeathsquad: 0.5
     ammoAffinityCategory: FullArsenalAmmo
     ammoAffinityMultiplier: 4
     companionCategories:

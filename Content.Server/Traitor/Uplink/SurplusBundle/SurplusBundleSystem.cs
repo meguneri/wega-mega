@@ -227,9 +227,14 @@ public sealed partial class SurplusBundleSystem : EntitySystem
 
     private double Weight(ListingDataWithCostModifiers listing, SurplusBundleComponent comp, HashSet<string>? wantedAmmoTags)
     {
-        var weight = comp.WeightByCost
-            ? Math.Pow(Math.Max(1.0, EffectiveCost(listing, comp).Double()), comp.CostWeightExponent)
-            : 1.0;
+        // An explicit per-listing weight override wins over the cost-based weight: it lets a budget-sink
+        // jackpot (priced up via CostOverrides so it eats the budget) stay a rare drop instead of a likely
+        // one, since cost-based weight would otherwise make the priciest item the most probable pick.
+        var weight = comp.WeightOverrides.TryGetValue(listing.ID, out var weightOverride)
+            ? weightOverride
+            : comp.WeightByCost
+                ? Math.Pow(Math.Max(1.0, EffectiveCost(listing, comp).Double()), comp.CostWeightExponent)
+                : 1.0;
 
         if (wantedAmmoTags is { Count: > 0 }
             && comp.AmmoAffinityCategory is { } ammoCategory

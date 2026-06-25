@@ -133,6 +133,17 @@ public sealed partial class SurplusBundleComponent : Component
     public Dictionary<string, int> CostOverrides = new();
 
     /// <summary>
+    ///     Optional explicit pick-weight per listing ID, overriding the cost-based weight from
+    ///     <see cref="WeightByCost"/>. Decouples "how much budget an item eats" from "how often it is rolled":
+    ///     a <see cref="CostOverrides"/> entry that raises an item's price to make it a budget sink would
+    ///     otherwise also raise its cost-based weight (price^exponent), making the supposed jackpot MORE likely.
+    ///     Set a low weight here (e.g. 0.5) so the item stays a genuinely rare drop while still costing its
+    ///     full overridden price when it does appear. Ammo-affinity multipliers still apply on top.
+    /// </summary>
+    [DataField]
+    public Dictionary<string, double> WeightOverrides = new();
+
+    /// <summary>
     ///     If true, listings in <see cref="AmmoAffinityCategory"/> are only rolled once a compatible gun is
     ///     already in the bundle (matched by the gun's magazine/chamber tags). Stops "orphan" ammo — boxes
     ///     of magazines for a gun that never dropped.

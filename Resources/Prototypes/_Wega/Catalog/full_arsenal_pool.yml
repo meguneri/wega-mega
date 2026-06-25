@@ -859,7 +859,7 @@
   description: full-arsenal-armor-cult-desc
   productEntity: ClothingOuterArmorCult
   cost:
-    Telecrystal: 5
+    Telecrystal: 7
   categories:
   - FullArsenal
   - FullArsenalArmor
@@ -4291,7 +4291,7 @@
   description: full-arsenal-mjollnir-desc
   productEntity: Mjollnir
   cost:
-    Telecrystal: 15
+    Telecrystal: 18
   categories:
   - FullArsenal
 
@@ -4533,7 +4533,7 @@
   description: full-arsenal-smg-atreides-desc
   productEntity: WeaponSubMachineGunAtreides
   cost:
-    Telecrystal: 11
+    Telecrystal: 18
   categories:
   - FullArsenal
 
@@ -5341,7 +5341,7 @@
   description: full-arsenal-energy-black-mamba-desc
   productEntity: WeaponSyndieLaserGun
   cost:
-    Telecrystal: 60
+    Telecrystal: 38
   categories:
   - FullArsenal
 
@@ -5361,7 +5361,7 @@
   description: full-arsenal-pulse-pistol-desc
   productEntity: WeaponPulsePistol
   cost:
-    Telecrystal: 24
+    Telecrystal: 30
   categories:
   - FullArsenal
 
@@ -5371,7 +5371,7 @@
   description: full-arsenal-pulse-carbine-desc
   productEntity: WeaponPulseCarbine
   cost:
-    Telecrystal: 28
+    Telecrystal: 35
   categories:
   - FullArsenal
 
@@ -5381,7 +5381,7 @@
   description: full-arsenal-pulse-shotgun-desc
   productEntity: WeaponPulseShotgun
   cost:
-    Telecrystal: 40
+    Telecrystal: 46
   categories:
   - FullArsenal
 
@@ -5391,7 +5391,7 @@
   description: full-arsenal-pulse-sniper-desc
   productEntity: WeaponPulseSniper
   cost:
-    Telecrystal: 35
+    Telecrystal: 42
   categories:
   - FullArsenal
 
@@ -5412,18 +5412,6 @@
   productEntity: WeaponTeslaGun
   cost:
     Telecrystal: 18
-  categories:
-  - FullArsenal
-
-# ── HEAVY WEAPONS ─────────────────────────────────────────────────────────────
-
-- type: listing
-  id: FullArsenalMinigun
-  name: full-arsenal-minigun-name
-  description: full-arsenal-minigun-desc
-  productEntity: WeaponMinigun
-  cost:
-    Telecrystal: 30
   categories:
   - FullArsenal
 
@@ -6216,7 +6204,7 @@
   description: full-arsenal-rifle-ar2-desc
   productEntity: WeaponRifleAR2
   cost:
-    Telecrystal: 14
+    Telecrystal: 11
   categories:
   - FullArsenal
 
@@ -6236,7 +6224,7 @@
   description: full-arsenal-rifle-m52-desc
   productEntity: WeaponRifleM52
   cost:
-    Telecrystal: 11
+    Telecrystal: 13
   categories:
   - FullArsenal
 
@@ -6553,7 +6541,7 @@
   description: full-arsenal-duffel-ash12-desc
   productEntity: ArenaDuffelAsh12Bundle
   cost:
-    Telecrystal: 15
+    Telecrystal: 20
   categories:
   - FullArsenal
 

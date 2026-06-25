@@ -83,7 +83,7 @@
 | Ритуальный кинжал смерти (арена) | `WeaponDeathDaggerArena` | 3 TC |
 | Лезвие руки | `ArmBlade` | 8 TC |
 | Молот сингулярности | `SingularityHammer` | 12 TC |
-| Мьёльнир | `Mjollnir` | 15 TC |
+| Мьёльнир | `Mjollnir` | 18 TC |
 | Ратварианское копьё | `WeaponRatvarianSpearArena` | 4 TC |
 | Заводной меч | `WeaponClockworkSwordArena` | 5 TC |
 | Заводной меч (тяжёлый) | `WeaponClockworkSwordBorg` | 5 TC |
@@ -127,13 +127,13 @@
 | Улучшенный лазер | `WeaponAdvancedLaser` | 5 TC |
 | Энергетический арбалет | `WeaponEnergyCrossbow` | 5 TC |
 | Энергетический арбалет (крупный) | `WeaponEnergyCrossbowLarge` | 8 TC |
-| S-13 «Чёрная мамба» (плазменный, полный авто) | `WeaponSyndieLaserGun` | 60 TC |
+| S-13 «Чёрная мамба» (плазменный, полный авто) | `WeaponSyndieLaserGun` | 38 TC |
 | Револьвер Python AP | `WeaponRevolverPythonAP` | 6 TC |
 | Revolving Mateba AP | `WeaponRevolverMatebaAP` | 8 TC |
 | Desert Eagle | `WeaponPistolDesertEagle` | 4 TC |
 | Desert Eagle AP | `WeaponPistolDesertEagleAP` | 6 TC |
 | Dominator (три режима) | `WeaponDominator` | 8 TC |
-| Импульсный пистолет | `WeaponPulsePistol` | 20 TC |
+| Импульсный пистолет | `WeaponPulsePistol` | 30 TC |
 | Пиратский пистолет | `WeaponRevolverPirate` | 2 TC |
 | Deckard | `WeaponRevolverDeckard` | 4 TC |
 | Энергетический магнум | `WeaponEnergyMagnum` | 5 TC |
@@ -150,7 +150,7 @@
 | MP5 | `WeaponSubMachineGunMP5` | 8 TC |
 | ПП WT550 | `WeaponSubMachineGunWt550` | 5 TC |
 | ПП Berkut | `WeaponSubmachinegunBerkut` | 6 TC |
-| ПП Atreides | `WeaponSubMachineGunAtreides` | 11 TC |
+| ПП Atreides | `WeaponSubMachineGunAtreides` | 18 TC |
 | ПП C-20r | `WeaponSubMachineGunC20r` | 10 TC |
 | MP-38 | `WeaponSubMachineGunMP38` | 3 TC |
 | MP7 | `WeaponSubMachineGunMP7` | 10 TC |
@@ -211,18 +211,18 @@
 | Снайперка Hristov МК2 | `WeaponSniperHristovAdvanced` | 12 TC |
 | Пулемёт L6 | `WeaponLightMachineGunL6` | 12 TC |
 | Пулемёт DP-28 | `WeaponLightMachineGunDP28` | 11 TC |
-| Импульсный карабин | `WeaponPulseCarbine` | 20 TC |
-| Импульсный дробовик | `WeaponPulseShotgun` | 40 TC |
-| Импульсная снайперская винтовка | `WeaponPulseSniper` | 35 TC |
+| Импульсный карабин | `WeaponPulseCarbine` | 35 TC |
+| Импульсный дробовик | `WeaponPulseShotgun` | 46 TC |
+| Импульсная снайперская винтовка | `WeaponPulseSniper` | 42 TC |
 | Мушкет | `Musket` | 6 TC |
 | xC-67 (одиночно) | `WeaponRifleXC67` | 7 TC |
 | M-90gl (одиночно) | `WeaponRifleM90GrenadeLauncher` | 8 TC |
 | Lecter XL8 | `WeaponRifleLecterXL8` | 8 TC |
 <!-- | Болтер | `WeaponRifleBolter` | 10 TC | временно отключён -->
 | M16A4 | `WeaponRifleM16A4` | 10 TC |
-| AR2 (импульсная) | `WeaponRifleAR2` | 14 TC |
+| AR2 (импульсная) | `WeaponRifleAR2` | 11 TC |
 | ASH-12 | `WeaponRifleAsh12` | 12 TC |
-| M-52 | `WeaponRifleM52` | 11 TC |
+| M-52 | `WeaponRifleM52` | 13 TC |
 | Famas | `WeaponRifleFamas` | 9 TC |
 | G-36 | `WeaponRifleG36` | 9 TC |
 
@@ -236,9 +236,8 @@
 | Пушка Форс | `WeaponForceGun` | 5 TC |
 | Замедлитель частиц | `WeaponParticleDecelerator` | 5 TC |
 | Рентгеновская пушка | `WeaponXrayCannon` | 8 TC |
-| Миниган | `WeaponMinigun` | 20 TC |
 | Пневматическая пушка | `WeaponImprovisedPneumaticCannonFilled` | 2 TC |
-| Тесла-пистолет | `WeaponTeslaGun` | 12 TC |
+| Тесла-пистолет | `WeaponTeslaGun` | 18 TC |
 | Лазерная пушка | `WeaponLaserCannon` | 7 TC |
 | Протокинетический ускоритель | `WeaponProtoKineticAccelerator` | 8 TC |
 | Ракетница (РПГ-7) | `WeaponLauncherRocket` | 18 TC |
@@ -300,7 +299,7 @@
 | Противоударная броня | `ClothingOuterArmorRiot` | 3 TC |
 | Отражающая броня | `ClothingOuterArmorReflective` | 4 TC |
 | Пулестойкая броня | `ClothingOuterArmorBulletproof` | 5 TC |
-| Культистская броня | `ClothingOuterArmorCult` | 5 TC |
+| Культистская броня | `ClothingOuterArmorCult` | 7 TC |
 | Броня смотрителя | `ClothingOuterArmorWarden` | 6 TC |
 | Рейдовая броня | `ClothingOuterArmorRaid` | 6 TC |
 | Тяжёлая броня | `ClothingOuterArmorHeavy` | 18 TC |
@@ -711,7 +710,7 @@
 | Вещмешок костюм клоуна | `ClothingBackpackDuffelSyndicateCostumeClown` | 1 TC |
 | ЕКД вещмешок Синдиката | `ClothingBackpackDuffelSyndicateEVABundle` | 3 TC |
 | Вещмешок M-90gl | `ClothingBackpackDuffelArenaM90gl` | 10 TC |
-| Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 15 TC |
+| Вещмешок ASH-12 | `ArenaDuffelAsh12Bundle` | 20 TC |
 | Вещмешок AS-12 «Минотавр» | `ArenaDuffelMinotaurBundle` | 20 TC |
 | Комплект «Маг любви» (подарок: гримуар арены, броня эскадрона смерти, AS-12, импульсный пистолет, ПП «Донксофт», форма горничной, 2×наручники, шибари, шипастая дубинка) | `ArenaLoveMageSet` | 120 TC |
 | Вещмешок P90 | `ArenaDuffelP90Bundle` | 30 TC |

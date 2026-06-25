@@ -2,9 +2,13 @@ using Content.Server.Administration.Logs;
 using Content.Server.Cargo.Systems;
 using Content.Server.Storage.Components;
 using Content.Shared.Cargo;
+using Content.Shared.Clothing.Components;
 using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Inventory;
+using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
@@ -20,6 +24,7 @@ namespace Content.Server.Storage.EntitySystems
         [Dependency] private PricingSystem _pricing = default!;
         [Dependency] private SharedAudioSystem _audio = default!;
         [Dependency] private SharedTransformSystem _transform = default!;
+        [Dependency] private InventorySystem _inventory = default!;
 
         public override void Initialize()
         {
@@ -73,13 +78,26 @@ namespace Content.Server.Storage.EntitySystems
             var coords = Transform(args.User).Coordinates;
             var spawnEntities = GetSpawns(component.Items, _random);
             EntityUid? entityToPlaceInHands = null;
+            EntityUid? weaponForHands = null;
             var spawned = new List<EntityUid>();
 
             foreach (var proto in spawnEntities)
             {
-                entityToPlaceInHands = Spawn(proto, coords);
-                spawned.Add(entityToPlaceInHands.Value);
-                _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(entityToPlaceInHands.Value)}");
+                var item = Spawn(proto, coords);
+                spawned.Add(item);
+                _adminLogger.Add(LogType.EntitySpawn, LogImpact.Low, $"{ToPrettyString(args.User)} used {ToPrettyString(uid)} which spawned {ToPrettyString(item)}");
+
+                // Wega: auto-equip kits dress the user — clothing goes onto a matching empty slot and is
+                // taken out of the hands/floor handling; everything else falls through as before.
+                if (component.EquipToUser && TryAutoEquip(args.User, item))
+                    continue;
+
+                entityToPlaceInHands = item;
+
+                // Wega: for an auto-equip kit, prefer to end up holding the first weapon rather than the last
+                // leftover (a book/food) — the kit's clothing is already worn, so the gun/blade is what matters.
+                if (component.EquipToUser && weaponForHands == null && IsWeapon(item))
+                    weaponForHands = item;
             }
 
             // Wega: позволяем другим системам отреагировать на свежезаспавненное содержимое
@@ -103,11 +121,49 @@ namespace Content.Server.Storage.EntitySystems
                 QueueDel(uid);
             }
 
-            if (entityToPlaceInHands != null)
-                _hands.PickupOrDrop(args.User, entityToPlaceInHands.Value);
+            var handItem = weaponForHands ?? entityToPlaceInHands;
+            if (handItem != null)
+                _hands.PickupOrDrop(args.User, handItem.Value);
 
             args.Handled = true;
         }
+
+        /// <summary>
+        ///     Wega: tries to put a freshly spawned clothing item onto the user in the first matching empty
+        ///     inventory slot. Returns true if it was equipped. Non-clothing, no matching slot, or an already
+        ///     occupied slot returns false so the caller falls back to hands/floor — the user is never stripped.
+        /// </summary>
+        private bool TryAutoEquip(EntityUid user, EntityUid item)
+        {
+            if (!TryComp<ClothingComponent>(item, out var clothing) || clothing.Slots == SlotFlags.NONE)
+                return false;
+
+            if (!_inventory.TryGetSlots(user, out var slots))
+                return false;
+
+            foreach (var slot in slots)
+            {
+                // Curated kit clothing belongs in its real slot, not stuffed into a pocket.
+                if ((slot.SlotFlags & SlotFlags.POCKET) != 0)
+                    continue;
+
+                if ((clothing.Slots & slot.SlotFlags) == 0)
+                    continue;
+
+                // Only fill empty slots — never strip gear the duelist already wears.
+                if (_inventory.TryGetSlotEntity(user, slot.Name, out _))
+                    continue;
+
+                if (_inventory.TryEquip(user, item, slot.Name, silent: true, force: true))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>Wega: a usable weapon is one with a gun or a melee-weapon component.</summary>
+        private bool IsWeapon(EntityUid uid)
+            => HasComp<GunComponent>(uid) || HasComp<MeleeWeaponComponent>(uid);
     }
 
     /// <summary>

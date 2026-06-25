@@ -223,6 +223,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: GrimoireOfPassion
     - id: ClothingOuterHardsuitDeathsquad

@@ -17,6 +17,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: WeaponRifleAk
     - id: MagazineLightRifle

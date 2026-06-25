@@ -15,6 +15,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: Claymore
     - id: Spear
@@ -38,6 +39,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: Katana
     - id: ClothingOuterDogi
@@ -62,6 +64,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: WeaponRevolverPython
     - id: SpeedLoaderMagnum
@@ -85,6 +88,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: CaneSheathFilled
     - id: WeaponRevolverSnubRevolver
@@ -110,6 +114,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: ClothingUniformJumpsuitMonasticRobeDark
     - id: ClothingHeadHatHoodNunHood
@@ -138,6 +143,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: ClothingHandsGlovesNorthStar
     - id: ClothingEyesSandevistanArena
@@ -158,6 +164,7 @@
     sprite: Objects/Decoration/present.rsi
     state: present
   - type: SpawnItemsOnUse
+    equipToUser: true
     items:
     - id: ClothingHandsGlovesNorthStar
     - id: SandevistanImplanterArena
