@@ -94,21 +94,13 @@ public sealed partial class RengokuKatanaComponent : Component
     [DataField]
     public EntProtoId? NinthFormTrailEffect;
 
-    /// <summary>Эффект вспышки для каждого взрыва в кольце вокруг точки удара.</summary>
+    /// <summary>Эффект, спавнящийся НА каждой задетой девятой формой цели.</summary>
     [DataField]
-    public EntProtoId? NinthFormRingEffect;
+    public EntProtoId? NinthFormHitEffect;
 
     /// <summary>Сколько вспышек пламени оставляет след за время рывка.</summary>
     [DataField]
     public int NinthFormTrailCount = 5;
-
-    /// <summary>Сколько взрывов идёт кольцом вокруг точки удара.</summary>
-    [DataField]
-    public int NinthFormRingCount = 8;
-
-    /// <summary>Радиус кольца взрывов вокруг точки удара (в тайлах).</summary>
-    [DataField]
-    public float NinthFormRingRadius = 2f;
 
     /// <summary>Сила тряски экрана у тех, кто рядом с ударом.</summary>
     [DataField]

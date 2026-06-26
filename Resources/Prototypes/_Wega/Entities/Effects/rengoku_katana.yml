@@ -1,5 +1,11 @@
+# TODO (см. /TODO.md): переделать на кастомные анимации — текущий свод
+# explosion.rsi + fire.rsi выглядит «так себе».
 # Визуальные эффекты приёмов катаны Рэнгоку. Спавнятся RengokuKatanaSystem
-# в позиции носителя и сами исчезают через TimedDespawn.
+# преимущественно НА задетых целях. Каждый эффект — комбинация двух слоёв:
+#   explosion.rsi/explosionfast — резкая огненная вспышка (0.48с)
+#   fire.rsi/fire               — языки пламени поверх (горящая цель)
+# Оба слоя unshaded: светятся сами, не темнеют от освещения карты.
+# lifetime ≈ длительности взрыва, чтобы вспышка не зацикливалась.
 
 - type: entity
   id: EffectRengokuFirstForm
@@ -10,24 +16,31 @@
   - type: Transform
     noRot: true
   - type: Sprite
-    sprite: Effects/fire.rsi
     drawdepth: Effects
     noRot: true
-    scale: 3, 3
-    color: "#FF6A00"
     layers:
-    - state: fire
+    - sprite: Effects/explosion.rsi
+      state: explosionfast
+      shader: unshaded
+      scale: 1.0, 1.0
+      color: "#FFB454"
+    - sprite: Effects/fire.rsi
+      state: fire
+      shader: unshaded
+      scale: 1.4, 1.4
+      color: "#FFC85A"
   - type: PointLight
     radius: 4
-    energy: 4
-    color: "#FF6A00"
+    energy: 5
+    color: "#FF7A00"
     netsync: false
   - type: TimedDespawn
-    lifetime: 0.8
+    lifetime: 0.5
   - type: Tag
     tags:
     - HideContextMenu
 
+# Центральная вспышка девятой формы — в точке приземления рывка.
 - type: entity
   id: EffectRengokuNinthForm
   name: rengoku
@@ -37,27 +50,33 @@
   - type: Transform
     noRot: true
   - type: Sprite
-    sprite: Effects/fire.rsi
     drawdepth: Effects
     noRot: true
-    scale: 9, 9
-    color: "#FF4500"
     layers:
-    - state: overcharged
+    - sprite: Effects/explosion.rsi
+      state: explosionfast
+      shader: unshaded
+      scale: 2.8, 2.8
+      color: "#FF7A2E"
+    - sprite: Effects/fire.rsi
+      state: fire
+      shader: unshaded
+      scale: 3.2, 3.2
+      color: "#FF9030"
   - type: PointLight
-    radius: 10
-    energy: 9
+    radius: 12
+    energy: 13
     color: "#FF4500"
     netsync: false
   - type: TimedDespawn
-    lifetime: 1.6
+    lifetime: 0.55
   - type: Tag
     tags:
     - HideContextMenu
 
-# Средняя вспышка для кольца взрывов девятой формы.
+# Эффект на КАЖДОЙ задетой девятой формой цели — она вспыхивает.
 - type: entity
-  id: EffectRengokuNinthRing
+  id: EffectRengokuNinthHit
   name: flame burst
   categories: [ HideSpawnMenu ]
   save: false
@@ -65,20 +84,26 @@
   - type: Transform
     noRot: true
   - type: Sprite
-    sprite: Effects/fire.rsi
     drawdepth: Effects
     noRot: true
-    scale: 4, 4
-    color: "#FF7A00"
     layers:
-    - state: fire
+    - sprite: Effects/explosion.rsi
+      state: explosionfast
+      shader: unshaded
+      scale: 1.4, 1.4
+      color: "#FF8838"
+    - sprite: Effects/fire.rsi
+      state: fire
+      shader: unshaded
+      scale: 1.8, 1.8
+      color: "#FFB050"
   - type: PointLight
     radius: 5
-    energy: 5
+    energy: 6
     color: "#FF7A00"
     netsync: false
   - type: TimedDespawn
-    lifetime: 1.0
+    lifetime: 0.55
   - type: Tag
     tags:
     - HideContextMenu

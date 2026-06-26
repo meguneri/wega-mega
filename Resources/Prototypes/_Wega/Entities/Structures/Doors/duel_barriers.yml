@@ -101,7 +101,7 @@
     channel: DuelFight
   - type: EmitGlobalSoundOnSignal
     sound:
-      path: /Audio/Effects/church_bell3.ogg
+      path: /Audio/_Wega/Duel/duel_start.ogg
     params:
       volume: 0
 

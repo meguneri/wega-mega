@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Maths;
@@ -9,6 +10,13 @@ namespace Content.Server._Wega.Duel.Components;
 [RegisterComponent]
 public sealed partial class DuelArenaComponent : Component, IDuelScoreStore
 {
+    // Звук СТАРТА дуэли воспроизводит DuelStartSoundEmitter на карте
+    // (EmitGlobalSoundOnSignal). Здесь поля для него нет намеренно.
+
+    /// <summary>Звук в момент завершения дуэли (победа/ничья).</summary>
+    [DataField]
+    public SoundSpecifier? EndSound = new SoundPathSpecifier("/Audio/_Wega/Duel/duel_end.ogg");
+
     Dictionary<NetUserId, int> IDuelScoreStore.Scores => Scores;
     Dictionary<NetUserId, string> IDuelScoreStore.ScoreNames => ScoreNames;
     NetUserId? IDuelScoreStore.StreakUser { get => StreakUser; set => StreakUser = value; }

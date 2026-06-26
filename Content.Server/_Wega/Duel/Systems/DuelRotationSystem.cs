@@ -2,6 +2,8 @@ using System.Linq;
 using Content.Server._Wega.Duel.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Movement.Pulling.Components;
+using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.GameObjects;
@@ -26,6 +28,25 @@ public sealed partial class DuelRotationSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private DuelArenaSystem _arena = default!;
+    [Dependency] private PullingSystem _pulling = default!;
+
+    /// <summary>
+    /// Останавливает перетаскивание в обе стороны перед телепортом бойца на другую арену:
+    /// иначе джойнт перетаскивания свяжет тела на разных картах и движок упадёт
+    /// (DebugAssert «cross-map joint» в SharedJointSystem).
+    /// </summary>
+    private void StopPulls(EntityUid fighter)
+    {
+        // Если бойца кто-то тащит — отпускаем.
+        if (TryComp<PullableComponent>(fighter, out var pullable) && pullable.BeingPulled)
+            _pulling.TryStopPull(fighter, pullable);
+
+        // Если боец сам кого-то тащит — отпускаем ту цель.
+        if (TryComp<PullerComponent>(fighter, out var puller)
+            && puller.Pulling is { } pulled
+            && TryComp<PullableComponent>(pulled, out var pulledComp))
+            _pulling.TryStopPull(pulled, pulledComp);
+    }
 
     /// <summary>
     /// Защита от рекурсии: пока идёт предзагрузка арен, загрузка карты-арены может сама содержать
@@ -278,6 +299,7 @@ public sealed partial class DuelRotationSystem : EntitySystem
                 coords = coords.Offset(new System.Numerics.Vector2(usage[slot], 0f));
             usage[slot]++;
 
+            StopPulls(ordered[i]);
             _transform.SetCoordinates(ordered[i], coords);
         }
 
@@ -365,6 +387,7 @@ public sealed partial class DuelRotationSystem : EntitySystem
             return;
         }
 
+        StopPulls(fighter);
         _transform.SetCoordinates(fighter, Transform(target).Coordinates);
 
         // Запоминаем, на каком спавне игрок реально оказался, чтобы между раундами возвращать его сюда же.

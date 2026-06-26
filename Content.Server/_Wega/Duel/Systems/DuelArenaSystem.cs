@@ -14,6 +14,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
+using Robust.Server.Audio;
+using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
@@ -41,6 +43,7 @@ public sealed partial class DuelArenaSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private DuelRotationSystem _rotation = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -252,6 +255,9 @@ public sealed partial class DuelArenaSystem : EntitySystem
         var names = string.Join(vsSep, comp.Duelists.Select(d => MetaData(d).EntityName));
         _chatManager.DispatchServerAnnouncement(
             Loc.GetString("duel-arena-started", ("fighters", names)), Color.Gold);
+
+        // Звук старта дуэли играет штатный DuelStartSoundEmitter на карте
+        // (EmitGlobalSoundOnSignal по сигналу DuelFight) — здесь дублировать не нужно.
     }
 
     /// <summary>
@@ -498,6 +504,12 @@ public sealed partial class DuelArenaSystem : EntitySystem
         // Убираем снаряжение и объявляем результат одним сообщением.
         _cleanup.CleanupArea(arenaUid, arena.CleanupRange);
         _chatManager.DispatchServerAnnouncement(msg, Color.Gold);
+
+        // Сигнал завершения дуэли — играем для всех бойцов раунда (список снят до очистки).
+        if (arena.EndSound != null)
+            foreach (var d in roundDuelists)
+                if (Exists(d))
+                    _audio.PlayPvs(arena.EndSound, d);
 
         // Восстанавливаем разрушенные за бой стены на следующем тике (см. Update): сразу по
         // завершении, но вне стека события смерти — удаление/спавн стен из обработчика

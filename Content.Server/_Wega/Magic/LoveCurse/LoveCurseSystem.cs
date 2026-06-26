@@ -64,6 +64,13 @@ public sealed partial class LoveCurseSystem : EntitySystem
 
     private readonly List<EntityUid> _expired = new();
 
+    /// <summary>
+    /// Кастеры с открытым меню выбора цели. Заполняется при легитимном касте (серверное событие
+    /// действия) и расходуется в OnTargetSelected. Без этого гейта клиент мог бы прислать
+    /// LoveCurseTargetSelectedEvent напрямую и проклясть кого угодно без всякого заклинания.
+    /// </summary>
+    private readonly HashSet<EntityUid> _pendingCasters = new();
+
     private void OnSpellCast(LoveCurseSpellEvent args)
     {
         if (args.Handled)
@@ -76,6 +83,7 @@ public sealed partial class LoveCurseSystem : EntitySystem
         if (!TryComp<ActorComponent>(caster, out var actor))
             return;
 
+        _pendingCasters.Add(caster);
         RaiseNetworkEvent(new LoveCurseMenuOpenedEvent(GetNetEntity(caster)), actor.PlayerSession);
     }
 
@@ -83,6 +91,13 @@ public sealed partial class LoveCurseSystem : EntitySystem
     {
         var caster = GetEntity(args.Caster);
         var target = GetEntity(args.Target);
+
+        // Анти-спуф: событие сетевое (от клиента) — отправитель обязан управлять самим кастером,
+        // и у кастера должно быть открыто меню выбора (легитимный каст). Иначе игнор.
+        if (session.SenderSession.AttachedEntity != caster)
+            return;
+        if (!_pendingCasters.Remove(caster))
+            return;
 
         if (!Exists(caster) || !Exists(target) || caster == target)
             return;

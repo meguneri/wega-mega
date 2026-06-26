@@ -1,0 +1,26 @@
+# Звуки дуэльной арены. Источники — бесплатные SFX-паки Chequered Ink с itch.io.
+# Лицензия Chequered Ink (одна на все их паки), процитирована дословно:
+#   "You may use these game assets for ANY and ALL uses including commercial use,
+#    with or without giving credit, except that you may not sell or redistribute
+#    the unaltered assets as your own game assets."
+# То есть: можно использовать в любых проектах (вкл. коммерческие), атрибуция
+# НЕ требуется, нельзя лишь перепродавать неизменённые файлы как свой пак.
+# Файлы здесь сконвертированы в моно OGG (изменены) — указываем кредит на всякий случай.
+
+- files: ["duel_start.ogg"]
+  license: "Custom"
+  copyright: "Chequered Ink — '400 Sounds Pack' (match_synth_1). Free for any use incl. commercial, no attribution required, no resale of unaltered assets. Converted to mono OGG for wega-mega."
+  source: "https://ci.itch.io/400-sounds-pack"
+
+- files: ["duel_end.ogg"]
+  license: "Custom"
+  copyright: "Chequered Ink — '400 Sounds Pack' (match_xylophone_1). Free for any use incl. commercial, no attribution required, no resale of unaltered assets. Converted to mono OGG for wega-mega."
+  source: "https://ci.itch.io/400-sounds-pack"
+
+# duel_storm: из набора FreeSFX/GameSFX ('Retro Weird Psych 18'). Нейминг и структура
+# совпадают с паками Chequered Ink (та же лицензия), но точный пак/страница не подтверждены —
+# при публикации стоит сверить источник. Лицензия указана по их общим условиям.
+- files: ["duel_storm.ogg"]
+  license: "Custom"
+  copyright: "Chequered Ink GameSFX/FreeSFX ('Retro Weird Psych 18') — source pack not 100% confirmed; assumed Chequered Ink license: free for any use incl. commercial, no attribution required, no resale of unaltered assets. Converted to mono OGG for wega-mega."
+  source: "https://chequeredink.itch.io/"

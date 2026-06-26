@@ -23,6 +23,7 @@ public sealed partial class BloodRitualSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private Content.Shared.Mobs.Systems.MobStateSystem _mobState = default!;
 
     private const string BloodReagent = "Blood";
     private const string PentagramEffect = "BloodRuneRitualDimensionalRendingEffect";
@@ -62,7 +63,7 @@ public sealed partial class BloodRitualSystem : EntitySystem
 
         foreach (var target in _lookup.GetEntitiesInRange<MobStateComponent>(coords, Radius))
         {
-            if (target.Owner == caster)
+            if (target.Owner == caster || _mobState.IsDead(target.Owner))
                 continue;
 
             if (_damageable.TryChangeDamage(target.Owner, RitualDamage, out var dealt, origin: caster))

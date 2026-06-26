@@ -5,6 +5,7 @@ using Content.Shared._Wega.Duel;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Mobs.Systems;
+using Robust.Server.Audio;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
 
@@ -27,6 +28,7 @@ public sealed partial class ArenaStormSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private DeviceLinkSystem _signalSystem = default!;
+    [Dependency] private AudioSystem _audio = default!;
 
     /// <summary>Сигнальный порт: отменяет сужение зоны на текущий бой.</summary>
     public const string CancelPort = "StormCancel";
@@ -152,6 +154,12 @@ public sealed partial class ArenaStormSystem : EntitySystem
                 if (storm.Announce)
                     _chatManager.DispatchServerAnnouncement(
                         Loc.GetString("arena-storm-incoming"), Color.OrangeRed);
+
+                // Звук начала сужения зоны — для каждого бойца арены.
+                if (storm.StormSound != null)
+                    foreach (var d in arena.Duelists)
+                        if (Exists(d))
+                            _audio.PlayPvs(storm.StormSound, d);
             }
 
             if (!storm.Active)

@@ -1,0 +1,10 @@
+- files: ["rengoku_slash.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Derivative mix of vanilla Audio/Weapons/bladeslice.ogg and Audio/Effects/fire.ogg, combined for wega-mega (see Tools/gen_rengoku_slash_sound.sh)."
+  source: "https://github.com/space-wizards/space-station-14"
+
+# Звук способностей катаны Рэнгоку (Первая/Девятая формы).
+- files: ["rengoku_fire_explosion.ogg"]
+  license: "Custom"
+  copyright: "Leohpaz — 'RPG Essentials SFX - Free!' (04_Fire_explosion_04_medium). Free incl. commercial use, credit appreciated but not required. Source/slug not 100% confirmed — verify before public release. Converted to mono OGG for wega-mega."
+  source: "https://leohpaz.itch.io/"

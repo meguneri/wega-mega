@@ -101,9 +101,9 @@ public sealed partial class TelekinesisSystem : EntitySystem
         {
             _status.TryRemoveStatusEffect(target, SharedStunSystem.StunId);
             RemComp<TelekinesisGrabbedComponent>(target);
-            // снимаем левитацию
-            if (TryComp<GravityAffectedComponent>(target, out var grav))
-                grav.Weightless = false;
+            // Снимаем левитацию полностью: компонент навешивает только этот спелл (в прототипах его нет),
+            // поэтому удаляем его, а не просто гасим Weightless — иначе он вечно висел бы на цели.
+            RemComp<GravityAffectedComponent>(target);
         }
 
         // убираем кнопку броска

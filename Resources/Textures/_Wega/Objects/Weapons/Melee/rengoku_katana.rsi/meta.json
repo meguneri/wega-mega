@@ -25,6 +25,12 @@
     {
       "name": "equipped-BACKPACK",
       "directions": 4
+    },
+    {
+      "name": "action-first"
+    },
+    {
+      "name": "action-ninth"
     }
   ]
 }

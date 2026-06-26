@@ -176,8 +176,9 @@
     wideAnimationRotation: -135
     animationOffset: 0.7
     attackRate: 1.25
+    # Смесь пореза и пламени (свод bladeslice + fire, см. Tools/gen_rengoku_slash_sound.sh)
     soundHit:
-      path: /Audio/Weapons/bladeslice.ogg
+      path: /Audio/_Wega/Weapons/rengoku_slash.ogg
     damage:
       types:
         Slash: 18
@@ -198,7 +199,11 @@
     firstFormEffect: EffectRengokuFirstForm
     ninthFormEffect: EffectRengokuNinthForm
     ninthFormTrailEffect: EffectRengokuFirstForm
-    ninthFormRingEffect: EffectRengokuNinthRing
+    ninthFormHitEffect: EffectRengokuNinthHit
+    firstFormSound:
+      path: /Audio/_Wega/Weapons/rengoku_fire_explosion.ogg
+    ninthFormSound:
+      path: /Audio/_Wega/Weapons/rengoku_fire_explosion.ogg
   - type: ActionGrant
     actions:
     - ActionRengokuFirstForm

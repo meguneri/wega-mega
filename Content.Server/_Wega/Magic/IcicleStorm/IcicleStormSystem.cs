@@ -3,7 +3,9 @@ using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._Wega.Magic.IcicleStorm;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Projectiles;
+using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 
@@ -17,6 +19,13 @@ public sealed partial class IcicleStormSystem : EntitySystem
     [Dependency] private IMapManager _mapManager = default!;
     [Dependency] private GunSystem _gunSystem = default!;
     [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private AudioSystem _audio = default!;
+
+    // Звук каста. Проигрывается тут на сервере (PlayPvs), а не через Action.sound:
+    // у этих заклинаний обработчик серверный, поэтому предсказанный звук Action
+    // не доходит до самого кастера (его слышали бы только окружающие).
+    private static readonly SoundSpecifier CastSound =
+        new SoundPathSpecifier("/Audio/_Wega/Magic/ice_explosion.ogg");
 
     private const string ProjectilePrototype = "ProjectileIcicle";
     private const float ProjectileSpeed = 12f;
@@ -38,6 +47,7 @@ public sealed partial class IcicleStormSystem : EntitySystem
         args.Handled = true;
 
         var caster = args.Performer;
+        _audio.PlayPvs(CastSound, caster);
         var casterXform = Transform(caster);
         var casterMapPos = _xform.GetMapCoordinates(caster);
 
@@ -91,6 +101,7 @@ public sealed partial class IcicleStormSystem : EntitySystem
         args.Handled = true;
 
         var caster = args.Performer;
+        _audio.PlayPvs(CastSound, caster);
         var casterMapPos = _xform.GetMapCoordinates(caster);
 
         var spawnCoords = _mapManager.TryFindGridAt(casterMapPos, out var gridUid, out _)

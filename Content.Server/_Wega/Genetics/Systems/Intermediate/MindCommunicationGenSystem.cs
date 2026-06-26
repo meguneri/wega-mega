@@ -44,10 +44,18 @@ public sealed partial class MindCommunicationGenSystem : EntitySystem
         RaiseNetworkEvent(new MindCommunicationMenuOpenedEvent(GetNetEntity(ent)));
     }
 
-    private void OnTargetSelected(MindCommunicationTargetSelectedEvent args)
+    private void OnTargetSelected(MindCommunicationTargetSelectedEvent args, EntitySessionEventArgs session)
     {
         var sender = GetEntity(args.Sender);
         var target = GetEntity(args.Target);
+
+        // Анти-спуф: событие сетевое (от клиента). Отправитель обязан управлять заявленным
+        // sender'ом и реально обладать способностью (геном) — иначе любой клиент мог бы открыть
+        // диалог на чужом экране и слать «мысленные» сообщения от чужого имени без гена.
+        if (session.SenderSession.AttachedEntity != sender)
+            return;
+        if (!HasComp<MindCommunicationGenComponent>(sender))
+            return;
 
         if (!TryComp<ActorComponent>(sender, out var senderActor) ||
             !TryComp<ActorComponent>(target, out var targetActor))

@@ -63,12 +63,15 @@ public sealed class RengokuKatanaSystem : EntitySystem
 
             _damageable.TryChangeDamage(target.Owner, comp.FirstFormDamage, origin: user);
             _flammable.AdjustFireStacks(target.Owner, comp.FirstFormFireStacks, ignite: true);
+
+            // Вспышка пламени прямо на задетой цели.
+            if (comp.FirstFormEffect is { } hitEffect)
+                Spawn(hitEffect, Transform(target.Owner).Coordinates);
+
             hit = true;
         }
 
         _audio.PlayPvs(comp.FirstFormSound, user);
-        if (comp.FirstFormEffect is { } effect)
-            Spawn(effect, Transform(user).Coordinates);
 
         if (!hit)
             _popup.PopupEntity(Loc.GetString("rengoku-katana-first-form-miss"), user, user);
@@ -126,7 +129,7 @@ public sealed class RengokuKatanaSystem : EntitySystem
 
         var coords = Transform(user).Coordinates;
 
-        // Урон и поджог всем в радиусе + тряска экрана.
+        // Урон, поджог, вспышка НА цели и тряска экрана — для каждого задетого.
         foreach (var target in _lookup.GetEntitiesInRange<MobStateComponent>(coords, comp.NinthFormRadius))
         {
             if (target.Owner == user || _mobState.IsDead(target.Owner))
@@ -135,31 +138,17 @@ public sealed class RengokuKatanaSystem : EntitySystem
             _damageable.TryChangeDamage(target.Owner, comp.NinthFormDamage, origin: user);
             _flammable.AdjustFireStacks(target.Owner, comp.NinthFormFireStacks, ignite: true);
             ShakeCamera(target.Owner, comp.NinthFormShakeStrength);
+
+            if (comp.NinthFormHitEffect is { } hitEffect)
+                Spawn(hitEffect, Transform(target.Owner).Coordinates);
         }
 
         ShakeCamera(user, comp.NinthFormShakeStrength);
 
-        // Раскатистый звук взрыва и центральная вспышка.
+        // Раскатистый звук взрыва и центральная вспышка в точке приземления.
         _audio.PlayPvs(comp.NinthFormSound, user);
         if (comp.NinthFormEffect is { } effect)
             Spawn(effect, coords);
-
-        // Кольцо взрывов вокруг точки удара.
-        if (comp.NinthFormRingEffect is { } ringEffect && comp.NinthFormRingCount > 0)
-        {
-            for (var i = 0; i < comp.NinthFormRingCount; i++)
-            {
-                var ang = Angle.FromDegrees(360.0 * i / comp.NinthFormRingCount);
-                var offset = ang.ToVec() * comp.NinthFormRingRadius;
-                var ringCoords = coords.Offset(offset);
-                var delay = 0.05f * i;
-                Timer.Spawn(TimeSpan.FromSeconds(delay), () =>
-                {
-                    if (!Deleted(user))
-                        Spawn(ringEffect, ringCoords);
-                });
-            }
-        }
     }
 
     private void ShakeCamera(EntityUid uid, float strength)

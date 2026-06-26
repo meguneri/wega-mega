@@ -25,9 +25,16 @@ public sealed partial class OfferItemSystem : SharedOfferItemSystem
         SubscribeLocalEvent<OfferReceiverComponent, AcceptOfferAlertEvent>(OnReceiverAlertAcceptOffer);
     }
 
-    private void OnRequestToggleOffer(RequestToggleOfferEvent msg)
+    private void OnRequestToggleOffer(RequestToggleOfferEvent msg, EntitySessionEventArgs session)
     {
-        TryToggleOfferMode(GetEntity(msg.Player));
+        var player = GetEntity(msg.Player);
+
+        // Анти-спуф: сетевое событие от клиента — переключать режим предложения можно только
+        // на самой управляемой сущности отправителя, а не на произвольном игроке.
+        if (session.SenderSession.AttachedEntity != player)
+            return;
+
+        TryToggleOfferMode(player);
     }
 
     private void OnGiverInteractUsing(Entity<OfferGiverComponent> ent, ref InteractUsingEvent args)

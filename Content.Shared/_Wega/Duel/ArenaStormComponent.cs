@@ -1,4 +1,5 @@
 using Content.Shared.Damage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._Wega.Duel;
@@ -63,6 +64,10 @@ public sealed partial class ArenaStormComponent : Component
     /// <summary>Объявлять ли в чат начало наступления шторма.</summary>
     [DataField]
     public bool Announce = true;
+
+    /// <summary>Звук в момент начала наступления шторма (сужения зоны).</summary>
+    [DataField]
+    public SoundSpecifier? StormSound = new SoundPathSpecifier("/Audio/_Wega/Duel/duel_storm.ogg");
 
     // --- Серверные тайминги (не сетятся) ---
 
