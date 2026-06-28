@@ -68,19 +68,75 @@
 
 # ── Кнопка старта ────────────────────────────────────────────────────────────
 
+# Кнопка готовности (ready-check). Нажатие НЕ стартует бой сразу: оно помечает нажавшего готовым
+# (над ним загорается голограмма «ГОТОВ»). Когда готовы все живые бойцы арены (минимум 2),
+# DuelArenaSystem программно дёргает порт Pressed → DuelStart → таймер → DuelFight (как раньше).
+# Если базы запечатаны и до одной кнопки дотягивается только один боец — поставь по такой кнопке
+# в каждую базу: готовность общая на арену (по гриду), так что несколько кнопок работают вместе.
 - type: entity
   id: DuelStartButton
-  parent: SignalButton
-  name: duel start button
+  parent: BaseWallmountMetallic
+  name: кнопка готовности к дуэли
   suffix: Duel Arena
-  description: Запускает обратный отсчёт и открывает барьеры арены.
+  description: Нажми, чтобы подтвердить готовность. Над тобой загорится голограмма «ГОТОВ». Бой начнётся, когда готовы оба бойца.
   components:
+  # НЕ наследуемся от SignalButton: его SignalSwitch транслировал бы DuelStart по КАЖДОМУ нажатию
+  # (мгновенный старт, без ready-check). Нажатие ловит DuelReadyButton; сигнал DuelStart на таймер
+  # шлётся программно через этот же порт Pressed / канал DuelStart, только когда готовы все.
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: Structures/Wallmounts/switch.rsi
+    state: dead
+  - type: UseDelay
+    delay: 0.5
+  - type: DuelReadyButton
+  - type: Rotatable
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+  - type: WirelessNetworkConnection
+    range: 200
   - type: DeviceLinkSource
     ports:
       - Pressed
-    range: 200
   - type: AutoLinkTransmitter
     channel: DuelStart
+  - type: Transform
+    anchored: false
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+
+# ── Голограмма готовности ────────────────────────────────────────────────────
+# Спавнится над бойцом, когда он нажал кнопку готовности; снимается при отмене готовности и при
+# старте/конце/сбросе боя (DuelArenaSystem.Ready). Только индикатор — без физики и коллизий.
+- type: entity
+  id: DuelReadyHologram
+  name: голограмма готовности
+  suffix: Duel Arena
+  categories: [ HideSpawnMenu ]
+  description: Голографическая отметка готовности бойца.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    drawdepth: Overlays
+    noRot: true
+    sprite: _Wega/Effects/duel_ready.rsi
+    layers:
+      - state: icon
+        shader: unshaded
+  - type: PointLight
+    radius: 1.5
+    energy: 1.2
+    color: "#4DFF73"
+    castShadows: false
 
 # ── Звуковой эмиттер ─────────────────────────────────────────────────────────
 

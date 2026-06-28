@@ -1,0 +1,34 @@
+# Изношенное оружие Диких: дешёвое, потрёпанное. Меткость теперь задаётся ТИПОМ скава
+# (RaidSkavAccuracy), а не стволом — поэтому здесь разброс лишь слегка повышен «для износа», а косость
+# обеспечивает сам дикий. Дёшево стоит (низкий StaticPrice) — мусорный дроп, маленькая награда.
+
+- type: entity
+  parent: WeaponPistolMk58
+  id: WeaponPistolMk58Skav
+  name: изношенный пистолет Mk 58
+  suffix: Дикий
+  description: Ушатанный пистолет Дикого. Ствол разболтан, в руках косого падальщика толку немного.
+  components:
+  - type: Gun
+    minAngle: 4
+    maxAngle: 18
+    angleIncrease: 6
+    angleDecay: 6
+  # Магазин уже заряжен по умолчанию (startingItem у BaseWeaponPistol) — отдельно патроны не нужны.
+  - type: StaticPrice
+    price: 120
+
+- type: entity
+  parent: WeaponSubMachineGunDrozd
+  id: WeaponSubMachineGunDrozdSkav
+  name: изношенный «Дрозд»
+  suffix: Дикий
+  description: Раздолбанный «Дрозд» Дикого. Сыпется на ходу, но всё ещё плюётся свинцом — мимо.
+  components:
+  - type: Gun
+    minAngle: 6
+    maxAngle: 22
+    angleIncrease: 6
+    angleDecay: 5
+  - type: StaticPrice
+    price: 220

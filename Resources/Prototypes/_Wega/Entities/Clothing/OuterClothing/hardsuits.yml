@@ -204,15 +204,20 @@
   - type: ItemToggle
     onUse: false
   - type: BreakStealthOnDamage
+  # Плоская невидимость (как у скафандра ниндзя): носитель скрыт, пока покров активен, даже
+  # В ДВИЖЕНИИ. Раньше тут был StealthOnMove (виден при движении, невидим только стоя) —
+  # но в дуэли бойцы постоянно двигаются, поэтому покров фактически никогда не маскировал
+  # («невидимость не работала»). lastVisibility/minVisibility 0.1 — лёгкое мерцание, а не
+  # абсолютная невидимость: внимательный соперник всё же замечает искажение (контрплей).
+  # Раскрытие при попадании по носителю — BreakStealthOnDamage (снимает Stealth при уроне).
   - type: ComponentToggler
     parent: true
     components:
       - type: Stealth
         hadOutline: true
         examineThreshold: 0.9
-      - type: StealthOnMove
-        passiveVisibilityRate: -1.25
-        movementVisibilityRate: 0.3
+        lastVisibility: 0.1
+        minVisibility: 0.1
   - type: PowerCellDraw
     drawRate: 7
   - type: ToggleCellDraw

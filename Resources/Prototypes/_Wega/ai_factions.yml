@@ -49,3 +49,19 @@
   - SimpleHostile
   - Xeno
   - Dragon
+
+# ── Экстракшн-режим «рейд» ─────────────────────────────────────────────────────
+# Скавы — падальщики локации. Враждебны к любым игрокам (крю NanoTrasen и Syndicate),
+# но НЕ к боссам (RaidBoss) и не к своим: нейтралитет задаётся отсутствием в hostile.
+- type: npcFaction
+  id: Skav
+  hostile:
+  - NanoTrasen
+  - Syndicate
+
+# Боссы рейда. Тоже враждебны к игрокам, но скавов (Skav) не трогают — нейтралитет.
+- type: npcFaction
+  id: RaidBoss
+  hostile:
+  - NanoTrasen
+  - Syndicate

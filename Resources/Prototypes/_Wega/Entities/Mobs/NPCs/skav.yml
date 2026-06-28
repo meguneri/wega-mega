@@ -1,0 +1,160 @@
+# Дикие — враждебная фракция экстракшн-режима («рейд»). Внутренний id фракции — Skav.
+#
+# Дикие: медленно бродят по локации, нападают по видимости, при тяжёлых ранах отходят (RaidSkavCompound).
+# Снаряжение разное (см. варианты). Меткость задаётся ТИПОМ (RaidSkavAccuracy), а не стволом — дикие
+# косые с любым оружием; «изношенные» стволы лишь оправдывают это и дёшевы. С трупа падает снаряжение
+# и ценность из рюкзака (RaidLootCarrier метит рекурсивно). Death-акидайзер намеренно не ставим.
+#
+# Боссы: толстые, точные (обычные стволы), стоят и охраняют точку (RaidBossCompound без блуждания),
+# имя случайно-уникальное (RandomMetadata), снаряжение всегда лучше, с трупа — крутой бонус-дроп.
+
+# ── База диких ────────────────────────────────────────────────────────────────
+- type: entity
+  abstract: true
+  parent: MobHuman
+  id: MobSkavBase
+  name: дикий
+  description: Одичавший падальщик локации. Медлителен и косоглаз, но опасен в стае.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - Skav
+  # Медленный шаркающий шаг.
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 1.8
+    baseSprintSpeed: 2.6
+  # Косоглазие задаётся ТИПОМ, а не стволом: широкий конус, медленный доворот, редкие выстрелы.
+  - type: RaidSkavAccuracy
+    accuracyDegrees: 50
+    shootDelay: 0.45
+    rotationSpeedDegrees: 100
+  - type: InputMover
+  - type: MobMover
+  # Бой + блуждание, но с веткой бегства при тяжёлых ранах.
+  - type: HTN
+    rootTask:
+      task: RaidSkavCompound
+  # Запоминают и преследуют того, кто их задел / на кого «позвали».
+  - type: NPCRetaliation
+    attackMemoryLength: 15
+  - type: FactionException
+  # Сами достают запасной магазин из сумки и перезаряжаются, когда ствол пуст.
+  - type: RaidSkavAutoReload
+  - type: RaidLootCarrier
+  # Перекличка между собой + боевые выкрики.
+  - type: RaidSkavChatter
+    phrases:
+    - raid-skav-chatter-1
+    - raid-skav-chatter-2
+    - raid-skav-chatter-3
+    - raid-skav-chatter-4
+    - raid-skav-chatter-5
+    - raid-skav-chatter-6
+    - raid-skav-chatter-7
+    - raid-skav-chatter-8
+    combatPhrases:
+    - raid-skav-bark-1
+    - raid-skav-bark-2
+    - raid-skav-bark-3
+    - raid-skav-bark-4
+    - raid-skav-bark-5
+
+# Единственный тип Дикого: снаряжение РАНДОМНОЕ — Loadout выдаёт ОДИН случайный набор из списка
+# на каждом спавне (а не фикс-пресет). Поэтому варианты-по-оружию больше не нужны.
+- type: entity
+  parent: MobSkavBase
+  id: MobSkav
+  components:
+  - type: Loadout
+    prototypes:
+    - SkavGearScrapper
+    - SkavGearMauler
+    - SkavGearAxe
+    - SkavGearSpear
+    - SkavGearKnifer
+    - SkavGearGunner
+    - SkavGearSprayer
+
+# ── База боссов ───────────────────────────────────────────────────────────────
+- type: entity
+  abstract: true
+  parent: MobHuman
+  id: MobSkavBossBase
+  name: вожак Диких
+  description: Матёрый главарь падальщиков. Толстый, точный и злой — стережёт своё логово.
+  components:
+  - type: NpcFactionMember
+    factions:
+    - RaidBoss
+  # Случайно-уникальное имя: «Вожак «Бешеный Кабан»» и т.п.
+  - type: RandomMetadata
+    nameSegments:
+    - NamesSkavBossTitle
+    - NamesSkavBossName
+    nameFormat: name-format-skav-boss
+  # Точная стрельба — задаётся типом: узкий конус, мгновенный доворот, частые выстрелы.
+  - type: RaidSkavAccuracy
+    accuracyDegrees: 6
+    shootDelay: 0.15
+  - type: InputMover
+  - type: MobMover
+  # Не бродит и не лутается — стоит и охраняет точку, вступает в бой по видимости.
+  - type: HTN
+    rootTask:
+      task: RaidBossCompound
+  # Заметно толще обычного скава.
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      250: PreCritical
+      300: Critical
+      500: Dead
+  - type: RaidLootCarrier
+    bonusLoot:
+    - IngotGold1
+    - MaterialDiamond1
+    - WeaponRifleAk
+  # Запоминает и преследует обидчиков дольше обычных скавов.
+  - type: NPCRetaliation
+    attackMemoryLength: 30
+  - type: FactionException
+  # Сам перезаряжается из запасных магазинов.
+  - type: RaidSkavAutoReload
+  # Реплики вожака — реже и весомее, плюс боевые.
+  - type: RaidSkavChatter
+    minDelay: 18
+    maxDelay: 40
+    phrases:
+    - raid-skav-boss-chatter-1
+    - raid-skav-boss-chatter-2
+    - raid-skav-boss-chatter-3
+    - raid-skav-boss-chatter-4
+    - raid-skav-boss-chatter-5
+    combatPhrases:
+    - raid-skav-boss-bark-1
+    - raid-skav-boss-bark-2
+    - raid-skav-boss-bark-3
+
+- type: entity
+  parent: MobSkavBossBase
+  id: MobSkavBoss
+  components:
+  - type: Loadout
+    prototypes:
+    - SkavBossGearRifle
+
+- type: entity
+  parent: MobSkavBossBase
+  id: MobSkavBossShotgun
+  components:
+  - type: Loadout
+    prototypes:
+    - SkavBossGearShotgun
+
+- type: entity
+  parent: MobSkavBossBase
+  id: MobSkavBossSMG
+  components:
+  - type: Loadout
+    prototypes:
+    - SkavBossGearSMG

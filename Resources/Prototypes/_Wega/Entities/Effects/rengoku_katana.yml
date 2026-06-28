@@ -1,12 +1,79 @@
-# TODO (см. /TODO.md): переделать на кастомные анимации — текущий свод
-# explosion.rsi + fire.rsi выглядит «так себе».
-# Визуальные эффекты приёмов катаны Рэнгоку. Спавнятся RengokuKatanaSystem
-# преимущественно НА задетых целях. Каждый эффект — комбинация двух слоёв:
+# Визуальные эффекты приёмов катаны Рэнгоку. Спавнятся RengokuKatanaSystem:
+#   * на задетых целях (вспышка пламени),
+#   * веером перед носителем (взмах Первой формы),
+#   * кольцом и следом вдоль рывка (Девятая форма).
+# Каждый эффект собран из ванильных огненных слоёв, скомпонованных так, чтобы
+# читались как «Дыхание Пламени»:
 #   explosion.rsi/explosionfast — резкая огненная вспышка (0.48с)
-#   fire.rsi/fire               — языки пламени поверх (горящая цель)
-# Оба слоя unshaded: светятся сами, не темнеют от освещения карты.
-# lifetime ≈ длительности взрыва, чтобы вспышка не зацикливалась.
+#   fire.rsi/fire               — языки пламени (несколько слоёв со смещением)
+#   sparks.rsi/sparks           — разлетающиеся искры-угли (перекрашены в тёплый)
+# Все слои unshaded — светятся сами и не темнеют от освещения карты.
+# lifetime подобран так, чтобы вспышка не зацикливалась.
 
+# Лёгкий язык пламени — веер Первой формы и кольцо Девятой.
+- type: entity
+  id: EffectRengokuFlame
+  name: flame
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    layers:
+    - sprite: Effects/fire.rsi
+      state: fire
+      shader: unshaded
+      scale: 1.2, 1.2
+      color: "#FFB454"
+    - sprite: Effects/sparks.rsi
+      state: sparks
+      shader: unshaded
+      scale: 0.9, 0.9
+      color: "#FFD27A"
+  - type: PointLight
+    radius: 3
+    energy: 4
+    color: "#FF7A00"
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 0.4
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Огненный след, остающийся за носителем во время рывка Девятой формы.
+- type: entity
+  id: EffectRengokuTrail
+  name: flame trail
+  categories: [ HideSpawnMenu ]
+  save: false
+  components:
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    layers:
+    - sprite: Effects/fire.rsi
+      state: fire
+      shader: unshaded
+      scale: 0.95, 0.95
+      color: "#FF9A3C"
+  - type: PointLight
+    radius: 2.5
+    energy: 3
+    color: "#FF6A00"
+    netsync: false
+  - type: TimedDespawn
+    lifetime: 0.45
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+# Вспышка пламени НА задетой Первой формой цели.
 - type: entity
   id: EffectRengokuFirstForm
   name: flame arc
@@ -29,9 +96,20 @@
       shader: unshaded
       scale: 1.4, 1.4
       color: "#FFC85A"
+    - sprite: Effects/fire.rsi
+      state: fire
+      shader: unshaded
+      scale: 1.1, 1.1
+      offset: 0.15, 0.2
+      color: "#FF8A2E"
+    - sprite: Effects/sparks.rsi
+      state: sparks
+      shader: unshaded
+      scale: 1.2, 1.2
+      color: "#FFD27A"
   - type: PointLight
-    radius: 4
-    energy: 5
+    radius: 4.5
+    energy: 6
     color: "#FF7A00"
     netsync: false
   - type: TimedDespawn
@@ -40,7 +118,7 @@
     tags:
     - HideContextMenu
 
-# Центральная вспышка девятой формы — в точке приземления рывка.
+# Центральная вспышка Девятой формы — в точке приземления рывка.
 - type: entity
   id: EffectRengokuNinthForm
   name: rengoku
@@ -56,25 +134,35 @@
     - sprite: Effects/explosion.rsi
       state: explosionfast
       shader: unshaded
-      scale: 2.8, 2.8
+      scale: 3.0, 3.0
       color: "#FF7A2E"
+    - sprite: Effects/explosion.rsi
+      state: explosionfast
+      shader: unshaded
+      scale: 1.8, 1.8
+      color: "#FFD15A"
     - sprite: Effects/fire.rsi
       state: fire
       shader: unshaded
       scale: 3.2, 3.2
       color: "#FF9030"
+    - sprite: Effects/sparks.rsi
+      state: sparks
+      shader: unshaded
+      scale: 2.6, 2.6
+      color: "#FFD27A"
   - type: PointLight
-    radius: 12
-    energy: 13
+    radius: 13
+    energy: 15
     color: "#FF4500"
     netsync: false
   - type: TimedDespawn
-    lifetime: 0.55
+    lifetime: 0.6
   - type: Tag
     tags:
     - HideContextMenu
 
-# Эффект на КАЖДОЙ задетой девятой формой цели — она вспыхивает.
+# Эффект на КАЖДОЙ задетой Девятой формой цели — она вспыхивает.
 - type: entity
   id: EffectRengokuNinthHit
   name: flame burst
@@ -97,6 +185,11 @@
       shader: unshaded
       scale: 1.8, 1.8
       color: "#FFB050"
+    - sprite: Effects/sparks.rsi
+      state: sparks
+      shader: unshaded
+      scale: 1.5, 1.5
+      color: "#FFD27A"
   - type: PointLight
     radius: 5
     energy: 6

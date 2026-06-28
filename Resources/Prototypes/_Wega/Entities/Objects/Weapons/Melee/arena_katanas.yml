@@ -101,6 +101,144 @@
   - type: ChangeTemperatureOnHit
     heat: 150000
 
+# Грозовая катана — клинок, бьющий разрядом. Часть урона — Shock, который многие
+# брони держат хуже пореза, поэтому против бронированных целей бьёт ощутимее базовой.
+- type: entity
+  name: tempest katana
+  description: A blade humming with caged lightning. Every cut arcs raw voltage through the target.
+  parent: ArenaBaseKatana
+  id: ArenaTempestKatana
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    layers:
+    - state: blade
+      color: "#FFE23A"
+    - state: handle
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: handle-inhand-left
+      - state: blade-inhand-left
+        color: "#FFE23A"
+      right:
+      - state: handle-inhand-right
+      - state: blade-inhand-right
+        color: "#FFE23A"
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: handle-equipped-BACKPACK
+      - state: blade-equipped-BACKPACK
+        color: "#FFE23A"
+      belt:
+      - state: handle-equipped-BELT
+      - state: blade-equipped-BELT
+        color: "#FFE23A"
+  - type: MeleeWeapon
+    wideAnimationRotation: -60
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 12
+        Shock: 6
+  - type: PointLight
+    radius: 1.2
+    energy: 1.5
+    castShadows: false
+    color: "#FFE23A"
+
+# Ядовитая катана — лезвие сочится кислотой. Caustic-урон разъедает и плоть, и броню.
+- type: entity
+  name: venom katana
+  description: Its edge weeps a hissing acid that eats through flesh and armour alike.
+  parent: ArenaBaseKatana
+  id: ArenaVenomKatana
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    layers:
+    - state: blade
+      color: "#7FE03A"
+    - state: handle
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: handle-inhand-left
+      - state: blade-inhand-left
+        color: "#7FE03A"
+      right:
+      - state: handle-inhand-right
+      - state: blade-inhand-right
+        color: "#7FE03A"
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: handle-equipped-BACKPACK
+      - state: blade-equipped-BACKPACK
+        color: "#7FE03A"
+      belt:
+      - state: handle-equipped-BELT
+      - state: blade-equipped-BELT
+        color: "#7FE03A"
+  - type: MeleeWeapon
+    wideAnimationRotation: -60
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 12
+        Caustic: 6
+
+# Лучезарная катана — освящённый клинок. Доступный вариант со святым уроном
+# (теневая катана — премиальный «легендарный» аналог с большим уроном и ценой).
+- type: entity
+  name: radiant katana
+  description: Forged in consecrated light. The blade sears the unholy with every strike.
+  parent: ArenaBaseKatana
+  id: ArenaRadiantKatana
+  categories: [ DoNotMap ]
+  components:
+  - type: Sprite
+    layers:
+    - state: blade
+      color: "#FFF2B0"
+    - state: handle
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: handle-inhand-left
+      - state: blade-inhand-left
+        color: "#FFF2B0"
+      right:
+      - state: handle-inhand-right
+      - state: blade-inhand-right
+        color: "#FFF2B0"
+  - type: Clothing
+    clothingVisuals:
+      back:
+      - state: handle-equipped-BACKPACK
+      - state: blade-equipped-BACKPACK
+        color: "#FFF2B0"
+      belt:
+      - state: handle-equipped-BELT
+      - state: blade-equipped-BELT
+        color: "#FFF2B0"
+  - type: MeleeWeapon
+    wideAnimationRotation: -60
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 13
+        Holy: 8
+  - type: PointLight
+    radius: 1.2
+    energy: 1.5
+    castShadows: false
+    color: "#FFF0C0"
+
 - type: entity
   name: shadow katana
   description: Legendary sword that emits the darkness itself. Has an ability to pierce through any armor with enough luck and determination.
@@ -197,9 +335,11 @@
   # Приёмы Дыхания Пламени.
   - type: RengokuKatana
     firstFormEffect: EffectRengokuFirstForm
+    firstFormArcEffect: EffectRengokuFlame
     ninthFormEffect: EffectRengokuNinthForm
-    ninthFormTrailEffect: EffectRengokuFirstForm
+    ninthFormTrailEffect: EffectRengokuTrail
     ninthFormHitEffect: EffectRengokuNinthHit
+    ninthFormRingEffect: EffectRengokuFlame
     firstFormSound:
       path: /Audio/_Wega/Weapons/rengoku_fire_explosion.ogg
     ninthFormSound:

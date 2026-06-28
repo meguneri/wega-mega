@@ -45,9 +45,20 @@ public sealed partial class RengokuKatanaComponent : Component
     [DataField]
     public SoundSpecifier FirstFormSound = new SoundPathSpecifier("/Audio/Effects/fire.ogg");
 
-    /// <summary>Опциональный визуальный эффект, спавнится в позиции носителя.</summary>
+    /// <summary>Опциональный визуальный эффект, спавнится НА каждой задетой цели.</summary>
     [DataField]
     public EntProtoId? FirstFormEffect;
+
+    /// <summary>
+    /// Лёгкий эффект пламени для веера взмаха — спавнится дугой перед носителем
+    /// независимо от того, попал ли приём, чтобы взмах было видно.
+    /// </summary>
+    [DataField]
+    public EntProtoId? FirstFormArcEffect;
+
+    /// <summary>Сколько язычков пламени выкладывается в веер взмаха.</summary>
+    [DataField]
+    public int FirstFormArcCount = 5;
 
     // === Девятая форма: Рэнгоку (玖ノ型 煉獄) ===
     // Коронный приём — огненный рывок сквозь врагов с мощным взрывом пламени.
@@ -97,6 +108,14 @@ public sealed partial class RengokuKatanaComponent : Component
     /// <summary>Эффект, спавнящийся НА каждой задетой девятой формой цели.</summary>
     [DataField]
     public EntProtoId? NinthFormHitEffect;
+
+    /// <summary>Лёгкий эффект пламени, выкладываемый кольцом вокруг точки взрыва.</summary>
+    [DataField]
+    public EntProtoId? NinthFormRingEffect;
+
+    /// <summary>Сколько язычков пламени в огненном кольце взрыва.</summary>
+    [DataField]
+    public int NinthFormRingCount = 8;
 
     /// <summary>Сколько вспышек пламени оставляет след за время рывка.</summary>
     [DataField]

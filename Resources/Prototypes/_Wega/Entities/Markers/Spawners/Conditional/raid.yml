@@ -1,0 +1,165 @@
+# Маркеры экстракшн-режима («рейд»). Ставятся при маппинге.
+#
+# Схема расстановки:
+#   ХАБ (карта станции/лобби):
+#     • RaidController        — один на сервер, поле raidMap = путь к карте-локации рейда.
+#     • RaidEntryButton       — кнопка входа (можно несколько). Жмёшь → всех мобов с грида кнопки
+#                               переносит на спавны рейда и стартует таймер.
+#     • RaidReturnMarker      — точка возврата выживших (одна). Нет маркера → возврат на контроллер.
+#   КАРТА РЕЙДА (отдельный .yml, указан в RaidController.raidMap):
+#     • RaidSpawnMarker(N)    — точки появления рейдеров (несколько по краям).
+#     • RaidExtractionPoint   — зона(ы) экстракта: стой ExtractTime сек → эвакуация на хаб.
+
+# ── Контроллер рейда (на хаб) ─────────────────────────────────────────────────
+- type: entity
+  id: RaidController
+  parent: MarkerBase
+  name: Raid Controller
+  suffix: Raid
+  description: Невидимый контроллер экстракшн-режима. Предзагружает карту рейда и ведёт таймер. Укажи raidMap.
+  components:
+  - type: Sprite
+    layers:
+      - state: pink
+  - type: RaidController
+    # Путь к карте-локации рейда. ОБЯЗАТЕЛЬНО заменить на свою карту.
+    raidMap: /Maps/_Wega/Raid/raid_location.yml
+    raidDuration: 900
+    # Предупреждения «на выход» за N секунд до конца.
+    warningTimes:
+    - 300
+    - 60
+    # Кто не успел эвакуироваться к концу таймера — задыхается (MIA, теряет всё). Убери блок для
+    # мягкого режима (просто конец рейда без смертей).
+    miaDamage:
+      types:
+        Asphyxiation: 500
+
+# Тестовый контроллер: грузит готовую карту-арену как локацию рейда и ставит короткий таймер.
+# Нужен только для быстрой проверки режима админ-спавном без сборки своей карты (см. RAID_MODE.md).
+- type: entity
+  parent: RaidController
+  id: RaidControllerTest
+  suffix: Raid, TEST
+  components:
+  - type: RaidController
+    raidMap: /Maps/_Wega/Arena/arena_duel_31.yml
+    raidDuration: 180
+    autoSetup: true
+    warningTimes:
+    - 60
+    - 15
+    miaDamage:
+      types:
+        Asphyxiation: 500
+
+# ── Кнопка входа (на хаб) ─────────────────────────────────────────────────────
+- type: entity
+  id: RaidEntryButton
+  parent: SignalButton
+  name: raid entry button
+  suffix: Raid
+  description: Кнопка входа в рейд. Переносит игроков с хаба на карту рейда и стартует таймер.
+  components:
+  - type: RaidEntry
+
+# ── Точка возврата выживших (на хаб) ──────────────────────────────────────────
+- type: entity
+  id: RaidReturnMarker
+  parent: MarkerBase
+  name: Raid Return
+  suffix: Raid
+  description: Невидимая точка возврата на хаб. Сюда телепортирует выживших при экстракте.
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+  - type: RaidReturn
+
+# ── Хаб-магазин: закупка снаряжения за добытые ТК ─────────────────────────────
+# Терминал на базе StorePresetFullArsenal (весь арсенальный пул за телекристаллы). Игрок вставляет
+# в него заработанные на выносе ТК и закупается перед следующим заходом. Ставится на хаб.
+- type: entity
+  parent: [ VendingMachine, StorePresetFullArsenal ]
+  id: RaidShopTerminal
+  name: терминал рейд-снабжения
+  suffix: Raid
+  description: Закупка снаряжения за телекристаллы, добытые в рейдах. Вставь ТК и закупись.
+  components:
+  - type: Sprite
+    sprite: _Wega/Structures/Machines/VendingMachines/pat.rsi
+    layers:
+    - state: base
+    - state: unshaded
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StoreUiKey.Key
+  - type: Store
+    # Сбрасываем фракционную привязку пресета — покупать может любой рейдер.
+    expectedFaction: []
+    balance:
+      Telecrystal: 0
+
+# ── Точка появления рейдера (на карту рейда) ──────────────────────────────────
+- type: entity
+  id: RaidSpawnMarker
+  parent: MarkerBase
+  name: Raid Spawn
+  suffix: Raid, Spawn 0
+  description: Невидимая точка появления рейдера на карте рейда (точка инсерта).
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+  - type: RaidSpawn
+    spawnIndex: 0
+
+- type: entity
+  parent: RaidSpawnMarker
+  id: RaidSpawnMarker1
+  suffix: Raid, Spawn 1
+  components:
+  - type: RaidSpawn
+    spawnIndex: 1
+
+- type: entity
+  parent: RaidSpawnMarker
+  id: RaidSpawnMarker2
+  suffix: Raid, Spawn 2
+  components:
+  - type: RaidSpawn
+    spawnIndex: 2
+
+- type: entity
+  parent: RaidSpawnMarker
+  id: RaidSpawnMarker3
+  suffix: Raid, Spawn 3
+  components:
+  - type: RaidSpawn
+    spawnIndex: 3
+
+# ── Точка экстракта (на карту рейда) ──────────────────────────────────────────
+- type: entity
+  id: RaidExtractionPoint
+  parent: MarkerBase
+  name: Raid Extraction Point
+  suffix: Raid
+  description: Зона экстракта. Стой в радиусе несколько секунд — эвакуация на хаб со снаряжением.
+  components:
+  - type: Sprite
+    layers:
+      - state: blue
+  - type: RaidExtractionPoint
+    range: 1.5
+    extractTime: 10

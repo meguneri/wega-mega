@@ -52,6 +52,12 @@
 | Адский клинок | `ArenaHellBlade` | 4 TC |
 | Кровавый клинок | `ArenaBloodBlade` | 5 TC |
 | Нереальный меч | `WeaponUnrealSword` | 5 TC |
+| Энергокатана ниндзя | `EnergyKatana` | 9 TC |
+| Сабля капитана | `ClothingBeltSheathFilled` | 3 TC |
+| Рапира Синдиката | `ClothingBeltSheathSyndicateFilled` | 8 TC |
+| Нулевой жезл | `ClothingBeltSheathChaplinFilled` | 2 TC |
+| Клинок смерти | `WeaponDeathBladeArena` | 7 TC |
+| Кость войны | `DiceOfWar` | 10 TC |
 
 ## Броня и одежда с бронёй
 
@@ -349,6 +355,11 @@
 | Рюкзак службы безопасности | `ClothingBackpackSecurity` | 2 TC |
 | Рюкзак наёмника | `ClothingBackpackMerc` | 3 TC |
 | Вещмешок Синдиката (EVA-набор) | `ClothingBackpackDuffelSyndicateEVABundle` | 3 TC |
+| Рюкзак | `ClothingBackpack` | 1 TC |
+| Кожаная сумка | `ClothingBackpackSatchelLeather` | 1 TC |
+| Вещмешок | `ClothingBackpackDuffel` | 1 TC |
+| Сумка | `ClothingBackpackSatchel` | 1 TC |
+| Кожаная поясная сумка | `ClothingBeltStorageWaistbag` | 1 TC |
 
 ## Комбинезоны
 
@@ -520,6 +531,7 @@
 | Предмет | Entity | Цена |
 |---|---|---|
 | Арбузная шляпа | `ClothingHeadHatWatermelon` | 1 TC |
+| Омега-мыло | `SoapOmega` | 2 TC |
 
 ## Ближний бой (дополнительно)
 

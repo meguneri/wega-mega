@@ -199,7 +199,7 @@
 | Винтовка AK | `WeaponRifleAk` | 6 TC |
 | АК-514 | `WeaponRifleAK514` | 13 TC |
 | SKM-24 | `WeaponRifleSKM24` | 8 TC |
-| SKM-28 (снайперская, .308) | `WeaponRifleSKM28` | 10 TC |
+| SKM-28 (снайперская, .308) | `WeaponRifleSKM28Syndi` | 10 TC |
 | Bauer127 (противоматериальная, 15mm) | `WeaponRifleBauer127Arena` | 12 TC |
 | Набор "Элитный Снайпер" (Bauer127 + 2×наборы магазинов + тепловизор) | `ClothingBackpackDuffelSyndicateFilledBauer127` | 20 TC |
 | Ионный карабин | `WeaponIonCarabine` | 5 TC |
@@ -336,7 +336,7 @@
 | Тренч | `ClothingOuterCoatTrench` | 1 TC |
 | Доги | `ClothingOuterDogi` | 2 TC |
 | Бронированный медицинский халат | `ClothingOuterCoatAMG` | 2 TC |
-| Одеяние флаггелянта (не под лимитом брони) | `ClothingOuterFlagellantRobe` | 2 TC |
+| Одеяние флаггелянта (не под лимитом брони) | `ClothingOuterFlagellantRobeArsenal` | 2 TC |
 | Тонкий базовый бронежилет | `ClothingOuterArmorBasicSlim` | 3 TC |
 | Броня Синего щита | `ClothingOuterArmorBlueShield` | 5 TC |
 | Карапас капитана | `ClothingOuterArmorCaptainCarapace` | 5 TC |
@@ -726,6 +726,7 @@
 | Набор стрелка | `ArenaWestSet` | 7 TC |
 | Набор капиталиста | `ArenaCapitalistSet` | 5 TC |
 | Чумба, ты совсем ё@%&тый? | `ArenaNorthStarSet` | 120 TC |
+| Чумба, ты совсем ё@%&тый? (имплант) | `ArenaNorthStarImplantSet` | 120 TC |
 | Набор святоши | `ArenaHolyManSet` | 6 TC |
 | Травматическая аптечка | `ArenaSurvivalTraumaKit` | 6 TC |
 | Противоожоговая аптечка | `ArenaSurvivalBurnKit` | 6 TC |

@@ -1,0 +1,169 @@
+# Снаряжение скавов экстракшн-режима. Падает с трупа (носитель метит его RaidLoot рекурсивно, включая
+# содержимое рюкзака) — игрок может вынести за деньги. У каждого дикого свой набор: разное оружие
+# плюс какая-нибудь ценность в рюкзаке. Боссы — всегда лучше: броня, точный ствол, больше ценностей.
+
+# ── Дикие скавы: разнообразные наборы ─────────────────────────────────────────
+- type: startingGear
+  id: SkavGearScrapper
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    outerClothing: ClothingOuterArmorBasicSlim
+    head: ClothingHeadHatGreysoft
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpack
+  inhand:
+    - WeaponMeleeToolboxRobust
+  storage:
+    back:
+    - ResearchDisk
+
+- type: startingGear
+  id: SkavGearMauler
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+    outerClothing: ClothingOuterArmorBasicSlim
+    head: ClothingHeadHatGreysoft
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpack
+  inhand:
+    - Machete
+  storage:
+    back:
+    - IngotSilver1
+
+- type: startingGear
+  id: SkavGearAxe
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    outerClothing: ClothingOuterVestHazard
+    head: ClothingHeadHatWelding
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackDuffel
+  inhand:
+    - FireAxe
+  storage:
+    back:
+    - SpaceCash500
+
+- type: startingGear
+  id: SkavGearSpear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+    head: ClothingHeadHatGreysoft
+    mask: ClothingMaskGas
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpack
+  inhand:
+    - Spear
+  storage:
+    back:
+    - ResearchDisk
+
+- type: startingGear
+  id: SkavGearKnifer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    outerClothing: ClothingOuterArmorBasicSlim
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpack
+  inhand:
+    - CombatKnife
+  storage:
+    back:
+    - SpaceCash500
+
+- type: startingGear
+  id: SkavGearGunner
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitPrisoner
+    outerClothing: ClothingOuterArmorBasic
+    head: ClothingHeadHelmetBasic
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpack
+  inhand:
+    - WeaponPistolMk58Skav
+  storage:
+    back:
+    - IngotGold1
+    # Запасные магазины — лут с трупа + задел под авто-перезарядку.
+    - MagazinePistol
+    - MagazinePistol
+
+- type: startingGear
+  id: SkavGearSprayer
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+    outerClothing: ClothingOuterArmorBasic
+    head: ClothingHeadHatGreysoft
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesColorBlack
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackDuffel
+  inhand:
+    - WeaponSubMachineGunDrozdSkav
+  storage:
+    back:
+    - IngotSilver1
+    # Запасные магазины — лут с трупа + задел под авто-перезарядку.
+    - MagazinePistolSubMachineGun
+    - MagazinePistolSubMachineGun
+
+# ── Боссы: всегда лучше (броня + точный ствол + ценности) ──────────────────────
+- type: startingGear
+  id: SkavBossGearRifle
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+    outerClothing: ClothingOuterArmorBulletproof
+    head: ClothingHeadHelmetBasic
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesCombat
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackDuffel
+  inhand:
+    - WeaponRifleAk
+  storage:
+    back:
+    - IngotGold1
+    - MaterialDiamond1
+
+- type: startingGear
+  id: SkavBossGearShotgun
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+    outerClothing: ClothingOuterArmorBulletproof
+    head: ClothingHeadHelmetBasic
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesCombat
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackDuffel
+  inhand:
+    - WeaponShotgunKammerer
+  storage:
+    back:
+    - IngotGold1
+    - MaterialDiamond1
+
+- type: startingGear
+  id: SkavBossGearSMG
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitColorDarkGreen
+    outerClothing: ClothingOuterArmorBulletproof
+    head: ClothingHeadHelmetBasic
+    mask: ClothingMaskGas
+    gloves: ClothingHandsGlovesCombat
+    shoes: ClothingShoesBootsCombat
+    back: ClothingBackpackDuffel
+  inhand:
+    - WeaponSubMachineGunDrozd
+  storage:
+    back:
+    - IngotGold1
+    - MaterialDiamond1

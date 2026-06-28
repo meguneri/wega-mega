@@ -193,4 +193,26 @@ public sealed partial class DuelArenaComponent : Component, IDuelScoreStore
     /// Связывается контроллером при предзагрузке арен, в маппинге вручную не выставляется.
     /// </summary>
     public EntityUid? RotationController;
+
+    // ── Ready-check (кнопка готовности) ────────────────────────────────────────
+
+    /// <summary>
+    /// Бойцы, подтвердившие готовность к старту нажатием кнопки готовности. Бой стартует, когда
+    /// готовы все живые игроки на гриде арены (минимум 2). Сбрасывается при старте/завершении/сбросе.
+    /// </summary>
+    public readonly HashSet<EntityUid> Ready = new();
+
+    /// <summary>
+    /// Голограммы «ГОТОВ», висящие над готовыми бойцами (боец → сущность-голограмма). Спавнятся при
+    /// подтверждении готовности, удаляются при снятии готовности и при старте/завершении/сбросе боя.
+    /// </summary>
+    public readonly Dictionary<EntityUid, EntityUid> ReadyHolograms = new();
+
+    /// <summary>Прототип голограммы готовности, висящей над бойцом.</summary>
+    [DataField]
+    public EntProtoId ReadyHologram = "DuelReadyHologram";
+
+    /// <summary>Звук подтверждения готовности (играется рядом с кнопкой).</summary>
+    [DataField]
+    public SoundSpecifier? ReadySound = new SoundPathSpecifier("/Audio/Machines/chime.ogg");
 }

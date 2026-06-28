@@ -9,7 +9,9 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -49,6 +51,9 @@ public sealed class RengokuKatanaSystem : EntitySystem
 
         var origin = _transform.GetWorldPosition(user);
         var facing = _transform.GetWorldRotation(user).ToWorldVec();
+
+        // Видимый веер пламени перед носителем — рисует сам взмах, даже если приём прошёл мимо.
+        SpawnArc(user, facing, comp.FirstFormRadius * 0.7f, comp.FirstFormHalfAngle, comp.FirstFormArcCount, comp.FirstFormArcEffect);
 
         var hit = false;
         foreach (var target in _lookup.GetEntitiesInRange<MobStateComponent>(Transform(user).Coordinates, comp.FirstFormRadius))
@@ -93,6 +98,9 @@ public sealed class RengokuKatanaSystem : EntitySystem
         _throwing.TryThrow(user, direction, comp.NinthFormSpeed, compensateFriction: true);
         _audio.PlayPvs(comp.NinthFormChargeSound, user);
         _audio.PlayPvs(comp.NinthFormSound, user);
+
+        // Боевой клич Пламенного столпа — виден всем рядом.
+        _popup.PopupEntity(Loc.GetString("rengoku-katana-ninth-form-cry"), user, PopupType.LargeCaution);
 
         var flyTime = comp.NinthFormRange / comp.NinthFormSpeed;
         var katana = ent.Owner;
@@ -149,6 +157,46 @@ public sealed class RengokuKatanaSystem : EntitySystem
         _audio.PlayPvs(comp.NinthFormSound, user);
         if (comp.NinthFormEffect is { } effect)
             Spawn(effect, coords);
+
+        // Огненное кольцо по краю радиуса поражения — взрыв «раскрывается».
+        SpawnRing(_transform.GetMapCoordinates(user), comp.NinthFormRadius * 0.7f, comp.NinthFormRingCount, comp.NinthFormRingEffect);
+    }
+
+    /// <summary>Выкладывает <paramref name="proto"/> веером перед носителем, рисуя дугу взмаха.</summary>
+    private void SpawnArc(EntityUid user, Vector2 facing, float radius, float halfAngleDegrees, int count, EntProtoId? proto)
+    {
+        if (proto is not { } effect || count <= 0)
+            return;
+
+        if (facing.LengthSquared() < 0.001f)
+            facing = new Vector2(1, 0);
+
+        var mapPos = _transform.GetMapCoordinates(user);
+        var baseAngle = new Angle(facing);
+        // 80% полуугла — веер держится внутри конуса поражения и выглядит аккуратнее.
+        var spread = halfAngleDegrees * 0.8f;
+
+        for (var i = 0; i < count; i++)
+        {
+            var frac = count == 1 ? 0.5f : (float)i / (count - 1);
+            var angle = baseAngle + Angle.FromDegrees((frac - 0.5f) * 2f * spread);
+            var pos = mapPos.Position + angle.ToVec() * radius;
+            Spawn(effect, new MapCoordinates(pos, mapPos.MapId));
+        }
+    }
+
+    /// <summary>Выкладывает <paramref name="proto"/> равномерным кольцом вокруг <paramref name="center"/>.</summary>
+    private void SpawnRing(MapCoordinates center, float radius, int count, EntProtoId? proto)
+    {
+        if (proto is not { } effect || count <= 0)
+            return;
+
+        for (var i = 0; i < count; i++)
+        {
+            var angle = Angle.FromDegrees(360f * i / count);
+            var pos = center.Position + angle.ToVec() * radius;
+            Spawn(effect, new MapCoordinates(pos, center.MapId));
+        }
     }
 
     private void ShakeCamera(EntityUid uid, float strength)

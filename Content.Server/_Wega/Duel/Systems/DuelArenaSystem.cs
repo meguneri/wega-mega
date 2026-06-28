@@ -51,6 +51,8 @@ public sealed partial class DuelArenaSystem : EntitySystem
         SubscribeLocalEvent<DuelArenaComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<DuelArenaComponent, SignalReceivedEvent>(OnSignalReceived);
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
+
+        InitializeReady();
     }
 
     private void OnInit(EntityUid uid, DuelArenaComponent comp, ComponentInit args)
@@ -302,6 +304,9 @@ public sealed partial class DuelArenaSystem : EntitySystem
         comp.Duelists.Clear();
         comp.IsActive = false;
 
+        // Сброс ready-check: убираем готовность и голограммы «ГОТОВ».
+        ClearReady(comp);
+
         // Останавливаем авто-дроп снабжения до следующего боя.
         comp.SupplyDropAt = null;
 
@@ -411,6 +416,9 @@ public sealed partial class DuelArenaSystem : EntitySystem
             return false; // бой ещё идёт
 
         arena.IsActive = false;
+
+        // Готовность к этому бою больше не нужна — убираем остатки ready-check (на всякий случай).
+        ClearReady(arena);
 
         // Останавливаем авто-дроп снабжения — бой окончен.
         arena.SupplyDropAt = null;

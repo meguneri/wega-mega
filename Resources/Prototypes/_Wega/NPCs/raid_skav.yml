@@ -1,0 +1,112 @@
+# Поведение дикого скава (приоритет веток сверху вниз):
+#   1) бегство при тяжёлых ранах — отход от ближайшего врага;
+#   2) дальний бой;  3) ближний бой;
+#   4) падальщичество — если рядом валяется предмет, подойти и подобрать (когда боя нет);
+#   5) блуждание (= патруль) — если и предметов рядом нет.
+- type: htnCompound
+  id: RaidSkavCompound
+  branches:
+    # 1. Бегство при тяжёлых ранах.
+    - preconditions:
+        - !type:LowHealthPrecondition
+          damageFraction: 0.5
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:UtilityOperator
+            proto: NearbyMeleeTargets
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: Target
+          operator: !type:MaintainRangeOperator
+            targetKey: Target
+            minRange: 10.0
+            maxRange: 14.0
+            shutdownState: PlanFinished
+            targetCoordinatesKey: TargetCoordinates
+            pathfindKey: TargetPathfind
+          services:
+            - !type:UtilityService
+              id: SkavFleeService
+              proto: NearbyMeleeTargets
+              key: Target
+    # 2–3. Бой: дальний (без дропа/подбора пустого ствола) → ближний (приклад/кулаки при пустом стволе).
+    - tasks:
+        - !type:HTNCompoundTask
+          task: RaidSkavRangedCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MeleeCombatCompound
+    # 4. Падальщичество: найти ближайший валяющийся предмет, дойти и подобрать. Если предметов нет —
+    #    PickAccessibleComponentOperator не найдёт цель, ветка отвалится → блуждание ниже.
+    - tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:PickAccessibleComponentOperator
+            rangeKey: IdleRange
+            targetKey: Target
+            component: Item
+        - !type:HTNPrimitiveTask
+          operator: !type:MoveToOperator
+            pathfindInPlanning: false
+        - !type:HTNPrimitiveTask
+          preconditions:
+            - !type:KeyExistsPrecondition
+              key: Target
+          operator: !type:InteractWithOperator
+            targetKey: Target
+    # 5. Блуждание (= патруль).
+    - tasks:
+        - !type:HTNCompoundTask
+          task: IdleCompound
+
+# Поведение босса-скава: как у враждебного гуманоида, но БЕЗ ветки блуждания (IdleCompound) —
+# поэтому без цели он не бродит, а стоит на месте («охраняет точку») и вступает в бой по видимости.
+# Предпочитает дальний бой, затем ближний. По образцу SimpleHumanoidHostileCompound минус Idle.
+- type: htnCompound
+  id: RaidBossCompound
+  branches:
+    - tasks:
+        - !type:HTNCompoundTask
+          task: RaidSkavRangedCompound
+    - tasks:
+        - !type:HTNCompoundTask
+          task: MeleeCombatCompound
+
+# Дальний бой скавов БЕЗ ванильных веток «выбросить пустой ствол» и «подобрать ствол» — именно они
+# в RangedCombatCompound создают цикл «бросил-поднял-бросил» (NPC не умеет перезаряжаться, а пустой
+# ствол сразу выбрасывается и тут же подбирается). Здесь: дослать затвор → взять двумя руками →
+# стрелять, если есть патроны. Кончились патроны — ветка отваливается, и HTN переходит к ближнему
+# бою (бьёт прикладом / кулаками), а ствол остаётся в руке.
+- type: htnCompound
+  id: RaidSkavRangedCompound
+  branches:
+    # Дослать патрон / закрыть затвор при необходимости.
+    - preconditions:
+        - !type:ActiveHandComponentPrecondition
+          components:
+            - type: Gun
+        - !type:GunAmmoPrecondition
+          minPercent: 0.001
+        - !type:NeedToRackBoltPrecondition
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:RackBoltOperator
+    # Взять оружие двумя руками.
+    - preconditions:
+        - !type:ActiveHandComponentPrecondition
+          components:
+            - type: Gun
+        - !type:GunAmmoPrecondition
+          minPercent: 0.001
+        - !type:WieldedPrecondition
+          wielded: false
+      tasks:
+        - !type:HTNPrimitiveTask
+          operator: !type:WieldOperator
+    # Двигаться к цели и стрелять, пока есть патроны.
+    - preconditions:
+        - !type:GunAmmoPrecondition
+          minPercent: 0.001
+      tasks:
+        - !type:HTNCompoundTask
+          task: GunCombatCompound

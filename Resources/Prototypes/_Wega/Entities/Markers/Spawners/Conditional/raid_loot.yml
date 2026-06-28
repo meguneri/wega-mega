@@ -1,0 +1,120 @@
+# Лут-спавнеры рейда. Ставятся при маппинге по локации. При загрузке карты с шансом spawnChance
+# спавнят случайные предметы из своего пула, метят их как добычу рейда (RaidLoot) и самоудаляются.
+# Стоимость предметов — штатная карго-оценка; её игрок получает телекристаллами при экстракте.
+#
+# Тиры: Common (часто, дёшево) → Rare (реже, ценнее) → Epic (редко, джекпот). Расставляй Common
+# густо по всей карте, Rare — в опасных местах, Epic — в дальних/охраняемых углах.
+
+# ── Обычный лут ───────────────────────────────────────────────────────────────
+- type: entity
+  id: RaidLootSpawnerCommon
+  parent: MarkerBase
+  name: Raid Loot (Common)
+  suffix: Raid
+  description: Спавнер обычной добычи рейда. Инструменты, материалы, расходники.
+  components:
+  - type: Sprite
+    layers:
+      - state: green
+  - type: RaidLootSpawner
+    spawnChance: 0.8
+    minItems: 1
+    maxItems: 2
+    loot:
+      - Crowbar
+      - Wrench
+      - Screwdriver
+      - SheetSteel1
+      - FoodSnackChips
+      - DrinkVodkaBottleFull
+      - Ointment
+      - MagazinePistol
+
+# ── Редкий лут ────────────────────────────────────────────────────────────────
+- type: entity
+  id: RaidLootSpawnerRare
+  parent: RaidLootSpawnerCommon
+  name: Raid Loot (Rare)
+  suffix: Raid
+  description: Спавнер редкой добычи рейда. Оружие, медицина, слитки.
+  components:
+  - type: RaidLootSpawner
+    spawnChance: 0.6
+    minItems: 1
+    maxItems: 1
+    loot:
+      - WeaponPistolMk58
+      - WeaponPistolViper
+      - WeaponPistolN1984
+      - BoxMagazinePistol
+      - Brutepack
+      - Bloodpack
+      - IngotSilver1
+      - ResearchDisk
+      - ClothingHeadHelmetBasic
+      - Spear
+
+# ── Элитный лут ───────────────────────────────────────────────────────────────
+- type: entity
+  id: RaidLootSpawnerEpic
+  parent: RaidLootSpawnerCommon
+  name: Raid Loot (Epic)
+  suffix: Raid
+  description: "Спавнер элитной добычи рейда. Джекпот: золото, алмазы."
+  components:
+  - type: RaidLootSpawner
+    spawnChance: 0.4
+    minItems: 1
+    maxItems: 1
+    loot:
+      - IngotGold1
+      - MaterialDiamond1
+      - WeaponSubMachineGunDrozd
+      - WeaponRifleAk
+      - WeaponShotgunKammerer
+      - SpaceCash500
+
+# ── Лут-поле: авто-разброс по всей карте ──────────────────────────────────────
+# Поставь маркер(ы) на грид карты рейда. Контроллер рейда триггерит поле на старте КАЖДОГО рейда:
+# чистит старый хлам и заново разбрасывает наполнение по случайным свободным тайлам. Веса тиров —
+# повторами id в spawners (Common чаще Epic). Поле остаётся на карте (не самоудаляется).
+- type: entity
+  id: RaidLootField
+  parent: MarkerBase
+  name: Raid Loot Field
+  suffix: Raid
+  description: Разбрасывает добычу рейда по случайным тайлам грида на старте каждого рейда. Один на карту.
+  components:
+  - type: Sprite
+    layers:
+      - state: pink
+  - type: RaidLootField
+    count: 40
+    spawners:
+      - RaidLootSpawnerCommon
+      - RaidLootSpawnerCommon
+      - RaidLootSpawnerCommon
+      - RaidLootSpawnerCommon
+      - RaidLootSpawnerCommon
+      - RaidLootSpawnerCommon
+      - RaidLootSpawnerRare
+      - RaidLootSpawnerRare
+      - RaidLootSpawnerRare
+      - RaidLootSpawnerEpic
+
+# Скав-поле: то же поле, но разбрасывает спавнеры скавов (с шансом — стрелки, изредка босс).
+# Тоже триггерится контроллером на старте каждого рейда. Поставь один на карту рядом с лут-полем.
+- type: entity
+  parent: RaidLootField
+  id: RaidSkavField
+  name: Raid Skav Field
+  suffix: Raid
+  description: Разбрасывает скавов по случайным тайлам грида на старте каждого рейда. Один на карту.
+  components:
+  - type: RaidLootField
+    count: 12
+    spawners:
+      - RaidSkavSpawner
+      - RaidSkavSpawner
+      - RaidSkavSpawner
+      - RaidSkavBossSpawner

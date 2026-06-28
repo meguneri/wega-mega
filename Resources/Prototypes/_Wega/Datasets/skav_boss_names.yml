@@ -1,0 +1,15 @@
+# Сегменты случайного уникального имени босса-скава (RandomMetadata → localizedDataset).
+# Значения — в локали (ключи names-skav-boss-title-N / names-skav-boss-name-N, N = 1..count).
+# Имя собирается как «Вожак «<Титул> <Кличка>»» (см. name-format-skav-boss).
+
+- type: localizedDataset
+  id: NamesSkavBossTitle
+  values:
+    prefix: names-skav-boss-title-
+    count: 15
+
+- type: localizedDataset
+  id: NamesSkavBossName
+  values:
+    prefix: names-skav-boss-name-
+    count: 15
