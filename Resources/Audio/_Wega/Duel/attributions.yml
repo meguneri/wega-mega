@@ -24,3 +24,14 @@
   license: "Custom"
   copyright: "Chequered Ink GameSFX/FreeSFX ('Retro Weird Psych 18') — source pack not 100% confirmed; assumed Chequered Ink license: free for any use incl. commercial, no attribution required, no resale of unaltered assets. Converted to mono OGG for wega-mega."
   source: "https://chequeredink.itch.io/"
+
+# duel_ready: звук подтверждения готовности. Автор — Atelier Magicae, пак 'Crystalline UI'
+# ('Wind Crystal 11'). Условия: использование в коммерческих/некоммерческих/личных проектах
+# разрешено (вкл. использование в составе игры с открытыми исходниками); ОБЯЗАТЕЛЬНА атрибуция
+# «Atelier Magicae». Запрет «no redistribution» — это про перезалив/перепродажу САМОГО пака как
+# отдельных ассетов, а не про использование внутри проекта (как и у звуков Chequered Ink выше).
+# Сконвертирован в моно OGG для wega-mega.
+- files: ["duel_ready.ogg"]
+  license: "Custom (Atelier Magicae — credit required)"
+  copyright: "Atelier Magicae — 'Crystalline UI' SFX pack ('Wind Crystal 11'). Use in commercial/non-commercial/personal projects allowed; credit 'Atelier Magicae' required; do not redistribute/resell the assets standalone. Converted to mono OGG for wega-mega."
+  source: "Atelier Magicae — 'Crystalline UI' SFX pack"

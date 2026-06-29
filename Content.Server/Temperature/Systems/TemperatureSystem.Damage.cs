@@ -36,6 +36,14 @@ public sealed partial class TemperatureSystem
     public HashSet<Entity<TemperatureDamageComponent>> ShouldUpdateDamage = new();
 
     /// <summary>
+    ///     Reused snapshot buffer for <see cref="UpdateDamage"/>. We copy <see cref="ShouldUpdateDamage"/>
+    ///     here and clear the live set BEFORE applying damage: applying temperature damage can re-enter
+    ///     and modify the live set mid-iteration (e.g. Flammable ignites → ChangeHeat → OnTemperatureChangeEvent
+    ///     → EnqueueDamage), which previously threw "Collection was modified" on the HashSet enumerator.
+    /// </summary>
+    private readonly List<Entity<TemperatureDamageComponent>> _damageUpdateBuffer = new();
+
+    /// <summary>
     /// Alert prototype for Temperature.
     /// </summary>
     public static readonly ProtoId<AlertCategoryPrototype> TemperatureAlertCategory = "Temperature";
@@ -65,7 +73,17 @@ public sealed partial class TemperatureSystem
 
     private void UpdateDamage()
     {
-        foreach (var entity in ShouldUpdateDamage)
+        if (ShouldUpdateDamage.Count == 0)
+            return;
+
+        // Snapshot then clear the live set up front: ChangeDamage → TryChangeDamage can re-enter and add
+        // to ShouldUpdateDamage mid-pass (Flammable ignite, etc.). Iterating a copy avoids mutating the
+        // HashSet during enumeration; re-entrant additions accumulate in the cleared set for the next tick.
+        _damageUpdateBuffer.Clear();
+        _damageUpdateBuffer.AddRange(ShouldUpdateDamage);
+        ShouldUpdateDamage.Clear();
+
+        foreach (var entity in _damageUpdateBuffer)
         {
             if (Deleted(entity) || Paused(entity))
                 continue;
@@ -77,7 +95,7 @@ public sealed partial class TemperatureSystem
             ChangeDamage(entity, deltaTime);
         }
 
-        ShouldUpdateDamage.Clear();
+        _damageUpdateBuffer.Clear();
     }
 
     private void ChangeDamage(Entity<TemperatureDamageComponent> entity, TimeSpan deltaTime)

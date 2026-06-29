@@ -54,7 +54,10 @@ public sealed partial class TextScreenSystem : VisualizerSystem<TextScreenVisual
     /// </summary>
     private const string TimerMapKey = "timerMapKey";
     private const string TextPath = "Effects/text.rsi";
-    private const int CharWidth = 4;
+
+    /// <summary>RSI-«шрифт» экрана: переопределённый <see cref="TextScreenVisualsComponent.Font"/> либо дефолтный.</summary>
+    private static ResPath GetFont(TextScreenVisualsComponent component)
+        => component.Font ?? new ResPath(TextPath);
 
     public override void Initialize()
     {
@@ -91,9 +94,11 @@ public sealed partial class TextScreenSystem : VisualizerSystem<TextScreenVisual
         {
             SpriteSystem.LayerMapReserve((uid, sprite), TimerMapKey + i);
             timer.LayerStatesToDraw.Add(TimerMapKey + i, null);
-            SpriteSystem.LayerSetRsi((uid, sprite), TimerMapKey + i, new ResPath(TextPath));
+            SpriteSystem.LayerSetRsi((uid, sprite), TimerMapKey + i, GetFont(screen));
             SpriteSystem.LayerSetColor((uid, sprite), TimerMapKey + i, screen.Color);
             SpriteSystem.LayerSetRsiState((uid, sprite), TimerMapKey + i, DefaultState);
+            if (screen.Shader != null)
+                sprite.LayerSetShader(TimerMapKey + i, screen.Shader);
         }
     }
 
@@ -199,9 +204,11 @@ public sealed partial class TextScreenSystem : VisualizerSystem<TextScreenVisual
                 var key = TextMapKey + row + i;
                 SpriteSystem.LayerMapReserve((uid, sprite), key);
                 component.LayerStatesToDraw.Add(key, null);
-                SpriteSystem.LayerSetRsi((uid, sprite), key, new ResPath(TextPath));
+                SpriteSystem.LayerSetRsi((uid, sprite), key, GetFont(component));
                 SpriteSystem.LayerSetColor((uid, sprite), key, component.Color);
                 SpriteSystem.LayerSetRsiState((uid, sprite), key, DefaultState);
+                if (component.Shader != null)
+                    sprite.LayerSetShader(key, component.Shader);
             }
     }
 
@@ -231,7 +238,7 @@ public sealed partial class TextScreenSystem : VisualizerSystem<TextScreenVisual
                     (uid, sprite),
                     TextMapKey + rowIdx + chr,
                     Vector2.Multiply(
-                        new Vector2((chr - min / 2f + 0.5f) * CharWidth, -rowIdx * component.RowOffset),
+                        new Vector2((chr - min / 2f + 0.5f) * component.CharWidth, -rowIdx * component.RowOffset),
                         TextScreenVisualsComponent.PixelSize
                         ) + component.TextOffset
                 );
@@ -262,7 +269,7 @@ public sealed partial class TextScreenSystem : VisualizerSystem<TextScreenVisual
                 (uid, sprite),
                 TimerMapKey + i,
                 Vector2.Multiply(
-                    new Vector2((i - min / 2f + 0.5f) * CharWidth, 0f),
+                    new Vector2((i - min / 2f + 0.5f) * screen.CharWidth, 0f),
                     TextScreenVisualsComponent.PixelSize
                     ) + screen.TimerOffset
             );

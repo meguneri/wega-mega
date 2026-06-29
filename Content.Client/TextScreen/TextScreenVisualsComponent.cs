@@ -1,5 +1,6 @@
 using System.Numerics;
 using Robust.Client.Graphics;
+using Robust.Shared.Utility;
 
 namespace Content.Client.TextScreen;
 
@@ -19,6 +20,26 @@ public sealed partial class TextScreenVisualsComponent : Component
     /// </remarks>
     [DataField("color"), ViewVariables(VVAccess.ReadWrite)]
     public Color Color = new Color(15, 151, 251);
+
+    /// <summary>
+    ///     RSI-«шрифт» глифов (по состоянию на символ). null — стандартный <c>Effects/text.rsi</c>.
+    ///     Позволяет конкретному экрану рисовать цифры своим стилем (см. дуэльный таймер).
+    /// </summary>
+    [DataField("font")]
+    public ResPath? Font;
+
+    /// <summary>
+    ///     Шейдер слоёв-глифов (например, <c>unshaded</c> для неонового «голо»-вида). null — без шейдера.
+    /// </summary>
+    [DataField("shader")]
+    public string? Shader;
+
+    /// <summary>
+    ///     Ширина символа (в пикселях) для раскладки глифов. Должна соответствовать ширине глифов
+    ///     выбранного <see cref="Font"/>. 4 — под стандартный <c>Effects/text.rsi</c> (4×6).
+    /// </summary>
+    [DataField("charWidth")]
+    public int CharWidth = 4;
 
     /// <summary>
     ///     Offset for centering the text.

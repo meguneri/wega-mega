@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
-"""Генерирует голографический спрайт «ГОТОВ» для индикатора готовности дуэли.
+"""Генерирует АНИМИРОВАННЫЙ голографический спрайт «ГОТОВ» для индикатора готовности дуэли.
 
-Ярко-зелёное слово «ГОТОВ» (NotoSans-Bold) с мягким зелёным свечением (bloom) и
-лёгкими сканлайнами — голографический вид. В игре рисуется unshaded + зелёный
-PointLight (см. прототип DuelReadyHologram).
+Киберпанк-голограмма слова «ГОТОВ» (NotoSans-Bold): неоновый цвет переливается
+зелёный↔циан, по тексту бежит яркая скан-линия, есть лёгкий хроматический сдвиг
+(RGB-split, маджента/циан тени) и редкий глитч-фликер. Кадры пакуются вертикально
+в один лист icon.png; тайминги — в meta.json (delays). В игре рисуется unshaded +
+зелёный PointLight (см. прототип DuelReadyHologram).
 
 Запуск из корня репозитория:  python3 Tools/gen_duel_ready_hologram.py
 """
 import json
+import math
 import os
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -18,8 +21,17 @@ RSI = os.path.join(ROOT, "Resources", "Textures", "_Wega", "Effects", "duel_read
 
 W, H = 96, 32
 TEXT = "ГОТОВ"
-BRIGHT = (90, 255, 120, 255)   # ярко-зелёный
-GLOW = (40, 200, 80)           # цвет свечения
+FRAMES = 12              # кадров в цикле
+DELAY = 0.08            # секунд на кадр (~0.96с цикл)
+
+GREEN = (120, 255, 140)  # неоново-зелёный
+CYAN = (80, 240, 255)    # неоново-циан
+GLOW_G = (40, 220, 120)  # свечение (зелёное)
+GLOW_C = (40, 180, 230)  # свечение (циан)
+
+
+def lerp(a, b, t):
+    return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(len(a)))
 
 
 def fit_font(text, max_w, max_h):
@@ -34,6 +46,65 @@ def fit_font(text, max_w, max_h):
     return ImageFont.truetype(FONT, 8)
 
 
+def make_frame(font, x, y, f):
+    """Строит один кадр анимации (RGBA W×H) для фазы f/FRAMES."""
+    phase = f / FRAMES
+    # Переливание цвета: плавная синусоида зелёный↔циан.
+    osc = 0.5 + 0.5 * math.sin(phase * 2 * math.pi)
+    bright = lerp(GREEN, CYAN, osc)
+    glow = lerp(GLOW_G, GLOW_C, osc)
+
+    frame = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+
+    # Bloom: размытый цветной текст, наложенный дважды.
+    glow_img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(glow_img).text((x, y), TEXT, font=font, fill=glow + (170,))
+    glow_img = glow_img.filter(ImageFilter.GaussianBlur(2.4))
+    frame.alpha_composite(glow_img)
+    frame.alpha_composite(glow_img)
+
+    # Хроматический сдвиг (RGB-split): слабые смещённые копии маджента/циан.
+    # Смещение чуть «дышит» по фазе — эффект нестабильной голограммы.
+    shift = 1 + (1 if (f % 4 == 0) else 0)
+    mag = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(mag).text((x - shift, y), TEXT, font=font, fill=(255, 40, 130, 70))
+    frame.alpha_composite(mag)
+    cya = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(cya).text((x + shift, y), TEXT, font=font, fill=(40, 210, 255, 70))
+    frame.alpha_composite(cya)
+
+    # Чёткий яркий текст поверх.
+    ImageDraw.Draw(frame).text((x, y), TEXT, font=font, fill=bright + (255,))
+
+    px = frame.load()
+
+    # Статичные голо-сканлайны: каждую вторую строку гасим.
+    for yy in range(0, H, 2):
+        for xx in range(W):
+            cr, cg, cb, ca = px[xx, yy]
+            if ca:
+                px[xx, yy] = (cr, cg, cb, int(ca * 0.7))
+
+    # Бегущая яркая скан-линия (двигается вниз по кадрам).
+    band = int(phase * H)
+    for yy in (band, (band + 1) % H):
+        for xx in range(W):
+            cr, cg, cb, ca = px[xx, yy]
+            if ca:
+                px[xx, yy] = (min(255, cr + 90), min(255, cg + 90),
+                              min(255, cb + 90), min(255, ca + 45))
+
+    # Глитч-фликер: один кадр в цикле — резко тусклее (голограмма «моргает»).
+    if f == FRAMES - 2:
+        for yy in range(H):
+            for xx in range(W):
+                cr, cg, cb, ca = px[xx, yy]
+                if ca:
+                    px[xx, yy] = (cr, cg, cb, int(ca * 0.4))
+
+    return frame
+
+
 def main():
     os.makedirs(RSI, exist_ok=True)
     font = fit_font(TEXT, W - 8, H - 8)
@@ -44,42 +115,25 @@ def main():
     x = (W - tw) / 2 - l
     y = (H - th) / 2 - t
 
-    # Слой свечения: текст в полупрозрачном зелёном, размытый — bloom.
-    glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    gd = ImageDraw.Draw(glow)
-    gd.text((x, y), TEXT, font=font, fill=GLOW + (180,))
-    glow = glow.filter(ImageFilter.GaussianBlur(2.2))
-
-    out = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    out.alpha_composite(glow)
-    out.alpha_composite(glow)  # удвоить свечение
-
-    # Чёткий яркий текст поверх.
-    od = ImageDraw.Draw(out)
-    od.text((x, y), TEXT, font=font, fill=BRIGHT)
-
-    # Голо-сканлайны: каждую вторую строку слегка гасим.
-    px = out.load()
-    for yy in range(0, H, 2):
-        for xx in range(W):
-            cr, cg, cb, ca = px[xx, yy]
-            if ca:
-                px[xx, yy] = (cr, cg, cb, int(ca * 0.72))
-
-    out.save(os.path.join(RSI, "icon.png"))
+    # Лист кадров: один столбец (ширина = W), кадры сверху вниз.
+    sheet = Image.new("RGBA", (W, H * FRAMES), (0, 0, 0, 0))
+    for f in range(FRAMES):
+        sheet.alpha_composite(make_frame(font, x, y, f), (0, f * H))
+    sheet.save(os.path.join(RSI, "icon.png"))
 
     meta = {
         "version": 1,
         "license": "CC0-1.0",
-        "copyright": "Generated by Tools/gen_duel_ready_hologram.py (NotoSans-Bold text)",
+        "copyright": "Generated by Tools/gen_duel_ready_hologram.py (NotoSans-Bold text, animated cyberpunk hologram)",
         "size": {"x": W, "y": H},
-        "states": [{"name": "icon"}],
+        "states": [{"name": "icon", "delays": [[DELAY] * FRAMES]}],
     }
     with open(os.path.join(RSI, "meta.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=2, ensure_ascii=False)
         f.write("\n")
 
-    print(f"written {os.path.join(RSI, 'icon.png')} ({W}x{H}), font size {font.size}")
+    print(f"written {os.path.join(RSI, 'icon.png')} "
+          f"({W}x{H*FRAMES}, {FRAMES} frames @ {DELAY}s), font size {font.size}")
 
 
 if __name__ == "__main__":

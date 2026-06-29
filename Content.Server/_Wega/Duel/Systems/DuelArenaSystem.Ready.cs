@@ -9,11 +9,13 @@ using Robust.Shared.Map;
 namespace Content.Server._Wega.Duel.Systems;
 
 /// <summary>
-/// Ready-check кнопки дуэли. Первое нажатие помечает бойца готовым и вешает над ним голограмму
-/// «ГОТОВ»; повторное — снимает готовность. Когда готовы все живые игроки на арене (минимум 2),
-/// кнопка программно шлёт DuelStart и запускается штатная цепочка старта (таймер → DuelFight →
-/// барьеры/колокол/ArmDuel). Готовность хранится на трекере (<see cref="DuelArenaComponent"/>),
-/// кнопка находит «свою» арену по гриду.
+/// Ready-check кнопки дуэли. У каждой базы — своя кнопка; готовность считается ПО КНОПКАМ арены, а не
+/// по бойцам «в радиусе» (дуэлянты сидят в отдельных запечатанных базах и в момент нажатия второй мог
+/// быть ещё не виден трекеру — счёт по кнопкам от их позиций не зависит). Первое нажатие помечает
+/// кнопку готовой и вешает голограмму «ГОТОВ» над кнопками ОСТАЛЬНЫХ, ещё не готовых бойцов — так
+/// второй дуэлянт у своей кнопки видит, что первый уже нажал. Повторное нажатие снимает готовность.
+/// Когда нажаты все кнопки арены (минимум две), кнопка программно шлёт DuelStart и запускается штатная
+/// цепочка старта (таймер → DuelFight → барьеры/колокол/ArmDuel). Кнопка находит «свою» арену по гриду.
 /// </summary>
 public sealed partial class DuelArenaSystem
 {
@@ -51,31 +53,32 @@ public sealed partial class DuelArenaSystem
             return;
         }
 
-        var user = args.User;
+        // Все кнопки готовности этой арены (по одной на базу) и чистка тех, что уже разрушены.
+        var buttons = GetArenaButtons(arenaUid);
+        PruneReadyButtons(arena, buttons);
 
-        // Тоггл готовности нажавшего.
-        if (arena.Ready.Contains(user))
-            SetUnready(arena, user);
+        // Тоггл готовности нажатой кнопки.
+        if (arena.ReadyButtons.Contains(uid))
+            arena.ReadyButtons.Remove(uid);
         else
-            SetReady(arena, user);
+            arena.ReadyButtons.Add(uid);
 
-        // Кто вообще должен подтвердить готовность (живые игроки на гриде арены), и чистка тех,
-        // кто уже ушёл с арены, но остался в списке готовых.
-        var required = GetReadyRequired(arenaUid, arena);
-        PruneReady(arena, required);
+        var isReady = arena.ReadyButtons.Contains(uid);
 
-        var isReady = arena.Ready.Contains(user);
+        // Перевешиваем голограммы «ГОТОВ» над кнопками ещё не готовых бойцов (см. RefreshReadyHolograms).
+        RefreshReadyHolograms(arena, buttons);
+
         var msg = Loc.GetString(
             isReady ? "duel-ready-fighter-ready" : "duel-ready-fighter-unready",
-            ("name", SafeName(user)), ("count", arena.Ready.Count), ("total", required.Count));
+            ("name", SafeName(args.User)), ("count", arena.ReadyButtons.Count), ("total", buttons.Count));
 
-        // Индикатор-объявление видно всем рядом; основной индикатор — голограмма над бойцом.
+        // Объявление-индикатор видно всем рядом с кнопкой; основной индикатор — голограмма над кнопкой соперника.
         _popup.PopupCoordinates(msg, Transform(uid).Coordinates, PopupType.Medium);
         if (arena.ReadySound != null)
             _audio.PlayPvs(arena.ReadySound, uid);
 
-        // Старт, когда готовы все нужные бойцы (минимум двое).
-        if (required.Count >= 2 && required.All(arena.Ready.Contains))
+        // Старт, когда нажаты все кнопки арены (минимум две).
+        if (buttons.Count >= 2 && buttons.All(arena.ReadyButtons.Contains))
         {
             ClearReady(arena);
             // Программно дёргаем порт кнопки — AutoLink доставит DuelStart таймеру, дальше штатно.
@@ -83,34 +86,66 @@ public sealed partial class DuelArenaSystem
         }
     }
 
-    private void SetReady(DuelArenaComponent arena, EntityUid user)
+    /// <summary>Все кнопки готовности на гриде арены (обычно по одной на базу).</summary>
+    private List<EntityUid> GetArenaButtons(EntityUid arenaUid)
     {
-        arena.Ready.Add(user);
-
-        // Голограмма «ГОТОВ» висит над бойцом (привязана к нему — следует за ним).
-        if (!arena.ReadyHolograms.ContainsKey(user) && Exists(user))
-            arena.ReadyHolograms[user] = Spawn(arena.ReadyHologram, new EntityCoordinates(user, new Vector2(0f, 0.75f)));
-    }
-
-    private void SetUnready(DuelArenaComponent arena, EntityUid user)
-    {
-        arena.Ready.Remove(user);
-        if (arena.ReadyHolograms.Remove(user, out var holo) && Exists(holo))
-            QueueDel(holo);
-    }
-
-    /// <summary>Живые игроки (управляемые сессией) на гриде арены — те, кто должен подтвердить готовность.
-    /// Совпадает с набором бойцов, которых ArmDuel зарегистрирует при старте.</summary>
-    private List<EntityUid> GetReadyRequired(EntityUid arenaUid, DuelArenaComponent arena)
-        => GetAliveInRange(arenaUid, arena).Where(d => GetUser(d) != null).ToList();
-
-    /// <summary>Снимает готовность с тех, кого уже нет среди требуемых бойцов (ушёл с арены/погиб).</summary>
-    private void PruneReady(DuelArenaComponent arena, List<EntityUid> required)
-    {
-        foreach (var u in arena.Ready.ToList())
+        var grid = Transform(arenaUid).GridUid;
+        var result = new List<EntityUid>();
+        var query = EntityQueryEnumerator<DuelReadyButtonComponent>();
+        while (query.MoveNext(out var uid, out _))
         {
-            if (!required.Contains(u))
-                SetUnready(arena, u);
+            // Трекер на гриде — берём кнопки только этого грида; трекер в космосе — берём все.
+            if (grid == null || Transform(uid).GridUid == grid)
+                result.Add(uid);
+        }
+        return result;
+    }
+
+    /// <summary>Снимает готовность и убирает голограммы с кнопок, которых уже нет среди кнопок арены (разрушены).</summary>
+    private void PruneReadyButtons(DuelArenaComponent arena, List<EntityUid> buttons)
+    {
+        foreach (var b in arena.ReadyButtons.ToList())
+        {
+            if (!buttons.Contains(b))
+                arena.ReadyButtons.Remove(b);
+        }
+
+        foreach (var b in arena.ReadyHolograms.Keys.ToList())
+        {
+            if (!buttons.Contains(b) && arena.ReadyHolograms.Remove(b, out var holo) && Exists(holo))
+                QueueDel(holo);
+        }
+    }
+
+    /// <summary>
+    /// Пересобирает голограммы «ГОТОВ». Над кнопкой висит голограмма, если сама кнопка ещё НЕ нажата,
+    /// но готов хотя бы один соперник (нажата другая кнопка) — так дуэлянт у своей кнопки узнаёт, что
+    /// первый уже подтвердил готовность. Над нажатыми кнопками и когда не готов никто — голограмм нет.
+    /// </summary>
+    private void RefreshReadyHolograms(DuelArenaComponent arena, List<EntityUid> buttons)
+    {
+        var anyReady = arena.ReadyButtons.Count > 0;
+        foreach (var b in buttons)
+        {
+            var shouldShow = anyReady && !arena.ReadyButtons.Contains(b);
+            var has = arena.ReadyHolograms.TryGetValue(b, out var holo) && Exists(holo);
+
+            if (shouldShow && !has && Exists(b))
+            {
+                var xform = Transform(b);
+                // Сдвигаем голограмму в сторону, КУДА СМОТРИТ кнопка — в комнату, а не жёстко вверх.
+                // Раньше был фиксированный +Y: на картах, где кнопка на верхней (или боковой) стене,
+                // голограмма уезжала В СТЕНУ. Настенная кнопка повёрнута «лицом» в комнату; её локальный
+                // «низ» (0,-1), повёрнутый на LocalRotation, и есть направление в комнату (так же берут
+                // направление «от стены в зал» стыковочные шлюзы, см. DockingSystem.Shuttle).
+                var toRoom = xform.LocalRotation.RotateVec(new Vector2(0f, -0.65f));
+                arena.ReadyHolograms[b] = Spawn(arena.ReadyHologram, xform.Coordinates.Offset(toRoom));
+            }
+            else if (!shouldShow && has)
+            {
+                QueueDel(holo);
+                arena.ReadyHolograms.Remove(b);
+            }
         }
     }
 
@@ -123,7 +158,7 @@ public sealed partial class DuelArenaSystem
                 QueueDel(holo);
         }
         arena.ReadyHolograms.Clear();
-        arena.Ready.Clear();
+        arena.ReadyButtons.Clear();
     }
 
     private bool TryGetArenaForGrid(EntityUid? grid, out EntityUid arenaUid, out DuelArenaComponent arena)

@@ -11,8 +11,10 @@ namespace Content.Shared._Wega.Duel;
 /// кемперов и форсить развязку. Центр зоны = собственная позиция сущности (как у авто-дропа снабжения),
 /// поэтому отдельно его сетить не нужно: клиент берёт <c>Transform.MapPosition</c> этой сущности.
 ///
-/// Сетятся только динамические <see cref="Active"/> и <see cref="CurrentRadius"/> — по ним клиентский
-/// оверлей рисует границу зоны. Остальное — серверная конфигурация и тайминги.
+/// Сетятся только динамические <see cref="Active"/>, <see cref="ShrinkStartTime"/> и
+/// <see cref="ShrinkStartRadius"/> — по ним клиентский оверлей САМ плавно (без рывков) интерполирует
+/// радиус зоны через <see cref="RadiusAt"/>. Так зона сжимается непрерывно, а сеть не грузится
+/// (радиус не шлётся каждый тик). Остальное — серверная конфигурация и тайминги.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ArenaStormComponent : Component
@@ -28,10 +30,17 @@ public sealed partial class ArenaStormComponent : Component
     public bool Active;
 
     /// <summary>
-    /// Текущий радиус безопасной зоны (в метрах от центра). Сетится для клиентского оверлея.
+    /// Время начала непрерывного сжатия зоны (серверное игровое время). Сетится клиенту, который сам
+    /// плавно интерполирует радиус по этому времени — без рывков и без сетевого спама каждый тик.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float CurrentRadius;
+    public TimeSpan ShrinkStartTime;
+
+    /// <summary>
+    /// Радиус зоны (в метрах) в момент <see cref="ShrinkStartTime"/> — точка отсчёта для интерполяции. Сетится клиенту.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float ShrinkStartRadius;
 
     /// <summary>Стартовый радиус безопасной зоны в начале шторма (в метрах). Должен покрывать арену.</summary>
     [DataField]
@@ -83,9 +92,22 @@ public sealed partial class ArenaStormComponent : Component
     /// <summary>Когда шторм начнёт наступать (после <see cref="StartDelay"/>). null — не запланирован.</summary>
     public TimeSpan? StartAt;
 
-    /// <summary>Время следующего шага сжатия.</summary>
-    public TimeSpan NextShrinkAt;
-
     /// <summary>Время следующего тика урона.</summary>
     public TimeSpan NextDamageAt;
+
+    /// <summary>
+    /// Радиус безопасной зоны на момент <paramref name="now"/>: непрерывная линейная интерполяция от
+    /// <see cref="ShrinkStartRadius"/> со скоростью <see cref="ShrinkStep"/>/<see cref="ShrinkInterval"/>
+    /// (метров в секунду), зажатая снизу <see cref="MinRadius"/>. Считается ОДИНАКОВО на сервере (урон) и
+    /// клиенте (оверлей) — поэтому отрисованная граница точно совпадает с границей урона, без рассинхрона.
+    /// </summary>
+    public float RadiusAt(TimeSpan now)
+    {
+        if (ShrinkInterval <= 0f)
+            return MathF.Max(MinRadius, ShrinkStartRadius);
+
+        var rate = ShrinkStep / ShrinkInterval; // метров в секунду
+        var elapsed = MathF.Max(0f, (float)(now - ShrinkStartTime).TotalSeconds);
+        return Math.Clamp(ShrinkStartRadius - rate * elapsed, MinRadius, ShrinkStartRadius);
+    }
 }

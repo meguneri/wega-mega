@@ -73,7 +73,6 @@ public sealed partial class ArenaStormSystem : EntitySystem
         comp.Cancelled = true;
         comp.Active = false;
         comp.StartAt = null;
-        comp.CurrentRadius = 0f;
         Dirty(uid, comp);
 
         if (comp.Announce)
@@ -147,7 +146,10 @@ public sealed partial class ArenaStormSystem : EntitySystem
 
                 storm.StartAt = null;
                 storm.Active = true;
-                storm.NextShrinkAt = now + TimeSpan.FromSeconds(storm.ShrinkInterval);
+                // Непрерывное сжатие: фиксируем точку отсчёта (время + радиус). Дальше радиус
+                // считается из времени и на сервере, и на клиенте — Dirty шлём только здесь, раз.
+                storm.ShrinkStartTime = now;
+                storm.ShrinkStartRadius = storm.InitialRadius;
                 storm.NextDamageAt = now + TimeSpan.FromSeconds(storm.DamageInterval);
                 Dirty(uid, storm);
 
@@ -165,14 +167,7 @@ public sealed partial class ArenaStormSystem : EntitySystem
             if (!storm.Active)
                 continue;
 
-            // Шаг сжатия зоны.
-            if (now >= storm.NextShrinkAt && storm.CurrentRadius > storm.MinRadius)
-            {
-                storm.NextShrinkAt = now + TimeSpan.FromSeconds(storm.ShrinkInterval);
-                storm.CurrentRadius = MathF.Max(storm.MinRadius, storm.CurrentRadius - storm.ShrinkStep);
-                Dirty(uid, storm);
-            }
-
+            // Радиус зоны теперь непрерывен (RadiusAt по времени) — отдельный шаг сжатия не нужен.
             // Тик урона по бойцам вне зоны.
             if (now >= storm.NextDamageAt)
             {
@@ -186,7 +181,8 @@ public sealed partial class ArenaStormSystem : EntitySystem
     {
         storm.Active = false;
         storm.Cancelled = false;
-        storm.CurrentRadius = storm.InitialRadius;
+        storm.ShrinkStartRadius = storm.InitialRadius;
+        storm.ShrinkStartTime = _timing.CurTime;
         storm.StartAt = _timing.CurTime + TimeSpan.FromSeconds(storm.StartDelay);
         Dirty(uid, storm);
     }
@@ -195,7 +191,6 @@ public sealed partial class ArenaStormSystem : EntitySystem
     {
         storm.Active = false;
         storm.StartAt = null;
-        storm.CurrentRadius = 0f;
         Dirty(uid, storm);
     }
 
@@ -205,7 +200,9 @@ public sealed partial class ArenaStormSystem : EntitySystem
             return;
 
         var center = _transform.GetMapCoordinates(uid);
-        var radiusSq = storm.CurrentRadius * storm.CurrentRadius;
+        // Граница урона = текущий непрерывный радиус (та же формула, что у клиентского оверлея).
+        var radius = storm.RadiusAt(_timing.CurTime);
+        var radiusSq = radius * radius;
 
         foreach (var duelist in arena.Duelists)
         {

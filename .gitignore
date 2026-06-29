@@ -323,3 +323,8 @@ Resources/MapImages
 
 # C# Dev Kit cache file
 *.lscache
+
+# Standalone Windows package build output (package_windows_standalone.sh).
+# Это self-contained сборка (рантайм .NET + все ресурсы) — десятки тысяч файлов,
+# артефакт сборки, в git не нужен.
+/dist/
