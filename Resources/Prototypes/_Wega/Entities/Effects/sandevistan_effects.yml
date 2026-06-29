@@ -1,0 +1,25 @@
+# Визуальные эффекты сандэвистана.
+
+# «Корка времени» Проекции (Наоя Дзенин): спавнится на цели в момент заморозки касанием. Это поле
+# искажения времени (chronofield), затонированное в ледяной циан — цель будто застывает во льду
+# времени. Живёт ~1с (как и сама заморозка touchFreezeDuration), плавно рассеиваясь к разморозке.
+- type: entity
+  id: EffectSandevistanFreeze
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    color: "#7fe6ff"
+    layers:
+    - shader: unshaded
+      map: ["enum.EffectLayers.Unshaded"]
+      sprite: Effects/chronofield.rsi
+      state: chronofield
+  - type: AnimationPlayer
+  - type: EffectVisuals
+  - type: TimedDespawn
+    lifetime: 1.0
+  - type: Tag
+    tags:
+    - HideContextMenu

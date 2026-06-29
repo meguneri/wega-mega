@@ -1,18 +1,38 @@
-// Sandevistan victim overlay: when you are caught in someone's "bullet time", the world
-// goes cold and desaturated with darkened edges. Drawn fullscreen while slowed.
+// Sandevistan victim overlay: when you are caught in someone's "bullet time", the world goes cold and
+// desaturated with darkened edges — and now visibly *stutters*: time is quantised into choppy slow
+// "frames" with a soft ghost-blur, so it reads as the world crawling rather than just a colour grade.
+// Drawn fullscreen while slowed.
 
 uniform sampler2D SCREEN_TEXTURE;
-// 0..1 fade factor (eased in/out by the overlay so it doesn't pop on the 0.6s refresh window).
+// 0..1 fade factor (eased in/out by the overlay so it doesn't pop on the slow window refresh/lapse).
 uniform highp float intensity;
 
 void fragment() {
     highp vec2 coord = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
-    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, coord);
+
+    // Time-stutter: quantise time into ~9 discrete steps a second and nudge the sample point by a
+    // per-step jitter. The image only "updates" on those steps, selling the choppy slow-motion of
+    // being caught in bullet time instead of a smooth pan.
+    highp float tq = floor(TIME * 9.0);
+    highp float jit = (fract(sin(tq * 12.9898) * 43758.5453) - 0.5) * 0.0045 * intensity;
+    highp vec2 sc = coord + vec2(jit, 0.0);
+
+    highp vec4 color = zTextureSpec(SCREEN_TEXTURE, sc);
+
+    // Soft ghost-blur: average a few neighbouring taps so the slowed world smears like a long frame.
+    highp float b = 0.0025 * intensity;
+    highp vec3 blur = color.rgb;
+    blur += zTextureSpec(SCREEN_TEXTURE, sc + vec2(b, 0.0)).rgb;
+    blur += zTextureSpec(SCREEN_TEXTURE, sc - vec2(b, 0.0)).rgb;
+    blur += zTextureSpec(SCREEN_TEXTURE, sc + vec2(0.0, b)).rgb;
+    blur += zTextureSpec(SCREEN_TEXTURE, sc - vec2(0.0, b)).rgb;
+    blur *= 0.2;
+    highp vec3 src = mix(color.rgb, blur, intensity * 0.6);
 
     // Desaturate, then push toward a cold blue (the Sandevistan trail colour).
-    highp float gray = zGrayscale(color.rgb);
+    highp float gray = zGrayscale(src);
     highp vec3 cold = vec3(gray) * vec3(0.55, 0.75, 1.15);
-    highp vec3 graded = mix(color.rgb, cold, 0.6);
+    highp vec3 graded = mix(src, cold, 0.6);
 
     // Vignette: darken toward the edges so attention pulls to the centre.
     highp vec2 d = coord - vec2(0.5);

@@ -165,3 +165,8 @@
   id: SandevistanActive
   kind: source
   path: "/Textures/_Wega/Shaders/sandevistan_active.swsl"
+
+- type: shader
+  id: SandevistanGlitch
+  kind: source
+  path: "/Textures/_Wega/Shaders/sandevistan_glitch.swsl"

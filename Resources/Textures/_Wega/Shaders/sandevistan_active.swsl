@@ -1,8 +1,8 @@
 // Sandevistan WEARER overlay — "speed vision" while your own burst is active. Driven by `intensity`
 // (0..1, eased in/out by the overlay) and animated with TIME. Layers a cool-blue tint with a small
 // contrast punch, a faint edge chromatic split (the "time stretching" fringe), a breathing vignette
-// and shimmering radial speed lines that ramp up toward the screen edges. Wearer-only, purely
-// cosmetic — no gameplay state touched.
+// and neon cyberpunk data-streaks that blink and march out toward the screen edges. Wearer-only,
+// purely cosmetic — no gameplay state touched.
 
 uniform sampler2D SCREEN_TEXTURE;
 // 0..1 fade factor (eased in/out by the overlay).
@@ -39,15 +39,21 @@ void fragment() {
     highp float vig = smoothstep(0.95, 0.45, rad);
     col *= mix(1.0, mix(vig, 1.0, 0.55) * pulse, intensity * 0.4);
 
-    // Shimmering radial speed lines, concentrated near the edges. Each ray pulses at a random phase
-    // (smooth sine, not a hard strobe) so the rim "buzzes" with motion without flashing.
-    highp float rays = 90.0;
+    // Cyberpunk data-streaks near the rim: sharp neon rays that blink digitally, with ticks marching
+    // outward like a HUD data-stream — mostly cyan, the odd magenta ray. Replaces the old soft shimmer.
+    highp float rays = 120.0;
     highp float ri = floor((ang / TAU + 0.5) * rays);
-    highp float phase = hash11(ri) * TAU;
-    highp float flick = 0.5 + 0.5 * sin(phase + TIME * 12.0);
-    highp float edge = smoothstep(0.30, 0.85, rad);
-    highp float streak = smoothstep(0.72, 1.0, flick) * edge;
-    col += streak * intensity * vec3(0.45, 0.75, 1.0) * 0.28;
+    highp float rh = hash11(ri);
+    // Digital on/off, quantised in time so rays "blink" like data instead of smoothly shimmering.
+    highp float beat = floor(TIME * 10.0);
+    highp float on = step(0.55, hash11(ri + beat * 1.7));
+    // Ticks marching outward along each ray (data streaming toward the edge).
+    highp float ticks = step(0.45, fract(rad * 36.0 - TIME * 5.0));
+    highp float edge = smoothstep(0.45, 0.95, rad);
+    highp float streak = on * ticks * edge * (0.6 + 0.4 * rh);
+    // Mostly cyan; a few rays flip to magenta for that neon-sign accent.
+    highp vec3 neon = mix(vec3(0.2, 0.85, 1.0), vec3(1.0, 0.2, 0.9), step(0.82, rh));
+    col += streak * intensity * neon * 0.4;
 
     COLOR = vec4(col, base.a);
 }

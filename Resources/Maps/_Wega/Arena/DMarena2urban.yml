@@ -3642,7 +3642,7 @@ entities:
     - type: Transform
       pos: 20.5,38.5
       parent: 2
-- proto: DuelArenaTracker
+- proto: DuelArenaTrackerAirstrike
   entities:
   - uid: 419
     components:

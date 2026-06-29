@@ -1,0 +1,33 @@
+# Маркер-прицел авиаудара: появляется за WarningDuration секунд до взрыва,
+# показывает дуэлянтам, куда сейчас прилетит снаряд. Удаляется системой ArenaAirstrikeSystem
+# перед взрывом, либо при очистке арены (ArenaIssuedItem).
+- type: entity
+  id: ArenaAirstrikeWarning
+  name: авиаудар
+  save: false
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ArenaIssuedItem
+  - type: Transform
+    noRot: true
+  - type: Sprite
+    drawdepth: Effects
+    noRot: true
+    color: "#FF4400BB"
+    layers:
+    - shader: unshaded
+      sprite: _Wega/Effects/drakeeffects.rsi
+      state: target_circle
+  - type: PointLight
+    color: "#FF2200"
+    radius: 2.5
+    energy: 5
+    enabled: true
+  - type: EmitSoundOnSpawn
+    sound:
+      path: /Audio/Effects/beep_landmine.ogg
+      params:
+        volume: -3
+  - type: Tag
+    tags:
+    - HideContextMenu

@@ -73,7 +73,16 @@ public sealed partial class SandevistanComponent : Component
 
     /// <summary>How long each afterimage lingers before fading out.</summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan AfterimageLifetime = TimeSpan.FromSeconds(0.9);
+    public TimeSpan AfterimageLifetime = TimeSpan.FromSeconds(1.6);
+
+    /// <summary>
+    /// Bright "core" colour of a fresh afterimage. The trail stays in the blue family (Naoya Zenin
+    /// aesthetic) but each variant can pick a different shade of it to be told apart in a fight:
+    /// pure cyan (base / projection), icy white-blue (freeze), electric blue (arena). Each ghost fades
+    /// from this toward a darker deep-blue "echo" as it ages, for a speed-smear instead of flat copies.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public Color AfterimageColor = new(0.45f, 0.88f, 1f, 0.62f);
 
     /// <summary>Action granted to the wearer.</summary>
     [DataField]
@@ -142,10 +151,15 @@ public sealed partial class SandevistanActiveComponent : Component
     public TimeSpan AfterimageInterval = TimeSpan.FromSeconds(0.1);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan AfterimageLifetime = TimeSpan.FromSeconds(0.6);
+    public TimeSpan AfterimageLifetime = TimeSpan.FromSeconds(1.6);
 
     [DataField, AutoNetworkedField]
     public TimeSpan NextAfterimageTime;
+
+    /// <summary>Bright "core" colour of each afterimage (per-variant shade of blue); see
+    /// <see cref="SandevistanComponent.AfterimageColor"/>.</summary>
+    [DataField, AutoNetworkedField]
+    public Color AfterimageColor = new(0.45f, 0.88f, 1f, 0.62f);
 }
 
 /// <summary>

@@ -66,3 +66,20 @@
     damage:
       types:
         Heat: 5
+
+# Вариант трекера со случайными авиаударами: раз в StrikeInterval секунд в случайных
+# точках арены появляется прицел-маркер, затем следует взрыв. Ставь строго в центр арены —
+# удары падают по всем тайлам грида трекера.
+- type: entity
+  id: DuelArenaTrackerAirstrike
+  parent: DuelArenaTracker
+  suffix: Duel Arena, Airstrike
+  components:
+  - type: ArenaAirstrike
+    firstStrikeDelay: 20
+    strikeInterval: 15
+    warningDuration: 3
+    strikeCount: 2
+    totalIntensity: 150
+    slope: 3
+    maxTileIntensity: 10

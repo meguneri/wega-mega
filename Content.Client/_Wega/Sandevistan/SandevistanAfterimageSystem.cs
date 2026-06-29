@@ -1,6 +1,8 @@
 using System.Linq;
+using System.Numerics;
 using Content.Shared._Wega.Clothing.Sandevistan;
 using Robust.Client.GameObjects;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Spawners;
 using DrawDepthEnum = Content.Shared.DrawDepth.DrawDepth;
 
@@ -27,12 +29,18 @@ public sealed class SandevistanAfterimageSystem : EntitySystem
     {
         base.FrameUpdate(frameTime);
 
-        // Fade each ghost's alpha toward 0 over its remaining lifetime (TimedDespawn counts down).
+        // Over its life each ghost fades alpha toward 0 AND shifts from the bright "core" colour to a
+        // darker deep-blue "echo" — so the trail reads as a bright cyan core near the user blurring back
+        // into a dark-blue smear, instead of a row of flat sprite copies.
         var query = EntityQueryEnumerator<SandevistanAfterimageComponent, TimedDespawnComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var ghost, out var despawn, out var sprite))
         {
             var frac = ghost.FadeDuration > 0f ? Math.Clamp(despawn.Lifetime / ghost.FadeDuration, 0f, 1f) : 1f;
-            _sprite.SetColor((uid, sprite), ghost.BaseColor.WithAlpha(ghost.BaseColor.A * frac));
+            var core = ghost.BaseColor;
+            // Tail only cools/deepens slightly toward blue — kept bright so the trail doesn't go dark.
+            var echo = new Color(core.R * 0.6f, core.G * 0.85f, core.B * 1f, core.A);
+            var col = Color.InterpolateBetween(echo, core, frac);
+            _sprite.SetColor((uid, sprite), col.WithAlpha(core.A * frac));
         }
     }
 
@@ -69,5 +77,15 @@ public sealed class SandevistanAfterimageSystem : EntitySystem
         sprite.RenderOrder = 0;
         sprite.EnableDirectionOverride = true;
         sprite.DirectionOverride = ent.Comp.DirectionOverride;
+
+        // Subtle speed-smear: stretch the ghost along the user's current travel axis so each one is an
+        // elongated streak in the direction of motion, not a crisp copy. Top-down sprites are screen-axis
+        // aligned, so the larger velocity component picks which screen axis to stretch.
+        if (TryComp<PhysicsComponent>(ent.Comp.SourceEntity, out var body) && body.LinearVelocity.LengthSquared() > 0.01f)
+        {
+            var v = body.LinearVelocity;
+            var stretch = MathF.Abs(v.X) >= MathF.Abs(v.Y) ? new Vector2(1.25f, 0.95f) : new Vector2(0.95f, 1.25f);
+            _sprite.SetScale((ent.Owner, sprite), sprite.Scale * stretch);
+        }
     }
 }

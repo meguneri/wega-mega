@@ -62,6 +62,7 @@ public sealed partial class SandevistanAfterimageSpawnerSystem : EntitySystem
             comp.SourceEntity = uid;
             comp.DirectionOverride = xform.LocalRotation.GetCardinalDir();
             comp.FadeDuration = (float) active.AfterimageLifetime.TotalSeconds;
+            comp.BaseColor = active.AfterimageColor;
             _afterimage.ApplyVisuals((afterimage, comp));
 
             var despawn = EnsureComp<TimedDespawnComponent>(afterimage);

@@ -59,8 +59,9 @@ public sealed partial class SandevistanSystem : EntitySystem
     private static readonly SoundSpecifier EndSound = new SoundPathSpecifier("/Audio/Machines/phasein.ogg",
         AudioParams.Default.WithPitchScale(0.85f).WithVolume(-6f));
 
-    /// <summary>Chrono-field "time distortion" visual spawned on a mob the instant Projection's touch freezes it.</summary>
-    private static readonly EntProtoId ProjectionFreezeEffect = "EffectDesynchronizer";
+    /// <summary>Icy cyan "time-crust" spawned on a mob the instant Projection's touch freezes it — a
+    /// chrono-field tinted into a frozen-in-time look, dissipating over the freeze.</summary>
+    private static readonly EntProtoId ProjectionFreezeEffect = "EffectSandevistanFreeze";
 
     public override void Initialize()
     {
@@ -304,6 +305,7 @@ public sealed partial class SandevistanSystem : EntitySystem
         active.TouchFreezeDuration = ent.Comp.TouchFreezeDuration;
         active.AfterimageInterval = ent.Comp.AfterimageInterval;
         active.AfterimageLifetime = ent.Comp.AfterimageLifetime;
+        active.AfterimageColor = ent.Comp.AfterimageColor;
         active.NextAfterimageTime = curTime;
         Dirty(wearer, active);
 

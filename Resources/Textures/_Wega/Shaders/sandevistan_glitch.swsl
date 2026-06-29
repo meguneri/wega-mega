@@ -1,0 +1,118 @@
+// Sandevistan WEARER glitch overlay — cyberpunk digital interference ("помехи") layered while your
+// own burst is active: horizontal tear bands, block channel-corruption, chromatic aberration, RGB
+// sparkle. Driven by `intensity` (a low ambient hum during the burst that spikes hard at activation)
+// and `punch` (a short radial zoom-lurch right when the burst kicks in). Wearer-only, purely cosmetic.
+// Adapted from the Goobstation Sandevistan glitch, retuned to our sampling conventions.
+
+uniform sampler2D SCREEN_TEXTURE;
+// 0..1 overall glitch strength (ambient + activation spike), eased by the overlay.
+uniform highp float intensity;
+// 0..1 activation "lurch": a brief radial zoom kick at the moment the burst starts.
+uniform highp float punch;
+
+highp float hash(highp float n)
+{
+    return fract(sin(n) * 43758.5453);
+}
+
+highp float hash2(highp vec2 p)
+{
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+void fragment()
+{
+    highp vec2 uv = FRAGCOORD.xy * SCREEN_PIXEL_SIZE.xy;
+    highp float t = TIME;
+    highp float i = intensity;
+
+    // Activation zoom-lurch: pull the whole frame slightly toward centre when `punch` is high, so the
+    // burst "kicks" the camera in before settling.
+    highp vec2 cen = uv - vec2(0.5);
+    uv = vec2(0.5) + cen * (1.0 - 0.05 * punch);
+
+    highp vec4 baseT = zTextureSpec(SCREEN_TEXTURE, uv);
+    highp vec3 base = baseT.rgb;
+
+    // Random single-frame jolt — the whole image jumps sideways for one quantised instant.
+    highp float jSeed = floor(t * 16.0);
+    highp float jolt = step(0.87, hash(jSeed)) * (hash(jSeed + 5.0) - 0.5) * 0.04 * i;
+
+    highp float tClock = floor(t * 8.0);
+
+    // Wide + fine horizontal tear bands — rows of the screen shear left/right.
+    highp float wBand = floor(uv.y * 14.0);
+    highp float wH = hash(wBand + tClock * 3.1);
+    highp float wTear = step(0.83, wH) * (wH - 0.5) * 0.16 * i;
+
+    highp float mBand = floor(uv.y * 45.0);
+    highp float mH = hash(mBand + tClock * 4.7);
+    highp float mTear = step(0.90, mH) * (mH - 0.5) * 0.07 * i;
+
+    highp float totalTear = wTear + mTear + jolt;
+    highp float tearStr = abs(totalTear);
+
+    // Block corruption — chunky cells of the screen flicker and shift.
+    highp vec2 bG = floor(uv * vec2(12.0, 8.0));
+    highp float bS = hash2(bG + floor(t * 5.0));
+    highp float bActive = step(0.86, bS);
+    highp float bShift = bActive * (hash2(bG * 2.0) - 0.5) * 0.06 * i;
+
+    highp float corruption = clamp(smoothstep(0.0, 0.015, tearStr) + bActive * 0.8, 0.0, 1.0) * i;
+
+    // Chromatic aberration along the tear; the activation lurch widens it.
+    highp vec2 uvD = uv + vec2(totalTear + bShift, 0.0);
+    highp float ab = (0.006 + tearStr * 0.04 + punch * 0.02) * i;
+
+    highp float cr = zTextureSpec(SCREEN_TEXTURE, vec2(uvD.x + ab, uvD.y - ab * 0.4)).r;
+    highp float cg = zTextureSpec(SCREEN_TEXTURE, uvD).g;
+    highp float cb = zTextureSpec(SCREEN_TEXTURE, vec2(uvD.x - ab, uvD.y + ab * 0.4)).b;
+    highp vec3 rgbCorrupt = vec3(cr, cg, cb);
+
+    // Inside an active block, isolate or swizzle channels for that "datamosh" RGB tear.
+    if (bActive > 0.5)
+    {
+        highp float ch = hash(bG.x * 7.0 + bG.y * 11.0 + floor(t * 5.0));
+        if (ch < 0.25)
+            rgbCorrupt = vec3(rgbCorrupt.r * 2.0, 0.0, 0.0);
+        else if (ch < 0.5)
+            rgbCorrupt = vec3(0.0, rgbCorrupt.g * 2.0, 0.0);
+        else if (ch < 0.75)
+            rgbCorrupt = vec3(0.0, 0.0, rgbCorrupt.b * 2.0);
+        else
+            rgbCorrupt = rgbCorrupt.gbr * 1.5;
+    }
+
+    // Neon edge along strong tears.
+    highp float tearEdge = smoothstep(0.005, 0.04, tearStr);
+    if (tearEdge > 0.01)
+    {
+        highp float ePick = hash(floor(uv.y * 30.0) + floor(t * 4.0));
+        highp vec3 eColor = ePick < 0.5
+            ? vec3(0.0, 1.0, 1.0)   // cyan
+            : vec3(1.0, 0.0, 1.0);  // magenta
+        rgbCorrupt = mix(rgbCorrupt, eColor, tearEdge * 0.35);
+    }
+
+    // Brief horizontal RGB ghost/echo.
+    highp float ghostOn = step(0.86, hash(floor(t * 7.0)));
+    highp float gOff = (hash(floor(t * 7.0) + 3.0) - 0.5) * 0.05 * i * ghostOn;
+    rgbCorrupt.r += zTextureSpec(SCREEN_TEXTURE, vec2(uv.x + gOff, uv.y)).r * 0.25 * ghostOn;
+    rgbCorrupt.b += zTextureSpec(SCREEN_TEXTURE, vec2(uv.x - gOff, uv.y)).b * 0.25 * ghostOn;
+
+    highp float alpha = corruption * 0.65;
+    highp vec3 color = mix(base, rgbCorrupt, alpha);
+
+    // Sparse RGB sparkle pixels.
+    highp float sp = hash2(floor(uv * 350.0) + t * 20.0);
+    if (sp > 0.998)
+    {
+        highp float sH = hash(sp * 50.0);
+        highp vec3 spC = sH < 0.33
+            ? vec3(1.0, 0.0, 0.0)
+            : (sH < 0.66 ? vec3(0.0, 1.0, 0.0) : vec3(0.0, 0.0, 1.0));
+        color = mix(color, spC, 0.5 * i);
+    }
+
+    COLOR = vec4(color, baseT.a);
+}
